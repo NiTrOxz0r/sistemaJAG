@@ -1,0 +1,4 @@
+aqui llegan a morir las definiciones anteriores de las
+diferentes bases de datos.
+
+solo por referencia se mantiene esta carpeta.
