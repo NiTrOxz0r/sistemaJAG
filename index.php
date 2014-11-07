@@ -1,10 +1,14 @@
+<?php
+	session_start();
+	require("php/conexion.php");		
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
 	<title></title>
 </head>
 <body>
-	
 <?php 
 
 //NAVBAR:
@@ -20,6 +24,7 @@ if ( !isset($_SESSION['cod_tipo_usr']) ) {
 switch ($_SESSION['cod_tipo_usr']) {
 	case 0:
 		require "php/validacion/form_usr.php";
+		echo '<script type="text/javascript" src="java/validacionUsuario.js"></script>';
 		break;
 	
 	case 1:
