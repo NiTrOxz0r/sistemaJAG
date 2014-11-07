@@ -1,16 +1,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Pre index del asunto</title>
+	<title></title>
 </head>
 <body>
-	<div>
-		<p>
-			index: <a href="rev2/index.php">version rev2</a>
-		</p>
-		<p>
-			<a href="mysql.php">mysql</a>
-		</p>
-	</div>
+	<form action="validaruser.php" method="POST">
+
+		Usuario:<input type="text" name="seudonimo" placeholder="Instroduzca Usuario"></br>
+
+		Clave: <input type="password" name="clave" placeholder="Instroduzca Clave"></br>
+		<input type="submit" value="enviar" name="enviar">
+
+	</form>
+
+<a href="reg.php">Registrarse</a>
+
 </body>
 </html>
