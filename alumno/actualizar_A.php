@@ -6,7 +6,7 @@
 	if ( isset($_POST['cedula']) ) {
 		$cedula = $_POST['cedula'];
 	}else{
-		header("Location: menucom.html?cedulaError=unset");
+		header("Location: menucom.php?cedulaError=unset");
 	}
 
 	
@@ -418,8 +418,12 @@
 </div>
 		
 	<?php else : ?>
-			<p align=center>No existe Datos con cedula: <?=$cedula ?></p>
-			<p align=center><a href=menucon.html>Volver</a></p>
+			<p align=center>
+				No existe Datos con cedula: <?=$cedula ?>
+			</p>
+			<p align=center>
+				<a href="menucon.php">Volver</a>
+			</p>
 	<?php endif; ?>
 
 	</body>
