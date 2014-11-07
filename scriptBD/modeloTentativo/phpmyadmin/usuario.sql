@@ -29,7 +29,7 @@ SET time_zone = "+00:00";
 CREATE TABLE IF NOT EXISTS `usuario` (
   `codigo` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `seudonimo` varchar(20) NOT NULL,
-  `clave` varchar(20) NOT NULL,
+  `clave` varchar(64) NOT NULL,
   `cod_tipo_usr` tinyint(1) unsigned DEFAULT '1',
   `status` tinyint(1) unsigned NOT NULL DEFAULT '1',
   `cod_usr_reg` int(11) NOT NULL,

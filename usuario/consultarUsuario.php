@@ -1,6 +1,12 @@
 <?php
 
-require("php/conexion.php");
+//leer: http://php.net/manual/en/function.md5.php
+//en resumen: no es seguro
+
+//TODO: implementacion de sha256/512 con salt.
+
+
+require("../php/master.php");
 	if(isset($_POST['enviar'])) {
 	
 		if (empty($_POST['seudonimo']) || empty($_POST['clave'])) {
@@ -15,7 +21,7 @@ require("php/conexion.php");
 			// 	sin ser modificada:
 			// $clave = md5($clave);
 			$query = "SELECT codigo, cod_tipo_usr from usuario where seudonimo  ='".$seudonimo."' and clave='".$clave."';";
-			$sql = conexion($query);
+			$sql = conexion($query, 1);
 			// si hay errores raros descomentar y comentar la linea anterior:
 			//   $sql = conexion($query, 1);
 			if ( $sql->num_rows == 1 ) {
@@ -25,7 +31,7 @@ require("php/conexion.php");
 				$_SESSION['seudonimo'] = $seudonimo;
 				header("Location: admin.php");
 			}else{?>
-				Usuario no existe <a href='index.php'>Reintentar</a>
+				Usuario no existe <a href='../index.php'>Reintentar</a>
 			<?php
 			}
 		}

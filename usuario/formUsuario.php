@@ -1,5 +1,5 @@
 <div>
-	<form action="validaruser.php" method="POST">
+	<form action="usuario/consultarUsuario.php" method="POST">
 
 		Usuario:<input type="text" name="seudonimo" placeholder="Instroduzca Usuario"></br>
 
