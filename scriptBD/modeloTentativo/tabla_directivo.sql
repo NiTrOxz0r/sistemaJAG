@@ -6,8 +6,12 @@ CREATE TABLE directivo (
 	s_apellido varchar(20) default "Sin Registro",
 	nacionalidad enum('v','e') default 'v' not null,
 	cedula varchar(8) default "sinDatos" not null,
+	celular varchar(11) default "SinRegistro",
 	telefono varchar(11) default 'SinRegistro',
 	telefono_otro varchar(11) default 'SinRegistro',
+	nivel_instruccion tinyint(1) unsigned not null,
+	-- PARA ACTUALIZAR TITULO
+	titulo varchar(80) unsigned,
 	fec_nac date not null,
 	sexo tinyint(1) unsigned not null,
 	email varchar(50) unique,
