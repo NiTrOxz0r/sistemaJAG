@@ -12,7 +12,7 @@
 <?php 
 
 //NAVBAR:
-require "php/validacion/cuerpo/navbar.php";
+require "php/cuerpo/navbar.php";
 
 
 //variable inicial que chequea el tipo de usuario:
@@ -23,7 +23,7 @@ if ( !isset($_SESSION['cod_tipo_usr']) ) {
 
 switch ($_SESSION['cod_tipo_usr']) {
 	case 0:
-		require "php/validacion/form_usr.php";
+		require "php/usuario/formUsuario.php";
 		echo '<script type="text/javascript" src="java/validacionUsuario.js"></script>';
 		break;
 	
@@ -44,13 +44,13 @@ switch ($_SESSION['cod_tipo_usr']) {
 			break;
 
 	default:
-		require "php/validacion/form_usr.php";
+		require "php/usuario/formUsuario.php";
 		break;
 } 
 
 
 //FOOTER:
-require "php/validacion/cuerpo/footer.php";
+require "php/cuerpo/footer.php";
 ?>
 
 </body>

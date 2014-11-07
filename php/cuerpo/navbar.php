@@ -8,6 +8,8 @@
 			| <a href="cerrar.php">Salir</a>
 		</div>
 	<?php else : ?>
-		<i>Bienvenido! Acceda al sistema.</i>
+		<div>
+			<i>Bienvenido! Acceda al sistema.</i>
+		</div>
 	<?php endif; ?>
 <?php endif; ?>
