@@ -36,7 +36,7 @@ switch ($_SESSION['cod_tipo_usr']) {
 		break;
 
 	case 3:
-			require ""
+			require "php/cuerpo/admin/body.php";
 			break;
 
 	case 4:
