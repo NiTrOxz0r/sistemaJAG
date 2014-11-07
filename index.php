@@ -36,7 +36,7 @@ switch ($_SESSION['cod_tipo_usr']) {
 		break;
 
 	case 3:
-			echo "Validacion tipo de usuario: Administrador en desarrollo";
+			require ""
 			break;
 
 	case 4:
