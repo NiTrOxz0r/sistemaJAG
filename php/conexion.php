@@ -32,24 +32,21 @@ function conexion($query = 0, $condicion = 0){
 	// modificar segun los datos de tu pc:
 	$servidor  =  'localhost';
 	$usuario   = 'php1';
-	$clave 	   = '';
-	$bd 	   = "JAG_rev0";
+	$clave 	   = 'clavephp';
+	$bd 	   = "JAG_REPO";
+
+	//se inicializa la variable conexion
+	$conexion  = mysqli_connect($servidor,$usuario,$clave,$bd) 
+	or die('error de conexion: '.mysqli_connect_error());
 	
 
 	// no tocar nada de lo de abajo al menos que sea absolutamente necesario
 	if ( $query === 0 and $condicion == 0) {
 
-		$conexion  = mysqli_connect($servidor,$usuario,$clave,$bd, $port) 
-		or die('error de conexion: '.mysqli_connect_error());
-		
 		return $conexion;
 	
 	}elseif($condicion == 0){
 		
-		//se inicializa la variable conexion
-		$conexion  = mysqli_connect($servidor,$usuario,$clave,$bd, $port) 
-		or die('error de conexion: '.mysqli_connect_error());
-	
 		/**
 		* Con la cadena de texto $query se accesa a la base de datos
 		* @param string $query
