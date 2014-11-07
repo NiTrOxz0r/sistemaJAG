@@ -1,6 +1,6 @@
-<?php if ( isset($_SESSION['cod_tipo_usr']) ): ?>
+<?php //if ( isset($_SESSION['cod_tipo_usr']) ): ?>
 
-	<?php if ($_SESSION['cod_tipo_usr'] <> 0): ?>
+	<?php //if ($_SESSION['cod_tipo_usr'] <> 0): ?>
 		<div>
 			<center>
 				<h1>Sistema JAG.</h1>
@@ -22,11 +22,11 @@
 				</td>
 			</table>
 		</div>
-	<?php else: ?>
-	<?php	header("location: ../index.php"); ?>
-	<?php endif ?>
+	<?php //else: ?>
+	<?php	//header("location: ../index.php"); ?>
+	<?php //endif ?>
 	
-<?php else: ?>
-	<?php $_SESSION['cod_tipo_usr'] = 0; ?>
-	<?php	header("location: ../index.php"); ?>
-<?php endif ?>
+<?php //else: ?>
+	<?php //$_SESSION['cod_tipo_usr'] = 0; ?>
+	<?php	//header("location: ../index.php"); ?>
+<?php //endif ?>
