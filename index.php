@@ -8,14 +8,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title></title>
+	<title>Sistema JAG</title>
+	<script type="text/javascript" src="java/jquery-1.11.0.min.js"></script>
 </head>
 <body>
 <?php 
 
 //NAVBAR:
 require "php/cuerpo/navbar.php";
-
+echo '<div class="contenido" id="contenido">';
 switch ($_SESSION['cod_tipo_usr']) {
 	case 0:
 		require "usuario/formUsuario.php";
@@ -35,14 +36,15 @@ switch ($_SESSION['cod_tipo_usr']) {
 			break;
 
 	case 4:
-			echo "Validacion tipo de usuario: Super Usuario en desarrollo";
+			//usando admin mientras tanto:
+			require "php/cuerpo/admin/body.php";
 			break;
 
 	default:
 		require "usuario/formUsuario.php";
 		break;
 } 
-
+echo '</div>';
 
 //FOOTER:
 require "php/cuerpo/footer.php";

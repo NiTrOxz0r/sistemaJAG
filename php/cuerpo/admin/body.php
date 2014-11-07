@@ -8,7 +8,7 @@
 		<tr>
 		<td>
 			&nbsp;&nbsp;
-			<a HREF="alumno/index.html">
+			<a HREF="alumno/index.php">
 				<h2> Gestionar Alumno. </h2>
 			</a>
 			&nbsp;&nbsp;
@@ -21,7 +21,8 @@
 			&nbsp;&nbsp;
 			<a HREF="padres_representante/index.html"> 
 				<h2>Gestionar Padres y Representante.</h2> 
-			</a>&nbsp;&nbsp;
+			</a>
+			&nbsp;&nbsp;
 		</td>
 	</TABLE>
 	<br>	
@@ -31,7 +32,8 @@
 			&nbsp;&nbsp;
 			<a HREF="profesor/index.html"> 
 				<h2>Gestionar Profesor.</h2> 
-			</a>&nbsp;&nbsp;
+			</a>
+			&nbsp;&nbsp;
 		</td>
 	</TABLE>
 	<br>	
@@ -41,7 +43,14 @@
 			&nbsp;&nbsp;
 			<a HREF="personal_autorizado/index.html"> 
 				<h2>Gestionar Personal Autorizado.</h2> 
-			</a>&nbsp;&nbsp;
+			</a>
+			&nbsp;&nbsp;
 		</td>
 	</TABLE>
 </div>
+
+<script type="text/javascript">
+	$(function(){
+
+	});
+</script>
