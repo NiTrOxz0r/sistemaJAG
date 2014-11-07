@@ -29,7 +29,7 @@
 
 	</form>
 
-	<a href="reg.php">Registrarse</a>
+	<a href="usuario/form_reg_U.php">Registrarse</a>
 </div>
 
 <script type="text/javascript" src="java/validacionUsuario.js"></script>
