@@ -1,7 +1,4 @@
-<?php
-	require("../php/conexion.php");
-
-?>
+<?php	require("../php/conexion.php");?>
 
 <html>
 	<head>
@@ -197,7 +194,7 @@
 											<option value="">Seleccionar</option>
 											<option value="n">NO</option>
 											<option value="s">SI</option>
-						    			</select><font color="#ff0000">*</font>
+											</select><font color="#ff0000">*</font>
 									</td>
 								</tr>
 							</table>

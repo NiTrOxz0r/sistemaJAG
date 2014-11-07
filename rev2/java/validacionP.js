@@ -28,7 +28,7 @@ function validarform(){
  var lugar_tra 		= document.getElementById("lug_tra");   
  var direcc_tra 	= document.getElementById("dir_tra"); 
  var telefono_tra 	= document.getElementById("tlf_tra"); 
-  
+	
 
 	if (!cedula.value) {
 		alert("Campo de Cedula Requerido");
@@ -148,7 +148,7 @@ function validarform(){
 	
 	else if (verificar=true) {
 		alert("Validando");
-	    document.getElementById("form").submit();
+			document.getElementById("form").submit();
 	}
 }
 function limpiarform(){
@@ -156,8 +156,8 @@ function limpiarform(){
 	document.getElementById("form").reset();
 }
 
-window.onload = function()
-{
+window.onload = function(){
+	
 	var botonEnviar, botonLimpiar;
 	botonLimpiar = document.getElementById("limpiar");
 	botonLimpiar.onclick = limpiarform;

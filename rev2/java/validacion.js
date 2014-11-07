@@ -55,8 +55,8 @@ function validarform(){
 	else if(isNaN(cedesc)) {
 		alert("Campo Cedula Escolar solo debe ir Numeros");
 		cedesc.focus();
-  		verificar = false;
-  		console.log("se detecto: cedesc: "+cedesc.value);
+			verificar = false;
+			console.log("se detecto: cedesc: "+cedesc.value);
 	}	
 	else if (!pnombre.value) {
 		alert("Campo Primer Nombre Requerido");
@@ -163,38 +163,38 @@ function validarform(){
 	else if(isNaN(alt)) {
 		alert("Altura solo Numeros");
 		alt.focus();
-  		verificar = false;
-  		console.log("se detecto: alt: "+alt.value);
+			verificar = false;
+			console.log("se detecto: alt: "+alt.value);
 	}
 	else if(isNaN(peso)) {
 		alert("Peso solo Numeros");
 		peso.focus();
-  		verificar = false;
-  		console.log("se detecto: peso: "+peso.value);
+			verificar = false;
+			console.log("se detecto: peso: "+peso.value);
 	}
 	else if(isNaN(cam)) {
 		alert("Talla de Camisa solo Numeros");
 		cam.focus();
-  		verificar = false;
-  		console.log("se detecto: cam: "+cam.value);
+			verificar = false;
+			console.log("se detecto: cam: "+cam.value);
 	}
 	else if(isNaN(pant)) {
 		alert("Talla de Pantalon solo Numeros");
 		pant.focus();
-  		verificar = false;
-  		console.log("se detecto: pant: "+pant.value);
+			verificar = false;
+			console.log("se detecto: pant: "+pant.value);
 	}	
 
 	else if(isNaN(zap)) {
 		alert("Talla de Calzado solo Numeros");
 		zap.focus();
-  		verificar = false;
-  		console.log("se detecto: zap: "+zap.value);
+			verificar = false;
+			console.log("se detecto: zap: "+zap.value);
 	}
 
 	else if (verificar===true) {
 		alert("Validando");
-	    document.getElementById("form").submit();
+			document.getElementById("form").submit();
 	}
 	
 }

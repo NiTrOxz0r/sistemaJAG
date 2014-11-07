@@ -29,6 +29,7 @@ function conexion($query = 0, $condicion = 0){
 	*/
 
 	// datos de la base de datos
+	// modificar segun los datos de tu pc:
 	$ip =  '0.0.0.0';
 	$port = "3306";
 	$servidor  =  $ip;
@@ -36,6 +37,8 @@ function conexion($query = 0, $condicion = 0){
 	$clave 	   = '';
 	$bd 	   = "JAG_rev0";
 	
+
+	// no tocar nada de lo de abajo al menos que sea absolutamente necesario
 	if ( $query === 0 and $condicion == 0) {
 
 		$conexion  = mysqli_connect($servidor,$usuario,$clave,$bd, $port) 

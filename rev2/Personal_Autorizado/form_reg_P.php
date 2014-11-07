@@ -27,7 +27,7 @@
 			});
 		</script>
 	</head>
-	 <body>
+	<body>
 		<div align="center">
 			<form method="post" action="insertar_P.php" name="form_repre" id="form">
 				<fieldset>
@@ -241,5 +241,5 @@
 				</fieldset>
 			</form>
 		</div>
-	 <body>
+	<body>
 </html>

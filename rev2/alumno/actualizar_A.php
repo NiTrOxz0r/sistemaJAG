@@ -307,7 +307,7 @@
 										<option name="repitiente" value="n">NO</option>
 									<?php endif ?>
 								</select>
-				    		</select><font color="#ff0000">*</font>
+								</select><font color="#ff0000">*</font>
 							</td>
 						</tr>
 		

@@ -1,11 +1,15 @@
+
+//se hizo con la idea de modificar especificamente
+//al formulario de consulta de alumno
+//porque la otra funcion requeria muchas variables
 function validar(){
-  var expRegced  = /^\d{0-9}$/;
-  var cedula = document.getElementById("cedula");
-  if ( !expRegced.exec(cedula.value) ) {
-     document.getElementById("form").submit();
-  }else{
-    alert("la cedula no esta formateada correctamente, contacte al administrador");
-  }
+	var expRegced  = /^\d{0-9}$/;
+	var cedula = document.getElementById("cedula");
+	if ( !expRegced.exec(cedula.value) ) {
+		 document.getElementById("form").submit();
+	}else{
+		alert("la cedula no esta formateada correctamente, contacte al administrador");
+	}
 }
 
 function limpiarform(){

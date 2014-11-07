@@ -19,14 +19,14 @@
 	$_SESSION['lugar_nac'] 			= $_POST['lugar_nac']; 
 	$_SESSION['fec_nac'] 				= $_POST['fec_nac'];
 	$_SESSION['acta_num_part_nac']					= $_POST['acta_num_part_nac'];
- 	$_SESSION['acta_folio_num_part_nac'] 		= $_POST['acta_folio_num_part_nac'];
+	$_SESSION['acta_folio_num_part_nac'] 		= $_POST['acta_folio_num_part_nac'];
 	$_SESSION_['plantel_procedencia']	 			= $_POST['plantel_procedencia']; 
 	$_SESSION['repitiente'] 			= $_POST['repitiente'];
 	$_SESSION['altura'] 					= $_POST['altura']; 
 	$_SESSION['peso'] 						= $_POST['peso']; 
 	$_SESSION['camisa']						= $_POST['camisa'];
- 	$_SESSION['pantalon']		 			= $_POST['pantalon'];
- 	$_SESSION['zapato']						= $_POST['zapato']; 
+	$_SESSION['pantalon']		 			= $_POST['pantalon'];
+	$_SESSION['zapato']						= $_POST['zapato']; 
 	$_SESSION['cod_curso']   			= $_POST['curso'];
 	
 	
@@ -76,7 +76,3 @@
 	// '$cod_repre', '$status', '$cod_pa_reg',	'$cod_pa_mod', $fec_mod;);";
 	//$rs = mysql_query($sql) or die ("ProblemaS ".mysql_error());
 ?>
-
-
-
-

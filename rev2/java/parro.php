@@ -25,8 +25,8 @@
 	<?php $consulta = conexion($query); ?>
 	<option value="">--Seleccionar--</option>
 	<?php while ($fila = mysqli_fetch_array($consulta)) : ?>
-    <option value="<?php echo $fila["codigo"] ?>">
-     <?php echo utf8_encode($fila["descripcion"]); ?>
-    </option>
+		<option value="<?php echo $fila["codigo"] ?>">
+		 <?php echo utf8_encode($fila["descripcion"]); ?>
+		</option>
 	<?php endwhile ?>
 <?php endif ?>
