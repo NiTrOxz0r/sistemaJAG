@@ -23,6 +23,13 @@
 				</td>
 			</table>
 		</div>
+		<div>
+			<p>
+				<center>
+					<a class="click" href="javascript:history.go(-1)">Volver al menu</a>
+				</center>
+			</p>
+		</div>
 		<script type="text/javascript" src="java/ajax/cargadorOnClick.js"></script>
 	<?php else: ?>
 	<?php	header("location: ../index.php"); ?>

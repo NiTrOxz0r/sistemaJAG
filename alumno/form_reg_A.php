@@ -311,6 +311,19 @@
 	</form>
 </div>
 
+<div>
+	<p>
+		<center>
+			<a class="click" href="alumno/body.php">Volver</a>
+		</center>
+	</p>
+	<p>
+		<center>
+			<a href="index.php">Volver al menu</a>
+		</center>
+	</p>
+</div>
+<script type="text/javascript" src="java/ajax/cargadorOnClick.js"></script>
 <script language="javascript" src="java/validacion.js"></script>
 <script type="text/javascript">
 	$("document").ready(function(){
