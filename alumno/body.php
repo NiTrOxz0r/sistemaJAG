@@ -18,7 +18,7 @@
 				</td>
 				<td>
 					&nbsp;&nbsp;
-					<a class="click" href="alumno/menucon.html"> Consultar un Alumno </a>
+					<a class="click" href="alumno/menucon.php"> Consultar un Alumno </a>
 					&nbsp;&nbsp;
 				</td>
 			</table>
