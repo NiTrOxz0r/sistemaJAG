@@ -1,27 +1,5 @@
 <?php	require("../php/conexion.php");?>
 
-<script language="javascript" src="java/validacion.js"></script>
-<script type="text/javascript">
-	$("document").ready(function(){
-		$("#cod_est").load("../java/edo.php");
-		$("#cod_est").change(function(){
-			var id = $("#cod_est").val();
-			$.get("../java/mun.php",{param_id:id})
-			.done(function(data){
-				$("#cod_mun").html(data);
-				$("#cod_mun").change(function(){
-					var id2 = $("#cod_mun").val();
-					$.get("../java/parro.php",{param_id2:id2})
-					.done(function(data){
-						$("#cod_parro").html(data);
-					});
-				});
-			});
-		});
-	});
-</script>
-
-
 <div align="center">
 	<form action="insertar_A.php" method="POST" name="form_alu" id="form">
 		<fieldset style="width:80%">
@@ -34,7 +12,8 @@
 							<sup>(<font color="#ff0000">*</font> indica campo obligatorio).</sup></td>
 						</tr>
 						<tr>
-							<th>C&eacute;dula</th><th>C&eacute;dula Escolar</th>
+							<th>C&eacute;dula</th>
+							<th>C&eacute;dula Escolar</th>
 						</tr>
 						<tr>
 							<td align="left">
@@ -318,7 +297,7 @@
 					$registros = conexion($query);
 				?>
 				<select name="curso" id="curso">
-					<option value="">Seleccione una opci&oacuten</option>
+					<option value="">Seleccione una opci&oacute;n</option>
 				<?php	while($fila = mysqli_fetch_array($registros)) : ?>
 					<option value="<?php echo $fila['codigo']; ?>"><?php echo $fila['descripcion']; ?></option>
 				<?php endwhile; ?>
@@ -327,7 +306,28 @@
 
 		</fieldset>
 
-			<input type="button" name="enviar_btn" value="Enviar" Id="enviar"/>
-			<input type="button" name="limpiar_btn" value="Reset" Id="limpiar"/>
+			<input type="button" name="enviar_btn" value="Enviar" id="enviar"/>
+			<input type="button" name="limpiar_btn" value="Reset" id="limpiar"/>
 	</form>
 </div>
+
+<script language="javascript" src="java/validacion.js"></script>
+<script type="text/javascript">
+	$("document").ready(function(){
+		$("#cod_est").load("java/edo.php");
+		$("#cod_est").change(function(){
+			var id = $("#cod_est").val();
+			$.get("java/mun.php",{param_id:id})
+			.done(function(data){
+				$("#cod_mun").html(data);
+				$("#cod_mun").change(function(){
+					var id2 = $("#cod_mun").val();
+					$.get("java/parro.php",{param_id2:id2})
+					.done(function(data){
+						$("#cod_parro").html(data);
+					});
+				});
+			});
+		});
+	});
+</script>

@@ -200,25 +200,19 @@ function validarform(){
 }
 
 function limpiarform(){
-//id del formulario
-	alert("Limpiando");
+	//id del formulario
 	document.getElementById("form").reset();
 }
 
 //Hay dos manera de llamar un elemento de html, 1ero con el objeto padre document.getElementById
 //2ndo siguiendo por el nombre del formulario más el nombre (name) no el id del elemento
 //Objeto ventana, al cargar ejecuta algo.
-window.onload = function()
-{
+
+//transformado a Jquery:
+$(function(){
 	var botonEnviar, botonLimpiar;
-	//1ero Para acceder a un elemento de un documento html
-	//hacemos uso del objeto padre document
-	// botonLimpiar = document.getElementById("limpiar");
-	// //cuando haga un click has lo que diga la funcion
-	// botonLimpiar.onclick = limpiarform;
-
-	//2ndo
 	botonEnviar = document.form_alu.enviar_btn;
+	botonLimpiar = document.form_alu.limpiar_btn;
 	botonEnviar.onclick = validarform;
-
-};
+	botonLimpiar.onclick = limpiarform;
+});
