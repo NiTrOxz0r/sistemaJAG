@@ -1,0 +1,50 @@
+recomiendo de ahora en addelante usar la misma base de datos con el mismo nombre y mismo usuario...
+
+por que?
+
+bueno porque asi el repositorio central no lo tienen que estar modificando a lo loco...
+
+como hacemos eso?
+
+bueno:
+
+
+ejemplo!!! no lo ejecuten todavia:
+CREATE USER 'php1'@'localhost' IDENTIFIED BY 'clavephp';
+
+porque php1? bueno porque se pueden crear varios php2 php3 php4 para simular cosas dentro de la base datos...
+
+
+luego de crear al usuario le damos privilegios dentro de la base de datos:
+
+
+GRANT ALL PRIVILEGES ON * . * TO 'php1'@'localhost';
+
+el primer * significa la base de datos
+
+el segundo significa la tabla
+
+GRANT ALL PRIVILEGES ON * . * TO 'php1'@'localhost';
+se lee como dale todos los permisos en todas las bases de datos dentro de mysql y todas las tablas de todas las bases de datos a usuario php1 en localhost.
+
+chevere, pero no quiero darle eso, quiero que nada mas pueda entrar a la base de datos referente a JAG, entonces:
+
+GRANT ALL PRIVILEGES ON JAG . * TO 'php1'@'localhost';
+
+como pueden haber N tablas dentro de JAG entonces dejamos el segundo *
+
+ok, ahora como uds probablemente tienen al igual que yo una base de datos JAG, es mejor hacer una nueva que se considere canonica.
+
+si no saben crearla: CREATE DATABASE JAG_REPO
+
+suguiero JAG_REPO para saber que es la de este repositorio.
+
+entonces lo que tienen que hacer es:
+
+ejecuten esto:
+
+CREATE USER 'php1'@'localhost' IDENTIFIED BY 'clavephp';
+GRANT ALL PRIVILEGES ON JAG_PROTO.* TO 'php1'@'localhost';
+FLUSH PRIVILEGES;
+
+y listo, importan el archivo .sql dentro de la carpeta scriptsBD, pueden tambien referenciar el resto de los archivos en la carpeta modeloTentativo.
