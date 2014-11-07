@@ -11,10 +11,10 @@ CREATE TABLE docente (
 	telefono_otro varchar(11) default 'SinRegistro',
 	nivel_instruccion tinyint(1) unsigned not null,
 	-- PARA ACTUALIZAR TITULO
-	titulo varchar(80) unsigned,
+	titulo varchar(80) default "Sin Registros",
 	fec_nac date not null,
 	sexo tinyint(1) unsigned not null,
-	email varchar(50) unique,
+	email varchar(50) unique default	"Sin Registro",
 	cod_direccion int unsigned not null,
 	cod_usr int unsigned not null,
 	cod_cargo tinyint unsigned not null default 255,

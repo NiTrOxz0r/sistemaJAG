@@ -1,6 +1,7 @@
 -- 
--- version 2.0
--- 
+-- version 2.1
+-- ESTE TUTORIAL ES COMO REFERENCIA, no para ser
+-- usado y ejecutado como tal.
 
 -- 
 -- primero que todo se mete la direccion de

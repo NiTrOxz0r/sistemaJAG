@@ -47,4 +47,15 @@ CREATE USER 'php1'@'localhost' IDENTIFIED BY 'clavephp';
 GRANT ALL PRIVILEGES ON JAG_PROTO.* TO 'php1'@'localhost';
 FLUSH PRIVILEGES;
 
+asi seria:
+mysql> create database JAG_REPO;
+Query OK, 1 row affected (0,00 sec)
+
+mysql> grant all privileges on JAG_REPO.* to 'php1'@'localhost';
+Query OK, 0 rows affected (0,00 sec)
+
+mysql> flush privileges;
+Query OK, 0 rows affected (0,01 sec)
+
+
 y listo, importan el archivo .sql dentro de la carpeta scriptsBD, pueden tambien referenciar el resto de los archivos en la carpeta modeloTentativo.

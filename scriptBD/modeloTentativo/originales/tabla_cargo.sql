@@ -9,12 +9,12 @@ CREATE table cargo(
 );
 
 INSERT INTO cargo values
-	(1, 'Director(a)', 1, 1, null, 1, null),
-	(2, 'Sub-Director(a)', 1, 1, null, 1, null),
-	(3, 'Coordinador(a)', 1, 1, null, 1, null),
-	(4, 'Asistente', 1, 1, null, 1, null),
-	(5, 'Docente', 1, 1, null, 1, null),
-	(6, 'Especialista', 1, 1, null, 1, null),
-	(7, 'Auxiliar', 1, 1, null, 1, null),
-	(255, 'Favor actualizar campo', 1, 1, null, 1, null)
+	(1, 'Favor actualizar campo', 1, 1, null, 1, null),
+	(2, 'Director(a)', 1, 1, null, 1, null),
+	(3, 'Sub-Director(a)', 1, 1, null, 1, null),
+	(4, 'Coordinador(a)', 1, 1, null, 1, null),
+	(5, 'Asistente', 1, 1, null, 1, null),
+	(6, 'Docente', 1, 1, null, 1, null),
+	(7, 'Especialista', 1, 1, null, 1, null),
+	(8, 'Auxiliar', 1, 1, null, 1, null)
 ;

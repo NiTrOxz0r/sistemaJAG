@@ -9,4 +9,4 @@ CREATE TABLE profesion (
 INSERT INTO profesion
 (codigo, descripcion, cod_usr_reg, cod_usr_mod)
 values
-(255,'Otro', 1, 1)
+(255,'Otro', 1, 1);

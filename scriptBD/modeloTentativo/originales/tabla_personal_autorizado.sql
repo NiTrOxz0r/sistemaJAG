@@ -10,7 +10,7 @@ CREATE TABLE personal_autorizado (
 	telefono_otro varchar(11) default 'SinRegistro',
 	fec_nac date, 
 	lugar_nac varchar(50) default 'Sin Registro',
-	sexo tinyint(1) unsigned not null, 
+	sexo tinyint(1) unsigned not null default 1, 
 	email varchar(50) default 'Sin Registro',
 	cod_direccion int unsigned,
 	relacion tinyint unsigned not null,
