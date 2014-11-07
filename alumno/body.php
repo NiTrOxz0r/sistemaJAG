@@ -1,6 +1,7 @@
-<?php //if ( isset($_SESSION['cod_tipo_usr']) ): ?>
+<?php session_start(); ?>
+<?php if ( isset($_SESSION['cod_tipo_usr']) ): ?>
 
-	<?php //if ($_SESSION['cod_tipo_usr'] <> 0): ?>
+	<?php if ($_SESSION['cod_tipo_usr'] <> 0): ?>
 		<div>
 			<center>
 				<h1>Sistema JAG.</h1>
@@ -12,21 +13,22 @@
 				<tr>
 				<td>
 					&nbsp;&nbsp;
-					<a href="form_reg_A.php"> Registar un Alumno </a>
+					<a class="click" href="alumno/form_reg_A.php"> Registar un Alumno </a>
 					&nbsp;&nbsp;
 				</td>
 				<td>
 					&nbsp;&nbsp;
-					<a href="menucon.html"> Consultar un Alumno </a>
+					<a class="click" href="alumno/menucon.html"> Consultar un Alumno </a>
 					&nbsp;&nbsp;
 				</td>
 			</table>
 		</div>
-	<?php //else: ?>
-	<?php	//header("location: ../index.php"); ?>
-	<?php //endif ?>
+		<script type="text/javascript" src="java/ajax/cargadorOnClick.js"></script>
+	<?php else: ?>
+	<?php	header("location: ../index.php"); ?>
+	<?php endif ?>
 	
-<?php //else: ?>
-	<?php //$_SESSION['cod_tipo_usr'] = 0; ?>
-	<?php	//header("location: ../index.php"); ?>
-<?php //endif ?>
+<?php else: ?>
+	<?php $_SESSION['cod_tipo_usr'] = 0; ?>
+	<?php	header("location: ../index.php"); ?>
+<?php endif ?>

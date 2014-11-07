@@ -49,13 +49,4 @@
 	</table>
 </div>
 
-<script type="text/javascript">
-	$(function(){
-		$('.click').click(function(e){
-			e.preventDefault();
-			var enlace = $(this).attr('href');
-			$('#contenido').html('');
-			$('#contenido').load(enlace);
-		});
-	});
-</script>
+<script type="text/javascript" src="java/ajax/cargadorOnClick.js"></script>
