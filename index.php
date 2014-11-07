@@ -1,6 +1,8 @@
 <?php
 	session_start();
-	require("php/conexion.php");		
+	require("php/master.php");
+	// invocamos validarUsuario desde master.php
+	validarUsuario();
 ?>
 
 <!DOCTYPE html>
@@ -14,16 +16,9 @@
 //NAVBAR:
 require "php/cuerpo/navbar.php";
 
-
-//variable inicial que chequea el tipo de usuario:
-
-if ( !isset($_SESSION['cod_tipo_usr']) ) {
-	$_SESSION['cod_tipo_usr'] = 0;
-}
-
 switch ($_SESSION['cod_tipo_usr']) {
 	case 0:
-		require "php/usuario/formUsuario.php";
+		require "usuario/formUsuario.php";
 		echo '<script type="text/javascript" src="java/validacionUsuario.js"></script>';
 		break;
 	
@@ -44,7 +39,7 @@ switch ($_SESSION['cod_tipo_usr']) {
 			break;
 
 	default:
-		require "php/usuario/formUsuario.php";
+		require "usuario/formUsuario.php";
 		break;
 } 
 

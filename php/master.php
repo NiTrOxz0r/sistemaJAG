@@ -27,6 +27,9 @@
 // aqui esta la funcion basica mysqli_connect y mysqli_query
 require "conexion.php";
 
+// funcion validar usuario en pagina web:
+require "validarUsuario.php";
+
 // clase conexion, por ahora ignorar.
 require "claseConexion.php";
 
