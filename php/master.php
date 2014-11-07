@@ -27,6 +27,10 @@
 // aqui esta la funcion basica mysqli_connect y mysqli_query
 require "conexion.php";
 
+
+// usado para ver variables de session nada mas:
+require "debugUsuario.php";
+
 // funcion validar usuario en pagina web:
 require "validarUsuario.php";
 

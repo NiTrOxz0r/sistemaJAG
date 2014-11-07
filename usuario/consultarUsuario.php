@@ -21,22 +21,23 @@ require("../php/master.php");
 			// 	sin ser modificada:
 			// $clave = md5($clave);
 			$query = "SELECT codigo, cod_tipo_usr from usuario where seudonimo  ='".$seudonimo."' and clave='".$clave."';";
-			$sql = conexion($query, 1);
+			$sql = conexion($query);
 			// si hay errores raros descomentar y comentar la linea anterior:
 			//   $sql = conexion($query, 1);
 			if ( $sql->num_rows == 1 ) {
+				$resultado = mysqli_fetch_assoc($sql);
 				session_start();
-				$_SESSION['codUsrMod'] = $row['codigo'];
-				$_SESSION['cod_tipo_usr'] = $row['cod_tipo_usr'];
+				$_SESSION['codUsrMod'] = $resultado['codigo'];
+				$_SESSION['cod_tipo_usr'] = $resultado['cod_tipo_usr'];
 				$_SESSION['seudonimo'] = $seudonimo;
-				header("Location: admin.php");
+				header("Location: ../index.php");
 			}else{?>
 				Usuario no existe <a href='../index.php'>Reintentar</a>
 			<?php
 			}
 		}
 	}else {
-		header("location: index.php");
+		header("location: ../index.php");
 	}
 
 ?>
