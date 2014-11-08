@@ -1,21 +1,11 @@
 <?php
 	session_start();
-	require("php/master.php");
+	require_once("php/master.php");
 	// invocamos validarUsuario desde master.php
 	validarUsuario();
-?>
-
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Sistema JAG</title>
-	<script type="text/javascript" src="java/jquery-1.11.0.min.js"></script>
-</head>
-<body>
-<?php 
-
 //NAVBAR:
-require "php/cuerpo/navbar.php";
+require_once("php/cuerpo/head.php");
+require_once("php/cuerpo/navbar.php");
 echo '<div class="contenido" id="contenido">';
 switch ($_SESSION['cod_tipo_usr']) {
 	case 0:
@@ -47,8 +37,6 @@ switch ($_SESSION['cod_tipo_usr']) {
 echo '</div>';
 
 //FOOTER:
-require "php/cuerpo/footer.php";
+require_once("php/cuerpo/footer.php");
+require_once("php/cuerpo/cola.php");
 ?>
-
-</body>
-</html>
