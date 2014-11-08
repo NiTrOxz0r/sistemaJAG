@@ -16,4 +16,5 @@ CREATE TABLE usuario (
 
 INSERT INTO usuario
 values
-(1, 'neo', 'matrix', 4, 1, 1, null, 1, null);
+(1, 'neo', 'matrix', 4, 1, 1, null, 1, null),
+(4294967295, 'POR VERIFICAR', 'NO ELIMINAR', 4, 1, 1, null, 1, null);

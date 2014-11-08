@@ -110,7 +110,22 @@
 
 			$('#form_U').on('submit', function (evento){
 				if ( validacionUsuario() === true ) {
-					return true;
+					evento.preventDefault();
+					var seudonimo = $('#seudonimo').val();
+					var clave = $('#clave').val();
+					$('#clave').val();
+					$.ajax({
+						url: 'insertar_U.php',
+						type: 'POST',
+						data: {
+							seudonimo:seudonimo,
+							clave:clave
+						},
+						success: function (datos){
+							$("#form_reg_U").html(datos);
+						},
+					});
+					//return true;
 				}else{
 					return false;
 				};

@@ -2126,7 +2126,8 @@ CREATE TABLE IF NOT EXISTS `usuario` (
 
 INSERT INTO `usuario` (`codigo`, `seudonimo`, `clave`, `cod_tipo_usr`, `status`, `cod_usr_reg`, `fec_reg`, `cod_usr_mod`, `fec_mod`) VALUES
 (1, 'neo', 'matrix', 4, 1, 1, '2014-11-07 13:52:56', 1, '2014-11-07 13:52:56'),
-(2, 'trinity', 'patadakunfu', 2, 1, 1, '2014-11-07 14:12:27', 1, '2014-11-07 14:12:27');
+(2, 'trinity', 'patadakunfu', 2, 1, 1, '2014-11-07 14:12:27', 1, '2014-11-07 14:12:27'),
+(4294967295, 'POR VERIFICAR', 'NO ELIMINAR', 0, 1, 1, '2014-11-07 14:12:27', 1, '2014-11-07 14:12:27');
 
 --
 -- Constraints for dumped tables
