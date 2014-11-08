@@ -22,7 +22,7 @@
 	$_SESSION['fec_nac'] 				= $_POST['fec_nac'];
 	$_SESSION['acta_num_part_nac']		= $_POST['acta_num_part_nac'];
  	$_SESSION['acta_folio_num_part_nac']= $_POST['acta_folio_num_part_nac'];
-	$_SESSION_['plantel_procedencia']	= $_POST['plantel_procedencia']; 
+	$_SESSION['plantel_procedencia']	= $_POST['plantel_procedencia']; 
 	$_SESSION['repitiente'] 			= $_POST['repitiente'];
 	$_SESSION['altura'] 				= $_POST['altura']; 
 	$_SESSION['peso'] 					= $_POST['peso']; 
@@ -39,6 +39,6 @@
 	$cod_pa_mod   	=   		1;
 	$fec_mod 		= 			"current_timestamp";
 	
-	echo "Se ha guardados los datos del alumno".$_SESSION['p_nombre'].$_SESSION['p_apellido'] ;
+	echo "Se ha guardados los datos del alumno".$_SESSION['p_nombre'].$_SESSION['p_apellido'];
 	
 ?>
