@@ -9,8 +9,10 @@ require_once("../php/conexion.php");?>
 			<legend style="width:80%">REGISTRO DE PADRES/REPRESENTANTE</legend>
 				<table>
 					<tr>
-						<td colspan=2>Entre la informaci&oacute;n:<br>
-						<sup>(<font color="#ff0000">*</font> indica campo obligatorio).</sup></td>
+						<td colspan=2>
+							Entre la informaci&oacute;n:<br>
+							<sup>(<font color="#ff0000">*</font> indica campo obligatorio).</sup>
+						</td>
 					</tr>
 					<tr> 
 						<th>C&eacute;dula</th>
@@ -22,11 +24,14 @@ require_once("../php/conexion.php");?>
 								<option value="v">V</option>
 								<option value="e">E</option>
 							</select>
-							<input type="text"
-							maxlength="8"
-							size="12"
-							name="cedula"
-							id="cedula">
+							<input 
+								type="text"
+								maxlength="8"
+								size="12"
+								name="cedula"
+								autofocus
+								required
+								id="cedula">
 							<font color="#ff0000">*</font>
 						</td>
 						<td>
@@ -42,38 +47,46 @@ require_once("../php/conexion.php");?>
 						<th>Primer Apellido</th><th>Segundo Apellido</th>
 					</tr>
 					<tr>
-						<td><input 
-						type="text" 
-						name="p_nombre" 
-						id="p_nombre">
-						<font color="#ff0000">*</font></td>
-						<td><input type="text" name="s_nombre" id="s_nombre"></td>
-						<td><input type="text" name="p_apellido" id="p_apellido" >
+						<td>
+							<input 
+								type="text" 
+								name="p_nombre"
+								required
+								id="p_nombre">
 							<font color="#ff0000">*</font>
 						</td>
-						<td><input type="text" name="s_apellido" id="s_apellido"></td>
+						<td>
+							<input type="text" name="s_nombre" id="s_nombre">
+						</td>
+						<td>
+							<input type="text" name="p_apellido" required id="p_apellido">
+							<font color="#ff0000">*</font>
+						</td>
+						<td>
+							<input type="text" name="s_apellido" id="s_apellido">
+						</td>
 					</tr>
 					<tr>
-						<th>Sexo</th><th>Fecha de Nacimiento</th><th>Lugar de Nacimiento</th>
+						<th>Sexo</th>
+						<th>Fecha de Nacimiento</th>
+						<th>Lugar de Nacimiento</th>
 					</tr>
 					<tr>
 						<td>		
-							<?php
-								$sql = "SELECT codigo, descripcion from sexo where status = 1;";
-								$registros = conexion($sql);
-							?>
-								<select name="sexo" id="sexo">
-								<option value="">Seleccione una opci&oacute;n </option>
-							<?php
-								while($fila = mysql_fetch_array($registros)){
-							?>
-								<option value="<?php echo "" .$fila['codigo']?>"><?php echo "" .$fila['descripcion']?></option>
-							<?php
-								}
-							?>
+							<?php	$sql = "SELECT codigo, descripcion from sexo where status = 1;";
+								$registros = conexion($sql);?>
+								<select name="sexo" required id="sexo">
+									<option value="">Seleccione una opci&oacute;n </option>
+									<?php	while($fila = mysqli_fetch_array($registros)) :?>
+										<option value="<?php echo $fila['codigo']?>">
+											<?php echo $fila['descripcion']?>
+										</option>
+									<?php endwhile; ?>
 								</select><font color="#ff0000">*</font>
 						</td>
-						<td><input type="date" maxlength="10" name="fec_nac" id="fec_nac"></td>
+						<td>
+							<input type="date" required name="fec_nac" id="fec_nac">
+						</td>
 						<td>							
 							<textarea
 								name="lugar_nac"
@@ -85,19 +98,29 @@ require_once("../php/conexion.php");?>
 						</td>
 					</tr>
 					<tr>
-						<th>Tel&eacute;fono Local</th><th>Tel&eacute;fono Celular</th><th>E-mail</th>
+						<th>Tel&eacute;fono</th>
+						<th>Tel&eacute;fono Celular/Otro</th>
+						<th>E-mail</th>
 					</tr>
 					<tr>	
-						<td><input type="text"  
-							maxlength="11" 
-							name="telefono" 
-							id="telefono">
-							<font color="#ff0000">*</font></td>
-						<td><input type="text" 
-							maxlength="11" 
-							name="telefono_otro" 
-							id="telefono_otro"></td>
-						<td><input type="text" name="email" id="email"></td>
+						<td>
+							<input 
+								type="text"  
+								maxlength="11" 
+								name="telefono" 
+								id="telefono">
+							<font color="#ff0000">*</font>
+						</td>
+						<td>
+							<input 
+								type="text" 
+								maxlength="11" 
+								name="telefono_otro" 
+								id="telefono_otro">
+						</td>
+						<td>
+							<input type="text" name="email" id="email">
+						</td>
 					</tr>
 					<tr>
 						<th>Parentesco</th><th>Vive con el Alumno?</th>
@@ -106,20 +129,20 @@ require_once("../php/conexion.php");?>
 						<td>
 							<?php $sql="SELECT codigo, descripcion from relacion where status = 1;";
 								$registros = conexion($sql);?>
-							<select name="relacion" id="relacion">
+							<select name="relacion" required id="relacion">
 								<option value="">Seleccione una opci&oacute;n</option>
-								<?php	while($fila = mysql_fetch_array($registros)) :?>
+								<?php	while($fila = mysqli_fetch_array($registros)) :?>
 									<option value="<?php echo $fila['codigo']?>">
 									<?php echo $fila['descripcion']?></option>
 								<?php endwhile; ?>
 							</select><font color="#ff0000">*</font>
 						</td>
 						<td>	
-							<select name="vive_con_alumno" id="vive_con_alumno">
+							<select name="vive_con_alumno" required id="vive_con_alumno">
 								<option value="">Seleccionar</option>
 								<option value="s">SI</option>
 								<option value="n">NO</option>
-							</select>
+							</select><font color="#ff0000">*</font>
 						</td>
 					</tr>
 					<tr>
@@ -146,11 +169,12 @@ require_once("../php/conexion.php");?>
 					</tr>
 						<tr>
 							<td colspan="3">
-								<input type="text" 
-								maxlength="20" 
-								size ="50%" 
-								name="direcc" 
-								id="direcc" />
+								<textarea
+									maxlenght="150"
+									cols="50"
+									rows="4"
+									name="direcc"
+									id="direcc"></textarea>
 								<font color="#ff0000">*</font>
 							</td>
 						</tr>
@@ -161,16 +185,22 @@ require_once("../php/conexion.php");?>
 						<td>
 							<?php $sql="SELECT codigo, descripcion from nivel_instruccion where status = 1;";
 								$registros = conexion($sql);?>
-							<select name="nivel_instruccion" id="nivel_instruccion">
-							<?php while($fila = mysql_fetch_array($registros)) :	?>
-									<option value="<?php echo $fila['codigo']?>">
-									<?php echo $fila['descripcion']?></option>
+							<select name="nivel_instruccion" required id="nivel_instruccion">
+							<?php while($fila = mysqli_fetch_array($registros)) :	?>
+								<option value="<?php echo $fila['codigo']?>">
+								<?php echo $fila['descripcion']?></option>
 							<?php endwhile; ?>
 							</select><font color="#ff0000">*</font>
 						</td>	
 						<td>
+							<?php $sql="SELECT codigo, descripcion from profesion where status = 1;";
+								$registros = conexion($sql);?>
 							<select name="profesion" id="profesion">
-								<option value="">En Construccion</option>
+								<option value="">Seleccione</option>
+								<?php while($fila = mysqli_fetch_array($registros)) :	?>
+									<option value="<?php echo $fila['codigo']?>">
+									<?php echo $fila['descripcion']?></option>
+								<?php endwhile; ?>
 							</select>
 						</td>
 					</tr>
@@ -179,23 +209,35 @@ require_once("../php/conexion.php");?>
 						<th>Tel&eacute;fono Laboral</th>
 					</tr>
 					<tr>
-						<td><input type="text" 
-						name="lugar_trabajo" 
-						id="lugar_trabajo">
-					</td>
-						<td><input type="text" 
-						name="direccion_trabajo" 
-						id="direccion_trabajo">
-					</td>
-						<td><input type="text" 
-						maxlength="11" 
-						name="telefono_trabajo"
-						id="telefono_trabajo">
-					</td>
+						<td>
+						<input 
+							type="text"
+							maxlength="50"
+							name="lugar_trabajo" 
+							id="lugar_trabajo">
+						</td>
+						<td>
+						<input 
+							type="text"
+							maxlength="150"
+							name="direccion_trabajo" 
+							id="direccion_trabajo">
+						</td>
+						<td>
+						<input 
+							type="text" 
+							maxlength="11" 
+							name="telefono_trabajo"
+							id="telefono_trabajo">
+						</td>
 					</tr>
 					<tr>
-						<td align="center"><input type="button" name="limpiar" id="limpiar" value="reset"></td>
-						<td align="center"><input type="button" name="registrar" value="insertar"></td>
+						<td align="center">
+							<input type="button" name="registrar" value="insertar">
+						</td>
+						<td align="center">
+							<input type="button" name="limpiar" id="limpiar" value="reset">
+						</td>
 					</tr>
 				</table>
 		</fieldset>
