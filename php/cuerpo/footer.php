@@ -22,6 +22,6 @@
 				$enlace = $puntoPunto.$enlace;
 			}
 		?> 
-		: <a href="<?php echo $enlace ?>">SALIR</a>
+		PARA IR A INDEX: <a href="<?php echo $enlace ?>">SALIR</a>
 	</p>
 </div>
