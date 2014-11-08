@@ -14,8 +14,7 @@ if ( isset($_POST['seudonimo']) && isset($_POST['clave']) ):
 	$query = "INSERT INTO usuario	
 	VALUES
 	(null, '$seudonimo', '$clave', 
-		5, 1, 4294967295,
-		null, 4294967295, null );";
+		5, 1, 1, null, 1, null );";
 	$resultado = conexion($query);
 	$codigo = mysqli_insert_id($resultado);
 	$query = "SELECT codigo, seudonimo, cod_tipo_usr from usuario where codigo = $codigo";
