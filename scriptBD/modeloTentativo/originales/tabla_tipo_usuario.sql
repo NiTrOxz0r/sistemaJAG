@@ -14,4 +14,5 @@ values
 (2, 'Usuario Privilegiado',1,1),
 (3, 'Administrador',1,1),
 (4, 'Super Usuario',1,1),
+(5, 'Por verificar',1,1),
 (255, 'slayerfat',1,1);

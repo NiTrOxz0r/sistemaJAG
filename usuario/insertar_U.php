@@ -4,10 +4,6 @@ $enlace = $_SERVER['DOCUMENT_ROOT']."/github/sistemaJAG/php/master.php";
 require_once($enlace);
 // invocamos validarUsuario desde master.php
 validarUsuario();
-
-if ($_SESSION['cod_tipo_usr'] == 0) {
-	header($_SERVER['DOCUMENT_ROOT']."/github/sistemaJAG/index.php?error=cod_tip_usr");
-}
 	
 if ( isset($_POST['seudonimo']) && isset($_POST['clave']) ): 
 
@@ -17,10 +13,32 @@ if ( isset($_POST['seudonimo']) && isset($_POST['clave']) ):
 
 	$query = "INSERT INTO usuario	
 	VALUES
-	(null, $seudonimo, $clave, 
-		1, 1, $_SESSION[cod_tipo_usr], 4294967295,
+	(null, '$seudonimo', '$clave', 
+		5, 1, 4294967295,
 		null, 4294967295, null );";
-	$resultado = conexion($query, 1);
+	$resultado = conexion($query);
+	$codigo = mysqli_insert_id($resultado);
+	$query = "SELECT codigo, seudonimo, cod_tipo_usr from usuario where codigo = $codigo";
+	$resultado = conexion($query);
+	if ( $resultado->num_rows == 1 ) {
+		$datos = mysqli_fetch_assoc($resultado);
+		$_SESSION['codUsrMod'] = $datos['codigo'];
+		$_SESSION['codigo'] = $datos['codigo'];
+		$_SESSION['seudonimo'] = $datos['seudonimo'];
+		$_SESSION['cod_tipo_usr'] = $datos['cod_tipo_usr'];
+	}else{
+		echo "error en la base de datos!";
+	}
+	?>
+	<div>
+		<h3>
+			Bienvenido al sistema <?php echo $seudonimo ?>!
+		</h3>
+		<p>
+			Ud. ya es miembro de este sistema, por favor contacte a un administrador para empezar a usar las diferentes actividades.
+		</p>
+	</div>
+	
 else: ?>
-	<?php echo 'if s y c fallo' ?>
+	<?php echo 'Problemas en registro de usuario, por favor contacte a un administrador del sistema.' ?>
 <?php endif ?>

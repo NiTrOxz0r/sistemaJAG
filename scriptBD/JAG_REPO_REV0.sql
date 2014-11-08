@@ -2097,6 +2097,7 @@ INSERT INTO `tipo_usuario` (`codigo`, `descripcion`, `status`, `cod_usr_reg`, `f
 (2, 'Usuario Privilegiado', 1, 1, '2014-11-07 13:52:25', 1, '2014-11-07 13:52:25'),
 (3, 'Administrador', 1, 1, '2014-11-07 13:52:25', 1, '2014-11-07 13:52:25'),
 (4, 'Super Usuario', 1, 1, '2014-11-07 13:52:25', 1, '2014-11-07 13:52:25'),
+(5, 'Por verificar', 1, 1, '2014-11-07 13:52:25', 1, '2014-11-07 13:52:25'),
 (255, 'slayerfat', 1, 1, '2014-11-07 13:52:25', 1, '2014-11-07 13:52:25');
 
 -- --------------------------------------------------------
@@ -2126,8 +2127,7 @@ CREATE TABLE IF NOT EXISTS `usuario` (
 
 INSERT INTO `usuario` (`codigo`, `seudonimo`, `clave`, `cod_tipo_usr`, `status`, `cod_usr_reg`, `fec_reg`, `cod_usr_mod`, `fec_mod`) VALUES
 (1, 'neo', 'matrix', 4, 1, 1, '2014-11-07 13:52:56', 1, '2014-11-07 13:52:56'),
-(2, 'trinity', 'patadakunfu', 2, 1, 1, '2014-11-07 14:12:27', 1, '2014-11-07 14:12:27'),
-(4294967295, 'POR VERIFICAR', 'NO ELIMINAR', 0, 1, 1, '2014-11-07 14:12:27', 1, '2014-11-07 14:12:27');
+(2, 'trinity', 'patadakunfu', 2, 1, 1, '2014-11-07 14:12:27', 1, '2014-11-07 14:12:27');
 
 --
 -- Constraints for dumped tables
