@@ -2,36 +2,45 @@
 //se hizo con la idea de modificar especificamente
 //al formulario de consulta de alumno
 //porque la otra funcion requeria muchas variables
-function validarUsuario(){
+function validacionUsuario(){
+
+	//estatus:
+	var estatus = false;
+	//datos del formulario
 	var seudonimo = document.getElementById('seudonimo').value;
 	var clave = document.getElementById("clave").value;
 	seudonimo = seudonimo.replace(/^\s+|\s+$/g, '');
 	clave = clave.replace(/^\s+|\s+$/g, '');
-	console.log(clave.length);
+
+	//chequeos
 	if ( seudonimo == "" ) {
 		document.getElementById("seudonimo").focus();
-		alert("campo seudonimo no puede estar vacio");
-		return false;
+		$("#seudonimo_chequeo").html('este campo no puede </br> estar vacio');
+		estatus = false;
 	}else{
-		return true;
-	}
-	if ( seudonimo.length == 8 ) {
-		 return true;
-	}else{
-		alert("Por favor introduzca seudonimo solo con numeros a un maximo de 8, EJ: 12345678");
-		return false;
+		estatus = true;
 	}
 	if ( clave == "" ) {
 		document.getElementById("clave").focus();
-		alert("campo clave no puede estar vacio");
-		return false;
+		$("#clave_chequeo").html('este campo no puede </br> estar vacio');
+		estatus = false;
 	}else{
-		return true;
+		estatus = true;
 	}
-	if ( clave.length > 1 ) {
-		alert("Por favor introduzca clave solo con numeros a un maximo de 8, EJ: 12345678");
-		return false;
+	if ( clave.length > 64 || clave.length < 8) {
+		$("#clave_chequeo").html('Por favor introduzca hasta </br> un maximo de 64 caracteres </br> y un minimo de 8');
+		estatus = false;
 	}else{
-		return true;
+		estatus = true;
+	}
+
+	return go(estatus);
+
+	function go (e){
+		if (e) {
+			return true;
+		}else{
+			return false;
+		};
 	}
 }

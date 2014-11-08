@@ -17,6 +17,7 @@
 	<!-- http://www.w3schools.com/html/html_forms.asp -->
 		<form 
 			name="form_U"
+			id="form_U"
 			action="<?php echo $_SERVER['DOCUMENT_ROOT'].'/github/sistemaJAG/usuario/insertar_U.php' ?>"
 			method="POST">
 			<table>
@@ -41,7 +42,7 @@
 								type="password"
 								name="clave"
 								id="clave"
-								data-required="required"
+								data-1required="required"
 								placeholder="Instroduzca Clave">
 						</td>
 					</tr>
@@ -65,8 +66,8 @@
 								type="submit"
 								value="enviar"
 								name="enviar"
-								onsubmit"return validarUsuario();"
-								onclick="return validarUsuario();">
+								onsubmit"return validacionUsuario();"
+								onclick="return validacionUsuario();">
 						</td>
 					</tr>
 				</tbody>
@@ -83,7 +84,7 @@
 			});
 			$("#seudonimo").change(function(){
 				var info = $(this).val();
-				
+				validacionUsuario();
 				$.ajax({
 					url: '../java/usuario.php',
 					type: 'POST',
@@ -96,15 +97,26 @@
 			});
 
 			$("#clave").change(function(){
-				validarUsuario();
+				validacionUsuario();
 			});
 
-			$("td :submit").on( 'click' , function (evento) {
-				evento.preventDefault();
+			// $("td :submit").on( 'click' , function (evento) {
+			// 	evento.preventDefault();
+			// 	console.log(evento);
+			// 	if (validacionUsuario()) {
+			// 		console.log(typeof(evento));
+			// 	};
+			// });
+
+			$('#form_U').on('submit', function (evento){
+				if ( validacionUsuario() === true ) {
+					return true;
+				}else{
+					return false;
+				};
 			});
 		});
 	</script>
-	
 <?php
 	//FOOTER:
 	$enlace = $_SERVER['DOCUMENT_ROOT']."/github/sistemaJAG/php/cuerpo/footer.php";
