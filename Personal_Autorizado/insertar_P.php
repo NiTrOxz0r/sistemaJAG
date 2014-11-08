@@ -2,6 +2,7 @@
 <?php
 
 session_start();
+
 include("../conexion/conex.php");
 
 	
@@ -102,9 +103,9 @@ include("../conexion/conex.php");
  	telefono_trabajo,
  	
 	status,
-  cod_usr_reg,
-  cod_usr_mod,
-  fec_mod
+  	cod_usr_reg,
+  	cod_usr_mod,
+  	fec_mod
 	)
 	VALUES('$cedula','$nacionalidad','$p_nombre','$s_nombre','$p_apellido',
 	'$s_apellido','$sexo','$fec_nac',	$lugar_nac','$telefono','$telefono_otro',
@@ -210,7 +211,5 @@ include("../conexion/conex.php");
 	echo " Ingresar Alumno";
 	
 }
-
-?>
 
 ?>
