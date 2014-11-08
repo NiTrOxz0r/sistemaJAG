@@ -6,6 +6,7 @@ function validacionUsuario(){
 
 	//estatus:
 	var estatus = false;
+	var espacios = '/^\s+$/';
 	//datos del formulario
 	var seudonimo = document.getElementById('seudonimo').value;
 	var clave = document.getElementById("clave").value;
@@ -20,6 +21,13 @@ function validacionUsuario(){
 	}else{
 		estatus = true;
 	}
+	// if ( espacios.exec(seudonimo.value) ) {
+	// 	document.getElementById("seudonimo").focus();
+	// 	$("#seudonimo_chequeo").html('Solo un seudonimo sin espacios </br> ej: usuario321, pepe_123');
+	// 	estatus = false;
+	// }else{
+	// 	estatus = true;
+	// }
 	if ( clave == "" ) {
 		document.getElementById("clave").focus();
 		$("#clave_chequeo").html('este campo no puede </br> estar vacio');
