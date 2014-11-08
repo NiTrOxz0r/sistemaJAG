@@ -42,7 +42,7 @@
 								type="password"
 								name="clave"
 								id="clave"
-								data-1required="required"
+								required="required"
 								placeholder="Instroduzca Clave">
 						</td>
 					</tr>
