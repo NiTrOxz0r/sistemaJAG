@@ -5,7 +5,7 @@ session_start();
 require("../php/conexion.php");?>
 
 <div align="center">
-	<form action="insertar_A.php" method="POST" name="form_alu" id="form">
+	<form action="alumno/insertar_A.php" method="POST" name="form_alu" id="form">
 		<fieldset style="width:80%">
 			<legend>  REGISTRO DE ALUMNO</legend>
 			<fieldset>
@@ -98,8 +98,7 @@ require("../php/conexion.php");?>
 									cols="40"
 									rows="4"
 									maxlength="50"
-									>
-								</textarea>
+									></textarea>
 							</td>
 						</tr>
 						<tr>
@@ -158,8 +157,7 @@ require("../php/conexion.php");?>
 									cols="50"
 									rows="4"
 									name="direcc"
-									id="direcc">
-								</textarea>
+									id="direcc"></textarea>
 								<!--<input type="text" maxlength="150" size ="50%" name="direcc" id="direcc" />-->
 							</td>
 						</tr>
