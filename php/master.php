@@ -77,4 +77,7 @@ require "claseChequearUsuario.php";
 class_alias('ChequearUsuario', 'ChequearLogin');
 class_alias('ChequearUsuario', 'ChequearLogeo');
 class_alias('ChequearUsuario', 'ChequearValidarUsuario');
+
+//enlace dinamico:
+require "enlaceDinamico.php";
 ?>

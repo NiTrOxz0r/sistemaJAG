@@ -7,6 +7,7 @@ function validarUsuario(){
 	var clave = document.getElementById("clave").value;
 	seudonimo = seudonimo.replace(/^\s+|\s+$/g, '');
 	clave = clave.replace(/^\s+|\s+$/g, '');
+	console.log(clave.length);
 	if ( seudonimo == "" ) {
 		document.getElementById("seudonimo").focus();
 		alert("campo seudonimo no puede estar vacio");
@@ -27,10 +28,10 @@ function validarUsuario(){
 	}else{
 		return true;
 	}
-	if ( clave.length == 8 ) {
-		 return true;
-	}else{
+	if ( clave.length > 1 ) {
 		alert("Por favor introduzca clave solo con numeros a un maximo de 8, EJ: 12345678");
 		return false;
+	}else{
+		return true;
 	}
 }

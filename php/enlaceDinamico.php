@@ -15,5 +15,7 @@
 		for ($i=4; $i < $dimension; $i++) { 
 			$archivo = $puntoPunto.$archivo;
 		}
+
+		return $archivo;
 	}
 ?>
