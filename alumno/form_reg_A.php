@@ -62,7 +62,7 @@ require_once("../php/conexion.php");?>
 									// este query puede mejorar:
 									// $sql="select * from sexo";
 									// $registros=mysql_query($sql,$conn) or die("Problemas en el select:".mysql_error());
-									$query = "SELECT codigo, descripcion froprofm sexo where status = 1;";
+									$query = "SELECT codigo, descripcion from sexo where status = 1;";
 									$registros = conexion($query);
 								?>
 								<select name="sexo" id="sexo" required>
