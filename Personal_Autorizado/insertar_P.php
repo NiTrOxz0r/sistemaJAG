@@ -3,15 +3,15 @@
 
 session_start();
 
-include("../conexion/conex.php");
+require("../php/master.php");
 
 	
-	$fec_nacA = $_SESSION['fec_nac']; // 'YYYY-MM-DD'
-	$a = substr($fec_nacA, 0, 4); // 'YYYY'
-	$b = substr($fec_nacA, 5, 2); // 'MM'
-	$c = substr($fec_nacA, 8, 2); // 'DD'
-	$query = "SELECT codigo from obtiene where cod_p_a = $codigoMama 
-						and cod_a = $codigoAlumno;"; // << regresa N;
+// 'YYYY-MM-DD' $fec_nacA = $_SESSION['fec_nac'];
+// 'YYYY'				$a = substr($fec_nacA, 0, 4);
+// 'MM'					$b = substr($fec_nacA, 5, 2);
+// 'DD'					$c = substr($fec_nacA, 8, 2); 
+// regresa N >>	$query = "SELECT codigo from obtiene where cod_p_a = $codigoMama 
+						//  and cod_a = $codigoAlumno;";
 	// if( /*comprobar que el query traiga algo*/ ) :
 	// 	$n = $resultado->num_rows
 	// endif;
@@ -24,6 +24,11 @@ include("../conexion/conex.php");
  
   if ( isset($_SESSION['cedula']) || isset($_SESSION['cedula_escolar'])) {
   
+
+  //INICIACION DE VARIABLE CONEXION PARA
+  //USAR mysqli_escape_string()
+  $con = conexion();
+
   //HACER CONDICIONAL PARA SABER CUAL DE LOS 2 PADRES
   //ES EL REPRESENTANTE!
   
@@ -38,17 +43,16 @@ include("../conexion/conex.php");
   //INSERTO LA DIRECCION DEL REPRESENTANTE
   //LA ENVIO A LA TABLA direccion_p_a
   
-  $cod_parroquia 		=	$_POST['cod_parro'];
-	$direccion_exacta	= $_POST['direcc'];
+  $cod_parroquia 		=	mysqli_escape_string($con, $_POST['cod_parro']);
+	$direccion_exacta	= mysqli_escape_string($con, $_POST['direcc']);
 	
-	$queryDirP="INSERT INTRO direccion_p_a(
-  	cod_parroquia,
+	$queryDirP = "INSERT INTO direccion_p_a
+		(cod_parroquia,
   	direccion_exacta,
   	status,
 		cod_usr_reg,
 		cod_usr_mod,
-		fec_mod
-  	 	)
+		fec_mod)
   	VALUES('$cod_parroquia,'$direccion_exacta', '$status','$cod_usr_reg',
   	'$cod_usr_mod','$fec_mod')";
   	
@@ -58,26 +62,26 @@ include("../conexion/conex.php");
   //Y LO INSERTO EN QUERY P_A
   $cod_direccion = mysqli_insert_id($direccionP); 
 	//representante:
-	$cedula					=	$_POST['cedula'];
-	$nacionalidad		=	$_POST['nacionalidad'];
-	$p_nombre				=	$_POST['p_nombre'];
-	$s_nombre				=	$_POST['s_nombre'];
-	$p_apellido			=	$_POST['p_apellido'];
-	$s_apellido			=	$_POST['s_apellido'];
-	$sexo						=	$_POST['sexo'];
-	$fec_nac				=	$_POST['fec_nac'];
-	$lugar_nac			=	$_POST['lugar_nac'];
-	$telefono				=	$_POST['telefono'];
-	$telefono_otro	=	$_POST['telefono_otro'];      
-	$email					=	$_POST['email'];     
- 	$relacion				=	$_POST['relacion'];     
- 	$vive_con_alumno	=	$_POST['vive_con_alumno'];   
- 	$cod_direccion		=	$_POST['direcc'];       
- 	$nivel_instruccion	=	$_POST['nivel_instruccion'];    
- 	$profesion					=	$_POST['profesion'];      
- 	$lugar_trabajo			=	$_POST['lugar_trabajo'];   
- 	$direccion_trabajo	=	$_POST['direccion_trabajo'];   
- 	$telefono_trabajo		=	$_POST['telefono_trabajo'];
+	$cedula					=	mysqli_escape_string($con, $_POST['cedula']);
+	$nacionalidad		=	mysqli_escape_string($con, $_POST['nacionalidad']);
+	$p_nombre				=	mysqli_escape_string($con, $_POST['p_nombre']);
+	$s_nombre				=	mysqli_escape_string($con, $_POST['s_nombre']);
+	$p_apellido			=	mysqli_escape_string($con, $_POST['p_apellido']);
+	$s_apellido			=	mysqli_escape_string($con, $_POST['s_apellido']);
+	$sexo						=	mysqli_escape_string($con, $_POST['sexo']);
+	$fec_nac				=	mysqli_escape_string($con, $_POST['fec_nac']);
+	$lugar_nac			=	mysqli_escape_string($con, $_POST['lugar_nac']);
+	$telefono				=	mysqli_escape_string($con, $_POST['telefono']);
+	$telefono_otro	=	mysqli_escape_string($con, $_POST['telefono_otro']);      
+	$email					=	mysqli_escape_string($con, $_POST['email']);     
+ 	$relacion				=	mysqli_escape_string($con, $_POST['relacion']);     
+ 	$vive_con_alumno	=	mysqli_escape_string($con, $_POST['vive_con_alumno']);   
+ 	$cod_direccion		=	mysqli_escape_string($con, $_POST['direcc']);       
+ 	$nivel_instruccion	=	mysqli_escape_string($con, $_POST['nivel_instruccion']);    
+ 	$profesion					=	mysqli_escape_string($con, $_POST['profesion']);      
+ 	$lugar_trabajo			=	mysqli_escape_string($con, $_POST['lugar_trabajo']);   
+ 	$direccion_trabajo	=	mysqli_escape_string($con, $_POST['direccion_trabajo']);   
+ 	$telefono_trabajo		=	mysqli_escape_string($con, $_POST['telefono_trabajo']);
  	
 
 	$queryPA = "INSERT INTO personal_autorizado(
