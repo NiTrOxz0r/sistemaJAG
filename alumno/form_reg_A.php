@@ -1,5 +1,8 @@
 
-<?php	require("../php/conexion.php");?>
+
+<?php	
+session_start();
+require("../php/conexion.php");?>
 
 <div align="center">
 	<form action="insertar_A.php" method="POST" name="form_alu" id="form">
