@@ -10,9 +10,38 @@ if ( isset($_POST['cedula']) || isset($_POST['cedula_escolar'])) :
 	//INICIACION DE VARIABLE CONEXION PARA
   //USAR mysqli_escape_string()
   $con = conexion();
+	$codDir = 1;
+	$codRepresentante = 1;
+	$codPR = 1;
 	//VALIDACION DE DATOS DE ALUMNO:
-	// $validarForma = new ChequearAlumno(
-	// );
+	$validarForma = new ChequearAlumno(
+		$_SESSION['codUsrMod'],
+		$_POST['p_apellido'],
+		$_POST['s_apellido'],
+		$_POST['p_nombre'],
+		$_POST['s_nombre'],
+		$_POST['nacionalidad'],
+		$_POST['cedula'],
+		$_POST['cedula_escolar'],
+		$_POST['telefono'],
+		$_POST['telefono_otro'],
+		$_POST['fec_nac'],
+		$_POST['lugar_nac'],
+		$_POST['sexo'],
+		$codDir,
+		$_POST['acta_num_part_nac'],
+		$_POST['acta_folio_num_part_nac'],
+		$_POST['plantel_procedencia'],
+		$_POST['repitiente'],
+		$_POST['curso'],
+		$_POST['altura'],
+		$_POST['peso'],
+		$_POST['camisa'],
+		$_POST['pantalon'],
+		$_POST['zapato'],
+		$codRepresentante,
+		$codPR
+	);
 	
 	$_SESSION['direccion_exacta_a']		= mysqli_escape_string($con, $_POST['direcc']);
 	$_SESSION['cod_parro_a']					= mysqli_escape_string($con, $_POST['cod_parro']);	
@@ -38,22 +67,6 @@ if ( isset($_POST['cedula']) || isset($_POST['cedula_escolar'])) :
 	$_SESSION['pantalon_a']		 		= mysqli_escape_string($con, $_POST['pantalon']);
 	$_SESSION['zapato_a']					= mysqli_escape_string($con, $_POST['zapato']); 
 	$_SESSION['cod_curso_a']   			= mysqli_escape_string($con, $_POST['curso']);
-
-	//ESTO NO PUEDE SER ASI LEOTUR:
-	// $cod_persona_retira = null;
-	// $cod_repre 					= 1; 
-	// $status 						= 1;
-	// $cod_pa_reg 				= 1;
-	// $cod_pa_mod 				= 1;
-	// $fec_mod = "current_timestamp";
-
-	//tiene que ser dinamicamente:
-	$cod_persona_retira = null;
-	$cod_repre 					= 1; 
-	$status 						= 1;
-	$cod_pa_reg 				= $_SESSION['codUsrMod'];
-	$cod_pa_mod 				= $_SESSION['codUsrMod'];
-	$fec_mod = "current_timestamp";
 
 	header("Location:../Personal_Autorizado/form_reg_P.php");
 
