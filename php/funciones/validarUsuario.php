@@ -20,9 +20,15 @@ function validarUsuario($tipo = 0){
 			//variable inicial que chequea el tipo de usuario:
 
 			if ( !isset($_SESSION['cod_tipo_usr']) ) {
+				session_destroy();
+				session_unset();
+				session_start();
 				$_SESSION['cod_tipo_usr'] = 0;
 				header("Location:".$index);
 			}elseif ( !isset($_SESSION['codUsrMod']) ) {
+				session_destroy();
+				session_unset();
+				session_start();
 				header("Location:".$index);
 			}
 			break;
@@ -31,6 +37,9 @@ function validarUsuario($tipo = 0){
 			//variable inicial que chequea el tipo de usuario:
 
 			if ( !isset($_SESSION['cod_tipo_usr']) ) {
+				session_destroy();
+				session_unset();
+				session_start();
 				$_SESSION['cod_tipo_usr'] = 0;
 			}
 			break;
