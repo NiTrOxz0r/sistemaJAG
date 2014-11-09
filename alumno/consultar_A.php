@@ -8,12 +8,12 @@ require_once($enlace);
 validarUsuario();
 
 if (isset($_POST['cedula'])) {
-	if ($_POST['cedula'] <> "" and count($_POST['cedula']) == 8) {
-		$con = conexion();
-		$cedula = mysqli_escape_string($con, $_POST['cedula']);
-	}else{
+	if (trim($_POST['cedula']) == "" or strlen($_POST['cedula']) <> 8) {
 		$enlace = enlaceDinamico("alumno/menucon.php");
 		header("Location:".$enlace);
+	}else{
+		$con = conexion();
+		$cedula = mysqli_escape_string($con, $_POST['cedula']);
 	}
 }else{
 	$enlace = enlaceDinamico("alumno/menucon.php");
