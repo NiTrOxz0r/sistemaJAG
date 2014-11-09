@@ -1,3 +1,4 @@
+
 <?php	require("../php/conexion.php");?>
 
 <div align="center">
@@ -90,11 +91,10 @@
 								<!--http://www.w3schools.com/tags/tag_textarea.asp-->
 								<textarea
 									name="lugar_nac"
-									id="lug_nac"
+									id="lugar_nac"
 									cols="40"
 									rows="4"
 									maxlength="50"
-									placeholder="Por favor de estar disponible, introduzca el lugar de nacimiento."
 									>
 								</textarea>
 							</td>
