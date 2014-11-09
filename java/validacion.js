@@ -15,7 +15,15 @@ function validarform(){
 	var papelli = document.getElementById("p_apellido");
 	var sapelli = document.getElementById("s_apellido");
 
-	var lugnac = document.getElementById("lug_nac");
+	var sexo = document.getElementById("sexo");
+	var fec_nac = document.getElementById("fec_nac");
+	var edo = document.getElementById("cod_est");
+	var mun = document.getElementById("cod_mun");
+	var parro = document.getElementById("cod_parro");
+	var direcc = document.getElementById("direcc");
+	var repit = document.getElementById("repitiente");
+
+	var lugnac = document.getElementById("lugar_nac");
 	var tlf = document.getElementById("telefono");
 	var tlfo = document.getElementById("telefono_otro");
 
@@ -30,13 +38,7 @@ function validarform(){
 	var zap = document.getElementById("zapato").value;
 
 
-	var sexo = document.getElementById("sexo");
-	var fec_nac = document.getElementById("fec_nac");
-	var edo = document.getElementById("cod_est");
-	var mun = document.getElementById("cod_mun");
-	var parro = document.getElementById("cod_parro");
-	var direcc = document.getElementById("direcc");
-	var repit = document.getElementById("repitiente");
+
 
 	
 
@@ -113,14 +115,13 @@ function validarform(){
 		console.log("se detecto: lugnac: "+lugnac.value);
 	}
 	
-	else if ( tlf.value != "SinRegistro" ) {
-		if(!expRegtlf.exec(tlf.value)) {
+	else if(!expRegtlf.exec(tlf.value)) {
 			alert("Introduzca Telefono Local sin caracteres especiales: ()-_.*/, y solo numeros. Ej: 02124443322");
 			tlf.focus();
 			verificar = false;
 			console.log("se detecto: tlf: "+tlf.value);
-		}
-	}
+		
+	}//quite es condicional, porque con doble condicional me da error y no deja pasar a la proxima validacion
 	else if (!edo.value) {
 		alert("Campo Estado Requerido");
 		edo.focus();
