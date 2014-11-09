@@ -69,7 +69,9 @@ function conexion($query = 0, $condicion = 0){
 		
 		return $resultado;
 	}elseif($condicion == 1){
-		die( var_dump($query) );
+		var_dump($query);
+	}elseif($condicion == 2){
+		die(var_dump($query));
 	}
 
 }
