@@ -58,7 +58,7 @@ if ( isset($_SESSION['cedula_a']) || isset($_SESSION['cedula_escolar_a'])) {
 	$direccionP = conexion($queryDirP);
 	//TOMO EL CODIGO DEL REGISTRO DE LA DIRECCION
   //Y LO INSERTO EN QUERY P_A
-  $cod_direccion_P = mysqli_insert_id($direccionP); 
+  $cod_direccion_P = mysqli_insert_id($con); 
 	//representante:
 	$cedula					=	mysqli_escape_string($con, $_POST['cedula']);
 	$nacionalidad		=	mysqli_escape_string($con, $_POST['nacionalidad']);
@@ -120,7 +120,7 @@ if ( isset($_SESSION['cedula_a']) || isset($_SESSION['cedula_escolar_a'])) {
 	// $rs = mysql_query($queryPA) or die ("Error ".mysql_error());
    $rs = conexion($queryPA);
 	
-	$cod_representante = mysqli_insert_id($rs);
+	$cod_representante = mysqli_insert_id($con);
 	
 	//INSERTO DIRECCION ALUMNO EN LA TABLA DIRECCION_ALUMNO
 	//CODIGO TRAIDA EN VARIABLES DE SESSIONES
@@ -139,7 +139,7 @@ if ( isset($_SESSION['cedula_a']) || isset($_SESSION['cedula_escolar_a'])) {
   // $rs = mysql_query($queryPA) or die ("Error ".mysql_error());
   $rs = conexion($queryAdir);
   
-  $cod_direccion_a = mysqli_insert_id($rs);
+  $cod_direccion_a = mysqli_insert_id($con);
   	
   $queryA = "INSERT INTO alumno (
 	cedula,
