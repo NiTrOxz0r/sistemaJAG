@@ -37,8 +37,8 @@ if ( isset($_SESSION['cedula_a']) || isset($_SESSION['cedula_escolar_a'])) {
   // insersion de datos en las diferentes tablas:
   	
   $status         =  			1;
-	$cod_usr_reg    = 			1;
-	$cod_usr_mod   	=   		1;
+	$cod_usr_reg    = 			$_SESSION['codUsrMod'];
+	$cod_usr_mod   	=   		$_SESSION['codUsrMod'];
 	$fec_mod 				= 			"current_timestamp";
   	
   //INSERTO LA DIRECCION DEL REPRESENTANTE
