@@ -5,28 +5,28 @@ function validarform(){
  var expRegtlf	 = /^\d{11}$/;
 
  var verificar = true;
- var cedula 		= document.getElementById("cedula");
+ var cedula 				= document.getElementById("cedula");
  var nacionalidad 	= document.getElementById("nacionalidad");       
- var pnombre 		= document.getElementById("p_nombre");          
- var snombre 		= document.getElementById("s_nombre");          
- var papelli 		= document.getElementById("p_apellido"); 
- var sapelli 		= document.getElementById("s_apellido"); 
- var sexo			= document.getElementById("sexo"); 
- var fecha_nac		= document.getElementById("fec_nac"); 
- var lugar_nac		= document.getElementById("lugar_nac"); 
- var telefono 		= document.getElementById("telefono"); 
- var telefono_o 	= document.getElementById("telefono_otro");     
- var email 			= document.getElementById("email");        
- var parentesco 	= document.getElementById("relacion");
- var vive_alu 		= document.getElementById("vive_con_alumno");      
- var edo 			= document.getElementById("cod_est");  
- var mun 			= document.getElementById("cod_mun");
- var parro 			= document.getElementById("cod_parro");
- var direcc 		= document.getElementById("direcc");
- var codigo_ne 		= document.getElementById("nivel_instruccion");          
- var profesion 		= document.getElementById("profesion");   
- var lugar_tra 		= document.getElementById("lugar_trabajo");   
- var direcc_tra 	= document.getElementById("direccion_trabajo"); 
+ var pnombre 				= document.getElementById("p_nombre");          
+ var snombre 				= document.getElementById("s_nombre");          
+ var papelli 				= document.getElementById("p_apellido"); 
+ var sapelli 				= document.getElementById("s_apellido"); 
+ var sexo						= document.getElementById("sexo"); 
+ var fecha_nac			= document.getElementById("fec_nac"); 
+ var lugar_nac			= document.getElementById("lugar_nac"); 
+ var telefono 			= document.getElementById("telefono"); 
+ var telefono_o 		= document.getElementById("telefono_otro");     
+ var email 					= document.getElementById("email");        
+ var parentesco 		= document.getElementById("relacion");
+ var vive_alu 			= document.getElementById("vive_con_alumno");      
+ var edo 						= document.getElementById("cod_est");  
+ var mun 						= document.getElementById("cod_mun");
+ var parro 					= document.getElementById("cod_parro");
+ var direcc 				= document.getElementById("direcc");
+ var codigo_ne 			= document.getElementById("nivel_instruccion");          
+ var profesion 			= document.getElementById("profesion");   
+ var lugar_tra 			= document.getElementById("lugar_trabajo");   
+ var direcc_tra 		= document.getElementById("direccion_trabajo"); 
  var telefono_tra 	= document.getElementById("telefono"); 
   
 
@@ -151,12 +151,17 @@ function validarform(){
 	    document.getElementById("form").submit();
 	}
 }
+
+
+
 function limpiarform(){
 	alert("Limpiando");
 	document.getElementById("form").reset();
 }
 
-window.onload = function()
+
+
+$(function()
 {
 	var botonEnviar, botonLimpiar;
 	botonLimpiar = document.getElementById("limpiar");
@@ -165,4 +170,4 @@ window.onload = function()
 	botonEnviar = document.form_repre.registrar;
 	botonEnviar.onclick = validarform;
 
-}
+});
