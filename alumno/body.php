@@ -29,7 +29,7 @@ $index = enlaceDinamico();
 					<tr>
 					<td>
 						&nbsp;&nbsp;
-						<?php $enlace = enlaceDinamico("alumno/form_reg_A.php"); ?>
+						<?php $enlace = enlaceDinamico("sistemaJAG/alumno/form_reg_A.php"); ?>
 						<a class="click" href="<?php echo $enlace ?>"> Registar un Alumno </a>
 						&nbsp;&nbsp;
 					</td>
