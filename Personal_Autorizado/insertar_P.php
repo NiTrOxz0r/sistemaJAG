@@ -1,17 +1,19 @@
-
 <?php
-
-session_start();
-
-require("../php/master.php");
+if(!isset($_SESSION)){ 
+  session_start(); 
+}
+$enlace = $_SERVER['DOCUMENT_ROOT']."/github/sistemaJAG/php/master.php";
+require_once($enlace);
+// invocamos validarUsuario.php desde master.php
+validarUsuario();
 
 	
-// 'YYYY-MM-DD' $fec_nacA = $_SESSION['fec_nac'];
-// 'YYYY'				$a = substr($fec_nacA, 0, 4);
-// 'MM'					$b = substr($fec_nacA, 5, 2);
-// 'DD'					$c = substr($fec_nacA, 8, 2); 
-// regresa N >>	$query = "SELECT codigo from obtiene where cod_p_a = $codigoMama 
-						//  and cod_a = $codigoAlumno;";
+	// 'YYYY-MM-DD' $fec_nacA = $_SESSION['fec_nac'];
+	// 'YYYY'				$a = substr($fec_nacA, 0, 4);
+	// 'MM'					$b = substr($fec_nacA, 5, 2);
+	// 'DD'					$c = substr($fec_nacA, 8, 2); 
+	// regresa N >>	$query = "SELECT codigo from obtiene where cod_p_a = $codigoMama 
+							//  and cod_a = $codigoAlumno;";
 	// if( /*comprobar que el query traiga algo*/ ) :
 	// 	$n = $resultado->num_rows
 	// endif;

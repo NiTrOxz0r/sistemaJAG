@@ -11,6 +11,9 @@ if (isset($_POST['cedula'])) {
 	if ($_POST['cedula'] <> "" and count($_POST['cedula']) == 8) {
 		$con = conexion();
 		$cedula = mysqli_escape_string($con, $_POST['cedula']);
+	}else{
+		$enlace = enlaceDinamico("alumno/menucon.php");
+		header("Location:".$enlace);
 	}
 }else{
 	$enlace = enlaceDinamico("alumno/menucon.php");

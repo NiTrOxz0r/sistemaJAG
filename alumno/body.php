@@ -29,8 +29,8 @@ $index = enlaceDinamico();
 					<tr>
 					<td>
 						&nbsp;&nbsp;
-						<?php $enlace = enlaceDinamico("alumno/form_reg_A.php"); ?>
-						<a class="click" href="<?php echo $enlace ?>"> Registar un Alumno </a>
+						<?php $forma = enlaceDinamico("alumno/form_reg_A.php"); ?>
+						<a class="click" href="<?php echo $forma ?>"> Registar un Alumno </a>
 						&nbsp;&nbsp;
 					</td>
 					<td>
