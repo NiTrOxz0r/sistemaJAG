@@ -176,14 +176,14 @@ require("../php/master.php");
 	cod_usr_reg,
 	cod_usr_mod,
 	fec_mod
-	) VALUES('$_SESSION[cedula]', '$_SESSION[cedula_escolar]','$_SESSION[nacionalidad]',
-	'$_SESSION[p_nombre]', '$_SESSION[s_nombre]', '$_SESSION[p_apellido]', 
-	'$_SESSION[s_apellido]','$_SESSION[telefono]','$_SESSION[telefono_otro]',
-	'$_SESSION[sexo]', '$_SESSION[lugar_nac]','$_SESSION[fec_nac]',
+	) VALUES('$_SESSION[cedula_a]', '$_SESSION[cedula_escolar_a]','$_SESSION[nacionalidad_a]',
+	'$_SESSION[p_nombre_a]', '$_SESSION[s_nombre_a]', '$_SESSION[p_apellido_a]', 
+	'$_SESSION[s_apellido_a]','$_SESSION[telefono_a]','$_SESSION[telefono_otro_a]',
+	'$_SESSION[sexo_a]', '$_SESSION[lugar_nac_a]','$_SESSION[fec_nac_a]',
 	'$cod_direccion_a', '$_SESSION[acta_num_part_nac]',
-	'$_SESSION[acta_folio_num_part_nac]',	'$_SESSION[plantel_procedencia]',
-	'$_SESSION[repitiente]', '$_SESSION[altura]','$_SESSION[peso]',
-	'$_SESSION[camisa]', 	'$_SESSION[zapato],'$_SESSION[cod_curso]', 
+	'$_SESSION[acta_folio_num_part_nac]',	'$_SESSION[plantel_procedencia_a]',
+	'$_SESSION[repitiente_a]', '$_SESSION[altura_a]','$_SESSION[peso_a]',
+	'$_SESSION[camisa_a]', 	'$_SESSION[zapato_a],'$_SESSION[cod_curso_a]', 
 	'$cod_representante', '$status', '$cod_usr_reg',	'$cod_usr_mod', $fec_mod;);";
     	
 	// $rs = mysql_query($queryPA) or die ("Error ".mysql_error());

@@ -1,37 +1,37 @@
 <?php
 session_start();
 
-if ( isset($_SESSION['cedula']) || isset($_SESSION['cedula_escolar'])) :
+if ( isset($_POST['cedula']) || isset($_POST['cedula_escolar'])) :
 	
 	require("../php/master.php");
 	//INICIACION DE VARIABLE CONEXION PARA
   //USAR mysqli_escape_string()
   $con = conexion();
 	
-	$_SESSION['direccion_exacta']		=mysqli_escape_string($con, 'direcc']);
-	$_SESSION['cod_parro']					=mysqli_escape_string($con, 'cod_parro']);	
-	$_SESSION['$cedula'] 						= mysqli_escape_string($con, 'cedula']);
-	$_SESSION['cedula_escolar']			= mysqli_escape_string($con, 'cedula_escolar']);
-	$_SESSION['nacionalidad']				= mysqli_escape_string($con, 'nacionalidad']);
-	$_SESSION['p_nombre']						= mysqli_escape_string($con, 'p_nombre']);
-	$_SESSION['s_nombre'] 					= mysqli_escape_string($con, 's_nombre']);
-	$_SESSION['p_apellido'] 				= mysqli_escape_string($con, 'p_apellido']); 
-	$_SESSION['s_apellido'] 				= mysqli_escape_string($con, 's_apellido']);
-	$_SESSION['sexo']								= mysqli_escape_string($con, 'sexo']);
-	$_SESSION['telefono'] 					= mysqli_escape_string($con, 'telefono']);
-	$_SESSION['telefono_otro'] 			= mysqli_escape_string($con, 'telefono_otro']);
-	$_SESSION['lugar_nac'] 					= mysqli_escape_string($con, 'lugar_nac']); 
-	$_SESSION['fec_nac'] 						= mysqli_escape_string($con, 'fec_nac']);
-	$_SESSION['acta_num_part_nac']	= mysqli_escape_string($con, 'acta_num_part_nac']);
-	$_SESSION['acta_folio_num_part_nac']	= mysqli_escape_string($con, 'acta_folio_num_part_nac']);
-	$_SESSION['plantel_procedencia']			= mysqli_escape_string($con, 'plantel_procedencia']); 
-	$_SESSION['repitiente'] 		= mysqli_escape_string($con, 'repitiente']);
-	$_SESSION['altura'] 				= mysqli_escape_string($con, 'altura']); 
-	$_SESSION['peso'] 					= mysqli_escape_string($con, 'peso']); 
-	$_SESSION['camisa']					= mysqli_escape_string($con, 'camisa']);
-	$_SESSION['pantalon']		 		= mysqli_escape_string($con, 'pantalon']);
-	$_SESSION['zapato']					= mysqli_escape_string($con, 'zapato']); 
-	$_SESSION['cod_curso']   			= mysqli_escape_string($con, 'curso']);
+	$_SESSION['direccion_exacta_a']		= mysqli_escape_string($con, $_POST['direcc']);
+	$_SESSION['cod_parro_a']					= mysqli_escape_string($con, $_POST['cod_parro']);	
+	$_SESSION['$cedula_a'] 						= mysqli_escape_string($con, $_POST['cedula']);
+	$_SESSION['cedula_escolar_a']			= mysqli_escape_string($con, $_POST['cedula_escolar']);
+	$_SESSION['nacionalidad_a']				= mysqli_escape_string($con, $_POST['nacionalidad']);
+	$_SESSION['p_nombre_a']						= mysqli_escape_string($con, $_POST['p_nombre']);
+	$_SESSION['s_nombre_a'] 					= mysqli_escape_string($con, $_POST['s_nombre']);
+	$_SESSION['p_apellido_a'] 				= mysqli_escape_string($con, $_POST['p_apellido']); 
+	$_SESSION['s_apellido_a'] 				= mysqli_escape_string($con, $_POST['s_apellido']);
+	$_SESSION['sexo_a']								= mysqli_escape_string($con, $_POST['sexo']);
+	$_SESSION['telefono_a'] 					= mysqli_escape_string($con, $_POST['telefono']);
+	$_SESSION['telefono_otro_a'] 			= mysqli_escape_string($con, $_POST['telefono_otro']);
+	$_SESSION['lugar_nac_a'] 					= mysqli_escape_string($con, $_POST['lugar_nac']); 
+	$_SESSION['fec_nac_a'] 						= mysqli_escape_string($con, $_POST['fec_nac']);
+	$_SESSION['acta_num_part_nac_a']	= mysqli_escape_string($con, $_POST['acta_num_part_nac']);
+	$_SESSION['acta_folio_num_part_nac_a']	= mysqli_escape_string($con, $_POST['acta_folio_num_part_nac']);
+	$_SESSION['plantel_procedencia_a']			= mysqli_escape_string($con, $_POST['plantel_procedencia']); 
+	$_SESSION['repitiente_a'] 		= mysqli_escape_string($con, $_POST['repitiente']);
+	$_SESSION['altura_a'] 				= mysqli_escape_string($con, $_POST['altura']); 
+	$_SESSION['peso_a'] 					= mysqli_escape_string($con, $_POST['peso']); 
+	$_SESSION['camisa_a']					= mysqli_escape_string($con, $_POST['camisa']);
+	$_SESSION['pantalon_a']		 		= mysqli_escape_string($con, $_POST['pantalon']);
+	$_SESSION['zapato_a']					= mysqli_escape_string($con, $_POST['zapato']); 
+	$_SESSION['cod_curso_a']   			= mysqli_escape_string($con, $_POST['curso']);
 
 	//ESTO NO PUEDE SER ASI LEOTUR:
 	// $cod_persona_retira = null;
@@ -52,5 +52,5 @@ if ( isset($_SESSION['cedula']) || isset($_SESSION['cedula_escolar'])) :
 	header("Location:../Personal_Autorizado/form_reg_P.php");
 
 endif;
-	
+	echo "string";
 ?>
