@@ -18,13 +18,12 @@
 	$_SESSION['sexo']								= $_POST['sexo'];
 	$_SESSION['telefono'] 					= $_POST['telefono'];
 	$_SESSION['telefono_otro'] 			= $_POST['telefono_otro'];
-	$_SESSION['lugar_nac'] 				= $_POST['lugar_nac']; 
-	$_SESSION['fec_nac'] 				= $_POST['fec_nac'];
-	$_SESSION['acta_num_part_nac']		= $_POST['acta_num_part_nac'];
-	$_SESSION['acta_folio_num_part_nac']= $_POST['acta_folio_num_part_nac'];
-	$_SESSION['plantel_procedencia']	= $_POST['plantel_procedencia']; 
-	$_SESSION['repitiente'] 			= $_POST['repitiente'];
->>>>>>> 457e056f82de4a013842ddf14bf1c472b4173519
+	$_SESSION['lugar_nac'] 					= $_POST['lugar_nac']; 
+	$_SESSION['fec_nac'] 						= $_POST['fec_nac'];
+	$_SESSION['acta_num_part_nac']	= $_POST['acta_num_part_nac'];
+	$_SESSION['acta_folio_num_part_nac']	= $_POST['acta_folio_num_part_nac'];
+	$_SESSION['plantel_procedencia']			= $_POST['plantel_procedencia']; 
+	$_SESSION['repitiente'] 		= $_POST['repitiente'];
 	$_SESSION['altura'] 				= $_POST['altura']; 
 	$_SESSION['peso'] 					= $_POST['peso']; 
 	$_SESSION['camisa']					= $_POST['camisa'];
@@ -33,12 +32,12 @@
 	$_SESSION['cod_curso']   			= $_POST['curso'];
 
 	$cod_persona_retira = null;
-	$cod_repre = 1; 
-	$status = 1;
-	$cod_pa_reg = 1;
-	$cod_pa_mod = 1;
+	$cod_repre 					= 1; 
+	$status 						= 1;
+	$cod_pa_reg 				= 1;
+	$cod_pa_mod 				= 1;
 	$fec_mod = "current_timestamp";
->>>>>>> 457e056f82de4a013842ddf14bf1c472b4173519
+
 	header("Location:../Personal_Autorizado/form_reg_P.php");
 	
 ?>
