@@ -5,7 +5,8 @@
 			<strong>
 				<?=$_SESSION['seudonimo']?>
 			</strong>
-			| <a href="cerrar.php">Salir</a>
+			<?php $cerar = enlaceDinamico('cerrar.php'); ?>
+			| <a href="<?php echo $cerar ?>">Salir</a>
 		</div>
 	<?php else : ?>
 		<div>

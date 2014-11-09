@@ -16,8 +16,10 @@ if ( isset($_POST['seudonimo']) && isset($_POST['clave']) ):
 	(null, '$seudonimo', '$clave', 
 		5, 1, 1, null, 1, null );";
 	$resultado = conexion($query);
-	$codigo = mysqli_insert_id($resultado);
-	$query = "SELECT codigo, seudonimo, cod_tipo_usr from usuario where codigo = $codigo";
+	$query = "SELECT codigo, seudonimo, cod_tipo_usr 
+	from usuario 
+	where seudonimo = '$seudonimo'
+	and clave = '$clave'";
 	$resultado = conexion($query);
 	if ( $resultado->num_rows == 1 ) {
 		$datos = mysqli_fetch_assoc($resultado);
@@ -36,8 +38,11 @@ if ( isset($_POST['seudonimo']) && isset($_POST['clave']) ):
 		<p>
 			Ud. ya es miembro de este sistema, por favor contacte a un administrador para empezar a usar las diferentes actividades.
 		</p>
+		<p>
+			<a href="../index.php">Regresar al sistema</a>
+		</p>
 	</div>
 	
-else: ?>
+<?php else: ?>
 	<?php echo 'Problemas en registro de usuario, por favor contacte a un administrador del sistema.' ?>
 <?php endif ?>
