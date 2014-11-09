@@ -12,14 +12,14 @@
 	empezarPagina();
 
 	//CONTENIDO:?>
-	
-	<div id="blancoAjax">
-		<!-- CONTENIDO EMPIEZA DEBAJO DE ESTO: -->
+	<div id="contenido">
+		<div id="blancoAjax">
+			<!-- CONTENIDO EMPIEZA DEBAJO DE ESTO: -->
 
 
-		<!-- CONTENIDO TERMINA ARRIBA DE ESTO: -->
+			<!-- CONTENIDO TERMINA ARRIBA DE ESTO: -->
+		</div>
 	</div>
-	
 <?php
 	//FINALIZAMOS LA PAGINA:
 	//trae footer.php y cola.php

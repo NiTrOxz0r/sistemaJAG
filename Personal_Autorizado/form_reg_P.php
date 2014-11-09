@@ -1,18 +1,18 @@
 <?php
-	session_start();
-	$enlace = $_SERVER['DOCUMENT_ROOT']."/github/sistemaJAG/php/master.php";
-	require_once($enlace);
-	// invocamos validarUsuario desde master.php
-	validarUsuario();
-	//HEAD:
-	$enlace = $_SERVER['DOCUMENT_ROOT']."/github/sistemaJAG/php/cuerpo/head.php";
-	require_once($enlace);
-	//NAVBAR
-	$enlace = $_SERVER['DOCUMENT_ROOT']."/github/sistemaJAG/php/cuerpo/navbar.php";
-	require_once($enlace);
+if(!isset($_SESSION)){ 
+  session_start(); 
+}
+$enlace = $_SERVER['DOCUMENT_ROOT']."/github/sistemaJAG/php/master.php";
+require_once($enlace);
+// invocamos validarUsuario.php desde master.php
+validarUsuario();
 
-	//CONTENIDO:?>
-	
+//ESTA FUNCION TRAE EL HEAD Y NAVBAR:
+//DESDE empezarPagina.php
+empezarPagina();
+
+//CONTENIDO:?>
+<div id="contenido">	
 	<div id="blancoAjax">
 
 		<div align="center">
@@ -261,17 +261,20 @@
 		<?php $validacionP = enlaceDinamico("java/validacionP.js"); ?>
 		<script type="text/javascript" src="<?php echo $cargadorOnClick ?>"></script>
 		<script language="javascript" src="<?php echo $validacionP ?>"></script>
+		<?php $estado = enlaceDinamico("java/edo.php"); ?>
+		<?php $municipio = enlaceDinamico("java/mun.php"); ?>
+		<?php $parroquia = enlaceDinamico("java/parro.php"); ?>
 		<script type="text/javascript">
 			$("document").ready(function(){
-				$("#cod_est").load("java/edo.php");
+				$("#cod_est").load("<?php echo $estado ?>");
 					$("#cod_est").change(function(){
 					var id = $("#cod_est").val();
-					$.get("java/mun.php",{param_id:id})
+					$.get("<?php echo $municipio ?>",{param_id:id})
 					.done(function(data){
 						$("#cod_mun").html(data);
 							$("#cod_mun").change(function(){
 							var id2 = $("#cod_mun").val();
-							$.get("java/parro.php",{param_id2:id2})
+							$.get("<?php echo $parroquia ?>",{param_id2:id2})
 							.done(function(data){
 								$("#cod_parro").html(data);
 							});
@@ -282,11 +285,8 @@
 		</script>
 		
 	</div>
-	
+</div>
 <?php
-	//FOOTER:
-	$enlace = $_SERVER['DOCUMENT_ROOT']."/github/sistemaJAG/php/cuerpo/footer.php";
-	require_once($enlace);
-	$enlace = $_SERVER['DOCUMENT_ROOT']."/github/sistemaJAG/php/cuerpo/cola.php";
-	require_once($enlace);
-?>
+	//FINALIZAMOS LA PAGINA:
+	//trae footer.php y cola.php
+	finalizarPagina();?>

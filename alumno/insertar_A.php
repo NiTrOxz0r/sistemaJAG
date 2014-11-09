@@ -1,9 +1,12 @@
 <?php
-session_start();
-
+if(!isset($_SESSION)){ 
+  session_start(); 
+}
+$enlace = $_SERVER['DOCUMENT_ROOT']."/github/sistemaJAG/php/master.php";
+require_once($enlace);
+// invocamos validarUsuario.php desde master.php
+validarUsuario();
 if ( isset($_POST['cedula']) || isset($_POST['cedula_escolar'])) :
-	
-	require("../php/master.php");
 	//INICIACION DE VARIABLE CONEXION PARA
   //USAR mysqli_escape_string()
   $con = conexion();
