@@ -10,7 +10,7 @@
 			</center>
 			<fieldset style="width: 300px">
 				<legend><i>Indique La Cedula del Alumno</i></legend>
-					<form action="consultar_A.php" method="post">
+					<form action="almuno/consultar_A.php" method="post">
 						<b>&nbsp;Cedula&nbsp;</b>
 						<input type="text" name="cedula" size="8" maxlength="8">
 						&nbsp;&nbsp;
