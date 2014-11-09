@@ -5,7 +5,7 @@ if(!isset($_SESSION)){
 $enlace = $_SERVER['DOCUMENT_ROOT']."/github/sistemaJAG/php/master.php";
 require_once($enlace);
 // invocamos validarUsuario desde master.php
-validarUsuario();
+validarUsuario(1);
 	
 if ( isset($_POST['seudonimo']) && isset($_POST['clave']) ): 
 

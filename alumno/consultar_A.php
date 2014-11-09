@@ -5,7 +5,7 @@ if(!isset($_SESSION)){
 $enlace = $_SERVER['DOCUMENT_ROOT']."/github/sistemaJAG/php/master.php";
 require_once($enlace);
 // invocamos validarUsuario.php desde master.php
-validarUsuario();
+validarUsuario(1);
 
 if (isset($_POST['cedula'])) {
 	if (trim($_POST['cedula']) == "" or strlen($_POST['cedula']) <> 8) {
@@ -33,7 +33,7 @@ if($reg = mysqli_fetch_array($re)) :
 	//ESTA FUNCION TRAE EL HEAD Y NAVBAR:
 	//DESDE empezarPagina.php
 	empezarPagina();?>
-
+<div id="contenido">
 	<div id="blancoAjax" align="center">
 		<form action="actualizar_A.php" method="POST" name="form_alu" id="form">
 				<fieldset style="width:80%">
@@ -175,13 +175,16 @@ if($reg = mysqli_fetch_array($re)) :
 		<?php $validacionCA = enlaceDinamico("java/validacionCA.js"); ?>
 		<script type="text/javascript" src="<?php echo $validacionCA ?>"></script>
 	</div>
+</div>
 <?php else : ?>
+<div id="contenido">
 	<div id="blancoAjax" align="center">
 		<p align=center>
 			No existe informacion referente a la cedula:
 			<strong><?php echo $cedula ?></strong>
 		</p>
 	</div>
+</div>
 <?php endif ; ?>
 <?php
 //FINALIZAMOS LA PAGINA:

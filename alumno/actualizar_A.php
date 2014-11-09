@@ -6,7 +6,7 @@ if(!isset($_SESSION)){
 $enlace = $_SERVER['DOCUMENT_ROOT']."/github/sistemaJAG/php/master.php";
 require_once($enlace);
 // invocamos validarUsuario.php desde master.php
-validarUsuario();
+validarUsuario(1);
 
 if (isset($_POST['cedula'])) {
 	if ($_POST['cedula'] <> "" and count($_POST['cedula']) == 8) {

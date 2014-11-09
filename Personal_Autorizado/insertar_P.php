@@ -5,7 +5,7 @@ if(!isset($_SESSION)){
 $enlace = $_SERVER['DOCUMENT_ROOT']."/github/sistemaJAG/php/master.php";
 require_once($enlace);
 // invocamos validarUsuario.php desde master.php
-validarUsuario();
+validarUsuario(1);
 
 	// 'YYYY-MM-DD' $fec_nacA = $_SESSION['fec_nac'];
 	// 'YYYY'				$a = substr($fec_nacA, 0, 4);

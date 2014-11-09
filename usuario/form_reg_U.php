@@ -1,18 +1,18 @@
 <?php
-	if(!isset($_SESSION)){ 
-    session_start(); 
-  } 
-	$enlace = $_SERVER['DOCUMENT_ROOT']."/github/sistemaJAG/php/master.php";
-	require_once($enlace);
-	// invocamos validarUsuario desde master.php
-	validarUsuario();
-	//HEAD:
-	//ESTA FUNCION TRAE EL HEAD Y NAVBAR:
-	//DESDE empezarPagina.php
-	empezarPagina();
+if(!isset($_SESSION)){ 
+  session_start(); 
+} 
+$enlace = $_SERVER['DOCUMENT_ROOT']."/github/sistemaJAG/php/master.php";
+require_once($enlace);
+// invocamos validarUsuario desde master.php
+validarUsuario(1);
+//HEAD:
+//ESTA FUNCION TRAE EL HEAD Y NAVBAR:
+//DESDE empezarPagina.php
+empezarPagina();
 
-	//CONTENIDO:?>
-	
+//CONTENIDO:?>
+<div id="contenido">
 	<div id="blancoAjax">
 	<!-- http://www.w3schools.com/html/html_forms.asp -->
 		<form 
@@ -75,62 +75,62 @@
 			</table>
 		</form>
 		<script type="text/javascript">
-		$(function(){
-			$.ajax({
-				url: '../java/validacionUsuario.js',
-				type: 'GET',
-				dataType: "script",
-			});
-			$("#seudonimo").change(function(){
-				var info = $(this).val();
-				validacionUsuario();
+			$(function(){
 				$.ajax({
-					url: '../java/usuario.php',
-					type: 'POST',
-					data: {seudonimo:info},
-					dataType: "html",
-					success: function(datos){
-						$("#seudonimo_chequeo").html(datos);
-					},
+					url: '../java/validacionUsuario.js',
+					type: 'GET',
+					dataType: "script",
 				});
-			});
-
-			$("#clave").change(function(){
-				validacionUsuario();
-			});
-
-			// $("td :submit").on( 'click' , function (evento) {
-			// 	evento.preventDefault();
-			// 	console.log(evento);
-			// 	if (validacionUsuario()) {
-			// 		console.log(typeof(evento));
-			// 	};
-			// });
-
-			$('#form_U').on('submit', function (evento){
-				if ( validacionUsuario() === true ) {
-					evento.preventDefault();
-					var seudonimo = $('#seudonimo').val();
-					var clave = $('#clave').val();
-					$('#clave').val();
+				$("#seudonimo").change(function(){
+					var info = $(this).val();
+					validacionUsuario();
 					$.ajax({
-						url: 'insertar_U.php',
+						url: '../java/usuario.php',
 						type: 'POST',
-						data: {
-							seudonimo:seudonimo,
-							clave:clave
-						},
-						success: function (datos){
-							$("#form_reg_U").html(datos);
+						data: {seudonimo:info},
+						dataType: "html",
+						success: function(datos){
+							$("#seudonimo_chequeo").html(datos);
 						},
 					});
-					//return true;
-				}else{
-					return false;
-				};
+				});
+
+				$("#clave").change(function(){
+					validacionUsuario();
+				});
+
+				// $("td :submit").on( 'click' , function (evento) {
+				// 	evento.preventDefault();
+				// 	console.log(evento);
+				// 	if (validacionUsuario()) {
+				// 		console.log(typeof(evento));
+				// 	};
+				// });
+
+				$('#form_U').on('submit', function (evento){
+					if ( validacionUsuario() === true ) {
+						evento.preventDefault();
+						var seudonimo = $('#seudonimo').val();
+						var clave = $('#clave').val();
+						$('#clave').val();
+						$.ajax({
+							url: 'insertar_U.php',
+							type: 'POST',
+							data: {
+								seudonimo:seudonimo,
+								clave:clave
+							},
+							success: function (datos){
+								$("#form_reg_U").html(datos);
+							},
+						});
+						//return true;
+					}else{
+						return false;
+					};
+				});
 			});
-		});
-	</script>
+		</script>
 	</div>
 	
 <?php
