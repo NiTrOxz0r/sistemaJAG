@@ -22,11 +22,11 @@ require_once("../php/conexion.php");?>
 						<tr>
 							<td align="left">
 								<!--http://www.w3schools.com/tags/tag_select.asp-->
-								<select name="nacionalidad" id="nacionalidad" required="required">
+								<select name="nacionalidad" id="nacionalidad" required>
 									<option value="v">V</option>
 									<option value="e">E</option>
 								</select>
-								<input type="text"  maxlength="8" name="cedula" id="cedula" required="required">
+								<input type="text"  maxlength="8" name="cedula" id="cedula" required>
 								<font color="#ff0000">*</font>
 							</td>
 							<td>
@@ -39,14 +39,14 @@ require_once("../php/conexion.php");?>
 						</tr>
 						<tr>
 							<td>
-								<input type="text" maxlength="20" name="p_nombre" id="p_nombre" required="required"/>
+								<input type="text" maxlength="20" name="p_nombre" id="p_nombre" required/>
 								<font color="#ff0000">*</font>
 							</td>
 							<td>
 								<input type="text" maxlength="20" name="s_nombre" id="s_nombre"/>
 							</td>
 							<td>
-								<input type="text" maxlength="20" name="p_apellido" id="p_apellido" required="required"/>
+								<input type="text" maxlength="20" name="p_apellido" id="p_apellido" required/>
 								<font color="#ff0000">*</font>
 							</td>
 							<td>
@@ -65,7 +65,7 @@ require_once("../php/conexion.php");?>
 									$query = "SELECT codigo, descripcion from sexo where status = 1;";
 									$registros = conexion($query);
 								?>
-								<select name="sexo" id="sexo" required="required">
+								<select name="sexo" id="sexo" required>
 									<option value="">Seleccione una opci&oacute;n </option>
 									<?php	while($fila = mysqli_fetch_array($registros)) : ?>
 										<option value="<?php echo $fila['codigo']; ?>"><?php echo $fila['descripcion']; ?></option>
@@ -77,7 +77,7 @@ require_once("../php/conexion.php");?>
 										type="date"
 										name="fec_nac"
 										id="fec_nac"
-										required="required"/>
+										required/>
 								</td>
 							<td colspan="2">
 								<?php
