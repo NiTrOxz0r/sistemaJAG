@@ -333,10 +333,6 @@
 			</center>
 		</p>
 	</div>
-	<?php $cargadorOnClick = enlaceDinamico("java/ajax/cargadorOnClick.js"); ?>
-	<?php $validacion = enlaceDinamico("java/validacion.js"); ?>
-	<script type="text/javascript" src="<?php echo $cargadorOnClick ?>"></script>
-	<script language="javascript" src="<?php echo $validacion ?>"></script>
 	<?php $estado = enlaceDinamico("java/edo.php"); ?>
 	<?php $municipio = enlaceDinamico("java/mun.php"); ?>
 	<?php $parroquia = enlaceDinamico("java/parro.php"); ?>

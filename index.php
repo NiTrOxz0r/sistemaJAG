@@ -14,28 +14,29 @@
 	//CUERPO:
 	echo '<div class="contenido" id="contenido">';
 	switch ($_SESSION['cod_tipo_usr']) {
+		//SIN TIPO:
 		case 0:
 			require "usuario/formUsuario.php";
 			echo '<script type="text/javascript" src="java/validacionUsuario.js"></script>';
 			break;
-		
+		//USUARIO:
 		case 1:
 			echo "Validacion tipo de usuario: usuario en desarrollo";
 			break;
-
+		//USUARIO PRIV:
 		case 2:
 			echo "Validacion tipo de usuario: Usuario Privilegiado en desarrollo";
 			break;
-
+		//ADMIN:
 		case 3:
 				require "php/cuerpo/admin/body.php";
 				break;
-
+		//SUPER USUARIO:
 		case 4:
 				//usando admin mientras tanto:
 				require "php/cuerpo/admin/body.php";
 				break;
-
+		//TIPO DESCONOCIDO:
 		default:
 			require "usuario/formUsuario.php";
 			break;

@@ -1,29 +1,37 @@
-<html>
-	<head>
-		<title>Consultar</title>
-	</head>
-	<script language="javascript" src="../java/validacionCA.js"></script> 
+<?php
+if(!isset($_SESSION)){ 
+  session_start(); 
+}
+$enlace = $_SERVER['DOCUMENT_ROOT']."/github/sistemaJAG/php/master.php";
+require_once($enlace);
+// invocamos validarUsuario.php desde master.php
+validarUsuario();
 
-	<body>
+if (isset($_POST['cedula'])) {
+	if ($_POST['cedula'] <> "" and count($_POST['cedula']) == 8) {
+		$con = conexion();
+		$cedula = mysqli_escape_string($con, $_POST['cedula']);
+	}
+}else{
+	$enlace = enlaceDinamico("alumno/menucon.php");
+	header("Location:".$enlace);
+}
 
-	<?php
-	
+$sql = "SELECT a.codigo, a.cedula, a.cedula_escolar, nacionalidad, p_nombre, s_nombre, p_apellido, 
+s_apellido, f.descripcion as sexo, fec_nac, lugar_nac, telefono, telefono_otro, b.direccion_exacta as direccion, 
+c.descripcion as parroquia, d.descripcion as municipio, e.descripcion as estado, acta_num_part_nac, 
+acta_folio_num_part_nac, plantel_procedencia, repitiente, altura, peso, camisa, pantalon, zapato FROM alumno a, 
+direccion_alumno b, parroquia c, municipio d, estado e, sexo f WHERE a.cod_direccion=b.codigo and 
+b.cod_parroquia=c.codigo and c.cod_mun=d.codigo and e.codigo=d.cod_edo and cedula ='$cedula';";
 
-		require("../php/conexion.php");
+$re = conexion($sql);
 
-		$cedula = $_POST['cedula'];
-	
-		$sql = "SELECT a.codigo, a.cedula, a.cedula_escolar, nacionalidad, p_nombre, s_nombre, p_apellido, 
-		s_apellido, f.descripcion as sexo, fec_nac, lugar_nac, telefono, telefono_otro, b.direccion_exacta as direccion, 
-		c.descripcion as parroquia, d.descripcion as municipio, e.descripcion as estado, acta_num_part_nac, 
-		acta_folio_num_part_nac, plantel_procedencia, repitiente, altura, peso, camisa, pantalon, zapato FROM alumno a, 
-		direccion_alumno b, parroquia c, municipio d, estado e, sexo f WHERE a.cod_direccion=b.codigo and 
-		b.cod_parroquia=c.codigo and c.cod_mun=d.codigo and e.codigo=d.cod_edo and cedula ='$cedula';";
-		
-		$re = conexion($sql);
-	
-	if($reg = mysqli_fetch_array($re)) : ?>	
-	<div align="center">
+if($reg = mysqli_fetch_array($re)) : 
+	//ESTA FUNCION TRAE EL HEAD Y NAVBAR:
+	//DESDE empezarPagina.php
+	empezarPagina();?>
+
+	<div id="blancoAjax" align="center">
 		<form action="actualizar_A.php" method="POST" name="form_alu" id="form">
 				<fieldset style="width:80%">
 					<legend>  CONSULTA DE ALUMNO</legend>
@@ -161,12 +169,17 @@
 							</table>
 						</fieldset>
 		</form>
+		<?php  ?>
 	</div>
-		
-	<?php else : ?>
-		<p align=center>No existe Datos con esa Cedula</p>
-	<?php endif ; ?>
-
-	</body>
-
-</html>
+<?php else : ?>
+	<div id="blancoAjax" align="center">
+		<p align=center>
+			No existe informacion referente a la cedula:
+			<strong><?php echo $cedula ?></strong>
+		</p>
+	</div>
+<?php endif ; ?>
+<?php
+//FINALIZAMOS LA PAGINA:
+//trae footer.php y cola.php
+finalizarPagina();

@@ -1,43 +1,65 @@
+<?php 
+$enlace = $_SERVER['DOCUMENT_ROOT']."/github/sistemaJAG/php/master.php";
+require_once($enlace);
+$index = enlaceDinamico();
+?>
+
 <?php if(!isset($_SESSION)){ session_start(); } ?>
 <?php if ( isset($_SESSION['cod_tipo_usr']) ): ?>
 
-	<?php if ($_SESSION['cod_tipo_usr'] <> 0): ?>
-		<div id="blancoAjax">
-		<div>
-			<center>
-				<h1>Sistema JAG.</h1>
-				<h2>opciones</h2>
-				<h2>Alumno.</h2>
-			</center>
+	<?php if ($_SESSION['cod_tipo_usr'] <> 0):
+		// invocamos validarUsuario.php desde master.php
+		validarUsuario();
 
-			<table border="1" align="center">
-				<tr>
-				<td>
-					&nbsp;&nbsp;
-					<a class="click" href="alumno/form_reg_A.php"> Registar un Alumno </a>
-					&nbsp;&nbsp;
-				</td>
-				<td>
-					&nbsp;&nbsp;
-					<a class="click" href="alumno/menucon.php"> Consultar un Alumno </a>
-					&nbsp;&nbsp;
-				</td>
-			</table>
-		</div>
-		<div>
-			<p>
+		//ESTA FUNCION TRAE EL HEAD Y NAVBAR:
+		//DESDE empezarPagina.php
+		empezarPagina();
+
+		//CONTENIDO:?>
+
+		<div id="blancoAjax">
+			<div>
 				<center>
-					<a class="click" href="javascript:history.go(-1)">Volver al menu</a>
+					<h1>Sistema JAG.</h1>
+					<h2>opciones</h2>
+					<h2>Alumno.</h2>
 				</center>
-			</p>
+
+				<table border="1" align="center">
+					<tr>
+					<td>
+						&nbsp;&nbsp;
+						<?php $enlace = enlaceDinamico("alumno/form_reg_A.php"); ?>
+						<a class="click" href="<?php echo $enlace ?>"> Registar un Alumno </a>
+						&nbsp;&nbsp;
+					</td>
+					<td>
+						&nbsp;&nbsp;
+						<?php $enlace = enlaceDinamico("alumno/menucon.php"); ?>
+						<a class="click" href="<?php echo $enlace ?>"> Consultar un Alumno </a>
+						&nbsp;&nbsp;
+					</td>
+				</table>
+			</div>
+			<div>
+				<p>
+					<center>
+						<a class="click" href="<?php echo $index ?>">Volver al menu</a>
+					</center>
+				</p>
+			</div>
+			<?php $cargadorOnClick = enlaceDinamico("java/ajax/cargadorOnClick.js"); ?>
+			<script type="text/javascript" src="<?php echo $cargadorOnClick ?>"></script>
 		</div>
-		<script type="text/javascript" src="java/ajax/cargadorOnClick.js"></script>
-		</div>
+		<?php
+		//FINALIZAMOS LA PAGINA:
+		//trae footer.php y cola.php
+		finalizarPagina();?>
 	<?php else: ?>
-	<?php	header("location: ../index.php"); ?>
+	<?php	header("Location:".$index); ?>
 	<?php endif ?>
 	
 <?php else: ?>
 	<?php $_SESSION['cod_tipo_usr'] = 0; ?>
-	<?php	header("location: ../index.php"); ?>
+	<?php	header("Location:".$index); ?>
 <?php endif ?>
