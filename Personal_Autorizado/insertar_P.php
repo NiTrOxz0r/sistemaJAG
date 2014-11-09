@@ -7,7 +7,6 @@ require_once($enlace);
 // invocamos validarUsuario.php desde master.php
 validarUsuario();
 
-	
 	// 'YYYY-MM-DD' $fec_nacA = $_SESSION['fec_nac'];
 	// 'YYYY'				$a = substr($fec_nacA, 0, 4);
 	// 'MM'					$b = substr($fec_nacA, 5, 2);
@@ -24,7 +23,7 @@ validarUsuario();
 	// }
  
  
-  if ( isset($_SESSION['cedula']) || isset($_SESSION['cedula_escolar'])) {
+if ( isset($_SESSION['cedula_a']) || isset($_SESSION['cedula_escolar_a'])) {
   
 
   //INICIACION DE VARIABLE CONEXION PARA
@@ -141,7 +140,7 @@ validarUsuario();
 		cod_usr_mod,
 		fec_mod
 		)	VALUES
-		('$_SESSION[cod_parro]','$_SESSION[direccion_exacta]', '$status',
+		('$_SESSION[cod_parro]','$_SESSION[direccion_exacta_a]', '$status',
 		'$cod_usr_reg','$cod_usr_mod','$fec_mod');";
   	
   // $rs = mysql_query($queryPA) or die ("Error ".mysql_error());

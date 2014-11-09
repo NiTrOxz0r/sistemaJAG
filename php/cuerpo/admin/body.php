@@ -12,64 +12,64 @@
 	empezarPagina();
 
 	//CONTENIDO:?>
+<div id="contenido">
+	<div id="blancoAjax">
+		<center>
+			<h1>Sistema JAG.</h1>
+			<h2>opciones</h2>
+		</center>
 
-<div id="blancoAjax">
-	<center>
-		<h1>Sistema JAG.</h1>
-		<h2>opciones</h2>
-	</center>
-
-	<table border="1" align="center">
-		<tr>
-		<td>
-			&nbsp;&nbsp;
-			<a 
-				class="no-click"
-				data-titulo="GestionarAlumno"
-				href="alumno/body.php">
-				<h2> Gestionar Alumno. </h2>
-			</a>
-			&nbsp;&nbsp;
-		</td>
-	</table>
-	<br>
-	<table border="1" align="center">
-		<tr>
-		<td>
-			&nbsp;&nbsp;
-			<a 
-				class="no-click"
-				data-titulo="personalAutorizado"
-				href="Personal_Autorizado/form_reg_P.php"> 
-				<h2>Gestionar Padres y Representante.</h2> 
-			</a>
-			&nbsp;&nbsp;
-		</td>
-	</table>
-	<br>	
-	<table border="1" align="center">
-		<tr>
-		<td>
-			&nbsp;&nbsp;
-			<a class="no-click" data-titulo="gestionarProfesor" href="profesor/index.html"> 
-				<h2>Gestionar Profesor.</h2> 
-			</a>
-			&nbsp;&nbsp;
-		</td>
-	</table>
-	<br>	
-	<table border="1" align="center">
-		<tr>
-		<td>
-			&nbsp;&nbsp;
-			<a class="no-click" href="personal_autorizado/index.html"> 
-				<h2>Gestionar Personal Autorizado.</h2> 
-			</a>
-			&nbsp;&nbsp;
-		</td>
-	</table>
+		<table border="1" align="center">
+			<tr>
+			<td>
+				&nbsp;&nbsp;
+				<a 
+					class="no-click"
+					data-titulo="GestionarAlumno"
+					href="alumno/body.php">
+					<h2> Gestionar Alumno. </h2>
+				</a>
+				&nbsp;&nbsp;
+			</td>
+		</table>
+		<br>
+		<table border="1" align="center">
+			<tr>
+			<td>
+				&nbsp;&nbsp;
+				<a 
+					class="no-click"
+					data-titulo="personalAutorizado"
+					href="Personal_Autorizado/form_reg_P.php"> 
+					<h2>Gestionar Padres y Representante.</h2> 
+				</a>
+				&nbsp;&nbsp;
+			</td>
+		</table>
+		<br>	
+		<table border="1" align="center">
+			<tr>
+			<td>
+				&nbsp;&nbsp;
+				<a class="no-click" data-titulo="gestionarProfesor" href="profesor/body.php"> 
+					<h2>Gestionar Profesor.</h2> 
+				</a>
+				&nbsp;&nbsp;
+			</td>
+		</table>
+		<br>	
+		<table border="1" align="center">
+			<tr>
+			<td>
+				&nbsp;&nbsp;
+				<a class="no-click" href="usuario/body.php">
+					<h2>Gestionar Personal Autorizado.</h2> 
+				</a>
+				&nbsp;&nbsp;
+			</td>
+		</table>
+	</div>
 </div>
-
 <script type="text/javascript" src="java/ajax/cargadorOnClick.js"></script>
 
 <?php

@@ -10,6 +10,9 @@ if ( isset($_POST['cedula']) || isset($_POST['cedula_escolar'])) :
 	//INICIACION DE VARIABLE CONEXION PARA
   //USAR mysqli_escape_string()
   $con = conexion();
+	//VALIDACION DE DATOS DE ALUMNO:
+	// $validarForma = new ChequearAlumno(
+	// );
 	
 	$_SESSION['direccion_exacta_a']		= mysqli_escape_string($con, $_POST['direcc']);
 	$_SESSION['cod_parro_a']					= mysqli_escape_string($con, $_POST['cod_parro']);	

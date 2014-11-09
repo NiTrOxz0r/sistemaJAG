@@ -10,15 +10,31 @@
 *
 * @return void
 *
-* @version 1.0
+* @version 1.1
 */
 
-function validarUsuario(){
-	//variable inicial que chequea el tipo de usuario:
+function validarUsuario($tipo = 0){
+	$index = enlaceDinamico();
+	switch ($tipo) :
+		case 1:
+			//variable inicial que chequea el tipo de usuario:
 
-	if ( !isset($_SESSION['cod_tipo_usr']) ) {
-		$_SESSION['cod_tipo_usr'] = 0;
-	}
+			if ( !isset($_SESSION['cod_tipo_usr']) ) {
+				$_SESSION['cod_tipo_usr'] = 0;
+				header("Location:".$index);
+			}elseif ( !isset($_SESSION['codUsrMod']) ) {
+				header("Location:".$index);
+			}
+			break;
+		
+		default:
+			//variable inicial que chequea el tipo de usuario:
+
+			if ( !isset($_SESSION['cod_tipo_usr']) ) {
+				$_SESSION['cod_tipo_usr'] = 0;
+			}
+			break;
+	endswitch;
 }
 
 
