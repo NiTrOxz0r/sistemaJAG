@@ -3,6 +3,6 @@ $(function(){
 		e.preventDefault();
 		var enlace = $(this).attr('href');
 		$('#contenido').html('');
-		$('#contenido').load(enlace);
+		$('#contenido').load(enlace+" #blancoAjax");
 	});
 });   

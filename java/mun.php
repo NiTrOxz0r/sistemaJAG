@@ -1,6 +1,9 @@
+<?php 
+$enlace = $_SERVER['DOCUMENT_ROOT']."/github/sistemaJAG/php/master.php";
+require_once($enlace); ?>
+
 <?php /*si el codigo es mandado como parametro hace esto:*/?>
-<?php if ( isset($_GET['param_id']) && isset($_REQUEST['cod_mun']) ): ?>
-	<?php require("../php/conexion.php");
+<?php if ( isset($_GET['param_id']) && isset($_REQUEST['cod_mun']) ): 
 	$query = "select * from municipio where cod_edo = ".$_REQUEST['param_id'].";";
 	//$consulta = mysql_query($query)	or die( var_dump($query)."...error: ".mysqli_error() );
 	$consulta = conexion($query);
@@ -19,7 +22,6 @@
 	<?php endwhile; ?>
 <?php else: ?>
 	<?php /*sino entonces es como si no paso nada:*/ ?>
-	<?php require("../php/conexion.php");?>
 	<?php //$consulta = mysql_query("select * from municipio where cod_edo = '$_GET[param_id]'");?>
 	<?php $query = "select * from municipio where cod_edo = '$_GET[param_id]'"; ?>
 	<?php $consulta = conexion($query); ?>

@@ -27,6 +27,11 @@
 // aqui esta la funcion basica mysqli_connect y mysqli_query
 require "funciones/conexion.php";
 
+// aqui esta la funcion que trae head y navbar:
+require "funciones/empezarPagina.php";
+
+// aqui esta la funcion que trae footer y cola:
+require "funciones/finalizarPagina.php";
 
 // usado para ver variables de session nada mas:
 require "funciones/debugUsuario.php";

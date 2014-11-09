@@ -1,11 +1,17 @@
 <?php 
-session_start();
+if(!isset($_SESSION)){ 
+    session_start(); 
+}
 $enlace = $_SERVER['DOCUMENT_ROOT']."/github/sistemaJAG/php/master.php";
 require_once($enlace);
 // invocamos validarUsuario desde master.php
 validarUsuario();
 	
 if ( isset($_POST['seudonimo']) && isset($_POST['clave']) ): 
+
+	//ESTA FUNCION TRAE EL HEAD Y NAVBAR:
+	//DESDE empezarPagina.php
+	empezarPagina();
 
 	$seudonimo = $_POST['seudonimo'];
 	$clave = $_POST['clave'];
@@ -31,7 +37,7 @@ if ( isset($_POST['seudonimo']) && isset($_POST['clave']) ):
 		echo "error en la base de datos!";
 	}
 	?>
-	<div>
+	<div id="blancoAjax">
 		<h3>
 			Bienvenido al sistema <?php echo $seudonimo ?>!
 		</h3>
@@ -42,6 +48,11 @@ if ( isset($_POST['seudonimo']) && isset($_POST['clave']) ):
 			<a href="../index.php">Regresar al sistema</a>
 		</p>
 	</div>
+
+	<?php
+	//FINALIZAMOS LA PAGINA:
+	//trae footer.php y cola.php
+	finalizarPagina();?>
 	
 <?php else: ?>
 	<?php echo 'Problemas en registro de usuario, por favor contacte a un administrador del sistema.' ?>

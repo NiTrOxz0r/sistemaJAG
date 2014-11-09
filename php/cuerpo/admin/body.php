@@ -1,4 +1,19 @@
-<div>
+<?php
+	if(!isset($_SESSION)){ 
+    session_start(); 
+  }
+	$enlace = $_SERVER['DOCUMENT_ROOT']."/github/sistemaJAG/php/master.php";
+	require_once($enlace);
+	// invocamos validarUsuario.php desde master.php
+	validarUsuario();
+
+	//ESTA FUNCION TRAE EL HEAD Y NAVBAR:
+	//DESDE empezarPagina.php
+	empezarPagina();
+
+	//CONTENIDO:?>
+
+<div id="blancoAjax">
 	<center>
 		<h1>Sistema JAG.</h1>
 		<h2>opciones</h2>
@@ -50,3 +65,8 @@
 </div>
 
 <script type="text/javascript" src="java/ajax/cargadorOnClick.js"></script>
+
+<?php
+	//FINALIZAMOS LA PAGINA:
+	//trae footer.php y cola.php
+	finalizarPagina();?>

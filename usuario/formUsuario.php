@@ -1,4 +1,19 @@
-<div>
+<?php
+	if(!isset($_SESSION)){ 
+    session_start(); 
+  }
+	$enlace = $_SERVER['DOCUMENT_ROOT']."/github/sistemaJAG/php/master.php";
+	require_once($enlace);
+	// invocamos validarUsuario.php desde master.php
+	validarUsuario();
+
+	//ESTA FUNCION TRAE EL HEAD Y NAVBAR:
+	//DESDE empezarPagina.php
+	empezarPagina();
+
+	//CONTENIDO:?>
+
+<div id="blancoAjax">
 
 	<!-- http://www.w3schools.com/tags/ref_eventattributes.asp -->
 	<form action="usuario/consultarUsuario.php" method="POST">
@@ -30,6 +45,10 @@
 	</form>
 
 	<a href="usuario/form_reg_U.php">Registrarse</a>
+	<script type="text/javascript" src="java/validacionUsuario.js"></script>
 </div>
 
-<script type="text/javascript" src="java/validacionUsuario.js"></script>
+<?php
+	//FINALIZAMOS LA PAGINA:
+	//trae footer.php y cola.php
+	finalizarPagina();?>

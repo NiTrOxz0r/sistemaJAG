@@ -1,7 +1,8 @@
-<?php session_start(); ?>
+<?php if(!isset($_SESSION)){ session_start(); } ?>
 <?php if ( isset($_SESSION['cod_tipo_usr']) ): ?>
 
 	<?php if ($_SESSION['cod_tipo_usr'] <> 0): ?>
+		<div id="blancoAjax">
 		<div>
 			<center>
 				<h1>Sistema JAG.</h1>
@@ -31,6 +32,7 @@
 			</p>
 		</div>
 		<script type="text/javascript" src="java/ajax/cargadorOnClick.js"></script>
+		</div>
 	<?php else: ?>
 	<?php	header("location: ../index.php"); ?>
 	<?php endif ?>

@@ -21,4 +21,7 @@ if (isset($_SESSION['cod_tipo_usr'])) {
 if (isset($_SESSION['codUsrMod'])) {
 	echo "codigo usuario en BD: ".$_SESSION['codUsrMod']."<br />";
 }
+if (isset($_SESSION['inicio'])) {
+	echo "head y navbar: ".$_SESSION['inicio']."<br />";
+}
 ?>

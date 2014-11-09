@@ -1,8 +1,15 @@
-<?php session_start(); ?>
+<?php if(!isset($_SESSION)){ session_start(); } ?>
 <?php if ( isset($_SESSION['cod_tipo_usr']) ): ?>
 
-	<?php if ($_SESSION['cod_tipo_usr'] <> 0): ?>
-		<div>
+	<?php if ($_SESSION['cod_tipo_usr'] <> 0): 
+		$enlace = $_SERVER['DOCUMENT_ROOT']."/github/sistemaJAG/php/master.php";
+		require_once($enlace);
+		//ESTA FUNCION TRAE EL HEAD Y NAVBAR:
+		//DESDE empezarPagina.php
+		empezarPagina();
+		
+		//CONTENIDO:?>
+		<div id="blancoAjax">
 		
 			<center>
 				<h1>Alumno(a).</h1>
@@ -41,6 +48,10 @@
 
 		</div>
 		<script type="text/javascript" src="java/ajax/cargadorOnClick.js"></script>
+		<?php
+		//FINALIZAMOS LA PAGINA:
+		//trae footer.php y cola.php
+		finalizarPagina();?>
 	<?php else: ?>
 	<?php	header("location: ../index.php"); ?>
 	<?php endif ?>
