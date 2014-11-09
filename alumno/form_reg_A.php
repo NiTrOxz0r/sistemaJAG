@@ -2,7 +2,7 @@
 <?php	
 
 session_start();
-require_once("../php/conexion.php");?>
+require_once("../php/master.php");?>
 
 <div align="center">
 	<form action="alumno/insertar_A.php" method="POST" name="form_alu" id="form">
