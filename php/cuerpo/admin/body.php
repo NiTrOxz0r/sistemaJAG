@@ -23,7 +23,10 @@
 		<tr>
 		<td>
 			&nbsp;&nbsp;
-			<a class="click" href="alumno/body.php">
+			<a 
+				class="no-click"
+				data-titulo="GestionarAlumno"
+				href="alumno/body.php">
 				<h2> Gestionar Alumno. </h2>
 			</a>
 			&nbsp;&nbsp;
@@ -34,7 +37,10 @@
 		<tr>
 		<td>
 			&nbsp;&nbsp;
-			<a class="click" href="Personal_Autorizado/form_reg_P.php"> 
+			<a 
+				class="no-click"
+				data-titulo="personalAutorizado"
+				href="Personal_Autorizado/form_reg_P.php"> 
 				<h2>Gestionar Padres y Representante.</h2> 
 			</a>
 			&nbsp;&nbsp;
@@ -45,7 +51,7 @@
 		<tr>
 		<td>
 			&nbsp;&nbsp;
-			<a class="click" href="profesor/index.html"> 
+			<a class="no-click" data-titulo="gestionarProfesor" href="profesor/index.html"> 
 				<h2>Gestionar Profesor.</h2> 
 			</a>
 			&nbsp;&nbsp;
@@ -56,7 +62,7 @@
 		<tr>
 		<td>
 			&nbsp;&nbsp;
-			<a class="click" href="personal_autorizado/index.html"> 
+			<a class="no-click" href="personal_autorizado/index.html"> 
 				<h2>Gestionar Personal Autorizado.</h2> 
 			</a>
 			&nbsp;&nbsp;

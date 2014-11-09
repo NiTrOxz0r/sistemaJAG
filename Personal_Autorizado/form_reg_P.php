@@ -13,7 +13,7 @@
 
 	//CONTENIDO:?>
 	
-	<div id="form_reg_P">
+	<div id="blancoAjax">
 
 		<div align="center">
 			<!-- http://www.w3schools.com/html/html_forms.asp -->

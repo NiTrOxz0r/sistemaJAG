@@ -364,6 +364,8 @@ if (isset($_POST['cedula'])) {
 		</fieldset>
 			<input type="button" name="enviar_btn" value="Enviar" Id="enviar"/>
 	</form>
+	<?php $validacion = enlaceDinamico("java/validacion.js"); ?>
+	<script type="text/javascript" src="<?php echo $validacion ?>"></script>
 	<?php $estadoenlace = "../java/edo.php?cod_est=".$reg['cod_est']; ?>
 	<?php $estado = enlaceDinamico($estadoenlace); ?>
 	<?php $municipio = enlaceDinamico("java/mun.php"); ?>

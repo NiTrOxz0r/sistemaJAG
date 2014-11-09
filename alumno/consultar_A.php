@@ -169,7 +169,8 @@ if($reg = mysqli_fetch_array($re)) :
 							</table>
 						</fieldset>
 		</form>
-		<?php  ?>
+		<?php $validacionCA = enlaceDinamico("java/validacionCA.js"); ?>
+		<script type="text/javascript" src="<?php echo $validacionCA ?>"></script>
 	</div>
 <?php else : ?>
 	<div id="blancoAjax" align="center">

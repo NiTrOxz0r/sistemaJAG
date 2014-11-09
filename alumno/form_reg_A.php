@@ -333,6 +333,8 @@
 			</center>
 		</p>
 	</div>
+	<?php $validacion = enlaceDinamico("java/validacion.js"); ?>
+	<script type="text/javascript" src="<?php echo $validacion ?>"></script>
 	<?php $estado = enlaceDinamico("java/edo.php"); ?>
 	<?php $municipio = enlaceDinamico("java/mun.php"); ?>
 	<?php $parroquia = enlaceDinamico("java/parro.php"); ?>

@@ -16,7 +16,7 @@ $index = enlaceDinamico();
 		empezarPagina();
 
 		//CONTENIDO:?>
-
+	<div id="contenido">
 		<div id="blancoAjax">
 			<div>
 				<center>
@@ -51,6 +51,7 @@ $index = enlaceDinamico();
 			<?php $cargadorOnClick = enlaceDinamico("java/ajax/cargadorOnClick.js"); ?>
 			<script type="text/javascript" src="<?php echo $cargadorOnClick ?>"></script>
 		</div>
+	</div>
 		<?php
 		//FINALIZAMOS LA PAGINA:
 		//trae footer.php y cola.php
