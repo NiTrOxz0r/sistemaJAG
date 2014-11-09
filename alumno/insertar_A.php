@@ -1,8 +1,9 @@
 <?php
 	session_start();
 	require("../php/conexion.php");
+
 	
-	$_SESSION['direccion_exacta']=		$_POST['direcc'];
+	$_SESSION['direccion_exacta']		=$_POST['direcc'];
 	$_SESSION['cod_parro']				=$_POST['cod_parro'];
 
 	
@@ -10,10 +11,10 @@
 	$_SESSION['cedula_escolar']			= $_POST['cedula_escolar'];
 	$_SESSION['nacionalidad']			= $_POST['nacionalidad'];
 	$_SESSION['p_nombre']				= $_POST['p_nombre'];
-	$_SESSION['s_nombre'] 				= $_POST['s_nombre'];alumno/insertar_A.php
+	$_SESSION['s_nombre'] 				= $_POST['s_nombre'];
 	$_SESSION['p_apellido'] 			= $_POST['p_apellido']; 
 	$_SESSION['s_apellido'] 			= $_POST['s_apellido'];
-	$_SESSION['sexo']					=$_POST['sexo'];
+	$_SESSION['sexo']					= $_POST['sexo'];
 	$_SESSION['telefono'] 				= $_POST['telefono'];
 	$_SESSION['telefono_otro'] 			= $_POST['telefono_otro'];
 	$_SESSION['lugar_nac'] 				= $_POST['lugar_nac']; 
@@ -35,8 +36,8 @@
 	$status         =  			1;
 	$cod_pa_reg    	= 			1;
 	$cod_pa_mod   	=   		1;
-	$fec_mod = "current_timestamp";
+	$fec_mod 		= 			"current_timestamp";
 	
 	echo "Se ha guardados los datos del alumno".$_SESSION['p_nombre'].$_SESSION['p_apellido'] ;
-	e
+	
 ?>
