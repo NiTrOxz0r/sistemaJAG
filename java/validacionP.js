@@ -166,7 +166,6 @@ $(function()
 	var botonEnviar, botonLimpiar;
 	botonLimpiar = document.getElementById("limpiar");
 	botonLimpiar.onclick = limpiarform;
-	
 	botonEnviar = document.form_repre.registrar;
 	botonEnviar.onclick = validarform;
 
