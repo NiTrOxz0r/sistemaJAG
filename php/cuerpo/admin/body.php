@@ -19,7 +19,7 @@
 		<tr>
 		<td>
 			&nbsp;&nbsp;
-			<a class="click" href="padres_representante/form_reg_P.html"> 
+			<a class="click" href="Personal_Autoizado/form_reg_P.php"> 
 				<h2>Gestionar Padres y Representante.</h2> 
 			</a>
 			&nbsp;&nbsp;
