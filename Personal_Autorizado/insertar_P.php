@@ -58,7 +58,7 @@ if ( isset($_SESSION['cedula_a']) || isset($_SESSION['cedula_escolar_a'])) {
 	$direccionP = conexion($queryDirP);
 	//TOMO EL CODIGO DEL REGISTRO DE LA DIRECCION
   //Y LO INSERTO EN QUERY P_A
-  $cod_direccion = mysqli_insert_id($direccionP); 
+  $cod_direccion_P = mysqli_insert_id($direccionP); 
 	//representante:
 	$cedula					=	mysqli_escape_string($con, $_POST['cedula']);
 	$nacionalidad		=	mysqli_escape_string($con, $_POST['nacionalidad']);
@@ -73,8 +73,7 @@ if ( isset($_SESSION['cedula_a']) || isset($_SESSION['cedula_escolar_a'])) {
 	$telefono_otro	=	mysqli_escape_string($con, $_POST['telefono_otro']);      
 	$email					=	mysqli_escape_string($con, $_POST['email']);     
  	$relacion				=	mysqli_escape_string($con, $_POST['relacion']);     
- 	$vive_con_alumno	=	mysqli_escape_string($con, $_POST['vive_con_alumno']);   
- 	$cod_direccion		=	mysqli_escape_string($con, $_POST['direcc']);       
+ 	$vive_con_alumno	=	mysqli_escape_string($con, $_POST['vive_con_alumno']);  
  	$nivel_instruccion	=	mysqli_escape_string($con, $_POST['nivel_instruccion']);    
  	$profesion					=	255;  
  	$lugar_trabajo			=	mysqli_escape_string($con, $_POST['lugar_trabajo']);   
@@ -109,7 +108,7 @@ if ( isset($_SESSION['cedula_a']) || isset($_SESSION['cedula_escolar_a'])) {
 	)
 	VALUES('$cedula','$nacionalidad','$p_nombre','$s_nombre','$p_apellido',
 	'$s_apellido','$sexo','$fec_nac',	'$lugar_nac','$telefono','$telefono_otro',
-	'$email','$relacion','$vive_con_alumno','$cod_direccion',	'$nivel_instruccion', 
+	'$email','$relacion','$vive_con_alumno','$cod_direccion_P',	'$nivel_instruccion', 
 	'$profesion','$lugar_trabajo','$direccion_trabajo','$telefono_trabajo','$status',
 	'$cod_usr_reg','$cod_usr_mod');";
 
