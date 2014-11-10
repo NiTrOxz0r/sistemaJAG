@@ -16,7 +16,7 @@ if ( isset($_POST['cedula']) || isset($_POST['cedula_escolar'])) :
 	
 	$_SESSION['direccion_exacta_a']		= mysqli_escape_string($con, $_POST['direcc']);
 	$_SESSION['cod_parro_a']					= mysqli_escape_string($con, $_POST['cod_parro']);	
-	$_SESSION['$cedula_a'] 						= mysqli_escape_string($con, $_POST['cedula']);
+	$_SESSION['cedula_a'] 						= mysqli_escape_string($con, $_POST['cedula']);
 	$_SESSION['cedula_escolar_a']			= mysqli_escape_string($con, $_POST['cedula_escolar']);
 	$_SESSION['nacionalidad_a']				= mysqli_escape_string($con, $_POST['nacionalidad']);
 	$_SESSION['p_nombre_a']						= mysqli_escape_string($con, $_POST['p_nombre']);

@@ -140,8 +140,8 @@ if ( isset($_SESSION['cedula_a']) || isset($_SESSION['cedula_escolar_a'])) {
 		cod_usr_mod,
 		fec_mod
 		)	VALUES
-		('$_SESSION[cod_parro]','$_SESSION[direccion_exacta_a]', '$status',
-		'$cod_usr_reg','$cod_usr_mod','$fec_mod');";
+		('$_SESSION[cod_parro_a]','$_SESSION[direccion_exacta_a]', '$status',
+		'$cod_usr_reg','$cod_usr_mod',$fec_mod);";
   	
   // $rs = mysql_query($queryPA) or die ("Error ".mysql_error());
   $rs = conexion($queryAdir, 1);
@@ -181,8 +181,8 @@ if ( isset($_SESSION['cedula_a']) || isset($_SESSION['cedula_escolar_a'])) {
 	'$_SESSION[p_nombre_a]', '$_SESSION[s_nombre_a]', '$_SESSION[p_apellido_a]', 
 	'$_SESSION[s_apellido_a]','$_SESSION[telefono_a]','$_SESSION[telefono_otro_a]',
 	'$_SESSION[sexo_a]', '$_SESSION[lugar_nac_a]','$_SESSION[fec_nac_a]',
-	'$cod_direccion_a', '$_SESSION[acta_num_part_nac]',
-	'$_SESSION[acta_folio_num_part_nac]',	'$_SESSION[plantel_procedencia_a]',
+	'$cod_direccion_a', '$_SESSION[acta_num_part_nac_a]',
+	'$_SESSION[acta_folio_num_part_nac_a]',	'$_SESSION[plantel_procedencia_a]',
 	'$_SESSION[repitiente_a]', '$_SESSION[altura_a]','$_SESSION[peso_a]',
 	'$_SESSION[camisa_a]', 	'$_SESSION[zapato_a],'$_SESSION[cod_curso_a]', 
 	'$cod_representante', '$status', '$cod_usr_reg',	'$cod_usr_mod', $fec_mod;);";
