@@ -85,7 +85,7 @@ empezarPagina();
 					var info = $(this).val();
 					validacionUsuario();
 					$.ajax({
-						url: '../java/usuario.php',
+						url: '../java/usuario/usuario.php',
 						type: 'POST',
 						data: {seudonimo:info},
 						dataType: "html",
