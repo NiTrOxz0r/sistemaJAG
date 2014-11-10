@@ -4,15 +4,4 @@ sistemaJAG
 Repositorio en donde se manejara el codigo referente al sistema.
 
 
-###Sistema 30% completado, por ahora falta:
-
-####FLUJO NORMAL DE FORMULARIOS
-####FLUJO ALTERNATIVO DE FORMULARIOS
-
-####moduloProfesores
-####moduloCursos
-####moduloUsuarios
-####CSS
-
-#branch FORMULARIOS
-se trabaja aqui para lo referente a flujos de formularios.
+Por ahora se trabajara el formulario de A y P.
