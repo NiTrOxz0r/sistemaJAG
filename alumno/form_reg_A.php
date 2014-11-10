@@ -324,12 +324,12 @@
 	<div>
 		<p>
 			<center>
-				<a class="click" href="alumno/body.php">Volver</a>
+				<a class="" href="body.php">Volver</a>
 			</center>
 		</p>
 		<p>
 			<center>
-				<a href="index.php">Volver al menu</a>
+				<a href="../index.php">Volver al menu</a>
 			</center>
 		</p>
 	</div>

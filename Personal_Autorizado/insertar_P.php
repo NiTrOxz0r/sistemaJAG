@@ -58,7 +58,7 @@ if ( isset($_SESSION['cedula_a']) || isset($_SESSION['cedula_escolar_a'])) {
 	$direccionP = conexion($queryDirP);
 	//TOMO EL CODIGO DEL REGISTRO DE LA DIRECCION
   //Y LO INSERTO EN QUERY P_A
-  $cod_direccion_P = mysqli_insert_id($con); 
+  $cod_direccion_P = mysqli_insert_id($direccionP); 
 	//representante:
 	$cedula					=	mysqli_escape_string($con, $_POST['cedula']);
 	$nacionalidad		=	mysqli_escape_string($con, $_POST['nacionalidad']);
