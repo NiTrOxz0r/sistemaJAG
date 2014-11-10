@@ -5,7 +5,7 @@ if(!isset($_SESSION)){
 $enlace = $_SERVER['DOCUMENT_ROOT']."/github/sistemaJAG/php/master.php";
 require_once($enlace);
 // invocamos validarUsuario desde master.php
-validarUsuario(1);
+validarUsuario();
 //HEAD:
 //ESTA FUNCION TRAE EL HEAD Y NAVBAR:
 //DESDE empezarPagina.php
@@ -26,7 +26,7 @@ empezarPagina();
 				</thead>
 				<tbody>
 					<tr>
-						<td>Seudonimo</td>
+						<td id="seudonimo_titulo">Seudonimo</td>
 						<td>
 							<input 
 								type="text"
@@ -34,15 +34,17 @@ empezarPagina();
 								id="seudonimo"
 								autofocus="autofocus"
 								required="required"
-								placeholder="Instroduzca Usuario">
+								maxlength="20" 
+								placeholder="Instroduzca Seudonimo">
 						</td>
-						<td>Contrase&ntilde;a</td>
+						<td id="clave_titulo">Contrase&ntilde;a</td>
 						<td>
 							<input 
 								type="password"
 								name="clave"
 								id="clave"
 								required="required"
+								maxlength="64" 
 								placeholder="Instroduzca Clave">
 						</td>
 					</tr>
@@ -85,7 +87,7 @@ empezarPagina();
 					var info = $(this).val();
 					validacionUsuario();
 					$.ajax({
-						url: '../java/usuario/usuario.php',
+						url: '../java/ajax/usuario/usuario.php',
 						type: 'POST',
 						data: {seudonimo:info},
 						dataType: "html",
