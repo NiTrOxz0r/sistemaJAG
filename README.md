@@ -1,6 +1,6 @@
 sistemaJAG
 ==========
-
+##en desarrollo rama formulario.
 Repositorio en donde se manejara el codigo referente al sistema.
 
 
