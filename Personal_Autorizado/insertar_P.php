@@ -55,7 +55,7 @@ if ( isset($_SESSION['cedula_a']) || isset($_SESSION['cedula_escolar_a'])) {
 		cod_usr_mod,
 		fec_mod)
   	VALUES('$cod_parroquia,'$direccion_exacta', '$status','$cod_usr_reg',
-  	'$cod_usr_mod','$fec_mod')";
+  	'$cod_usr_mod',$fec_mod);";
   	
   //$direccionP = conexion($queryDirP);
 	$direccionP = conexion($queryDirP, 1);
