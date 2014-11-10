@@ -2097,6 +2097,7 @@ INSERT INTO `tipo_usuario` (`codigo`, `descripcion`, `status`, `cod_usr_reg`, `f
 (2, 'Usuario Privilegiado', 1, 1, '2014-11-07 13:52:25', 1, '2014-11-07 13:52:25'),
 (3, 'Administrador', 1, 1, '2014-11-07 13:52:25', 1, '2014-11-07 13:52:25'),
 (4, 'Super Usuario', 1, 1, '2014-11-07 13:52:25', 1, '2014-11-07 13:52:25'),
+(5, 'Por verificar', 1, 1, '2014-11-07 13:52:25', 1, '2014-11-07 13:52:25'),
 (255, 'slayerfat', 1, 1, '2014-11-07 13:52:25', 1, '2014-11-07 13:52:25');
 
 -- --------------------------------------------------------
@@ -2108,7 +2109,7 @@ INSERT INTO `tipo_usuario` (`codigo`, `descripcion`, `status`, `cod_usr_reg`, `f
 CREATE TABLE IF NOT EXISTS `usuario` (
   `codigo` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `seudonimo` varchar(20) NOT NULL,
-  `clave` varchar(20) NOT NULL,
+  `clave` varchar(64) NOT NULL,
   `cod_tipo_usr` tinyint(1) unsigned DEFAULT '1',
   `status` tinyint(1) unsigned NOT NULL DEFAULT '1',
   `cod_usr_reg` int(11) NOT NULL,

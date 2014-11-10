@@ -1,7 +1,7 @@
 CREATE TABLE usuario (
 	codigo int unsigned auto_increment primary key,
 	seudonimo varchar(20) not null unique,
-	clave varchar(20) not null,
+	clave varchar(64) not null,
 	cod_tipo_usr tinyint(1) unsigned default 1,
 	status tinyint(1) unsigned not null default 1,
 	cod_usr_reg int not null, 

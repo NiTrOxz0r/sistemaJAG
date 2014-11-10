@@ -25,26 +25,38 @@
 * 
 */
 // aqui esta la funcion basica mysqli_connect y mysqli_query
-require "conexion.php";
+require "funciones/conexion.php";
+
+// aqui esta la funcion que trae head y navbar:
+require "funciones/empezarPagina.php";
+
+// aqui esta la funcion que trae footer y cola:
+require "funciones/finalizarPagina.php";
+
+// usado para ver variables de session nada mas:
+require "funciones/debugUsuario.php";
+
+// funcion validar usuario en pagina web:
+require "funciones/validarUsuario.php";
 
 // clase conexion, por ahora ignorar.
-require "claseConexion.php";
+require "clases/claseConexion.php";
 
 // clase tabla primara ej:
 // alumno, docente, direccion, usuario etc.
 // por ahora ignorar.
-require "claseTablaPrimaria.php";
+require "clases/claseTablaPrimaria.php";
 
 //generico para situaciones especificas varias
-require "claseChequearGenerico.php";
+require "clases/claseChequearGenerico.php";
 
 // alumno
-require "claseChequearAlumno.php";
+require "clases/claseChequearAlumno.php";
 
 // personal autorizado ej: 
 // madres, representantes, 
 // personas autorizadas a retirar el alumno
-require "claseChequearPA.php";
+require "clases/claseChequearPA.php";
 // crea nombres diferentes para la misma clase
 class_alias('ChequearPA', 'ChequearPersonalAutorizado');
 class_alias('ChequearPA', 'ChequearPadres');
@@ -54,7 +66,7 @@ class_alias('ChequearPA', 'ChequearRepresentante');
 
 
 //personal interno ej: docentes, directoras etc
-require "claseChequearPI.php"; 
+require "clases/claseChequearPI.php"; 
 // crea nombres diferentes para la misma clase
 class_alias('ChequearPI', 'ChequearDocente');
 class_alias('ChequearPI', 'ChequearProfesor');
@@ -65,9 +77,12 @@ class_alias('ChequearPI', 'ChequearSubDirectora');
 class_alias('ChequearPI', 'ChequearAdministrativo');
 class_alias('ChequearPI', 'ChequearSecretaria');
 //usuario del sistema:
-require "claseChequearUsuario.php";
+require "clases/claseChequearUsuario.php";
 // crea nombres diferentes para la misma clase
 class_alias('ChequearUsuario', 'ChequearLogin');
 class_alias('ChequearUsuario', 'ChequearLogeo');
 class_alias('ChequearUsuario', 'ChequearValidarUsuario');
+
+//enlace dinamico:
+require "funciones/enlaceDinamico.php";
 ?>

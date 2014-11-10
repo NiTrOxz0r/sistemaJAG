@@ -1,19 +1,50 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title></title>
-</head>
-<body>
-	<form action="validaruser.php" method="POST">
+<?php
+	if(!isset($_SESSION)){ 
+    session_start(); 
+  }
+	$enlace = $_SERVER['DOCUMENT_ROOT']."/github/sistemaJAG/php/master.php";
+	require_once($enlace);
+	// invocamos validarUsuario.php desde master.php
+	validarUsuario();
 
-		Usuario:<input type="text" name="seudonimo" placeholder="Instroduzca Usuario"></br>
+	//ESTA FUNCION TRAE EL HEAD Y NAVBAR:
+	//DESDE empezarPagina.php
+	empezarPagina();
 
-		Clave: <input type="password" name="clave" placeholder="Instroduzca Clave"></br>
-		<input type="submit" value="enviar" name="enviar">
+	//CUERPO:
+	echo '<div class="contenido" id="contenido">';
+	switch ($_SESSION['cod_tipo_usr']) {
+		//SIN TIPO:
+		case 0:
+			require "usuario/formUsuario.php";
+			echo '<script type="text/javascript" src="java/validacionUsuario.js"></script>';
+			break;
+		//USUARIO:
+		case 1:
+			echo "Validacion tipo de usuario: usuario en desarrollo";
+			break;
+		//USUARIO PRIV:
+		case 2:
+			echo "Validacion tipo de usuario: Usuario Privilegiado en desarrollo";
+			break;
+		//ADMIN:
+		case 3:
+				require "php/cuerpo/admin/body.php";
+				break;
+		//SUPER USUARIO:
+		case 4:
+				//usando admin mientras tanto:
+				require "php/cuerpo/admin/body.php";
+				break;
+		//TIPO DESCONOCIDO:
+		default:
+			require "usuario/formUsuario.php";
+			break;
+	} 
+	echo '</div>';
 
-	</form>
-
-<a href="reg.php">Registrarse</a>
-
-</body>
-</html>
+	//FINALIZAMOS LA PAGINA:
+	//trae footer.php y cola.php
+	finalizarPagina();
+	
+?>

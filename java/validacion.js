@@ -15,7 +15,15 @@ function validarform(){
 	var papelli = document.getElementById("p_apellido");
 	var sapelli = document.getElementById("s_apellido");
 
-	var lugnac = document.getElementById("lug_nac");
+	var sexo = document.getElementById("sexo");
+	var fec_nac = document.getElementById("fec_nac");
+	var edo = document.getElementById("cod_est");
+	var mun = document.getElementById("cod_mun");
+	var parro = document.getElementById("cod_parro");
+	var direcc = document.getElementById("direcc");
+	var repit = document.getElementById("repitiente");
+
+	var lugnac = document.getElementById("lugar_nac");
 	var tlf = document.getElementById("telefono");
 	var tlfo = document.getElementById("telefono_otro");
 
@@ -30,13 +38,7 @@ function validarform(){
 	var zap = document.getElementById("zapato").value;
 
 
-	var sexo = document.getElementById("sexo");
-	var fec_nac = document.getElementById("fec_nac");
-	var edo = document.getElementById("cod_est");
-	var mun = document.getElementById("cod_mun");
-	var parro = document.getElementById("cod_parro");
-	var direcc = document.getElementById("direcc");
-	var repit = document.getElementById("repitiente");
+
 
 	
 
@@ -113,14 +115,13 @@ function validarform(){
 		console.log("se detecto: lugnac: "+lugnac.value);
 	}
 	
-	else if ( tlf.value != "SinRegistro" ) {
-		if(!expRegtlf.exec(tlf.value)) {
+	else if(!expRegtlf.exec(tlf.value)) {
 			alert("Introduzca Telefono Local sin caracteres especiales: ()-_.*/, y solo numeros. Ej: 02124443322");
 			tlf.focus();
 			verificar = false;
 			console.log("se detecto: tlf: "+tlf.value);
-		}
-	}
+		
+	}//quite es condicional, porque con doble condicional me da error y no deja pasar a la proxima validacion
 	else if (!edo.value) {
 		alert("Campo Estado Requerido");
 		edo.focus();
@@ -200,25 +201,19 @@ function validarform(){
 }
 
 function limpiarform(){
-//id del formulario
-	alert("Limpiando");
+	//id del formulario
 	document.getElementById("form").reset();
 }
 
 //Hay dos manera de llamar un elemento de html, 1ero con el objeto padre document.getElementById
 //2ndo siguiendo por el nombre del formulario más el nombre (name) no el id del elemento
 //Objeto ventana, al cargar ejecuta algo.
-window.onload = function()
-{
+
+//transformado a Jquery:
+$(function(){
 	var botonEnviar, botonLimpiar;
-	//1ero Para acceder a un elemento de un documento html
-	//hacemos uso del objeto padre document
-	// botonLimpiar = document.getElementById("limpiar");
-	// //cuando haga un click has lo que diga la funcion
-	// botonLimpiar.onclick = limpiarform;
-
-	//2ndo
 	botonEnviar = document.form_alu.enviar_btn;
+	botonLimpiar = document.form_alu.limpiar_btn;
 	botonEnviar.onclick = validarform;
-
-};
+	botonLimpiar.onclick = limpiarform;
+});

@@ -1,13 +1,22 @@
 
 <?php
-	
-	require("../php/conexion.php");
-	
-	if ( isset($_POST['cedula']) ) {
-		$cedula = $_POST['cedula'];
-	}else{
-		header("Location: menucom.html?cedulaError=unset");
+if(!isset($_SESSION)){ 
+  session_start(); 
+}
+$enlace = $_SERVER['DOCUMENT_ROOT']."/github/sistemaJAG/php/master.php";
+require_once($enlace);
+// invocamos validarUsuario.php desde master.php
+validarUsuario(1);
+
+if (isset($_POST['cedula'])) {
+	if ($_POST['cedula'] <> "" and count($_POST['cedula']) == 8) {
+		$con = conexion();
+		$cedula = mysqli_escape_string($con, $_POST['cedula']);
 	}
+}else{
+	$enlace = enlaceDinamico("menucom.php?cedulaError=unset");
+	header("Location:".$enlace);
+}
 
 	
 	$sql = "SELECT a.codigo, a.cedula, a.cedula_escolar, nacionalidad, p_nombre, s_nombre, p_apellido, 
@@ -20,67 +29,7 @@
 	$re = conexion($sql);
 	if($reg = mysqli_fetch_array($re)) :?>	
 
-<html>
-	<head>
-		<title>Actualizaci&oacute;n</title>
-		<script language="javascript" src="../java/validacion.js"></script> 
-		<script type="text/javascript" src="../java/jquery-1.11.0.min.js"></script>
-		<script type="text/javascript">
-			$("document").ready(function(){
-				$("#cod_est").load('../java/<?php echo "edo.php?cod_est=".$reg['cod_est']; ?>');
-				$("#cod_est").change(function(){
-					var id = $("#cod_est").val();
-					$.get("../java/mun.php",{param_id:id})
-					.done(function(data){
-						$("#cod_mun").html(data);
-						
-						$("#cod_mun").change(function(){
-							var id2 = $("#cod_mun").val();
-							$.get("../java/parro.php",{param_id2:id2})
-							.done(function(data){
-
-								$("#cod_parro").html(data);
-							});
-						});
-					});
-				});
-
-				$("#cod_est").ready(function(){
-					var id = "<?php echo $reg['cod_est'] ?>";
-					var cod_mun = "<?php echo $reg['cod_mun'] ?>";
-					var id2 = "<?php echo $reg['cod_parro'] ?>";
-					$.ajax({
-
-						url:'../java/mun.php',
-						data: {
-							'param_id': id,
-							'cod_mun': cod_mun
-						},
-						success: function(datos){
-							$("#cod_mun").html(datos);
-						}
-					});
-					$.ajax({
-
-						url:'../java/parro.php',
-						data: {
-							'param_id2': cod_mun,
-							'cod_parro': id2
-						},
-						success: function(datos){
-							$("#cod_parro").html(datos);
-						}
-					});
-				});
-
-			});
-
-		</script>
-	</head>
-<body>
-
-
-<div align="center">
+<div id="blancoAjax" align="center">
 	<form action="actualizar1.php" method="POST" name="form_alu" id="form">
 		<fieldset style="width:80%">
 			<legend>REGISTRO DE ALUMNO</legend>
@@ -415,11 +364,72 @@
 		</fieldset>
 			<input type="button" name="enviar_btn" value="Enviar" Id="enviar"/>
 	</form>
+	<?php $validacion = enlaceDinamico("java/validacion.js"); ?>
+	<script type="text/javascript" src="<?php echo $validacion ?>"></script>
+	<?php $estadoenlace = "../java/edo.php?cod_est=".$reg['cod_est']; ?>
+	<?php $estado = enlaceDinamico($estadoenlace); ?>
+	<?php $municipio = enlaceDinamico("java/mun.php"); ?>
+	<?php $parroquia = enlaceDinamico("java/parro.php"); ?>
+	<script type="text/javascript">
+		$("document").ready(function(){
+			$("#cod_est").load("<?php echo $estado ?>");
+			$("#cod_est").change(function(){
+				var id = $("#cod_est").val();
+				$.get("<?php echo $municipio ?>",{param_id:id})
+				.done(function(data){
+					$("#cod_mun").html(data);
+					
+					$("#cod_mun").change(function(){
+						var id2 = $("#cod_mun").val();
+						$.get("<?php echo $parroquia ?>",{param_id2:id2})
+						.done(function(data){
+
+							$("#cod_parro").html(data);
+						});
+					});
+				});
+			});
+
+			$("#cod_est").ready(function(){
+				var id = "<?php echo $reg['cod_est'] ?>";
+				var cod_mun = "<?php echo $reg['cod_mun'] ?>";
+				var id2 = "<?php echo $reg['cod_parro'] ?>";
+				$.ajax({
+
+					url:'../java/mun.php',
+					data: {
+						'param_id': id,
+						'cod_mun': cod_mun
+					},
+					success: function(datos){
+						$("#cod_mun").html(datos);
+					}
+				});
+				$.ajax({
+
+					url:'../java/parro.php',
+					data: {
+						'param_id2': cod_mun,
+						'cod_parro': id2
+					},
+					success: function(datos){
+						$("#cod_parro").html(datos);
+					}
+				});
+			});
+
+		});
+
+	</script>
 </div>
 		
 	<?php else : ?>
-			<p align=center>No existe Datos con cedula: <?=$cedula ?></p>
-			<p align=center><a href=menucon.html>Volver</a></p>
+			<p align=center>
+				No existe Datos con cedula: <?=$cedula ?>
+			</p>
+			<p align=center>
+				<a href="menucon.php">Volver</a>
+			</p>
 	<?php endif; ?>
 
 	</body>

@@ -1,8 +1,11 @@
+<?php 
+$enlace = $_SERVER['DOCUMENT_ROOT']."/github/sistemaJAG/php/master.php";
+require_once($enlace); ?>
+
+
 <?php /*si el codigo es mandado como parametro hace esto:*/?>
 <?php if ( isset($_REQUEST['cod_est']) ): ?>
-	<?php require("../php/conexion.php");
-	//$consulta = mysql_query("select * from estado");
-	$query = "select * from estado where status = 1;";
+	<?php $query = "select * from estado where status = 1;";
 	$consulta = conexion($query);
 	while( $fila = mysqli_fetch_array($consulta) ) : ?>
 		<?php if ($fila['codigo'] == $_REQUEST['cod_est']): ?>
@@ -19,7 +22,6 @@
 	<?php endwhile; ?>
 <?php else: ?>
 	<?php /*sino entonces es como si no paso nada:*/ ?>
-	<?php require("../php/conexion.php");?>
 	<?php $query = "select * from estado where status = 1;";?>
 	<?php $consulta = conexion($query);?>
 	<option value="">--Seleccionar--</option>

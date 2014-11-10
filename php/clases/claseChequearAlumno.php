@@ -189,87 +189,87 @@ class ChequearAlumno extends ChequearGenerico{
 		// pero como no tengo acceso a la onidex, lo dejo en 5.
 
 		if ( !is_numeric($this->cedulaEscolar) ) {
-			die(header("Location: registro.php?cedulaEscolarNumeric=false"));
+			die(header("Location: form_reg_A.php?cedulaEscolarNumeric=false"));
 		}
 		if ( strlen($this->cedulaEscolar) <>10 ) {
-				header( "Location: registro.php?cedulaEscolarError=1_largo_cedulaEscolar___".strlen($cedulaEscolar) );
+				header( "Location: form_reg_A.php?cedulaEscolarError=1_largo_cedulaEscolar___".strlen($cedulaEscolar) );
 		}
 
 		if ( $this->nacionalidad <> 'v' and $this->nacionalidad <> 'e' ) {
-			die(header("Location: registro.php?nacionalidad=notVorE"));
+			die(header("Location: form_reg_A.php?nacionalidad=notVorE"));
 		}
 
 
 		if ( preg_match( "/^A-Za-z$^'$^áéíóú$^ÁÉÍÓÚ$/", $this->p_nombre) ) {
-			die(header("Location: registro.php?p_nombreNumeric=true"));
+			die(header("Location: form_reg_A.php?p_nombreNumeric=true"));
 		}
 
 		if ($this->s_nombre <> 'null') {
 			if ( preg_match( "/^A-Za-z$^'$^áéíóú$^ÁÉÍÓÚ$/", $this->s_nombre) ) {
-				die(header("Location: registro.php?s_nombreNumeric=true"));
+				die(header("Location: form_reg_A.php?s_nombreNumeric=true"));
 			}
 		}
 
 		if ( preg_match( "/^A-Za-z$^'$^áéíóú$^ÁÉÍÓÚ$/", $this->p_apellido) ) {
-			die(header("Location: registro.php?p_apellidoNumeric=true"));
+			die(header("Location: form_reg_A.php?p_apellidoNumeric=true"));
 		}
 
 		if ( $this->s_apellido <> 'null' ) {
 			if ( preg_match( "/^A-Za-z$^'$^áéíóú$^ÁÉÍÓÚ$/", $this->s_apellido) ) {
-				die(header("Location: registro.php?s_apellidoNumeric=true"));
+				die(header("Location: form_reg_A.php?s_apellidoNumeric=true"));
 			}
 		}
 
 		if ( $this->nacionalidad <> 'v' and $this->nacionalidad <> 'e' ) {
-			die(header("Location: registro.php?nacionalidad=notVorE"));
+			die(header("Location: form_reg_A.php?nacionalidad=notVorE"));
 		}
 
 		if ($this->cedula <> 'null') {
 			if ( !is_numeric($this->cedula) ) {
-			die(header("Location: registro.php?cedulaNumeric=false"));
+			die(header("Location: form_reg_A.php?cedulaNumeric=false"));
 			}
 			if ( strlen($this->cedula) <>8 ) {
-				header( "Location: registro.php?cedulaError=1_largo_cedula___".strlen($cedula) );
+				header( "Location: form_reg_A.php?cedulaError=1_largo_cedula___".strlen($cedula) );
 			}
 		}
 
 		if ($this->telefono <> 'null') {
 			if ( !is_numeric($this->telefono) ) {
-			die(header("Location: registro.php?telefonoNumeric=false"));
+			die(header("Location: form_reg_A.php?telefonoNumeric=false"));
 			}
 			if ( !preg_match( '/^\d{11}$/', $this->telefono) ) {
-				die(header("Location: registro.php?telefonoLength=false"));
+				die(header("Location: form_reg_A.php?telefonoLength=false"));
 			}
 		}
 
 		if ($this->telefonoOtro <> 'null') {
 			if ( !is_numeric($this->telefonoOtro) ) {
-			die(header("Location: registro.php?telefonoOtroNumeric=false"));
+			die(header("Location: form_reg_A.php?telefonoOtroNumeric=false"));
 			}
 			if ( !preg_match( '/^\d{11}$/', $this->telefonoOtro) ) {
-				die(header("Location: registro.php?telefonoOtroLength=false"));
+				die(header("Location: form_reg_A.php?telefonoOtroLength=false"));
 			}
 		}
 
 		if ($this->fecNac <> 'current_timestamp') {
 			if ( preg_match( "/[^0-9$^-]/", $this->fecNac) ) {
-			die(header("Location: registro.php?fecNacNumeric=false"));
+			die(header("Location: form_reg_A.php?fecNacNumeric=false"));
 			}
 		}
 
 		if ($this->sexo <> '0' and $this->sexo <> '1') {
 			if ( !is_numeric($this->sexo) ) {
-			die(header("Location: registro.php?sexo=malDefinido"));
+			die(header("Location: form_reg_A.php?sexo=malDefinido"));
 			}
 		}
 
 		if ( !is_numeric($this->codigoDireccion) ) {
-			die(header("Location: registro.php?codigoDireccionNumeric=false"));
+			die(header("Location: form_reg_A.php?codigoDireccionNumeric=false"));
 		}
 
 		if ($this->lugNac <> 'null') {
 			if ( strlen($this->lugNac) > 50 ) {
-				header( "Location: registro.php?lugNacError=1_largo_lugNac___".strlen($lugNac) );
+				header( "Location: form_reg_A.php?lugNacError=1_largo_lugNac___".strlen($lugNac) );
 			}
 		}
 
@@ -279,74 +279,74 @@ class ChequearAlumno extends ChequearGenerico{
 
 		if ($this->actaNumero <> '') {
 			if ( preg_match( "/[^0-9$^-]/", $this->actaNumero) ) {
-			die(header("Location: registro.php?actaNumeroNumeric=false"));
+			die(header("Location: form_reg_A.php?actaNumeroNumeric=false"));
 			}
 			if ( strlen($this->actaNumero) > 99 ) { // modificar al numero real
-				header( "Location: registro.php?actaNumeroError=1_largo_actaNumero___".strlen($actaNumero) );
+				header( "Location: form_reg_A.php?actaNumeroError=1_largo_actaNumero___".strlen($actaNumero) );
 			}
 		}
 
 		if ($this->actaFolio <> '') {
 			if ( preg_match( "/[^0-9$^-]/", $this->actaFolio) ) {
-			die(header("Location: registro.php?actaFolioNumeric=false"));
+			die(header("Location: form_reg_A.php?actaFolioNumeric=false"));
 			}
 			if ( strlen($this->actaFolio) > 99 ) { // modificar al numero real
-				header( "Location: registro.php?actaFolioError=1_largo_actaFolio___".strlen($actaFolio) );
+				header( "Location: form_reg_A.php?actaFolioError=1_largo_actaFolio___".strlen($actaFolio) );
 			}
 		}
 
 		if ($this->plantel_procedencia <> 'null') {
 			if ( strlen($this->plantel_procedencia) > 50 ) {
-				header( "Location: registro.php?plantel_procedenciaError=1_largo_plantel_procedencia___".strlen($plantel_procedencia) );
+				header( "Location: form_reg_A.php?plantel_procedenciaError=1_largo_plantel_procedencia___".strlen($plantel_procedencia) );
 			}
 		}
 
 		if ( $this->repitiente <> 's' and $this->repitiente <> 'n' ) {
-			die(header("Location: registro.php?repitiente=notSorN"));
+			die(header("Location: form_reg_A.php?repitiente=notSorN"));
 		}
 
 		if ($this->altura <> 'null') {
 			if ( !is_numeric($this->altura) ) {
-			die(header("Location: registro.php?altura=notNumeric"));
+			die(header("Location: form_reg_A.php?altura=notNumeric"));
 			}
 			if ( strlen($this->altura) > 3 ) {
-				header( "Location: registro.php?alturaError=1_largo_altura___".strlen($altura) );
+				header( "Location: form_reg_A.php?alturaError=1_largo_altura___".strlen($altura) );
 			}
 		}
 
 		if ($this->peso <> 'null') {
 			if ( !is_numeric($this->peso) ) {
-			die(header("Location: registro.php?peso=notNumeric"));
+			die(header("Location: form_reg_A.php?peso=notNumeric"));
 			}
 			if ( strlen($this->peso) > 3 ) {
-				header( "Location: registro.php?pesoError=1_largo_peso___".strlen($peso) );
+				header( "Location: form_reg_A.php?pesoError=1_largo_peso___".strlen($peso) );
 			}
 		}
 
 		if ($this->camisa <> 'null') {
 			if ( !is_numeric($this->camisa) ) {
-			die(header("Location: registro.php?camisa=notNumeric"));
+			die(header("Location: form_reg_A.php?camisa=notNumeric"));
 			}
 			if ( strlen($this->camisa) > 1 ) {
-				header( "Location: registro.php?camisaError=1_largo_camisa___".strlen($camisa) );
+				header( "Location: form_reg_A.php?camisaError=1_largo_camisa___".strlen($camisa) );
 			}
 		}
 
 		if ($this->pantalon <> 'null') {
 			if ( !is_numeric($this->pantalon) ) {
-			die(header("Location: registro.php?pantalon=notNumeric"));
+			die(header("Location: form_reg_A.php?pantalon=notNumeric"));
 			}
 			if ( strlen($this->pantalon) > 1 ) {
-				header( "Location: registro.php?pantalonError=1_largo_pantalon___".strlen($pantalon) );
+				header( "Location: form_reg_A.php?pantalonError=1_largo_pantalon___".strlen($pantalon) );
 			}
 		}
 
 		if ($this->zapato <> 'null') {
 			if ( !is_numeric($this->zapato) ) {
-			die(header("Location: registro.php?zapato=notNumeric"));
+			die(header("Location: form_reg_A.php?zapato=notNumeric"));
 			}
 			if ( strlen($this->zapato) > 2 ) {
-				header( "Location: registro.php?zapatoError=1_largo_zapato___".strlen($zapato) );
+				header( "Location: form_reg_A.php?zapatoError=1_largo_zapato___".strlen($zapato) );
 			}
 		}
 	}

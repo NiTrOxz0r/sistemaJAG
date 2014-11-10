@@ -179,7 +179,7 @@ class TablaPrimaria{
 		if ( isset($_SESSION['codUsrMod']) ) {
 			$this->codUsrMod = $_SESSION['codUsrMod'];
 		}else{
-			die(header("Location: ingreso.php?codUsrMod=false"));
+			die(header("Location: index.php?codUsrMod=false"));
 			echo "string";
 		}
 	}

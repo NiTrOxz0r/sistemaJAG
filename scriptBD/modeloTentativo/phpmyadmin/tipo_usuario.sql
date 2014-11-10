@@ -47,6 +47,7 @@ INSERT INTO `tipo_usuario` (`codigo`, `descripcion`, `status`, `cod_usr_reg`, `f
 (2, 'Usuario Privilegiado', 1, 1, '2014-11-07 13:52:25', 1, '2014-11-07 13:52:25'),
 (3, 'Administrador', 1, 1, '2014-11-07 13:52:25', 1, '2014-11-07 13:52:25'),
 (4, 'Super Usuario', 1, 1, '2014-11-07 13:52:25', 1, '2014-11-07 13:52:25'),
+(5, 'Por verificar', 1, 1, '2014-11-07 13:52:25', 1, '2014-11-07 13:52:25'),
 (255, 'slayerfat', 1, 1, '2014-11-07 13:52:25', 1, '2014-11-07 13:52:25');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
