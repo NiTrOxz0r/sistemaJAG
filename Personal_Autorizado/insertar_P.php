@@ -103,7 +103,6 @@ if ( isset($_SESSION['cedula_a']) || isset($_SESSION['cedula_escolar_a'])) {
  	lugar_trabajo,
  	direccion_trabajo,
  	telefono_trabajo,
- 	
 	status,
   cod_usr_reg,
   cod_usr_mod
