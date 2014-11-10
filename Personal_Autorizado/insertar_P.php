@@ -139,7 +139,6 @@ if ( isset($_SESSION['cedula_a']) || isset($_SESSION['cedula_escolar_a'])) {
 		('$_SESSION[cod_parro_a]','$_SESSION[direccion_exacta_a]', '$status',
 		'$cod_usr_reg','$cod_usr_mod');";
   	
-  // $rs = mysql_query($queryPA) or die ("Error ".mysql_error());
   $rs = conexion($queryAdir);
   
   $query = "SELECT codigo from direccion_alumno 
@@ -186,11 +185,52 @@ if ( isset($_SESSION['cedula_a']) || isset($_SESSION['cedula_escolar_a'])) {
 	'$_SESSION[repitiente_a]', '$_SESSION[altura_a]','$_SESSION[peso_a]',
 	'$_SESSION[camisa_a]','$_SESSION[pantalon_a]' , 	'$_SESSION[zapato_a]','$_SESSION[cod_curso_a]', 
 	'$cod_representante', '$status', '$cod_usr_reg',	'$cod_usr_mod');";
-    	
-	// $rs = mysql_query($queryPA) or die ("Error ".mysql_error());
-  $rs = conexion($queryA);
-  
-  
+		
+	$rs = conexion($queryA);
+
+	$query = "SELECT codigo from alumno where cedula = '$_SESSION[cedula_a]';";
+	$resultado = conexion($query);
+	$datos = mysqli_fetch_assoc($resultado);
+	$codigo_alumno = $datos['codigo'];
+
+	//INSERSION A LA TABLA OBTIENE:
+	//RELACION ENTRE ALUMNO Y PA:
+	//M > N
+	$query = "INSERT INTO obtiene
+	VALUES
+	(null, $cod_representante, $codigo_alumno, $status, $cod_usr_reg, null, $cod_usr_mod, null);";
+  $resultado = conexion($query);
+
+  //buscamos los alumnos que esten relacionados
+  //con este representante
+  $query = "SELECT 
+  personal_autorizado.codigo as codigo_r,
+  personal_autorizado.p_apellido as p_apellido_r,
+  personal_autorizado.s_apellido as s_apellido_r,
+  personal_autorizado.p_nombre as p_nombre_r,
+  personal_autorizado.s_nombre as s_nombre_r,
+  alumno.codigo as codigo_a,
+  alumno.p_apellido as p_apellido_a,
+  alumno.s_apellido as s_apellido_a,
+  alumno.p_nombre as p_nombre_a,
+  alumno.s_nombre as s_nombre_a
+  from obtiene
+  inner join personal_autorizado
+  on obtiene.cod_p_a = personal_autorizado.codigo
+  inner join alumno
+  on obtiene.cod_alu = alumno.codigo
+  where cod_p_a = $cod_representante
+  and cod_alu = $codigo_alumno
+  order by alumno.codigo;";
+  $resultado = conexion($query);
+
+  if ($resultado->num_rows <> 0) {
+  	$datos = mysqli_fetch_assoc($resultado);
+  	var_dump($datos);
+  	// while ($datos = mysqli_fetch_array($resultado)) {
+  	// 	
+  	// }
+  }
   //DEBIDO A QUE MUCHOS USUARIOS PUEDEN HACER MUCHAS
   //INSERSIONES DE ALUMNOS/PA/ETC
   //TENEMOS QUE DESACTIVAR LA VARIABLE SESSION PARA QUE
