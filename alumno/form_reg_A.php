@@ -14,7 +14,7 @@
 	//CONTENIDO:?>
 <div id="blancoAjax">
 	<div align="center">
-		<form action="alumno/insertar_A.php" method="POST" name="form_alu" id="form">
+		<form action="insertar_A.php" method="POST" name="form_alu" id="form">
 			<fieldset style="width:80%">
 				<legend>  REGISTRO DE ALUMNO</legend>
 				<fieldset>

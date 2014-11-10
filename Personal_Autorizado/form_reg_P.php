@@ -17,7 +17,7 @@ empezarPagina();
 
 		<div align="center">
 			<!-- http://www.w3schools.com/html/html_forms.asp -->
-			<form method="post" action="Personal_Autorizado/insertar_P.php" name="form_repre" id="form">
+			<form method="post" action="insertar_P.php" name="form_repre" id="form">
 				<fieldset>
 					<legend style="width:80%">REGISTRO DE PADRES/REPRESENTANTE</legend>
 						<table>
