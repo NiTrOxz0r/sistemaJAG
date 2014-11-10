@@ -4,17 +4,15 @@ sistemaJAG
 Repositorio en donde se manejara el codigo referente al sistema.
 
 
-si no has visto el tutorial principal: [repositorio tutorial miniPrueba](https://github.com/slayerfat/miniPrueba)
+###Sistema 30% completado, por ahora falta:
 
+####FLUJO NORMAL DE FORMULARIOS
+####FLUJO ALTERNATIVO DE FORMULARIOS
 
-# en construccion!
+####moduloProfesores
+####moduloCursos
+####moduloUsuarios
+####CSS
 
-### este repositorio es igual a miniPrueba, solo que es el que usuremos, la idea de separarlos es para que practiquen a usar git en miniPrueba y despues modifiquen este repo.
-
-#GIT FORK
-
-#GIT BRANCHES
-
-#GIT MERGE
-
-#MYSQL
+#branch FORMULARIOS
+se trabaja aqui para lo referente a flujos de formularios.
