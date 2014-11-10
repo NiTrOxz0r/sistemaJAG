@@ -118,7 +118,7 @@ if ( isset($_SESSION['cedula_a']) || isset($_SESSION['cedula_escolar_a'])) {
 	//DESTRUYE A LA HORA QUE HACE LA COMPROBACION A CONTINUACION
 	
 	// $rs = mysql_query($queryPA) or die ("Error ".mysql_error());
-   $rs = conexion($queryPA);
+  $rs = conexion($queryPA);
 	
 	$cod_representante = mysqli_insert_id($con);
 	
