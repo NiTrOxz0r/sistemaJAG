@@ -201,12 +201,6 @@ if ( isset($_SESSION['cedula_a']) || isset($_SESSION['cedula_escolar_a'])) {
 	(null, $cod_representante, $codigo_alumno, $status, $cod_usr_reg, null, $cod_usr_mod, null);";
   $resultado = conexion($query);
 
-  header("Location: consultar_P.php?cedula_r=$cedula");
-
-  // ESTO POR AHORA NO ES NECESARIO:
-
-
-
   //DEBIDO A QUE MUCHOS USUARIOS PUEDEN HACER MUCHAS
   //INSERSIONES DE ALUMNOS/PA/ETC
   //TENEMOS QUE DESACTIVAR LA VARIABLE SESSION PARA QUE
@@ -215,20 +209,21 @@ if ( isset($_SESSION['cedula_a']) || isset($_SESSION['cedula_escolar_a'])) {
   
   //AGARRAMOS LAS VARIABLES DE VALIDACION QUE NOS INTERESAN:
   
-  // $codUsrMod = $_SESSION['codUsrMod'];
-  // $codTipoUsr = $_SESSION['cod_tipo_usr'];
-  // $seudonimo = $_SESSION['seudonimo'];
+  $codUsrMod = $_SESSION['codUsrMod'];
+  $codTipoUsr = $_SESSION['cod_tipo_usr'];
+  $seudonimo = $_SESSION['seudonimo'];
   
   // LA VARIABLE SE DES-CREA, DES-INICIA DESACTIVA
-  // unset($_SESSION);
+  unset($_SESSION);
   
   //REINICIAMOS LA VARIABLE:
   
-  // $_SESSION['codUsrMod'] = $codUsrMod;
-	// $_SESSION['cod_tipo_usr'] = $codTipoUsr;
-	// $_SESSION['seudonimo'] = $seudonimo;
+  $_SESSION['codUsrMod'] = $codUsrMod;
+	$_SESSION['cod_tipo_usr'] = $codTipoUsr;
+	$_SESSION['seudonimo'] = $seudonimo;
 
-	// echo "EXITO TOTALES!";
+  header("Location: consultar_P.php?cedula_r=$cedula");
+
 }else{
 	
 	echo " Ingresar Alumno";
