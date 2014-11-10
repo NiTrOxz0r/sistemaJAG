@@ -39,7 +39,6 @@ if ( isset($_SESSION['cedula_a']) || isset($_SESSION['cedula_escolar_a'])) {
   $status         =  			1;
 	$cod_usr_reg    = 			$_SESSION['codUsrMod'];
 	$cod_usr_mod   	=   		$_SESSION['codUsrMod'];
-	$fec_mod 				= 			"current_timestamp";
   	
   //INSERTO LA DIRECCION DEL REPRESENTANTE
   //LA ENVIO A LA TABLA direccion_p_a
@@ -52,13 +51,11 @@ if ( isset($_SESSION['cedula_a']) || isset($_SESSION['cedula_escolar_a'])) {
   	direccion_exacta,
   	status,
 		cod_usr_reg,
-		cod_usr_mod,
-		fec_mod)
-  	VALUES('$cod_parroquia,'$direccion_exacta', '$status','$cod_usr_reg',
-  	'$cod_usr_mod',$fec_mod);";
+		cod_usr_mod)
+  	VALUES('$cod_parroquia','$direccion_exacta', '$status','$cod_usr_reg','$cod_usr_mod');";
   	
   //$direccionP = conexion($queryDirP);
-	$direccionP = conexion($queryDirP, 1);
+	$direccionP = conexion($queryDirP);
 	//TOMO EL CODIGO DEL REGISTRO DE LA DIRECCION
   //Y LO INSERTO EN QUERY P_A
   $cod_direccion = mysqli_insert_id($direccionP); 
@@ -92,7 +89,7 @@ if ( isset($_SESSION['cedula_a']) || isset($_SESSION['cedula_escolar_a'])) {
 	s_nombre,
 	p_apellido,
 	s_apellido,
-	sexo
+	sexo,
 	fec_nac,
 	lugar_nac,
 	telefono,
@@ -103,20 +100,19 @@ if ( isset($_SESSION['cedula_a']) || isset($_SESSION['cedula_escolar_a'])) {
  	cod_direccion,      
  	nivel_instruccion,   
  	profesion, 
- 	lugar_tra,
+ 	lugar_trabajo,
  	direccion_trabajo,
  	telefono_trabajo,
  	
 	status,
-  	cod_usr_reg,
-  	cod_usr_mod,
-  	fec_mod
+  cod_usr_reg,
+  cod_usr_mod
 	)
 	VALUES('$cedula','$nacionalidad','$p_nombre','$s_nombre','$p_apellido',
-	'$s_apellido','$sexo','$fec_nac',	$lugar_nac','$telefono','$telefono_otro',
+	'$s_apellido','$sexo','$fec_nac',	'$lugar_nac','$telefono','$telefono_otro',
 	'$email','$relacion','$vive_con_alumno','$cod_direccion',	'$nivel_instruccion', 
 	'$profesion','$lugar_trabajo','$direccion_trabajo','$telefono_trabajo','$status',
-	'$cod_usr_reg','$cod_usr_mod','$fec_mod');";
+	'$cod_usr_reg','$cod_usr_mod');";
 
 	//CREO UNA VARIABLE DE SESSION PARA TOMAR EL CODIGO ID 
 	//DEL REPRESENTANTE E INSERTARLO EN ALUMNO
@@ -124,7 +120,7 @@ if ( isset($_SESSION['cedula_a']) || isset($_SESSION['cedula_escolar_a'])) {
 	//DESTRUYE A LA HORA QUE HACE LA COMPROBACION A CONTINUACION
 	
 	// $rs = mysql_query($queryPA) or die ("Error ".mysql_error());
-   $rs = conexion($queryPA, 1);
+   $rs = conexion($queryPA);
 	
 	$cod_representante = mysqli_insert_id($rs);
 	
@@ -137,14 +133,13 @@ if ( isset($_SESSION['cedula_a']) || isset($_SESSION['cedula_escolar_a'])) {
   	direccion_exacta,
   	status,
 		cod_usr_reg,
-		cod_usr_mod,
-		fec_mod
+		cod_usr_mod
 		)	VALUES
 		('$_SESSION[cod_parro_a]','$_SESSION[direccion_exacta_a]', '$status',
-		'$cod_usr_reg','$cod_usr_mod',$fec_mod);";
+		'$cod_usr_reg','$cod_usr_mod');";
   	
   // $rs = mysql_query($queryPA) or die ("Error ".mysql_error());
-  $rs = conexion($queryAdir, 1);
+  $rs = conexion($queryAdir);
   
   $cod_direccion_a = mysqli_insert_id($rs);
   	
@@ -175,8 +170,7 @@ if ( isset($_SESSION['cedula_a']) || isset($_SESSION['cedula_escolar_a'])) {
 	cod_repre,
 	status,
 	cod_usr_reg,
-	cod_usr_mod,
-	fec_mod
+	cod_usr_mod
 	) VALUES('$_SESSION[cedula_a]', '$_SESSION[cedula_escolar_a]','$_SESSION[nacionalidad_a]',
 	'$_SESSION[p_nombre_a]', '$_SESSION[s_nombre_a]', '$_SESSION[p_apellido_a]', 
 	'$_SESSION[s_apellido_a]','$_SESSION[telefono_a]','$_SESSION[telefono_otro_a]',
@@ -185,10 +179,10 @@ if ( isset($_SESSION['cedula_a']) || isset($_SESSION['cedula_escolar_a'])) {
 	'$_SESSION[acta_folio_num_part_nac_a]',	'$_SESSION[plantel_procedencia_a]',
 	'$_SESSION[repitiente_a]', '$_SESSION[altura_a]','$_SESSION[peso_a]',
 	'$_SESSION[camisa_a]', 	'$_SESSION[zapato_a],'$_SESSION[cod_curso_a]', 
-	'$cod_representante', '$status', '$cod_usr_reg',	'$cod_usr_mod', $fec_mod;);";
+	'$cod_representante', '$status', '$cod_usr_reg',	'$cod_usr_mod';);";
     	
 	// $rs = mysql_query($queryPA) or die ("Error ".mysql_error());
-  $rs = conexion($queryA, 1);
+  $rs = conexion($queryA);
   
   
   //DEBIDO A QUE MUCHOS USUARIOS PUEDEN HACER MUCHAS
