@@ -1,24 +1,24 @@
 <?php
-	if(!isset($_SESSION)){ 
-    session_start(); 
-  }
-	$enlace = $_SERVER['DOCUMENT_ROOT']."/github/sistemaJAG/php/master.php";
-	require_once($enlace);
-	// invocamos validarUsuario.php desde master.php
-	validarUsuario(1);
+if(!isset($_SESSION)){ 
+	session_start(); 
+}
+$enlace = $_SERVER['DOCUMENT_ROOT']."/github/sistemaJAG/php/master.php";
+require_once($enlace);
+// invocamos validarUsuario.php desde master.php
+validarUsuario(1);
 
-	//ESTA FUNCION TRAE EL HEAD Y NAVBAR:
-	//DESDE empezarPagina.php
-	empezarPagina();
+//ESTA FUNCION TRAE EL HEAD Y NAVBAR:
+//DESDE empezarPagina.php
+empezarPagina();
 
-	//CONTENIDO:?>
+//CONTENIDO:?>
 <div id="blancoAjax">
 	<div align="center">
 		<form action="insertar_A.php" method="POST" name="form_alu" id="form">
 			<fieldset style="width:80%">
-				<legend>  REGISTRO DE ALUMNO</legend>
+				<legend>REGISTRO DE ALUMNO</legend>
 				<fieldset>
-					<legend  align="left"> DATOS PERSONALES</legend>
+					<legend align="left">DATOS PERSONALES</legend>
 						<table>
 							<tr>
 								<td colspan=2>Entre la informaci&oacute;n:<br>
@@ -27,6 +27,7 @@
 							<tr>
 								<th>C&eacute;dula</th>
 								<th>C&eacute;dula Escolar</th>
+								<th>Representante (cedula):</th>
 							</tr>
 							<tr>
 								<td align="left">
@@ -39,27 +40,81 @@
 									<font color="#ff0000">*</font>
 								</td>
 								<td>
-									<input type="text" maxlength="10" name="cedula_escolar" id="cedula_escolar"/>
+									<input 
+										type="text" 
+										maxlength="10" 
+										name="cedula_escolar" 
+										id="cedula_escolar"/>
+								</td>
+								<td>
+									<input 
+										type="text"  
+										maxlength="8" 
+										name="codigo_r" 
+										id="codigo_r"
+										required
+										disabled
+										hidden>
+									<input 
+										type="text"  
+										maxlength="8" 
+										name="cedula_r" 
+										id="cedula_r"
+										required
+										disabled>
 								</td>
 							</tr>
 							<tr>
-								<th>Primer Nombre</th><th>Segundo Nombre</th>
-								<th>Primer Apellido</th><th>Segundo Apellido</th>
+								<th>Primer Nombre</th>
+								<th>Segundo Nombre</th>
+								<th>Apellido, Nombre:</th>
 							</tr>
 							<tr>
 								<td>
-									<input type="text" maxlength="20" name="p_nombre" id="p_nombre" required/>
+									<input 
+										type="text" 
+										maxlength="20" 
+										name="p_nombre" 
+										id="p_nombre" 
+										required/>
 									<font color="#ff0000">*</font>
 								</td>
 								<td>
 									<input type="text" maxlength="20" name="s_nombre" id="s_nombre"/>
 								</td>
 								<td>
-									<input type="text" maxlength="20" name="p_apellido" id="p_apellido" required/>
+									<input 
+										type="text" 
+										maxlength="20" 
+										disabled 
+										name="p_nombre_r" 
+										id="p_nombre_r"/>
+								</td>
+							</tr>
+							<tr>
+								<th>Primer Apellido</th>
+								<th>Segundo Apellido</th>
+								<th>Relacion (Representante)</th>
+							</tr>
+							<tr>
+								<td>
+									<input 
+										type="text" 
+										maxlength="20" 
+										name="p_apellido" 
+										id="p_apellido" 
+										required/>
 									<font color="#ff0000">*</font>
 								</td>
 								<td>
 									<input type="text" maxlength="20" name="s_apellido" id="s_apellido"/>
+								</td>
+								<td>
+									<select required disabled name="parentesco_r" id="parentesco_r">
+										<option selected="selected">
+											Seleccione
+										</option>
+									</select>
 								</td>
 							</tr>
 							<tr>
@@ -312,6 +367,14 @@
 						<option value="<?php echo $fila['codigo']; ?>"><?php echo $fila['descripcion']; ?></option>
 					<?php endwhile; ?>
 					</select>
+					<b>ignorar:</b>
+					<select disabled name="" id="">
+						<option value="">Seleccione una opci&oacute;n</option>
+					</select>
+					<b>ignorar:</b>
+					<select disabled name="" id="">
+						<option value="">Seleccione una opci&oacute;n</option>
+					</select>
 				</fieldset>
 
 			</fieldset>
@@ -360,6 +423,6 @@
 </div>
 
 <?php
-	//FINALIZAMOS LA PAGINA:
-	//trae footer.php y cola.php
-	finalizarPagina();?>
+//FINALIZAMOS LA PAGINA:
+//trae footer.php y cola.php
+finalizarPagina();?>
