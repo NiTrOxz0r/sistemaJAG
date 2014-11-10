@@ -255,7 +255,19 @@ empezarPagina();
 						</table>
 				</fieldset>
 			</form>
-		</div>
+			</div>
+			<div>
+					<p>
+						<center>
+							<a class="" href="en COnstruccion">Volver</a>
+						</center>
+					</p>
+					<p>
+						<center>
+							<a href="../index.php">Volver al menu</a>
+						</center>
+					</p>
+			</div>
 
 		<?php $cargadorOnClick = enlaceDinamico("java/ajax/cargadorOnClick.js"); ?>
 		<?php $validacionP = enlaceDinamico("java/validacionP.js"); ?>

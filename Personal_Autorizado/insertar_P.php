@@ -53,6 +53,7 @@ if ( isset($_SESSION['cedula_a']) || isset($_SESSION['cedula_escolar_a'])) {
 		cod_usr_reg,
 		cod_usr_mod)
   	VALUES('$cod_parroquia','$direccion_exacta', '$status','$cod_usr_reg','$cod_usr_mod');";
+
   $resultado = conexion($queryDirP);
   $query = "SELECT codigo from direccion_p_a where cod_parroquia = $cod_parroquia and direccion_exacta = '$direccion_exacta';";
   $resultado = conexion($query);
