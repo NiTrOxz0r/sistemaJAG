@@ -201,36 +201,12 @@ if ( isset($_SESSION['cedula_a']) || isset($_SESSION['cedula_escolar_a'])) {
 	(null, $cod_representante, $codigo_alumno, $status, $cod_usr_reg, null, $cod_usr_mod, null);";
   $resultado = conexion($query);
 
-  //buscamos los alumnos que esten relacionados
-  //con este representante
-  $query = "SELECT 
-  personal_autorizado.codigo as codigo_r,
-  personal_autorizado.p_apellido as p_apellido_r,
-  personal_autorizado.s_apellido as s_apellido_r,
-  personal_autorizado.p_nombre as p_nombre_r,
-  personal_autorizado.s_nombre as s_nombre_r,
-  alumno.codigo as codigo_a,
-  alumno.p_apellido as p_apellido_a,
-  alumno.s_apellido as s_apellido_a,
-  alumno.p_nombre as p_nombre_a,
-  alumno.s_nombre as s_nombre_a
-  from obtiene
-  inner join personal_autorizado
-  on obtiene.cod_p_a = personal_autorizado.codigo
-  inner join alumno
-  on obtiene.cod_alu = alumno.codigo
-  where cod_p_a = $cod_representante
-  and cod_alu = $codigo_alumno
-  order by alumno.codigo;";
-  $resultado = conexion($query);
+  header("Location: consultar_P.php?cedula_r=$cedula");
 
-  if ($resultado->num_rows <> 0) {
-  	$datos = mysqli_fetch_assoc($resultado);
-  	var_dump($datos);
-  	// while ($datos = mysqli_fetch_array($resultado)) {
-  	// 	
-  	// }
-  }
+  // ESTO POR AHORA NO ES NECESARIO:
+
+
+
   //DEBIDO A QUE MUCHOS USUARIOS PUEDEN HACER MUCHAS
   //INSERSIONES DE ALUMNOS/PA/ETC
   //TENEMOS QUE DESACTIVAR LA VARIABLE SESSION PARA QUE
@@ -239,20 +215,20 @@ if ( isset($_SESSION['cedula_a']) || isset($_SESSION['cedula_escolar_a'])) {
   
   //AGARRAMOS LAS VARIABLES DE VALIDACION QUE NOS INTERESAN:
   
-  $codUsrMod = $_SESSION['codUsrMod'];
-  $codTipoUsr = $_SESSION['cod_tipo_usr'];
-  $seudonimo = $_SESSION['seudonimo'];
+  // $codUsrMod = $_SESSION['codUsrMod'];
+  // $codTipoUsr = $_SESSION['cod_tipo_usr'];
+  // $seudonimo = $_SESSION['seudonimo'];
   
   // LA VARIABLE SE DES-CREA, DES-INICIA DESACTIVA
-  unset($_SESSION);
+  // unset($_SESSION);
   
   //REINICIAMOS LA VARIABLE:
   
-  $_SESSION['codUsrMod'] = $codUsrMod;
-	$_SESSION['cod_tipo_usr'] = $codTipoUsr;
-	$_SESSION['seudonimo'] = $seudonimo;
+  // $_SESSION['codUsrMod'] = $codUsrMod;
+	// $_SESSION['cod_tipo_usr'] = $codTipoUsr;
+	// $_SESSION['seudonimo'] = $seudonimo;
 
-	echo "EXITO TOTALES!";
+	// echo "EXITO TOTALES!";
 }else{
 	
 	echo " Ingresar Alumno";
