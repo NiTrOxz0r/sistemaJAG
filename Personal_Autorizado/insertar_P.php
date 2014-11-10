@@ -53,12 +53,12 @@ if ( isset($_SESSION['cedula_a']) || isset($_SESSION['cedula_escolar_a'])) {
 		cod_usr_reg,
 		cod_usr_mod)
   	VALUES('$cod_parroquia','$direccion_exacta', '$status','$cod_usr_reg','$cod_usr_mod');";
-  	
-  //$direccionP = conexion($queryDirP);
-	$direccionP = conexion($queryDirP);
-	//TOMO EL CODIGO DEL REGISTRO DE LA DIRECCION
-  //Y LO INSERTO EN QUERY P_A
-  $cod_direccion_P = mysqli_insert_id($con); 
+  $resultado = conexion($queryDirP);
+  $query = "SELECT codigo from direccion_p_a where cod_parroquia = $cod_parroquia and direccion_exacta = '$direccion_exacta';";
+  $resultado = conexion($query);
+  $datos = mysqli_fetch_assoc($resultado);
+  $cod_direccion_P = $datos['codigo'];
+
 	//representante:
 	$cedula					=	mysqli_escape_string($con, $_POST['cedula']);
 	$nacionalidad		=	mysqli_escape_string($con, $_POST['nacionalidad']);
@@ -118,9 +118,11 @@ if ( isset($_SESSION['cedula_a']) || isset($_SESSION['cedula_escolar_a'])) {
 	//DESTRUYE A LA HORA QUE HACE LA COMPROBACION A CONTINUACION
 	
 	// $rs = mysql_query($queryPA) or die ("Error ".mysql_error());
-   $rs = conexion($queryPA);
-	
-	$cod_representante = mysqli_insert_id($con);
+  $rs = conexion($queryPA);
+  $query = "SELECT codigo from personal_autorizado where cedula = '$cedula';";
+	$resultado = conexion($query);
+	$datos = mysqli_fetch_assoc($resultado);
+	$cod_representante = $datos['codigo'];
 	
 	//INSERTO DIRECCION ALUMNO EN LA TABLA DIRECCION_ALUMNO
 	//CODIGO TRAIDA EN VARIABLES DE SESSIONES
@@ -139,7 +141,12 @@ if ( isset($_SESSION['cedula_a']) || isset($_SESSION['cedula_escolar_a'])) {
   // $rs = mysql_query($queryPA) or die ("Error ".mysql_error());
   $rs = conexion($queryAdir);
   
-  $cod_direccion_a = mysqli_insert_id($con);
+  $query = "SELECT codigo from direccion_alumno 
+  where cod_parroquia = '$_SESSION[cod_parro_a]' 
+  and direccion_exacta = '$_SESSION[direccion_exacta_a]';";
+  $resultado = conexion($query);
+  $datos = mysqli_fetch_assoc($resultado);
+  $cod_direccion_a = $datos['codigo'];
   	
   $queryA = "INSERT INTO alumno (
 	cedula,
@@ -165,19 +172,19 @@ if ( isset($_SESSION['cedula_a']) || isset($_SESSION['cedula_escolar_a'])) {
  	pantalon,
  	zapato,
 	cod_curso,
-	cod_repre,
+	cod_representante,
 	status,
 	cod_usr_reg,
 	cod_usr_mod
-	) VALUES('$_SESSION[cedula_a]', '$_SESSION[cedula_escolar_a]','$_SESSION[nacionalidad_a]',
+	) VALUES ('$_SESSION[cedula_a]', '$_SESSION[cedula_escolar_a]','$_SESSION[nacionalidad_a]',
 	'$_SESSION[p_nombre_a]', '$_SESSION[s_nombre_a]', '$_SESSION[p_apellido_a]', 
 	'$_SESSION[s_apellido_a]','$_SESSION[telefono_a]','$_SESSION[telefono_otro_a]',
 	'$_SESSION[sexo_a]', '$_SESSION[lugar_nac_a]','$_SESSION[fec_nac_a]',
 	'$cod_direccion_a', '$_SESSION[acta_num_part_nac_a]',
 	'$_SESSION[acta_folio_num_part_nac_a]',	'$_SESSION[plantel_procedencia_a]',
 	'$_SESSION[repitiente_a]', '$_SESSION[altura_a]','$_SESSION[peso_a]',
-	'$_SESSION[camisa_a]', 	'$_SESSION[zapato_a],'$_SESSION[cod_curso_a]', 
-	'$cod_representante', '$status', '$cod_usr_reg',	'$cod_usr_mod';);";
+	'$_SESSION[camisa_a]','$_SESSION[pantalon_a]' , 	'$_SESSION[zapato_a]','$_SESSION[cod_curso_a]', 
+	'$cod_representante', '$status', '$cod_usr_reg',	'$cod_usr_mod');";
     	
 	// $rs = mysql_query($queryPA) or die ("Error ".mysql_error());
   $rs = conexion($queryA);
@@ -203,6 +210,8 @@ if ( isset($_SESSION['cedula_a']) || isset($_SESSION['cedula_escolar_a'])) {
   $_SESSION['codUsrMod'] = $codUsrMod;
 	$_SESSION['cod_tipo_usr'] = $codTipoUsr;
 	$_SESSION['seudonimo'] = $seudonimo;
+
+	echo "EXITO TOTALES!";
 }else{
 	
 	echo " Ingresar Alumno";
