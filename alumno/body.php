@@ -30,13 +30,13 @@ $index = enlaceDinamico();
 					<td>
 						&nbsp;&nbsp;
 						<?php $forma = enlaceDinamico("alumno/form_reg_A.php"); ?>
-						<a class="click" href="<?php echo $forma ?>"> Registar un Alumno </a>
+						<a class="otro" href="<?php echo $forma ?>"> Registar un Alumno </a>
 						&nbsp;&nbsp;
 					</td>
 					<td>
 						&nbsp;&nbsp;
 						<?php $enlace = enlaceDinamico("alumno/menucon.php"); ?>
-						<a class="click" href="<?php echo $enlace ?>"> Consultar un Alumno </a>
+						<a class="otro" href="<?php echo $enlace ?>"> Consultar un Alumno </a>
 						&nbsp;&nbsp;
 					</td>
 				</table>
@@ -44,7 +44,7 @@ $index = enlaceDinamico();
 			<div>
 				<p>
 					<center>
-						<a class="click" href="<?php echo $index ?>">Volver al menu</a>
+						<a class="otro" href="<?php echo $index ?>">Volver al menu</a>
 					</center>
 				</p>
 			</div>
