@@ -18,6 +18,32 @@ empezarPagina();
 			<!-- DETALLESE QUE NO ES UN ID SINO UNA CLASE. -->
 			<div class="contenido">
 
+
+			<!-- EJEMPLO DE FORMULARIOS: -->
+			<form>
+
+				<!-- chequeo por medio de ajax: -->
+				<span class="chequeo" id="campoX_chequeo">
+					
+				</span>
+
+				<td class="chequeo" id"campo_Y_chequeo">
+					
+				</td>
+
+				<input type="text" class="chequeo" id="campoZ_chequeo">
+
+			</form>
+
+			<!-- EJEMPLO DE MENUS -->
+			
+			<td>...</td>
+			<div>...</div>
+			<span>...</span>
+			<legend>...</legend>
+
+			<!-- EJEMPLO DE X.. -->
+			
 				
 			</div>
 			<!-- CONTENIDO TERMINA ARRIBA DE ESTO: -->
