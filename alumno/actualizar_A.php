@@ -1,4 +1,3 @@
-
 <?php
 if(!isset($_SESSION)){ 
   session_start(); 
@@ -8,8 +7,14 @@ require_once($enlace);
 // invocamos validarUsuario.php desde master.php
 validarUsuario(1);
 
+//ESTA FUNCION TRAE EL HEAD Y NAVBAR:
+//DESDE empezarPagina.php
+empezarPagina();
+
+
+
 if (isset($_POST['cedula'])) {
-	if ($_POST['cedula'] <> "" and count($_POST['cedula']) == 8) {
+	if ($_POST['cedula'] <> "" and strlen($_POST['cedula']) == 8) {
 		$con = conexion();
 		$cedula = mysqli_escape_string($con, $_POST['cedula']);
 	}
@@ -54,7 +59,7 @@ if (isset($_POST['cedula'])) {
 								<!-- HACER AJAX PARA CEDULA!!! -->
 								<input 
 								type="text" 
-								readonly 
+								required
 								maxlength="8" 
 								size="12" 
 								name="cedula" 
@@ -66,7 +71,7 @@ if (isset($_POST['cedula'])) {
 							<!-- HACER AJAX PARA CEDULA!!! -->
 							<input 
 								type="text" 
-								readonly 
+								required
 								maxlength="10" 
 								name="cedula_escolar" 
 								id="cedula_escolar" 
@@ -362,11 +367,12 @@ if (isset($_POST['cedula'])) {
 				</select>
 			</fieldset>
 		</fieldset>
-			<input type="button" name="enviar_btn" value="Enviar" Id="enviar"/>
+			<input type="button" name="enviar_btn" value="Enviar" id="enviar"/>
+			<input type="button" name="limpiar_btn" value="Enviar" hidden disabled id="limpiar"/>
 	</form>
 	<?php $validacion = enlaceDinamico("java/validacion.js"); ?>
 	<script type="text/javascript" src="<?php echo $validacion ?>"></script>
-	<?php $estadoenlace = "../java/edo.php?cod_est=".$reg['cod_est']; ?>
+	<?php $estadoenlace = "java/edo.php?cod_est=".$reg['cod_est']; ?>
 	<?php $estado = enlaceDinamico($estadoenlace); ?>
 	<?php $municipio = enlaceDinamico("java/mun.php"); ?>
 	<?php $parroquia = enlaceDinamico("java/parro.php"); ?>
@@ -431,7 +437,7 @@ if (isset($_POST['cedula'])) {
 				<a href="menucon.php">Volver</a>
 			</p>
 	<?php endif; ?>
-
-	</body>
-
-</html>
+<?php
+//FINALIZAMOS LA PAGINA:
+//trae footer.php y cola.php
+finalizarPagina();?>
