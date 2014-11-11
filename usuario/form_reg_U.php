@@ -52,13 +52,13 @@ empezarPagina();
 						<td>
 							
 						</td>
-						<td id="seudonimo_chequeo">
+						<td class="chequeo" id="seudonimo_chequeo">
 							
 						</td>
 						<td>
 							
 						</td>
-						<td id="clave_chequeo">
+						<td class="chequeo"  id="clave_chequeo">
 							
 						</td>
 					</tr>

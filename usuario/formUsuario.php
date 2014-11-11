@@ -32,7 +32,7 @@ empezarPagina();
 									required="required"
 									placeholder="Instroduzca Usuario">
 							</td>
-							<td id="seudonimo_chequeo"></td>
+							<td class="chequeo" id="seudonimo_chequeo"></td>
 						</tr>
 						<tr>
 							<td id="clave_titulo">
@@ -46,7 +46,7 @@ empezarPagina();
 									required="required"
 									placeholder="Instroduzca Clave">
 							</td>
-							<td id="clave_chequeo"></td>
+							<td class="chequeo"  id="clave_chequeo"></td>
 						</tr>
 						<tr>
 							<td>
