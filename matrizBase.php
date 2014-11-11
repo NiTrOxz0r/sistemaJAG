@@ -15,8 +15,11 @@
 	<div id="contenido">
 		<div id="blancoAjax">
 			<!-- CONTENIDO EMPIEZA DEBAJO DE ESTO: -->
+			<!-- DETALLESE QUE NO ES UN ID SINO UNA CLASE. -->
+			<div class="contenido">
 
-
+				
+			</div>
 			<!-- CONTENIDO TERMINA ARRIBA DE ESTO: -->
 		</div>
 	</div>
