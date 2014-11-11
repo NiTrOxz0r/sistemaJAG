@@ -21,46 +21,12 @@ empezarPagina();
 					$con = conexion();
 					$cedula_r = mysqli_escape_string($con, $cedula_r);
 
-					//buscamos los alumnos que esten relacionados
-					//con este representante
-					$query = "SELECT 
-					personal_autorizado.codigo as codigo_r,
-					personal_autorizado.p_apellido as p_apellido_r,
-					personal_autorizado.s_apellido as s_apellido_r,
-					personal_autorizado.p_nombre as p_nombre_r,
-					personal_autorizado.s_nombre as s_nombre_r,
-					alumno.codigo as codigo_a,
-					alumno.cedula as cedula_a,
-					alumno.cedula_escolar as cedula_escolar_a,
-					curso.descripcion as curso_a,
-					alumno.p_apellido as p_apellido_a,
-					alumno.s_apellido as s_apellido_a,
-					alumno.p_nombre as p_nombre_a,
-					alumno.s_nombre as s_nombre_a
-					from obtiene
-					inner join personal_autorizado
-					on obtiene.cod_p_a = personal_autorizado.codigo
-					inner join alumno
-					on obtiene.cod_alu = alumno.codigo
-					inner join curso
-					on alumno.cod_curso = curso.codigo
-					where personal_autorizado.cedula = $cedula_r
-					order by alumno.codigo;";
+					
+					$query = "SELECT ;";
 					$resultado = conexion($query);?>
 
 					<?php if ($resultado->num_rows <> 0) :?>
-						
-						<?php $unaVez = true; ?>
-						<?php	while ($datos = mysqli_fetch_array($resultado)) : ?>
-
-							<?php if ($unaVez): ?>						
-								<span>
-									Alumnos relacionados con: 
-									<?php echo $datos['p_apellido_r']; ?>,
-									<?php echo $datos['p_nombre_r']; ?>
-								</span>
-							<?php endif; $unaVez = false; ?>
-
+						<?php $datos = mysqli_fetch_assoc($resultado) ?>
 							<table>
 								<thead>
 									<th>
@@ -114,20 +80,17 @@ empezarPagina();
 									</td>
 								</tbody>
 							</table>
-
-						<?php endwhile;?>
-
-						<div>
-							<p>
-								Agregar otro alumno relacionado con este representante.
-							</p>
-							<p>
-								Agregar un familiar o personal autorizado que pueda retirar al alumno.
-							</p>
-							<p>
-								Culminar el proceso de inscripcion (GENERACION DE REPORTE; ETC!!)
-							</p>
-						</div>
+							<div>
+								<p>
+									Agregar otro alumno relacionado con este representante.
+								</p>
+								<p>
+									Agregar un familiar o personal autorizado que pueda retirar al alumno.
+								</p>
+								<p>
+									Culminar el proceso de inscripcion (GENERACION DE REPORTE; ETC!!)
+								</p>
+							</div>
 
 					<?php	else:?>
 							<span>
