@@ -35,43 +35,92 @@ if($reg = mysqli_fetch_array($re)) :
 	empezarPagina();?>
 <div id="contenido">
 	<div id="blancoAjax" align="center">
-		<form action="actualizar_A.php" method="POST" name="form_alu" id="form">
+		<div class="contenido">
+			<form action="actualizar_A.php" method="POST" name="form_alu" id="form">
 				<fieldset style="width:80%">
-					<legend>  CONSULTA DE ALUMNO</legend>
+					<legend>CONSULTA DE ALUMNO</legend>
 					<fieldset>
 						<legend  align="left"> DATOS PERSONALES</legend>
-							<table>
+							<table class="tabla-consulta" id="tabla-consulta-alumno">
+								<tr>
+									<th>Datos de alumno</th>
+								</tr>
 								<tr>
 									<th>C&eacute;dula</th><th>C&eacute;dula Escolar</th>
 								</tr>
 								<td>
-									<input type="text" readonly size="1" value="<?php echo $reg['nacionalidad'];?>">
-									<input id="cedula" type="text" readonly maxlength="8" size="12" name="cedula"  value="<?php echo $reg['cedula'];?>">
+									<input 
+										type="text" 
+										readonly size="1" 
+										value="<?php echo $reg['nacionalidad'] == 'v' ? 'V':'E';?>">
+									<input 
+										id="cedula" 
+										type="text" 
+										readonly 
+										maxlength="8" 
+										size="12" 
+										name="cedula"  
+										value="<?php echo $reg['cedula'];?>">
 								</td>
-									<td><input type="text" readonly maxlength="10" value="<?php echo $reg['cedula_escolar'];?>"/></td>
+									<td>
+										<input 
+											type="text" 
+											readonly 
+											maxlength="10" 
+											value="<?php echo $reg['cedula_escolar'];?>"/>
+									</td>
 								</tr>
 								
 								<tr>
-									<th>Primer Nombre</th><th>Segundo Nombre</th><th>Primer Apellido</th><th>Segundo Apellido</th>
+									<th>Primer Nombre</th>
+									<th>Segundo Nombre</th>
 								</tr>			
 								<tr>
-									<td><input type="text" readonly maxlength="20"  value="<?php echo $reg['p_nombre'];?>"/></td>
-									<td><input type="text" maxlength="20" readonly value="<?php echo $reg['s_nombre'];?>"/></td>
-									<td><input type="text" readonly maxlength="20" value="<?php echo $reg['p_apellido'];?>"/>
-									</td><td><input type="text" maxlength="20" readonly value="<?php echo $reg['s_apellido'];?>"/></td>
+									<td>
+										<input type="text" readonly maxlength="20"  value="<?php echo $reg['p_nombre'];?>"/>
+									</td>
+									<td>
+										<input type="text" maxlength="20" readonly value="<?php echo $reg['s_nombre'];?>"/>
+									</td>
 								</tr>			
 								<tr>
-									<th>Sexo</th><th>Fecha de Nacimiento</th><th>Lugar de Nacimiento</th>
+								<tr>
+									<th>Primer Apellido</th>
+									<th>Segundo Apellido</th>
+								</tr>
+								<tr>
+									<td>
+										<input type="text" readonly maxlength="20" value="<?php echo $reg['p_apellido'];?>"/>
+									</td>
+									<td>
+										<input type="text" maxlength="20" readonly value="<?php echo $reg['s_apellido'];?>"/>
+									</td>
+								</tr>
+									<th>Sexo</th>
+									<th>Fecha de Nacimiento</th>
 								</tr>
 								<tr>
 									<td>		
 										<input type="text" readonly value="<?php echo $reg['sexo'];?>"/>
 									</td>
 									<td>
-										<input type="date" readonly value="<?php echo $reg['fec_nac'];?>"/></td>
-									<td>							
-										<input type="text" readonly value="<?php echo $reg['lugar_nac'];?>"/>
-									<td>
+										<input type="date" readonly value="<?php echo $reg['fec_nac'];?>"/>
+									</td>
+								</tr>
+								<tr colspan="2">
+									<th>Lugar de Nacimiento</th>
+								</tr>
+								<tr>
+									<td colspan="2">
+										<textarea
+											name="lugar_nac"
+											id="lugar_nac"
+											cols="65"
+											rows="2"
+											readonly
+											maxlength="50"
+											><?php echo $reg['lugar_nac'];?></textarea>
+									</td>
 								</tr>
 								<tr>
 									<th>Tel&eacute;fono</th><th> Tel&eacute;no Celular</th>
@@ -80,7 +129,93 @@ if($reg = mysqli_fetch_array($re)) :
 									<td><input type="text" readonly maxlength="11" value="<?php echo $reg['telefono'];?>"/>
 									</td><td><input type="text" readonly maxlength="11" value="<?php echo $reg['telefono_otro'];?>"/></td>
 								</tr>
-							</table>				
+							</table>
+							<table class="tabla-consulta" id="tabla-consulta-representante">
+								<tr>
+									<th>C&eacute;dula</th><th>C&eacute;dula Escolar</th>
+								</tr>
+								<td>
+									<input 
+										type="text" 
+										readonly size="1" 
+										value="<?php echo $reg['nacionalidad'] == 'v' ? 'V':'E';?>">
+									<input 
+										id="cedula" 
+										type="text" 
+										readonly 
+										maxlength="8" 
+										size="12" 
+										name="cedula"  
+										value="<?php echo $reg['cedula'];?>">
+								</td>
+									<td>
+										<input 
+											type="text" 
+											readonly 
+											maxlength="10" 
+											value="<?php echo $reg['cedula_escolar'];?>"/>
+									</td>
+								</tr>
+								
+								<tr>
+									<th>Primer Nombre</th>
+									<th>Segundo Nombre</th>
+								</tr>			
+								<tr>
+									<td>
+										<input type="text" readonly maxlength="20"  value="<?php echo $reg['p_nombre'];?>"/>
+									</td>
+									<td>
+										<input type="text" maxlength="20" readonly value="<?php echo $reg['s_nombre'];?>"/>
+									</td>
+								</tr>			
+								<tr>
+								<tr>
+									<th>Primer Apellido</th>
+									<th>Segundo Apellido</th>
+								</tr>
+								<tr>
+									<td>
+										<input type="text" readonly maxlength="20" value="<?php echo $reg['p_apellido'];?>"/>
+									</td>
+									<td>
+										<input type="text" maxlength="20" readonly value="<?php echo $reg['s_apellido'];?>"/>
+									</td>
+								</tr>
+									<th>Sexo</th>
+									<th>Fecha de Nacimiento</th>
+								</tr>
+								<tr>
+									<td>		
+										<input type="text" readonly value="<?php echo $reg['sexo'];?>"/>
+									</td>
+									<td>
+										<input type="date" readonly value="<?php echo $reg['fec_nac'];?>"/>
+									</td>
+								</tr>
+								<tr colspan="2">
+									<th>Lugar de Nacimiento</th>
+								</tr>
+								<tr>
+									<td colspan="2">
+										<textarea
+											name="lugar_nac"
+											id="lugar_nac"
+											cols="65"
+											rows="2"
+											readonly
+											maxlength="50"
+											><?php echo $reg['lugar_nac'];?></textarea>
+									</td>
+								</tr>
+								<tr>
+									<th>Tel&eacute;fono</th><th> Tel&eacute;no Celular</th>
+								</tr>
+								<tr>
+									<td><input type="text" readonly maxlength="11" value="<?php echo $reg['telefono'];?>"/>
+									</td><td><input type="text" readonly maxlength="11" value="<?php echo $reg['telefono_otro'];?>"/></td>
+								</tr>
+							</table>	
 					</fieldset>
 				</fieldset>
 					<fieldset>
@@ -171,9 +306,10 @@ if($reg = mysqli_fetch_array($re)) :
 								</tr>	
 							</table>
 						</fieldset>
-		</form>
-		<?php $validacionCA = enlaceDinamico("java/validacionCA.js"); ?>
-		<script type="text/javascript" src="<?php echo $validacionCA ?>"></script>
+			</form>
+			<?php $validacionCA = enlaceDinamico("java/validacionCA.js"); ?>
+			<script type="text/javascript" src="<?php echo $validacionCA ?>"></script>
+		</div>
 	</div>
 </div>
 <?php else : ?>
