@@ -23,7 +23,7 @@ validarUsuario(1);?>
 						</center>
 						<fieldset style="width: 300px">
 							<legend><i>Indique La Cedula del Representante</i></legend>
-								<?php $action = enlaceDinamico("xxx"); ?>
+								<?php $action = enlaceDinamico(""); ?>
 								<form action="consultar_P.php" method="post" id="form_r">
 									<b>Cedula</b>
 									<input type="text" name="cedula_r" size="8" maxlength="8">
