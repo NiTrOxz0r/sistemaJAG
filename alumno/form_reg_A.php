@@ -396,11 +396,21 @@ empezarPagina();
 			</center>
 		</p>
 	</div>
+	<!-- calendario -->
+	<?php $cssDatepick = enlaceDinamico("java/jqDatePicker/jquery.datepick.css"); ?>
+	<link href="<?php echo $cssDatepick ?>" rel="stylesheet">
+	<?php $plugin = enlaceDinamico("java/jqDatePicker/jquery.plugin.js"); ?>
+	<?php $datepick = enlaceDinamico("java/jqDatePicker/jquery.datepick.js"); ?>
+	<script type="text/javascript" src="<?php echo $plugin ?>"></script>
+	<script type="text/javascript" src="<?php echo $datepick ?>"></script>
+	<!-- validacion -->
 	<?php $validacion = enlaceDinamico("java/validacion.js"); ?>
 	<script type="text/javascript" src="<?php echo $validacion ?>"></script>
+	<!-- ajax de estado -->
 	<?php $estado = enlaceDinamico("java/edo.php"); ?>
 	<?php $municipio = enlaceDinamico("java/mun.php"); ?>
 	<?php $parroquia = enlaceDinamico("java/parro.php"); ?>
+	<!-- ajax de estado/mun/par -->
 	<script type="text/javascript">
 		$("document").ready(function(){
 			$("#cod_est").load("<?php echo $estado ?>");
@@ -417,6 +427,19 @@ empezarPagina();
 						});
 					});
 				});
+			});
+		});
+	</script>
+	<!-- calendario -->
+	<script type="text/javascript">
+		<?php $imagen = enlaceDinamico("java/jqDatePicker/calendar-blue.gif"); ?>
+		$(function(){
+			$('#fec_nac').datepick({
+				maxDate:'-h',
+				showOn: "button",
+				buttonImage: "<?php echo $imagen ?>",
+				buttonImageOnly: true,
+				dateFormat: "yyyy-mm-dd"
 			});
 		});
 	</script>

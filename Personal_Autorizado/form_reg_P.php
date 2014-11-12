@@ -268,11 +268,13 @@ empezarPagina();
 						</center>
 					</p>
 			</div>
-
+		<!-- esto es para ajax -->
 		<?php $cargadorOnClick = enlaceDinamico("java/ajax/cargadorOnClick.js"); ?>
 		<?php $validacionP = enlaceDinamico("java/validacionP.js"); ?>
 		<script type="text/javascript" src="<?php echo $cargadorOnClick ?>"></script>
+		<!-- validacion -->
 		<script language="javascript" src="<?php echo $validacionP ?>"></script>
+		<!-- ajax de edo/mun/parr -->
 		<?php $estado = enlaceDinamico("java/edo.php"); ?>
 		<?php $municipio = enlaceDinamico("java/mun.php"); ?>
 		<?php $parroquia = enlaceDinamico("java/parro.php"); ?>
@@ -295,7 +297,26 @@ empezarPagina();
 				});
 			});
 		</script>
-		
+		<!-- calendario -->
+		<?php $cssDatepick = enlaceDinamico("java/jqDatePicker/jquery.datepick.css"); ?>
+		<link href="<?php echo $cssDatepick ?>" rel="stylesheet">
+		<?php $plugin = enlaceDinamico("java/jqDatePicker/jquery.plugin.js"); ?>
+		<?php $datepick = enlaceDinamico("java/jqDatePicker/jquery.datepick.js"); ?>
+		<script type="text/javascript" src="<?php echo $plugin ?>"></script>
+		<script type="text/javascript" src="<?php echo $datepick ?>"></script>
+		<!-- calendario -->
+		<script type="text/javascript">
+			<?php $imagen = enlaceDinamico("java/jqDatePicker/calendar-blue.gif"); ?>
+			$(function(){
+				$('#fec_nac').datepick({
+					maxDate:'-h',
+					showOn: "button",
+					buttonImage: "<?php echo $imagen ?>",
+					buttonImageOnly: true,
+					dateFormat: "yyyy-mm-dd"
+				});
+			});
+		</script>
 	</div>
 </div>
 <?php

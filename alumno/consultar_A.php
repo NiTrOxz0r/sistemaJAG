@@ -441,7 +441,7 @@ empezarPagina();?>
 							</tr>
 							<tr align="center">
 								<td>
-									<input type="button" name="enviar_btn" value="Enviar" Id="enviar"/>
+									<input type="button" name="enviar_btn" value="Editar" Id="enviar"/>
 								</td>
 							</tr>	
 						</table>

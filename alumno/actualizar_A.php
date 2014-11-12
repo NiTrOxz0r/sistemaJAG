@@ -370,8 +370,10 @@ if (isset($_POST['cedula'])) {
 			<input type="button" name="enviar_btn" value="Enviar" id="enviar"/>
 			<input type="button" name="limpiar_btn" value="Enviar" hidden disabled id="limpiar"/>
 	</form>
+	<!-- validacion -->
 	<?php $validacion = enlaceDinamico("java/validacion.js"); ?>
 	<script type="text/javascript" src="<?php echo $validacion ?>"></script>
+	<!-- ajax de estado/mun/parr -->
 	<?php $estadoenlace = "java/edo.php?cod_est=".$reg['cod_est']; ?>
 	<?php $estado = enlaceDinamico($estadoenlace); ?>
 	<?php $municipio = enlaceDinamico("java/mun.php"); ?>
@@ -425,7 +427,26 @@ if (isset($_POST['cedula'])) {
 			});
 
 		});
-
+	</script>
+	<!-- calendario -->
+	<?php $cssDatepick = enlaceDinamico("java/jqDatePicker/jquery.datepick.css"); ?>
+	<link href="<?php echo $cssDatepick ?>" rel="stylesheet">
+	<?php $plugin = enlaceDinamico("java/jqDatePicker/jquery.plugin.js"); ?>
+	<?php $datepick = enlaceDinamico("java/jqDatePicker/jquery.datepick.js"); ?>
+	<script type="text/javascript" src="<?php echo $plugin ?>"></script>
+	<script type="text/javascript" src="<?php echo $datepick ?>"></script>
+	<!-- calendario -->
+	<script type="text/javascript">
+		<?php $imagen = enlaceDinamico("java/jqDatePicker/calendar-blue.gif"); ?>
+		$(function(){
+			$('#fec_nac').datepick({
+				maxDate:'-h',
+				showOn: "button",
+				buttonImage: "<?php echo $imagen ?>",
+				buttonImageOnly: true,
+				dateFormat: "yyyy-mm-dd"
+			});
+		});
 	</script>
 </div>
 		
