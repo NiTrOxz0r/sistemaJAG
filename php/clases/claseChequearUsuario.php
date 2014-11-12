@@ -29,7 +29,7 @@ class ChequearUsuario extends ChequearGenerico{
 		$claveSeguro = trim($clave);
 
 		$this->seudonimo = mysql_escape_string($seudonimoSeguro);
-		$this->clave = mysql_escape_string($clave);
+		$this->clave = mysql_escape_string($claveSeguro);
 
 		self::chequeaForma();
 		
@@ -59,6 +59,14 @@ class ChequearUsuario extends ChequearGenerico{
 		}
 		$togo = "Location: registro.php?clave=false&clase=".$clase;
 		if ($this->clave == "") {
+			die( header($togo) );
+		}
+		$togo = "Location: registro.php?seudonimo=length&clase=".$clase;
+		if ( strlen($this->seudonimo) < 3 or strlen($this->seudonimo) > 20) {
+			die( header($togo) );
+		}
+		$togo = "Location: registro.php?clave=length_is_".strlen($this->clave)."&clase=".$clase;
+		if ( strlen($this->clave) < 6 or strlen($this->clave) > 20) {
 			die( header($togo) );
 		}
 

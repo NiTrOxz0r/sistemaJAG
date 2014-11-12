@@ -19,37 +19,37 @@ empezarPagina();
 			<div class="contenido">
 
 
-			<!-- EJEMPLO DE FORMULARIOS: -->
-			<form>
+				<!-- EJEMPLO DE FORMULARIOS: -->
+				<form>
 
-				<!-- chequeo por medio de ajax: -->
-				<span class="chequeo" id="campoX_chequeo">
-					
-				</span>
+					<!-- chequeo por medio de ajax: -->
+					<span class="chequeo" id="campoX_chequeo">
+						
+					</span>
 
-				<td class="chequeo" id"campo_Y_chequeo">
-					
-				</td>
+					<td class="chequeo" id"campo_Y_chequeo">
+						
+					</td>
 
-				<input type="text" class="chequeo" id="campoZ_chequeo">
+					<input type="text" class="chequeo" id="campoZ_chequeo">
 
-			</form>
+				</form>
 
-			<!-- EJEMPLO DE MENUS -->
-			
-			<td>...</td>
-			<div>...</div>
-			<span>...</span>
-			<legend>...</legend>
+				<!-- EJEMPLO DE MENUS -->
+				
+				<td>...</td>
+				<div>...</div>
+				<span>...</span>
+				<legend>...</legend>
 
-			<!-- EJEMPLO DE X.. -->
+				<!-- EJEMPLO DE X.. -->
 			
 				
 			</div>
 			<!-- CONTENIDO TERMINA ARRIBA DE ESTO: -->
 		</div>
 	</div>
-</div>
+
 <?php
 //FINALIZAMOS LA PAGINA:
 //trae footer.php y cola.php

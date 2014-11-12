@@ -38,8 +38,8 @@ function validacionUsuario(){
 		$("#clave_chequeo").html('Por favor introduzca un minimo de 6 caracteres.');
 		$("#clave_titulo").css('color', 'red');
 		estatus = false;
-	}else if ( clave.length > 64 ) {
-		$("#clave_chequeo").html('Por favor introduzca hasta un maximo de 64 caracteres.');
+	}else if ( clave.length > 15 ) {
+		$("#clave_chequeo").html('Por favor introduzca hasta un maximo de 15 caracteres.');
 		$("#clave_titulo").css('color', 'red');
 		estatus = false;
 	}else{

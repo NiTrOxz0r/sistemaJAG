@@ -44,7 +44,7 @@ empezarPagina();
 								name="clave"
 								id="clave"
 								required="required"
-								maxlength="64" 
+								maxlength="15"
 								placeholder="Instroduzca Clave">
 						</td>
 					</tr>

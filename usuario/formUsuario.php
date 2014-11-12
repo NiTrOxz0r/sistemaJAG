@@ -44,6 +44,7 @@ empezarPagina();
 									name="clave" 
 									id="clave"
 									required="required"
+									maxlength="15" 
 									placeholder="Instroduzca Clave">
 							</td>
 							<td class="chequeo"  id="clave_chequeo"></td>
