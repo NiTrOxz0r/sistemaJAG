@@ -6,13 +6,9 @@ function validacionUsuario(){
 
 	//estatus:
 	var estatus = false;
-	var espacios = '/^\s+$/';
 	//datos del formulario
-	var seudonimo = document.getElementById('seudonimo').value;
-	var clave = document.getElementById("clave").value;
-	seudonimo = seudonimo.replace(/^\s+|\s+$/g, '');
-	clave = clave.replace(/^\s+|\s+$/g, '');
-
+	var seudonimo = document.getElementById('seudonimo').value.replace(/^\s+|\s+$/g, '');
+	var clave = document.getElementById("clave").value.replace(/^\s+|\s+$/g, '');
 	//chequeos
 	if ( clave == "" ) {
 		document.getElementById("clave").focus();

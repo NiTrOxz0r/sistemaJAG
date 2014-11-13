@@ -7,10 +7,10 @@ require_once($enlace);
 // invocamos validarUsuario desde master.php
 validarUsuario();
 	
-if ( isset($_POST['seudonimo']) && isset($_POST['clave']) && isset($_POST['cedula']) ): 
+if ( isset($_SESSION['seudonimo']) && isset($_SESSION['clave']) && isset($_POST['cedula']) ): 
 
 	//la clave tiene que ser exactamente 60 caracteres:
-	if ($_POST['clave'] <> 60) {
+	if ($_SESSION['clave'] <> 60) {
 		header("Location: form_reg_U.php?clave=MalDefinido");
 	}
 	//ESTA FUNCION TRAE EL HEAD Y NAVBAR:
@@ -18,8 +18,8 @@ if ( isset($_POST['seudonimo']) && isset($_POST['clave']) && isset($_POST['cedul
 	empezarPagina();
 	//para el escape string:
 	$con = conexion();
-	$seudonimo = mysqli_escape_string($con, $_POST['seudonimo']);
-	$clave = mysqli_escape_string($con, $_POST['clave']);
+	$seudonimo = mysqli_escape_string($con, $_SESSION['seudonimo']);
+	$clave = mysqli_escape_string($con, $_SESSION['clave']);
 	//validamos datos basicos de usuario:
 	$validarForma = new ChequearUsuario($seudonimo,	$clave);
 	//iniciamos datos restantes del formulario:

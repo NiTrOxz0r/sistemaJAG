@@ -5,12 +5,11 @@ if(!isset($_SESSION)){
 $enlace = $_SERVER['DOCUMENT_ROOT']."/github/sistemaJAG/php/master.php";
 require_once($enlace);
 
-if ( isset($_POST['seudonimo']) && isset($_POST['clave']) ): 
- 
+if ( isset($_POST['seudonimo']) && isset($_POST['clave']) ):
 	$seudonimo = $_POST['seudonimo'];
 	$clave = $_POST['clave'];
 	$hash = password_hash($clave, PASSWORD_BCRYPT, ['cost' => 12]);
-	$validarForma = new ChequearUsuario($seudonimo,	$hash);
+	//$validarForma = new ChequearUsuario($seudonimo,	$hash);
 	//CONTENIDO:?>
 	<div id="contenido">
 		<div id="blancoAjax">
@@ -29,7 +28,7 @@ if ( isset($_POST['seudonimo']) && isset($_POST['clave']) ):
 									<select 
 										name="nacionalidad"
 										id="nacionalidad"
-										required>
+										1required>
 										<option selected="selected" value="v">V</option>
 										<option value="e">E</option>
 									</select>
@@ -40,7 +39,7 @@ if ( isset($_POST['seudonimo']) && isset($_POST['clave']) ):
 										maxlength="8" 
 										name="cedula" 
 										id="cedula" 
-										required>
+										1required>
 								</td>
 							</tr>
 							<tr>
@@ -65,7 +64,7 @@ if ( isset($_POST['seudonimo']) && isset($_POST['clave']) ):
 										type="text"
 										name="p_nombre"
 										id="p_nombre"
-										required
+										1required
 										maxlength="20">
 								</td>
 								<td>
@@ -80,7 +79,7 @@ if ( isset($_POST['seudonimo']) && isset($_POST['clave']) ):
 										type="text"
 										name="p_apellido"
 										id="p_apellido"
-										required
+										1required
 										maxlength="20">
 								</td>
 								<td>
@@ -111,14 +110,14 @@ if ( isset($_POST['seudonimo']) && isset($_POST['clave']) ):
 										type="date"
 										name="fec_nac"
 										id="fec_nac"
-										required>
+										1required>
 								</td>
 								<td>
 									<?php
 										$query = "SELECT codigo, descripcion from sexo where status = 1;";
 										$registros = conexion($query);
 									?>
-									<select name="sexo" id="sexo" required>
+									<select name="sexo" id="sexo" 1required>
 										<option value="">Seleccione una opci&oacute;n </option>
 										<?php	while($fila = mysqli_fetch_array($registros)) : ?>
 											<option value="<?php echo $fila['codigo']; ?>">
@@ -164,7 +163,7 @@ if ( isset($_POST['seudonimo']) && isset($_POST['clave']) ):
 								<td>
 									<?php $sql="SELECT codigo, descripcion from nivel_instruccion where status = 1;";
 										$registros = conexion($sql);?>
-									<select name="nivel_instruccion" required id="nivel_instruccion">
+									<select name="nivel_instruccion" 1required id="nivel_instruccion">
 									<?php while($fila = mysqli_fetch_array($registros)) :	?>
 										<option value="<?php echo $fila['codigo']?>">
 										<?php echo $fila['descripcion']?></option>
@@ -208,15 +207,15 @@ if ( isset($_POST['seudonimo']) && isset($_POST['clave']) ):
 						</tbody>
 						<thead>
 							<th id="cargo_titulo">Cargo</th>
-							<th id="p_apellido_titulo">Perfil de Usuario</th>
-							<th>Direccion (Av/Calle/Edf.)</th>
+							<th id="tipo_titulo">Perfil de Usuario</th>
+							<th id="direcc_titulo">Direccion (Av/Calle/Edf.)</th>
 						</thead>
 						<tbody>
 							<tr>
 								<td>
 									<?php $sql="SELECT codigo, descripcion from cargo where status = 1;";
 										$registros = conexion($sql);?>
-									<select name="cargo" required id="cargo">
+									<select name="cargo" 1required id="cargo">
 									<?php while($fila = mysqli_fetch_array($registros)) :	?>
 										<option value="<?php echo $fila['codigo']?>">
 										<?php echo $fila['descripcion']?></option>
@@ -224,7 +223,7 @@ if ( isset($_POST['seudonimo']) && isset($_POST['clave']) ):
 									</select>
 								</td>
 								<td>
-									<select name="tipo" id="tipo" required>
+									<select name="tipo" id="tipo" 1required>
 										<option value="" selected="selected">
 											--Seleccione--
 										</option>
@@ -253,9 +252,9 @@ if ( isset($_POST['seudonimo']) && isset($_POST['clave']) ):
 							</tr>
 						</tbody>
 						<thead>
-							<th>Estado</th>
-							<th>Municipio</th>
-							<th>Parroquia</th>
+							<th id="estado_titulo">Estado</th>
+							<th id="municipio_titulo">Municipio</th>
+							<th id="parroquia_titulo">Parroquia</th>
 						</thead>
 						<tbody>
 							<tr>
@@ -271,8 +270,11 @@ if ( isset($_POST['seudonimo']) && isset($_POST['clave']) ):
 									<option value="">--Seleccionar--</option></select>
 								</td>
 								<td>
-									<input type="button" name="registrar" value="Insertar">
+									<input type="submit" name="registrar" value="Insertar">
 								</td>
+							</tr>
+							<tr>
+								
 							</tr>
 						</tbody>
 					</table>
@@ -286,8 +288,29 @@ if ( isset($_POST['seudonimo']) && isset($_POST['clave']) ):
 			<script type="text/javascript" src="<?php echo $plugin ?>"></script>
 			<script type="text/javascript" src="<?php echo $datepick ?>"></script>
 			<!-- validacion -->
-			<?php $validacion = enlaceDinamico("java/validacionUsuario.js"); ?>
+			<?php $validacion = enlaceDinamico("java/validacionPI.js"); ?>
 			<script type="text/javascript" src="<?php echo $validacion ?>"></script>
+			<script type="text/javascript">
+			$(function(){
+				$('#form_PI').on('submit', function (evento){
+					evento.preventDefault();
+					if ( validacionPI() ) {
+						$.ajax({
+							url: 'insertar_U.php',
+							type: 'POST',
+							data: {
+								seudonimo:seudonimo,
+								clave:clave
+							},
+							success: function (datos){
+								$('#contenido').html('');
+								$("#contenido").load().html(datos);
+							},
+						});
+					};
+				});
+			});
+			</script>
 			<!-- ajax de estado -->
 			<?php $estado = enlaceDinamico("java/edo.php"); ?>
 			<?php $municipio = enlaceDinamico("java/mun.php"); ?>
@@ -325,6 +348,7 @@ if ( isset($_POST['seudonimo']) && isset($_POST['clave']) ):
 					});
 				});
 			</script>
+			<!-- submit -->
 			<!-- CONTENIDO TERMINA ARRIBA DE ESTO: -->
 		</div>
 	</div>
