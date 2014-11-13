@@ -114,6 +114,11 @@ empezarPagina();
 										</a>
 									</td>
 								</tbody>
+								<tbody>
+										<td>
+												<a class="" href="menucon.php">Volver</a>
+										<td>
+								</tbody>
 							</table>
 
 						<?php endwhile;?>
@@ -259,7 +264,6 @@ empezarPagina();
 								Culminar el proceso de inscripcion (GENERACION DE REPORTE; ETC!!)
 							</p>
 						</div>
-
 					<?php	else:?>
 							<span>
 								La cedula <strong><?php echo $cedula_a ?></strong>
@@ -412,9 +416,7 @@ empezarPagina();
 				<span>
 						Error, cedula Incorrecta, intente nuevamente
 					</span>
-					<p>
-						<a href="#">A DONDE TIENE QUE IR...</a>
-					</p>
+				
 			<?php endif ?>
 			<!-- CONTENIDO TERMINA ARRIBA DE ESTO: -->
 		</div>
