@@ -49,13 +49,7 @@ function validacionUsuario(){
 		$("#clave_titulo").css('color', 'green');
 		estatus = true;
 	}
-		// if ( espacios.exec(seudonimo.value) ) {
-	// 	document.getElementById("seudonimo").focus();
-	// 	$("#seudonimo_chequeo").html('Solo un seudonimo sin espacios </br> ej: usuario321, pepe_123');
-	// 	estatus = false;
-	// }else{
-	// 	estatus = true;
-	// }
+	
 	return go(estatus);
 
 	function go (e){

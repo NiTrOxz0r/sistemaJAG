@@ -132,7 +132,11 @@ empezarPagina();
 										id="telefono_otro">
 								</td>
 								<td>
-									<input type="text" name="email" id="email">
+									<input 
+										type="text" 
+										name="email" 
+										id="email"
+										maxlength="50">
 								</td>
 							</tr>
 							<tr>
@@ -173,8 +177,8 @@ empezarPagina();
 								</td>
 								<td>				
 									<select name="cod_parro" id="cod_parro">
-									<option value="">--Seleccionar--</option></select
-									><font color="#ff0000">*</font>
+									<option value="">--Seleccionar--</option></select>
+									<font color="#ff0000">*</font>
 								</td>
 							</tr>
 							<tr>
@@ -246,10 +250,10 @@ empezarPagina();
 							</tr>
 							<tr>
 								<td align="center">
-									<input type="button" name="registrar" value="insertar">
+									<input type="button" name="registrar" value="Insertar">
 								</td>
 								<td align="center">
-									<input type="button" name="limpiar" id="limpiar" value="reset">
+									<input type="button" name="limpiar" id="limpiar" value="Reset">
 								</td>
 							</tr>
 						</table>

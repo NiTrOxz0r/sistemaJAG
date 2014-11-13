@@ -44,7 +44,7 @@ CREATE TABLE IF NOT EXISTS `directivo` (
   `email` varchar(50) DEFAULT 'Sin Registro',
   `cod_direccion` int(10) unsigned NOT NULL,
   `cod_usr` int(10) unsigned NOT NULL,
-  `cod_cargo` tinyint(3) unsigned NOT NULL DEFAULT '255',
+  `cod_cargo` tinyint(3) unsigned NOT NULL DEFAULT '1',
   `status` tinyint(1) unsigned NOT NULL DEFAULT '1',
   `cod_usr_reg` int(11) NOT NULL,
   `fec_reg` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,

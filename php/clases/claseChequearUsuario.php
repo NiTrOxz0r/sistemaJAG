@@ -66,7 +66,7 @@ class ChequearUsuario extends ChequearGenerico{
 			die( header($togo) );
 		}
 		$togo = "Location: registro.php?clave=length_is_".strlen($this->clave)."&clase=".$clase;
-		if ( strlen($this->clave) < 6 or strlen($this->clave) > 20) {
+		if ( strlen($this->clave) <> 60) {
 			die( header($togo) );
 		}
 

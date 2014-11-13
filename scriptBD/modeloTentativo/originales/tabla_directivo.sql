@@ -17,7 +17,7 @@ CREATE TABLE directivo (
 	email varchar(50) unique default	"Sin Registro",
 	cod_direccion int unsigned not null,
 	cod_usr int unsigned not null,
-	cod_cargo tinyint unsigned not null default 255,
+	cod_cargo tinyint unsigned not null default 1,
 	status tinyint(1) unsigned not null default 1,
 	cod_usr_reg int not null,
 	fec_reg timestamp not null default current_timestamp,

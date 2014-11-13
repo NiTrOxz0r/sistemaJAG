@@ -33,7 +33,7 @@ empezarPagina();
 								name="seudonimo"
 								id="seudonimo"
 								autofocus="autofocus"
-								required="required"
+								required
 								maxlength="20" 
 								placeholder="Instroduzca Seudonimo">
 						</td>
