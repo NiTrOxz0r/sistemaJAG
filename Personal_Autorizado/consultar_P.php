@@ -16,8 +16,8 @@ empezarPagina();
 		<div class="contenido">
 			<!-- CONTENIDO EMPIEZA DEBAJO DE ESTO: -->
 			<?print_r($_POST);?>
-			<?php if (isset($_POST['cedula_r'])): ?>
-				<?php $cedula_r = trim($_POST['cedula_r']) ?>
+			<?php if (isset($_POST['cedula_r'])): //Cambie GET por POST?>
+				<?php $cedula_r = trim($_POST['cedula_r']) //Cambie GET por POST?>
 				<?php if (strlen($cedula_r) == 8):
 					$con = conexion();
 					$cedula_r = mysqli_escape_string($con, $cedula_r);
