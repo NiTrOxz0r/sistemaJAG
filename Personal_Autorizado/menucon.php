@@ -68,6 +68,8 @@ validarUsuario(1);?>
 			</div>
 		</div>
 		<?php
+		//Modifeque el documento para adaptarlo a Representante
+
 		//FINALIZAMOS LA PAGINA:
 		//trae footer.php y cola.php
 		finalizarPagina();?>
