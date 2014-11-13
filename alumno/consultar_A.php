@@ -174,12 +174,12 @@ empezarPagina();?>
 											readonly size="1" 
 											value="<?php echo $datos['nacionalidad_r'] == 'v' ? 'V':'E';?>">
 										<input 
-											id="cedula" 
+											id="cedula_r" 
 											type="text" 
 											readonly 
 											maxlength="8" 
 											size="12" 
-											name="cedula"  
+											name="cedula_r"  
 											value="<?php echo $datos['cedula_r'];?>">
 									</td>
 										<td>
@@ -251,7 +251,7 @@ empezarPagina();?>
 									</tr>
 									<tr>
 										<th>Tel&eacute;fono</th>
-										<th>Tel&eacute;no Celular</th>
+										<th>Tel&eacute;fono Celular</th>
 									</tr>
 									<tr>
 										<td>
