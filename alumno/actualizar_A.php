@@ -146,7 +146,7 @@ if (isset($_POST['cedula'])) {
 							<td colspan="2">		
 								<textarea 
 									name="lugar_nac" 
-									id="lug_nac"
+									id="lugar_nac"
 									cols="40" 
 									rows="4" 
 									maxlength="50"
