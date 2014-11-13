@@ -282,13 +282,17 @@ empezarPagina();?>
 										<td>
 											<input 
 												type="text" 
-												readonly maxlength="11" 
+												readonly 
+												maxlength="11" 
 												value="<?php echo $datos['telefono_trabajo_r'];?>"/>
 										</td>
 									</tr>
 									<tr colspan="2">
-										<th colspan="2"><input type="button" value="Ver mas"></th>
+										<th colspan="2">
+											<a href="../Personal_Autorizado/consultar_reg_P.php?cedula_r=<?php echo $datos['cedula_r'];?>">VER MAS</a>
+										</th>
 									</tr>
+								</form>
 								</table>
 							<?php else: ?>
 								<table class="tabla-consulta" id="tabla-consulta-representante">
