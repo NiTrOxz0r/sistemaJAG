@@ -9,24 +9,29 @@ require_once($enlace);
 			$conexion = conexion(); // esto es una funcion, no una clase
 			$seudonimo = mysqli_real_escape_string($conexion, $_POST['seudonimo']); 
 			$clave = mysqli_real_escape_string($conexion, $_POST['clave']); 
-			//aplicamos encriptamiento:
-			//con salt para el hash
-			//lean sobre BCRYPT si quieren saber mas.
-			$hash = password_hash($clave, PASSWORD_BCRYPT, ['cost' => 12]);
-			$validarForma = new ChequearUsuario($seudonimo,	$hash);
-			$query = "SELECT codigo, cod_tipo_usr 
+			$query = "SELECT codigo, cod_tipo_usr, clave 
 			from usuario 
-			where seudonimo  ='".$seudonimo."' and clave='".$hash."';";
+			where seudonimo  ='".$seudonimo."';";
 			$sql = conexion($query);
 			// si hay errores raros descomentar y comentar la linea anterior:
 			//   $sql = conexion($query, 1);
 			if ( $sql->num_rows == 1 ) {
 				$resultado = mysqli_fetch_assoc($sql);
-				session_start();
-				$_SESSION['codUsrMod'] = $resultado['codigo'];
-				$_SESSION['cod_tipo_usr'] = $resultado['cod_tipo_usr'];
-				$_SESSION['seudonimo'] = $seudonimo;
-				header("Location: ../index.php");
+				//aplicamos encriptamiento:
+				//con salt para el hash
+				//lean sobre BCRYPT si quieren saber mas.
+				$hash = password_verify($clave, $resultado['clave']);
+				if ($hash) {
+					session_start();
+					$_SESSION['codUsrMod'] = $resultado['codigo'];
+					$_SESSION['cod_tipo_usr'] = $resultado['cod_tipo_usr'];
+					$_SESSION['seudonimo'] = $seudonimo;
+					header("Location: ../index.php");
+				} else {
+					echo "error clave";
+				}
+				
+				
 			}else{?>
 				Usuario no existe <a href='../index.php'>Reintentar</a>
 			<?php
