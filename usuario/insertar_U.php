@@ -10,18 +10,70 @@ validarUsuario();
 if ( isset($_SESSION['seudonimo']) && isset($_SESSION['clave']) && isset($_POST['cedula']) ): 
 
 	//la clave tiene que ser exactamente 60 caracteres:
-	if ($_SESSION['clave'] <> 60) {
+	if (strlen($_SESSION['clave']) <> 60) {
 		header("Location: form_reg_U.php?clave=MalDefinido");
 	}
-	//ESTA FUNCION TRAE EL HEAD Y NAVBAR:
-	//DESDE empezarPagina.php
-	empezarPagina();
+	//si todo sale bien:
+	//chequeamos en que tabla quedara el usuario:
+	if (isset($_POST['tipo'])) {
+		if ($_POST['tipo'] === '1') {
+			$tabla = "administrativo";
+		} elseif ($_POST['tipo'] === '2') {
+			$tabla = "docente";
+		} elseif ($_POST['tipo'] === '3') {
+			$tabla = "directivo";
+		}else{
+			header("Location: form_reg_PI?seudonimo=$seudonimo&tipo=MalDefinido");
+		}
+		
+	}else {
+		header("Location: form_reg_PI?seudonimo=$seudonimo&tipo=MalDefinido");
+	}
+
 	//para el escape string:
 	$con = conexion();
 	$seudonimo = mysqli_escape_string($con, $_SESSION['seudonimo']);
 	$clave = mysqli_escape_string($con, $_SESSION['clave']);
 	//validamos datos basicos de usuario:
 	$validarForma = new ChequearUsuario($seudonimo,	$clave);
+	
+	//cod_tipo_usr = 5 (por verificar)
+	$query = "INSERT INTO usuario	
+	VALUES
+	(null, '$seudonimo', '$clave', 
+		5, 1, 1, null, 1, null );";
+	$resultado = conexion($query, 1);
+
+	if ($tabla == "administrativo") {
+		$tablaDir = "direccion_administrativo";
+	} elseif($tabla == "directivo") {
+		$tablaDir = "direccion_directivo";
+	}elseif ($tabla == "docente") {
+		$tablaDir = "direccion_docente";
+	}else{
+		header("Location: form_reg_PI?tipoTablaDir=$tabla&tipo=MalDefinido");
+	}
+	$cod_parroquia = trim($_POST['cod_parro']);
+	$cod_parroquia = mysqli_escape_string($con, $cod_parroquia);
+	$direcc = trim($_POST['direcc']);
+	$direcc = mysqli_escape_string($con, $direcc);
+	//insertamos datos en la tabla que es:
+	$query = "INSERT INTO $tablaDir
+	VALUES
+	(null, $cod_parroquia, $direcc, 1, 1, null,	1, null);";
+	$resultado = conexion($query, 1);
+	$codigoDireccion = 1;
+	//chequeamos la BD para ver el codigo:
+	$query = "SELECT codigo, seudonimo, cod_tipo_usr 
+	from usuario 
+	where seudonimo = '$seudonimo'
+	and clave = '$clave'";
+	$resultado = conexion($query, 1);
+	$codigoUsuario = 1;
+	//ESTA FUNCION TRAE EL HEAD Y NAVBAR:
+	//DESDE empezarPagina.php
+	empezarPagina();
+	
 	//iniciamos datos restantes del formulario:
 	$codUsrMod = 1;
 	$p_apellido = mysqli_escape_string($con, $_POST['p_apellido']);
@@ -33,11 +85,13 @@ if ( isset($_SESSION['seudonimo']) && isset($_SESSION['clave']) && isset($_POST[
 	$celular = mysqli_escape_string($con, $_POST['celular']);
 	$telefono = mysqli_escape_string($con, $_POST['telefono']);
 	$telefonoOtro = mysqli_escape_string($con, $_POST['telefono_otro']);
+	$nivel_instruccion = mysqli_escape_string($con, $_POST['nivel_instruccion']);
+	$titulo = mysqli_escape_string($con, $_POST['titulo']);
 	$fecNac = mysqli_escape_string($con, $_POST['fec_nac']);
 	$sexo = mysqli_escape_string($con, $_POST['sexo']);
-	$codigoDireccion = mysqli_escape_string($con, $_POST['cod_direccion']);
+	$codigoDireccion = 1;
 	$email = mysqli_escape_string($con, $_POST['email']);
-	$codTipoUsr = mysqli_escape_string($con, $_POST['cod_tipo_usr']);
+	$codTipoUsr = '0';
 	$codCargo = mysqli_escape_string($con, $_POST['cod_cargo']);
 	//validamos los datos restantes:
 	$validarPI = new ChequearPI(
@@ -51,6 +105,8 @@ if ( isset($_SESSION['seudonimo']) && isset($_SESSION['clave']) && isset($_POST[
 		$celular,
 		$telefono,
 		$telefonoOtro,
+		$nivel_instruccion,
+		$titulo,
 		$fecNac,
 		$sexo,
 		$codigoDireccion,
@@ -58,43 +114,17 @@ if ( isset($_SESSION['seudonimo']) && isset($_SESSION['clave']) && isset($_POST[
 		$codTipoUsr,
 		$codCargo
 		);
-	//si todo sale bien:
-	//chequeamos en que tabla quedara el usuario:
-	if (isset($_POST['tipo'])) {
-		if ($_POST['tipo'] === 1) {
-			$tabla = "administrativo";
-		} elseif ($_POST['tipo'] === 2) {
-			$tabla = "docente";
-		} elseif ($_POST['tipo'] === 3) {
-			$tabla = "directivo";
-		}else{
-			header("Location: form_reg_PI?seudonimo=$seudonimo&tipo=MalDefinido");
-		}
-		
-	} else {
-		header("Location: form_reg_PI?seudonimo=$seudonimo&tipo=MalDefinido");
-	}
-	
-	//cod_tipo_usr = 5 (por verificar)
-	$query = "INSERT INTO usuario	
-	(
-		)
-	VALUES
-	(null, '$seudonimo', '$clave', 
-		5, 1, 1, null, 1, null );";
-	$resultado = conexion($query, 1);
 
-	//insertamos datos en la tabla que es:
 	$query = "INSERT INTO $tabla
-	VALUES
-	(
-		);";
-	//chequeamos la BD para ver el codigo:
-	$query = "SELECT codigo, seudonimo, cod_tipo_usr 
-	from usuario 
-	where seudonimo = '$seudonimo'
-	and clave = '$clave'";
-	$resultado = conexion($query);
+	values
+	(null, $validarPI->p_nombre, $validarPI->s_nombre, $validarPI->p_apellido,
+		$validarPI->s_apellido,	$validarPI->nacionalidad, $validarPI->cedula, 
+		$validarPI->celular, $validarPI->telefono, $validarPI->telefonoOtro,
+		$validarPI->nivel_instruccion, $validarPI->titulo, $validarPI->fecNac,
+		$validarPI->sexo, $validarPI->email,
+		$validarPI->codigoDireccion, $codigoUsuario, $validarPI->codCargo,
+		1, 1, null, 1, null);";
+	$resultado = conexion($query, 1);
 	//si todo sale bien
 	//se inicia la sesion de ese usuario:
 	if ( $resultado->num_rows == 1 ) :
@@ -122,10 +152,10 @@ if ( isset($_SESSION['seudonimo']) && isset($_SESSION['clave']) && isset($_POST[
 		</div>
 	<?php endif;?>
 
-	<?php
-	//FINALIZAMOS LA PAGINA:
-	//trae footer.php y cola.php
-	finalizarPagina();?>
+<?php
+//FINALIZAMOS LA PAGINA:
+//trae footer.php y cola.php
+finalizarPagina();?>
 	
 <?php else: ?>
 	<div id="blancoAjax">
@@ -133,4 +163,8 @@ if ( isset($_SESSION['seudonimo']) && isset($_SESSION['clave']) && isset($_POST[
 			Problemas en registro de usuario, por favor contacte a un administrador del sistema.
 		</p>
 	</div>
+<?php
+//FINALIZAMOS LA PAGINA:
+//trae footer.php y cola.php
+finalizarPagina();?>
 <?php endif ?>

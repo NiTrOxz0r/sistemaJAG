@@ -4,17 +4,16 @@
 * @author Granadillo Alejandro.
 * @copyright MIT/GNU/Otro??? Octurbre 2014
 * 
-* @internal 
+* @internal mejorada la logica dentro de la clase
+* para estar adaptada a las definiciones
+* de las tablas docente, administrativo, directivo.
 * 
-* 
-*  
-*
 * @see chequearGenericoEjemplo.php
 * @example chequearGenericoEjemplo.php
 * @todo ampliar segun sea necesario segun
 * los objetivos necesarios:
 * 
-* @version 1.1
+* @version 1.2
 * 
 * 
 */
@@ -31,6 +30,8 @@ class ChequearPI extends ChequearGenerico{
 		$celular = 'null',
 		$telefono = 'null',
 		$telefonoOtro = 'null',
+		$nivel_instruccion,
+		$titulo = 'null',
 		$fecNac,
 		$sexo,
 		$codigoDireccion = 'null',
@@ -40,7 +41,7 @@ class ChequearPI extends ChequearGenerico{
 
 		){
 
-
+		$this->codUsrMod = $codUsrMod;
 		$this->p_apellido = $p_apellido;
 		
 		if ($s_apellido == "") {
@@ -62,6 +63,12 @@ class ChequearPI extends ChequearGenerico{
 		$this->nacionalidad = $nacionalidad;
 		$this->cedula = $cedula;
 
+		$this->nivel_instruccion = $nivel_instruccion;
+		if ($titulo == "") {
+			$this->titulo = "null";
+		}else{
+			$this->titulo = $titulo;
+		}
 		if ($celular == "") {
 			$this->celular = "null";
 		}else{

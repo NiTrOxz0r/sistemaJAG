@@ -9,7 +9,9 @@ if ( isset($_POST['seudonimo']) && isset($_POST['clave']) ):
 	$seudonimo = $_POST['seudonimo'];
 	$clave = $_POST['clave'];
 	$hash = password_hash($clave, PASSWORD_BCRYPT, ['cost' => 12]);
-	//$validarForma = new ChequearUsuario($seudonimo,	$hash);
+	$validarForma = new ChequearUsuario($seudonimo,	$hash);
+	$_SESSION['seudonimo'] = $validarForma->seudonimo;
+	$_SESSION['clave'] = $validarForma->clave;
 	//CONTENIDO:?>
 	<div id="contenido">
 		<div id="blancoAjax">
@@ -215,7 +217,7 @@ if ( isset($_POST['seudonimo']) && isset($_POST['clave']) ):
 								<td>
 									<?php $sql="SELECT codigo, descripcion from cargo where status = 1;";
 										$registros = conexion($sql);?>
-									<select name="cargo" 1required id="cargo">
+									<select name="cod_cargo" 1required id="cargo">
 									<?php while($fila = mysqli_fetch_array($registros)) :	?>
 										<option value="<?php echo $fila['codigo']?>">
 										<?php echo $fila['descripcion']?></option>
@@ -258,14 +260,14 @@ if ( isset($_POST['seudonimo']) && isset($_POST['clave']) ):
 						</thead>
 						<tbody>
 							<tr>
-								<td>									
+								<td>
 									<select name="cod_est" id="cod_est"></select>
 								</td>
 								<td>
 									<select name="cod_mun" id="cod_mun" >
 									<option value="">--Seleccionar--</option></select>
 								</td>
-								<td>				
+								<td>
 									<select name="cod_parro" id="cod_parro">
 									<option value="">--Seleccionar--</option></select>
 								</td>
@@ -295,12 +297,48 @@ if ( isset($_POST['seudonimo']) && isset($_POST['clave']) ):
 				$('#form_PI').on('submit', function (evento){
 					evento.preventDefault();
 					if ( validacionPI() ) {
+						var nacionalidad = $('#nacionalidad').val();
+						var cedula = $('#cedula').val();
+						var p_nombre = $('#p_nombre').val();
+						var s_nombre = $('#s_nombre').val();
+						var p_apellido = $('#p_apellido').val();
+						var s_apellido = $('#s_apellido').val();
+						var fec_nac = $('#fec_nac').val();
+						var sexo = $('#sexo').val();
+						var email = $('#email').val();
+						var nivel_instruccion = $('#nivel_instruccion').val();
+						var titulo = $('#titulo').val();
+						var telefono = $('#telefono').val();
+						var telefono_otro = $('#telefono_otro').val();
+						var celular = $('#celular').val();
+						var cargo = $('#cargo').val();
+						var tipo = $('#tipo').val();
+						var direcc = $('#direcc').val();
+						var cod_est = $('#cod_est').val();
+						var cod_mun = $('#cod_mun').val();
+						var cod_parro = $('#cod_parro').val();
 						$.ajax({
 							url: 'insertar_U.php',
 							type: 'POST',
 							data: {
-								seudonimo:seudonimo,
-								clave:clave
+								nacionalidad:nacionalidad,
+								cedula:cedula,
+								p_nombre:p_nombre,
+								s_nombre:s_nombre,
+								p_apellido:p_apellido,
+								s_apellido:s_apellido,
+								fec_nac:fec_nac,
+								sexo:sexo,
+								email:email,
+								nivel_instruccion:nivel_instruccion,
+								titulo:titulo,
+								telefono:telefono,
+								telefono_otro:telefono_otro,
+								celular:celular,
+								cod_cargo:cargo,
+								tipo:tipo,
+								direcc:direcc,
+								cod_parro:cod_parro
 							},
 							success: function (datos){
 								$('#contenido').html('');

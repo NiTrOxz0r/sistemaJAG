@@ -54,7 +54,7 @@ class ChequearGenerico extends TablaPrimaria{
 		$sexo,
 		$codigoDireccion = 'null'
 	){
-		
+		$this->codUsrMod = $codUsrMod;
 		$this->p_apellido = $p_apellido;
 
 		if ($s_apellido == "") {
