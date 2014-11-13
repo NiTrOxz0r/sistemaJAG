@@ -4,16 +4,11 @@ if(!isset($_SESSION)){
 }
 $enlace = $_SERVER['DOCUMENT_ROOT']."/github/sistemaJAG/php/master.php";
 require_once($enlace);
-// invocamos validarUsuario.php desde master.php
-validarUsuario();
-empezarPagina();
 
-//if ( isset($_POST['seudonimo']) && isset($_POST['clave']) ): 
-if ( true ): 
-	// $seudonimo = $_POST['seudonimo'];
-	// $clave = $_POST['clave'];
-	$seudonimo = "hola";
-	$clave = "matrix1";
+if ( isset($_POST['seudonimo']) && isset($_POST['clave']) ): 
+ 
+	$seudonimo = $_POST['seudonimo'];
+	$clave = $_POST['clave'];
 	$hash = password_hash($clave, PASSWORD_BCRYPT, ['cost' => 12]);
 	$validarForma = new ChequearUsuario($seudonimo,	$hash);
 	//CONTENIDO:?>
@@ -22,7 +17,7 @@ if ( true ):
 			<!-- CONTENIDO EMPIEZA DEBAJO DE ESTO: -->
 			<!-- DETALLESE QUE NO ES UN ID SINO UNA CLASE. -->
 			<div class="contenido">
-				<form method="POST" action="">
+				<form method="POST" name="form_PI" id="form_PI" action="insertar_U.php">
 					<table>
 						<thead>
 							<th>Nacionalidad</th>
@@ -213,6 +208,7 @@ if ( true ):
 						</tbody>
 						<thead>
 							<th>Cargo</th>
+							<th>Perfil de Usuario</th>
 							<th>Direccion (Av/Calle/Edf.)</th>
 						</thead>
 						<tbody>
@@ -227,10 +223,26 @@ if ( true ):
 									<?php endwhile; ?>
 									</select>
 								</td>
+								<td>
+									<select name="tipo" id="tipo" required>
+										<option value="" selected="selected">
+											--Seleccione--
+										</option>
+										<option value="1">
+											Administrativo
+										</option>
+										<option value="2">
+											Docente
+										</option>
+										<option value="3">
+											Directivo
+										</option>
+									</select>
+								</td>
 								<td colspan="3">
 									<textarea
 											maxlenght="150"
-											cols="100"
+											cols="30"
 											rows="3"
 											name="direcc"
 											id="direcc"></textarea>
@@ -323,7 +335,3 @@ if ( true ):
 		Ups! parece ser que trato de ingresar a esta pagina incorrectamente!
 	</div>
 <?php endif; ?>
-<?php
-//FINALIZAMOS LA PAGINA:
-//trae footer.php y cola.php
-finalizarPagina();?>

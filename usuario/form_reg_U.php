@@ -18,7 +18,7 @@ empezarPagina();
 		<form 
 			name="form_U"
 			id="form_U"
-			action="<?php echo $_SERVER['DOCUMENT_ROOT'].'/github/sistemaJAG/usuario/insertar_U.php' ?>"
+			action="<?php echo $_SERVER['DOCUMENT_ROOT'].'/github/sistemaJAG/usuario/form_reg_PI.php' ?>"
 			method="POST">
 			<table>
 				<thead>
@@ -116,14 +116,15 @@ empezarPagina();
 						var clave = $('#clave').val();
 						$('#clave').val();
 						$.ajax({
-							url: 'insertar_U.php',
+							url: 'form_reg_PI.php',
 							type: 'POST',
 							data: {
 								seudonimo:seudonimo,
 								clave:clave
 							},
 							success: function (datos){
-								$("#form_reg_U").html(datos);
+								$('#contenido').html('');
+								$("#contenido").load().html(datos);
 							},
 						});
 						//return true;

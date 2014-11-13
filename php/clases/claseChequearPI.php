@@ -14,7 +14,7 @@
 * @todo ampliar segun sea necesario segun
 * los objetivos necesarios:
 * 
-* @version 1.0
+* @version 1.1
 * 
 * 
 */
@@ -28,6 +28,7 @@ class ChequearPI extends ChequearGenerico{
 		$s_nombre = 'null',
 		$nacionalidad,
 		$cedula = 'null',
+		$celular = 'null',
 		$telefono = 'null',
 		$telefonoOtro = 'null',
 		$fecNac,
@@ -61,6 +62,11 @@ class ChequearPI extends ChequearGenerico{
 		$this->nacionalidad = $nacionalidad;
 		$this->cedula = $cedula;
 
+		if ($celular == "") {
+			$this->celular = "null";
+		}else{
+			$this->celular = $celular;
+		}
 		if ($telefono == "") {
 			$this->telefono = "null";
 		}else{
@@ -138,12 +144,6 @@ class ChequearPI extends ChequearGenerico{
 			die(header("Location: registro.php?nacionalidad=notVorE"));
 		}
 
-		if ($this->telefono <> 'null') {
-			if ( !is_numeric($this->telefono) ) {
-			die(header("Location: registro.php?telefonoNumeric=false"));
-			}
-		}
-
 		if ( preg_match( "/^A-Za-z$^'$^áéíóú$^ÁÉÍÓÚ$/", $this->p_nombre) ) {
 			die(header("Location: registro.php?p_nombreNumeric=true"));
 		}
@@ -166,6 +166,15 @@ class ChequearPI extends ChequearGenerico{
 
 		if ( $this->nacionalidad <> 'v' and $this->nacionalidad <> 'e' ) {
 			die(header("Location: registro.php?nacionalidad=notVorE"));
+		}
+
+		if ($this->celular <> 'null') {
+			if ( !is_numeric($this->celular) ) {
+			die(header("Location: registro.php?celularNumeric=false"));
+			}
+			if ( !preg_match( '/^\d{11}$/', $this->celular) ) {
+				die(header("Location: registro.php?telefonoLength=false"));
+			}
 		}
 
 		if ($this->telefono <> 'null') {
