@@ -20,8 +20,8 @@ if ( isset($_POST['seudonimo']) && isset($_POST['clave']) ):
 				<form method="POST" name="form_PI" id="form_PI" action="insertar_U.php">
 					<table>
 						<thead>
-							<th>Nacionalidad</th>
-							<th>C&eacute;dula</th>
+							<th id="nacionalidad_titulo">Nacionalidad</th>
+							<th id="cedula_titulo">C&eacute;dula</th>
 						</thead>
 						<tbody>
 							<tr>
@@ -44,19 +44,19 @@ if ( isset($_POST['seudonimo']) && isset($_POST['clave']) ):
 								</td>
 							</tr>
 							<tr>
-								<td>
+								<td class="chequeo" id="nacionalidad_chequeo">
 									
 								</td>
-								<td id="cedula_chequeo">
+								<td class="chequeo" id="cedula_chequeo">
 									
 								</td>
 							</tr>
 						</tbody>
 						<thead>
-							<th>Primer Nombre</th>
-							<th>Segundo Nombre</th>
-							<th>Primer Apellido</th>
-							<th>Segundo Apellido</th>
+							<th id="p_nombre_titulo">Primer Nombre</th>
+							<th id="s_nombre_titulo">Segundo Nombre</th>
+							<th id="p_apellido_titulo">Primer Apellido</th>
+							<th id="s_apellido_titulo">Segundo Apellido</th>
 						</thead>
 						<tbody>
 							<tr>
@@ -92,17 +92,17 @@ if ( isset($_POST['seudonimo']) && isset($_POST['clave']) ):
 								</td>
 							</tr>
 							<tr>
-								<td id="p_nombre_chequeo"></td>
-								<td id="s_nombre_chequeo"></td>
-								<td id="p_apellido_chequeo"></td>
-								<td id="s_apellido_chequeo"></td>
+								<td class="chequeo" id="p_nombre_chequeo"></td>
+								<td class="chequeo" id="s_nombre_chequeo"></td>
+								<td class="chequeo" id="p_apellido_chequeo"></td>
+								<td class="chequeo" id="s_apellido_chequeo"></td>
 							</tr>
 						</tbody>
 						<thead>
-							<th>Fecha de nacimiento</th>
-							<th>Sexo</th>
-							<th>Email</th>
-							<th>Titulos y/o Certificados</th>
+							<th id="fec_nac_titulo">Fecha de nacimiento</th>
+							<th id="sexo_titulo">Sexo</th>
+							<th id="email_titulo">Email</th>
+							<th id="titulo_titulo">Titulos y/o Certificados</th>
 						</thead>
 						<tbody>
 							<tr>
@@ -145,19 +145,19 @@ if ( isset($_POST['seudonimo']) && isset($_POST['clave']) ):
 							<tr>
 								<td></td>
 								<td></td>
-								<td id="email_chequeo">
+								<td class="chequeo" id="email_chequeo">
 									
 								</td>
-								<td id="titulo_chequeo">
+								<td class="chequeo" id="titulo_chequeo">
 									
 								</td>
 							</tr>
 						</tbody>
 						<thead>
-							<th>Nivel Educativo</th>
-							<th>Telefono</th>
-							<th>Telefono Adicional</th>
-							<th>Telefono Celular</th>
+							<th id="nivel_instruccion_titulo">Nivel Educativo</th>
+							<th id="telefono_titulo">Telefono</th>
+							<th id="telefono_otro_titulo">Telefono Adicional</th>
+							<th id="celular_titulo">Telefono Celular</th>
 						</thead>
 						<tbody>
 							<tr>
@@ -195,20 +195,20 @@ if ( isset($_POST['seudonimo']) && isset($_POST['clave']) ):
 							</tr>
 							<tr>
 								<td></td>
-								<td id="telefono_chequeo">
+								<td class="chequeo" id="telefono_chequeo">
 									
 								</td>
-								<td id="telefono_otro_chequeo">
+								<td class="chequeo" id="telefono_otro_chequeo">
 									
 								</td>
-								<td id="celular_chequeo">
+								<td class="chequeo" id="celular_chequeo">
 									
 								</td>
 							</tr>
 						</tbody>
 						<thead>
-							<th>Cargo</th>
-							<th>Perfil de Usuario</th>
+							<th id="cargo_titulo">Cargo</th>
+							<th id="p_apellido_titulo">Perfil de Usuario</th>
 							<th>Direccion (Av/Calle/Edf.)</th>
 						</thead>
 						<tbody>
@@ -242,7 +242,7 @@ if ( isset($_POST['seudonimo']) && isset($_POST['clave']) ):
 								<td colspan="3">
 									<textarea
 											maxlenght="150"
-											cols="30"
+											cols="70"
 											rows="3"
 											name="direcc"
 											id="direcc"></textarea>

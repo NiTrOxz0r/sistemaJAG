@@ -1,5 +1,5 @@
 Simple regex
-
+http://www.w3schools.com/jsref/jsref_obj_regexp.asp
 (regular expression)
 
 Regex quick reference
