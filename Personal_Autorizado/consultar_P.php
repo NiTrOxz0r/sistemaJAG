@@ -15,9 +15,9 @@ empezarPagina();
 	<div id="blancoAjax">
 		<div class="contenido">
 			<!-- CONTENIDO EMPIEZA DEBAJO DE ESTO: -->
-			<?print_r($_POST);?>
-			<?php if (isset($_POST['cedula_r'])): //Cambie GET por POST?>
-				<?php $cedula_r = trim($_POST['cedula_r']) //Cambie GET por POST?>
+		
+			<?php if (isset($_GET['cedula_r'])): ?>
+				<?php $cedula_r = trim($_GET['cedula_r'])?>
 				<?php if (strlen($cedula_r) == 8):
 					$con = conexion();
 					$cedula_r = mysqli_escape_string($con, $cedula_r);
