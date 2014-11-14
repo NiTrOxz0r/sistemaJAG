@@ -152,7 +152,6 @@ empezarPagina();
 								</td>
 								<td>	
 									<select name="vive_con_alumno" required id="vive_con_alumno">
-										<option value="">Seleccionar</option>
 										<option value="s">SI</option>
 										<option value="n">NO</option>
 									</select><font color="#ff0000">*</font>
@@ -257,11 +256,6 @@ empezarPagina();
 			</form>
 			</div>
 			<div>
-					<p>
-						<center>
-							<a class="" href="en COnstruccion">Volver</a>
-						</center>
-					</p>
 					<p>
 						<center>
 							<a href="../index.php">Volver al menu</a>
