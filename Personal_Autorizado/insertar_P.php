@@ -76,7 +76,7 @@ if ( isset($_SESSION['cedula_a']) || isset($_SESSION['cedula_escolar_a'])) {
  	$relacion				=	mysqli_escape_string($con, $_POST['relacion']);     
  	$vive_con_alumno	=	mysqli_escape_string($con, $_POST['vive_con_alumno']);  
  	$nivel_instruccion	=	mysqli_escape_string($con, $_POST['nivel_instruccion']);    
- 	$profesion					=	255;  
+ 	$profesion					=	mysqli_escape_string($con, $_POST['profesion']); 
  	$lugar_trabajo			=	mysqli_escape_string($con, $_POST['lugar_trabajo']);   
  	$direccion_trabajo	=	mysqli_escape_string($con, $_POST['direccion_trabajo']);   
  	$telefono_trabajo		=	mysqli_escape_string($con, $_POST['telefono_trabajo']);
