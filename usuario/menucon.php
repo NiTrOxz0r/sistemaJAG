@@ -125,12 +125,33 @@ empezarPagina();
 				$('#tipo').on('change', function(){
 					var tipo = $(this).val();
 					if (tipo === '0') {
+						$('#informacion_titulo').show();
 						$('#informacion_titulo').css('color', '#888');
 						$('#informacion').prop('disabled', true);
 						$('#submit').prop('disabled', true);
+						$('#informacion_lista').prop('disabled', true);
+						$('#informacion_lista').prop('hidden', true);
+					}else if (tipo === '4'){
+						$('#informacion_titulo').show();
+						$('#submit').prop('disabled', true);
+						$('#informacion').prop('disabled', false);
+						$('#informacion').prop('hidden', true);
+						$('#informacion_lista').prop('disabled', false);
+						$('#informacion_lista').prop('hidden', false);
+					}else if (tipo === '5'){
+						$('#informacion_titulo').hide();
+						$('#submit').prop('disabled', false);
+						$('#informacion').prop('disabled', true);
+						$('#informacion').prop('hidden', true);
+						$('#informacion_lista').prop('disabled', true);
+						$('#informacion_lista').prop('hidden', true);
 					}else{
+						$('#informacion_titulo').show();
 						$('#informacion_titulo').css('color', '#000');
 						$('#informacion').prop('disabled', false);
+						$('#informacion').prop('hidden', false);
+						$('#informacion_lista').prop('disabled', true);
+						$('#informacion_lista').prop('hidden', true);
 					};
 				});
 				$('#informacion').on('change', function(){
@@ -186,10 +207,16 @@ empezarPagina();
 							estatus = true;
 						}
 
-					}else if(tipo === '4' || tipo === '5') {
+					};
+				});
+
+				$('#informacion_lista').on('change', function(){
+					var campo = $(this).val();
+					console.log(campo);
+					if (campo === '0') {
 						$('#submit').prop('disabled', true);
-						$(this).prop('disabled', false);
-						$('#informacion').prop('hidden', true);
+					}else{
+						$('#submit').prop('disabled', false);
 					};
 				});
 			});
