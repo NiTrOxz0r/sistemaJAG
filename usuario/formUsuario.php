@@ -54,21 +54,6 @@ empezarPagina();
 							</td>
 						</tr>
 						<tr>
-							<td id="error">
-
-							<?php if (condition): ?>
-								<p>
-									Los datos ingresados no concuerdan, por favor cheque nuevamente los datos e intente ingresar de nuevo.
-								</p>
-							<?php else if (): ?>
-
-							<?php else: ?>
-								
-							<?php endif ?>
-								
-							</td>
-						</tr>
-						<tr>
 							<td>
 								<input 
 									type="submit" 
@@ -79,8 +64,16 @@ empezarPagina();
 							</td>
 						</tr>
 					</tbody>
-						
 				</table>
+				<div id="error" class="chequeo">
+					<?php if (isset($_SESSION['error_login'])): ?>
+						<p>
+							Los datos ingresados no concuerdan, 
+							por favor cheque nuevamente los 
+							datos e intente ingresar de nuevo.
+						</p>					
+					<?php endif ?>
+				</div>
 			</form>
 			<a href="usuario/form_reg_U.php">Registrarse</a>
 			<!-- validacion -->
@@ -89,10 +82,12 @@ empezarPagina();
 			$(function(){
 				$("#seudonimo").change(function(){
 					validacionUsuario();
+					$('#error').html('');
 				});
 
 				$("#clave").change(function(){
 					validacionUsuario();
+					$('#error').html('');
 				});
 
 			});

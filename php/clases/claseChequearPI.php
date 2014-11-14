@@ -104,11 +104,8 @@ class ChequearPI extends ChequearGenerico{
 
 		$this->sexo = "'$sexo'";
 
-		if ($codigoDireccion == "") {
-			$this->codigoDireccion = "null";
-		}else{
-			$this->codigoDireccion = $codigoDireccion;
-		}
+		$this->codigoDireccion = $codigoDireccion;
+		
 
 		if ($email == "") {
 			$this->email = "null";
@@ -153,7 +150,7 @@ class ChequearPI extends ChequearGenerico{
 		// que exista alguien vivo con cedula menor de 1 millon,
 		// pero como no tengo acceso a la onidex, lo dejo en 5.
 
-		if ($this->cedula <> "'null'") {
+		if ($this->cedula <> "null") {
 			if ( !preg_match( "/^'\d{8}'$/", $this->cedula) ) {
 				die( header( "Location: registro.php?cedulaError=1_largo_cedula___".strlen($this->cedula) ) );
 			}
@@ -163,7 +160,7 @@ class ChequearPI extends ChequearGenerico{
 			die(header("Location: registro.php?p_nombreNumeric=true"));
 		}
 
-		if ($this->s_nombre <> "'null'") {
+		if ($this->s_nombre <> "null") {
 			if ( preg_match( "/^A-Za-z$^'$^áéíóú$^ÁÉÍÓÚ$/", $this->s_nombre) ) {
 				die(header("Location: registro.php?s_nombreNumeric=true"));
 			}
@@ -173,7 +170,7 @@ class ChequearPI extends ChequearGenerico{
 			die(header("Location: registro.php?p_apellidoNumeric=true"));
 		}
 
-		if ( $this->s_apellido <> "'null'" ) {
+		if ( $this->s_apellido <> "null" ) {
 			if ( preg_match( "/^A-Za-z$^'$^áéíóú$^ÁÉÍÓÚ$/", $this->s_apellido) ) {
 				die(header("Location: registro.php?s_apellidoNumeric=true"));
 			}

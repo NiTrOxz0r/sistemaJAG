@@ -72,12 +72,14 @@ if ( isset($_SESSION['seudonimo']) && isset($_SESSION['clave']) && isset($_POST[
 	$direcc = mysqli_escape_string($con, $direcc);
 	if ($direcc == '') {
 		$direcc = "null";
+	}else{
+		$direcc = "'$direcc'";
 	}
 	$direcc = mysqli_escape_string($con, $direcc);
 	//insertamos datos en la tabla que es:
 	$query = "INSERT INTO $tablaDir
 	VALUES
-	(null, $cod_parroquia, '$direcc', 1, 1, null,	1, null);";
+	(null, $cod_parroquia, $direcc, 1, 1, null,	1, null);";
 	$resultado = conexion($query);
 	//buscamos el codigo de esa direccion que
 	//acabamos de insertar:
@@ -86,12 +88,11 @@ if ( isset($_SESSION['seudonimo']) && isset($_SESSION['clave']) && isset($_POST[
 	$resultado = conexion($query);
 	$datos = mysqli_fetch_assoc($resultado);
 	$codigoDireccion = $datos['codigo'];
-	$codigoDireccion = 1;
 	
 	//iniciamos datos restantes del formulario:
 	$codUsrMod = 1; // 1 porque nadie hace referencia a este registro
 	$p_apellido = mysqli_escape_string($con, $_POST['p_apellido']);
-	$s_apellido = mysqli_escape_string($con, $_POST['p_apellido']);
+	$s_apellido = mysqli_escape_string($con, $_POST['s_apellido']);
 	$p_nombre = mysqli_escape_string($con, $_POST['p_nombre']);
 	$s_nombre = mysqli_escape_string($con, $_POST['s_nombre']);
 	$nacionalidad = mysqli_escape_string($con, $_POST['nacionalidad']);
@@ -104,7 +105,7 @@ if ( isset($_SESSION['seudonimo']) && isset($_SESSION['clave']) && isset($_POST[
 	$fecNac = mysqli_escape_string($con, $_POST['fec_nac']);
 	$sexo = mysqli_escape_string($con, $_POST['sexo']);
 	$email = mysqli_escape_string($con, $_POST['email']);
-	$codTipoUsr = '0';
+	$codTipoUsr = '5'; //tipo: por verificar
 	$codCargo = mysqli_escape_string($con, $_POST['cod_cargo']);
 	//validamos los datos restantes:
 	$validarPI = new ChequearPI(
@@ -154,6 +155,9 @@ if ( isset($_SESSION['seudonimo']) && isset($_SESSION['clave']) && isset($_POST[
 	//se inicia la sesion de ese usuario:
 	if ( $resultado->num_rows == 1 ) :
 		$datos = mysqli_fetch_assoc($resultado);
+		session_unset();
+		session_destroy();
+		session_start();
 		$_SESSION['codUsrMod'] = $datos['codigo'];
 		$_SESSION['codigo'] = $datos['codigo'];
 		$_SESSION['seudonimo'] = $datos['seudonimo'];
