@@ -40,7 +40,7 @@
 				<a 
 					class="no-click"
 					data-titulo="personalAutorizado"
-					href="Personal_Autorizado/menucon.php"> //Agregue
+					href="Personal_Autorizado/menucon.php"> 
 					<h2>Gestionar Padres y Representante.</h2> 
 				</a>
 				&nbsp;&nbsp;

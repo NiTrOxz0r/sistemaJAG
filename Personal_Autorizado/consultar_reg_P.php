@@ -250,7 +250,7 @@ empezarPagina();?>
 			<div>
 					<p>
 						<center>
-							<a class="" href="menucon.php">Volver</a>
+							<a class="" href="actualizar_P.php">Editar</a>
 						</center>
 					</p>
 			</div>
