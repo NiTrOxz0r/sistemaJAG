@@ -22,7 +22,7 @@ if (isset($_GET['cedula_r'])) {
 
 
 
-$sql = "SELECT a.codigo, a.cedula, nacionalidad,p_nombre, s_nombre, p_apellido, s_apellido, f.descripcion as sexo, 
+$sql = "SELECT a.codigo, a.cedula, nacionalidad, p_nombre, s_nombre, p_apellido, s_apellido, f.descripcion as sexo, 
 fec_nac, lugar_nac, telefono, telefono_otro, email,  g.descripcion as relacion, vive_con_alumno,b.direccion_exacta as direccion, 
 c.descripcion as parroquia, d.descripcion as municipio, e.descripcion as estado, h.descripcion nivel_instruccion, 
 i.descripcion as profesion, lugar_trabajo, direccion_trabajo, telefono_trabajo FROM personal_autorizado a, direccion_p_a b, parroquia c, municipio d, estado e, sexo f, 
@@ -44,7 +44,7 @@ empezarPagina();?>
 
 		<div align="center">
 			<!-- http://www.w3schools.com/html/html_forms.asp -->
-			<form method="post" action="insertar_P.php" name="form_repre" id="form">
+			<form method="GET" action="actualizar_P.php" name="form_repre" id="form">
 				<fieldset>
 					<legend style="width:80%">REGISTRO DE PADRES/REPRESENTANTE</legend>
 						<table>
@@ -58,12 +58,12 @@ empezarPagina();?>
 										readonly size="1" 
 										value="<?php echo $reg['nacionalidad'] == 'v' ? 'V':'E';?>">
 									<input 
-										id="cedula" 
+										id="cedula_r" 
 										type="text" 
 										readonly 
 										maxlength="8" 
 										size="12" 
-										name="cedula"  
+										name="cedula_r"  
 										value="<?php echo $reg['cedula'];?>">
 								</td>
 							</tr>
@@ -243,17 +243,19 @@ empezarPagina();?>
 										value="<?php echo $reg['telefono_trabajo'];?>">
 								</td>
 							</tr>
+							<tr>
+									<td>
+											<input type="button" name="registrar" value="Editar">
+											<input type="button" name="limpiar_btn" value="Enviar" hidden disabled id="limpiar"/>
+									</td>
+							</tr>
 						</table>
 					</fieldset>
 				</form>
 			</div>
-			<div>
-					<p>
-						<center>
-							<a class="" href="actualizar_P.php">Editar</a>
-						</center>
-					</p>
-			</div>
+			<?php $validacion = enlaceDinamico("java/validarPA.js"); ?>
+			<script type="text/javascript" src="<?php echo $validacion ?>"></script>
+
 <?php else : ?>
 <div id="contenido">
 	<div id="blancoAjax" align="center">
