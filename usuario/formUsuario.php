@@ -16,7 +16,7 @@ empezarPagina();
 		<div id="blancoAjax">
 
 			<!-- http://www.w3schools.com/tags/ref_eventattributes.asp -->
-			<form action="usuario/consultarUsuario.php" method="POST">
+			<form action="usuario/validar_U.php" method="POST">
 				<table>
 					<tbody>
 						<tr>
@@ -32,7 +32,9 @@ empezarPagina();
 									required="required"
 									placeholder="Instroduzca Usuario">
 							</td>
-							<td class="chequeo" id="seudonimo_chequeo"></td>
+							<td class="chequeo" id="seudonimo_chequeo">
+								
+							</td>
 						</tr>
 						<tr>
 							<td id="clave_titulo">
@@ -47,7 +49,24 @@ empezarPagina();
 									maxlength="15" 
 									placeholder="Instroduzca Clave">
 							</td>
-							<td class="chequeo"  id="clave_chequeo"></td>
+							<td class="chequeo"  id="clave_chequeo">
+								
+							</td>
+						</tr>
+						<tr>
+							<td id="error">
+
+							<?php if (condition): ?>
+								<p>
+									Los datos ingresados no concuerdan, por favor cheque nuevamente los datos e intente ingresar de nuevo.
+								</p>
+							<?php else if (): ?>
+
+							<?php else: ?>
+								
+							<?php endif ?>
+								
+							</td>
 						</tr>
 						<tr>
 							<td>
@@ -63,8 +82,8 @@ empezarPagina();
 						
 				</table>
 			</form>
-
 			<a href="usuario/form_reg_U.php">Registrarse</a>
+			<!-- validacion -->
 			<script type="text/javascript" src="java/validacionUsuario.js"></script>
 			<script type="text/javascript">
 			$(function(){
