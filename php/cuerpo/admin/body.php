@@ -62,7 +62,7 @@
 			<tr>
 			<td>
 				&nbsp;&nbsp;
-				<a class="no-click" href="usuario/body.php">
+				<a class="no-click" href="usuario/menucon.php">
 					<h2>Gestionar Personal Autorizado.</h2> 
 				</a>
 				&nbsp;&nbsp;
