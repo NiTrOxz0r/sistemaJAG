@@ -35,7 +35,7 @@ if (isset($_POST['cedula'])) {
 	if($reg = mysqli_fetch_array($re)) :?>	
 
 <div id="blancoAjax" align="center">
-	<form action="actualizar1.php" method="POST" name="form_alu" id="form">
+	<form action="actualizar_1.php" method="POST" name="form_alu" id="form">
 		<fieldset style="width:80%">
 			<legend>REGISTRO DE ALUMNO</legend>
 			<fieldset>
