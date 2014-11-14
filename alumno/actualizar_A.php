@@ -49,17 +49,17 @@ if (isset($_POST['cedula'])) {
 								<!--http://www.w3schools.com/tags/tag_select.asp-->
 								<select name="nacionalidad" id="nacionalidad">
 									<?php if ( $reg['nacionalidad'] == 'v' ): ?>
-										<option name="nacionalidad" value="v" selected="selected">V</option>
-										<option name="nacionalidad" value="e">E</option>
+										<option  value="v" selected="selected">V</option>
+										<option  value="e">E</option>
 									<?php else: ?>
-										<option name="nacionalidad" value="v">V </option>
-										<option name="nacionalidad" value="e" selected="selected">E</option>
+										<option  value="v">V </option>
+										<option  value="e" selected="selected">E</option>
 									<?php endif ?>
 								</select>
 								<!-- HACER AJAX PARA CEDULA!!! -->
 								<input 
 								type="text" 
-								required
+								reqadonly
 								maxlength="8" 
 								size="12" 
 								name="cedula" 
@@ -201,7 +201,6 @@ if (isset($_POST['cedula'])) {
 						<tr>
 							<th>Direcci&oacute;n</th>
 							<td colspan="3">
-							
 								<textarea 
 									maxlenght="150" 
 									cols="50" 
