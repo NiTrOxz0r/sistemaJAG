@@ -130,8 +130,8 @@ function validarform(){
 		dir.focus();
 		verificar = false;
 	}
-	else if (!expRegpnom.exec(profesion.value)) {
-		alert("Profesion acepta solo letras sin espacio en blanco.");
+	else if (profesion.value) {
+		alert("Campo Profesion Requerido");
 		prof.focus();
 		verificar = false;
 	}
