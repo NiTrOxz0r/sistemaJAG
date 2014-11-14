@@ -45,7 +45,7 @@ empezarPagina();?>
 
 		<div align="center">
 			<!-- http://www.w3schools.com/html/html_forms.asp -->
-			<form method="GET" action="" name="form_repre" id="form">
+			<form method="GET" action="actualizar_1.php" name="form_repre" id="form">
 				<fieldset>
 					<legend style="width:80%">ACTUALIZACION DE PADRES/REPRESENTANTE</legend>
 						<table>
