@@ -22,7 +22,7 @@ if (isset($_GET['cedula_r'])) {
 
 
 
-$sql = "SELECT a.codigo, a.cedula, nacionalidad,p_nombre, s_nombre, p_apellido, s_apellido, f.descripcion as sexo, 
+$sql = "SELECT a.codigo, a.cedula, nacionalidad,p_nombre, s_nombre, p_apellido, s_apellido, f.codigo as sexo, 
 fec_nac, lugar_nac, telefono, telefono_otro, email,  g.codigo as cod_relacion, g.descripcion as relacion, vive_con_alumno,
 b.direccion_exacta as direccion, c.codigo as cod_parro, c.descripcion as parroquia, d.codigo as cod_mun, d.descripcion as municipio, 
 e.codigo as cod_est, e.descripcion as estado, h.codigo as nivel_Ins, h.descripcion as nivel_instruccion, i.codigo as cod_profesion, i.descripcion as profesion, lugar_trabajo, direccion_trabajo, 
