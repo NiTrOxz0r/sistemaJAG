@@ -59,7 +59,7 @@ if (isset($_POST['cedula'])) {
 								<!-- HACER AJAX PARA CEDULA!!! -->
 								<input 
 								type="text" 
-								reqadonly
+								readonly
 								maxlength="8" 
 								size="12" 
 								name="cedula" 
@@ -71,7 +71,7 @@ if (isset($_POST['cedula'])) {
 							<!-- HACER AJAX PARA CEDULA!!! -->
 							<input 
 								type="text" 
-								required
+								readonly
 								maxlength="10" 
 								name="cedula_escolar" 
 								id="cedula_escolar" 
