@@ -109,7 +109,7 @@ if ( isset($_POST['seudonimo']) && isset($_POST['clave']) ):
 							<tr>
 								<td>
 									<input
-										type="date"
+										type="text"
 										name="fec_nac"
 										id="fec_nac"
 										required>

@@ -16,12 +16,15 @@ if ( isset($_GET['cedula']) && isset($_GET['tabla']) ):
 	$con = conexion();
 	$cedula = mysqli_escape_string($con, $_GET['cedula']);
 	if ($_GET['tabla'] == '1') :
+		$tablaOriginal = '1';
 		$tabla = 'docente';
 		$tablaDir = 'direccion_docente';
 	elseif ($_GET['tabla'] == '2'):
+		$tablaOriginal = '2';
 		$tabla = 'administrativo';
 	$tablaDir = 'direccion_administrativo';
 	elseif ($_GET['tabla'] == '3'):
+		$tablaOriginal = '3';
 		$tabla = 'directivo';
 	$tablaDir = 'direccion_directivo';
 	endif;
@@ -171,7 +174,7 @@ if ( isset($_GET['cedula']) && isset($_GET['tabla']) ):
 								<tr>
 									<td>
 										<input
-											type="date"
+											type="text"
 											name="fec_nac"
 											id="fec_nac"
 											required
@@ -449,6 +452,7 @@ if ( isset($_GET['cedula']) && isset($_GET['tabla']) ):
 								var celular = $('#celular').val();
 								var cargo = $('#cargo').val();
 								var tipo = $('#tipo').val();
+								var tipoOriginal = <?php echo $tablaOriginal; ?>;
 								var direcc = $('#direcc').val();
 								var cod_est = $('#cod_est').val();
 								var cod_mun = $('#cod_mun').val();
