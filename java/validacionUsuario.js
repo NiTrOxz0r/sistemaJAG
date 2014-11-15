@@ -63,7 +63,7 @@ function validacionUsuario(){
 		estatus = true;
 	}
 	//cod_tipo_usr (nivel_educativo):
-	if ( cod_tipo_usr == '' ) {
+	if ( cod_tipo_usr === '' ) {
 		$("#cod_tipo_usr_chequeo").html('Por favor seleccione una opcion apropiada.');
 		$("#cod_tipo_usr_titulo").css('color', 'red');
 		return false;

@@ -429,66 +429,67 @@ if ( isset($_GET['cedula']) && isset($_GET['tabla']) ):
 				<?php $validacion = enlaceDinamico("java/validacionUsuario.js"); ?>
 				<script type="text/javascript" src="<?php echo $validacion ?>"></script>
 				<script type="text/javascript">
-				$(function(){
-					$('#form_PI').on('submit', function (evento){
-						evento.preventDefault();
-						if ( validacionPI() && validacionUsuario() ) {
-							var nacionalidad = $('#nacionalidad').val();
-							var cedula = $('#cedula').val();
-							var p_nombre = $('#p_nombre').val();
-							var s_nombre = $('#s_nombre').val();
-							var p_apellido = $('#p_apellido').val();
-							var s_apellido = $('#s_apellido').val();
-							var fec_nac = $('#fec_nac').val();
-							var sexo = $('#sexo').val();
-							var email = $('#email').val();
-							var nivel_instruccion = $('#nivel_instruccion').val();
-							var titulo = $('#titulo').val();
-							var telefono = $('#telefono').val();
-							var telefono_otro = $('#telefono_otro').val();
-							var celular = $('#celular').val();
-							var cargo = $('#cargo').val();
-							var tipo = $('#tipo').val();
-							var direcc = $('#direcc').val();
-							var cod_est = $('#cod_est').val();
-							var cod_mun = $('#cod_mun').val();
-							var cod_usr = <?php echo $datos['cod_usr'] ?>;
-							var seudonimo = $('#seudonimo').val();
-							var cod_tipo_usr = $('#cod_tipo_usr').val();
-							// $.ajax({
-							// 	url: 'actualizar_U.php',
-							// 	type: 'POST',
-							// 	data: {
-							// 		nacionalidad:nacionalidad,
-							// 		cedula:cedula,
-							// 		p_nombre:p_nombre,
-							// 		s_nombre:s_nombre,
-							// 		p_apellido:p_apellido,
-							// 		s_apellido:s_apellido,
-							// 		fec_nac:fec_nac,
-							// 		sexo:sexo,
-							// 		email:email,
-							// 		nivel_instruccion:nivel_instruccion,
-							// 		titulo:titulo,
-							// 		telefono:telefono,
-							// 		telefono_otro:telefono_otro,
-							// 		celular:celular,
-							// 		cod_cargo:cargo,
-							// 		tipo:tipo,
-							// 		direcc:direcc,
-							// 		cod_parro:cod_parro
-							// 	},
-							// 	success: function (datos){
-							// 		$('#contenido').html('');
-							// 		$("#contenido").load().html(datos);
-							// 	},
-							// });
-						};
-					});
-					$('#form_PI').on('change', function(){
+					$(function(){
+						$('#form_PI').on('submit', function (evento){
+							evento.preventDefault();
+							if ( validacionPI() && validacionUsuario() ) {
+								var nacionalidad = $('#nacionalidad').val();
+								var cedula = $('#cedula').val();
+								var p_nombre = $('#p_nombre').val();
+								var s_nombre = $('#s_nombre').val();
+								var p_apellido = $('#p_apellido').val();
+								var s_apellido = $('#s_apellido').val();
+								var fec_nac = $('#fec_nac').val();
+								var sexo = $('#sexo').val();
+								var email = $('#email').val();
+								var nivel_instruccion = $('#nivel_instruccion').val();
+								var titulo = $('#titulo').val();
+								var telefono = $('#telefono').val();
+								var telefono_otro = $('#telefono_otro').val();
+								var celular = $('#celular').val();
+								var cargo = $('#cargo').val();
+								var tipo = $('#tipo').val();
+								var direcc = $('#direcc').val();
+								var cod_est = $('#cod_est').val();
+								var cod_mun = $('#cod_mun').val();
+								var cod_usr = <?php echo $datos['cod_usr'] ?>;
+								var seudonimo = $('#seudonimo').val();
+								var cod_tipo_usr = $('#cod_tipo_usr').val();
+								console.log("exitos totales");
+								// $.ajax({
+								// 	url: 'actualizar_U.php',
+								// 	type: 'POST',
+								// 	data: {
+								// 		nacionalidad:nacionalidad,
+								// 		cedula:cedula,
+								// 		p_nombre:p_nombre,
+								// 		s_nombre:s_nombre,
+								// 		p_apellido:p_apellido,
+								// 		s_apellido:s_apellido,
+								// 		fec_nac:fec_nac,
+								// 		sexo:sexo,
+								// 		email:email,
+								// 		nivel_instruccion:nivel_instruccion,
+								// 		titulo:titulo,
+								// 		telefono:telefono,
+								// 		telefono_otro:telefono_otro,
+								// 		celular:celular,
+								// 		cod_cargo:cargo,
+								// 		tipo:tipo,
+								// 		direcc:direcc,
+								// 		cod_parro:cod_parro
+								// 	},
+								// 	success: function (datos){
+								// 		$('#contenido').html('');
+								// 		$("#contenido").load().html(datos);
+								// 	},
+								// });
+							};
+						});
+						$('#form_PI').on('change', function(){
 
+						});
 					});
-				});
 				</script>
 				<!-- ajax de estado/mun/parr -->
 				<?php $estadoEnlace = "java/edo.php?cod_est=".$datos['cod_est']; ?>
