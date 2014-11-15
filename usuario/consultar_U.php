@@ -1,6 +1,6 @@
 <?php
-if(!isset($_SESSION)){ 
-  session_start(); 
+if(!isset($_SESSION)){
+  session_start();
 }
 $enlace = $_SERVER['DOCUMENT_ROOT']."/github/sistemaJAG/php/master.php";
 require_once($enlace);
@@ -11,8 +11,8 @@ validarUsuario();
 //DESDE empezarPagina.php
 empezarPagina();
 
-if ( isset($_POST['informacion']) 
-	and isset($_POST['tipo']) 
+if ( isset($_POST['informacion'])
+	and isset($_POST['tipo'])
 	and isset($_POST['tabla']) ) :
 	if ($_POST['tabla'] === '1') :
 		$valor = $_POST['informacion'];
@@ -29,7 +29,7 @@ if ( isset($_POST['informacion'])
 		else :
 			header('Location: menucon.php?error=tipo&q='.$_POST['tipo']);
 		endif;
-		$query = "SELECT 
+		$query = "SELECT
 		docente.p_apellido,
 		docente.p_nombre,
 		docente.cedula,
@@ -54,8 +54,8 @@ if ( isset($_POST['informacion'])
 		inner join tipo_usuario
 		on usuario.cod_tipo_usr = tipo_usuario.codigo
 		$where
-		order by 
-		docente.p_apellido, 
+		order by
+		docente.p_apellido,
 		usuario.seudonimo,
 		tipo_usuario.descripcion;";
 	else:
@@ -80,7 +80,7 @@ if ( isset($_POST['informacion'])
 		else :
 			header('Location: menucon.php?error=tipo&q='.$_POST['tipo']);
 		endif;
-		$query = "SELECT 
+		$query = "SELECT
 		$tabla.p_apellido,
 		$tabla.p_nombre,
 		$tabla.cedula,
@@ -101,8 +101,8 @@ if ( isset($_POST['informacion'])
 		inner join tipo_usuario
 		on usuario.cod_tipo_usr = tipo_usuario.codigo
 		$where
-		order by 
-		$tabla.p_apellido, 
+		order by
+		$tabla.p_apellido,
 		usuario.seudonimo,
 		tipo_usuario.descripcion;";
 	endif;
@@ -199,7 +199,7 @@ if ( isset($_POST['informacion'])
 						</thead>
 						<tbody>
 							<td>
-								<a href="actualizar_U.php?cedula=<?php echo $datos['cedula'] ?>">
+								<a href="actualizar_U.php?cedula=<?php echo $datos['cedula'] ?>&tabla=<?php echo $_POST['tabla'] ?>">
 									<button>Actualizar</button>
 								</a>
 							</td>
