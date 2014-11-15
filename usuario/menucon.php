@@ -58,8 +58,8 @@ empezarPagina();
 									type="text"
 									name="informacion"
 									id="informacion">
-									<?php $query = "SELECT codigo, descripcion from cargo where status = 1;";
-										$resultado = conexion($query);?>
+								<?php $query = "SELECT codigo, descripcion from cargo where status = 1;";
+									$resultado = conexion($query);?>
 								<select name="informacion" id="informacion_lista" hidden>
 									<option value="" selected="selected">--Seleccione--</option>
 									<?php while ( $datos = mysqli_fetch_array($resultado) ) : ?>
@@ -70,6 +70,21 @@ empezarPagina();
 								</select>
 							</td>
 							<td class="chequeo" id="informacion_chequeo">
+								
+							</td>
+						</tr>
+						<tr>
+							<td id="tabla_titulo">
+								Seleccione:
+							</td>
+							<td>
+								<select name="tabla" required id="tabla">
+									<option value="1" selected="selected">Personal Docente</option>
+									<option value="1">Personal Administrativo</option>
+									<option value="1">Personal Directivo</option>
+								</select>
+							</td>
+							<td class="chequeo" id="tabla_chequeo">
 								
 							</td>
 						</tr>
@@ -120,6 +135,8 @@ empezarPagina();
 			$(function(){
 				$('#informacion_titulo').css('color', '#888');
 				$('#informacion').prop('disabled', true);
+				$('#tabla_titulo').css('color', '#888');
+				$('#tabla').prop('disabled', true);
 				$('#submit').prop('disabled', true);
 				//el select:
 				$('#tipo').on('change', function(){
@@ -128,30 +145,42 @@ empezarPagina();
 						$('#informacion_titulo').show();
 						$('#informacion_titulo').css('color', '#888');
 						$('#informacion').prop('disabled', true);
-						$('#submit').prop('disabled', true);
 						$('#informacion_lista').prop('disabled', true);
 						$('#informacion_lista').prop('hidden', true);
-					}else if (tipo === '4'){
-						$('#informacion_titulo').show();
+						$('#tabla_titulo').css('color', '#888');
+						$('#tabla').prop('disabled', true);
 						$('#submit').prop('disabled', true);
+					}else if (tipo === '4'){
+						$('#informacion').prop('value', '');
+						$('#informacion_titulo').css('color', '#000');
+						$('#informacion_titulo').show();
 						$('#informacion').prop('disabled', false);
 						$('#informacion').prop('hidden', true);
 						$('#informacion_lista').prop('disabled', false);
 						$('#informacion_lista').prop('hidden', false);
+						$('#tabla_titulo').css('color', '#000');
+						$('#tabla').prop('disabled', false);
+						$('#submit').prop('disabled', true);
 					}else if (tipo === '5'){
 						$('#informacion_titulo').hide();
-						$('#submit').prop('disabled', false);
 						$('#informacion').prop('disabled', true);
 						$('#informacion').prop('hidden', true);
+						$('#informacion').prop('value', 'status');
 						$('#informacion_lista').prop('disabled', true);
 						$('#informacion_lista').prop('hidden', true);
+						$('#tabla_titulo').css('color', '#000');
+						$('#tabla').prop('disabled', false);
+						$('#submit').prop('disabled', false);
 					}else{
+						$('#informacion').prop('value', '');
 						$('#informacion_titulo').show();
 						$('#informacion_titulo').css('color', '#000');
 						$('#informacion').prop('disabled', false);
 						$('#informacion').prop('hidden', false);
 						$('#informacion_lista').prop('disabled', true);
 						$('#informacion_lista').prop('hidden', true);
+						$('#tabla_titulo').css('color', '#000');
+						$('#tabla').prop('disabled', false);
 					};
 				});
 				$('#informacion').on('change', function(){

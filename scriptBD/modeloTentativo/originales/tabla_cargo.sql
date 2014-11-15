@@ -9,7 +9,7 @@ CREATE table cargo(
 );
 
 INSERT INTO cargo values
-	(1, 'Favor actualizar campo', 1, 1, null, 1, null),
+	(1, 'Sin cargo asociado', 1, 1, null, 1, null),
 	(2, 'Director(a)', 1, 1, null, 1, null),
 	(3, 'Sub-Director(a)', 1, 1, null, 1, null),
 	(4, 'Coordinador(a)', 1, 1, null, 1, null),

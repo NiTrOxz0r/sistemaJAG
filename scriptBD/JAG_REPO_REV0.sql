@@ -170,7 +170,7 @@ CREATE TABLE IF NOT EXISTS `cargo` (
 --
 
 INSERT INTO `cargo` (`codigo`, `descripcion`, `status`, `cod_usr_reg`, `fec_reg`, `cod_usr_mod`, `fec_mod`) VALUES
-(1, 'Favor actualizar campo', 1, 1, '2014-11-07 13:55:21', 1, '2014-11-07 13:55:21'),
+(1, 'Sin cargo asociado', 1, 1, '2014-11-07 13:55:21', 1, '2014-11-07 13:55:21'),
 (2, 'Director(a)', 1, 1, '2014-11-07 13:55:21', 1, '2014-11-07 13:55:21'),
 (3, 'Sub-Director(a)', 1, 1, '2014-11-07 13:55:21', 1, '2014-11-07 13:55:21'),
 (4, 'Coordinador(a)', 1, 1, '2014-11-07 13:55:21', 1, '2014-11-07 13:55:21'),
