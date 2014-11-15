@@ -80,8 +80,8 @@ empezarPagina();
 							<td>
 								<select name="tabla" required id="tabla">
 									<option value="1" selected="selected">Personal Docente</option>
-									<option value="1">Personal Administrativo</option>
-									<option value="1">Personal Directivo</option>
+									<option value="2">Personal Administrativo</option>
+									<option value="3">Personal Directivo</option>
 								</select>
 							</td>
 							<td class="chequeo" id="tabla_chequeo">
@@ -145,6 +145,7 @@ empezarPagina();
 						$('#informacion_titulo').show();
 						$('#informacion_titulo').css('color', '#888');
 						$('#informacion').prop('disabled', true);
+						$('#informacion').prop('readonly', false);
 						$('#informacion_lista').prop('disabled', true);
 						$('#informacion_lista').prop('hidden', true);
 						$('#tabla_titulo').css('color', '#888');
@@ -154,7 +155,7 @@ empezarPagina();
 						$('#informacion').prop('value', '');
 						$('#informacion_titulo').css('color', '#000');
 						$('#informacion_titulo').show();
-						$('#informacion').prop('disabled', false);
+						$('#informacion').prop('readonly', true);
 						$('#informacion').prop('hidden', true);
 						$('#informacion_lista').prop('disabled', false);
 						$('#informacion_lista').prop('hidden', false);
@@ -163,8 +164,8 @@ empezarPagina();
 						$('#submit').prop('disabled', true);
 					}else if (tipo === '5'){
 						$('#informacion_titulo').hide();
-						$('#informacion').prop('disabled', true);
 						$('#informacion').prop('hidden', true);
+						$('#informacion').prop('readonly', true);
 						$('#informacion').prop('value', 'status');
 						$('#informacion_lista').prop('disabled', true);
 						$('#informacion_lista').prop('hidden', true);
@@ -177,6 +178,7 @@ empezarPagina();
 						$('#informacion_titulo').css('color', '#000');
 						$('#informacion').prop('disabled', false);
 						$('#informacion').prop('hidden', false);
+						$('#informacion').prop('readonly', false);
 						$('#informacion_lista').prop('disabled', true);
 						$('#informacion_lista').prop('hidden', true);
 						$('#tabla_titulo').css('color', '#000');
@@ -233,7 +235,7 @@ empezarPagina();
 						}else{
 							$("#informacion_chequeo").html('');
 							$("#informacion_titulo").css('color', 'green');
-							estatus = true;
+							$('#submit').prop('disabled', false);
 						}
 
 					};
