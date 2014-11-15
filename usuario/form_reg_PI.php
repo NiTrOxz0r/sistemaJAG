@@ -347,6 +347,9 @@ if ( isset($_POST['seudonimo']) && isset($_POST['clave']) ):
 						});
 					};
 				});
+				$('#form_PI').on('change', function (){
+					validacionPI()
+				});
 			});
 			</script>
 			<!-- ajax de estado -->

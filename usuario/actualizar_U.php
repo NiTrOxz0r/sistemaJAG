@@ -12,5 +12,17 @@ validarUsuario();
 empezarPagina();
 
 if (isset($_POST['tipo'])	and isset($_POST['cedula']) ) :
-	if ($_POST['tabla'] === '1') :
-
+	if ($_POST['tabla'] == '1') :
+		$tabla = 'docente';
+	elseif ($_POST['tabla'] == '2'):
+		$tabla = 'administrativo';
+	elseif ($_POST['tabla'] == '3'):
+		$tabla = 'directivo';
+	endif;
+<?php
+//FINALIZAMOS LA PAGINA:
+//trae footer.php y cola.php
+finalizarPagina();?>
+<?php else: ?>
+	<?php header('Location: consultar_U.php?error=vacio'); ?>
+<?php endif; ?>
