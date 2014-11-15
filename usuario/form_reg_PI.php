@@ -1,6 +1,6 @@
 <?php
-if(!isset($_SESSION)){ 
-  session_start(); 
+if(!isset($_SESSION)){
+  session_start();
 }
 $enlace = $_SERVER['DOCUMENT_ROOT']."/github/sistemaJAG/php/master.php";
 require_once($enlace);
@@ -27,29 +27,29 @@ if ( isset($_POST['seudonimo']) && isset($_POST['clave']) ):
 						<tbody>
 							<tr>
 								<td>
-									<select 
+									<select
 										name="nacionalidad"
 										id="nacionalidad"
-										1required>
+										required>
 										<option selected="selected" value="v">V</option>
 										<option value="e">E</option>
 									</select>
 								</td>
 								<td>
-									<input 
-										type="text"  
-										maxlength="8" 
-										name="cedula" 
-										id="cedula" 
-										1required>
+									<input
+										type="text"
+										maxlength="8"
+										name="cedula"
+										id="cedula"
+										required>
 								</td>
 							</tr>
 							<tr>
 								<td class="chequeo" id="nacionalidad_chequeo">
-									
+
 								</td>
 								<td class="chequeo" id="cedula_chequeo">
-									
+
 								</td>
 							</tr>
 						</tbody>
@@ -62,30 +62,30 @@ if ( isset($_POST['seudonimo']) && isset($_POST['clave']) ):
 						<tbody>
 							<tr>
 								<td>
-									<input 
+									<input
 										type="text"
 										name="p_nombre"
 										id="p_nombre"
-										1required
+										required
 										maxlength="20">
 								</td>
 								<td>
-									<input 
+									<input
 										type="text"
 										name="s_nombre"
 										id="s_nombre"
 										maxlength="20">
 								</td>
 								<td>
-									<input 
+									<input
 										type="text"
 										name="p_apellido"
 										id="p_apellido"
-										1required
+										required
 										maxlength="20">
 								</td>
 								<td>
-									<input 
+									<input
 										type="text"
 										name="s_apellido"
 										id="s_apellido"
@@ -108,18 +108,18 @@ if ( isset($_POST['seudonimo']) && isset($_POST['clave']) ):
 						<tbody>
 							<tr>
 								<td>
-									<input 
+									<input
 										type="date"
 										name="fec_nac"
 										id="fec_nac"
-										1required>
+										required>
 								</td>
 								<td>
 									<?php
 										$query = "SELECT codigo, descripcion from sexo where status = 1;";
 										$registros = conexion($query);
 									?>
-									<select name="sexo" id="sexo" 1required>
+									<select name="sexo" id="sexo" required>
 										<option value="">Seleccione una opci&oacute;n </option>
 										<?php	while($fila = mysqli_fetch_array($registros)) : ?>
 											<option value="<?php echo $fila['codigo']; ?>">
@@ -129,14 +129,14 @@ if ( isset($_POST['seudonimo']) && isset($_POST['clave']) ):
 									</select>
 								</td>
 								<td>
-									<input 
+									<input
 										type="text"
 										name="email"
 										id="email"
-										maxlength="20">
+										maxlength="40">
 								</td>
 								<td>
-									<input 
+									<input
 										type="text"
 										name="titulo"
 										id="titulo"
@@ -147,10 +147,10 @@ if ( isset($_POST['seudonimo']) && isset($_POST['clave']) ):
 								<td></td>
 								<td></td>
 								<td class="chequeo" id="email_chequeo">
-									
+
 								</td>
 								<td class="chequeo" id="titulo_chequeo">
-									
+
 								</td>
 							</tr>
 						</tbody>
@@ -165,7 +165,7 @@ if ( isset($_POST['seudonimo']) && isset($_POST['clave']) ):
 								<td>
 									<?php $sql="SELECT codigo, descripcion from nivel_instruccion where status = 1;";
 										$registros = conexion($sql);?>
-									<select name="nivel_instruccion" 1required id="nivel_instruccion">
+									<select name="nivel_instruccion" required id="nivel_instruccion">
 									<?php while($fila = mysqli_fetch_array($registros)) :	?>
 										<option value="<?php echo $fila['codigo']?>">
 										<?php echo $fila['descripcion']?></option>
@@ -173,23 +173,23 @@ if ( isset($_POST['seudonimo']) && isset($_POST['clave']) ):
 									</select>
 								</td>
 								<td>
-									<input 
-										type="text" 
-										maxlength="11" 
+									<input
+										type="text"
+										maxlength="11"
 										name="telefono"
 										id="telefono">
 								</td>
 								<td>
-									<input 
-										type="text" 
-										maxlength="11" 
+									<input
+										type="text"
+										maxlength="11"
 										name="telefono_otro"
 										id="telefono_otro">
 								</td>
 								<td>
-									<input 
-										type="text" 
-										maxlength="11" 
+									<input
+										type="text"
+										maxlength="11"
 										name="celular"
 										id="celular">
 								</td>
@@ -197,13 +197,13 @@ if ( isset($_POST['seudonimo']) && isset($_POST['clave']) ):
 							<tr>
 								<td></td>
 								<td class="chequeo" id="telefono_chequeo">
-									
+
 								</td>
 								<td class="chequeo" id="telefono_otro_chequeo">
-									
+
 								</td>
 								<td class="chequeo" id="celular_chequeo">
-									
+
 								</td>
 							</tr>
 						</tbody>
@@ -217,7 +217,7 @@ if ( isset($_POST['seudonimo']) && isset($_POST['clave']) ):
 								<td>
 									<?php $sql="SELECT codigo, descripcion from cargo where status = 1;";
 										$registros = conexion($sql);?>
-									<select name="cod_cargo" 1required id="cargo">
+									<select name="cod_cargo" required id="cargo">
 									<?php while($fila = mysqli_fetch_array($registros)) :	?>
 										<option value="<?php echo $fila['codigo']?>">
 										<?php echo $fila['descripcion']?></option>
@@ -225,7 +225,7 @@ if ( isset($_POST['seudonimo']) && isset($_POST['clave']) ):
 									</select>
 								</td>
 								<td>
-									<select name="tipo" id="tipo" 1required>
+									<select name="tipo" id="tipo" required>
 										<option value="" selected="selected">
 											--Seleccione--
 										</option>
@@ -276,11 +276,11 @@ if ( isset($_POST['seudonimo']) && isset($_POST['clave']) ):
 								</td>
 							</tr>
 							<tr>
-								
+
 							</tr>
 						</tbody>
 					</table>
-				</form>			
+				</form>
 			</div>
 			<!-- calendario -->
 			<?php $cssDatepick = enlaceDinamico("java/jqDatePicker/jquery.datepick.css"); ?>

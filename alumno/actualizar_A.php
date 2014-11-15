@@ -1,6 +1,6 @@
 <?php
-if(!isset($_SESSION)){ 
-  session_start(); 
+if(!isset($_SESSION)){
+  session_start();
 }
 $enlace = $_SERVER['DOCUMENT_ROOT']."/github/sistemaJAG/php/master.php";
 require_once($enlace);
@@ -23,16 +23,16 @@ if (isset($_POST['cedula'])) {
 	header("Location:".$enlace);
 }
 
-	
-	$sql = "SELECT a.codigo, a.cedula, a.cedula_escolar, nacionalidad, p_nombre, s_nombre, p_apellido, 
-		s_apellido, sexo, fec_nac, lugar_nac, telefono, telefono_otro, b.direccion_exacta as direccion, 
-		c.descripcion as parroquia, c.codigo as cod_parro, d.descripcion as municipio, d.codigo as cod_mun, e.descripcion as estado, 
-		e.codigo as cod_est, acta_num_part_nac, acta_folio_num_part_nac, plantel_procedencia, repitiente, altura, peso, camisa, pantalon, 
-		zapato, a.cod_curso FROM alumno a, direccion_alumno b, parroquia c, municipio d, estado e, sexo f, curso g WHERE a.cod_direccion=b.codigo and 
+
+	$sql = "SELECT a.codigo, a.cedula, a.cedula_escolar, nacionalidad, p_nombre, s_nombre, p_apellido,
+		s_apellido, sexo, fec_nac, lugar_nac, telefono, telefono_otro, b.direccion_exacta as direccion,
+		c.descripcion as parroquia, c.codigo as cod_parro, d.descripcion as municipio, d.codigo as cod_mun, e.descripcion as estado,
+		e.codigo as cod_est, acta_num_part_nac, acta_folio_num_part_nac, plantel_procedencia, repitiente, altura, peso, camisa, pantalon,
+		zapato, a.cod_curso FROM alumno a, direccion_alumno b, parroquia c, municipio d, estado e, sexo f, curso g WHERE a.cod_direccion=b.codigo and
 		b.cod_parroquia=c.codigo and c.cod_mun=d.codigo and e.codigo=d.cod_edo and a.cod_curso=g.codigo and cedula ='$cedula';";
 	//$re = mysql_query($sql) or die ("Error al Conectar a la Base". mysql_error());
 	$re = conexion($sql);
-	if($reg = mysqli_fetch_array($re)) :?>	
+	if($reg = mysqli_fetch_array($re)) :?>
 
 <div id="blancoAjax" align="center">
 	<form action="actualizar1.php" method="POST" name="form_alu" id="form">
@@ -57,73 +57,73 @@ if (isset($_POST['cedula'])) {
 									<?php endif ?>
 								</select>
 								<!-- HACER AJAX PARA CEDULA!!! -->
-								<input 
-								type="text" 
+								<input
+								type="text"
 								required
-								maxlength="8" 
-								size="12" 
-								name="cedula" 
-								id="cedula" 
+								maxlength="8"
+								size="12"
+								name="cedula"
+								id="cedula"
 								value="<?php echo $reg['cedula'];?>">
 							<font color="#ff0000">*</font>
 							</td>
 							<td>
 							<!-- HACER AJAX PARA CEDULA!!! -->
-							<input 
-								type="text" 
+							<input
+								type="text"
 								required
-								maxlength="10" 
-								name="cedula_escolar" 
-								id="cedula_escolar" 
+								maxlength="10"
+								name="cedula_escolar"
+								id="cedula_escolar"
 								value="<?php echo $reg['cedula_escolar'];?>"/>
 							</td>
 						</tr>
 						<tr>
 							<th>Primer Nombre</th><th>Segundo Nombre</th>
 							<th>Primer Apellido</th><th>Segundo Apellido</th>
-						</tr>			
+						</tr>
 						<tr>
 							<td>
-								<input type="text" 
-								maxlength="20" 
-								name="p_nombre"  
-								id="p_nombre" 
+								<input type="text"
+								maxlength="20"
+								name="p_nombre"
+								id="p_nombre"
 								value="<?php echo $reg['p_nombre'];?>"/>
 								<font color="#ff0000">*</font></td>
-								<td><input type="text" 
-								maxlength="20" 
-								name="s_nombre" 
+								<td><input type="text"
+								maxlength="20"
+								name="s_nombre"
 								id="s_nombre" value="<?php echo $reg['s_nombre'];?>"/>
 							</td>
 							<td>
-								<input type="text" 
-								maxlength="20" 
-								name="p_apellido" 
-								id="p_apellido" 
+								<input type="text"
+								maxlength="20"
+								name="p_apellido"
+								id="p_apellido"
 								value="<?php echo $reg['p_apellido'];?>"/>
 								<font color="#ff0000">*</font></td>
-								<td><input type="text" 
-								maxlength="20" 
-								name="s_apellido" 
-								id="s_apellido" 
+								<td><input type="text"
+								maxlength="20"
+								name="s_apellido"
+								id="s_apellido"
 								value="<?php echo $reg['s_apellido'];?>"/>
 							</td>
-						</tr>	
+						</tr>
 						<tr>
 							<th>Sexo</th>
 							<th>Fecha de Nacimiento</th>
 							<th>Lugar de Nacimiento</th>
 						</tr>
 						<tr>
-							<td>		
-								<?php 
+							<td>
+								<?php
 									$sql="select codigo, descripcion from sexo where status = 1;";
 									$registros = conexion($sql); ?>
-								<select name="sexo" id="sexo" required="required">						
+								<select name="sexo" id="sexo" required="required">
 								<?php while($fila = mysqli_fetch_array($registros)) : ?>
-								<?php if ( $reg['sexo'] == $fila['codigo']): ?> 
-									<option 
-										selected="selected" 
+								<?php if ( $reg['sexo'] == $fila['codigo']): ?>
+									<option
+										selected="selected"
 										value="<?php echo $fila['codigo']?>">
 											<?php echo $fila['descripcion']?>
 									</option>
@@ -136,45 +136,45 @@ if (isset($_POST['cedula'])) {
 								</select><font color="#ff0000">*</font>
 							</td>
 							<td>
-								<input 
-									type="date" 
-									name="fec_nac" 
+								<input
+									type="date"
+									name="fec_nac"
 									id="fec_nac"
 									required="required"
 									value="<?php echo $reg['fec_nac'];?>"/>
 							</td>
-							<td colspan="2">		
-								<textarea 
-									name="lugar_nac" 
+							<td colspan="2">
+								<textarea
+									name="lugar_nac"
 									id="lug_nac"
-									cols="40" 
-									rows="4" 
+									cols="40"
+									rows="4"
 									maxlength="50"
 									><?php echo $reg['lugar_nac'] ?></textarea>
 							</td>
 						</tr>
 						<tr>
 							<th>Tel&eacute;fono</th><th> Tel&eacute;no Celular</th>
-						</tr>		
+						</tr>
 						<tr>
 							<td>
-								<input 
-									type="text" 
-									maxlength="11" 
-									name="telefono" 
-									id="telefono" 
+								<input
+									type="text"
+									maxlength="11"
+									name="telefono"
+									id="telefono"
 									value="<?php echo $reg['telefono'];?>"/>
 							</td>
 							<td>
-								<input 
-									type="text" 
-									maxlength="11" 
-									name="telefono_otro" 
-									id="telefono_otro" 
+								<input
+									type="text"
+									maxlength="11"
+									name="telefono_otro"
+									id="telefono_otro"
 									value="<?php echo $reg['telefono_otro'];?>"/>
 							</td>
 						</tr>
-					</table>				
+					</table>
 			</fieldset>
 			<fieldset>
 				<legend align="left">DIRECCI&Oacute;N</legend>
@@ -193,7 +193,7 @@ if (isset($_POST['cedula'])) {
 								<select name="cod_mun" id="cod_mun" >
 									<option value="">--Seleccionar--</option>
 								</select><font color="#ff0000">*</font></td>
-							<td>	
+							<td>
 								<select name="cod_parro" id="cod_parro">
 									<option value="">--Seleccionar--</option>
 								</select><font color="#ff0000">*</font></td>
@@ -201,12 +201,12 @@ if (isset($_POST['cedula'])) {
 						<tr>
 							<th>Direcci&oacute;n</th>
 							<td colspan="3">
-							
-								<textarea 
-									maxlenght="150" 
-									cols="50" 
-									rows="4" 
-									name="direcc" 
+
+								<textarea
+									maxlenght="150"
+									cols="50"
+									rows="4"
+									name="direcc"
 									id="direcc"><?php echo $reg['direccion'];?></textarea>
 								<font color="#ff0000">*</font>
 							</td>
@@ -224,30 +224,30 @@ if (isset($_POST['cedula'])) {
 						</tr>
 						<tr align="center">
 							<td colspan="2" >
-								<input 
-									type="text" 
-									maxlength="8" 
-									size ="8" 
-									name="acta_num_part_nac"  
-									id="acta_num_part_nac" 
+								<input
+									type="text"
+									maxlength="8"
+									size ="8"
+									name="acta_num_part_nac"
+									id="acta_num_part_nac"
 									value="<?php echo $reg['acta_num_part_nac'];?>"/>
 							</td>
 							<td></td><td></td>
 							<td></td>
 							<td colspan="3">
-								<input 
-									type="text" 
-									maxlength="8" 
-									size ="8" 
-									name="acta_folio_num_part_nac" 
-									id="acta_folio_num_part_nac" 
+								<input
+									type="text"
+									maxlength="8"
+									size ="8"
+									name="acta_folio_num_part_nac"
+									id="acta_folio_num_part_nac"
 									value="<?php echo $reg['acta_folio_num_part_nac'];?>" />
 							</td>
 							<td>
-								<input 
-									type="text" 
-									maxlength="20" 
-									name="plantel_procedencia" 
+								<input
+									type="text"
+									maxlength="20"
+									name="plantel_procedencia"
 									id="plantel_procedencia"
 									value="<?php echo $reg['plantel_procedencia'];?>"/>
 							</td>
@@ -264,41 +264,41 @@ if (isset($_POST['cedula'])) {
 								</select><font color="#ff0000">*</font>
 							</td>
 						</tr>
-		
+
 					</table>
-		
+
 			</fieldset>
 
 			<fieldset>
-		
+
 				<legend align="left"> DATOS ANTROPOL&Oacute;GICO</legend>
 
 					<table>
 						<tr>
 							<th>Altura</th><th>Peso</th>
-						</tr>			
+						</tr>
 						<tr align="center">
 						<!-- http://www.w3schools.com/tags/tag_input.asp -->
 							<td>
-								<input 
-									type="number" 
-									maxlength="3" 
-									size ="3" 
-									max="250" 
+								<input
+									type="number"
+									maxlength="3"
+									size ="3"
+									max="250"
 									min="30"
 									name="altura"
 									id="altura"
 									value="<?php echo $reg['altura'];?>"/><font color="#ff0000">cm</font>
 							</td>
 							<td>
-								<input 
-									type="number" 
-									maxlength="3" 
-									size ="3" 
-									max="250" 
-									min="10" 
-									name="peso" 
-									id="peso" 
+								<input
+									type="number"
+									maxlength="3"
+									size ="3"
+									max="250"
+									min="10"
+									name="peso"
+									id="peso"
 									value="<?php echo $reg['peso'];?>"/><font color="#ff0000">kg</font>
 							</td>
 						</tr>
@@ -306,7 +306,7 @@ if (isset($_POST['cedula'])) {
 							<th>Talla de Camisa</th>
 							<th>Talla de Pantal&oacute;n</th>
 							<th>N&uacute;m. de Calzado</th>
-						</tr>			
+						</tr>
 						<tr align="center">
 							<td>
 								<?php	$query = "SELECT codigo, descripcion from talla where status = 1 order by codigo;";
@@ -335,12 +335,12 @@ if (isset($_POST['cedula'])) {
 								</select>
 							</td>
 							<td>
-								<input 
-									type="number" 
-									maxlength="2" 
-									min="4" 
-									max="50" 
-									size ="2" 
+								<input
+									type="number"
+									maxlength="2"
+									min="4"
+									max="50"
+									size ="2"
 									name="zapato"
 									id="zapato"
 									value="<?php echo $reg['zapato'];?>"/>
@@ -374,8 +374,8 @@ if (isset($_POST['cedula'])) {
 	<?php $validacion = enlaceDinamico("java/validacion.js"); ?>
 	<script type="text/javascript" src="<?php echo $validacion ?>"></script>
 	<!-- ajax de estado/mun/parr -->
-	<?php $estadoenlace = "java/edo.php?cod_est=".$reg['cod_est']; ?>
-	<?php $estado = enlaceDinamico($estadoenlace); ?>
+	<?php $estadoEnlace = "java/edo.php?cod_est=".$reg['cod_est']; ?>
+	<?php $estado = enlaceDinamico($estadoEnlace); ?>
 	<?php $municipio = enlaceDinamico("java/mun.php"); ?>
 	<?php $parroquia = enlaceDinamico("java/parro.php"); ?>
 	<script type="text/javascript">
@@ -386,7 +386,6 @@ if (isset($_POST['cedula'])) {
 				$.get("<?php echo $municipio ?>",{param_id:id})
 				.done(function(data){
 					$("#cod_mun").html(data);
-					
 					$("#cod_mun").change(function(){
 						var id2 = $("#cod_mun").val();
 						$.get("<?php echo $parroquia ?>",{param_id2:id2})
@@ -449,7 +448,7 @@ if (isset($_POST['cedula'])) {
 		});
 	</script>
 </div>
-		
+
 	<?php else : ?>
 			<p align=center>
 				No existe Datos con cedula: <?=$cedula ?>

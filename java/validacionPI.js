@@ -3,7 +3,12 @@ function validacionPI(){
 	//REGEX:
 	var estatus = false;
 	var numerosChequeo = /[^\d+]/g;
-	var	nombresChequeo = /[^A-Za-záéíóúÁÉÍÓÚ-]/g;
+	var	nombresChequeo = /[^A-Za-záéíóúÁÉÍÓÚ-\s]/g;
+	//por alguna razon javascrip se queja si uso esta expresion:
+	// ^[0-9a-zA-Z-_$#]{2,20}+\@[0-9a-zA-Z-_$#]{2,20}+\.[a-zA-Z]{2,5}\.?[a-zA-Z]{2,5}+
+	// eso cacha algo@algo.com.ve
+	// no veo el error, adicionalmente la probe en php y funciona.
+	// esta expresion solo llega hasta algo.com ||| ignora el .ve
 	var emailChequeo = /^[0-9a-zA-Z-_\$#]+@[0-9a-zA-Z-_\$#]+\.[a-zA-Z]{2,5}/;
 	//datos del formulario
 	var nacionalidad = document.getElementById('nacionalidad').value;
@@ -168,12 +173,12 @@ function validacionPI(){
 		estatus = true;
 	}
 	//email
-	if(email.length > 20){
+	if(email.length > 40){
 		document.getElementById("email").focus();
-		$("#email_chequeo").html('este campo no puede ser mayor a 20 caracteres');
+		$("#email_chequeo").html('este campo no puede ser mayor a 40 caracteres');
 		$("#email_titulo").css('color', 'red');
 		return false;
-	}else if( emailChequeo.test(email) ){
+	}else if( !emailChequeo.test(email) ){
 		document.getElementById("email").focus();
 		$("#email_chequeo").html('Favor introduzca en este campo correctamente EJ: suNombre71@dominio.com.ve');
 		$("#email_titulo").css('color', 'red');
@@ -195,11 +200,15 @@ function validacionPI(){
 		estatus = true;
 	}
 	//telefono
-	if(telefono.length != 11 && telefono != ""){
+	if(telefono.length != 11 && telefono != "" ){
 		document.getElementById("telefono").focus();
-		$("#telefono_chequeo").html('este campo no puede ser mayor exactamente 11 caracteres EJ: 02127773322');
+		$("#telefono_chequeo").html('este campo no puede ser mayor a 11 caracteres EJ: 02127773322');
 		$("#telefono_titulo").css('color', 'red');
 		return false;
+	}else if( telefono === "SinRegistro" ){
+		$("#telefono_chequeo").html('');
+		$("#telefono_titulo").css('color', 'green');
+		estatus = true;
 	}else if( numerosChequeo.test(telefono) ){
 		document.getElementById("telefono").focus();
 		$("#telefono_chequeo").html('Favor introduzca en este campo Letras sin numeros o caracteres especiales EJ: 19?=;@*');
@@ -211,11 +220,15 @@ function validacionPI(){
 		estatus = true;
 	}
 	//telefono_otro
-	if(telefono_otro.length != 11 && telefono_otro != ""){
+	if(telefono_otro.length != 11 && telefono_otro != "" ){
 		document.getElementById("telefono_otro").focus();
-		$("#telefono_otro_chequeo").html('este campo no puede ser mayor exactamente 11 caracteres EJ: 02127773322');
+		$("#telefono_otro_chequeo").html('este campo no puede ser mayor a 11 caracteres EJ: 02127773322');
 		$("#telefono_otro_titulo").css('color', 'red');
 		return false;
+	}else if( telefono_otro === "SinRegistro" ){
+		$("#telefono_otro_chequeo").html('');
+		$("#telefono_otro_titulo").css('color', 'green');
+		estatus = true;
 	}else if( numerosChequeo.test(telefono_otro) ){
 		document.getElementById("telefono_otro").focus();
 		$("#telefono_otro_chequeo").html('Favor introduzca en este campo Letras sin numeros o caracteres especiales EJ: 19?=;@*');
@@ -227,11 +240,15 @@ function validacionPI(){
 		estatus = true;
 	}
 	//celular
-	if(celular.length != 11 && celular != ""){
+	if(celular.length != 11 && celular != "" ){
 		document.getElementById("celular").focus();
-		$("#celular_chequeo").html('este campo no puede ser mayor exactamente 11 caracteres EJ: 02127773322');
+		$("#celular_chequeo").html('este campo no puede ser mayor a 11 caracteres EJ: 02127773322');
 		$("#celular_titulo").css('color', 'red');
 		return false;
+	}else if( celular === "SinRegistro" ){
+		$("#celular_chequeo").html('');
+		$("#celular_titulo").css('color', 'green');
+		estatus = true;
 	}else if( numerosChequeo.test(celular) ){
 		document.getElementById("celular").focus();
 		$("#celular_chequeo").html('Favor introduzca en este campo Letras sin numeros o caracteres especiales EJ: 19?=;@*');
@@ -271,6 +288,16 @@ function validacionPI(){
 	}else{
 		$("#cargo_chequeo").html('');
 		$("#cargo_titulo").css('color', 'green');
+		estatus = true;
+	}
+	//nivel_instruccion (nivel_educativo):
+	if ( nivel_instruccion == '0' || nivel_instruccion == '' ) {
+		$("#nivel_instruccion_chequeo").html('Por favor seleccione una opcion apropiada.');
+		$("#nivel_instruccion_titulo").css('color', 'red');
+		return false;
+	}else{
+		$("#nivel_instruccion_chequeo").html('');
+		$("#nivel_instruccion_titulo").css('color', 'green');
 		estatus = true;
 	}
 	//estado

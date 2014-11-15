@@ -8,7 +8,17 @@ function validacionUsuario(){
 	var estatus = false;
 	//datos del formulario
 	var seudonimo = document.getElementById('seudonimo').value.replace(/^\s+|\s+$/g, '');
-	var clave = document.getElementById("clave").value.replace(/^\s+|\s+$/g, '');
+	if ( document.getElementById("clave") != null) {
+		var clave = document.getElementById("clave").value.replace(/^\s+|\s+$/g, '');
+	} else{
+		var clave = false;
+	};
+	if ( document.getElementById("cod_tipo_usr") != null) {
+		var cod_tipo_usr = document.getElementById("cod_tipo_usr").value.replace(/^\s+|\s+$/g, '');
+	} else{
+		var cod_tipo_usr = false;
+	};
+
 	//chequeos
 	if ( seudonimo.length < 3 ) {
 		document.getElementById("seudonimo").focus();
@@ -30,7 +40,11 @@ function validacionUsuario(){
 		$("#seudonimo_titulo").css('color', 'green');
 		estatus = true;
 	}
-	if ( clave == "" ) {
+	if (clave === false) {
+		$("#clave_chequeo").html('');
+		$("#clave_titulo").css('color', 'green');
+		estatus = true;
+	}else if ( clave == "" ) {
 		document.getElementById("clave").focus();
 		$("#clave_chequeo").html('este campo no puede </br> estar vacio');
 		$("#clave_titulo").css('color', 'red');
@@ -48,7 +62,17 @@ function validacionUsuario(){
 		$("#clave_titulo").css('color', 'green');
 		estatus = true;
 	}
-	
+	//cod_tipo_usr (nivel_educativo):
+	if ( cod_tipo_usr == '' ) {
+		$("#cod_tipo_usr_chequeo").html('Por favor seleccione una opcion apropiada.');
+		$("#cod_tipo_usr_titulo").css('color', 'red');
+		return false;
+	}else{
+		$("#cod_tipo_usr_chequeo").html('');
+		$("#cod_tipo_usr_titulo").css('color', 'green');
+		estatus = true;
+	}
+
 	return go(estatus);
 
 	function go (e){

@@ -199,7 +199,7 @@ if ( isset($_POST['informacion'])
 						</thead>
 						<tbody>
 							<td>
-								<a href="actualizar_U.php?cedula=<?php echo $datos['cedula'] ?>&tabla=<?php echo $_POST['tabla'] ?>">
+								<a href="form_act_PI.php?cedula=<?php echo $datos['cedula'] ?>&tabla=<?php echo $_POST['tabla'] ?>">
 									<button>Actualizar</button>
 								</a>
 							</td>
