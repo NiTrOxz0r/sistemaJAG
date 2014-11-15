@@ -69,13 +69,12 @@ if ( isset($_SESSION['seudonimo']) && isset($_SESSION['clave']) && isset($_POST[
 	$cod_parroquia = trim($_POST['cod_parro']);
 	$cod_parroquia = mysqli_escape_string($con, $cod_parroquia);
 	$direcc = trim($_POST['direcc']);
-	$direcc = mysqli_escape_string($con, $direcc);
 	if ($direcc == '') {
 		$direcc = "null";
 	}else{
+		$direcc = mysqli_escape_string($con, $direcc);
 		$direcc = "'$direcc'";
 	}
-	$direcc = mysqli_escape_string($con, $direcc);
 	//insertamos datos en la tabla que es:
 	$query = "INSERT INTO $tablaDir
 	VALUES
@@ -84,7 +83,7 @@ if ( isset($_SESSION['seudonimo']) && isset($_SESSION['clave']) && isset($_POST[
 	//buscamos el codigo de esa direccion que
 	//acabamos de insertar:
 	$query = "SELECT codigo from $tablaDir
-	where cod_parroquia = $cod_parroquia and direccion_exacta = '$direcc';";
+	where cod_parroquia = $cod_parroquia and direccion_exacta = $direcc;";
 	$resultado = conexion($query);
 	$datos = mysqli_fetch_assoc($resultado);
 	$codigoDireccion = $datos['codigo'];
