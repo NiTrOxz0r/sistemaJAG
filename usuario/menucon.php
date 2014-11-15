@@ -164,6 +164,7 @@ empezarPagina();
 						$('#submit').prop('disabled', true);
 					}else if (tipo === '5'){
 						$('#informacion_titulo').hide();
+						$('#informacion').prop('disabled', false);
 						$('#informacion').prop('hidden', true);
 						$('#informacion').prop('readonly', true);
 						$('#informacion').prop('value', 'status');

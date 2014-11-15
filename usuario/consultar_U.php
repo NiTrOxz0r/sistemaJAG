@@ -36,12 +36,12 @@ if ( isset($_POST['informacion'])
 		docente.celular,
 		docente.telefono,
 		docente.email,
-		cargo.descripcion,
-		curso.descripcion,
-		usuario.seudonimo,
-		tipo_usuario.descripcion,
-		docente.status,
-		usuario.status
+		cargo.descripcion as cargo,
+		curso.descripcion as curso,
+		usuario.seudonimo as seudonimo,
+		tipo_usuario.descripcion as tipo_usuario,
+		docente.status as status_d,
+		usuario.status as status_u
 		from docente
 		inner join cargo
 		on docente.cod_cargo = cargo.codigo
@@ -60,7 +60,13 @@ if ( isset($_POST['informacion'])
 		tipo_usuario.descripcion;";
 	else:
 		$valor = $_POST['informacion'];
-		$tabla = $_POST['tabla'];
+		if ($_POST['tabla'] == '1') :
+			$tabla = 'docente';
+		elseif ($_POST['tabla'] == '2'):
+			$tabla = 'administrativo';
+		elseif ($_POST['tabla'] == '3'):
+			$tabla = 'directivo';
+		endif;
 		if ($_POST['tipo'] === '1') :
 			$where = "WHERE $tabla.cedula = '$valor'";
 		elseif ($_POST['tipo'] === '2') :
@@ -80,12 +86,13 @@ if ( isset($_POST['informacion'])
 		$tabla.cedula,
 		$tabla.celular,
 		$tabla.telefono,
+		$tabla.telefono_otro,
 		$tabla.email,
-		cargo.descripcion,
-		usuario.seudonimo,
-		tipo_usuario.descripcion,
-		$tabla.status,
-		usuario.status
+		cargo.descripcion as cargo,
+		usuario.seudonimo as seudonimo,
+		tipo_usuario.descripcion as tipo_usuario,
+		$tabla.status as status_d,
+		usuario.status as status_u
 		from $tabla
 		inner join cargo
 		on $tabla.cod_cargo = cargo.codigo
@@ -99,26 +106,106 @@ if ( isset($_POST['informacion'])
 		usuario.seudonimo,
 		tipo_usuario.descripcion;";
 	endif;
-	$resultado = conexion($query,1); ?>
-
+	$resultado = conexion($query); ?>
 
 	<div id="contenido">
 		<div id="blancoAjax">
 			<!-- CONTENIDO EMPIEZA DEBAJO DE ESTO: -->
 			<!-- DETALLESE QUE NO ES UN ID SINO UNA CLASE. -->
 			<div class="contenido">
-
-
 				<table>
-					<thead>
-						
-					</thead>
-					<tbody>
-						
-					</tbody>
+					<?php while ( $datos = mysqli_fetch_array($resultado) ) : ?>
+						<thead>
+							<th>Primer Apellido</th>
+							<th>Primer Nombre</th>
+							<th>Cedula</th>
+						</thead>
+						<tbody>
+							<td>
+								<?php echo $datos['p_apellido'] ?>
+							</td>
+							<td>
+								<?php echo $datos['p_nombre'] ?>
+							</td>
+							<td>
+								<?php echo $datos['cedula'] ?>
+							</td>
+						</tbody>
+						<thead>
+							<th>Celular</th>
+							<th>Telefono</th>
+							<th>Correo electronico</th>
+						</thead>
+						<tbody>
+							<td>
+								<?php echo $datos['celular'] ?>
+							</td>
+							<td>
+								<?php echo $datos['telefono'] ?>
+							</td>
+							<td>
+								<?php echo $datos['email'] ?>
+							</td>
+						</tbody>
+						<?php if (isset($datos['curso'])): ?>
+							<thead>
+								<th>Cargo</th>
+								<th>Curso Asociado</th>
+							</thead>
+							<tbody>
+								<td>
+									<?php echo $datos['cargo'] ?>
+								</td>
+								<td>
+									<?php echo $datos['curso'] ?>
+								</td>
+							</tbody>
+						<?php else: ?>
+							<thead>
+								<th>Curso Asociado</th>
+								<th>Cargo</th>
+								<th>Seudonimo</th>
+							</thead>
+							<tbody>
+								<td>
+									<?php echo $datos['telefono_otro'] ?>
+								</td>
+								<td>
+									<?php echo $datos['cargo'] ?>
+								</td>
+								<td>
+									<?php echo $datos['seudonimo'] ?>
+								</td>
+							</tbody>
+						<?php endif ?>
+						<thead>
+							<th>Tipo usuario</th>
+							<th>Estatus personal</th>
+							<th>Estatus en sistema</th>
+						</thead>
+						<tbody>
+							<td>
+								<?php echo $datos['tipo_usuario'] ?>
+							</td>
+							<td>
+								<?php echo $datos['status_d'] == ('1') ? 'Activo' : 'Inactivo'; ?>
+							</td>
+							<td>
+								<?php echo $datos['status_u'] == ('1') ? 'Activo' : 'Inactivo'; ?>
+							</td>
+						</tbody>
+						<thead>
+							<th></th>
+						</thead>
+						<tbody>
+							<td>
+								<a href="actualizar_U.php?cedula=<?php echo $datos['cedula'] ?>">
+									<button>Actualizar</button>
+								</a>
+							</td>
+						</tbody>
+					<?php endwhile; ?>
 				</table>
-			
-				
 			</div>
 			<!-- CONTENIDO TERMINA ARRIBA DE ESTO: -->
 		</div>
