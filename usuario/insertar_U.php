@@ -1,14 +1,14 @@
-<?php 
-if(!isset($_SESSION)){ 
-    session_start(); 
+<?php
+if(!isset($_SESSION)){
+    session_start();
 }
 $enlace = $_SERVER['DOCUMENT_ROOT']."/github/sistemaJAG/php/master.php";
 require_once($enlace);
 // invocamos validarUsuario desde master.php
 validarUsuario();
-	
-if ( isset($_SESSION['seudonimo']) && isset($_SESSION['clave']) && isset($_POST['cedula']) ): 
-	
+
+if ( isset($_SESSION['seudonimo']) && isset($_SESSION['clave']) && isset($_POST['cedula']) ):
+
 	//la clave tiene que ser exactamente 60 caracteres:
 	if (strlen($_SESSION['clave']) <> 60) {
 		header("Location: form_reg_U.php?clave=MalDefinido");
@@ -17,10 +17,13 @@ if ( isset($_SESSION['seudonimo']) && isset($_SESSION['clave']) && isset($_POST[
 	if (isset($_POST['tipo'])) {
 		if ($_POST['tipo'] === '1') {
 			$tabla = "administrativo";
+			$asume = false;
 		} elseif ($_POST['tipo'] === '2') {
 			$tabla = "docente";
+			$asume = true;
 		} elseif ($_POST['tipo'] === '3') {
 			$tabla = "directivo";
+			$asume = false;
 		}else{
 			header("Location: form_reg_PI?seudonimo=$seudonimo&tipo=MalDefinido");
 		}
@@ -39,15 +42,15 @@ if ( isset($_SESSION['seudonimo']) && isset($_SESSION['clave']) && isset($_POST[
 	//chequeamos que el usuario ingrese como tal a la
 	//tabla usuarios antes que todo:
 	//cod_tipo_usr = 5 (por verificar)
-	$query = "INSERT INTO usuario	
+	$query = "INSERT INTO usuario
 	VALUES
-	(null, '$seudonimo', '$clave', 
+	(null, '$seudonimo', '$clave',
 		5, 1, 1, null, 1, null );";
 	$resultado = conexion($query);
 	//chequeamos la BD para ver el codigo:
 	//del usuario:
 	$query = "SELECT codigo
-	from usuario 
+	from usuario
 	where seudonimo = '$seudonimo'
 	and clave = '$clave';";
 	$resultado = conexion($query);
@@ -69,8 +72,8 @@ if ( isset($_SESSION['seudonimo']) && isset($_SESSION['clave']) && isset($_POST[
 	$cod_parroquia = trim($_POST['cod_parro']);
 	$cod_parroquia = mysqli_escape_string($con, $cod_parroquia);
 	$direcc = trim($_POST['direcc']);
-	if ($direcc == '') {
-		$direcc = "null";
+	if ($direcc === '') {
+		$direcc = "'Sin Registro, favor Actualizar-$seudonimo-$tabla'";
 	}else{
 		$direcc = mysqli_escape_string($con, $direcc);
 		$direcc = "'$direcc'";
@@ -87,7 +90,7 @@ if ( isset($_SESSION['seudonimo']) && isset($_SESSION['clave']) && isset($_POST[
 	$resultado = conexion($query);
 	$datos = mysqli_fetch_assoc($resultado);
 	$codigoDireccion = $datos['codigo'];
-	
+
 	//iniciamos datos restantes del formulario:
 	$codUsrMod = 1; // 1 porque nadie hace referencia a este registro
 	$p_apellido = mysqli_escape_string($con, $_POST['p_apellido']);
@@ -131,7 +134,7 @@ if ( isset($_SESSION['seudonimo']) && isset($_SESSION['clave']) && isset($_POST[
 	$query = "INSERT INTO $tabla
 	values
 	(null, $validarPI->p_nombre, $validarPI->s_nombre, $validarPI->p_apellido,
-		$validarPI->s_apellido,	$validarPI->nacionalidad, $validarPI->cedula, 
+		$validarPI->s_apellido,	$validarPI->nacionalidad, $validarPI->cedula,
 		$validarPI->celular, $validarPI->telefono, $validarPI->telefonoOtro,
 		$validarPI->nivel_instruccion, $validarPI->titulo, $validarPI->fecNac,
 		$validarPI->sexo, $validarPI->email,
@@ -140,9 +143,11 @@ if ( isset($_SESSION['seudonimo']) && isset($_SESSION['clave']) && isset($_POST[
 	$resultado = conexion($query);
 
 	//por ultimo:
-	$query = "SELECT usuario.codigo as codigo, 
-	usuario.seudonimo as seudonimo, 
+	$query = "SELECT usuario.codigo as codigo,
+	usuario.seudonimo as seudonimo,
 	usuario.cod_tipo_usr as cod_tipo_usr,
+	$tabla.codigo as codigo_docente,
+	$tabla.cedula as cedula,
 	$tabla.p_nombre as p_nombre,
 	$tabla.p_apellido as p_apellido
 	from usuario
@@ -154,6 +159,12 @@ if ( isset($_SESSION['seudonimo']) && isset($_SESSION['clave']) && isset($_POST[
 	//se inicia la sesion de ese usuario:
 	if ( $resultado->num_rows == 1 ) :
 		$datos = mysqli_fetch_assoc($resultado);
+
+		if ($asume) {
+			$query = "INSERT INTO asume values
+			(null, $datos[codigo_docente], 34, 'Autogenerado en proceso de registro-$seudonimo-$tabla-$datos[cedula]', 1, 1, null, 1, null);";
+			$resultado = conexion($query);
+		}
 		session_unset();
 		session_destroy();
 		session_start();
@@ -186,7 +197,7 @@ if ( isset($_SESSION['seudonimo']) && isset($_SESSION['clave']) && isset($_POST[
 //FINALIZAMOS LA PAGINA:
 //trae footer.php y cola.php
 finalizarPagina();?>
-	
+
 <?php else: ?>
 	<div id="blancoAjax">
 		<p>

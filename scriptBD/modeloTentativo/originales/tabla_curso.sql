@@ -47,14 +47,15 @@ INSERT INTO curso VALUES
 (30, 6, 5, 'Sexto Grado Seccion:"E"', 1, 1, null, 1, null),
 (31, -1, 1, 'Prescolar nivel 1', 1, 1, null, 1, null),
 (32, -2, 1, 'Prescolar nivel 2', 1, 1, null, 1, null),
-(33, -3, 1, 'Prescolar nivel 3"', 1, 1, null, 1, null)
+(33, -3, 1, 'Prescolar nivel 3', 1, 1, null, 1, null),
+(34, 7, 1, 'Sin Curso Asociado', 1, 1, null, 1, null)
 ;
 
 -- CREATE TABLE curso (
--- 	codigo tinyint unsigned auto_increment primary key, 
+-- 	codigo tinyint unsigned auto_increment primary key,
 -- 	grado tinyint(2) not null, seccion tinyint(2) not null,
 -- 	cod_prof int unsigned default null, turno enum('m','t') not null,
--- 	status tinyint(1) unsigned not null default 1, 
+-- 	status tinyint(1) unsigned not null default 1,
 -- 	cod_usr_reg int not null, fec_reg timestamp not null default current_timestamp,
 -- 	cod_usr_mod int not null, fec_mod timestamp not null default current_timestamp,
 -- 	foreign key (cod_prof)
@@ -65,7 +66,7 @@ INSERT INTO curso VALUES
 
 
 -- /*insertar todos los posibles cursos a mano da ladilla:*/
--- <?php 
+-- <?php
 -- $i = 1; $j = 1;
 -- 	echo "INSERT INTO curso<br>
 -- 			(grado, seccion, cod_prof, turno, cod_usr_reg, cod_usr_mod)<br>
@@ -78,7 +79,7 @@ INSERT INTO curso VALUES
 -- 			}else{
 -- 				echo "($i, $j, null, 'm', 1, 1),<br>";
 -- 				$j++;
--- 			}	
+-- 			}
 -- 		}
 -- 		$j = 1;
 -- 	}
