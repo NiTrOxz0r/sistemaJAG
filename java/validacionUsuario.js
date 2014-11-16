@@ -1,9 +1,8 @@
-
+//hecho por slayerfat, saben donde estoy.
 //se hizo con la idea de modificar especificamente
 //al formulario de consulta de alumno
 //porque la otra funcion requeria muchas variables
 function validacionUsuario(){
-
 	//estatus:
 	var estatus = false;
 	//datos del formulario
@@ -20,6 +19,7 @@ function validacionUsuario(){
 	};
 
 	//chequeos
+	//seudonimo:
 	if ( seudonimo.length < 3 ) {
 		document.getElementById("seudonimo").focus();
 		$("#seudonimo_chequeo").html('por favor escojer un seudonimo </br>de mas de 3 letras.');
@@ -40,6 +40,7 @@ function validacionUsuario(){
 		$("#seudonimo_titulo").css('color', 'green');
 		estatus = true;
 	}
+	//clave:
 	if (clave === false) {
 		$("#clave_chequeo").html('');
 		$("#clave_titulo").css('color', 'green');
@@ -73,6 +74,9 @@ function validacionUsuario(){
 		estatus = true;
 	}
 
+	//una vez comprobado los campos
+	//se procede a iniciar esta funcion:
+	//(esto puede ser mejorado, pero funciona.)
 	return go(estatus);
 
 	function go (e){

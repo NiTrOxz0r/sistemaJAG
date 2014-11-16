@@ -1,6 +1,6 @@
 <?php
-if(!isset($_SESSION)){ 
-  session_start(); 
+if(!isset($_SESSION)){
+  session_start();
 }
 $enlace = $_SERVER['DOCUMENT_ROOT']."/github/sistemaJAG/php/master.php";
 require_once($enlace);
@@ -18,8 +18,8 @@ empezarPagina();
 		<!-- DETALLESE QUE NO ES UN ID SINO UNA CLASE. -->
 		<div class="contenido">
 
-			<form 
-				id="consulta_singular_U" 
+			<form
+				id="consulta_singular_U"
 				name="consulta_singular_U"
 				action="consultar_U.php"
 				method="post">
@@ -32,8 +32,8 @@ empezarPagina();
 						<tr>
 							<td id="tipo_titulo">Tipo de consulta:</td>
 							<td>
-								<select 
-									name="tipo" 
+								<select
+									name="tipo"
 									id="tipo"
 									autofocus="autofocus"
 									required>
@@ -46,7 +46,7 @@ empezarPagina();
 								</select>
 							</td>
 							<td class="chequeo" id="tipo_chequeo">
-								
+
 							</td>
 						</tr>
 						<tr>
@@ -70,7 +70,7 @@ empezarPagina();
 								</select>
 							</td>
 							<td class="chequeo" id="informacion_chequeo">
-								
+
 							</td>
 						</tr>
 						<tr>
@@ -85,7 +85,7 @@ empezarPagina();
 								</select>
 							</td>
 							<td class="chequeo" id="tabla_chequeo">
-								
+
 							</td>
 						</tr>
 						<tr>
@@ -99,14 +99,14 @@ empezarPagina();
 				<div id="error" class="chequeo">
 					<!-- chequeo por medio de ajax: -->
 					<span class="error" id="error">
-						
+
 					</span>
 				</div>
 
 			</form>
 
-			<form 
-				id="consulta_listado_U" 
+			<form
+				id="consulta_listado_U"
 				name="consulta_listado_U"
 				action="consultar_listado_U.php"
 				method="post">
@@ -125,20 +125,26 @@ empezarPagina();
 			<div id="error" class="chequeo">
 				<!-- chequeo por medio de ajax: -->
 				<span class="error" id="error">
-					
+
 				</span>
 			</div>
-		
+
 		</div>
 		<!-- validacion -->
 		<script type="text/javascript">
+			/*hecho por slayerfat, consultas o sugerencias, saben donde estoy.*/
+			//iniciamos jQuery:
 			$(function(){
+				//cambiamos de una vez
+				//estructura del formulario:
 				$('#informacion_titulo').css('color', '#888');
 				$('#informacion').prop('disabled', true);
 				$('#tabla_titulo').css('color', '#888');
 				$('#tabla').prop('disabled', true);
 				$('#submit').prop('disabled', true);
-				//el select:
+				//se cambia la estructura del formulario
+				//dependiendo de lo que el usuario escoja en el primer select
+				//(tipo) = por cedula, por cargo, etc.
 				$('#tipo').on('change', function(){
 					var tipo = $(this).val();
 					if (tipo === '0') {
@@ -186,6 +192,10 @@ empezarPagina();
 						$('#tabla').prop('disabled', false);
 					};
 				});
+				//debido a que las validaciones hechas por
+				//este script solo es usado en este archivo,
+				//se considero no pasar este script a un
+				//archivo aparte como otros archivos.
 				$('#informacion').on('change', function(){
 					var campo = $(this).val().replace(/^\s+|\s+$/g, '');
 					if (campo === "") {
@@ -194,12 +204,12 @@ empezarPagina();
 						$("#informacion_chequeo").html('este campo no puede </br> estar vacio.');
 						$("#informacion_titulo").css('color', 'red');
 					};
-					
+					//valores de expresiones regulares:
 					var tipo = $('#tipo').val();
 					var numerosChequeo = /[^\d+]/g;
 					var	nombresChequeo = /[^A-Za-záéíóúÁÉÍÓÚ-]/g;
+					//comprobacion de campos dentro del formulario:
 					if (tipo === '1') {
-
 						if(campo.length < 6){
 							$('#submit').prop('disabled', true);
 							$(this).focus();
@@ -220,9 +230,7 @@ empezarPagina();
 							$("#informacion_titulo").css('color', 'green');
 							$('#submit').prop('disabled', false);
 						}
-
 					}else if( tipo === '2' || tipo === '3' ) {
-
 						if(campo.length > 20){
 							$('#submit').prop('disabled', true);
 							$(this).focus();
@@ -238,10 +246,9 @@ empezarPagina();
 							$("#informacion_titulo").css('color', 'green');
 							$('#submit').prop('disabled', false);
 						}
-
 					};
 				});
-
+				//comprobacion del select de cargo:
 				$('#informacion_lista').on('change', function(){
 					var campo = $(this).val();
 					console.log(campo);
