@@ -18,8 +18,8 @@ empezarPagina();
 		<div align="center">
 			<!-- http://www.w3schools.com/html/html_forms.asp -->
 			<form method="post" action="insertar_P.php" name="form_repre" id="form">
-				<fieldset>
-					<legend style="width:80%">REGISTRO DE PADRES/REPRESENTANTE</legend>
+
+					<h1>REGISTRO DE PADRES/REPRESENTANTE</h1>
 						<table>
 							<tr>
 								<td colspan=2>
@@ -252,7 +252,7 @@ empezarPagina();
 								</td>
 							</tr>
 						</table>
-				</fieldset>
+
 			</form>
 			</div>
 			<div>

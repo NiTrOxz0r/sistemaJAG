@@ -21,8 +21,8 @@ validarUsuario(1);?>
 							<h1>Personal Autorizado.</h1>
 							<h2>Consultar</h2>
 						</center>
-						<fieldset style="width: 300px">
-							<legend><i>Indique La Cedula del Representante</i></legend>
+
+							<h4>Indique La Cedula del Representante</h4>
 								<?php $action = enlaceDinamico(""); ?>
 								<form action="consultar_P.php" method="GET" id="form_r">
 									<b>Cedula</b>
@@ -34,7 +34,7 @@ validarUsuario(1);?>
 											
 										</span>
 									</p>
-						</fieldset>
+
 											
 							<a href="<?php echo $index ?>">Regresar a Menu</a>
 					</center>
