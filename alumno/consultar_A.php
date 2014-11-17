@@ -290,7 +290,7 @@ empezarPagina();?>
 									<tr colspan="2">
 										<th colspan="2">
 											<a href="../Personal_Autorizado/consultar_reg_P.php?cedula_r=<?php echo $datos['cedula_r'];?>">
-												<button>VER MAS</button>
+												VER MAS
 											</a>
 										</th>
 									</tr>
