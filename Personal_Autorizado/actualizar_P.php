@@ -46,8 +46,8 @@ empezarPagina();?>
 		<div align="center">
 			<!-- http://www.w3schools.com/html/html_forms.asp -->
 			<form method="POST" action="actualizar_1.php" name="form_repre" id="form">
-				<fieldset>
-					<legend style="width:80%">ACTUALIZACION DE PADRES/REPRESENTANTE</legend>
+
+					<h1>ACTUALIZACION DE PADRES/REPRESENTANTE</h1>
 						<table>
 							<tr> 
 								<th>C&eacute;dula</th>
@@ -331,7 +331,6 @@ empezarPagina();?>
 									</td>
 								</tr>
 						</table>
-					</fieldset>
 				</form>
 					<!-- validacion -->
 	<?php $validacion = enlaceDinamico("java/validacionP.js"); ?>
