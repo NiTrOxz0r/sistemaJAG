@@ -21,8 +21,8 @@ validarUsuario(1);?>
 							<h1>Alumno(a).</h1>
 							<h2>Consultar</h2>
 						</center>
-						<fieldset style="width: 300px">
-							<legend><i>Indique La Cedula del Alumno</i></legend>
+
+							<h4 align="center">Indique La Cedula del Alumno</h4>
 								<?php $action = enlaceDinamico("alumno/consultar_A.php"); ?>
 								<form action="<?php echo $action ?>" method="post" id="form_a">
 									<b>Cedula</b>
@@ -34,32 +34,7 @@ validarUsuario(1);?>
 											
 										</span>
 									</p>
-						</fieldset>
-						<br>	
-						<fieldset style="width: 300px">
-							<legend><i>Indique La Cedula del Representante</i></legend>
-								<?php $action = enlaceDinamico("alumno/consultar_A_XXX.php"); ?>
-								<form action="<?php echo $action ?>" method="post"id="form_r">
-									<b>Cedula</b>
-									<input type="text"  name="cedula" size="8" maxlength="8">
-									<input type="submit" value="Enviar"/>
-									<p>
-										<span id="cedula_chequeo_r">
-											
-										</span>
-									</p>
-								</form>
-						</fieldset>
-						<br>	
-						<fieldset style="width: 300px">
-							<legend><i>Curso</i></legend>
-								<?php $action = enlaceDinamico("alumno/consultar_A_XXX.php"); ?>
-								<form action="<?php echo $action ?>" method="post">
-									<b>Curso</b>
-									<input type="submit" value="Enviar"/>
-								</form>
-						</fieldset>
-						
+
 							<a href="<?php echo $index ?>">Regresar a Menu</a>
 					</center>
 				</div>

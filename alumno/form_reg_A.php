@@ -15,10 +15,10 @@ empezarPagina();
 <div id="blancoAjax">
 	<div align="center">
 		<form action="insertar_A.php" method="POST" name="form_alu" id="form">
-			<fieldset style="width:80%">
-				<legend>REGISTRO DE ALUMNO</legend>
-				<fieldset>
-					<legend align="left">DATOS PERSONALES</legend>
+		
+				<h1 align="center">REGISTRO DE ALUMNO</h1>
+				
+					<h2 align="center">DATOS PERSONALES</h2>
 						<table>
 							<tr>
 								<td colspan=2>Entre la informaci&oacute;n:<br>
@@ -185,9 +185,8 @@ empezarPagina();
 								</td>
 							</tr>
 						</table>
-				</fieldset>
-				<fieldset>
-					<legend align="left">DIRECCI&Oacute;N</legend>
+
+					<h2 align="center">DIRECCI&Oacute;N</h2>
 						<table>
 							<tr>
 								<th>Estado</th>
@@ -226,9 +225,8 @@ empezarPagina();
 								</td>
 							</tr>
 						</table>
-				</fieldset>
-				<fieldset>
-					<legend align="left"> Partida de Nacimiento</legend>
+
+					<h2 align="center"> Partida de Nacimiento</h2>
 						<table>
 							<tr align="cr">
 								<th colspan="2">Act. N&uacute;m Partida de Nac.</th><td></td>
@@ -266,9 +264,8 @@ empezarPagina();
 								</td>
 							</tr>
 						</table>
-				</fieldset>
-				<fieldset>
-					<legend align="left"> DATOS ANTROPOL&Oacute;GICO</legend>
+
+					<h2 align="center"> DATOS ANTROPOL&Oacute;GICO</h2>
 						<table>
 							<tr>
 								<th>Altura</th><th>Peso</th>
@@ -348,10 +345,10 @@ empezarPagina();
 								<td><input type="text" maxlength="2" size ="4" name="zapato" id="zapato"/></td>-->
 							</tr>
 						</table>
-				</fieldset>
+				
 				<br>
-				<fieldset>
-					<legend><i>Datos Educativos.</i></legend>
+		
+					<h2><i>Datos Educativos.</i></h2>
 					<b>&nbsp;Nivel a Cursar.&nbsp;&nbsp;</b>
 					<?php
 						// esto puede mejorar:
@@ -375,9 +372,6 @@ empezarPagina();
 					<select disabled name="" id="">
 						<option value="">Seleccione una opci&oacute;n</option>
 					</select>
-				</fieldset>
-
-			</fieldset>
 
 				<input type="button" name="enviar_btn" value="Enviar" id="enviar"/>
 				<input type="button" name="limpiar_btn" value="Reset" id="limpiar"/>
