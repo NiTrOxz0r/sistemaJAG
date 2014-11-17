@@ -36,10 +36,10 @@ if (isset($_POST['cedula'])) {
 
 <div id="blancoAjax" align="center">
 	<form action="actualizar_1.php" method="POST" name="form_alu" id="form">
-		<fieldset style="width:80%">
-			<legend>REGISTRO DE ALUMNO</legend>
-			<fieldset>
-				<legend  align="left"> DATOS PERSONALES</legend>
+
+			<h1>REGISTRO DE ALUMNO</h1>
+
+				<h2  align="center"> DATOS PERSONALES</h2>
 					<table>
 						<tr>
 							<th>C&eacute;dula</th><th>C&eacute;dula Escolar</th>
@@ -175,9 +175,8 @@ if (isset($_POST['cedula'])) {
 							</td>
 						</tr>
 					</table>				
-			</fieldset>
-			<fieldset>
-				<legend align="left">DIRECCI&Oacute;N</legend>
+
+				<h2 align="center">DIRECCI&Oacute;N</h2>
 					<table>
 						<tr>
 							<th>Estado</th>
@@ -211,9 +210,8 @@ if (isset($_POST['cedula'])) {
 							</td>
 						<tr/>
 					</table>
-			</fieldset>
-			<fieldset>
-				<legend align="left"> Partida de Nacimiento</legend>
+
+				<h2 align="center"> PARTIDA DE NACIMIENTO</h2>
 					<table >
 						<tr align="cr">
 							<th colspan="2">Act. N&uacute;m Partida de Nac.</th><td></td>
@@ -265,12 +263,8 @@ if (isset($_POST['cedula'])) {
 						</tr>
 		
 					</table>
-		
-			</fieldset>
 
-			<fieldset>
-		
-				<legend align="left"> DATOS ANTROPOL&Oacute;GICO</legend>
+				<h2 align="center"> DATOS ANTROPOL&Oacute;GICO</h2>
 
 					<table>
 						<tr>
@@ -346,9 +340,8 @@ if (isset($_POST['cedula'])) {
 							</td>
 						</tr>
 					</table>
-			</fieldset>
-			<fieldset>
-				<legend><i>Datos Educativos.</i></legend>
+
+				<h2 align="center">DATOS EDUCATIVOS</h2>
 				<br><b>&nbsp;Nivel a Cursar.&nbsp;&nbsp;</b>
 				<?php
 					$sql="select codigo, descripcion from curso where status = 1;";
@@ -364,8 +357,7 @@ if (isset($_POST['cedula'])) {
 				<?php endif ?>
 				<?php endwhile; ?>
 				</select>
-			</fieldset>
-		</fieldset>
+
 			<input type="button" name="enviar_btn" value="Enviar" id="enviar"/>
 			<input type="button" name="limpiar_btn" value="Enviar" hidden disabled id="limpiar"/>
 	</form>

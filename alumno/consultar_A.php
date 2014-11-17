@@ -43,10 +43,10 @@ empezarPagina();?>
 	<div id="blancoAjax" align="center">
 		<div class="contenido">
 			<form action="actualizar_A.php" method="POST" name="form_alu" id="form">
-				<fieldset style="width:80%">
-					<legend>CONSULTA DE ALUMNO</legend>
-					<fieldset>
-						<legend  align="left">DATOS PERSONALES</legend>
+
+					<h1>CONSULTA DE ALUMNO </h1>
+
+						<h2  align="center">DATOS PERSONALES</h2>
 							<table class="tabla-consulta" id="tabla-consulta-alumno">
 								<tr>
 									<th>Datos de alumno</th>
@@ -309,8 +309,7 @@ empezarPagina();?>
 									</tr>
 								</table>
 							<?php endif ?>
-					</fieldset>
-				</fieldset>
+
 				<div>
 					<span>
 						<a href="#">Informacion completa de la madre.</a>
@@ -328,8 +327,8 @@ empezarPagina();?>
 						<a href="../Personal_Autorizado/consultar_P.php?cedula_a=<?php echo $cedula_a ?>">Informacion de todos los allegados de este alumno.</a>
 					</span>
 				</div>
-				<fieldset>
-					<legend align="left">DIRECCI&Oacute;N</legend>
+
+					<h2 align="center">DIRECCI&Oacute;N</h2>
 						<table>
 							<tr>
 								<th>Estado</th>
@@ -359,9 +358,8 @@ empezarPagina();?>
 								</td>
 							</tr>
 						</table>
-				</fieldset>
-				<fieldset>	
-					<legend align="left"> Partida de Nacimiento</legend>
+
+					<h2 align="center">PARTIDA DE NACIMIENTO</h2>
 						<table >
 							<tr>
 								<th colspan="2">Act. N&uacute;m Partida de Nac.</th><td></td>
@@ -393,9 +391,8 @@ empezarPagina();?>
 								</td>
 							</tr>
 						</table>
-				</fieldset>
-				<fieldset>
-					<legend align="l</fieldset>eft"> DATOS ANTROPOL&Oacute;GICO</legend>
+
+					<h2 align="center"> DATOS ANTROPOL&Oacute;GICO</h2>
 						<table>			
 							<tr>
 								<th>Altura</th><th>Peso</th>
@@ -451,7 +448,7 @@ empezarPagina();?>
 								</td>
 							</tr>	
 						</table>
-					</fieldset>
+
 			</form>
 			<?php $validacionCA = enlaceDinamico("java/validacionCA.js"); ?>
 			<script type="text/javascript" src="<?php echo $validacionCA ?>"></script>
