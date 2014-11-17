@@ -1,21 +1,23 @@
-<?php 
+<?php
 
 /**
 * @author Granadillo Alejandro.
 * @copyright MIT/GNU/Otro??? Octurbre 2014
-* 
+*
 * @internal mejorada la logica dentro de la clase
 * para estar adaptada a las definiciones
 * de las tablas docente, administrativo, directivo.
-* 
+*
+* {@internal clase modificada para que
+* de una vez haga un mysqli_escape_string}
+*
 * @see chequearGenericoEjemplo.php
 * @example chequearGenericoEjemplo.php
 * @todo ampliar segun sea necesario segun
-* los objetivos necesarios:
-* 
-* @version 1.3
-* 
-* 
+* los objetivos necesarios
+*
+* @version 1.4
+*
 */
 class ChequearPI extends ChequearGenerico{
 
@@ -38,98 +40,24 @@ class ChequearPI extends ChequearGenerico{
 		$email = 'null',
 		$codTipoUsr,
 		$codCargo
-
 		){
+		//metodos internos:
 
-		$this->codUsrMod = trim($codUsrMod);
-		$this->p_apellido = trim($p_apellido);
-		$this->s_apellido = trim($s_apellido);
-		$this->p_nombre = trim($p_nombre);
-		$this->s_nombre = trim($s_nombre);
-		$this->nacionalidad = trim($nacionalidad);
-		$this->celular = trim($celular);
-		$this->telefono = trim($telefono);
-		$this->telefonoOtro = trim($telefonoOtro);
-		$this->nivel_instruccion = trim($nivel_instruccion);
-		$this->titulo = trim($titulo);
-		$this->fecNac = trim($fecNac);
-		$this->sexo = trim($sexo);
-		$this->codigoDireccion = trim($codigoDireccion);
-		$this->email = trim($email);
-		$this->codTipoUsr = trim($codTipoUsr);
-		$this->codCargo = trim($codCargo);
-		
-		if ($s_apellido == "") {
-			$this->s_apellido = "null";
-		}else{
-			$this->s_apellido = "'$s_apellido'";
-		}
-
-		$this->p_apellido = "'$p_apellido'";
-
-		$this->p_nombre = "'$p_nombre'";
-
-		if ($s_nombre == "") {
-			$this->s_nombre = "null";
-		}else{
-			$this->s_nombre = "'$s_nombre'";
-		}
-
-		$this->nacionalidad = "'$nacionalidad'";
-		$this->cedula = "'$cedula'";
-
-		$this->nivel_instruccion = "'$nivel_instruccion'";
-		if ($titulo == "") {
-			$this->titulo = "null";
-		}else{
-			$this->titulo = "'$titulo'";
-		}
-		if ($celular == "") {
-			$this->celular = "null";
-		}else{
-			$this->celular = "'$celular'";
-		}
-		if ($telefono == "") {
-			$this->telefono = "null";
-		}else{
-			$this->telefono = "'$telefono'";
-		}
-		if ($telefonoOtro == "") {
-			$this->telefonoOtro = "null";
-		}else{
-			$this->telefonoOtro = "'$telefonoOtro'";
-		}
-
-		$this->fecNac = "'$fecNac'";
-
-		$this->sexo = "'$sexo'";
-
-		$this->codigoDireccion = $codigoDireccion;
-		
-
-		if ($email == "") {
-			$this->email = "null";
-		}else{
-			$this->email = "'$email'";
-		}
-
-		$this->codTipoUsr = $codTipoUsr;
-		$this->codCargo = $codCargo;
-
-		$this->fecMod = "current_timestamp";
-		
-		
+		//para mysqli_escape_string();
+		self::escapeString();
+		//para poner variables nulas si es necesario:
+		self::setNull();
+		//chequeaomos la forma (el objeto como tal):
 		self::chequeaForma();
 		self::chequeame(); //heredado de ChequearGenerico
-		
 	}
 
 	/**
 	*
-	* @internal {chequea que los datos 
+	* @internal {chequea que los datos
 	* existan antes de enviarlos a la base de datos.
-	* tambien chequea la validez de cedula, 
-	* y valizacion de clave de usuario en base de datos 
+	* tambien chequea la validez de cedula,
+	* y valizacion de clave de usuario en base de datos
 	* ej: nombre = juan1 < error}
 	* @version 1.1
 	*
@@ -144,7 +72,7 @@ class ChequearPI extends ChequearGenerico{
 
 		// si cedula es mayor a 8 digitos o menor o igual a 5 digitos
 		// se devuelve a registro, cedula de 99999 <--- no existe
-		// y si existe esta muerto o loco o fuera de la ley o 
+		// y si existe esta muerto o loco o fuera de la ley o
 		// ALGUN AGENTE DEL CEBIN!!!
 		// de hecho 6 digitos tambien porque no creo
 		// que exista alguien vivo con cedula menor de 1 millon,
@@ -215,7 +143,105 @@ class ChequearPI extends ChequearGenerico{
 				die(header("Location: registro.php?codigoDireccionNumeric=false"));
 			}
 		}
+	}
 
+	/**
+	 * @author [slayerfat]
+	 *
+	 * {@internal esto es para que
+	 * automaticamente convierta las variables del objeto
+	 * a variables limpias para mysql}
+	 *
+	 * @return void [solo genera las variables internas del objeto]
+	 */
+
+	private function escapeString(){
+		$con = conexion();//desde master.php > conexion.php
+		$this->codUsrMod = mysqli_escape_string($con, trim($codUsrMod));
+		$this->p_apellido = mysqli_escape_string($con, trim($p_apellido));
+		$this->s_apellido = mysqli_escape_string($con, trim($s_apellido));
+		$this->p_nombre = mysqli_escape_string($con, trim($p_nombre));
+		$this->s_nombre = mysqli_escape_string($con, trim($s_nombre));
+		$this->nacionalidad = mysqli_escape_string($con, trim($nacionalidad));
+		$this->celular = mysqli_escape_string($con, trim($celular));
+		$this->telefono = mysqli_escape_string($con, trim($telefono));
+		$this->telefonoOtro = mysqli_escape_string($con, trim($telefonoOtro));
+		$this->nivel_instruccion = mysqli_escape_string($con, trim($nivel_instruccion));
+		$this->titulo = mysqli_escape_string($con, trim($titulo));
+		$this->fecNac = mysqli_escape_string($con, trim($fecNac));
+		$this->sexo = mysqli_escape_string($con, trim($sexo));
+		$this->codigoDireccion = mysqli_escape_string($con, trim($codigoDireccion));
+		$this->email = mysqli_escape_string($con, trim($email));
+		$this->codTipoUsr = mysqli_escape_string($con, trim($codTipoUsr));
+		$this->codCargo = mysqli_escape_string($con, trim($codCargo));
+	}
+	/**
+	* @author [slayerfat]
+	*
+	* {@internal esto es para autogenerar el null
+	* para los campos que acepten null en la base de datos.}
+	*
+	* @return void [solo genera las variables internas del objeto]
+	*/
+	private function setNull(){
+		if ($s_apellido == "") {
+			$this->s_apellido = "null";
+		}else{
+			$this->s_apellido = "'$s_apellido'";
+		}
+
+		$this->p_apellido = "'$p_apellido'";
+
+		$this->p_nombre = "'$p_nombre'";
+
+		if ($s_nombre == "") {
+			$this->s_nombre = "null";
+		}else{
+			$this->s_nombre = "'$s_nombre'";
+		}
+
+		$this->nacionalidad = "'$nacionalidad'";
+		$this->cedula = "'$cedula'";
+
+		$this->nivel_instruccion = "'$nivel_instruccion'";
+		if ($titulo == "") {
+			$this->titulo = "null";
+		}else{
+			$this->titulo = "'$titulo'";
+		}
+		if ($celular == "") {
+			$this->celular = "null";
+		}else{
+			$this->celular = "'$celular'";
+		}
+		if ($telefono == "") {
+			$this->telefono = "null";
+		}else{
+			$this->telefono = "'$telefono'";
+		}
+		if ($telefonoOtro == "") {
+			$this->telefonoOtro = "null";
+		}else{
+			$this->telefonoOtro = "'$telefonoOtro'";
+		}
+
+		$this->fecNac = "'$fecNac'";
+
+		$this->sexo = "'$sexo'";
+
+		$this->codigoDireccion = $codigoDireccion;
+
+
+		if ($email == "") {
+			$this->email = "null";
+		}else{
+			$this->email = "'$email'";
+		}
+
+		$this->codTipoUsr = $codTipoUsr;
+		$this->codCargo = $codCargo;
+
+		$this->fecMod = "current_timestamp";
 	}
 
 }

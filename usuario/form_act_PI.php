@@ -454,8 +454,7 @@ if ( isset($_GET['cedula']) && isset($_GET['tabla']) ):
 								var tipo = $('#tipo').val();
 								var tipoOriginal = <?php echo $tablaOriginal; ?>;
 								var direcc = $('#direcc').val();
-								var cod_est = $('#cod_est').val();
-								var cod_mun = $('#cod_mun').val();
+								var cod_parroquia = $('#cod_parro').val();
 								var cod_usr = <?php echo $datos['cod_usr'] ?>;
 								var seudonimo = $('#seudonimo').val();
 								var cod_tipo_usr = $('#cod_tipo_usr').val();
@@ -481,7 +480,7 @@ if ( isset($_GET['cedula']) && isset($_GET['tabla']) ):
 								// 		cod_cargo:cargo,
 								// 		tipo:tipo,
 								// 		direcc:direcc,
-								// 		cod_parro:cod_parro
+								// 		cod_parroquia:cod_parroquia
 								// 	},
 								// 	success: function (datos){
 								// 		$('#contenido').html('');

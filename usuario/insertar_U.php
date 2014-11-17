@@ -25,18 +25,18 @@ if ( isset($_SESSION['seudonimo']) && isset($_SESSION['clave']) && isset($_POST[
 			$tabla = "directivo";
 			$asume = false;
 		}else{
-			header("Location: form_reg_PI?seudonimo=$seudonimo&tipo=MalDefinido");
+			header("Location: form_reg_PI.php?seudonimo=$seudonimo&tipo=MalDefinido");
 		}
 	}else {
-		header("Location: form_reg_PI?seudonimo=$seudonimo&tipo=MalDefinido");
+		header("Location: form_reg_PI.php?seudonimo=$seudonimo&tipo=MalDefinido");
 	}
 
 
 	//para el escape string:
 	$con = conexion();
 	//campos para el inject:
-	$seudonimo = mysqli_escape_string($con, $_SESSION['seudonimo']);
-	$clave = mysqli_escape_string($con, $_SESSION['clave']);
+	$seudonimo = mysqli_escape_string($con, trim($_SESSION['seudonimo']));
+	$clave = mysqli_escape_string($con, trim($_SESSION['clave']));
 	//validamos datos basicos de usuario:
 	$validarForma = new ChequearUsuario($seudonimo,	$clave);
 	//chequeamos que el usuario ingrese como tal a la
@@ -66,7 +66,7 @@ if ( isset($_SESSION['seudonimo']) && isset($_SESSION['clave']) && isset($_POST[
 	}elseif ($tabla == "docente") {
 		$tablaDir = "direccion_docente";
 	}else{
-		header("Location: form_reg_PI?tipoTablaDir=$tabla&tipo=MalDefinido");
+		header("Location: form_reg_PI.php?tipoTablaDir=$tabla&tipo=MalDefinido");
 	}
 	//iniciamos variables:
 	$cod_parroquia = trim($_POST['cod_parro']);
