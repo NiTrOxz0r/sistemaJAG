@@ -15,7 +15,7 @@ CREATE TABLE alumno (
 	cod_representante int unsigned not null,
 	cod_persona_retira int unsigned,
 	certificado_vacuna enum ('s', 'n') not null,
-	discapacidad tinyint(3) not null,
+	discapacidad tinyint(3) not null default 0,
 	cod_persona int unsigned not null,
 	status tinyint(1) unsigned not null default 1,
 	cod_usr_reg int unsigned not null,

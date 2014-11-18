@@ -8,13 +8,8 @@ fec_nac date not null,
 telefono varchar(11) default 'SinRegistro',
 telefono_otro varchar(11) default 'SinRegistro',
 sexo tinyint(1) unsigned not null,
-cod_direccion int unsigned not null,
 
 	foreign key (sexo)
 		references sexo(codigo)
-		on update cascade
-		on delete restrict,
-	foreign key (cod_direccion)
-		references direccion_docente(codigo)
 		on update cascade
 		on delete restrict
