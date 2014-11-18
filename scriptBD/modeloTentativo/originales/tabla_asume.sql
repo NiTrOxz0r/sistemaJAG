@@ -8,9 +8,9 @@ CREATE TABLE asume (
 	cod_usr_reg int not null,
 	fec_reg timestamp not null default current_timestamp,
 	cod_usr_mod int not null,
-	fec_mod timestamp not null default current_timestamp,
+	fec_mod timestamp not null,
 	foreign key (cod_docente)
-		references docente(codigo)
+		references personal(codigo)
 		on update cascade
 		on delete restrict,
 	foreign key (periodo_academico)

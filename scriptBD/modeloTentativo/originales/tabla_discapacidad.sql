@@ -5,10 +5,10 @@ CREATE TABLE discapacidad (
 	cod_usr_reg int not null,
 	fec_reg timestamp not null default current_timestamp,
 	cod_usr_mod int not null,
-	fec_mod timestamp not null default current_timestamp
+	fec_mod timestamp not null
 );
 
 INSERT INTO discapacidad
 (codigo, descripcion, cod_usr_reg, cod_usr_mod)
 values
-(0,'No posee', 1, 1);
+(0,'No posee', 1, current_timestamp);

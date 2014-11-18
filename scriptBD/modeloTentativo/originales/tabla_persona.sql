@@ -14,11 +14,7 @@ CREATE TABLE persona (
 	cod_usr_reg int not null,
 	fec_reg timestamp not null default current_timestamp,
 	cod_usr_mod int not null,
-	fec_mod timestamp not null default current_timestamp,
-	foreign key (cod_tipo_usr)
-		references tipo_usuario(codigo)
-		on update cascade
-		on delete restrict,
+	fec_mod timestamp not null,
 	foreign key (sexo)
 		references sexo(codigo)
 		on update cascade

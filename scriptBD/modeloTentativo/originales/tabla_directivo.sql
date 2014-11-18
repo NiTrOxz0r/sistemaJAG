@@ -22,7 +22,7 @@ CREATE TABLE directivo (
 	cod_usr_reg int not null,
 	fec_reg timestamp not null default current_timestamp,
 	cod_usr_mod int not null,
-	fec_mod timestamp not null default current_timestamp,
+	fec_mod timestamp not null,
 	foreign key (cod_usr)
 		references usuario(codigo)
 		on update cascade
