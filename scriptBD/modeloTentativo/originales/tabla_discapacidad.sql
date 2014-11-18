@@ -1,5 +1,5 @@
-CREATE TABLE sexo (
-	codigo tinyint(1) unsigned primary key,
+CREATE TABLE discapacidad (
+	codigo tinyint(3) unsigned primary key,
 	descripcion varchar(10) not null,
 	status tinyint(1) unsigned not null default 1,
 	cod_usr_reg int not null,
@@ -8,8 +8,7 @@ CREATE TABLE sexo (
 	fec_mod timestamp not null default current_timestamp
 );
 
-INSERT INTO sexo
+INSERT INTO discapacidad
 (codigo, descripcion, cod_usr_reg, cod_usr_mod)
 values
-(0,'Masculino', 1, 1),
-(1,'Femenino', 1, 1);
+(0,'No posee', 1, 1);
