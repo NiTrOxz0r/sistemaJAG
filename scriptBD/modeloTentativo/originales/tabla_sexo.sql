@@ -9,8 +9,7 @@ CREATE TABLE sexo (
 );
 
 INSERT INTO sexo
-(codigo, descripcion, cod_usr_reg, cod_usr_mod)
 values
-(0,'Masculino', 1, current_timestamp),
-(1,'Femenino', 1, current_timestamp)
+(0,'Masculino', 1, 1, null, 1, current_timestamp),
+(1,'Femenino', 1, 1, null, 1, current_timestamp)
 ;

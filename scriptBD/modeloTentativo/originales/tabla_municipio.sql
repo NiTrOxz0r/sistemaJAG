@@ -13,7 +13,11 @@ CREATE table municipio (
 		on delete restrict
 );
 
-INSERT INTO `municipio` (codigo, cod_edo, descripcion, status, cod_usr_reg, `fec_reg`, `cod_usr_mod`, `fec_mod`) VALUES
+INSERT INTO `municipio`
+(codigo, cod_edo, descripcion,
+	status, cod_usr_reg, fec_reg,
+	cod_usr_mod, fec_mod)
+VALUES
 (1, 1, 'Libertador', 1, 1, null, 1, current_timestamp),
 (2, 15, 'Baruta', 1, 1, null, 1, current_timestamp),
 (3, 15, 'Chacao', 1, 1, null, 1, current_timestamp),

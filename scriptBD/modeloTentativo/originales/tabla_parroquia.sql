@@ -14,7 +14,8 @@ CREATE table parroquia (
 );
 
 INSERT INTO parroquia
-	(codigo, cod_mun, descripcion, `status`, `cod_usr_reg`, `fec_reg`, `cod_usr_mod`, `fec_mod`)
+	(codigo, cod_mun, descripcion,
+		status, cod_usr_reg, fec_reg, cod_usr_mod, fec_mod)
 VALUES
 	(1, 1, 'Altagracia', 1, 1, null, 1, current_timestamp),
 	(2, 1, 'Antímano', 1, 1, null, 1, current_timestamp),

@@ -9,12 +9,12 @@ CREATE TABLE talla (
 );
 
 INSERT INTO talla
-(descripcion, cod_usr_reg, cod_usr_mod)
+(descripcion, cod_usr_reg, cod_usr_mod, fec_mod)
 values
-('XS', 1, current_timestamp),
-('S', 1, current_timestamp),
-('M', 1, current_timestamp),
-('L', 1, current_timestamp),
-('XL', 1, current_timestamp),
-('XXL', 1, current_timestamp)
+('XS', 1, 1,current_timestamp),
+('S', 1, 1,current_timestamp),
+('M', 1, 1,current_timestamp),
+('L', 1, 1,current_timestamp),
+('XL', 1, 1,current_timestamp),
+('XXL', 1, 1,current_timestamp)
 ;
