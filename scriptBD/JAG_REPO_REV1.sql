@@ -49,7 +49,7 @@ CREATE TABLE IF NOT EXISTS `alumno` (
   `cod_usr_reg` int(10) unsigned NOT NULL,
   `fec_reg` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `cod_usr_mod` int(10) unsigned NOT NULL,
-  `fec_mod` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `fec_mod` timestamp NOT NULL,
   PRIMARY KEY (`codigo`),
   UNIQUE KEY `cedula_escolar` (`cedula_escolar`),
   UNIQUE KEY `acta_num_part_nac` (`acta_num_part_nac`),
@@ -86,7 +86,7 @@ CREATE TABLE IF NOT EXISTS `asume` (
   `cod_usr_reg` int(11) NOT NULL,
   `fec_reg` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `cod_usr_mod` int(11) NOT NULL,
-  `fec_mod` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `fec_mod` timestamp NOT NULL,
   PRIMARY KEY (`codigo`),
   KEY `cod_docente` (`cod_docente`),
   KEY `periodo_academico` (`periodo_academico`),
@@ -146,7 +146,7 @@ CREATE TABLE IF NOT EXISTS `cargo` (
   `cod_usr_reg` int(11) NOT NULL,
   `fec_reg` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `cod_usr_mod` int(11) NOT NULL,
-  `fec_mod` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `fec_mod` timestamp NOT NULL,
   PRIMARY KEY (`codigo`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
 
@@ -179,7 +179,7 @@ CREATE TABLE IF NOT EXISTS `curso` (
   `cod_usr_reg` int(11) NOT NULL,
   `fec_reg` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `cod_usr_mod` int(11) NOT NULL,
-  `fec_mod` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `fec_mod` timestamp NOT NULL,
   PRIMARY KEY (`codigo`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -238,7 +238,7 @@ CREATE TABLE IF NOT EXISTS `direccion` (
   `cod_usr_reg` int(11) NOT NULL,
   `fec_reg` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `cod_usr_mod` int(11) NOT NULL,
-  `fec_mod` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `fec_mod` timestamp NOT NULL,
   PRIMARY KEY (`codigo`),
   KEY `cod_parroquia` (`cod_parroquia`),
   KEY `cod_persona` (`cod_persona`)
@@ -266,7 +266,7 @@ CREATE TABLE IF NOT EXISTS `discapacidad` (
   `cod_usr_reg` int(11) NOT NULL,
   `fec_reg` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `cod_usr_mod` int(11) NOT NULL,
-  `fec_mod` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `fec_mod` timestamp NOT NULL,
   PRIMARY KEY (`codigo`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -290,7 +290,7 @@ CREATE TABLE IF NOT EXISTS `estado` (
   `cod_usr_reg` int(11) NOT NULL,
   `fec_reg` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `cod_usr_mod` int(11) NOT NULL,
-  `fec_mod` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `fec_mod` timestamp NOT NULL,
   PRIMARY KEY (`codigo`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=25 ;
 
@@ -338,7 +338,7 @@ CREATE TABLE IF NOT EXISTS `municipio` (
   `cod_usr_reg` int(11) NOT NULL,
   `fec_reg` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `cod_usr_mod` int(11) NOT NULL,
-  `fec_mod` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `fec_mod` timestamp NOT NULL,
   PRIMARY KEY (`codigo`),
   KEY `cod_edo` (`cod_edo`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=337 ;
@@ -697,7 +697,7 @@ CREATE TABLE IF NOT EXISTS `nivel_instruccion` (
   `cod_usr_reg` int(11) NOT NULL,
   `fec_reg` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `cod_usr_mod` int(11) NOT NULL,
-  `fec_mod` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `fec_mod` timestamp NOT NULL,
   PRIMARY KEY (`codigo`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -730,7 +730,7 @@ CREATE TABLE IF NOT EXISTS `obtiene` (
   `cod_usr_reg` int(11) NOT NULL,
   `fec_reg` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `cod_usr_mod` int(11) NOT NULL,
-  `fec_mod` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `fec_mod` timestamp NOT NULL,
   PRIMARY KEY (`codigo`),
   KEY `cod_alu` (`cod_alu`),
   KEY `cod_p_a` (`cod_p_a`)
@@ -757,7 +757,7 @@ CREATE TABLE IF NOT EXISTS `parroquia` (
   `cod_usr_reg` int(11) NOT NULL,
   `fec_reg` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `cod_usr_mod` int(11) NOT NULL,
-  `fec_mod` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `fec_mod` timestamp NOT NULL,
   PRIMARY KEY (`codigo`),
   KEY `cod_mun` (`cod_mun`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=925 ;
@@ -1696,7 +1696,7 @@ CREATE TABLE IF NOT EXISTS `periodo_academico` (
   `cod_usr_reg` int(11) NOT NULL,
   `fec_reg` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `cod_usr_mod` int(11) NOT NULL,
-  `fec_mod` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `fec_mod` timestamp NOT NULL,
   PRIMARY KEY (`codigo`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -1749,7 +1749,7 @@ CREATE TABLE IF NOT EXISTS `persona` (
   `cod_usr_reg` int(11) NOT NULL,
   `fec_reg` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `cod_usr_mod` int(11) NOT NULL,
-  `fec_mod` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `fec_mod` timestamp NOT NULL,
   PRIMARY KEY (`codigo`),
   KEY `sexo` (`sexo`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
@@ -1783,7 +1783,7 @@ CREATE TABLE IF NOT EXISTS `personal` (
   `cod_usr_reg` int(11) NOT NULL,
   `fec_reg` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `cod_usr_mod` int(11) NOT NULL,
-  `fec_mod` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `fec_mod` timestamp NOT NULL,
   PRIMARY KEY (`codigo`),
   UNIQUE KEY `email` (`email`),
   KEY `cod_usr` (`cod_usr`),
@@ -1822,7 +1822,7 @@ CREATE TABLE IF NOT EXISTS `personal_autorizado` (
   `cod_usr_reg` int(11) NOT NULL,
   `fec_reg` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `cod_usr_mod` int(11) NOT NULL,
-  `fec_mod` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `fec_mod` timestamp NOT NULL,
   PRIMARY KEY (`codigo`),
   KEY `cod_persona` (`cod_persona`),
   KEY `relacion` (`relacion`),
@@ -1850,7 +1850,7 @@ CREATE TABLE IF NOT EXISTS `profesion` (
   `cod_usr_reg` int(11) NOT NULL,
   `fec_reg` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `cod_usr_mod` int(11) NOT NULL,
-  `fec_mod` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `fec_mod` timestamp NOT NULL,
   PRIMARY KEY (`codigo`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -1982,7 +1982,7 @@ CREATE TABLE IF NOT EXISTS `relacion` (
   `cod_usr_reg` int(11) NOT NULL,
   `fec_reg` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `cod_usr_mod` int(11) NOT NULL,
-  `fec_mod` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `fec_mod` timestamp NOT NULL,
   PRIMARY KEY (`codigo`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -2012,7 +2012,7 @@ CREATE TABLE IF NOT EXISTS `sexo` (
   `cod_usr_reg` int(11) NOT NULL,
   `fec_reg` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `cod_usr_mod` int(11) NOT NULL,
-  `fec_mod` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `fec_mod` timestamp NOT NULL,
   PRIMARY KEY (`codigo`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -2035,13 +2035,13 @@ CREATE TABLE IF NOT EXISTS `suplente` (
   `cod_profesor` int(10) unsigned NOT NULL,
   `cod_suplente` int(10) unsigned NOT NULL,
   `comentarios` varchar(200) DEFAULT 'Sin Comentarios',
-  `desde` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `hasta` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `desde` timestamp NOT NULL DEFAULT 0,
+  `hasta` timestamp NOT NULL DEFAULT 0,
   `status` tinyint(1) unsigned NOT NULL DEFAULT '1',
   `cod_usr_reg` int(11) NOT NULL,
   `fec_reg` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `cod_usr_mod` int(11) NOT NULL,
-  `fec_mod` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `cod_usr_mod` int(11) NOT NULL DEFAULT 0,
+  `fec_mod` timestamp NOT NULL,
   PRIMARY KEY (`codigo`),
   KEY `cod_profesor` (`cod_profesor`),
   KEY `cod_suplente` (`cod_suplente`)
@@ -2060,7 +2060,7 @@ CREATE TABLE IF NOT EXISTS `talla` (
   `cod_usr_reg` int(11) NOT NULL,
   `fec_reg` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `cod_usr_mod` int(11) NOT NULL,
-  `fec_mod` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `fec_mod` timestamp NOT NULL,
   PRIMARY KEY (`codigo`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
 
@@ -2089,7 +2089,7 @@ CREATE TABLE IF NOT EXISTS `tipo_personal` (
   `cod_usr_reg` int(11) NOT NULL,
   `fec_reg` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `cod_usr_mod` int(11) NOT NULL,
-  `fec_mod` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `fec_mod` timestamp NOT NULL,
   PRIMARY KEY (`codigo`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -2117,7 +2117,7 @@ CREATE TABLE IF NOT EXISTS `tipo_usuario` (
   `cod_usr_reg` int(11) NOT NULL,
   `fec_reg` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `cod_usr_mod` int(11) NOT NULL,
-  `fec_mod` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `fec_mod` timestamp NOT NULL,
   PRIMARY KEY (`codigo`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -2149,7 +2149,7 @@ CREATE TABLE IF NOT EXISTS `usuario` (
   `cod_usr_reg` int(11) NOT NULL,
   `fec_reg` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `cod_usr_mod` int(11) NOT NULL,
-  `fec_mod` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `fec_mod` timestamp NOT NULL,
   PRIMARY KEY (`codigo`),
   UNIQUE KEY `seudonimo` (`seudonimo`),
   KEY `cod_tipo_usr` (`cod_tipo_usr`)

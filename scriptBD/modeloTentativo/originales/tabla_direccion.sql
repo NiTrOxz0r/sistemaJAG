@@ -7,7 +7,7 @@ CREATE TABLE direccion(
 	cod_usr_reg int not null,
 	fec_reg timestamp not null default current_timestamp,
 	cod_usr_mod int not null,
-	fec_mod timestamp not null,
+	fec_mod timestamp not null DEFAULT 0,
 	foreign key (cod_parroquia)
 		references parroquia(codigo)
 		on update cascade
