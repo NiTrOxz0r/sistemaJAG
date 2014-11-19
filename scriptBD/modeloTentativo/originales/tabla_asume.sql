@@ -10,7 +10,7 @@ CREATE TABLE asume (
 	cod_usr_mod int not null,
 	fec_mod timestamp not null DEFAULT 0,
 	foreign key (cod_docente)
-		references persona(codigo)
+		references personal(codigo)
 		on update cascade
 		on delete restrict,
 	foreign key (periodo_academico)
@@ -31,7 +31,7 @@ INSERT INTO asume
 	comentarios, status, cod_usr_reg,
 	fec_reg, cod_usr_mod, fec_mod)
 VALUES
-	(NULL, '3', '34', '0', 'Sin curso asociado favor actualizar', '1', '1',CURRENT_TIMESTAMP, '1', CURRENT_TIMESTAMP),
+	(NULL, '1', '34', '0', 'Sin curso asociado favor actualizar', '1', '1',CURRENT_TIMESTAMP, '1', CURRENT_TIMESTAMP),
 	(NULL, NULL, '1', '0', NULL, '1', '1', CURRENT_TIMESTAMP, '1', CURRENT_TIMESTAMP),
 	(NULL, NULL, '2', '0', NULL, '1', '1', CURRENT_TIMESTAMP, '1', CURRENT_TIMESTAMP),
 	(NULL, NULL, '3', '0', NULL, '1', '1', CURRENT_TIMESTAMP, '1', CURRENT_TIMESTAMP),

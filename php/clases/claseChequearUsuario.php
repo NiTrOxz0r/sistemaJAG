@@ -57,7 +57,7 @@ class ChequearUsuario extends ChequearGenerico{
 			$this->clave = null;
 		}
 		self::setNull();
-		//self::chequeaForma();
+		self::chequeaForma();
 		mysqli_close($conexion);
 	}
 

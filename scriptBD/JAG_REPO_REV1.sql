@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Nov 19, 2014 at 01:06 am
+-- Generation Time: Nov 20, 2014 at 12:06 am
 -- Server version: 5.6.16
 -- PHP Version: 5.5.11
 
@@ -17,7 +17,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Database: `JAG_REPO_REV1`
+-- Database: `JAG_REPO`
 --
 
 -- --------------------------------------------------------
@@ -68,7 +68,7 @@ CREATE TABLE IF NOT EXISTS `alumno` (
 --
 
 INSERT INTO `alumno` (`codigo`, `cod_persona`, `cedula_escolar`, `acta_num_part_nac`, `acta_folio_num_part_nac`, `lugar_nac`, `plantel_procedencia`, `repitiente`, `cod_curso`, `altura`, `peso`, `camisa`, `pantalon`, `zapato`, `cod_representante`, `cod_persona_retira`, `certificado_vacuna`, `cod_discapacidad`, `status`, `cod_usr_reg`, `fec_reg`, `cod_usr_mod`, `fec_mod`) VALUES
-(1, 1, '1234567890', 1231231231, 1231231231, 'Sin Registro', 'que es no hacer cola ?', 'n', 2, 052, 52, 2, 3, 25, 1, NULL, 's', 0, 1, 1, '2014-11-19 00:05:07', 1, '2014-11-19 00:05:07');
+(1, 1, '1234567890', 1234567890, 1234567890, 'Sin Registro', 'Que es no hacer cola para todo?', 'n', 1, 052, 52, 3, 3, 25, 1, NULL, 's', 0, 1, 1, '2014-11-19 22:48:28', 1, '2014-11-19 22:48:28');
 
 -- --------------------------------------------------------
 
@@ -91,47 +91,47 @@ CREATE TABLE IF NOT EXISTS `asume` (
   KEY `cod_docente` (`cod_docente`),
   KEY `periodo_academico` (`periodo_academico`),
   KEY `cod_curso` (`cod_curso`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=36 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=35 ;
 
 --
 -- Dumping data for table `asume`
 --
 
 INSERT INTO `asume` (`codigo`, `cod_docente`, `cod_curso`, `periodo_academico`, `comentarios`, `status`, `cod_usr_reg`, `fec_reg`, `cod_usr_mod`, `fec_mod`) VALUES
-(2, 3, 34, 0, 'Sin curso asociado favor actualizar', 1, 1, '2014-11-19 00:00:20', 1, '2014-11-19 00:00:20'),
-(3, NULL, 1, 0, NULL, 1, 1, '2014-11-19 00:00:20', 1, '2014-11-19 00:00:20'),
-(4, NULL, 2, 0, NULL, 1, 1, '2014-11-19 00:00:20', 1, '2014-11-19 00:00:20'),
-(5, NULL, 3, 0, NULL, 1, 1, '2014-11-19 00:00:20', 1, '2014-11-19 00:00:20'),
-(6, NULL, 4, 0, NULL, 1, 1, '2014-11-19 00:00:20', 1, '2014-11-19 00:00:20'),
-(7, NULL, 5, 0, NULL, 1, 1, '2014-11-19 00:00:20', 1, '2014-11-19 00:00:20'),
-(8, NULL, 6, 0, NULL, 1, 1, '2014-11-19 00:00:20', 1, '2014-11-19 00:00:20'),
-(9, NULL, 7, 0, NULL, 1, 1, '2014-11-19 00:00:20', 1, '2014-11-19 00:00:20'),
-(10, NULL, 8, 0, NULL, 1, 1, '2014-11-19 00:00:20', 1, '2014-11-19 00:00:20'),
-(11, NULL, 9, 0, NULL, 1, 1, '2014-11-19 00:00:20', 1, '2014-11-19 00:00:20'),
-(12, NULL, 10, 0, NULL, 1, 1, '2014-11-19 00:00:20', 1, '2014-11-19 00:00:20'),
-(13, NULL, 11, 0, NULL, 1, 1, '2014-11-19 00:00:20', 1, '2014-11-19 00:00:20'),
-(14, NULL, 12, 0, NULL, 1, 1, '2014-11-19 00:00:20', 1, '2014-11-19 00:00:20'),
-(15, NULL, 13, 0, NULL, 1, 1, '2014-11-19 00:00:20', 1, '2014-11-19 00:00:20'),
-(16, NULL, 14, 0, NULL, 1, 1, '2014-11-19 00:00:20', 1, '2014-11-19 00:00:20'),
-(17, NULL, 15, 0, NULL, 1, 1, '2014-11-19 00:00:20', 1, '2014-11-19 00:00:20'),
-(18, NULL, 16, 0, NULL, 1, 1, '2014-11-19 00:00:20', 1, '2014-11-19 00:00:20'),
-(19, NULL, 17, 0, NULL, 1, 1, '2014-11-19 00:00:20', 1, '2014-11-19 00:00:20'),
-(20, NULL, 18, 0, NULL, 1, 1, '2014-11-19 00:00:20', 1, '2014-11-19 00:00:20'),
-(21, NULL, 19, 0, NULL, 1, 1, '2014-11-19 00:00:20', 1, '2014-11-19 00:00:20'),
-(22, NULL, 20, 0, NULL, 1, 1, '2014-11-19 00:00:20', 1, '2014-11-19 00:00:20'),
-(23, NULL, 21, 0, NULL, 1, 1, '2014-11-19 00:00:20', 1, '2014-11-19 00:00:20'),
-(24, NULL, 22, 0, NULL, 1, 1, '2014-11-19 00:00:20', 1, '2014-11-19 00:00:20'),
-(25, NULL, 23, 0, NULL, 1, 1, '2014-11-19 00:00:20', 1, '2014-11-19 00:00:20'),
-(26, NULL, 24, 0, NULL, 1, 1, '2014-11-19 00:00:20', 1, '2014-11-19 00:00:20'),
-(27, NULL, 25, 0, NULL, 1, 1, '2014-11-19 00:00:20', 1, '2014-11-19 00:00:20'),
-(28, NULL, 26, 0, NULL, 1, 1, '2014-11-19 00:00:20', 1, '2014-11-19 00:00:20'),
-(29, NULL, 27, 0, NULL, 1, 1, '2014-11-19 00:00:20', 1, '2014-11-19 00:00:20'),
-(30, NULL, 28, 0, NULL, 1, 1, '2014-11-19 00:00:20', 1, '2014-11-19 00:00:20'),
-(31, NULL, 29, 0, NULL, 1, 1, '2014-11-19 00:00:20', 1, '2014-11-19 00:00:20'),
-(32, NULL, 30, 0, NULL, 1, 1, '2014-11-19 00:00:20', 1, '2014-11-19 00:00:20'),
-(33, NULL, 31, 0, NULL, 1, 1, '2014-11-19 00:00:20', 1, '2014-11-19 00:00:20'),
-(34, NULL, 32, 0, NULL, 1, 1, '2014-11-19 00:00:20', 1, '2014-11-19 00:00:20'),
-(35, NULL, 33, 0, NULL, 1, 1, '2014-11-19 00:00:20', 1, '2014-11-19 00:00:20');
+(1, 1, 34, 0, 'Sin curso asociado favor actualizar', 1, 1, '2014-11-19 22:40:21', 1, '2014-11-19 22:40:21'),
+(2, NULL, 1, 0, NULL, 1, 1, '2014-11-19 22:40:21', 1, '2014-11-19 22:40:21'),
+(3, NULL, 2, 0, NULL, 1, 1, '2014-11-19 22:40:21', 1, '2014-11-19 22:40:21'),
+(4, NULL, 3, 0, NULL, 1, 1, '2014-11-19 22:40:21', 1, '2014-11-19 22:40:21'),
+(5, NULL, 4, 0, NULL, 1, 1, '2014-11-19 22:40:21', 1, '2014-11-19 22:40:21'),
+(6, NULL, 5, 0, NULL, 1, 1, '2014-11-19 22:40:21', 1, '2014-11-19 22:40:21'),
+(7, NULL, 6, 0, NULL, 1, 1, '2014-11-19 22:40:21', 1, '2014-11-19 22:40:21'),
+(8, NULL, 7, 0, NULL, 1, 1, '2014-11-19 22:40:21', 1, '2014-11-19 22:40:21'),
+(9, NULL, 8, 0, NULL, 1, 1, '2014-11-19 22:40:21', 1, '2014-11-19 22:40:21'),
+(10, NULL, 9, 0, NULL, 1, 1, '2014-11-19 22:40:21', 1, '2014-11-19 22:40:21'),
+(11, NULL, 10, 0, NULL, 1, 1, '2014-11-19 22:40:21', 1, '2014-11-19 22:40:21'),
+(12, NULL, 11, 0, NULL, 1, 1, '2014-11-19 22:40:21', 1, '2014-11-19 22:40:21'),
+(13, NULL, 12, 0, NULL, 1, 1, '2014-11-19 22:40:21', 1, '2014-11-19 22:40:21'),
+(14, NULL, 13, 0, NULL, 1, 1, '2014-11-19 22:40:21', 1, '2014-11-19 22:40:21'),
+(15, NULL, 14, 0, NULL, 1, 1, '2014-11-19 22:40:21', 1, '2014-11-19 22:40:21'),
+(16, NULL, 15, 0, NULL, 1, 1, '2014-11-19 22:40:21', 1, '2014-11-19 22:40:21'),
+(17, NULL, 16, 0, NULL, 1, 1, '2014-11-19 22:40:21', 1, '2014-11-19 22:40:21'),
+(18, NULL, 17, 0, NULL, 1, 1, '2014-11-19 22:40:21', 1, '2014-11-19 22:40:21'),
+(19, NULL, 18, 0, NULL, 1, 1, '2014-11-19 22:40:21', 1, '2014-11-19 22:40:21'),
+(20, NULL, 19, 0, NULL, 1, 1, '2014-11-19 22:40:21', 1, '2014-11-19 22:40:21'),
+(21, NULL, 20, 0, NULL, 1, 1, '2014-11-19 22:40:21', 1, '2014-11-19 22:40:21'),
+(22, NULL, 21, 0, NULL, 1, 1, '2014-11-19 22:40:21', 1, '2014-11-19 22:40:21'),
+(23, NULL, 22, 0, NULL, 1, 1, '2014-11-19 22:40:21', 1, '2014-11-19 22:40:21'),
+(24, NULL, 23, 0, NULL, 1, 1, '2014-11-19 22:40:21', 1, '2014-11-19 22:40:21'),
+(25, NULL, 24, 0, NULL, 1, 1, '2014-11-19 22:40:21', 1, '2014-11-19 22:40:21'),
+(26, NULL, 25, 0, NULL, 1, 1, '2014-11-19 22:40:21', 1, '2014-11-19 22:40:21'),
+(27, NULL, 26, 0, NULL, 1, 1, '2014-11-19 22:40:21', 1, '2014-11-19 22:40:21'),
+(28, NULL, 27, 0, NULL, 1, 1, '2014-11-19 22:40:21', 1, '2014-11-19 22:40:21'),
+(29, NULL, 28, 0, NULL, 1, 1, '2014-11-19 22:40:21', 1, '2014-11-19 22:40:21'),
+(30, NULL, 29, 0, NULL, 1, 1, '2014-11-19 22:40:21', 1, '2014-11-19 22:40:21'),
+(31, NULL, 30, 0, NULL, 1, 1, '2014-11-19 22:40:21', 1, '2014-11-19 22:40:21'),
+(32, NULL, 31, 0, NULL, 1, 1, '2014-11-19 22:40:21', 1, '2014-11-19 22:40:21'),
+(33, NULL, 32, 0, NULL, 1, 1, '2014-11-19 22:40:21', 1, '2014-11-19 22:40:21'),
+(34, NULL, 33, 0, NULL, 1, 1, '2014-11-19 22:40:21', 1, '2014-11-19 22:40:21');
 
 -- --------------------------------------------------------
 
@@ -242,7 +242,7 @@ CREATE TABLE IF NOT EXISTS `direccion` (
   PRIMARY KEY (`codigo`),
   KEY `cod_parroquia` (`cod_parroquia`),
   KEY `cod_persona` (`cod_persona`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
 
 --
 -- Dumping data for table `direccion`
@@ -276,11 +276,11 @@ CREATE TABLE IF NOT EXISTS `discapacidad` (
 
 INSERT INTO `discapacidad` (`codigo`, `descripcion`, `status`, `cod_usr_reg`, `fec_reg`, `cod_usr_mod`, `fec_mod`) VALUES
 (0, 'No posee', 1, 1, '2014-11-18 23:23:51', 1, '2014-11-18 23:23:51'),
-(1, 'Fisico-motora', 1, 1, '2014-11-18 23:23:51', 1, '2014-11-18 23:23:51'),
-(2, 'Cognitiva o intelectual', 1, 1, '2014-11-18 23:23:51', 1, '2014-11-18 23:23:51'),
-(3, 'Sensorial', 1, 1, '2014-11-18 23:23:51', 1, '2014-11-18 23:23:51'),
-(4, 'Enfermedad organica', 1, 1, '2014-11-18 23:23:51', 1, '2014-11-18 23:23:51'),
-(5, 'Multiple', 1, 1, '2014-11-18 23:23:51', 1, '2014-11-18 23:23:51');
+(1, 'Fisico-mot', 1, 1, '2014-11-19 15:05:45', 1, '2014-11-19 15:05:45'),
+(2, 'Cognitiva ', 1, 1, '2014-11-19 15:05:45', 1, '2014-11-19 15:05:45'),
+(3, 'Sensorial', 1, 1, '2014-11-19 15:05:45', 1, '2014-11-19 15:05:45'),
+(4, 'Enfermedad', 1, 1, '2014-11-19 15:05:45', 1, '2014-11-19 15:05:45'),
+(5, 'Multiple', 1, 1, '2014-11-19 15:05:45', 1, '2014-11-19 15:05:45');
 
 -- --------------------------------------------------------
 
@@ -746,7 +746,7 @@ CREATE TABLE IF NOT EXISTS `obtiene` (
 --
 
 INSERT INTO `obtiene` (`codigo`, `cod_p_a`, `cod_alu`, `status`, `cod_usr_reg`, `fec_reg`, `cod_usr_mod`, `fec_mod`) VALUES
-(1, 1, 1, 1, 1, '2014-11-19 00:05:41', 1, '2014-11-19 00:05:41');
+(1, 1, 1, 1, 1, '2014-11-19 22:48:50', 1, '2014-11-19 22:48:50');
 
 -- --------------------------------------------------------
 
@@ -1756,6 +1756,7 @@ CREATE TABLE IF NOT EXISTS `persona` (
   `cod_usr_mod` int(11) NOT NULL,
   `fec_mod` timestamp NOT NULL,
   PRIMARY KEY (`codigo`),
+  UNIQUE KEY `cedula` (`cedula`),
   KEY `sexo` (`sexo`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
@@ -2045,7 +2046,7 @@ CREATE TABLE IF NOT EXISTS `suplente` (
   `status` tinyint(1) unsigned NOT NULL DEFAULT '1',
   `cod_usr_reg` int(11) NOT NULL,
   `fec_reg` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `cod_usr_mod` int(11) NOT NULL DEFAULT 0,
+  `cod_usr_mod` int(11) NOT NULL DEFAULT '0',
   `fec_mod` timestamp NOT NULL,
   PRIMARY KEY (`codigo`),
   KEY `cod_profesor` (`cod_profesor`),
@@ -2176,19 +2177,19 @@ INSERT INTO `usuario` (`codigo`, `seudonimo`, `clave`, `cod_tipo_usr`, `status`,
 -- Constraints for table `alumno`
 --
 ALTER TABLE `alumno`
-  ADD CONSTRAINT `alumno_ibfk_8` FOREIGN KEY (`cod_curso`) REFERENCES `asume` (`codigo`) ON UPDATE CASCADE,
   ADD CONSTRAINT `alumno_ibfk_1` FOREIGN KEY (`cod_persona`) REFERENCES `persona` (`codigo`) ON UPDATE CASCADE,
   ADD CONSTRAINT `alumno_ibfk_2` FOREIGN KEY (`camisa`) REFERENCES `talla` (`codigo`) ON UPDATE CASCADE,
   ADD CONSTRAINT `alumno_ibfk_3` FOREIGN KEY (`pantalon`) REFERENCES `talla` (`codigo`) ON UPDATE CASCADE,
   ADD CONSTRAINT `alumno_ibfk_5` FOREIGN KEY (`cod_representante`) REFERENCES `personal_autorizado` (`codigo`) ON UPDATE CASCADE,
   ADD CONSTRAINT `alumno_ibfk_6` FOREIGN KEY (`cod_persona_retira`) REFERENCES `personal_autorizado` (`codigo`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `alumno_ibfk_7` FOREIGN KEY (`cod_discapacidad`) REFERENCES `discapacidad` (`codigo`) ON UPDATE CASCADE;
+  ADD CONSTRAINT `alumno_ibfk_7` FOREIGN KEY (`cod_discapacidad`) REFERENCES `discapacidad` (`codigo`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `alumno_ibfk_8` FOREIGN KEY (`cod_curso`) REFERENCES `asume` (`codigo`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `asume`
 --
 ALTER TABLE `asume`
-  ADD CONSTRAINT `asume_ibfk_1` FOREIGN KEY (`cod_docente`) REFERENCES `persona` (`codigo`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `asume_ibfk_1` FOREIGN KEY (`cod_docente`) REFERENCES `personal` (`codigo`) ON UPDATE CASCADE,
   ADD CONSTRAINT `asume_ibfk_2` FOREIGN KEY (`periodo_academico`) REFERENCES `periodo_academico` (`codigo`) ON UPDATE CASCADE,
   ADD CONSTRAINT `asume_ibfk_3` FOREIGN KEY (`cod_curso`) REFERENCES `curso` (`codigo`) ON UPDATE CASCADE;
 
@@ -2223,8 +2224,6 @@ ALTER TABLE `parroquia`
 --
 ALTER TABLE `persona`
   ADD CONSTRAINT `persona_ibfk_1` FOREIGN KEY (`sexo`) REFERENCES `sexo` (`codigo`) ON UPDATE CASCADE;
-ALTER TABLE `persona`
-  ADD UNIQUE( `cedula`);
 
 --
 -- Constraints for table `personal`
@@ -2249,7 +2248,7 @@ ALTER TABLE `personal_autorizado`
 -- Constraints for table `suplente`
 --
 ALTER TABLE `suplente`
-  ADD CONSTRAINT `suplente_ibfk_1` FOREIGN KEY (`cod_profesor`) REFERENCES `personal` (`codigo`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `suplente_ibfk_10` FOREIGN KEY (`cod_profesor`) REFERENCES `personal` (`codigo`) ON UPDATE CASCADE,
   ADD CONSTRAINT `suplente_ibfk_2` FOREIGN KEY (`cod_suplente`) REFERENCES `personal` (`codigo`) ON UPDATE CASCADE;
 
 --
