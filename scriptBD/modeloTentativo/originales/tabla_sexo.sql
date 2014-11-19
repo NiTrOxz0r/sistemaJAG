@@ -5,11 +5,12 @@ CREATE TABLE sexo (
 	cod_usr_reg int not null,
 	fec_reg timestamp not null default current_timestamp,
 	cod_usr_mod int not null,
-	fec_mod timestamp not null default current_timestamp
+	fec_mod timestamp not null
 );
 
 INSERT INTO sexo
 (codigo, descripcion, cod_usr_reg, cod_usr_mod)
 values
-(0,'Masculino', 1, 1),
-(1,'Femenino', 1, 1);
+(0,'Masculino', 1, current_timestamp),
+(1,'Femenino', 1, current_timestamp)
+;

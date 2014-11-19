@@ -5,15 +5,15 @@ CREATE TABLE tipo_personal (
 	cod_usr_reg int not null,
 	fec_reg timestamp not null default current_timestamp,
 	cod_usr_mod int not null,
-	fec_mod timestamp not null default current_timestamp
+	fec_mod timestamp not null
 );
 
 INSERT INTO tipo_personal
 (codigo, descripcion, cod_usr_reg, cod_usr_mod)
 values
-(0,'Otro', 1, 1),
-(1,'Administrativo', 1, 1),
-(2,'Directivo', 1, 1),
-(3,'Docente', 1, 1),
-(4,'Pasante', 1, 1)
+(0,'Otro', 1, current_timestamp),
+(1,'Administrativo', 1, current_timestamp),
+(2,'Directivo', 1, current_timestamp),
+(3,'Docente', 1, current_timestamp),
+(4,'Pasante', 1, current_timestamp)
 ;

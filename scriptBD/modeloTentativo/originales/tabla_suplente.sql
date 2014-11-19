@@ -3,13 +3,13 @@ CREATE TABLE suplente (
 	cod_profesor int unsigned not null,
 	cod_suplente int unsigned not null,
 	comentarios varchar(200) default 'Sin Comentarios',
-	desde timestamp not null default current_timestamp,
-	hasta timestamp default current_timestamp,
+	desde timestamp not null,
+	hasta timestamp,
 	status tinyint(1) unsigned not null default 1,
-	cod_usr_reg int not null, 
+	cod_usr_reg int not null,
 	fec_reg timestamp not null default current_timestamp,
-	cod_usr_mod int not null, 
-	fec_mod timestamp not null default current_timestamp,
+	cod_usr_mod int not null,
+	fec_mod timestamp not null,
 	foreign key (cod_profesor)
 		references docente(codigo)
 		on update cascade
