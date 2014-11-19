@@ -1,7 +1,7 @@
 CREATE TABLE curso (
 	codigo tinyint(3) unsigned primary key,
-  grado tinyint(3) NOT NULL,
-  seccion tinyint(3) NOT NULL,
+  grado tinyint(3) unsigned NOT NULL,
+  seccion tinyint(3) unsigned NOT NULL,
   descripcion varchar(50) NOT NULL,
   status tinyint(1) unsigned not null default 1,
 	cod_usr_reg int not null,
@@ -45,8 +45,8 @@ INSERT INTO curso VALUES
 (28, 6, 3, 'Sexto Grado Seccion:"C"', 1, 1, null, 1, current_timestamp),
 (29, 6, 4, 'Sexto Grado Seccion:"D"', 1, 1, null, 1, current_timestamp),
 (30, 6, 5, 'Sexto Grado Seccion:"E"', 1, 1, null, 1, current_timestamp),
-(31, -1, 1, 'Prescolar nivel 1', 1, 1, null, 1, current_timestamp),
-(32, -2, 1, 'Prescolar nivel 2', 1, 1, null, 1, current_timestamp),
-(33, -3, 1, 'Prescolar nivel 3', 1, 1, null, 1, current_timestamp),
-(34, 7, 1, 'Sin Curso Asociado', 1, 1, null, 1, current_timestamp)
+(31, 7, 1, 'Prescolar nivel 1', 1, 1, null, 1, current_timestamp),
+(32, 8, 1, 'Prescolar nivel 2', 1, 1, null, 1, current_timestamp),
+(33, 9, 1, 'Prescolar nivel 3', 1, 1, null, 1, current_timestamp),
+(34, 10, 1, 'Sin Curso Asociado', 1, 1, null, 1, current_timestamp)
 ;

@@ -1,5 +1,5 @@
 CREATE table cargo(
-	codigo tinyint unsigned auto_increment primary key,
+	codigo tinyint(3) unsigned auto_increment primary key,
 	descripcion varchar(50) not null,
 	status tinyint(1) unsigned not null default 1,
 	cod_usr_reg int not null,

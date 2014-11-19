@@ -10,7 +10,7 @@ CREATE TABLE asume (
 	cod_usr_mod int not null,
 	fec_mod timestamp not null,
 	foreign key (cod_docente)
-		references personal(codigo)
+		references persona(codigo)
 		on update cascade
 		on delete restrict,
 	foreign key (periodo_academico)
