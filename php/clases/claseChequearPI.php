@@ -42,31 +42,32 @@ class ChequearPI extends ChequearGenerico{
 		$tipoPersonal
 		){
 		//variables del objerto:
-		$con = conexion();//desde master.php > conexion.php
-		$this->codUsrMod = mysqli_escape_string($con, trim($codUsrMod));
-		$this->p_apellido = mysqli_escape_string($con, trim($p_apellido));
-		$this->s_apellido = mysqli_escape_string($con, trim($s_apellido));
-		$this->p_nombre = mysqli_escape_string($con, trim($p_nombre));
-		$this->s_nombre = mysqli_escape_string($con, trim($s_nombre));
-		$this->nacionalidad = mysqli_escape_string($con, trim($nacionalidad));
-		$this->cedula = mysqli_escape_string($con, trim($cedula));
-		$this->celular = mysqli_escape_string($con, trim($celular));
-		$this->telefono = mysqli_escape_string($con, trim($telefono));
-		$this->telefonoOtro = mysqli_escape_string($con, trim($telefonoOtro));
-		$this->nivel_instruccion = mysqli_escape_string($con, trim($nivel_instruccion));
-		$this->titulo = mysqli_escape_string($con, trim($titulo));
-		$this->fecNac = mysqli_escape_string($con, trim($fecNac));
-		$this->sexo = mysqli_escape_string($con, trim($sexo));
-		$this->email = mysqli_escape_string($con, trim($email));
-		$this->codTipoUsr = mysqli_escape_string($con, trim($codTipoUsr));
-		$this->codCargo = mysqli_escape_string($con, trim($codCargo));
-		$this->tipoPersonal = mysqli_escape_string($con, trim($tipoPersonal));
+		$conexion = conexion();//desde master.php > conexion.php
+		$this->codUsrMod = mysqli_escape_string($conexion, trim($codUsrMod));
+		$this->p_apellido = mysqli_escape_string($conexion, trim($p_apellido));
+		$this->s_apellido = mysqli_escape_string($conexion, trim($s_apellido));
+		$this->p_nombre = mysqli_escape_string($conexion, trim($p_nombre));
+		$this->s_nombre = mysqli_escape_string($conexion, trim($s_nombre));
+		$this->nacionalidad = mysqli_escape_string($conexion, trim($nacionalidad));
+		$this->cedula = mysqli_escape_string($conexion, trim($cedula));
+		$this->celular = mysqli_escape_string($conexion, trim($celular));
+		$this->telefono = mysqli_escape_string($conexion, trim($telefono));
+		$this->telefonoOtro = mysqli_escape_string($conexion, trim($telefonoOtro));
+		$this->nivel_instruccion = mysqli_escape_string($conexion, trim($nivel_instruccion));
+		$this->titulo = mysqli_escape_string($conexion, trim($titulo));
+		$this->fecNac = mysqli_escape_string($conexion, trim($fecNac));
+		$this->sexo = mysqli_escape_string($conexion, trim($sexo));
+		$this->email = mysqli_escape_string($conexion, trim($email));
+		$this->codTipoUsr = mysqli_escape_string($conexion, trim($codTipoUsr));
+		$this->codCargo = mysqli_escape_string($conexion, trim($codCargo));
+		$this->tipoPersonal = mysqli_escape_string($conexion, trim($tipoPersonal));
 		//metodos internos:
 		//para poner variables nulas si es necesario:
 		self::setNull();
 		//chequeaomos la forma (el objeto como tal):
 		self::chequeaForma();
 		self::chequeame(); //heredado de ChequearGenerico
+		mysqli_close($conexion);
 	}
 
 	/**

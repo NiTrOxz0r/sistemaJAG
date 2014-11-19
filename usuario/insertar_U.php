@@ -234,6 +234,8 @@ if ( isset($_SESSION['seudonimo']) && isset($_SESSION['clave']) && isset($_POST[
 	<?php endif;?>
 
 <?php
+//cerramos $con:
+mysqli_close($con);
 //FINALIZAMOS LA PAGINA:
 //trae footer.php y cola.php
 finalizarPagina();?>

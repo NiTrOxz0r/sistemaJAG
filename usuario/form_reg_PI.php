@@ -7,11 +7,11 @@ require_once($enlace);
 
 if ( isset($_POST['seudonimo']) && isset($_POST['clave']) ):
 	$seudonimo = $_POST['seudonimo'];
-	$clave = $_POST['clave'];
-	$hash = password_hash($clave, PASSWORD_BCRYPT, ['cost' => 12]);
-	$validarForma = new ChequearUsuario($seudonimo,	$hash);
+	$clave = array('simple' => $_POST['clave']);
+	$validarForma = new ChequearUsuario($seudonimo,	$clave);
+	$hash = password_hash($clave['simple'], PASSWORD_BCRYPT, ['cost' => 12]);
 	$_SESSION['seudonimo'] = $validarForma->seudonimo;
-	$_SESSION['clave'] = $validarForma->clave;
+	$_SESSION['clave'] = $hash;
 	//CONTENIDO:?>
 	<div id="contenido">
 		<div id="blancoAjax">

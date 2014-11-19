@@ -11,18 +11,18 @@ require_once($enlace);
 			$_SESSION['error_login'] = "campos vacios (seudonimo o clave)";
 			header("location: ../index.php");
 		else :
-			//iniciamos conexion para 
+			//iniciamos conexion para
 			//establecer el escape_string,
 			//detallese que la variable entra en la funcion
 			//mysqli_real_escape_string:
 			$conexion = conexion(); // esto es una funcion, no una clase
-			$seudonimo = mysqli_real_escape_string($conexion, $_POST['seudonimo']); 
-			$clave = mysqli_real_escape_string($conexion, $_POST['clave']);
+			$clave = array('simple' => $_POST['clave']);
+			$validarForma = new ChequearUsuario ($_POST['seudonimo'], $clave);
 			//hacemos el query para determinar entre otras cosas
 			//la clave del usuario en hash:
-			$query = "SELECT codigo, cod_tipo_usr, clave 
-			from usuario 
-			where seudonimo  ='".$seudonimo."';";
+			$query = "SELECT codigo, cod_tipo_usr, seudonimo, clave
+			from usuario
+			where seudonimo = $validarForma->seudonimo;";
 			$sql = conexion($query);
 			//si el usuario esta en la base de datos:
 			if ( $sql->num_rows == 1 ) :
@@ -30,6 +30,7 @@ require_once($enlace);
 				//verificamos encriptamiento:
 				//con salt para el hash
 				//verifica la clave segun la clave encriptada en BD:
+				$clave = $validarForma->clave['simple'];
 				$hash = password_verify($clave, $resultado['clave']);
 				//password_verify regresa falso si la clave no concuerda:
 				if ($hash) :
@@ -42,49 +43,57 @@ require_once($enlace);
 						unset($_SESSION['error_login']);
 					endif;
 					//se chequea los datos personales del usuario:
-					$query = "SELECT p_nombre, p_apellido 
-					from docente
-					where cod_usr = $resultado[codigo]
-					UNION
-					SELECT p_nombre, p_apellido 
-					from administrativo
-					where cod_usr = $resultado[codigo]
-					UNION
-					SELECT p_nombre, p_apellido 
-					from directivo
-					where cod_usr = $resultado[codigo];";
+					$query = "SELECT
+					p_nombre, p_apellido,
+					usuario.codigo as codigo,
+					seudonimo, cod_tipo_usr
+					from persona
+					inner join personal
+					on persona.codigo = personal.cod_persona
+					inner join usuario
+					on personal.cod_usr = usuario.codigo
+					where
+					usuario.codigo = $resultado[codigo];";
 					$rs = conexion($query);
 					//si no hay PI asociado internamente
 					//o hay mas de uno.
 					//en caso de haber mas de uno hay que revisar codigo
 					//PORQUE ESO NO DEBERIA PASAR NUNCA.
 					if ($rs->num_rows <> 1) :
+						mysqli_close($conexion);
 					 	$_SESSION['error_login'] = "Multiples Usuarios con el mismo codigo, revisar registro de usuarios.";
 						header("location: ../index.php");
 					endif;
 					//culminado todo se inician las variables de sesion:
 					$datosPersonales = mysqli_fetch_assoc($rs);
-					$_SESSION['codUsrMod'] = $resultado['codigo'];
-					$_SESSION['cod_tipo_usr'] = $resultado['cod_tipo_usr'];
-					$_SESSION['seudonimo'] = $seudonimo;
+					$_SESSION['codUsrMod'] = $datosPersonales['codigo'];
+					$_SESSION['cod_tipo_usr'] = $datosPersonales['cod_tipo_usr'];
+					$_SESSION['seudonimo'] = $datosPersonales['seudonimo'];
 					$_SESSION['p_apellido'] = $datosPersonales['p_apellido'];
 					$_SESSION['p_nombre'] = $datosPersonales['p_nombre'];
+					//cerramos $conexion:
+					mysqli_close($conexion);
 					header("Location: ../index.php");
 				//clave no coindice:
 				else :
+					mysqli_close($conexion);
 					session_start();
 					$_SESSION['error_login'] = "clave no coincide";
+					$_SESSION['error_login_clave'] = $clave;
+					$_SESSION['error_login_seudonimo'] = $validarForma->seudonimo;
+					$_SESSION['error_login_hash'] = $resultado['clave'];
 					header("location: ../index.php");
 				endif;
 			//usuario no exixte:
 			else :
+				mysqli_close($conexion);
 				session_start();
 				$_SESSION['error_login'] = "Usuario no existe";
 				header("location: ../index.php");
 			endif;
 		endif;
 	//el usuario entra directamente a validar_U.php:
-	else : 
+	else :
 		header("location: ../index.php");
 	endif;
 
