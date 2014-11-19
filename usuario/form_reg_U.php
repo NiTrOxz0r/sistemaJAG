@@ -18,7 +18,8 @@ empezarPagina();
 		<form
 			name="form_U"
 			id="form_U"
-			action="<?php echo $_SERVER['DOCUMENT_ROOT'].'/github/sistemaJAG/usuario/form_reg_PI.php' ?>"
+			action="<?php echo $_SERVER['DOCUMENT_ROOT'].
+			'/github/sistemaJAG/usuario/form_reg_PI.php' ?>"
 			method="POST">
 			<table>
 				<thead>
@@ -98,7 +99,7 @@ empezarPagina();
 					//hacemos una consulta por ajax
 					//para saber si el seudonimo esta disponible:
 					$.ajax({
-						url: '../java/ajax/usuario/usuario.php',
+						url: '../java/ajax/usuario/seudonimo.php',
 						type: 'POST',
 						data: {seudonimo:info},
 						dataType: "html",

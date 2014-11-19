@@ -5,7 +5,7 @@ CREATE TABLE persona (
 	p_apellido varchar(40) not null,
 	s_apellido varchar(40) default "Sin Registro",
 	nacionalidad enum('v','e') default 'v' not null,
-	cedula varchar(8) default "sinDatos" not null,
+	cedula varchar(8) default "sinDatos" not null unique,
 	fec_nac date not null,
 	telefono varchar(11) default 'SinRegistro',
 	telefono_otro varchar(11) default 'SinRegistro',

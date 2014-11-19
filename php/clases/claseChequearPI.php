@@ -16,7 +16,7 @@
 * @todo ampliar segun sea necesario segun
 * los objetivos necesarios
 *
-* @version 1.4
+* @version 1.5
 *
 */
 class ChequearPI extends ChequearGenerico{
@@ -36,15 +36,32 @@ class ChequearPI extends ChequearGenerico{
 		$titulo = 'null',
 		$fecNac,
 		$sexo,
-		$codigoDireccion = 'null',
 		$email = 'null',
 		$codTipoUsr,
-		$codCargo
+		$codCargo,
+		$tipoPersonal
 		){
+		//variables del objerto:
+		$con = conexion();//desde master.php > conexion.php
+		$this->codUsrMod = mysqli_escape_string($con, trim($codUsrMod));
+		$this->p_apellido = mysqli_escape_string($con, trim($p_apellido));
+		$this->s_apellido = mysqli_escape_string($con, trim($s_apellido));
+		$this->p_nombre = mysqli_escape_string($con, trim($p_nombre));
+		$this->s_nombre = mysqli_escape_string($con, trim($s_nombre));
+		$this->nacionalidad = mysqli_escape_string($con, trim($nacionalidad));
+		$this->cedula = mysqli_escape_string($con, trim($cedula));
+		$this->celular = mysqli_escape_string($con, trim($celular));
+		$this->telefono = mysqli_escape_string($con, trim($telefono));
+		$this->telefonoOtro = mysqli_escape_string($con, trim($telefonoOtro));
+		$this->nivel_instruccion = mysqli_escape_string($con, trim($nivel_instruccion));
+		$this->titulo = mysqli_escape_string($con, trim($titulo));
+		$this->fecNac = mysqli_escape_string($con, trim($fecNac));
+		$this->sexo = mysqli_escape_string($con, trim($sexo));
+		$this->email = mysqli_escape_string($con, trim($email));
+		$this->codTipoUsr = mysqli_escape_string($con, trim($codTipoUsr));
+		$this->codCargo = mysqli_escape_string($con, trim($codCargo));
+		$this->tipoPersonal = mysqli_escape_string($con, trim($tipoPersonal));
 		//metodos internos:
-
-		//para mysqli_escape_string();
-		self::escapeString();
 		//para poner variables nulas si es necesario:
 		self::setNull();
 		//chequeaomos la forma (el objeto como tal):
@@ -137,44 +154,12 @@ class ChequearPI extends ChequearGenerico{
 			die(header("Location: registro.php?sexo=malDefinido"));
 			}
 		}
-
-		if ($this->codigoDireccion <> "") {
-			if ( !is_numeric($this->codigoDireccion) ) {
-				die(header("Location: registro.php?codigoDireccionNumeric=false"));
-			}
+		if ( preg_match('/[a-zA-Z-*{\"}@!"#$%\/&)=_]/', $this->tipoPersonal) ) {
+			die(header("Location: registro.php?tipoPersonalNumeric=false"));
 		}
+
 	}
 
-	/**
-	 * @author [slayerfat]
-	 *
-	 * {@internal esto es para que
-	 * automaticamente convierta las variables del objeto
-	 * a variables limpias para mysql}
-	 *
-	 * @return void [solo genera las variables internas del objeto]
-	 */
-
-	private function escapeString(){
-		$con = conexion();//desde master.php > conexion.php
-		$this->codUsrMod = mysqli_escape_string($con, trim($codUsrMod));
-		$this->p_apellido = mysqli_escape_string($con, trim($p_apellido));
-		$this->s_apellido = mysqli_escape_string($con, trim($s_apellido));
-		$this->p_nombre = mysqli_escape_string($con, trim($p_nombre));
-		$this->s_nombre = mysqli_escape_string($con, trim($s_nombre));
-		$this->nacionalidad = mysqli_escape_string($con, trim($nacionalidad));
-		$this->celular = mysqli_escape_string($con, trim($celular));
-		$this->telefono = mysqli_escape_string($con, trim($telefono));
-		$this->telefonoOtro = mysqli_escape_string($con, trim($telefonoOtro));
-		$this->nivel_instruccion = mysqli_escape_string($con, trim($nivel_instruccion));
-		$this->titulo = mysqli_escape_string($con, trim($titulo));
-		$this->fecNac = mysqli_escape_string($con, trim($fecNac));
-		$this->sexo = mysqli_escape_string($con, trim($sexo));
-		$this->codigoDireccion = mysqli_escape_string($con, trim($codigoDireccion));
-		$this->email = mysqli_escape_string($con, trim($email));
-		$this->codTipoUsr = mysqli_escape_string($con, trim($codTipoUsr));
-		$this->codCargo = mysqli_escape_string($con, trim($codCargo));
-	}
 	/**
 	* @author [slayerfat]
 	*
@@ -184,63 +169,55 @@ class ChequearPI extends ChequearGenerico{
 	* @return void [solo genera las variables internas del objeto]
 	*/
 	private function setNull(){
-		if ($s_apellido == "") {
+		if ($this->s_apellido == "") {
 			$this->s_apellido = "null";
 		}else{
-			$this->s_apellido = "'$s_apellido'";
+			$this->s_apellido = "'$this->s_apellido'";
 		}
 
-		$this->p_apellido = "'$p_apellido'";
+		$this->p_apellido = "'$this->p_apellido'";
 
-		$this->p_nombre = "'$p_nombre'";
+		$this->p_nombre = "'$this->p_nombre'";
 
-		if ($s_nombre == "") {
+		if ($this->s_nombre == "") {
 			$this->s_nombre = "null";
 		}else{
-			$this->s_nombre = "'$s_nombre'";
+			$this->s_nombre = "'$this->s_nombre'";
 		}
 
-		$this->nacionalidad = "'$nacionalidad'";
-		$this->cedula = "'$cedula'";
+		$this->nacionalidad = "'$this->nacionalidad'";
+		$this->cedula = "'$this->cedula'";
 
-		$this->nivel_instruccion = "'$nivel_instruccion'";
-		if ($titulo == "") {
+		$this->nivel_instruccion = "'$this->nivel_instruccion'";
+		if ($this->titulo == "") {
 			$this->titulo = "null";
 		}else{
-			$this->titulo = "'$titulo'";
+			$this->titulo = "'$this->titulo'";
 		}
-		if ($celular == "") {
+		if ($this->celular == "") {
 			$this->celular = "null";
 		}else{
-			$this->celular = "'$celular'";
+			$this->celular = "'$this->celular'";
 		}
-		if ($telefono == "") {
+		if ($this->telefono == "") {
 			$this->telefono = "null";
 		}else{
-			$this->telefono = "'$telefono'";
+			$this->telefono = "'$this->telefono'";
 		}
-		if ($telefonoOtro == "") {
+		if ($this->telefonoOtro == "") {
 			$this->telefonoOtro = "null";
 		}else{
-			$this->telefonoOtro = "'$telefonoOtro'";
+			$this->telefonoOtro = "'$this->telefonoOtro'";
 		}
 
-		$this->fecNac = "'$fecNac'";
+		$this->fecNac = "'$this->fecNac'";
+		$this->sexo = "'$this->sexo'";
 
-		$this->sexo = "'$sexo'";
-
-		$this->codigoDireccion = $codigoDireccion;
-
-
-		if ($email == "") {
+		if ($this->email == "") {
 			$this->email = "null";
 		}else{
-			$this->email = "'$email'";
+			$this->email = "'$this->email'";
 		}
-
-		$this->codTipoUsr = $codTipoUsr;
-		$this->codCargo = $codCargo;
-
 		$this->fecMod = "current_timestamp";
 	}
 

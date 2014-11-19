@@ -26,7 +26,7 @@ function validacionPI(){
 	var telefono = document.getElementById('telefono').value.replace(/^\s+|\s+$/g, '');
 	var telefono_otro = document.getElementById('telefono_otro').value.replace(/^\s+|\s+$/g, '');
 	var cargo = document.getElementById('cargo').value.replace(/^\s+|\s+$/g, '');
-	var tipo = document.getElementById('tipo').value.replace(/^\s+|\s+$/g, '');
+	var tipo = document.getElementById('tipo_personal').value.replace(/^\s+|\s+$/g, '');
 	var direcc = document.getElementById('direcc').value.replace(/^\s+|\s+$/g, '');
 	var estado = document.getElementById('cod_est').value.replace(/^\s+|\s+$/g, '');
 	var municipio = document.getElementById('cod_mun').value.replace(/^\s+|\s+$/g, '');

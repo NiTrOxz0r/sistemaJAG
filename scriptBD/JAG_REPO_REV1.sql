@@ -275,7 +275,12 @@ CREATE TABLE IF NOT EXISTS `discapacidad` (
 --
 
 INSERT INTO `discapacidad` (`codigo`, `descripcion`, `status`, `cod_usr_reg`, `fec_reg`, `cod_usr_mod`, `fec_mod`) VALUES
-(0, 'No posee', 1, 1, '2014-11-18 23:23:51', 1, '2014-11-18 23:23:51');
+(0, 'No posee', 1, 1, '2014-11-18 23:23:51', 1, '2014-11-18 23:23:51'),
+(1, 'Fisico-motora', 1, 1, '2014-11-18 23:23:51', 1, '2014-11-18 23:23:51'),
+(2, 'Cognitiva o intelectual', 1, 1, '2014-11-18 23:23:51', 1, '2014-11-18 23:23:51'),
+(3, 'Sensorial', 1, 1, '2014-11-18 23:23:51', 1, '2014-11-18 23:23:51'),
+(4, 'Enfermedad organica', 1, 1, '2014-11-18 23:23:51', 1, '2014-11-18 23:23:51'),
+(5, 'Multiple', 1, 1, '2014-11-18 23:23:51', 1, '2014-11-18 23:23:51');
 
 -- --------------------------------------------------------
 
@@ -2218,6 +2223,8 @@ ALTER TABLE `parroquia`
 --
 ALTER TABLE `persona`
   ADD CONSTRAINT `persona_ibfk_1` FOREIGN KEY (`sexo`) REFERENCES `sexo` (`codigo`) ON UPDATE CASCADE;
+ALTER TABLE `persona`
+  ADD UNIQUE( `cedula`);
 
 --
 -- Constraints for table `personal`

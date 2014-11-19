@@ -11,4 +11,10 @@ CREATE TABLE discapacidad (
 INSERT INTO discapacidad
 (codigo, descripcion, cod_usr_reg, cod_usr_mod, fec_mod)
 values
-(0,'No posee', 1, 1, current_timestamp);
+(0,'No posee', 1, 1, current_timestamp),
+(1,'Fisico-motora', 1, 1, current_timestamp),
+(2,'Cognitiva o intelectual', 1, 1, current_timestamp),
+(3,'Sensorial', 1, 1, current_timestamp),
+(4,'Enfermedad organica', 1, 1, current_timestamp),
+(5,'Multiple', 1, 1, current_timestamp)
+;

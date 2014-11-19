@@ -1,16 +1,16 @@
-<?php 
+<?php
 
 /**
 * @author Granadillo Alejandro.
 * @copyright MIT/GNU/Otro??? Octurbre 2014
-* 
+*
 * @internal este archivo esta echo para ser
 * un repositorio de todos los posibles archivos *.php
 * que el sistema requiera al momento de ejecucion.
 * tambien es necesario discutir
 * sobre el tipo de licencia, al ser codigo libre.
-* 
-* 
+*
+*
 * @deprecated considerado el archivo
 * o libreria principal que todas las paginas
 * y archivos o librerias adicionales, hagan referencia de.
@@ -19,10 +19,10 @@
 * @example indexMaster.php
 * @todo ampliar segun sea necesario segun
 * los objetivos necesarios:
-* 
+*
 * @version 1.0
-* 
-* 
+*
+*
 */
 // aqui esta la funcion basica mysqli_connect y mysqli_query
 require "funciones/conexion.php";
@@ -50,11 +50,14 @@ require "clases/claseTablaPrimaria.php";
 //generico para situaciones especificas varias
 require "clases/claseChequearGenerico.php";
 
+//direccion para todas las entidades:
+require "clases/claseChequearDireccion.php";
+
 // alumno
 require "clases/claseChequearAlumno.php";
 
-// personal autorizado ej: 
-// madres, representantes, 
+// personal autorizado ej:
+// madres, representantes,
 // personas autorizadas a retirar el alumno
 require "clases/claseChequearPA.php";
 // crea nombres diferentes para la misma clase
@@ -66,7 +69,7 @@ class_alias('ChequearPA', 'ChequearRepresentante');
 
 
 //personal interno ej: docentes, directoras etc
-require "clases/claseChequearPI.php"; 
+require "clases/claseChequearPI.php";
 // crea nombres diferentes para la misma clase
 class_alias('ChequearPI', 'ChequearDocente');
 class_alias('ChequearPI', 'ChequearProfesor');

@@ -225,7 +225,7 @@ if ( isset($_POST['seudonimo']) && isset($_POST['clave']) ):
 									</select>
 								</td>
 								<td>
-									<select name="tipo" id="tipo" required>
+									<select name="tipo_personal" id="tipo_personal" required>
 										<option value="" selected="selected">
 											--Seleccione--
 										</option>
@@ -312,7 +312,7 @@ if ( isset($_POST['seudonimo']) && isset($_POST['clave']) ):
 						var telefono_otro = $('#telefono_otro').val();
 						var celular = $('#celular').val();
 						var cargo = $('#cargo').val();
-						var tipo = $('#tipo').val();
+						var tipo_personal = $('#tipo_personal').val();
 						var direcc = $('#direcc').val();
 						var cod_est = $('#cod_est').val();
 						var cod_mun = $('#cod_mun').val();
@@ -336,9 +336,9 @@ if ( isset($_POST['seudonimo']) && isset($_POST['clave']) ):
 								telefono_otro:telefono_otro,
 								celular:celular,
 								cod_cargo:cargo,
-								tipo:tipo,
+								tipo_personal:tipo_personal,
 								direcc:direcc,
-								cod_parro:cod_parro
+								cod_parroquia:cod_parro
 							},
 							success: function (datos){
 								$('#contenido').html('');

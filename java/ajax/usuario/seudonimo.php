@@ -16,7 +16,7 @@ if ( isset($_POST['seudonimo']) ) :
 		require_once($enlace);
 		$con = conexion();
 		$seudonimo = mysqli_escape_string($con,$_POST['seudonimo']);
-		$query = "SELECT * FROM usuario
+		$query = "SELECT codigo FROM usuario
 		WHERE seudonimo = '$seudonimo';";
 		$consulta = conexion($query);
 		if ($consulta->num_rows == 0): ?>
