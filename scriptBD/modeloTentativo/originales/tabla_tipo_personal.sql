@@ -9,11 +9,11 @@ CREATE TABLE tipo_personal (
 );
 
 INSERT INTO tipo_personal
-(codigo, descripcion, cod_usr_reg, cod_usr_mod)
+(codigo, descripcion, cod_usr_reg, cod_usr_mod, fec_mod)
 values
-(0,'Otro', 1, current_timestamp),
-(1,'Administrativo', 1, current_timestamp),
-(2,'Directivo', 1, current_timestamp),
-(3,'Docente', 1, current_timestamp),
-(4,'Pasante', 1, current_timestamp)
+(0,'Otro', 1, 1, current_timestamp),
+(1,'Administrativo', 1, 1, current_timestamp),
+(2,'Directivo', 1, 1, current_timestamp),
+(3,'Docente', 1, 1, current_timestamp),
+(4,'Pasante', 1, 1, current_timestamp)
 ;

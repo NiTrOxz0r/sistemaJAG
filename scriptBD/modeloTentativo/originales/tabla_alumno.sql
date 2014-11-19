@@ -7,7 +7,7 @@ CREATE TABLE alumno (
 	lugar_nac varchar(50) default 'Sin Registro',
 	plantel_procedencia varchar(50),
 	repitiente enum('s','n') not null,
-	cod_curso tinyint(3) unsigned not null,
+	cod_curso int unsigned not null,
 	altura tinyint(3) unsigned zerofill,
 	peso smallint(3) unsigned,
 	camisa tinyint(1) unsigned,

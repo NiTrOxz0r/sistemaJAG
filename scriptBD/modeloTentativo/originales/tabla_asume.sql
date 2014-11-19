@@ -1,6 +1,6 @@
 CREATE TABLE asume (
 	codigo int unsigned auto_increment primary key,
-	cod_docente int unsigned not null,
+	cod_docente int unsigned,
 	cod_curso tinyint(3) unsigned not null,
 	periodo_academico tinyint(3) unsigned not null,
 	comentarios varchar(200) default 'Sin Comentarios',
@@ -25,3 +25,43 @@ CREATE TABLE asume (
 
 /*considerar: horas administrativas, tiempo de servicio, año de ingreso,
 sumplente, asignacion especial?, capacidad tecnica especializada?, otros.*/
+
+INSERT INTO asume
+(codigo, cod_docente, cod_curso, periodo_academico,
+	comentarios, status, cod_usr_reg,
+	fec_reg, cod_usr_mod, fec_mod)
+VALUES
+	(NULL, '3', '34', '0', 'Sin curso asociado favor actualizar', '1', '1',CURRENT_TIMESTAMP, '1', CURRENT_TIMESTAMP),
+	(NULL, NULL, '1', '0', NULL, '1', '1', CURRENT_TIMESTAMP, '1', CURRENT_TIMESTAMP),
+	(NULL, NULL, '2', '0', NULL, '1', '1', CURRENT_TIMESTAMP, '1', CURRENT_TIMESTAMP),
+	(NULL, NULL, '3', '0', NULL, '1', '1', CURRENT_TIMESTAMP, '1', CURRENT_TIMESTAMP),
+	(NULL, NULL, '4', '0', NULL, '1', '1', CURRENT_TIMESTAMP, '1', CURRENT_TIMESTAMP),
+	(NULL, NULL, '5', '0', NULL, '1', '1', CURRENT_TIMESTAMP, '1', CURRENT_TIMESTAMP),
+	(NULL, NULL, '6', '0', NULL, '1', '1', CURRENT_TIMESTAMP, '1', CURRENT_TIMESTAMP),
+	(NULL, NULL, '7', '0', NULL, '1', '1', CURRENT_TIMESTAMP, '1', CURRENT_TIMESTAMP),
+	(NULL, NULL, '8', '0', NULL, '1', '1', CURRENT_TIMESTAMP, '1', CURRENT_TIMESTAMP),
+	(NULL, NULL, '9', '0', NULL, '1', '1', CURRENT_TIMESTAMP, '1', CURRENT_TIMESTAMP),
+	(NULL, NULL, '10', '0', NULL, '1', '1', CURRENT_TIMESTAMP, '1', CURRENT_TIMESTAMP),
+	(NULL, NULL, '11', '0', NULL, '1', '1', CURRENT_TIMESTAMP, '1', CURRENT_TIMESTAMP),
+	(NULL, NULL, '12', '0', NULL, '1', '1', CURRENT_TIMESTAMP, '1', CURRENT_TIMESTAMP),
+	(NULL, NULL, '13', '0', NULL, '1', '1', CURRENT_TIMESTAMP, '1', CURRENT_TIMESTAMP),
+	(NULL, NULL, '14', '0', NULL, '1', '1', CURRENT_TIMESTAMP, '1', CURRENT_TIMESTAMP),
+	(NULL, NULL, '15', '0', NULL, '1', '1', CURRENT_TIMESTAMP, '1', CURRENT_TIMESTAMP),
+	(NULL, NULL, '16', '0', NULL, '1', '1', CURRENT_TIMESTAMP, '1', CURRENT_TIMESTAMP),
+	(NULL, NULL, '17', '0', NULL, '1', '1', CURRENT_TIMESTAMP, '1', CURRENT_TIMESTAMP),
+	(NULL, NULL, '18', '0', NULL, '1', '1', CURRENT_TIMESTAMP, '1', CURRENT_TIMESTAMP),
+	(NULL, NULL, '19', '0', NULL, '1', '1', CURRENT_TIMESTAMP, '1', CURRENT_TIMESTAMP),
+	(NULL, NULL, '20', '0', NULL, '1', '1', CURRENT_TIMESTAMP, '1', CURRENT_TIMESTAMP),
+	(NULL, NULL, '21', '0', NULL, '1', '1', CURRENT_TIMESTAMP, '1', CURRENT_TIMESTAMP),
+	(NULL, NULL, '22', '0', NULL, '1', '1', CURRENT_TIMESTAMP, '1', CURRENT_TIMESTAMP),
+	(NULL, NULL, '23', '0', NULL, '1', '1', CURRENT_TIMESTAMP, '1', CURRENT_TIMESTAMP),
+	(NULL, NULL, '24', '0', NULL, '1', '1', CURRENT_TIMESTAMP, '1', CURRENT_TIMESTAMP),
+	(NULL, NULL, '25', '0', NULL, '1', '1', CURRENT_TIMESTAMP, '1', CURRENT_TIMESTAMP),
+	(NULL, NULL, '26', '0', NULL, '1', '1', CURRENT_TIMESTAMP, '1', CURRENT_TIMESTAMP),
+	(NULL, NULL, '27', '0', NULL, '1', '1', CURRENT_TIMESTAMP, '1', CURRENT_TIMESTAMP),
+	(NULL, NULL, '28', '0', NULL, '1', '1', CURRENT_TIMESTAMP, '1', CURRENT_TIMESTAMP),
+	(NULL, NULL, '29', '0', NULL, '1', '1', CURRENT_TIMESTAMP, '1', CURRENT_TIMESTAMP),
+	(NULL, NULL, '30', '0', NULL, '1', '1', CURRENT_TIMESTAMP, '1', CURRENT_TIMESTAMP),
+	(NULL, NULL, '31', '0', NULL, '1', '1', CURRENT_TIMESTAMP, '1', CURRENT_TIMESTAMP),
+	(NULL, NULL, '32', '0', NULL, '1', '1', CURRENT_TIMESTAMP, '1', CURRENT_TIMESTAMP),
+	(NULL, NULL, '33', '0', NULL, '1', '1', CURRENT_TIMESTAMP, '1', CURRENT_TIMESTAMP);

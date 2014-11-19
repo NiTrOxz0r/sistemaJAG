@@ -11,11 +11,11 @@ CREATE TABLE suplente (
 	cod_usr_mod int not null,
 	fec_mod timestamp not null,
 	foreign key (cod_profesor)
-		references docente(codigo)
+		references personal(codigo)
 		on update cascade
 		on delete restrict,
 	foreign key (cod_suplente)
-		references docente(codigo)
+		references personal(codigo)
 		on update cascade
 		on delete restrict
 );

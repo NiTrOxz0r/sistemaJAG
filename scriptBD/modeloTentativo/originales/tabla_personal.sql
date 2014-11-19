@@ -6,7 +6,7 @@ CREATE TABLE personal (
 	-- PARA ACTUALIZAR TITULO
 	titulo varchar(80) default "Sin Registros",
 	email varchar(50) unique default "Sin Registro",
-	cod_usr int unsigned not null,
+	cod_usr int unsigned,
 	cod_cargo tinyint unsigned not null default 1,
 	tipo_personal tinyint(1) unsigned not null,
 	status tinyint(1) unsigned not null default 1,
