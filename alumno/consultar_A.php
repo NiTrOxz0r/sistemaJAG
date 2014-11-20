@@ -20,18 +20,16 @@ if (isset($_POST['cedula'])) {
 	header("Location:".$enlace);
 }
 
-$sql = "SELECT a.codigo, a.cedula, a.cedula_escolar, nacionalidad, 
-p_nombre, s_nombre, p_apellido, 
-s_apellido, f.descripcion as sexo, 
-fec_nac, lugar_nac, telefono, telefono_otro, b.direccion_exacta as direccion, 
-c.descripcion as parroquia, d.descripcion as municipio, 
-e.descripcion as estado, acta_num_part_nac, 
-acta_folio_num_part_nac, plantel_procedencia, 
-repitiente, altura, peso, camisa, pantalon, zapato, 
-a.cod_representante, a.cod_persona_retira
-FROM alumno a, 
-direccion_alumno b, parroquia c, municipio d, estado e, sexo f WHERE a.cod_direccion=b.codigo and 
-b.cod_parroquia=c.codigo and c.cod_mun=d.codigo and e.codigo=d.cod_edo and cedula ='$cedula';";
+$sql = "SELECT a.codigo, cedula, cedula_escolar, nacionalidad, p_nombre, s_nombre, p_apellido, s_apellido, g.descripcion as sexo, 
+fec_nac, lugar_nac, telefono, telefono_otro, d.descripcion as parroquia, e.descripcion as municipio, f.descripcion as estado, 
+direccion_exacta as direccion, acta_num_part_nac, acta_folio_num_part_nac, plantel_procedencia, repitiente, altura, peso, camisa,
+ pantalon, zapato, certificado_vacuna, cod_discapacidad, cod_representante FROM persona a 
+ inner join alumno b on (a.codigo=b.cod_persona) 
+ inner join direccion c on (a.codigo=c.cod_persona) 
+ inner join parroquia d on (c.cod_parroquia=d.codigo) 
+ inner join municipio e on (d.cod_mun=e.codigo) 
+ inner join estado f on (e.cod_edo=f.codigo) 
+ inner join sexo g on (a.sexo=g.codigo) WHERE cedula = '$cedula';";
 
 $re = conexion($sql);
 
@@ -138,25 +136,24 @@ empezarPagina();?>
 							</table>
 							<?php if (isset($reg['cod_representante'])): ?>
 								<?php 
-									$query = "SELECT
-									personal_autorizado.cedula as cedula_r,
-									personal_autorizado.nacionalidad as nacionalidad_r,
-									relacion.descripcion as relacion_r,
-									personal_autorizado.p_nombre as p_nombre_r,
-									personal_autorizado.s_nombre as s_nombre_r,
-									personal_autorizado.p_apellido as p_apellido_r,
-									personal_autorizado.s_apellido as s_apellido_r,
-									personal_autorizado.email as email_r,
-									personal_autorizado.telefono as telefono_r,
-									personal_autorizado.telefono_otro as telefono_otro_r,
-									personal_autorizado.vive_con_alumno as vive_con_alumno_r,
-									personal_autorizado.lugar_trabajo as lugar_trabajo_r,
-									personal_autorizado.telefono_trabajo as telefono_trabajo_r,
-									personal_autorizado.direccion_trabajo as direccion_trabajo_r
-									from personal_autorizado
-									inner join relacion
-									on personal_autorizado.relacion = relacion.codigo
-									where personal_autorizado.codigo = $reg[cod_representante];";
+									$query = "SELECT 
+											a.cedula as cedula_r, 
+											a.nacionalidad as nacionalidad_r, 
+											a.p_nombre as p_nombre_r, 
+											a.s_nombre as s_nombre_r, 
+											a.p_apellido as p_apellido_r,
+											a.s_apellido as s_apellido_r, 
+											a.telefono as telefono_r, 
+											a.telefono_otro as telefono_otro_r, 
+											b.email as email_r, 
+											c.descripcion as relacion_r, 
+											b.vive_con_alumno as vive_con_alumno_r, 
+											b.lugar_trabajo as lugar_trabajo_r, 
+											b.direccion_trabajo as direccion_trabajo_r, 
+											b.telefono_trabajo  as  telefono_trabajo_r
+											FROM persona a 
+											inner join personal_autorizado b on (a.codigo=b.cod_persona) 
+											inner join relacion c on (relacion=c.codigo) WHERE b.codigo = $reg[cod_representante];";
 									$resultado = conexion($query);
 									$datos = mysqli_fetch_assoc($resultado);
 								?>
@@ -393,7 +390,25 @@ empezarPagina();?>
 						</table>
 
 					<h2 align="center"> DATOS ANTROPOL&Oacute;GICO</h2>
-						<table>			
+						<table>
+							<tr>
+								<th>Discapacidad</th><th>Vacunaci&oacute;n</th>
+							</tr>
+							<tr>
+								<td><input type="text" 
+											readonly 
+											maxlength="5" 
+											size ="5" 
+											value="<?php echo $reg['cod_discapacidad'];?>"/>
+								</td>
+								<td>
+									<input type="text" 
+											readonly 
+											maxlength="5" 
+											size ="5" 
+											value="<?php echo $reg['certificado_vacuna'];?>"/>
+								</td>
+							</tr>			
 							<tr>
 								<th>Altura</th><th>Peso</th>
 							</tr>			
