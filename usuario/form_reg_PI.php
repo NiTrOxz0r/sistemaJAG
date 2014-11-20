@@ -226,19 +226,14 @@ if ( isset($_POST['seudonimo']) && isset($_POST['clave']) ):
 									</select>
 								</td>
 								<td>
-									<select name="tipo_personal" id="tipo_personal" required>
-										<option value="" selected="selected">
-											--Seleccione--
-										</option>
-										<option value="1">
-											Administrativo
-										</option>
-										<option value="2">
-											Docente
-										</option>
-										<option value="3">
-											Directivo
-										</option>
+									<?php $sql="SELECT codigo, descripcion from tipo_personal where status = 1;";
+										$registros = conexion($sql);?>
+									<select name="tipo_personal" required id="tipo_personal">
+										<option selected="selected">--Seleccione--</option>
+										<?php while($fila = mysqli_fetch_array($registros)) :	?>
+												<option value="<?php echo $fila['codigo']?>">
+												<?php echo $fila['descripcion']?></option>
+										<?php endwhile; ?>
 									</select>
 								</td>
 								<td colspan="3">

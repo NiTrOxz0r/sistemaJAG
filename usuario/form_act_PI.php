@@ -12,58 +12,51 @@ validarUsuario(1);
 //DESDE empezarPagina.php
 empezarPagina();
 
-if ( isset($_GET['cedula']) && isset($_GET['tabla']) ):
+if ( isset($_GET['cedula']) ):
 	$con = conexion();
-	$cedula = mysqli_escape_string($con, $_GET['cedula']);
-	if ($_GET['tabla'] == '1') :
-		$tablaOriginal = '1';
-		$tabla = 'docente';
-		$tablaDir = 'direccion_docente';
-	elseif ($_GET['tabla'] == '2'):
-		$tablaOriginal = '2';
-		$tabla = 'administrativo';
-	$tablaDir = 'direccion_administrativo';
-	elseif ($_GET['tabla'] == '3'):
-		$tablaOriginal = '3';
-		$tabla = 'directivo';
-	$tablaDir = 'direccion_directivo';
+	$cedula = mysqli_escape_string($con, trim($_GET['cedula']));
+	if (strlen($cedula) <> 8 ) :
+		header("Location: menucon.php?error=cedula&valor=".$cedula);
 	endif;
 	$query = "SELECT
-	$tabla.nacionalidad,
-	$tabla.cedula,
-	$tabla.p_nombre,
-	$tabla.s_nombre,
-	$tabla.p_apellido,
-	$tabla.s_apellido,
-	$tabla.fec_nac,
-	$tabla.sexo,
-	$tabla.email,
-	$tabla.titulo,
-	$tabla.nivel_instruccion,
-	$tabla.telefono,
-	$tabla.telefono_otro,
-	$tabla.celular,
-	$tabla.cod_cargo,
-	$tablaDir.direccion_exacta as direcc,
-	$tablaDir.codigo as codigo_dir,
+	persona.nacionalidad as nacionalidad,
+	persona.cedula as cedula,
+	persona.p_nombre as p_nombre,
+	persona.s_nombre as s_nombre,
+	persona.p_apellido as p_apellido,
+	persona.s_apellido as s_apellido,
+	persona.fec_nac as fec_nac,
+	persona.sexo as sexo,
+	personal.email as email,
+	personal.titulo as titulo,
+	personal.nivel_instruccion as nivel_instruccion,
+	persona.telefono as telefono,
+	persona.telefono_otro as telefono_otro,
+	personal.celular as celular,
+	personal.cod_cargo as cod_cargo,
+	personal.tipo_personal as tipo_personal,
+	direccion.direccion_exacta as direcc,
+	direccion.codigo as codigo_dir,
 	parroquia.codigo as cod_parro,
 	municipio.codigo as cod_mun,
 	estado.codigo as cod_est,
 	usuario.codigo as cod_usr,
 	usuario.seudonimo as seudonimo,
 	usuario.cod_tipo_usr as cod_tipo_usr
-	from $tabla
+	from persona
+	inner join personal
+	on personal.cod_persona = persona.codigo
 	inner join usuario
-	on $tabla.cod_usr = usuario.codigo
-	inner join $tablaDir
-	on $tabla.cod_direccion = $tablaDir.codigo
+	on personal.cod_usr = usuario.codigo
+	inner join direccion
+	on persona.codigo = direccion.cod_persona
 	inner join parroquia
-	on $tablaDir.cod_parroquia = parroquia.codigo
+	on direccion.cod_parroquia = parroquia.codigo
 	inner join municipio
 	on parroquia.cod_mun = municipio.codigo
 	inner join estado
 	on municipio.cod_edo = estado.codigo
-	where $tabla.cedula = '$cedula';";
+	where persona.cedula = '$cedula';";
 	$resultado = conexion($query);
 	if ($resultado->num_rows == 1) :
 		$datos = mysqli_fetch_assoc($resultado);
@@ -311,28 +304,18 @@ if ( isset($_GET['cedula']) && isset($_GET['tabla']) ):
 										</select>
 									</td>
 									<td>
-										<select name="tipo" id="tipo" required>
-											<option
-												<?php if ($tabla == 'administrativo'): ?>
-													<?php echo 'selected="selected"' ?>
-												<?php endif ?>
-												value="1">
-												Administrativo
-											</option>
-											<option
-												<?php if ($tabla == 'docente'): ?>
-													<?php echo 'selected="selected"' ?>
-												<?php endif ?>
-												value="2">
-												Docente
-											</option>
-											<option
-												<?php if ($tabla == 'directivo'): ?>
-													<?php echo 'selected="selected"' ?>
-												<?php endif ?>
-												value="3">
-												Directivo
-											</option>
+										<?php $sql="SELECT codigo, descripcion from tipo_personal where status = 1;";
+											$registros = conexion($sql);?>
+										<select name="tipo_personal" required id="tipo_personal">
+										<?php while($fila = mysqli_fetch_array($registros)) :	?>
+											<?php if ($datos['tipo_personal'] == $fila['codigo']): ?>
+												<option selected="selected" value="<?php echo $fila['codigo']?>">
+												<?php echo $fila['descripcion']?></option>
+											<?php else: ?>
+												<option value="<?php echo $fila['codigo']?>">
+												<?php echo $fila['descripcion']?></option>
+											<?php endif ?>
+										<?php endwhile; ?>
 										</select>
 									</td>
 									<td colspan="3">
@@ -451,7 +434,7 @@ if ( isset($_GET['cedula']) && isset($_GET['tabla']) ):
 								var telefono_otro = $('#telefono_otro').val();
 								var celular = $('#celular').val();
 								var cargo = $('#cargo').val();
-								var tipo = $('#tipo').val();
+								var tipo_personal = $('#tipo_personal').val();
 								var tipoOriginal = <?php echo $tablaOriginal; ?>;
 								var direcc = $('#direcc').val();
 								var cod_parroquia = $('#cod_parro').val();
@@ -478,7 +461,7 @@ if ( isset($_GET['cedula']) && isset($_GET['tabla']) ):
 								// 		telefono_otro:telefono_otro,
 								// 		celular:celular,
 								// 		cod_cargo:cargo,
-								// 		tipo:tipo,
+								// 		tipo_personal:tipo_personal,
 								// 		direcc:direcc,
 								// 		cod_parroquia:cod_parroquia
 								// 	},

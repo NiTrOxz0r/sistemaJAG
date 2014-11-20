@@ -11,18 +11,7 @@ validarUsuario(1);
 //DESDE empezarPagina.php
 empezarPagina();
 
-if (isset($_POST['tipo'])	and isset($_POST['cedula']) ) :
-
-	if ($_POST['tipo'] == '1') :
-		$tabla = 'docente';
-		$tablaDir = 'direccion_docente';
-	elseif ($_POST['tipo'] == '2'):
-		$tabla = 'administrativo';
-		$tablaDir = 'direccion_administrativo';
-	elseif ($_POST['tipo'] == '3'):
-		$tabla = 'directivo';
-		$tablaDir = 'direccion_directivo';
-	endif;
+if (isset($_POST['tipo_personal'])	and isset($_POST['cedula']) ) :
 
 	$validarDireccion = new ChequearDireccion (
 		$_SESSION['codUsrMod'],
@@ -52,12 +41,7 @@ if (isset($_POST['tipo'])	and isset($_POST['cedula']) ) :
 		$_POST['cod_tipo_usr'],
 		$_POST['cargo']
 		);
-	if ($_POST['tipo'] === $_POST['tipoOriginal']) :
-		$query = "UPDATE $tabla set
-	"
-	else :
 
-	endif;
 //FINALIZAMOS LA PAGINA:
 //trae footer.php y cola.php
 finalizarPagina();?>
