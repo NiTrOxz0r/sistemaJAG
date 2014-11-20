@@ -6,70 +6,154 @@ $enlace = $_SERVER['DOCUMENT_ROOT']."/github/sistemaJAG/php/master.php";
 require_once($enlace);
 // invocamos validarUsuario.php desde master.php
 validarUsuario(1);
-if ( isset($_POST['cedula']) || isset($_POST['cedula_escolar'])) :
-	//INICIACION DE VARIABLE CONEXION PARA
-  //USAR mysqli_escape_string()
-  $con = conexion();
-	$codDir = 1;
-	$codRepresentante = 1;
-	$codPR = 1;
-	//VALIDACION DE DATOS DE ALUMNO:
-	$validarForma = new ChequearAlumno(
-		$_SESSION['codUsrMod'],
-		$_POST['p_apellido'],
-		$_POST['s_apellido'],
-		$_POST['p_nombre'],
-		$_POST['s_nombre'],
-		$_POST['nacionalidad'],
-		$_POST['cedula'],
-		$_POST['cedula_escolar'],
-		$_POST['telefono'],
-		$_POST['telefono_otro'],
-		$_POST['fec_nac'],
-		$_POST['lugar_nac'],
-		$_POST['sexo'],
-		$codDir,
-		$_POST['acta_num_part_nac'],
-		$_POST['acta_folio_num_part_nac'],
-		$_POST['plantel_procedencia'],
-		$_POST['repitiente'],
-		$_POST['curso'],
-		$_POST['altura'],
-		$_POST['peso'],
-		$_POST['camisa'],
-		$_POST['pantalon'],
-		$_POST['zapato'],
-		$codRepresentante,
-		$codPR
-	);
+
+	if (isset($_SESSION['cedula_r'])){
+
+
+		$con = conexion();
+		$status         =  			1;
+		$cod_usr_reg    = 			$_SESSION['codUsrMod'];
+		$cod_usr_mod   	=   		$_SESSION['codUsrMod'];
+		
+
+		$cedula					=	mysqli_escape_string($con, $_POST['cedula']);
+		$nacionalidad		=	mysqli_escape_string($con, $_POST['nacionalidad']);
+		$p_nombre				=	mysqli_escape_string($con, $_POST['p_nombre']);
+		$s_nombre				=	mysqli_escape_string($con, $_POST['s_nombre']);
+		$p_apellido			=	mysqli_escape_string($con, $_POST['p_apellido']);
+		$s_apellido			=	mysqli_escape_string($con, $_POST['s_apellido']);
+		$sexo						=	mysqli_escape_string($con, $_POST['sexo']);
+		$fec_nac				=	mysqli_escape_string($con, $_POST['fec_nac']);
+		$telefono				=	mysqli_escape_string($con, $_POST['telefono']);
+		$telefono_otro	=	mysqli_escape_string($con, $_POST['telefono_otro']);      
+
+	 	$queryP = "INSERT INTO persona(
+		cedula,
+		nacionalidad,
+		p_nombre,
+		s_nombre,
+		p_apellido,
+		s_apellido,
+		sexo,
+		fec_nac,
+		telefono,
+		telefono_otro,
+		status,
+	  cod_usr_reg,
+	  cod_usr_mod
+		)
+		VALUES('$cedula','$nacionalidad','$p_nombre','$s_nombre','$p_apellido',
+		'$s_apellido','$sexo','$fec_nac','$telefono','$telefono_otro','$status',
+		'$cod_usr_reg','$cod_usr_mod');";
+
+		$res = conexion($queryP);
+	  
+	  $query = "SELECT codigo from persona where cedula = '$cedula';";
+	  $resultado = conexion($query);
+		$datos = mysqli_fetch_assoc($resultado);
+		
+		$cod_persona = $datos['codigo'];
+		$cod_parroquia 		=	mysqli_escape_string($con, $_POST['cod_parro']);
+		$direccion_exacta	= mysqli_escape_string($con, $_POST['direcc']);
+		
+		$queryDirA = "INSERT INTO direccion
+			(
+			cod_persona,
+			cod_parroquia,
+	  	direccion_exacta,
+	  	status,
+			cod_usr_reg,
+			cod_usr_mod)
+	  	VALUES('$cod_persona','$cod_parroquia','$direccion_exacta', '$status','$cod_usr_reg','$cod_usr_mod');";
+
+	  $res = conexion($queryDirA);
+
+	  $cedula_escolar = mysqli_escape_string($con, $_POST['cedula_escolar']);
+		$lugar_nac 			= mysqli_escape_string($con, $_POST['lugar_nac']);
+		$fec_nac 				= mysqli_escape_string($con, $_POST['fec_nac']);	
+		$acta_num_part_nac 				= mysqli_escape_string($con, $_POST['acta_num_part_nac']);
+	 	$acta_folio_num_part_nac = mysqli_escape_string($con, $_POST['acta_folio_num_part_nac']);
+		$plantel_procedencia 	= mysqli_escape_string($con, $_POST['plantel_procedencia']);
+		$repitiente 		= mysqli_escape_string($con, $_POST['repitiente']);
+		$altura 				= mysqli_escape_string($con, $_POST['altura']);
+		$peso 					= mysqli_escape_string($con, $_POST['peso']);
+		$camisa 				= mysqli_escape_string($con, $_POST['camisa']);
+	 	$pantalon 			= mysqli_escape_string($con, $_POST['pantalon']);
+	 	$zapato 				= mysqli_escape_string($con, $_POST['zapato']);
+	 	$certificado_vacuna = mysqli_escape_string($con, $_POST['vacuna']);
+	 	$cod_discapacidad 	= mysqli_escape_string($con, $_POST['discapacidad']);
+		$cod_curso 					= mysqli_escape_string($con, $_POST['curso']);
+		
+		$query_R="SELECT b.codigo from persona a, personal_autorizado b 
+		where a.codigo=b.cod_persona and cedula= '$_SESSION[cedula_r]'";
+		$resultado = conexion($query_R);
+		$datos = mysqli_fetch_assoc($resultado);
+		$cod_representante = $datos['codigo'];
+
+	  $queryA = "INSERT INTO alumno (
+		cod_persona,
+		cedula_escolar,
+		lugar_nac,
+		acta_num_part_nac,
+	 	acta_folio_num_part_nac,
+		plantel_procedencia,
+		repitiente,
+		altura,
+		peso,
+		camisa,
+	 	pantalon,
+	 	zapato,
+	 	certificado_vacuna,
+	 	cod_discapacidad,
+		cod_curso,
+		cod_representante,
+		status,
+		cod_usr_reg,
+		cod_usr_mod
+		) VALUES ('$cod_persona','$cedula_escolar','$lugar_nac','$acta_num_part_nac',
+		'$acta_folio_num_part_nac','$plantel_procedencia','$repitiente','$altura','$peso','$camisa',
+	 	'$pantalon','$zapato','$certificado_vacuna','$cod_discapacidad','$cod_curso',
+		'$cod_representante','$status','$cod_usr_reg','$cod_usr_mod');";
+			
+		$res = conexion($queryA);
+
+		$query = "SELECT b.codigo from persona a, alumno b 
+		where a.codigo=b.cod_persona and cedula = '$cedula';";
+		$resultado = conexion($query);
+		$datos = mysqli_fetch_assoc($resultado);
+		$codigo_alumno = $datos['codigo'];
+
+		//INSERSION A LA TABLA OBTIENE:
+		//RELACION ENTRE ALUMNO Y PA:
+		//M > N
+		$query_O= "INSERT INTO obtiene
+		VALUES
+		(null, $cod_representante, $codigo_alumno, $status, $cod_usr_reg, null, $cod_usr_mod, null);";
+	  
+	  $res = conexion($query_O);
+
+		echo "DATOS INGRESADOS EXITOSAMENTE";
+
+		 //AGARRAMOS LAS VARIABLES DE VALIDACION QUE NOS INTERESAN:
+	  
+	  $codUsrMod = $_SESSION['codUsrMod'];
+	  $codTipoUsr = $_SESSION['cod_tipo_usr'];
+	  $seudonimo = $_SESSION['seudonimo'];
+	  
+	  // LA VARIABLE SE DES-CREA, DES-INICIA DESACTIVA
+	  unset($_SESSION);
+	  
+	  //REINICIAMOS LA VARIABLE:
+	  
+	  $_SESSION['codUsrMod'] = $codUsrMod;
+		$_SESSION['cod_tipo_usr'] = $codTipoUsr;
+		$_SESSION['seudonimo'] = $seudonimo;
+
+
+	}else{
+		
+		echo " Ingresar REPRSENTANTE";
 	
-	$_SESSION['direccion_exacta_a']		= mysqli_escape_string($con, $_POST['direcc']);
-	$_SESSION['cod_parro_a']					= mysqli_escape_string($con, $_POST['cod_parro']);	
-	$_SESSION['cedula_a'] 						= mysqli_escape_string($con, $_POST['cedula']);
-	$_SESSION['cedula_escolar_a']			= mysqli_escape_string($con, $_POST['cedula_escolar']);
-	$_SESSION['nacionalidad_a']				= mysqli_escape_string($con, $_POST['nacionalidad']);
-	$_SESSION['p_nombre_a']						= mysqli_escape_string($con, $_POST['p_nombre']);
-	$_SESSION['s_nombre_a'] 					= mysqli_escape_string($con, $_POST['s_nombre']);
-	$_SESSION['p_apellido_a'] 				= mysqli_escape_string($con, $_POST['p_apellido']); 
-	$_SESSION['s_apellido_a'] 				= mysqli_escape_string($con, $_POST['s_apellido']);
-	$_SESSION['sexo_a']								= mysqli_escape_string($con, $_POST['sexo']);
-	$_SESSION['telefono_a'] 					= mysqli_escape_string($con, $_POST['telefono']);
-	$_SESSION['telefono_otro_a'] 			= mysqli_escape_string($con, $_POST['telefono_otro']);
-	$_SESSION['lugar_nac_a'] 					= mysqli_escape_string($con, $_POST['lugar_nac']); 
-	$_SESSION['fec_nac_a'] 						= mysqli_escape_string($con, $_POST['fec_nac']);
-	$_SESSION['acta_num_part_nac_a']	= mysqli_escape_string($con, $_POST['acta_num_part_nac']);
-	$_SESSION['acta_folio_num_part_nac_a']	= mysqli_escape_string($con, $_POST['acta_folio_num_part_nac']);
-	$_SESSION['plantel_procedencia_a']			= mysqli_escape_string($con, $_POST['plantel_procedencia']); 
-	$_SESSION['repitiente_a'] 		= mysqli_escape_string($con, $_POST['repitiente']);
-	$_SESSION['altura_a'] 				= mysqli_escape_string($con, $_POST['altura']); 
-	$_SESSION['peso_a'] 					= mysqli_escape_string($con, $_POST['peso']); 
-	$_SESSION['camisa_a']					= mysqli_escape_string($con, $_POST['camisa']);
-	$_SESSION['pantalon_a']		 		= mysqli_escape_string($con, $_POST['pantalon']);
-	$_SESSION['zapato_a']					= mysqli_escape_string($con, $_POST['zapato']); 
-	$_SESSION['cod_curso_a']   			= mysqli_escape_string($con, $_POST['curso']);
+}
 
-	header("Location:../Personal_Autorizado/form_reg_P.php");
-
-endif;
-	echo "string";
 ?>

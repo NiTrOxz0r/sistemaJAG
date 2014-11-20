@@ -143,18 +143,7 @@ empezarPagina();
 											id="fec_nac"
 											required/>
 									</td>
-								<td colspan="2">
-									<?php
-
-										// ESTO ES INNECESARIO PORQUE LUG_NAC NO ESTA EN ESTADO
-										// ESTA EN LA TABLA ALUMNO:
-
-										// este query puede mejorar:
-										// $sql="select * from estado order by descripcion";
-										// $registros=mysql_query($sql,$conn) or die("Problemas en el select:".mysql_error());
-										// $query = "SELECT codigo, descripcion from estado where status = 1 order by descripcion;";
-										// $registros = conexion($query);
-									?>
+								<td colspan="1">
 									<!--http://www.w3schools.com/tags/tag_textarea.asp-->
 									<textarea
 										name="lugar_nac"
@@ -267,6 +256,30 @@ empezarPagina();
 
 					<h2 align="center"> DATOS ANTROPOL&Oacute;GICO</h2>
 						<table>
+							<tr>
+								<th>Discapacidad</th><th>Vacunaci&oacute;n</th>
+							</tr>
+							<tr>
+								<td>
+									<?php
+										$query = "SELECT codigo, descripcion from discapacidad WHERE status ='1';";
+										$res = conexion($query);
+									?>
+									<select name="discapacidad" id="discapacidad">
+										<option>Seleccionar</option>
+										<? while($fila= mysqli_fetch_array($res)) : ?>
+											<option value="<?=$fila['codigo'];?>"><?=$fila['descripcion'];?></option>
+										<?php endwhile;?>
+								</select>
+								</td>
+								<td>
+									<select name="vacuna" id="vacuna">
+										<option value="">Seleccionar</option>
+										<option value="s">Si</option>
+										<option value="n">No</option>
+									</select>
+								</td>
+							</tr>
 							<tr>
 								<th>Altura</th><th>Peso</th>
 							</tr>
