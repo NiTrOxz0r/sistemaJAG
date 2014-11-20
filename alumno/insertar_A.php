@@ -84,15 +84,10 @@ validarUsuario(1);
 	 	$cod_discapacidad 	= mysqli_escape_string($con, $_POST['discapacidad']);
 		$cod_curso 					= mysqli_escape_string($con, $_POST['curso']);
 		
-		$queryAs="INSERT INTO asume(
-		cod_curs,
-		status,
-		cod_usr_reg,
-		cod_usr_mod
-			)VALUES('$cod_curso','$');";
+		$query_R="SELECT a.codigo from personal_autorizado a 
+		inner join persona b on (a.cod_persona=b.codigo) where b.cedula ='$_SESSION[cedula_r]'";
+	 
 
-		$query_R="SELECT b.codigo from persona a, personal_autorizado b 
-		where a.codigo=b.cod_persona and cedula= '$_SESSION[cedula_r]'";
 		$resultado = conexion($query_R);
 		$datos = mysqli_fetch_assoc($resultado);
 		$cod_representante = $datos['codigo'];
