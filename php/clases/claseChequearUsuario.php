@@ -71,8 +71,8 @@ class ChequearUsuario extends ChequearGenerico{
 				preg_match("/[\$a-zA-Z0-9]{6,15}/", $this->clave['simple'], $match);
 				$this->clave['simple'] = "'$match[0]'";
 			}else {
-				preg_match("/[\$a-zA-Z0-9]{60}/", $this->clave['completo'], $match);
-				$this->clave['completo'] = "$'match[0]'";
+				preg_match("/[\$a-zA-Z0-9\.\/-_*]{60}/", $this->clave['completo'], $match);
+				$this->clave['completo'] = "'$match[0]'";
 			}
 
 		}else{
@@ -111,21 +111,30 @@ class ChequearUsuario extends ChequearGenerico{
 				die( header($togo) );
 			}
 			if ( $this->clave['completo'] <> null ) {
-				$togo = "Location: registro.php?completo=1&clave=length_is_".
-				strlen($this->clave['completo'])."&clase=".$clase;
+				$togo = "Location: registro.php?completo=1&clave=length_is_".strlen($this->clave['completo'])."&contenido=".$this->clave['completo']."&clase=".$clase;
 				if ( strlen($this->clave['completo']) <> 62) {
 					die( header($togo) );
 				}
 			}elseif ( $this->clave['simple'] <> null ) {
 				$togo = "Location: registro.php?simple=1&clave=length_is_".
 				strlen($this->clave['simple'])."&clase=".$clase;
-				if ( strlen($this->clave['simple']) < 6 or strlen($this->clave['simple']) > 15) {
+				if ( strlen($this->clave['simple']) < 7 or strlen($this->clave['simple']) > 16) {
 					die( header($togo) );
 				}
 			}
 		endif;
 	}
+	/**
+	 * [funcion creada para dar la clave sin las comillas]
+	 *
+	 * @param  [string] $clave [clave a limpiar con comillas ej: 'megaClaveSecreta']
+	 * @return [string] [devuelve el string dentro de comillas.]
+	 */
+	public function clave($clave) {
 
+		preg_match("/[\$a-zA-Z0-9\.\/-_*]{6,60}/", $clave, $match);
+		return $match[0];
+	}
 }
 
 ?>

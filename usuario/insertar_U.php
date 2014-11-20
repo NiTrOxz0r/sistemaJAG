@@ -42,25 +42,24 @@ if ( isset($_SESSION['seudonimo']) && isset($_SESSION['clave']) && isset($_POST[
 		} elseif ($_POST['tipo_personal'] === '3') {
 			$asume = false;
 		}else{
-			header("Location: form_reg_PI.php?seudonimo=$seudonimo&tipo_personal=MalDefinido");
+			header("Location: form_reg_PI.php?tipo_personal=MalDefinido");
 		}
 	}else {
-		header("Location: form_reg_PI.php?seudonimo=$seudonimo&tipo_personal=MalDefinido");
+		header("Location: form_reg_PI.php?tipo_personal=MalDefinido");
 	}
 	//iniciamos variables:
 	//para el escape string:
 	$con = conexion();
-	//campos para el inject:
-	$seudonimo = mysqli_escape_string($con, trim($_SESSION['seudonimo']));
-	$clave = mysqli_escape_string($con, trim($_SESSION['clave']));
 	//validamos datos basicos de usuario:
-	$validarForma = new ChequearUsuario($seudonimo,	$clave);
+	$validarForma = new ChequearUsuario(
+		$_SESSION['seudonimo'],
+		array('completo' => $_SESSION['clave']) );
 	//chequeamos que el usuario ingrese como tal a la
 	//tabla usuarios antes que todo:
 	//cod_tipo_usr = 5 (por verificar)
 	$query = "INSERT INTO usuario
 	VALUES
-	(null, '$seudonimo', '$clave',
+	(null, $validarForma->seudonimo, ".$validarForma->clave['completo'].",
 		5, 1, 1, null, 1, current_timestamp );";
 	$resultado = conexion($query);
 	//MUCHO CUIDADO CON MYSQLI_INSERT_ID
@@ -71,8 +70,8 @@ if ( isset($_SESSION['seudonimo']) && isset($_SESSION['clave']) && isset($_POST[
 	//del usuario:
 	$query = "SELECT codigo
 	from usuario
-	where seudonimo = '$seudonimo'
-	and clave = '$clave';";
+	where seudonimo = $validarForma->seudonimo
+	and clave = ".$validarForma->clave['completo'].";";
 	$resultado = conexion($query);
 	$datos = mysqli_fetch_assoc($resultado);
 	$codigoUsuario = $datos['codigo'];
@@ -216,7 +215,7 @@ if ( isset($_SESSION['seudonimo']) && isset($_SESSION['clave']) && isset($_POST[
 		$_SESSION['cod_tipo_usr'] = $datos['cod_tipo_usr'];?>
 		<div id="blancoAjax">
 			<h3>
-				Bienvenido al sistema <?php echo $seudonimo ?>!
+				Bienvenido al sistema <?php echo $_SESSION['seudonimo'] ?>!
 			</h3>
 			<p>
 				Ud. ya es miembro de este sistema, por favor contacte a un administrador para empezar a usar las diferentes actividades.

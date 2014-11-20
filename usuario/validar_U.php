@@ -30,7 +30,7 @@ require_once($enlace);
 				//verificamos encriptamiento:
 				//con salt para el hash
 				//verifica la clave segun la clave encriptada en BD:
-				$clave = $validarForma->clave['simple'];
+				$clave = $validarForma::clave($validarForma->clave);
 				$hash = password_verify($clave, $resultado['clave']);
 				//password_verify regresa falso si la clave no concuerda:
 				if ($hash) :
