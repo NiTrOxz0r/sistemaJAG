@@ -28,11 +28,12 @@ if ( isset($_GET['cedula']) ):
 	persona.s_apellido as s_apellido,
 	persona.fec_nac as fec_nac,
 	persona.sexo as sexo,
+	persona.telefono as telefono,
+	persona.telefono_otro as telefono_otro,
+	personal.codigo as codigo_personal,
 	personal.email as email,
 	personal.titulo as titulo,
 	personal.nivel_instruccion as nivel_instruccion,
-	persona.telefono as telefono,
-	persona.telefono_otro as telefono_otro,
 	personal.celular as celular,
 	personal.cod_cargo as cod_cargo,
 	personal.tipo_personal as tipo_personal,
@@ -63,6 +64,8 @@ if ( isset($_GET['cedula']) ):
 		$datos = mysqli_fetch_assoc($resultado);
 		$_SESSION['codigo_persona'] = $datos['codigo_persona'];
 		$_SESSION['codigo_direccion'] = $datos['codigo_dir'];
+		$_SESSION['codigo_personal'] = $datos['codigo_personal'];
+		$_SESSION['codigo_usuario'] = $datos['codigo_usuario'];
 		//CONTENIDO:?>
 		<div id="contenido">
 			<div id="blancoAjax">

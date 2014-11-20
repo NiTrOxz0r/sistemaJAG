@@ -121,7 +121,7 @@ empezarPagina();
 					</thead>
 					<tbody>
 						<td>
-							<input type="submit" value="Consultar">
+							<input type="submit" value="Consultar Listado" name="consultar">
 						</td>
 					</tbody>
 				</table>
