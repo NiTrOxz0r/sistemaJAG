@@ -113,7 +113,7 @@ empezarPagina();
 			<form
 				id="consulta_listado_U"
 				name="consulta_listado_U"
-				action="consultar_listado_U.php"
+				action="consultar_U.php"
 				method="post">
 				<table>
 					<thead>
