@@ -78,10 +78,15 @@ empezarPagina();
 								Seleccione:
 							</td>
 							<td>
-								<select name="tipo_personal" required id="tipo_personal">
-									<option value="1" selected="selected">Personal Docente</option>
-									<option value="2">Personal Administrativo</option>
-									<option value="3">Personal Directivo</option>
+								<?php $query = "SELECT codigo, descripcion from tipo_personal where status = 1;";
+									$resultado = conexion($query);?>
+								<select name="tipo_personal" id="tipo_personal" required>
+									<option value="" selected="selected">--Seleccione--</option>
+									<?php while ( $datos = mysqli_fetch_array($resultado) ) : ?>
+										<option value="<?php echo $datos['codigo']; ?>">
+											<?php echo $datos['descripcion']; ?>
+										</option>
+									<?php endwhile; ?>
 								</select>
 							</td>
 							<td class="chequeo" id="tipo_personal_chequeo">

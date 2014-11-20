@@ -1,6 +1,6 @@
 CREATE TABLE tipo_personal (
 	codigo tinyint(3) unsigned primary key,
-	descripcion varchar(10) not null,
+	descripcion varchar(20) not null,
 	status tinyint(1) unsigned not null default 1,
 	cod_usr_reg int not null,
 	fec_reg timestamp not null default current_timestamp,

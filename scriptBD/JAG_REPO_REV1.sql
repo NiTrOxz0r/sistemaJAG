@@ -2090,7 +2090,7 @@ INSERT INTO `talla` (`codigo`, `descripcion`, `status`, `cod_usr_reg`, `fec_reg`
 
 CREATE TABLE IF NOT EXISTS `tipo_personal` (
   `codigo` tinyint(3) unsigned NOT NULL,
-  `descripcion` varchar(10) NOT NULL,
+  `descripcion` varchar(20) NOT NULL,
   `status` tinyint(1) unsigned NOT NULL DEFAULT '1',
   `cod_usr_reg` int(11) NOT NULL,
   `fec_reg` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
