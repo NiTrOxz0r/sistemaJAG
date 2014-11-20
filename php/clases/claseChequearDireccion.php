@@ -35,6 +35,7 @@ class ChequearDireccion extends ChequearGenerico{
 		//chequeaomos la forma (el objeto como tal):
 		self::chequeaForma();
 		self::chequeame(); //heredado de ChequearGenerico
+		mysqli_close($con);
 	}
 
 	/**

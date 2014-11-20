@@ -19,6 +19,7 @@ if ( isset($_GET['cedula']) ):
 		header("Location: menucon.php?error=cedula&valor=".$cedula);
 	endif;
 	$query = "SELECT
+	persona.codigo as codigo_persona,
 	persona.nacionalidad as nacionalidad,
 	persona.cedula as cedula,
 	persona.p_nombre as p_nombre,
@@ -60,6 +61,8 @@ if ( isset($_GET['cedula']) ):
 	$resultado = conexion($query);
 	if ($resultado->num_rows == 1) :
 		$datos = mysqli_fetch_assoc($resultado);
+		$_SESSION['codigo_persona'] = $datos['codigo_persona'];
+		$_SESSION['codigo_direccion'] = $datos['codigo_dir'];
 		//CONTENIDO:?>
 		<div id="contenido">
 			<div id="blancoAjax">
