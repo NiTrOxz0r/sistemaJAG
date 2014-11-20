@@ -41,6 +41,7 @@ if ( isset($_POST['seudonimo']) && isset($_POST['clave']) ):
 										maxlength="8"
 										name="cedula"
 										id="cedula"
+										autofocus="autofocus"
 										required>
 								</td>
 							</tr>

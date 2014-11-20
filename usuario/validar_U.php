@@ -30,7 +30,8 @@ require_once($enlace);
 				//verificamos encriptamiento:
 				//con salt para el hash
 				//verifica la clave segun la clave encriptada en BD:
-				$clave = $validarForma::clave($validarForma->clave);
+				//ver clase ChequearUsuario si no entieden esto.
+				$clave = $validarForma->clave($validarForma->clave['simple']);
 				$hash = password_verify($clave, $resultado['clave']);
 				//password_verify regresa falso si la clave no concuerda:
 				if ($hash) :
@@ -79,9 +80,6 @@ require_once($enlace);
 					mysqli_close($conexion);
 					session_start();
 					$_SESSION['error_login'] = "clave no coincide";
-					$_SESSION['error_login_clave'] = $clave;
-					$_SESSION['error_login_seudonimo'] = $validarForma->seudonimo;
-					$_SESSION['error_login_hash'] = $resultado['clave'];
 					header("location: ../index.php");
 				endif;
 			//usuario no exixte:

@@ -15,7 +15,7 @@
 * @todo ampliar segun sea necesario segun
 * los objetivos necesarios:
 *
-* @version 1.1
+* @version 1.2
 *
 *
 */
@@ -126,6 +126,9 @@ class ChequearUsuario extends ChequearGenerico{
 	}
 	/**
 	 * [funcion creada para dar la clave sin las comillas]
+	 *
+	 * @internal [esto sirve para obtener la clave sin comillas,
+	 * util para el password_verify() entre otras cosas.]
 	 *
 	 * @param  [string] $clave [clave a limpiar con comillas ej: 'megaClaveSecreta']
 	 * @return [string] [devuelve el string dentro de comillas.]

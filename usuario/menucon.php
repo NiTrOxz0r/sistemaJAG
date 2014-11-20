@@ -74,17 +74,17 @@ empezarPagina();
 							</td>
 						</tr>
 						<tr>
-							<td id="tabla_titulo">
+							<td id="tipo_personal_titulo">
 								Seleccione:
 							</td>
 							<td>
-								<select name="tabla" required id="tabla">
+								<select name="tipo_personal" required id="tipo_personal">
 									<option value="1" selected="selected">Personal Docente</option>
 									<option value="2">Personal Administrativo</option>
 									<option value="3">Personal Directivo</option>
 								</select>
 							</td>
-							<td class="chequeo" id="tabla_chequeo">
+							<td class="chequeo" id="tipo_personal_chequeo">
 
 							</td>
 						</tr>
@@ -139,8 +139,8 @@ empezarPagina();
 				//estructura del formulario:
 				$('#informacion_titulo').css('color', '#888');
 				$('#informacion').prop('disabled', true);
-				$('#tabla_titulo').css('color', '#888');
-				$('#tabla').prop('disabled', true);
+				$('#tipo_personal_titulo').css('color', '#888');
+				$('#tipo_personal').prop('disabled', true);
 				$('#submit').prop('disabled', true);
 				//se cambia la estructura del formulario
 				//dependiendo de lo que el usuario escoja en el primer select
@@ -154,8 +154,8 @@ empezarPagina();
 						$('#informacion').prop('readonly', false);
 						$('#informacion_lista').prop('disabled', true);
 						$('#informacion_lista').prop('hidden', true);
-						$('#tabla_titulo').css('color', '#888');
-						$('#tabla').prop('disabled', true);
+						$('#tipo_personal_titulo').css('color', '#888');
+						$('#tipo_personal').prop('disabled', true);
 						$('#submit').prop('disabled', true);
 					}else if (tipo === '4'){
 						$('#informacion').prop('value', '');
@@ -165,8 +165,8 @@ empezarPagina();
 						$('#informacion').prop('hidden', true);
 						$('#informacion_lista').prop('disabled', false);
 						$('#informacion_lista').prop('hidden', false);
-						$('#tabla_titulo').css('color', '#000');
-						$('#tabla').prop('disabled', false);
+						$('#tipo_personal_titulo').css('color', '#000');
+						$('#tipo_personal').prop('disabled', false);
 						$('#submit').prop('disabled', true);
 					}else if (tipo === '5'){
 						$('#informacion_titulo').hide();
@@ -176,8 +176,8 @@ empezarPagina();
 						$('#informacion').prop('value', 'status');
 						$('#informacion_lista').prop('disabled', true);
 						$('#informacion_lista').prop('hidden', true);
-						$('#tabla_titulo').css('color', '#000');
-						$('#tabla').prop('disabled', false);
+						$('#tipo_personal_titulo').css('color', '#000');
+						$('#tipo_personal').prop('disabled', false);
 						$('#submit').prop('disabled', false);
 					}else{
 						$('#informacion').prop('value', '');
@@ -188,8 +188,8 @@ empezarPagina();
 						$('#informacion').prop('readonly', false);
 						$('#informacion_lista').prop('disabled', true);
 						$('#informacion_lista').prop('hidden', true);
-						$('#tabla_titulo').css('color', '#000');
-						$('#tabla').prop('disabled', false);
+						$('#tipo_personal_titulo').css('color', '#000');
+						$('#tipo_personal').prop('disabled', false);
 					};
 				});
 				//debido a que las validaciones hechas por

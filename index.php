@@ -1,6 +1,6 @@
 <?php
-if(!isset($_SESSION)){ 
-  session_start(); 
+if(!isset($_SESSION)){
+  session_start();
 }
 $enlace = $_SERVER['DOCUMENT_ROOT']."/github/sistemaJAG/php/master.php";
 require_once($enlace);
@@ -41,11 +41,15 @@ switch ($_SESSION['cod_tipo_usr']) {
 		//usando admin mientras tanto:
 		require "php/cuerpo/usuario/porVerificar.php";
 		break;
+	case 255:
+		//usando admin mientras tanto:
+		require "php/cuerpo/admin/body.php";
+		break;
 	//TIPO DESCONOCIDO:
 	default:
 		require "usuario/formUsuario.php";
 		break;
-} 
+}
 echo '</div>';
 
 //FINALIZAMOS LA PAGINA:

@@ -13,60 +13,48 @@ empezarPagina();
 
 if ( isset($_POST['informacion'])
 	and isset($_POST['tipo'])
-	and isset($_POST['tabla']) ) :
-	if ($_POST['tabla'] === '1') :
-		$valor = $_POST['informacion'];
+	and isset($_POST['tipo_personal']) ) :
+	$conexion = conexion();
+	//tipo = tipo de consulta
+	//tipo_personal = docente, administrador, directivo
+	$valor = mysqli_escape_string($conexion, trim($_POST['informacion']));
+	if ($_POST['tipo_personal'] === '1') :
 		if ($_POST['tipo'] === '1') :
-			$where = "WHERE docente.cedula = '$valor'";
+			$where = "WHERE persona.cedula = '$valor'";
 		elseif ($_POST['tipo'] === '2') :
-			$where = "WHERE docente.p_nombre LIKE '%$valor%' or docente.s_nombre LIKE '%$valor%' ";
+			$where = "WHERE persona.p_nombre LIKE '%$valor%' or persona.s_nombre LIKE '%$valor%' ";
 		elseif ($_POST['tipo'] === '3') :
-			$where = "WHERE docente.p_apellido LIKE '%$valor%' or docente.s_apellido LIKE '%$valor%'";
+			$where = "WHERE persona.p_apellido LIKE '%$valor%' or persona.s_apellido LIKE '%$valor%'";
 		elseif ($_POST['tipo'] === '4') :
-			$where = "WHERE docente.cod_cargo = $valor";
+			$where = "WHERE personal.cod_cargo = $valor";
 		elseif ($_POST['tipo'] === '5') :
-			$where = "where docente.status = 0 or docente.status = 1";
+			$where = "where (persona.status = 0 or persona.status = 1) ";
+			$where = $where."AND (persona.status = 0 or persona.status = 1)"
 		else :
 			header('Location: menucon.php?error=tipo&q='.$_POST['tipo']);
 		endif;
 		$query = "SELECT
-		docente.p_apellido,
-		docente.p_nombre,
-		docente.cedula,
-		docente.celular,
-		docente.telefono,
-		docente.email,
+		persona.p_apellido as p_apellido,
+		persona.p_nombre as p_nombre,
+		persona.cedula as cedula,
+		personal.celular as celular,
+		persona.telefono as telefono,
+		personal.email as email,
 		cargo.descripcion as cargo,
 		curso.descripcion as curso,
 		usuario.seudonimo as seudonimo,
 		tipo_usuario.descripcion as tipo_usuario,
-		docente.status as status_d,
+		personal.status as status_d,
 		usuario.status as status_u
-		from docente
-		inner join cargo
-		on docente.cod_cargo = cargo.codigo
-		inner join asume
-		on docente.codigo = asume.cod_docente
-		inner join curso
-		on asume.codigo = curso.codigo
-		inner join usuario
-		on docente.cod_usr = usuario.codigo
-		inner join tipo_usuario
-		on usuario.cod_tipo_usr = tipo_usuario.codigo
+		from persona
+		inner join personal
+		on
 		$where
 		order by
-		docente.p_apellido,
+		persona.p_apellido,
 		usuario.seudonimo,
 		tipo_usuario.descripcion;";
-	else:
-		$valor = $_POST['informacion'];
-		if ($_POST['tabla'] == '1') :
-			$tabla = 'docente';
-		elseif ($_POST['tabla'] == '2'):
-			$tabla = 'administrativo';
-		elseif ($_POST['tabla'] == '3'):
-			$tabla = 'directivo';
-		endif;
+	elseif ($_POST['tipo_personal'] === '2' or $_POST['tipo_personal'] === '3'):
 		if ($_POST['tipo'] === '1') :
 			$where = "WHERE $tabla.cedula = '$valor'";
 		elseif ($_POST['tipo'] === '2') :
@@ -105,6 +93,8 @@ if ( isset($_POST['informacion'])
 		$tabla.p_apellido,
 		usuario.seudonimo,
 		tipo_usuario.descripcion;";
+	else:
+		header('Location: menucon.php?error=tipo&q='.$_POST['tipo_personal']);
 	endif;
 	$resultado = conexion($query); ?>
 
@@ -199,7 +189,7 @@ if ( isset($_POST['informacion'])
 						</thead>
 						<tbody>
 							<td>
-								<a href="form_act_PI.php?cedula=<?php echo $datos['cedula'] ?>&tabla=<?php echo $_POST['tabla'] ?>">
+								<a href="form_act_PI.php?cedula=<?php echo $datos['cedula'] ?>&tabla=<?php echo $_POST['tipo_personal'] ?>">
 									<button>Actualizar</button>
 								</a>
 							</td>
@@ -212,6 +202,7 @@ if ( isset($_POST['informacion'])
 	</div>
 
 <?php
+mysqli_close($conexion);
 //FINALIZAMOS LA PAGINA:
 //trae footer.php y cola.php
 finalizarPagina();?>
