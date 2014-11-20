@@ -42,7 +42,9 @@ empezarPagina();
 									<option value="2">Por Nombre:</option>
 									<option value="3">Por Apellido:</option>
 									<option value="4">Por Cargo:</option>
-									<option value="5">Por Estatus:</option>
+									<option value="5">Regitro activo:</option>
+									<option value="6">Regitro inactivo:</option>
+									<option value="7">Todos los Registros:</option>
 								</select>
 							</td>
 							<td class="chequeo" id="tipo_chequeo">
@@ -173,7 +175,7 @@ empezarPagina();
 						$('#tipo_personal_titulo').css('color', '#000');
 						$('#tipo_personal').prop('disabled', false);
 						$('#submit').prop('disabled', true);
-					}else if (tipo === '5'){
+					}else if (tipo === '5' || tipo === '6'){
 						$('#informacion_titulo').hide();
 						$('#informacion').prop('disabled', false);
 						$('#informacion').prop('hidden', true);
@@ -183,6 +185,17 @@ empezarPagina();
 						$('#informacion_lista').prop('hidden', true);
 						$('#tipo_personal_titulo').css('color', '#000');
 						$('#tipo_personal').prop('disabled', false);
+						$('#submit').prop('disabled', false);
+					}else if (tipo === '7'){
+						$('#informacion_titulo').hide();
+						$('#informacion').prop('disabled', false);
+						$('#informacion').prop('hidden', true);
+						$('#informacion').prop('readonly', true);
+						$('#informacion').prop('value', 'status');
+						$('#informacion_lista').prop('disabled', true);
+						$('#informacion_lista').prop('hidden', true);
+						$('#tipo_personal_titulo').css('color', '#000');
+						$('#tipo_personal').prop('disabled', true);
 						$('#submit').prop('disabled', false);
 					}else{
 						$('#informacion').prop('value', '');

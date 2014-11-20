@@ -65,7 +65,7 @@ if ( isset($_GET['cedula']) ):
 		$_SESSION['codigo_persona'] = $datos['codigo_persona'];
 		$_SESSION['codigo_direccion'] = $datos['codigo_dir'];
 		$_SESSION['codigo_personal'] = $datos['codigo_personal'];
-		$_SESSION['codigo_usuario'] = $datos['codigo_usuario'];
+		$_SESSION['codigo_usuario'] = $datos['cod_usr'];
 		//CONTENIDO:?>
 		<div id="contenido">
 			<div id="blancoAjax">
@@ -441,7 +441,6 @@ if ( isset($_GET['cedula']) ):
 								var celular = $('#celular').val();
 								var cargo = $('#cargo').val();
 								var tipo_personal = $('#tipo_personal').val();
-								var tipoOriginal = <?php echo $tablaOriginal; ?>;
 								var direcc = $('#direcc').val();
 								var cod_parroquia = $('#cod_parro').val();
 								var cod_usr = <?php echo $datos['cod_usr'] ?>;
@@ -550,7 +549,10 @@ if ( isset($_GET['cedula']) ):
 						});
 					});
 				</script>
-				<!-- submit -->
+				<?php
+					//FINALIZAMOS LA PAGINA:
+					//trae footer.php y cola.php
+					finalizarPagina(); ?>
 				<!-- CONTENIDO TERMINA ARRIBA DE ESTO: -->
 			</div>
 		</div>
