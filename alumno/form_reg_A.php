@@ -111,7 +111,7 @@ empezarPagina();
 								</td>
 								<td>
 									<select required disabled name="parentesco_r" id="parentesco_r">
-										<option selected="selected">
+										<option selected="selected" value="">
 											Seleccione
 										</option>
 									</select>
@@ -130,7 +130,7 @@ empezarPagina();
 										$registros = conexion($query);
 									?>
 									<select name="sexo" id="sexo" required>
-										<option value="">Seleccione una opci&oacute;n </option>
+										<option selected="selected" value="">Seleccione una opci&oacute;n </option>
 										<?php	while($fila = mysqli_fetch_array($registros)) : ?>
 											<option value="<?php echo $fila['codigo']; ?>"><?php echo $fila['descripcion']; ?></option>
 										<?php endwhile; ?>
@@ -246,7 +246,7 @@ empezarPagina();
 									name="plantel_procedencia"/>
 								</td>
 								<td><select name="repitiente" id="repitiente" required="required">
-										<option value="">Seleccionar</option>
+										<option selected="selected" value="">Seleccionar</option>
 										<option value="n">NO</option>
 										<option value="s">SI</option>
 										</select><font color="#ff0000">*</font>
@@ -266,7 +266,7 @@ empezarPagina();
 										$res = conexion($query);
 									?>
 									<select name="discapacidad" id="discapacidad">
-										<option>Seleccionar</option>
+										<option value="">Seleccionar</option>
 										<? while($fila= mysqli_fetch_array($res)) : ?>
 											<option value="<?=$fila['codigo'];?>"><?=$fila['descripcion'];?></option>
 										<?php endwhile;?>
@@ -274,7 +274,7 @@ empezarPagina();
 								</td>
 								<td>
 									<select name="vacuna" id="vacuna">
-										<option value="">Seleccionar</option>
+										<option selected="selected" value="">Seleccionar</option>
 										<option value="s">Si</option>
 										<option value="n">No</option>
 									</select>
@@ -313,14 +313,13 @@ empezarPagina();
 								<th>N&uacute;m. de Calzado</th>
 							</tr>
 							<tr align="center">
-
 								<?php
 									$query = "SELECT codigo, descripcion from talla where status = 1 order by codigo;";
 									$registros = conexion($query);
 								?>
 								<td>
 									<select name="camisa" id="camisa">
-										<option selected="selected">
+										<option selected="selected" value="">
 											Seleccionar
 										</option>
 										<?php while ( $camisa = mysqli_fetch_array($registros) ): ?>
@@ -328,16 +327,13 @@ empezarPagina();
 										<?php endwhile; ?>
 									</select>
 								</td>
-
 								<td>
 									<?php
 										$query = "SELECT codigo, descripcion from talla where status = 1 order by codigo;";
 										$registros = conexion($query);
 									?>
 									<select name="pantalon" id="pantalon">
-										<option selected="selected">
-											Seleccionar
-										</option>
+										<option selected="selected" value="">Seleccionar</option>
 										<?php while ( $pantalon = mysqli_fetch_array($registros) ): ?>
 											<option value="<?=$pantalon['codigo']; ?>"> <?=$pantalon['descripcion']; ?> </option>
 										<?php endwhile; ?>
@@ -353,9 +349,6 @@ empezarPagina();
 										name="zapato"
 										id="zapato"/>
 								</td>
-								<!--<td><input type="text" maxlength="2"  size ="4" name="camisa" id="camisa"/></td>
-								<td><input type="text" maxlength="2" size ="4" name="pantalon" id="pantalon"/></td>
-								<td><input type="text" maxlength="2" size ="4" name="zapato" id="zapato"/></td>-->
 							</tr>
 						</table>
 				
@@ -364,15 +357,11 @@ empezarPagina();
 					<h2><i>Datos Educativos.</i></h2>
 					<b>&nbsp;Nivel a Cursar.&nbsp;&nbsp;</b>
 					<?php
-						// esto puede mejorar:
-						// $sql="select * from curso";
-						// $registros=mysqli_query($sql,$conn) or die("Problemas en el select:".mysql_error());
-
 						$query = "SELECT codigo, descripcion from curso where status = 1;";
 						$registros = conexion($query);
 					?>
 					<select name="curso" id="curso">
-						<option value="">Seleccione una opci&oacute;n</option>
+						<option selected="selected" value="">Seleccione una opci&oacute;n</option>
 					<?php	while($fila = mysqli_fetch_array($registros)) : ?>
 						<option value="<?php echo $fila['codigo']; ?>"><?php echo $fila['descripcion']; ?></option>
 					<?php endwhile; ?>
@@ -385,12 +374,10 @@ empezarPagina();
 					<select disabled name="" id="">
 						<option value="">Seleccione una opci&oacute;n</option>
 					</select>
-
 				<input type="button" name="enviar_btn" value="Enviar" id="enviar"/>
 				<input type="button" name="limpiar_btn" value="Reset" id="limpiar"/>
 		</form>
 	</div>
-
 	<div>
 		<p>
 			<center>
