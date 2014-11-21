@@ -41,7 +41,7 @@
 						class="no-click"
 						data-titulo="GestionarAlumno"
 						href="alumno/body.php">
-						<h2> Gestionar Alumno</h2>
+						<h2>Gestionar Alumno</h2>
 					</a>
 					&nbsp;&nbsp;
 				</td>
@@ -59,15 +59,15 @@
 			<tr>
 				<td>
 					&nbsp;&nbsp;
-					<a class="no-click" data-titulo="gestionarProfesor" href="profesor/body.php">
-						<h2>Gestionar Profesor</h2>
+					<a class="no-click" data-titulo="gestionarProfesor" href="curso/menucon.php">
+						<h2>Gestionar Cursos</h2>
 					</a>
 					&nbsp;&nbsp;
 				</td>
 				<td>
 					&nbsp;&nbsp;
-					<a class="no-click" href="usuario/body.php">
-						<h2>Gestionar Personal Autorizado</h2>
+					<a class="no-click" href="usuario/menucon.php">
+						<h2>Gestionar Usuarios del sistema</h2>
 					</a>
 					&nbsp;&nbsp;
 				</td>

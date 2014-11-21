@@ -17,7 +17,7 @@
 				<?php $pa = enlaceDinamico('Personal_Autorizado/menucon.php'); ?>
 				<li><a href="<?php echo $pa ?>">Padres y Allegados</a></li>
 				<?php $curso = enlaceDinamico('cursos/menucon.php'); ?>
-				<li><a href="<?php echo $curso ?>">Docentes</a></li>
+				<li><a href="<?php echo $curso ?>">Cursos</a></li>
 				<?php $usuario = enlaceDinamico('usuario/menucon.php'); ?>
 				<li><a href="<?php echo $usuario ?>">Usuarios</a></li>
 			</ul>
