@@ -93,8 +93,12 @@
 	}else{
 
 		echo "No existe Registro";
-		echo "<p align=center>"."<a href=menucon.php>Volver</a>"."</p>";
 
 }
 
 ?>
+
+	<?php
+			finalizarPagina();
+
+	?>

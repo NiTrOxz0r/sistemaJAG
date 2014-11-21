@@ -23,13 +23,15 @@ if (isset($_POST['cedula'])) {
 $sql = "SELECT a.codigo, cedula, cedula_escolar, nacionalidad, p_nombre, s_nombre, p_apellido, s_apellido, g.descripcion as sexo, 
 fec_nac, lugar_nac, telefono, telefono_otro, d.descripcion as parroquia, e.descripcion as municipio, f.descripcion as estado, 
 direccion_exacta as direccion, acta_num_part_nac, acta_folio_num_part_nac, plantel_procedencia, repitiente, altura, peso, camisa,
- pantalon, zapato, certificado_vacuna, cod_discapacidad, cod_representante FROM persona a 
+ pantalon, zapato, certificado_vacuna, h.descripcion as discapacidad, cod_representante FROM persona a 
  inner join alumno b on (a.codigo=b.cod_persona) 
  inner join direccion c on (a.codigo=c.cod_persona) 
  inner join parroquia d on (c.cod_parroquia=d.codigo) 
  inner join municipio e on (d.cod_mun=e.codigo) 
  inner join estado f on (e.cod_edo=f.codigo) 
- inner join sexo g on (a.sexo=g.codigo) WHERE cedula = '$cedula';";
+ inner join sexo g on (a.sexo=g.codigo) 
+ inner join discapacidad h on (b.cod_discapacidad = h.codigo)
+ WHERE cedula = '$cedula';";
 
 $re = conexion($sql);
 
@@ -137,23 +139,23 @@ empezarPagina();?>
 							<?php if (isset($reg['cod_representante'])): ?>
 								<?php 
 									$query = "SELECT 
-											a.cedula as cedula_r, 
-											a.nacionalidad as nacionalidad_r, 
-											a.p_nombre as p_nombre_r, 
-											a.s_nombre as s_nombre_r, 
-											a.p_apellido as p_apellido_r,
-											a.s_apellido as s_apellido_r, 
-											a.telefono as telefono_r, 
-											a.telefono_otro as telefono_otro_r, 
-											b.email as email_r, 
-											c.descripcion as relacion_r, 
-											b.vive_con_alumno as vive_con_alumno_r, 
-											b.lugar_trabajo as lugar_trabajo_r, 
-											b.direccion_trabajo as direccion_trabajo_r, 
-											b.telefono_trabajo  as  telefono_trabajo_r
-											FROM persona a 
-											inner join personal_autorizado b on (a.codigo=b.cod_persona) 
-											inner join relacion c on (relacion=c.codigo) WHERE b.codigo = $reg[cod_representante];";
+										a.cedula as cedula_r, 
+										a.nacionalidad as nacionalidad_r, 
+										a.p_nombre as p_nombre_r, 
+										a.s_nombre as s_nombre_r, 
+										a.p_apellido as p_apellido_r,
+										a.s_apellido as s_apellido_r, 
+										a.telefono as telefono_r, 
+										a.telefono_otro as telefono_otro_r, 
+										b.email as email_r, 
+										c.descripcion as relacion_r, 
+										b.vive_con_alumno as vive_con_alumno_r, 
+										b.lugar_trabajo as lugar_trabajo_r, 
+										b.direccion_trabajo as direccion_trabajo_r, 
+										b.telefono_trabajo  as  telefono_trabajo_r
+										FROM persona a 
+										inner join personal_autorizado b on (a.codigo=b.cod_persona) 
+										inner join relacion c on (relacion=c.codigo) WHERE b.codigo = $reg[cod_representante];";
 									$resultado = conexion($query);
 									$datos = mysqli_fetch_assoc($resultado);
 								?>
@@ -399,7 +401,7 @@ empezarPagina();?>
 											readonly 
 											maxlength="5" 
 											size ="5" 
-											value="<?php echo $reg['cod_discapacidad'];?>"/>
+											value="<?php echo $reg['discapacidad'];?>"/>
 								</td>
 								<td>
 									<input type="text" 

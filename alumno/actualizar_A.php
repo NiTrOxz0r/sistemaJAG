@@ -24,13 +24,16 @@ if (isset($_POST['cedula'])) {
 }
 
 	
-	$sql = "SELECT a.codigo, a.cedula, a.cedula_escolar, nacionalidad, p_nombre, s_nombre, p_apellido, 
-		s_apellido, sexo, fec_nac, lugar_nac, telefono, telefono_otro, b.direccion_exacta as direccion, 
-		c.descripcion as parroquia, c.codigo as cod_parro, d.descripcion as municipio, d.codigo as cod_mun, e.descripcion as estado, 
-		e.codigo as cod_est, acta_num_part_nac, acta_folio_num_part_nac, plantel_procedencia, repitiente, altura, peso, camisa, pantalon, 
-		zapato, a.cod_curso FROM alumno a, direccion_alumno b, parroquia c, municipio d, estado e, sexo f, curso g WHERE a.cod_direccion=b.codigo and 
-		b.cod_parroquia=c.codigo and c.cod_mun=d.codigo and e.codigo=d.cod_edo and a.cod_curso=g.codigo and cedula ='$cedula';";
-	//$re = mysql_query($sql) or die ("Error al Conectar a la Base". mysql_error());
+	$sql = "SELECT a.codigo, cedula, cedula_escolar, nacionalidad, p_nombre, s_nombre, p_apellido, s_apellido, sexo, 
+	fec_nac, lugar_nac, telefono, telefono_otro, cod_parroquia as cod_parro, cod_mun as cod_mun, cod_edo as cod_est, 
+	direccion_exacta as direccion, acta_num_part_nac, acta_folio_num_part_nac, plantel_procedencia, repitiente, 
+	altura, peso, camisa, pantalon, zapato, cod_curso, certificado_vacuna, cod_discapacidad FROM persona a 
+	inner join alumno b on (a.codigo=b.cod_persona) 
+	inner join direccion c on (a.codigo=c.cod_persona) 
+	inner join parroquia d on (c.cod_parroquia=d.codigo) 
+	inner join municipio e on (d.cod_mun=e.codigo) 
+	inner join estado f on (e.cod_edo=f.codigo) where cedula='$cedula';";
+
 	$re = conexion($sql);
 	if($reg = mysqli_fetch_array($re)) :?>	
 
@@ -267,6 +270,38 @@ if (isset($_POST['cedula'])) {
 				<h2 align="center"> DATOS ANTROPOL&Oacute;GICO</h2>
 
 					<table>
+						<tr>
+								<th>Discapacidad</th><th>Vacunaci&oacute;n</th>
+						</tr>
+						<tr>
+								<td>
+									<?php
+										$query = "SELECT codigo, descripcion from discapacidad WHERE status ='1';";
+										$res = conexion($query);
+									?>
+									<select name="discapacidad" id="discapacidad">
+										<option>Seleccionar</option>
+										<? while($fila= mysqli_fetch_array($res)) : ?>
+										<?php if ($reg['cod_discapacidad']==$fila['codigo']):?>
+											<option selected="selected" value="<?=$fila['codigo'];?>"><?=$fila['descripcion'];?></option>
+											<?php else:?>
+											<? endif;?>
+											<option value="<?=$fila['codigo'];?>"><?=$fila['descripcion'];?></option>
+										<?php endwhile;?>
+								</select>
+							</td>
+							<td>
+								<select name="vacuna" id="vacuna">
+									<?php if ( $reg['certificado_vacuna'] == 's' ): ?>
+										<option  value="s" selected="selected">SI</option>
+										<option  value="n">NO</option>
+									<?php else: ?>
+										<option  value="s">SI</option>
+										<option  value="n" selected="selected">NO</option>
+									<?php endif ?>
+								</select>
+							</td>
+						</tr>
 						<tr>
 							<th>Altura</th><th>Peso</th>
 						</tr>			
