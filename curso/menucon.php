@@ -52,37 +52,18 @@ empezarPagina();
 							</td>
 						</tr>
 						<tr>
-							<td id="informacion_titulo">
-								Favor especifique:
-							</td>
-							<td>
-								<input
-									type="text"
-									name="informacion"
-									id="informacion">
-								<?php $query = "SELECT codigo, descripcion from cargo where status = 1;";
-									$resultado = conexion($query);?>
-								<select name="informacion" id="informacion_lista" hidden>
-									<option value="" selected="selected">--Seleccione--</option>
-									<?php while ( $datos = mysqli_fetch_array($resultado) ) : ?>
-										<option value="<?php echo $datos['codigo']; ?>">
-											<?php echo $datos['descripcion']; ?>
-										</option>
-									<?php endwhile; ?>
-								</select>
-							</td>
-							<td class="chequeo" id="informacion_chequeo">
-
-							</td>
-						</tr>
-						<tr>
-							<td id="tipo_personal_titulo">
+							<td id="curso_titulo">
 								Seleccione:
 							</td>
 							<td>
-								<?php $query = "SELECT codigo, descripcion from tipo_personal where status = 1;";
+								<?php $query = "SELECT
+									asume.codigo, curso.descripcion
+									from asume
+									inner join curso
+									on asume.cod_curso = curso.codigo
+									where asume.status = 1;";
 									$resultado = conexion($query);?>
-								<select name="tipo_personal" id="tipo_personal" required>
+								<select name="curso" id="curso" required>
 									<option value="" selected="selected">--Seleccione--</option>
 									<?php while ( $datos = mysqli_fetch_array($resultado) ) : ?>
 										<option value="<?php echo $datos['codigo']; ?>">
@@ -91,7 +72,7 @@ empezarPagina();
 									<?php endwhile; ?>
 								</select>
 							</td>
-							<td class="chequeo" id="tipo_personal_chequeo">
+							<td class="chequeo" id="curso_chequeo">
 
 							</td>
 						</tr>
@@ -124,10 +105,8 @@ empezarPagina();
 			$(function(){
 				//cambiamos de una vez
 				//estructura del formulario:
-				$('#informacion_titulo').css('color', '#888');
-				$('#informacion').prop('disabled', true);
-				$('#tipo_personal_titulo').css('color', '#888');
-				$('#tipo_personal').prop('disabled', true);
+				$('#curso_titulo').css('color', '#888');
+				$('#curso').prop('disabled', true);
 				$('#submit').prop('disabled', true);
 				//se cambia la estructura del formulario
 				//dependiendo de lo que el usuario escoja en el primer select
@@ -135,100 +114,22 @@ empezarPagina();
 				$('#tipo').on('change', function(){
 					var tipo = $(this).val();
 					if (tipo === '0') {
-						$('#informacion_titulo').show();
-						$('#informacion_titulo').css('color', '#888');
-						$('#informacion').prop('disabled', true);
-						$('#informacion').prop('readonly', false);
-						$('#informacion_lista').prop('disabled', true);
-						$('#informacion_lista').prop('hidden', true);
-						$('#tipo_personal_titulo').css('color', '#888');
-						$('#tipo_personal').prop('disabled', true);
+						$('#curso_titulo').css('color', '#888');
+						$('#curso').prop('disabled', true);
 						$('#submit').prop('disabled', true);
 					}else if (tipo === '2'){
-						$('#informacion').prop('value', '');
-						$('#informacion_titulo').css('color', '#000');
-						$('#informacion_titulo').show();
-						$('#informacion').prop('readonly', true);
-						$('#informacion').prop('hidden', true);
-						$('#informacion_lista').prop('disabled', false);
-						$('#informacion_lista').prop('hidden', false);
-						$('#tipo_personal_titulo').css('color', '#000');
-						$('#tipo_personal').prop('disabled', false);
+						$('#curso_titulo').css('color', '#000');
+						$('#curso').prop('disabled', false);
 						$('#submit').prop('disabled', true);
 					}else{
-						$('#informacion').prop('value', '');
-						$('#informacion_titulo').show();
-						$('#informacion_titulo').css('color', '#000');
-						$('#informacion').prop('disabled', false);
-						$('#informacion').prop('hidden', false);
-						$('#informacion').prop('readonly', false);
-						$('#informacion_lista').prop('disabled', true);
-						$('#informacion_lista').prop('hidden', true);
-						$('#tipo_personal_titulo').css('color', '#000');
-						$('#tipo_personal').prop('disabled', false);
+						$('#curso_titulo').css('color', '#000');
+						$('#curso').prop('disabled', false);
 					};
 				});
-				//debido a que las validaciones hechas por
-				//este script solo es usado en este archivo,
-				//se considero no pasar este script a un
-				//archivo aparte como otros archivos.
-				$('#informacion').on('change', function(){
-					var campo = $(this).val().replace(/^\s+|\s+$/g, '');
-					if (campo === "") {
-						$('#submit').prop('disabled', true);
-						$(this).focus();
-						$("#informacion_chequeo").html('este campo no puede </br> estar vacio.');
-						$("#informacion_titulo").css('color', 'red');
-					};
-					//valores de expresiones regulares:
-					var tipo = $('#tipo').val();
-					var numerosChequeo = /[^\d+]/g;
-					var	nombresChequeo = /[^A-Za-záéíóúÁÉÍÓÚ-]/g;
-					//comprobacion de campos dentro del formulario:
-					if (tipo === '1') {
-						if(campo.length < 6){
-							$('#submit').prop('disabled', true);
-							$(this).focus();
-							$("#informacion_chequeo").html('cedula no puede ser menor a 6 caracteres');
-							$("#informacion_titulo").css('color', 'red');
-						}else if(campo.length > 8){
-							$('#submit').prop('disabled', true);
-							$(this).focus();
-							$("#informacion_chequeo").html('cedula no puede ser mayor a 8 caracteres');
-							$("#informacion_titulo").css('color', 'red');
-						}else if( numerosChequeo.exec(campo) ){
-							$('#submit').prop('disabled', true);
-							$(this).focus();
-							$("#informacion_chequeo").html('Favor introduzca cedula solo numeros sin caracteres especiales, EJ: 12345678');
-							$("#informacion_titulo").css('color', 'red');
-						}else{
-							$("#informacion_chequeo").html('');
-							$("#informacion_titulo").css('color', 'green');
-							$('#submit').prop('disabled', false);
-						}
-					}else if( tipo === '1' ) {
-						if(campo.length > 20){
-							$('#submit').prop('disabled', true);
-							$(this).focus();
-							$("#informacion_chequeo").html('este campo no puede ser mayor a 20 caracteres');
-							$("#informacion_titulo").css('color', 'red');
-						}else if( nombresChequeo.test(campo) ){
-							$('#submit').prop('disabled', true);
-							$(this).focus();
-							$("#informacion_chequeo").html('Favor introduzca en este campo Letras sin numeros o caracteres especiales EJ: 19?=;@*');
-							$("#informacion_titulo").css('color', 'red');
-						}else{
-							$("#informacion_chequeo").html('');
-							$("#informacion_titulo").css('color', 'green');
-							$('#submit').prop('disabled', false);
-						}
-					};
-				});
-				//comprobacion del select de cargo:
-				$('#informacion_lista').on('change', function(){
+				//comprobacion del select de curso:
+				$('#curso').on('change', function(){
 					var campo = $(this).val();
-					console.log(campo);
-					if (campo === '0') {
+					if (campo === '') {
 						$('#submit').prop('disabled', true);
 					}else{
 						$('#submit').prop('disabled', false);
