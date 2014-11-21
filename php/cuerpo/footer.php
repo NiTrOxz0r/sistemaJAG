@@ -1,5 +1,9 @@
-<div>
-	
+<div style="border:2px solid black">
+	<h5>
+		<strong>
+			<i>SISTEMA DE DEBUG INTERNO:</i>
+		</strong>
+	</h5>
 	<p>
 		<?php var_dump($_SESSION) ?>
 	</p>
@@ -18,7 +22,7 @@
 			$enlace = "index.php";
 			//se cambia el camino relativo:
 			$puntoPunto = "../";
-			for ($i=4; $i < $dimension; $i++) { 
+			for ($i=4; $i < $dimension; $i++) {
 				$enlace = $puntoPunto.$enlace;
 			}
 			// PHP_SELF regresa el camino absoluto al archivo.
@@ -33,10 +37,10 @@
 			$cerrar = "cerrar.php";
 			//se cambia el camino relativo:
 			$puntoPunto = "../";
-			for ($i=4; $i < $dimension; $i++) { 
+			for ($i=4; $i < $dimension; $i++) {
 				$cerrar = $puntoPunto.$cerrar;
 			}
-		?> 
+		?>
 		PARA IR A INDEX: <a href="<?php echo $enlace ?>">SALIR</a>
 		PARA ELIMINAR SESION: <a href="<?php echo $cerrar ?>">SALIR</a>
 	</p>
