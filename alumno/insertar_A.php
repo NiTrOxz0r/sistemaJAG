@@ -158,4 +158,5 @@ validarUsuario(1);
 	
 }
 
+	finalizarPagina();
 ?>

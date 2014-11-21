@@ -128,6 +128,6 @@
 
 }
 
+	finalizarPagina();
 ?>
-	<?php
-			finalizarPagina();?>
+	
