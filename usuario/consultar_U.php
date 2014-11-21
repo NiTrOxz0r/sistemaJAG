@@ -157,6 +157,18 @@ if ( (isset($_POST['informacion'])
 				<!-- CONTENIDO EMPIEZA DEBAJO DE ESTO: -->
 				<!-- DETALLESE QUE NO ES UN ID SINO UNA CLASE. -->
 				<div class="contenido">
+					<div id="info">
+						<p>
+							Listado seleccionado segun los parametros que Ud. escojio
+						</p>
+						<p>
+							Si desea hacer otro tipo de consulta puede
+							<a href="menucon.php">hacerlo aqui.</a>
+						</p>
+						<p>
+							O puede regresar <a href="../index.php">al menu principal.</a>
+						</p>
+					</div>
 					<table>
 						<?php while ( $datos = mysqli_fetch_array($resultado) ) : ?>
 							<thead>

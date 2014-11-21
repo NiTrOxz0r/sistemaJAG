@@ -14,7 +14,15 @@ empezarPagina();
 //CONTENIDO:?>
 <div id="contenido">
 	<div id="blancoAjax">
-	<!-- http://www.w3schools.com/html/html_forms.asp -->
+		<div id="info">
+			<h5>
+				Por favor instroduzca el seudonimo que desea en el sistema y una clave.
+			</h5>
+			<p>
+				Es recomendable usar una clave entre 6 a 15 caracteres de largo por seguridad.
+			</p>
+		</div>
+		<!-- http://www.w3schools.com/html/html_forms.asp -->
 		<form
 			name="form_U"
 			id="form_U"
@@ -67,7 +75,7 @@ empezarPagina();
 						<td>
 							<input
 								type="submit"
-								value="enviar"
+								value="Continuar"
 								name="enviar"
 								onsubmit="return validacionUsuario();"
 								onclick="return validacionUsuario();">
@@ -154,9 +162,9 @@ empezarPagina();
 				});
 			});
 		</script>
-	</div>
-
-<?php
+	<?php
 	//FINALIZAMOS LA PAGINA:
 	//trae footer.php y cola.php
 	finalizarPagina();?>
+	</div>
+</div>

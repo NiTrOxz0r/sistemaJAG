@@ -31,7 +31,7 @@ function validacionPI(){
 	var estado = document.getElementById('cod_est').value.replace(/^\s+|\s+$/g, '');
 	var municipio = document.getElementById('cod_mun').value.replace(/^\s+|\s+$/g, '');
 	var parroquia = document.getElementById('cod_parro').value.replace(/^\s+|\s+$/g, '');
-	// cedula:
+// cedula:
 	if (cedula == "") {
 		document.getElementById("cedula").focus();
 		$("#cedula_chequeo").html('este campo no puede </br> estar vacio');
@@ -57,7 +57,7 @@ function validacionPI(){
 		$("#cedula_titulo").css('color', 'green');
 		estatus = true;
 	}
-	//NACIONALIDAD:
+//NACIONALIDAD:
 	if ( nacionalidad != 'v' && nacionalidad != 'e' ) {
 		$("#nacionalidad_chequeo").html('Por favor introduzca hasta un maximo de 15 caracteres.');
 		$("#nacionalidad_titulo").css('color', 'red');
@@ -67,7 +67,7 @@ function validacionPI(){
 		$("#nacionalidad_titulo").css('color', 'green');
 		estatus = true;
 	}
-	//P_NOMBRE:
+//P_NOMBRE:
 	if (p_nombre == "") {
 		document.getElementById("p_nombre").focus();
 		$("#p_nombre_chequeo").html('este campo no puede </br> estar vacio');
@@ -88,7 +88,7 @@ function validacionPI(){
 		$("#p_nombre_titulo").css('color', 'green');
 		estatus = true;
 	}
-	//S_NOMBRE
+//S_NOMBRE
 	if(s_nombre.length > 20){
 		document.getElementById("s_nombre").focus();
 		$("#s_nombre_chequeo").html('este campo no puede ser mayor a 20 caracteres');
@@ -104,7 +104,7 @@ function validacionPI(){
 		$("#s_nombre_titulo").css('color', 'green');
 		estatus = true;
 	}
-	//P_APELLIDO
+//P_APELLIDO
 	if (p_apellido == "") {
 		document.getElementById("p_apellido").focus();
 		$("#p_apellido_chequeo").html('este campo no puede </br> estar vacio');
@@ -125,7 +125,7 @@ function validacionPI(){
 		$("#p_apellido_titulo").css('color', 'green');
 		estatus = true;
 	}
-	//s_apellido
+//s_apellido
 	if(s_apellido.length > 20){
 		document.getElementById("s_apellido").focus();
 		$("#s_apellido_chequeo").html('este campo no puede ser mayor a 20 caracteres');
@@ -141,7 +141,7 @@ function validacionPI(){
 		$("#s_apellido_titulo").css('color', 'green');
 		estatus = true;
 	}
-	//fec_nac
+//fec_nac
 	if (fec_nac == "") {
 		document.getElementById("fec_nac").focus();
 		$("#fec_nac_chequeo").html('este campo no puede </br> estar vacio');
@@ -162,7 +162,7 @@ function validacionPI(){
 		$("#fec_nac_titulo").css('color', 'green');
 		estatus = true;
 	}
-	//sexo:
+//sexo:
 	if ( sexo != '0' && sexo != '1' ) {
 		$("#sexo_chequeo").html('Por favor seleccione una opcion apropiada.');
 		$("#sexo_titulo").css('color', 'red');
@@ -172,7 +172,7 @@ function validacionPI(){
 		$("#sexo_titulo").css('color', 'green');
 		estatus = true;
 	}
-	//email
+//email
 	if(email.length > 40){
 		document.getElementById("email").focus();
 		$("#email_chequeo").html('este campo no puede ser mayor a 40 caracteres');
@@ -188,7 +188,7 @@ function validacionPI(){
 		$("#email_titulo").css('color', 'green');
 		estatus = true;
 	}
-	//titulo
+//titulo
 	if(titulo.length > 80){
 		document.getElementById("titulo").focus();
 		$("#titulo_chequeo").html('este campo no puede ser mayor a 80 caracteres');
@@ -199,7 +199,7 @@ function validacionPI(){
 		$("#titulo_titulo").css('color', 'green');
 		estatus = true;
 	}
-	//telefono
+//telefono
 	if(telefono.length != 11 && telefono != "" ){
 		document.getElementById("telefono").focus();
 		$("#telefono_chequeo").html('este campo no puede ser mayor a 11 caracteres EJ: 02127773322');
@@ -219,7 +219,7 @@ function validacionPI(){
 		$("#telefono_titulo").css('color', 'green');
 		estatus = true;
 	}
-	//telefono_otro
+//telefono_otro
 	if(telefono_otro.length != 11 && telefono_otro != "" ){
 		document.getElementById("telefono_otro").focus();
 		$("#telefono_otro_chequeo").html('este campo no puede ser mayor a 11 caracteres EJ: 02127773322');
@@ -239,7 +239,7 @@ function validacionPI(){
 		$("#telefono_otro_titulo").css('color', 'green');
 		estatus = true;
 	}
-	//celular
+//celular
 	if(celular.length != 11 && celular != "" ){
 		document.getElementById("celular").focus();
 		$("#celular_chequeo").html('este campo no puede ser mayor a 11 caracteres EJ: 02127773322');
@@ -259,7 +259,7 @@ function validacionPI(){
 		$("#celular_titulo").css('color', 'green');
 		estatus = true;
 	}
-	//direcc
+//direcc
 	if(direcc != "" && direcc.length > 150){
 		document.getElementById("direcc").focus();
 		$("#direcc_chequeo").html('este campo no puede ser mayor a 80 caracteres');
@@ -270,8 +270,8 @@ function validacionPI(){
 		$("#direcc_titulo").css('color', 'green');
 		estatus = true;
 	}
-	//tipo (perfil de usuario):
-	if ( tipo == '0' || tipo == '' ) {
+//tipo (perfil de usuario):
+	if ( tipo === '' ) {
 		$("#tipo_chequeo").html('Por favor seleccione una opcion apropiada.');
 		$("#tipo_titulo").css('color', 'red');
 		return false;
@@ -280,7 +280,7 @@ function validacionPI(){
 		$("#tipo_titulo").css('color', 'green');
 		estatus = true;
 	}
-	//cargo (perfil de usuario):
+//cargo (cargo interno de personal):
 	if ( cargo == '0' || cargo == '' ) {
 		$("#cargo_chequeo").html('Por favor seleccione una opcion apropiada.');
 		$("#cargo_titulo").css('color', 'red');
@@ -290,7 +290,7 @@ function validacionPI(){
 		$("#cargo_titulo").css('color', 'green');
 		estatus = true;
 	}
-	//nivel_instruccion (nivel_educativo):
+//nivel_instruccion (nivel_educativo):
 	if ( nivel_instruccion == '0' || nivel_instruccion == '' ) {
 		$("#nivel_instruccion_chequeo").html('Por favor seleccione una opcion apropiada.');
 		$("#nivel_instruccion_titulo").css('color', 'red');
@@ -300,7 +300,7 @@ function validacionPI(){
 		$("#nivel_instruccion_titulo").css('color', 'green');
 		estatus = true;
 	}
-	//estado
+//estado
 	if ( estado == '' ) {
 		$("#estado_chequeo").html('Por favor seleccione una opcion apropiada.');
 		$("#estado_titulo").css('color', 'red');
@@ -310,7 +310,7 @@ function validacionPI(){
 		$("#estado_titulo").css('color', 'green');
 		estatus = true;
 	}
-	//municipio
+//municipio
 	if ( municipio == '' ) {
 		$("#municipio_chequeo").html('Por favor seleccione una opcion apropiada.');
 		$("#municipio_titulo").css('color', 'red');
@@ -320,7 +320,7 @@ function validacionPI(){
 		$("#municipio_titulo").css('color', 'green');
 		estatus = true;
 	}
-	//parroquia
+//parroquia
 	if ( parroquia == '' ) {
 		$("#parroquia_chequeo").html('Por favor seleccione una opcion apropiada.');
 		$("#parroquia_titulo").css('color', 'red');

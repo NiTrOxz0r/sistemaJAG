@@ -18,6 +18,14 @@ if ( isset($_POST['seudonimo']) && isset($_POST['clave']) ):
 			<!-- CONTENIDO EMPIEZA DEBAJO DE ESTO: -->
 			<!-- DETALLESE QUE NO ES UN ID SINO UNA CLASE. -->
 			<div class="contenido">
+				<div id="infor">
+					<p>
+						Seudonimo y clave validos!
+					</p>
+					<p>
+						Por favor continue el proceso de registro introduciendo sus datos basicos:
+					</p>
+				</div>
 				<form method="POST" name="form_PI" id="form_PI" action="insertar_U.php">
 					<table>
 						<thead>
@@ -229,7 +237,7 @@ if ( isset($_POST['seudonimo']) && isset($_POST['clave']) ):
 									<?php $sql="SELECT codigo, descripcion from tipo_personal where status = 1;";
 										$registros = conexion($sql);?>
 									<select name="tipo_personal" required id="tipo_personal">
-										<option selected="selected">--Seleccione--</option>
+										<option selected="selected" value="">--Seleccione--</option>
 										<?php while($fila = mysqli_fetch_array($registros)) :	?>
 												<option value="<?php echo $fila['codigo']?>">
 												<?php echo $fila['descripcion']?></option>
@@ -268,7 +276,7 @@ if ( isset($_POST['seudonimo']) && isset($_POST['clave']) ):
 									<option value="">--Seleccionar--</option></select>
 								</td>
 								<td>
-									<input type="submit" name="registrar" value="Insertar">
+									<input type="submit" name="registrar" value="Continuar">
 								</td>
 							</tr>
 							<tr>
@@ -289,64 +297,64 @@ if ( isset($_POST['seudonimo']) && isset($_POST['clave']) ):
 			<?php $validacion = enlaceDinamico("java/validacionPI.js"); ?>
 			<script type="text/javascript" src="<?php echo $validacion ?>"></script>
 			<script type="text/javascript">
-			$(function(){
-				$('#form_PI').on('submit', function (evento){
-					evento.preventDefault();
-					if ( validacionPI() ) {
-						var nacionalidad = $('#nacionalidad').val();
-						var cedula = $('#cedula').val();
-						var p_nombre = $('#p_nombre').val();
-						var s_nombre = $('#s_nombre').val();
-						var p_apellido = $('#p_apellido').val();
-						var s_apellido = $('#s_apellido').val();
-						var fec_nac = $('#fec_nac').val();
-						var sexo = $('#sexo').val();
-						var email = $('#email').val();
-						var nivel_instruccion = $('#nivel_instruccion').val();
-						var titulo = $('#titulo').val();
-						var telefono = $('#telefono').val();
-						var telefono_otro = $('#telefono_otro').val();
-						var celular = $('#celular').val();
-						var cargo = $('#cargo').val();
-						var tipo_personal = $('#tipo_personal').val();
-						var direcc = $('#direcc').val();
-						var cod_est = $('#cod_est').val();
-						var cod_mun = $('#cod_mun').val();
-						var cod_parro = $('#cod_parro').val();
-						$.ajax({
-							url: 'insertar_U.php',
-							type: 'POST',
-							data: {
-								nacionalidad:nacionalidad,
-								cedula:cedula,
-								p_nombre:p_nombre,
-								s_nombre:s_nombre,
-								p_apellido:p_apellido,
-								s_apellido:s_apellido,
-								fec_nac:fec_nac,
-								sexo:sexo,
-								email:email,
-								nivel_instruccion:nivel_instruccion,
-								titulo:titulo,
-								telefono:telefono,
-								telefono_otro:telefono_otro,
-								celular:celular,
-								cod_cargo:cargo,
-								tipo_personal:tipo_personal,
-								direcc:direcc,
-								cod_parroquia:cod_parro
-							},
-							success: function (datos){
-								$('#contenido').html('');
-								$("#contenido").load().html(datos);
-							},
-						});
-					};
+				$(function(){
+					$('#form_PI').on('submit', function (evento){
+						evento.preventDefault();
+						if ( validacionPI() ) {
+							var nacionalidad = $('#nacionalidad').val();
+							var cedula = $('#cedula').val();
+							var p_nombre = $('#p_nombre').val();
+							var s_nombre = $('#s_nombre').val();
+							var p_apellido = $('#p_apellido').val();
+							var s_apellido = $('#s_apellido').val();
+							var fec_nac = $('#fec_nac').val();
+							var sexo = $('#sexo').val();
+							var email = $('#email').val();
+							var nivel_instruccion = $('#nivel_instruccion').val();
+							var titulo = $('#titulo').val();
+							var telefono = $('#telefono').val();
+							var telefono_otro = $('#telefono_otro').val();
+							var celular = $('#celular').val();
+							var cargo = $('#cargo').val();
+							var tipo_personal = $('#tipo_personal').val();
+							var direcc = $('#direcc').val();
+							var cod_est = $('#cod_est').val();
+							var cod_mun = $('#cod_mun').val();
+							var cod_parro = $('#cod_parro').val();
+							$.ajax({
+								url: 'insertar_U.php',
+								type: 'POST',
+								data: {
+									nacionalidad:nacionalidad,
+									cedula:cedula,
+									p_nombre:p_nombre,
+									s_nombre:s_nombre,
+									p_apellido:p_apellido,
+									s_apellido:s_apellido,
+									fec_nac:fec_nac,
+									sexo:sexo,
+									email:email,
+									nivel_instruccion:nivel_instruccion,
+									titulo:titulo,
+									telefono:telefono,
+									telefono_otro:telefono_otro,
+									celular:celular,
+									cod_cargo:cargo,
+									tipo_personal:tipo_personal,
+									direcc:direcc,
+									cod_parroquia:cod_parro
+								},
+								success: function (datos){
+									$('#contenido').html('');
+									$("#contenido").load().html(datos);
+								},
+							});
+						};
+					});
+					$('#form_PI').on('change', function (){
+						validacionPI()
+					});
 				});
-				$('#form_PI').on('change', function (){
-					validacionPI()
-				});
-			});
 			</script>
 			<!-- ajax de estado -->
 			<?php $estado = enlaceDinamico("java/edo.php"); ?>
@@ -385,7 +393,10 @@ if ( isset($_POST['seudonimo']) && isset($_POST['clave']) ):
 					});
 				});
 			</script>
-			<!-- submit -->
+			<?php
+			//FINALIZAMOS LA PAGINA:
+			//trae footer.php y cola.php
+			finalizarPagina();?>
 			<!-- CONTENIDO TERMINA ARRIBA DE ESTO: -->
 		</div>
 	</div>

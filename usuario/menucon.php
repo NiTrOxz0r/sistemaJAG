@@ -18,15 +18,20 @@ empezarPagina();
 		<!-- DETALLESE QUE NO ES UN ID SINO UNA CLASE. -->
 		<div class="contenido">
 
+			<div class="info">
+				<p>
+					Para hacer una consulta por favor seleccione el tipo de consulta que Ud. desee:
+				</p>
+			</div>
+
 			<form
 				id="consulta_singular_U"
 				name="consulta_singular_U"
 				action="consultar_U.php"
 				method="post">
-
 				<table>
 					<thead>
-						<th>Busqueda especifica</th>
+						<th>Seleccione una opcion</th>
 					</thead>
 					<tbody>
 						<tr>
@@ -38,13 +43,13 @@ empezarPagina();
 									autofocus="autofocus"
 									required>
 									<option selected="selected" value="0">--Seleccione--</option>
-									<option value="1">Por cedula:</option>
-									<option value="2">Por Nombre:</option>
-									<option value="3">Por Apellido:</option>
-									<option value="4">Por Cargo:</option>
-									<option value="5">Regitro activo:</option>
-									<option value="6">Regitro inactivo:</option>
-									<option value="7">Todos los Registros:</option>
+									<option value="1">Por cedula</option>
+									<option value="2">Por Nombre</option>
+									<option value="3">Por Apellido</option>
+									<option value="4">Por Cargo</option>
+									<option value="5">Regitro activo</option>
+									<option value="6">Regitro inactivo</option>
+									<option value="7">Todos los Registros</option>
 								</select>
 							</td>
 							<td class="chequeo" id="tipo_chequeo">
@@ -102,7 +107,6 @@ empezarPagina();
 						</tr>
 					</tbody>
 				</table>
-
 				<div id="error" class="chequeo">
 					<!-- chequeo por medio de ajax: -->
 					<span class="error" id="error">
@@ -111,30 +115,34 @@ empezarPagina();
 				</div>
 
 			</form>
-
-			<form
-				id="consulta_listado_U"
-				name="consulta_listado_U"
-				action="consultar_U.php"
-				method="post">
-				<table>
-					<thead>
-						<th>Consulta General</th>
-					</thead>
-					<tbody>
-						<td>
-							<input type="submit" value="Consultar Listado" name="consultar">
-						</td>
-					</tbody>
-				</table>
-			</form>
-
 			<div id="error" class="chequeo">
 				<!-- chequeo por medio de ajax: -->
 				<span class="error" id="error">
 
 				</span>
 			</div>
+			<div class="info">
+				Si Ud. desea registrar a un personal interno de esta institucion puede hacerlo especificando la cedula de identidad:
+			</div>
+			<form>
+				<table>
+					<thead>
+						<th>EN CONSTRUCCION</th>
+					</thead>
+					<tbody>
+						<tr>
+							<td>
+								<input type="text" disabled>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<input type="submit" id="submit" value="Registrar" disabled>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</form>
 
 		</div>
 		<!-- validacion -->

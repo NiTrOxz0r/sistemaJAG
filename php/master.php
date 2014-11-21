@@ -39,6 +39,9 @@ require "funciones/finalizarPagina.php";
 // usado para ver variables de session nada mas:
 require "funciones/debugUsuario.php";
 
+// usado para ver variables de session junto a GET y POST:
+require "funciones/debugVariables.php";
+
 // funcion validar usuario en pagina web:
 require "funciones/validarUsuario.php";
 

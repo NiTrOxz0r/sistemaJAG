@@ -12,6 +12,11 @@
  * @version 1.0
  */
 function debugSistema(){
+	echo "<h5>
+					<strong>
+						<i>SISTEMA DE DEBUG INTERNO:</i>
+					</strong>
+				</h5>";
 	if (isset($_SESSION['pagina_origen'])) {
 		echo "pagina de origen: ".$_SESSION['pagina_origen']."<br />";
 	}
