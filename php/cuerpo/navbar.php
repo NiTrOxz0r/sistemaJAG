@@ -16,10 +16,10 @@
 				<li><a href="<?php echo $alumno ?>">Alumnos</a></li>
 				<?php $pa = enlaceDinamico('Personal_Autorizado/menucon.php'); ?>
 				<li><a href="<?php echo $pa ?>">Padres y Allegados</a></li>
-				<?php $pa = enlaceDinamico('docente/menucon.php'); ?>
-				<li><a href="<?php echo $docentes ?>">Docentes</a></li>
-				<?php $pa = enlaceDinamico('usuario/menucon.php'); ?>
-				<li><a href="<?php echo $usuarios ?>">Usuarios</a></li>
+				<?php $curso = enlaceDinamico('cursos/menucon.php'); ?>
+				<li><a href="<?php echo $curso ?>">Docentes</a></li>
+				<?php $usuario = enlaceDinamico('usuario/menucon.php'); ?>
+				<li><a href="<?php echo $usuario ?>">Usuarios</a></li>
 			</ul>
 		</div>
 	<?php else : ?>
