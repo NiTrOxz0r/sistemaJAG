@@ -44,7 +44,7 @@ CREATE TABLE IF NOT EXISTS `administrativo` (
   `email` varchar(50) DEFAULT 'Sin Registro',
   `cod_direccion` int(10) unsigned NOT NULL,
   `cod_usr` int(10) unsigned NOT NULL,
-  `cod_cargo` tinyint(3) unsigned NOT NULL DEFAULT '255',
+  `cod_cargo` tinyint(3) unsigned NOT NULL DEFAULT '1',
   `status` tinyint(1) unsigned NOT NULL DEFAULT '1',
   `cod_usr_reg` int(11) NOT NULL,
   `fec_reg` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -170,7 +170,7 @@ CREATE TABLE IF NOT EXISTS `cargo` (
 --
 
 INSERT INTO `cargo` (`codigo`, `descripcion`, `status`, `cod_usr_reg`, `fec_reg`, `cod_usr_mod`, `fec_mod`) VALUES
-(1, 'Favor actualizar campo', 1, 1, '2014-11-07 13:55:21', 1, '2014-11-07 13:55:21'),
+(1, 'Sin cargo asociado', 1, 1, '2014-11-07 13:55:21', 1, '2014-11-07 13:55:21'),
 (2, 'Director(a)', 1, 1, '2014-11-07 13:55:21', 1, '2014-11-07 13:55:21'),
 (3, 'Sub-Director(a)', 1, 1, '2014-11-07 13:55:21', 1, '2014-11-07 13:55:21'),
 (4, 'Coordinador(a)', 1, 1, '2014-11-07 13:55:21', 1, '2014-11-07 13:55:21'),
@@ -235,7 +235,8 @@ INSERT INTO `curso` (`codigo`, `grado`, `seccion`, `descripcion`, `status`, `cod
 (30, 6, 5, 'Sexto Grado Seccion:"E"', 1, 1, '2014-11-07 14:03:56', 1, '2014-11-07 14:03:56'),
 (31, -1, 1, 'Prescolar nivel 1', 1, 1, '2014-11-07 14:03:56', 1, '2014-11-07 14:03:56'),
 (32, -2, 1, 'Prescolar nivel 2', 1, 1, '2014-11-07 14:03:56', 1, '2014-11-07 14:03:56'),
-(33, -3, 1, 'Prescolar nivel 3"', 1, 1, '2014-11-07 14:03:56', 1, '2014-11-07 14:03:56');
+(33, -3, 1, 'Prescolar nivel 3', 1, 1, '2014-11-07 14:03:56', 1, '2014-11-07 14:03:56'),
+(34, 7, 1, 'Sin Curso Asociado', 1, 1, '2014-11-07 14:03:56', 1, '2014-11-07 14:03:56');
 
 -- --------------------------------------------------------
 
@@ -379,7 +380,7 @@ CREATE TABLE IF NOT EXISTS `directivo` (
   `email` varchar(50) DEFAULT 'Sin Registro',
   `cod_direccion` int(10) unsigned NOT NULL,
   `cod_usr` int(10) unsigned NOT NULL,
-  `cod_cargo` tinyint(3) unsigned NOT NULL DEFAULT '255',
+  `cod_cargo` tinyint(3) unsigned NOT NULL DEFAULT '1',
   `status` tinyint(1) unsigned NOT NULL DEFAULT '1',
   `cod_usr_reg` int(11) NOT NULL,
   `fec_reg` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -418,7 +419,7 @@ CREATE TABLE IF NOT EXISTS `docente` (
   `email` varchar(50) DEFAULT 'Sin Registro',
   `cod_direccion` int(10) unsigned NOT NULL,
   `cod_usr` int(10) unsigned NOT NULL,
-  `cod_cargo` tinyint(3) unsigned NOT NULL DEFAULT '255',
+  `cod_cargo` tinyint(3) unsigned NOT NULL DEFAULT '1',
   `status` tinyint(1) unsigned NOT NULL DEFAULT '1',
   `cod_usr_reg` int(11) NOT NULL,
   `fec_reg` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -2217,7 +2218,7 @@ INSERT INTO `tipo_usuario` (`codigo`, `descripcion`, `status`, `cod_usr_reg`, `f
 CREATE TABLE IF NOT EXISTS `usuario` (
   `codigo` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `seudonimo` varchar(20) NOT NULL,
-  `clave` varchar(64) NOT NULL,
+  `clave` varchar(60) NOT NULL,
   `cod_tipo_usr` tinyint(1) unsigned DEFAULT '1',
   `status` tinyint(1) unsigned NOT NULL DEFAULT '1',
   `cod_usr_reg` int(11) NOT NULL,

@@ -1,59 +1,252 @@
-<?php 
-if(!isset($_SESSION)){ 
-    session_start(); 
+<?php
+
+/**
+ * @author [slayerfat] <[slayerfat@gmail.com]>
+ *
+ * {@internal [si tienen dudas sobre este archivo
+ * pregunten, no es tan dificil, solo sigan el flujo del
+ * mismo, para registrar a un personal que desee ser usuario:
+ *
+ * 1. se inserta usuario.
+ * 2. se inserta persona.
+ * 3. se inserta personal.
+ * 4. se inserta direccion.
+ *
+ * y listo.
+ *
+ * este archivo fue cambiado para ajustarse a la nueva base de datos.]}
+ *
+ * @version [1.6]
+ */
+
+if(!isset($_SESSION)){
+    session_start();
 }
 $enlace = $_SERVER['DOCUMENT_ROOT']."/github/sistemaJAG/php/master.php";
 require_once($enlace);
 // invocamos validarUsuario desde master.php
-validarUsuario(1);
-	
-if ( isset($_POST['seudonimo']) && isset($_POST['clave']) ): 
+validarUsuario();
 
-	//ESTA FUNCION TRAE EL HEAD Y NAVBAR:
-	//DESDE empezarPagina.php
-	empezarPagina();
+if ( isset($_SESSION['seudonimo']) && isset($_SESSION['clave']) && isset($_POST['cedula']) ):
 
-	$seudonimo = $_POST['seudonimo'];
-	$clave = $_POST['clave'];
-	$validarForma = new ChequearUsuario($seudonimo,	$clave);
-
-	$query = "INSERT INTO usuario	
+	//la clave tiene que ser exactamente 60 caracteres:
+	if (strlen($_SESSION['clave']) <> 60) {
+		header("Location: form_reg_U.php?clave=MalDefinido");
+	}
+	//datos para saber si es docente o no:
+	if (isset($_POST['tipo_personal'])) {
+		if ($_POST['tipo_personal'] === '1') {
+			$asume = false;
+		} elseif ($_POST['tipo_personal'] === '2') {
+			$asume = true;
+		} elseif ($_POST['tipo_personal'] === '3') {
+			$asume = false;
+		}else{
+			header("Location: form_reg_PI.php?tipo_personal=MalDefinido");
+		}
+	}else {
+		header("Location: form_reg_PI.php?tipo_personal=MalDefinido");
+	}
+	//iniciamos variables:
+	//para el escape string:
+	$con = conexion();
+	//validamos datos basicos de usuario:
+	$validarForma = new ChequearUsuario(
+		$_SESSION['seudonimo'],
+		array('completo' => $_SESSION['clave']) );
+	//chequeamos que el usuario ingrese como tal a la
+	//tabla usuarios antes que todo:
+	//cod_tipo_usr = 5 (por verificar)
+	$query = "INSERT INTO usuario
 	VALUES
-	(null, '$seudonimo', '$clave', 
-		5, 1, 1, null, 1, null );";
+	(null, $validarForma->seudonimo, ".$validarForma->clave['completo'].",
+		5, 1, 1, null, 1, current_timestamp );";
 	$resultado = conexion($query);
-	$query = "SELECT codigo, seudonimo, cod_tipo_usr 
-	from usuario 
-	where seudonimo = '$seudonimo'
-	and clave = '$clave'";
+	//MUCHO CUIDADO CON MYSQLI_INSERT_ID
+	//ESTA FUNCION TRAE EL  ULTIMO ID AUTOINCREMENTADO.
+	//EN POCAS PALABRAS NO ES BUENA IDEA USARLO.
+	//
+	//chequeamos la BD para ver el codigo:
+	//del usuario:
+	$query = "SELECT codigo
+	from usuario
+	where seudonimo = $validarForma->seudonimo
+	and clave = ".$validarForma->clave['completo'].";";
 	$resultado = conexion($query);
-	if ( $resultado->num_rows == 1 ) {
+	$datos = mysqli_fetch_assoc($resultado);
+	$codigoUsuario = $datos['codigo'];
+
+	//iniciamos datos restantes del formulario:
+	$codUsrMod = 1; // 1 porque nadie hace referencia a este registro
+	$p_apellido = $_POST['p_apellido'];
+	$s_apellido = $_POST['s_apellido'];
+	$p_nombre = $_POST['p_nombre'];
+	$s_nombre = $_POST['s_nombre'];
+	$nacionalidad = $_POST['nacionalidad'];
+	$cedula = $_POST['cedula'];
+	$celular = $_POST['celular'];
+	$telefono = $_POST['telefono'];
+	$telefonoOtro = $_POST['telefono_otro'];
+	$nivel_instruccion = $_POST['nivel_instruccion'];
+	$titulo = $_POST['titulo'];
+	$fecNac = $_POST['fec_nac'];
+	$sexo = $_POST['sexo'];
+	$email = $_POST['email'];
+	$codTipoUsr = '5'; //tipo: por verificar
+	$codCargo = $_POST['cod_cargo'];
+	$tipo_personal = $_POST['tipo_personal'];
+	//validamos los datos restantes:
+	$validarPI = new ChequearPI(
+		$codUsrMod,
+		$p_apellido,
+		$s_apellido,
+		$p_nombre,
+		$s_nombre,
+		$nacionalidad,
+		$cedula,
+		$celular,
+		$telefono,
+		$telefonoOtro,
+		$nivel_instruccion,
+		$titulo,
+		$fecNac,
+		$sexo,
+		$email,
+		$codTipoUsr,
+		$codCargo,
+		$tipo_personal
+		);
+
+	//se inserta en persona
+	//los datos comunes o basicos:
+	$query = "INSERT INTO persona
+	values
+	(null, $validarPI->p_nombre, $validarPI->s_nombre, $validarPI->p_apellido,
+		$validarPI->s_apellido,	$validarPI->nacionalidad, $validarPI->cedula,
+		$validarPI->fecNac,	$validarPI->telefono, $validarPI->telefonoOtro,
+		$validarPI->sexo, 1, 1, null, 1, current_timestamp);";
+	$resultado = conexion($query);
+	//averiguamos codigo (y de una vez el resto de campos):
+	$query = "SELECT * from persona where cedula = $validarPI->cedula;";
+	$resultado = conexion($query);
+	if ($resultado->num_rows == 1) :
+		$datosDePersona = mysqli_fetch_assoc($resultado);
+	endif;
+
+	//se inserta en personal
+	//los datos no comunes o especificos:
+	$query = "INSERT INTO personal
+	values
+	(null, $datosDePersona[codigo], $validarPI->celular,
+		$validarPI->nivel_instruccion, $validarPI->titulo, $validarPI->email,
+		$codigoUsuario, $validarPI->codCargo, $validarPI->tipoPersonal,
+		1, 1, null, 1, current_timestamp);";
+	$resultado = conexion($query);
+
+	// TODO LIMPiAR ESTO
+	// creo que no necesitamos nada de personal
+
+	// agarramos los datos de personal
+	// $query = "SELECT * from personal where cod_persona = $datosDePersona[codigo];";
+	// $resultado = conexion($query);
+	// if ($resultado->num_rows == 1) :
+	// 	$datosDePersonal = mysqli_fetch_assoc($resultado);
+	// endif;
+
+	//validamos campos de direccion:
+	$direccion = new ChequearDireccion(
+		$codUsrMod,
+		$datosDePersona['codigo'],
+		$_POST['cod_parroquia'],
+		$_POST['direcc']
+		);
+	//insertamos datos:
+	$query = "INSERT INTO direccion
+	VALUES
+	(null, $direccion->codPersona, $direccion->codParroquia,
+		$direccion->direccionExacta,	1, 1, null,	1, current_timestamp);";
+	$resultado = conexion($query);
+
+	//TODO BORRAR ESTO:
+	//CREO QUE NO NECESITAMOS ESTO:
+	//buscamos el codigo de esa direccion que
+	//acabamos de insertar:
+	// $query = "SELECT codigo from direccion
+	// where cod_parroquia = $cod_parroquia and direccion_exacta = $direcc;";
+	// $resultado = conexion($query);
+	// $datos = mysqli_fetch_assoc($resultado);
+	// $codigoDireccion = $datos['codigo'];
+
+	//por ultimo:
+	$query = "SELECT
+	usuario.codigo as codigo,
+	usuario.seudonimo as seudonimo,
+	personal.codigo as cod_docente,
+	persona.p_nombre as p_nombre,
+	persona.p_apellido as p_apellido,
+	usuario.cod_tipo_usr as cod_tipo_usr
+	from persona
+	inner join personal
+	on persona.codigo = personal.cod_persona
+	inner join usuario
+	on personal.cod_usr = usuario.codigo
+	where persona.cedula = $validarPI->cedula;";
+	$resultado = conexion($query);
+	//si todo sale bien
+	//se inicia la sesion de ese usuario:
+	if ( $resultado->num_rows == 1 ) :
 		$datos = mysqli_fetch_assoc($resultado);
+
+		if ($asume) {
+			$query = "INSERT INTO asume values
+			(null, $datos[cod_docente], 34, 0,
+				'Autogenerado en registro, por sistema.',
+				1, 1, null, 1, current_timestamp);";
+			$resultado = conexion($query);
+		}
+		session_unset();
+		session_destroy();
+		session_start();
 		$_SESSION['codUsrMod'] = $datos['codigo'];
 		$_SESSION['codigo'] = $datos['codigo'];
 		$_SESSION['seudonimo'] = $datos['seudonimo'];
-		$_SESSION['cod_tipo_usr'] = $datos['cod_tipo_usr'];
-	}else{
-		echo "error en la base de datos!";
-	}
-	?>
+		$_SESSION['p_nombre'] = $datos['p_nombre'];
+		$_SESSION['p_apellido'] = $datos['p_apellido'];
+		$_SESSION['cod_tipo_usr'] = $datos['cod_tipo_usr'];?>
+		<div id="blancoAjax">
+			<h3>
+				Bienvenido al sistema <?php echo $_SESSION['seudonimo'] ?>!
+			</h3>
+			<p>
+				Ud. ya es miembro de este sistema, por favor contacte a un administrador para empezar a usar las diferentes actividades.
+			</p>
+			<p>
+				<a href="../index.php">Regresar al sistema</a>
+			</p>
+		</div>
+	<?php else: ?>
+		<div id="blancoAjax">
+			<p>
+				Error en la base de datos!
+			</p>
+		</div>
+	<?php endif;?>
+
+<?php
+//cerramos $con:
+mysqli_close($con);
+//FINALIZAMOS LA PAGINA:
+//trae footer.php y cola.php
+finalizarPagina();?>
+
+<?php else: ?>
 	<div id="blancoAjax">
-		<h3>
-			Bienvenido al sistema <?php echo $seudonimo ?>!
-		</h3>
 		<p>
-			Ud. ya es miembro de este sistema, por favor contacte a un administrador para empezar a usar las diferentes actividades.
-		</p>
-		<p>
-			<a href="../index.php">Regresar al sistema</a>
+			Problemas en registro de usuario, por favor contacte a un administrador del sistema.
 		</p>
 	</div>
-
-	<?php
-	//FINALIZAMOS LA PAGINA:
-	//trae footer.php y cola.php
-	finalizarPagina();?>
-	
-<?php else: ?>
-	<?php echo 'Problemas en registro de usuario, por favor contacte a un administrador del sistema.' ?>
+<?php
+//FINALIZAMOS LA PAGINA:
+//trae footer.php y cola.php
+finalizarPagina();?>
 <?php endif ?>

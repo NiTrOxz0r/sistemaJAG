@@ -4,5 +4,11 @@ dentro de los elementos dinamicos de ajax
 ej: form_reg_U.php*/
 
 .chequeo {
-	height:60px; width:270px;
+	height:60px; 
+	width:270px;
+}
+
+div .chequeo{
+	height:40px;
+	width: initial;
 }

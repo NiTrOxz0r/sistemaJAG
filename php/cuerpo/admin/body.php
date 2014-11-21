@@ -1,6 +1,6 @@
 <?php
-	if(!isset($_SESSION)){ 
-    session_start(); 
+	if(!isset($_SESSION)){
+    session_start();
   }
 	$enlace = $_SERVER['DOCUMENT_ROOT']."/github/sistemaJAG/php/master.php";
 	require_once($enlace);
@@ -23,7 +23,7 @@
 			<tr>
 				<td  colspan="2" align="center">
 					&nbsp;&nbsp;
-					<a 
+					<a
 						class="no-click"
 						data-titulo="Registro"
 						href="Personal_Autorizado/form_reg_P.php">
@@ -37,7 +37,7 @@
 			<tr>
 				<td>
 					&nbsp;&nbsp;
-					<a 
+					<a
 						class="no-click"
 						data-titulo="GestionarAlumno"
 						href="alumno/body.php">
@@ -47,11 +47,11 @@
 				</td>
 				<td>
 					&nbsp;&nbsp;
-					<a 
+					<a
 						class="no-click"
 						data-titulo="personalAutorizado"
-						href="Personal_Autorizado/menucon.php"> 
-						<h2>Gestionar Padres y Representante</h2> 
+						href="Personal_Autorizado/menucon.php">
+						<h2>Gestionar Padres y Representante</h2>
 					</a>
 					&nbsp;&nbsp;
 				</td>
@@ -59,15 +59,15 @@
 			<tr>
 				<td>
 					&nbsp;&nbsp;
-					<a class="no-click" data-titulo="gestionarProfesor" href="profesor/body.php"> 
-						<h2>Gestionar Profesor</h2> 
+					<a class="no-click" data-titulo="gestionarProfesor" href="profesor/body.php">
+						<h2>Gestionar Profesor</h2>
 					</a>
 					&nbsp;&nbsp;
 				</td>
 				<td>
 					&nbsp;&nbsp;
 					<a class="no-click" href="usuario/body.php">
-						<h2>Gestionar Personal Autorizado</h2> 
+						<h2>Gestionar Personal Autorizado</h2>
 					</a>
 					&nbsp;&nbsp;
 				</td>
