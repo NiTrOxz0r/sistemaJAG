@@ -18,8 +18,8 @@ empezarPagina();
 		<div align="center">
 			<!-- http://www.w3schools.com/html/html_forms.asp -->
 			<form method="post" action="insertar_P.php" name="form_repre" id="form">
-				<fieldset>
-					<legend style="width:80%">REGISTRO DE PADRES/REPRESENTANTE</legend>
+
+					<h1>REGISTRO DE PADRES/REPRESENTANTE</h1>
 						<table>
 							<tr>
 								<td colspan=2>
@@ -132,7 +132,11 @@ empezarPagina();
 										id="telefono_otro">
 								</td>
 								<td>
-									<input type="text" name="email" id="email">
+									<input 
+										type="text" 
+										name="email" 
+										id="email"
+										maxlength="50">
 								</td>
 							</tr>
 							<tr>
@@ -152,7 +156,6 @@ empezarPagina();
 								</td>
 								<td>	
 									<select name="vive_con_alumno" required id="vive_con_alumno">
-										<option value="">Seleccionar</option>
 										<option value="s">SI</option>
 										<option value="n">NO</option>
 									</select><font color="#ff0000">*</font>
@@ -173,8 +176,8 @@ empezarPagina();
 								</td>
 								<td>				
 									<select name="cod_parro" id="cod_parro">
-									<option value="">--Seleccionar--</option></select
-									><font color="#ff0000">*</font>
+									<option value="">--Seleccionar--</option></select>
+									<font color="#ff0000">*</font>
 								</td>
 							</tr>
 							<tr>
@@ -246,33 +249,23 @@ empezarPagina();
 							</tr>
 							<tr>
 								<td align="center">
-									<input type="button" name="registrar" value="insertar">
+									<input type="button" name="registrar" value="Insertar">
 								</td>
 								<td align="center">
-									<input type="button" name="limpiar" id="limpiar" value="reset">
+									<input type="button" name="limpiar" id="limpiar" value="Reset">
 								</td>
 							</tr>
 						</table>
-				</fieldset>
+
 			</form>
 			</div>
-			<div>
-					<p>
-						<center>
-							<a class="" href="en COnstruccion">Volver</a>
-						</center>
-					</p>
-					<p>
-						<center>
-							<a href="../index.php">Volver al menu</a>
-						</center>
-					</p>
-			</div>
-
+		<!-- esto es para ajax -->
 		<?php $cargadorOnClick = enlaceDinamico("java/ajax/cargadorOnClick.js"); ?>
 		<?php $validacionP = enlaceDinamico("java/validacionP.js"); ?>
 		<script type="text/javascript" src="<?php echo $cargadorOnClick ?>"></script>
+		<!-- validacion -->
 		<script language="javascript" src="<?php echo $validacionP ?>"></script>
+		<!-- ajax de edo/mun/parr -->
 		<?php $estado = enlaceDinamico("java/edo.php"); ?>
 		<?php $municipio = enlaceDinamico("java/mun.php"); ?>
 		<?php $parroquia = enlaceDinamico("java/parro.php"); ?>
@@ -295,7 +288,26 @@ empezarPagina();
 				});
 			});
 		</script>
-		
+		<!-- calendario -->
+		<?php $cssDatepick = enlaceDinamico("java/jqDatePicker/jquery.datepick.css"); ?>
+		<link href="<?php echo $cssDatepick ?>" rel="stylesheet">
+		<?php $plugin = enlaceDinamico("java/jqDatePicker/jquery.plugin.js"); ?>
+		<?php $datepick = enlaceDinamico("java/jqDatePicker/jquery.datepick.js"); ?>
+		<script type="text/javascript" src="<?php echo $plugin ?>"></script>
+		<script type="text/javascript" src="<?php echo $datepick ?>"></script>
+		<!-- calendario -->
+		<script type="text/javascript">
+			<?php $imagen = enlaceDinamico("java/jqDatePicker/calendar-blue.gif"); ?>
+			$(function(){
+				$('#fec_nac').datepick({
+					maxDate:'-h',
+					showOn: "button",
+					buttonImage: "<?php echo $imagen ?>",
+					buttonImageOnly: true,
+					dateFormat: "yyyy-mm-dd"
+				});
+			});
+		</script>
 	</div>
 </div>
 <?php

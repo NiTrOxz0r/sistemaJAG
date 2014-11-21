@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<title>jQuery Datepicker</title>
+<link href="jquery.datepick.css" rel="stylesheet">
+<script src="jquery.min.js"></script>
+<script src="jquery.plugin.js"></script>
+<script src="jquery.datepick.js"></script>
+<script>
+$(function() {
+	$('#popupDatepicker').datepick({
+            minDate:'+1D',
+            showOn: "button",
+            buttonImage: "calendar.gif",
+            buttonImageOnly: false,
+            dateFormat: "dd/mm/yy"
+        });
+        $('#popupDatepicker2').datepick({
+            maxDate:'-5Y',
+            showOn: "button",
+            buttonImage: "calendar.gif",
+            buttonImageOnly: true,
+            dateFormat: "dd/mm/yy"
+        });
+});
+</script>
+</head>
+<body>
+<h1>jQuery Datepicker</h1>
+Muestra el calendario configurado para que solo permita seleccionar fechas a partir del día de mañana<br>
+<p>A popup datepicker <input type="text" id="popupDatepicker"></p>
+
+Muestra el calendario configurado para que solo permita seleccionar fechas hasta 5 años antes a partir del día de hoy<br>
+<p>A popup datepicker <input type="text" id="popupDatepicker2"></p>
+
+</body>
+</html>
