@@ -4,7 +4,6 @@
 	$estilo = enlaceDinamico('css/estilo.css');
 	$jquery = enlaceDinamico('java/jquery-1.11.0.min.js');
 	$cargadorOnClick = enlaceDinamico("java/ajax/cargadorOnClick.js");
-
 ?>
 
 <!DOCTYPE html>

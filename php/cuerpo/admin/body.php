@@ -1,6 +1,6 @@
 <?php
-	if(!isset($_SESSION)){ 
-    session_start(); 
+	if(!isset($_SESSION)){
+    session_start();
   }
 	$enlace = $_SERVER['DOCUMENT_ROOT']."/github/sistemaJAG/php/master.php";
 	require_once($enlace);
@@ -23,11 +23,11 @@
 			<tr>
 			<td>
 				&nbsp;&nbsp;
-				<a 
+				<a
 					class="no-click"
 					data-titulo="GestionarAlumno"
 					href="alumno/body.php">
-					<h2> Gestionar Alumno. </h2>
+					<h2> Gestionar Alumnos. </h2>
 				</a>
 				&nbsp;&nbsp;
 			</td>
@@ -37,33 +37,33 @@
 			<tr>
 			<td>
 				&nbsp;&nbsp;
-				<a 
+				<a
 					class="no-click"
 					data-titulo="personalAutorizado"
-					href="Personal_Autorizado/menucon.php"> //Agregue
-					<h2>Gestionar Padres y Representante.</h2> 
+					href="Personal_Autorizado/menucon.php">
+					<h2>Gestionar Padres, Representantes y Allegados.</h2>
 				</a>
 				&nbsp;&nbsp;
 			</td>
 		</table>
-		<br>	
+		<br>
 		<table border="1" align="center">
 			<tr>
 			<td>
 				&nbsp;&nbsp;
-				<a class="no-click" data-titulo="gestionarProfesor" href="profesor/body.php"> 
-					<h2>Gestionar Profesor.</h2> 
+				<a class="no-click" data-titulo="gestionarDocente" href="docente/menucon.php">
+					<h2>Gestionar Docentes.</h2>
 				</a>
 				&nbsp;&nbsp;
 			</td>
 		</table>
-		<br>	
+		<br>
 		<table border="1" align="center">
 			<tr>
 			<td>
 				&nbsp;&nbsp;
 				<a class="no-click" href="usuario/menucon.php">
-					<h2>Gestionar Personal Autorizado.</h2> 
+					<h2>Gestionar Usuarios del sistema.</h2>
 				</a>
 				&nbsp;&nbsp;
 			</td>
