@@ -255,13 +255,6 @@ empezarPagina();
 
 			</form>
 			</div>
-			<div>
-					<p>
-						<center>
-							<a href="../index.php">Volver al menu</a>
-						</center>
-					</p>
-			</div>
 		<!-- esto es para ajax -->
 		<?php $cargadorOnClick = enlaceDinamico("java/ajax/cargadorOnClick.js"); ?>
 		<?php $validacionP = enlaceDinamico("java/validacionP.js"); ?>

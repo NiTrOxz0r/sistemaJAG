@@ -24,7 +24,7 @@ validarUsuario(1);?>
 
 							<h4>Indique La Cedula del Representante</h4>
 								<?php $action = enlaceDinamico(""); ?>
-								<form action="consultar_P.php" method="GET" id="form_r">
+								<form action="consultar_reg_P.php" method="GET" id="form_r">
 									<b>Cedula</b>
 									<input type="text" name="cedula_r" size="8" maxlength="8">
 									<input type="submit" value="Enviar"/>

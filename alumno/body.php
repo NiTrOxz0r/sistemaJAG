@@ -41,13 +41,6 @@ $index = enlaceDinamico();
 					</td>
 				</table>
 			</div>
-			<div>
-				<p>
-					<center>
-						<a class="otro" href="<?php echo $index ?>">Volver al menu</a>
-					</center>
-				</p>
-			</div>
 			<?php $cargadorOnClick = enlaceDinamico("java/ajax/cargadorOnClick.js"); ?>
 			<script type="text/javascript" src="<?php echo $cargadorOnClick ?>"></script>
 		</div>

@@ -136,7 +136,14 @@ validarUsuario(1);
 
 		echo "DATOS INGRESADOS EXITOSAMENTE";
 
-		 //AGARRAMOS LAS VARIABLES DE VALIDACION QUE NOS INTERESAN:
+
+	}else{
+		
+		echo " Ingresar REPRSENTANTE";
+	
+}
+
+ //AGARRAMOS LAS VARIABLES DE VALIDACION QUE NOS INTERESAN:
 	  
 	  $codUsrMod = $_SESSION['codUsrMod'];
 	  $codTipoUsr = $_SESSION['cod_tipo_usr'];
@@ -151,12 +158,6 @@ validarUsuario(1);
 		$_SESSION['cod_tipo_usr'] = $codTipoUsr;
 		$_SESSION['seudonimo'] = $seudonimo;
 
-
-	}else{
-		
-		echo " Ingresar REPRSENTANTE";
-	
-}
 
 	finalizarPagina();
 ?>
