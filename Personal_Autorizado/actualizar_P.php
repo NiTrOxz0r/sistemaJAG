@@ -22,14 +22,19 @@ if (isset($_GET['cedula_r'])) {
 
 
 
-$sql = "SELECT a.codigo, a.cedula, nacionalidad,p_nombre, s_nombre, p_apellido, s_apellido, f.codigo as sexo, 
-fec_nac, lugar_nac, telefono, telefono_otro, email,  g.codigo as cod_relacion, g.descripcion as relacion, vive_con_alumno,
-b.direccion_exacta as direccion, c.codigo as cod_parro, c.descripcion as parroquia, d.codigo as cod_mun, d.descripcion as municipio, 
-e.codigo as cod_est, e.descripcion as estado, h.codigo as nivel_Ins, h.descripcion as nivel_instruccion, i.codigo as cod_profesion, i.descripcion as profesion, lugar_trabajo, direccion_trabajo, 
-telefono_trabajo FROM personal_autorizado a, direccion_p_a b, parroquia c, municipio d, estado e, sexo f, relacion g,
-nivel_instruccion h, profesion i WHERE a.cod_direccion=b.codigo and b.cod_parroquia=c.codigo and c.cod_mun=d.codigo 
-and e.codigo=d.cod_edo and a.sexo=f.codigo and a.relacion=g.codigo and a.nivel_instruccion=h.codigo and a.profesion=i.codigo 
-and cedula ='$cedula';";
+$sql = "SELECT a.codigo, a.cedula, a.nacionalidad, a.p_nombre , a.s_nombre, a.p_apellido, a.s_apellido, a.fec_nac, 
+a.sexo, a.telefono, a.telefono_otro , cod_parroquia as cod_parro, cod_mun as cod_mun, cod_edo as cod_est, 
+	direccion_exacta as direccion, b.lugar_nac, b.email , b.relacion as cod_relacion, b.vive_con_alumno, 
+b.nivel_instruccion as cod_instruccion, b.profesion as cod_profesion, b.lugar_trabajo, b.direccion_trabajo, 
+b.telefono_trabajo FROM persona a 
+inner join personal_autorizado b on (a.codigo=b.cod_persona) 
+inner join direccion c on (a.codigo=c.cod_persona) 
+inner join parroquia d on (c.cod_parroquia=d.codigo) 
+inner join municipio e on (d.cod_mun=e.codigo) 
+inner join estado f on (e.cod_edo=f.codigo) 
+inner join sexo g on (a.sexo=g.codigo) 
+inner join relacion h on (b.relacion=h.codigo)
+inner join profesion j on (b.profesion=j.codigo) WHERE cedula ='$cedula';";
 
 $re = conexion($sql);
 
@@ -264,7 +269,7 @@ empezarPagina();?>
 										$registros = conexion($sql);?>
 									<select name="nivel_instruccion" required id="nivel_instruccion">
 									<?php while($fila = mysqli_fetch_array($registros)) :	?>
-									<?php if ($reg['nivel_Ins']==$fila['codigo']) :?>
+									<?php if ($reg['cod_instruccion']==$fila['codigo']) :?>
 										<option selected="selected" value="<?php echo $fila['codigo']?>">
 										<?php echo $fila['descripcion']?></option>
 										<?php else: ?>

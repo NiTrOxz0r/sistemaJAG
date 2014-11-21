@@ -19,11 +19,11 @@
 	$cod_usr_modn  	=   		$_SESSION['codUsrMod'];
 
 	$cedulan	=	$_POST['cedula'];
-	$sql= "SELECT a.codigo from direccion a
+	$sql= "SELECT a.codigo as cod_direccion from direccion a
 	 	inner join persona b on (a.cod_persona=b.codigo) where cedula = '$cedulan';";
 		$resultado = conexion($sql);
 	  $datos = mysqli_fetch_assoc($resultado);
-	  $cod_direccion_A = $datos['codigo'];
+	  $cod_direccion_A = $datos['cod_direccion'];
  	  	
   //ACTUALIZO LA DIRECCION DEL alumno
   //LA ENVIO A LA TABLA direccion_alumno
