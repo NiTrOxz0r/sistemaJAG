@@ -19,3 +19,11 @@ en progreso: 5?% aprox.
 en progreso: 40?% aprox.
 ####ModuloReporte
 en progreso: 0% aprox.
+
+versiones del sistema:
+https://github.com/slayerfat/sistemaJAG/releases/tag/ver0.3
+https://github.com/slayerfat/sistemaJAG/releases/tag/ver0.2.1m
+https://github.com/slayerfat/sistemaJAG/releases/tag/v0.2.1f
+https://github.com/slayerfat/sistemaJAG/releases/tag/ver0.2
+https://github.com/slayerfat/sistemaJAG/releases/tag/ver0.1
+https://github.com/slayerfat/sistemaJAG/releases/tag/ver0.0.9c
