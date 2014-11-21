@@ -42,9 +42,10 @@ empezarPagina();
 									id="tipo"
 									autofocus="autofocus"
 									required>
-									<option selected="selected" value="0">--Seleccione--</option>
-									<option value="1">Cursos Existentes</option>
-									<option value="2">Alumnos por curso</option>
+									<option selected="selected" value="0">Por favor seleccione:</option>
+									<option value="1">Cursos Existentes con docentes</option>
+									<option value="2">Cursos Existentes sin docentes</option>
+									<option value="3">Alumnos Existentes por curso</option>
 								</select>
 							</td>
 							<td class="chequeo" id="tipo_chequeo">
@@ -117,7 +118,12 @@ empezarPagina();
 						$('#curso_titulo').css('color', '#888');
 						$('#curso').prop('disabled', true);
 						$('#submit').prop('disabled', true);
-					}else if (tipo === '2'){
+					}else if (tipo === '1' || tipo === '2'){
+						$('#curso_titulo').css('color', '#000');
+						$('#curso').prop('disabled', true);
+						$('#curso').prop('value', '');
+						$('#submit').prop('disabled', false);
+					}else if (tipo === '3'){
 						$('#curso_titulo').css('color', '#000');
 						$('#curso').prop('disabled', false);
 						$('#submit').prop('disabled', true);
