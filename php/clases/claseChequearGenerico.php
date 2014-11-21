@@ -54,7 +54,7 @@ class ChequearGenerico extends TablaPrimaria{
 		$sexo,
 		$codigoDireccion = 'null'
 	){
-		
+		$this->codUsrMod = $codUsrMod;
 		$this->p_apellido = $p_apellido;
 
 		if ($s_apellido == "") {
@@ -129,7 +129,7 @@ class ChequearGenerico extends TablaPrimaria{
 				$togo = "Location: registro.php?".$campo."=false&clase=".$clase;
 				die(header($togo));
 			}else{
-				if ($valor == "") {
+				if ($valor === "") {
 					$togo = "Location: registro.php?".$campo."=vacio&clase=".$clase;
 					die(header($togo));
 				}

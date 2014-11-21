@@ -37,11 +37,6 @@ function validarform(){
 	var pant = document.getElementById("pantalon").value;
 	var zap = document.getElementById("zapato").value;
 
-
-
-
-	
-
 	if (!cedula.value) {
 		alert("Campo de Cedula Requerido");
 		cedula.focus();
