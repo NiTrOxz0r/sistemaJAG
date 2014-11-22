@@ -16,7 +16,7 @@ empezarPagina();
 if (isset($_REQUEST['cedula'])) {
 	if ($_REQUEST['cedula'] <> "" and strlen($_REQUEST['cedula']) == 8) {
 		$con = conexion();
-		$cedula = mysqli_escape_string($con, $_POST['cedula']);
+		$cedula = mysqli_escape_string($con, $_REQUEST['cedula']);
 	}
 }else{
 	$enlace = enlaceDinamico("menucom.php?cedulaError=unset");

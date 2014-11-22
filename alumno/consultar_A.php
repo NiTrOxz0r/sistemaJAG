@@ -217,7 +217,7 @@ empezarPagina();?>
 									</tr>
 									<tr>
 										<td>
-											<input2004482420044824
+											<input
 												type="text"
 												readonly
 												maxlength="20"
