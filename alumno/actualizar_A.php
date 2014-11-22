@@ -13,8 +13,8 @@ empezarPagina();
 
 
 
-if (isset($_POST['cedula'])) {
-	if ($_POST['cedula'] <> "" and strlen($_POST['cedula']) == 8) {
+if (isset($_REQUEST['cedula'])) {
+	if ($_REQUEST['cedula'] <> "" and strlen($_REQUEST['cedula']) == 8) {
 		$con = conexion();
 		$cedula = mysqli_escape_string($con, $_POST['cedula']);
 	}
