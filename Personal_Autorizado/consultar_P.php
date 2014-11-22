@@ -1,6 +1,6 @@
 <?php
-if(!isset($_SESSION)){ 
-	session_start(); 
+if(!isset($_SESSION)){
+	session_start();
 }
 $enlace = $_SERVER['DOCUMENT_ROOT']."/github/sistemaJAG/php/master.php";
 require_once($enlace);
@@ -15,7 +15,7 @@ empezarPagina();
 	<div id="blancoAjax">
 		<div class="contenido">
 			<!-- CONTENIDO EMPIEZA DEBAJO DE ESTO: -->
-		
+
 			<?php if (isset($_GET['cedula_r'])): ?>
 				<?php $cedula_r = trim($_GET['cedula_r'])?>
 				<?php if (strlen($cedula_r) == 8):
@@ -24,7 +24,7 @@ empezarPagina();
 
 					//buscamos los alumnos que esten relacionados
 					//con este representante
-					$query = "SELECT 
+					$query = "SELECT
 					personal_autorizado.codigo as codigo_r,
 					personal_autorizado.p_apellido as p_apellido_r,
 					personal_autorizado.s_apellido as s_apellido_r,
@@ -50,13 +50,13 @@ empezarPagina();
 					$resultado = conexion($query);?>
 
 					<?php if ($resultado->num_rows <> 0) :?>
-						
+
 						<?php $unaVez = true; ?>
 						<?php	while ($datos = mysqli_fetch_array($resultado)) : ?>
 
-							<?php if ($unaVez): ?>						
+							<?php if ($unaVez): ?>
 								<span>
-									Alumnos relacionados con: 
+									Alumnos relacionados con:
 									<?php echo $datos['p_apellido_r']; ?>,
 									<?php echo $datos['p_nombre_r']; ?>
 								</span>
@@ -162,7 +162,7 @@ empezarPagina();
 
 					//buscamos los representantes que esten relacionados
 					//con este alumno
-					$query = "SELECT 
+					$query = "SELECT
 					alumno.p_apellido as p_apellido_a,
 					alumno.p_nombre as p_nombre_a,
 					personal_autorizado.codigo as codigo_r,
@@ -185,13 +185,13 @@ empezarPagina();
 					$resultado = conexion($query);?>
 
 					<?php if ($resultado->num_rows <> 0) :?>
-						
+
 						<?php $unaVez = true; ?>
 						<?php	while ($datos = mysqli_fetch_array($resultado)) : ?>
 
-							<?php if ($unaVez): ?>						
+							<?php if ($unaVez): ?>
 								<span>
-									Personas relacionados con: 
+									Personas relacionados con:
 									<?php echo $datos['p_apellido_a']; ?>,
 									<?php echo $datos['p_nombre_a']; ?>
 								</span>
@@ -291,7 +291,7 @@ empezarPagina();
 
 					//buscamos los representantes que esten relacionados
 					//con este alumno
-					$query = "SELECT 
+					$query = "SELECT
 					alumno.p_nombre as p_nombre_a,
 					alumno.p_nombre as p_nombre_a,
 					personal_autorizado.codigo as codigo_r,
@@ -313,13 +313,13 @@ empezarPagina();
 					order by alumno.codigo;";
 					$resultado = conexion($query);?>
 					<?php if ($resultado->num_rows <> 0) :?>
-						
+
 						<?php $unaVez = true; ?>
 						<?php	while ($datos = mysqli_fetch_array($resultado)) : ?>
 
-							<?php if ($unaVez): ?>						
+							<?php if ($unaVez): ?>
 								<span>
-									Personas relacionados con: 
+									Personas relacionados con:
 									<?php echo $datos['p_apellido_a']; ?>,
 									<?php echo $datos['p_nombre_a']; ?>
 								</span>
@@ -416,7 +416,7 @@ empezarPagina();
 				<span>
 						Error, cedula Incorrecta, intente nuevamente
 					</span>
-				
+
 			<?php endif ?>
 			<!-- CONTENIDO TERMINA ARRIBA DE ESTO: -->
 		</div>
