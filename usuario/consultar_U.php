@@ -14,7 +14,7 @@ empezarPagina();
 if ( (isset($_REQUEST['informacion'])
 	and isset($_REQUEST['tipo'])
 	and isset($_REQUEST['tipo_personal']) )
-	or $_REQUEST['tipo'] === '7' ) :
+	or $_REQUEST['tipo'] === '7' or $_REQUEST['tipo'] === '4' ) :
 	$conexion = conexion();
 	//tipo = tipo de consulta
 	//tipo_personal = docente, administrador, directivo
@@ -35,7 +35,7 @@ if ( (isset($_REQUEST['informacion'])
 		elseif ($_REQUEST['tipo'] === '6') :
 			$where = "where (personal.status = 0 or persona.status = 0) ";
 		else:
-			header('Location: menucon.php?error=tipo&q='.$_REQUEST['tipo']);
+			header('Location: menucon.php?e=1&error=tipo&q='.$_REQUEST['tipo']);
 		endif;
 		// ajustamos la condicion de la busqueda:
 		if ($_REQUEST['tipo_personal'] === '1') :
@@ -48,6 +48,10 @@ if ( (isset($_REQUEST['informacion'])
 			$where = $where." AND personal.tipo_personal = 4";
 		elseif ($_REQUEST['tipo_personal'] === '5') :
 			$where = $where." AND personal.tipo_personal = 5";
+		elseif ($_REQUEST['tipo_personal'] === '0') :
+			$where = $where." AND personal.tipo_personal = 0";
+		elseif ($_REQUEST['tipo_personal'] === '6') :
+			$where = $where." AND personal.tipo_personal = 0";
 		endif;
 	endif;
 	// si el pedido no es un listado general:
@@ -87,7 +91,8 @@ if ( (isset($_REQUEST['informacion'])
 				tipo_usuario.descripcion;";
 		// si el pedido no es de un docente:
 		elseif ($_REQUEST['tipo_personal'] === '1' or $_REQUEST['tipo_personal'] === '2'
-			or $_REQUEST['tipo_personal'] === '4' or $_REQUEST['tipo_personal'] === '5'):
+			or $_REQUEST['tipo_personal'] === '4' or $_REQUEST['tipo_personal'] === '5'
+			or $_REQUEST['tipo_personal'] === '0' or $_REQUEST['tipo_personal'] === '6'):
 			$query = "SELECT
 				persona.p_apellido as p_apellido,
 				persona.p_nombre as p_nombre,
@@ -116,7 +121,7 @@ if ( (isset($_REQUEST['informacion'])
 				usuario.seudonimo,
 				tipo_usuario.descripcion;";
 		else:
-			header('Location: menucon.php?error=tipo&q='.$_REQUEST['tipo_personal']);
+			header('Location: menucon.php?e=2&error=tipo&q='.$_REQUEST['tipo_personal']);
 		endif;
 	// el pedido es un listado general:
 	else:
