@@ -99,7 +99,7 @@ empezarPagina();
 										<?php echo $datos['cedula_escolar_a']; ?>
 									</td>
 									<td>
-										<a href="../alumno/actualizar_A.php?cedula=<?php echo $datos['cedula'];?>">
+										<a href="../alumno/form_act_A.php?cedula=<?php echo $datos['cedula'];?>">
 											<button>
 												Editar
 											</button>
@@ -145,7 +145,7 @@ empezarPagina();
 								no tiene ninguna relacion con ningun alumno!
 							</p>
 							<p>
-								<a href="actualizar_P.php?cedula_r=<?php echo $cedula_r ?>">
+								<a href="form_act_P.php?cedula_r=<?php echo $cedula_r ?>">
 									Actualizar datos referentes a esta cedula
 								</a>
 							</p>

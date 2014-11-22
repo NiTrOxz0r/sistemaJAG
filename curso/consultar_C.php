@@ -199,7 +199,7 @@ if ( isset($_POST['tipo']) ) :
 										<?php echo $datos['Total de alumnos'] ?>
 									</td>
 									<td>
-										<a href="../alumno/actualizar_A.php?cedula=<?php echo $datos['Cedula'] ?>">
+										<a href="../alumno/form_act_A.php?cedula=<?php echo $datos['Cedula'] ?>">
 											<button>Actualizar Alumno</button>
 										</a>
 									</td>

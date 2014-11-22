@@ -43,7 +43,7 @@ empezarPagina();?>
 <div id="contenido">
 	<div id="blancoAjax" align="center">
 		<div class="contenido">
-			<form action="actualizar_A.php" method="POST" name="form_alu" id="form">
+			<form action="form_act_A.php" method="POST" name="form_alu" id="form">
 
 					<h1>CONSULTA DE ALUMNO </h1>
 

@@ -14,7 +14,7 @@
 				<li><a href="<?php echo $index ?>">Inicio</a></li>
 				<?php $inscripcion = enlaceDinamico('Personal_Autorizado/form_reg_P.php'); ?>
 				<li><a href="<?php echo $inscripcion ?>">Proceso de inscripcion 2014-2015</a></li>
-				<?php $alumno = enlaceDinamico('alumno/body.php'); ?>
+				<?php $alumno = enlaceDinamico('alumno/menucon.php'); ?>
 				<li><a href="<?php echo $alumno ?>">Alumnos</a></li>
 				<?php $pa = enlaceDinamico('Personal_Autorizado/menucon.php'); ?>
 				<li><a href="<?php echo $pa ?>">Padres y Allegados</a></li>

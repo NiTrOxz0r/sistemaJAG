@@ -40,7 +40,7 @@
 					<a
 						class="no-click"
 						data-titulo="GestionarAlumno"
-						href="alumno/body.php">
+						href="alumno/menucon.php">
 						<h2>Gestionar Alumno</h2>
 					</a>
 					&nbsp;&nbsp;
