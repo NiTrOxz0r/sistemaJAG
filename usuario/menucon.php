@@ -94,6 +94,7 @@ empezarPagina();
 											<?php echo $datos['descripcion']; ?>
 										</option>
 									<?php endwhile; ?>
+									<option hidden value="6">Todos</option>
 								</select>
 							</td>
 							<td class="chequeo" id="tipo_personal_chequeo">
@@ -180,7 +181,9 @@ empezarPagina();
 						$('#informacion').prop('hidden', true);
 						$('#informacion_lista').prop('disabled', false);
 						$('#informacion_lista').prop('hidden', false);
-						$('#tipo_personal_titulo').css('color', '#000');
+						$('#tipo_personal_titulo').css('color', '#888');
+						$('#tipo_personal').prop('value', '6');
+						$('#tipo_personal').prop('hidden', true);
 						$('#tipo_personal').prop('disabled', false);
 						$('#submit').prop('disabled', true);
 					}else if (tipo === '5' || tipo === '6'){
@@ -193,7 +196,7 @@ empezarPagina();
 						$('#informacion_lista').prop('hidden', true);
 						$('#tipo_personal_titulo').css('color', '#000');
 						$('#tipo_personal').prop('disabled', false);
-						$('#submit').prop('disabled', false);
+						$('#submit').prop('disabled', true);
 					}else if (tipo === '7'){
 						$('#informacion_titulo').hide();
 						$('#informacion').prop('disabled', false);
@@ -279,6 +282,16 @@ empezarPagina();
 					var campo = $(this).val();
 					console.log(campo);
 					if (campo === '0') {
+						$('#submit').prop('disabled', true);
+					}else{
+						$('#submit').prop('disabled', false);
+					};
+				});
+				//comprobacion del select de tipo_personal:
+				$('#tipo_personal').on('change', function(){
+					var campo = $(this).val();
+					console.log(campo);
+					if (campo === '') {
 						$('#submit').prop('disabled', true);
 					}else{
 						$('#submit').prop('disabled', false);

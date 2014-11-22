@@ -11,49 +11,53 @@ validarUsuario();
 //DESDE empezarPagina.php
 empezarPagina();
 
-if ( (isset($_POST['informacion'])
-	and isset($_POST['tipo'])
-	and isset($_POST['tipo_personal']) )
-	or $_POST['tipo'] === '7' ) :
+if ( (isset($_REQUEST['informacion'])
+	and isset($_REQUEST['tipo'])
+	and isset($_REQUEST['tipo_personal']) )
+	or $_REQUEST['tipo'] === '7' or $_REQUEST['tipo'] === '4' ) :
 	$conexion = conexion();
 	//tipo = tipo de consulta
 	//tipo_personal = docente, administrador, directivo
-	$valor = mysqli_escape_string($conexion, trim($_POST['informacion']));
+	$valor = mysqli_escape_string($conexion, trim($_REQUEST['informacion']));
 	// si el pedido no es un listado general:
-	if ($_POST['tipo'] <> '7') :
+	if ($_REQUEST['tipo'] <> '7') :
 		//ajustamos el where segun el tipo de busqueda:
-		if ($_POST['tipo'] === '1') :
+		if ($_REQUEST['tipo'] === '1') :
 			$where = "WHERE persona.cedula = '$valor'";
-		elseif ($_POST['tipo'] === '2') :
+		elseif ($_REQUEST['tipo'] === '2') :
 			$where = "WHERE persona.p_nombre LIKE '%$valor%' or persona.s_nombre LIKE '%$valor%' ";
-		elseif ($_POST['tipo'] === '3') :
+		elseif ($_REQUEST['tipo'] === '3') :
 			$where = "WHERE persona.p_apellido LIKE '%$valor%' or persona.s_apellido LIKE '%$valor%'";
-		elseif ($_POST['tipo'] === '4') :
+		elseif ($_REQUEST['tipo'] === '4') :
 			$where = "WHERE personal.cod_cargo = $valor";
-		elseif ($_POST['tipo'] === '5') :
+		elseif ($_REQUEST['tipo'] === '5') :
 			$where = "where (personal.status = 1 or persona.status = 1) ";
-		elseif ($_POST['tipo'] === '6') :
+		elseif ($_REQUEST['tipo'] === '6') :
 			$where = "where (personal.status = 0 or persona.status = 0) ";
 		else:
-			header('Location: menucon.php?error=tipo&q='.$_POST['tipo']);
+			header('Location: menucon.php?e=1&error=tipo&q='.$_REQUEST['tipo']);
 		endif;
 		// ajustamos la condicion de la busqueda:
-		if ($_POST['tipo_personal'] === '1') :
+		if ($_REQUEST['tipo_personal'] === '1') :
 			$where = $where." AND personal.tipo_personal = 1";
-		elseif ($_POST['tipo_personal'] === '2') :
+		elseif ($_REQUEST['tipo_personal'] === '2') :
 			$where = $where." AND personal.tipo_personal = 2";
-		elseif ($_POST['tipo_personal'] === '3') :
+		elseif ($_REQUEST['tipo_personal'] === '3') :
 			$where = $where." AND personal.tipo_personal = 3";
-		elseif ($_POST['tipo_personal'] === '4') :
+		elseif ($_REQUEST['tipo_personal'] === '4') :
 			$where = $where." AND personal.tipo_personal = 4";
-		elseif ($_POST['tipo_personal'] === '5') :
+		elseif ($_REQUEST['tipo_personal'] === '5') :
 			$where = $where." AND personal.tipo_personal = 5";
+		elseif ($_REQUEST['tipo_personal'] === '0') :
+			$where = $where." AND personal.tipo_personal = 0";
+		elseif ($_REQUEST['tipo_personal'] === '6') :
+			$where = $where." AND personal.tipo_personal = 0";
 		endif;
 	endif;
 	// si el pedido no es un listado general:
-	if ($_POST['tipo'] <> '7') :
+	if ($_REQUEST['tipo'] <> '7') :
 		// si el pedido es de un docente:
-		if ($_POST['tipo_personal'] === '3') :
+		if ($_REQUEST['tipo_personal'] === '3') :
 			$query = "SELECT
 				persona.p_apellido as p_apellido,
 				persona.p_nombre as p_nombre,
@@ -86,8 +90,9 @@ if ( (isset($_POST['informacion'])
 				usuario.seudonimo,
 				tipo_usuario.descripcion;";
 		// si el pedido no es de un docente:
-		elseif ($_POST['tipo_personal'] === '1' or $_POST['tipo_personal'] === '2'
-			or $_POST['tipo_personal'] === '4' or $_POST['tipo_personal'] === '5'):
+		elseif ($_REQUEST['tipo_personal'] === '1' or $_REQUEST['tipo_personal'] === '2'
+			or $_REQUEST['tipo_personal'] === '4' or $_REQUEST['tipo_personal'] === '5'
+			or $_REQUEST['tipo_personal'] === '0' or $_REQUEST['tipo_personal'] === '6'):
 			$query = "SELECT
 				persona.p_apellido as p_apellido,
 				persona.p_nombre as p_nombre,
@@ -116,7 +121,7 @@ if ( (isset($_POST['informacion'])
 				usuario.seudonimo,
 				tipo_usuario.descripcion;";
 		else:
-			header('Location: menucon.php?error=tipo&q='.$_POST['tipo_personal']);
+			header('Location: menucon.php?e=2&error=tipo&q='.$_REQUEST['tipo_personal']);
 		endif;
 	// el pedido es un listado general:
 	else:
