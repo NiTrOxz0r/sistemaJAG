@@ -1,48 +1,49 @@
 <?php
-if(!isset($_SESSION)){ 
-  session_start(); 
+if(!isset($_SESSION)){
+  session_start();
 }
 $enlace = $_SERVER['DOCUMENT_ROOT']."/github/sistemaJAG/php/master.php";
 require_once($enlace);
 // invocamos validarUsuario.php desde master.php
 validarUsuario(1);
 
-if (isset($_POST['cedula'])) {
-	if (trim($_POST['cedula']) == "" or strlen($_POST['cedula']) <> 8) {
-		$enlace = enlaceDinamico("alumno/menucon.php");
+if (isset($_REQUEST['cedula'])) {
+	if ( trim($_REQUEST['cedula']) === ""
+		or !preg_match( "/[0-9]{8}/", $_REQUEST['cedula']) ) {
+		$enlace = enlaceDinamico("alumno/menucon.php?error=cedula&tipo=malFormada");
 		header("Location:".$enlace);
 	}else{
 		$con = conexion();
-		$cedula = mysqli_escape_string($con, $_POST['cedula']);
+		$cedula = mysqli_escape_string($con, $_REQUEST['cedula']);
 	}
 }else{
 	$enlace = enlaceDinamico("alumno/menucon.php");
 	header("Location:".$enlace);
 }
 
-$sql = "SELECT a.codigo, cedula, cedula_escolar, nacionalidad, p_nombre, s_nombre, p_apellido, s_apellido, g.descripcion as sexo, 
-fec_nac, lugar_nac, telefono, telefono_otro, d.descripcion as parroquia, e.descripcion as municipio, f.descripcion as estado, 
+$sql = "SELECT a.codigo, cedula, cedula_escolar, nacionalidad, p_nombre, s_nombre, p_apellido, s_apellido, g.descripcion as sexo,
+fec_nac, lugar_nac, telefono, telefono_otro, d.descripcion as parroquia, e.descripcion as municipio, f.descripcion as estado,
 direccion_exacta as direccion, acta_num_part_nac, acta_folio_num_part_nac, plantel_procedencia, repitiente, altura, peso, camisa,
- pantalon, zapato, certificado_vacuna, h.descripcion as discapacidad, cod_representante FROM persona a 
- inner join alumno b on (a.codigo=b.cod_persona) 
- inner join direccion c on (a.codigo=c.cod_persona) 
- inner join parroquia d on (c.cod_parroquia=d.codigo) 
- inner join municipio e on (d.cod_mun=e.codigo) 
- inner join estado f on (e.cod_edo=f.codigo) 
- inner join sexo g on (a.sexo=g.codigo) 
+ pantalon, zapato, certificado_vacuna, h.descripcion as discapacidad, cod_representante FROM persona a
+ inner join alumno b on (a.codigo=b.cod_persona)
+ inner join direccion c on (a.codigo=c.cod_persona)
+ inner join parroquia d on (c.cod_parroquia=d.codigo)
+ inner join municipio e on (d.cod_mun=e.codigo)
+ inner join estado f on (e.cod_edo=f.codigo)
+ inner join sexo g on (a.sexo=g.codigo)
  inner join discapacidad h on (b.cod_discapacidad = h.codigo)
  WHERE cedula = '$cedula';";
 
 $re = conexion($sql);
 
-if($reg = mysqli_fetch_array($re)) : 
+if($reg = mysqli_fetch_array($re)) :
 //ESTA FUNCION TRAE EL HEAD Y NAVBAR:
 //DESDE empezarPagina.php
 empezarPagina();?>
 <div id="contenido">
 	<div id="blancoAjax" align="center">
 		<div class="contenido">
-			<form action="actualizar_A.php" method="POST" name="form_alu" id="form">
+			<form action="form_act_A.php" method="POST" name="form_alu" id="form">
 
 					<h1>CONSULTA DE ALUMNO </h1>
 
@@ -55,32 +56,32 @@ empezarPagina();?>
 									<th>C&eacute;dula</th><th>C&eacute;dula Escolar</th>
 								</tr>
 								<td>
-									<input 
-										type="text" 
-										readonly size="1" 
+									<input
+										type="text"
+										readonly size="1"
 										value="<?php echo $reg['nacionalidad'] == 'v' ? 'V':'E';?>">
-									<input 
-										id="cedula" 
-										type="text" 
-										readonly 
-										maxlength="8" 
-										size="12" 
-										name="cedula"  
+									<input
+										id="cedula"
+										type="text"
+										readonly
+										maxlength="8"
+										size="12"
+										name="cedula"
 										value="<?php echo $reg['cedula'];?>">
 								</td>
 									<td>
-										<input 
-											type="text" 
-											readonly 
-											maxlength="10" 
+										<input
+											type="text"
+											readonly
+											maxlength="10"
 											value="<?php echo $reg['cedula_escolar'];?>"/>
 									</td>
 								</tr>
-								
+
 								<tr>
 									<th>Primer Nombre</th>
 									<th>Segundo Nombre</th>
-								</tr>			
+								</tr>
 								<tr>
 									<td>
 										<input type="text" readonly maxlength="20"  value="<?php echo $reg['p_nombre'];?>"/>
@@ -88,7 +89,7 @@ empezarPagina();?>
 									<td>
 										<input type="text" maxlength="20" readonly value="<?php echo $reg['s_nombre'];?>"/>
 									</td>
-								</tr>			
+								</tr>
 								<tr>
 								<tr>
 									<th>Primer Apellido</th>
@@ -106,7 +107,7 @@ empezarPagina();?>
 									<th>Fecha de Nacimiento</th>
 								</tr>
 								<tr>
-									<td>		
+									<td>
 										<input type="text" readonly value="<?php echo $reg['sexo'];?>"/>
 									</td>
 									<td>
@@ -137,24 +138,24 @@ empezarPagina();?>
 								</tr>
 							</table>
 							<?php if (isset($reg['cod_representante'])): ?>
-								<?php 
-									$query = "SELECT 
-										a.cedula as cedula_r, 
-										a.nacionalidad as nacionalidad_r, 
-										a.p_nombre as p_nombre_r, 
-										a.s_nombre as s_nombre_r, 
+								<?php
+									$query = "SELECT
+										a.cedula as cedula_r,
+										a.nacionalidad as nacionalidad_r,
+										a.p_nombre as p_nombre_r,
+										a.s_nombre as s_nombre_r,
 										a.p_apellido as p_apellido_r,
-										a.s_apellido as s_apellido_r, 
-										a.telefono as telefono_r, 
-										a.telefono_otro as telefono_otro_r, 
-										b.email as email_r, 
-										c.descripcion as relacion_r, 
-										b.vive_con_alumno as vive_con_alumno_r, 
-										b.lugar_trabajo as lugar_trabajo_r, 
-										b.direccion_trabajo as direccion_trabajo_r, 
+										a.s_apellido as s_apellido_r,
+										a.telefono as telefono_r,
+										a.telefono_otro as telefono_otro_r,
+										b.email as email_r,
+										c.descripcion as relacion_r,
+										b.vive_con_alumno as vive_con_alumno_r,
+										b.lugar_trabajo as lugar_trabajo_r,
+										b.direccion_trabajo as direccion_trabajo_r,
 										b.telefono_trabajo  as  telefono_trabajo_r
-										FROM persona a 
-										inner join personal_autorizado b on (a.codigo=b.cod_persona) 
+										FROM persona a
+										inner join personal_autorizado b on (a.codigo=b.cod_persona)
 										inner join relacion c on (relacion=c.codigo) WHERE b.codigo = $reg[cod_representante];";
 									$resultado = conexion($query);
 									$datos = mysqli_fetch_assoc($resultado);
@@ -168,48 +169,48 @@ empezarPagina();?>
 										<th>C&eacute;dula</th><th>Relacion</th>
 									</tr>
 									<td>
-										<input 
-											type="text" 
-											readonly size="1" 
+										<input
+											type="text"
+											readonly size="1"
 											value="<?php echo $datos['nacionalidad_r'] == 'v' ? 'V':'E';?>">
-										<input 
-											id="cedula_r" 
-											type="text" 
-											readonly 
-											maxlength="8" 
-											size="12" 
-											name="cedula_r"  
+										<input
+											id="cedula_r"
+											type="text"
+											readonly
+											maxlength="8"
+											size="12"
+											name="cedula_r"
 											value="<?php echo $datos['cedula_r'];?>">
 									</td>
 										<td>
-											<input 
-												type="text" 
-												readonly 
-												maxlength="10" 
+											<input
+												type="text"
+												readonly
+												maxlength="10"
 												value="<?php echo $datos['relacion_r'];?>"/>
 										</td>
 									</tr>
-									
+
 									<tr>
 										<th>Primer Nombre</th>
 										<th>Segundo Nombre</th>
-									</tr>			
+									</tr>
 									<tr>
 										<td>
-											<input 
-												type="text" 
-												readonly 
-												maxlength="20" 
+											<input
+												type="text"
+												readonly
+												maxlength="20"
 												value="<?php echo $datos['p_nombre_r'];?>"/>
 										</td>
 										<td>
-											<input 
-												type="text" 
-												maxlength="20" 
-												readonly 
+											<input
+												type="text"
+												maxlength="20"
+												readonly
 												value="<?php echo $datos['s_nombre_r'];?>"/>
 										</td>
-									</tr>			
+									</tr>
 									<tr>
 									<tr>
 										<th>Primer Apellido</th>
@@ -217,17 +218,17 @@ empezarPagina();?>
 									</tr>
 									<tr>
 										<td>
-											<input 
-												type="text" 
-												readonly 
-												maxlength="20" 
+											<input
+												type="text"
+												readonly
+												maxlength="20"
 												value="<?php echo $datos['p_apellido_r'];?>"/>
 										</td>
 										<td>
-											<input 
-												type="text" 
-												maxlength="20" 
-												readonly 
+											<input
+												type="text"
+												maxlength="20"
+												readonly
 												value="<?php echo $datos['s_apellido_r'];?>"/>
 										</td>
 									</tr>
@@ -235,16 +236,16 @@ empezarPagina();?>
 										<th>Correo Electronico</th>
 									</tr>
 									<tr>
-										<td>		
-											<input 
-												type="text" 
-												readonly 
+										<td>
+											<input
+												type="text"
+												readonly
 												value="<?php echo $datos['vive_con_alumno_r'] == 'S' ? 'Si':'No';?>"/>
 										</td>
 										<td>
-											<input 
-												type="text" 
-												readonly 
+											<input
+												type="text"
+												readonly
 												value="<?php echo $datos['email_r'];?>"/>
 										</td>
 									</tr>
@@ -254,15 +255,15 @@ empezarPagina();?>
 									</tr>
 									<tr>
 										<td>
-											<input 
-												type="text" 
-												readonly 
+											<input
+												type="text"
+												readonly
 												value="<?php echo $datos['telefono_r'];?>"/>
 										</td>
 										<td>
-											<input 
-												type="text" 
-												readonly 
+											<input
+												type="text"
+												readonly
 												value="<?php echo $datos['telefono_otro_r'];?>"/>
 										</td>
 									</tr>
@@ -272,17 +273,17 @@ empezarPagina();?>
 									</tr>
 									<tr>
 										<td>
-											<input 
-												type="text" 
-												readonly 
-												maxlength="11" 
+											<input
+												type="text"
+												readonly
+												maxlength="11"
 												value="<?php echo $datos['lugar_trabajo_r'];?>"/>
 										</td>
 										<td>
-											<input 
-												type="text" 
-												readonly 
-												maxlength="11" 
+											<input
+												type="text"
+												readonly
+												maxlength="11"
 												value="<?php echo $datos['telefono_trabajo_r'];?>"/>
 										</td>
 									</tr>
@@ -315,13 +316,13 @@ empezarPagina();?>
 					</span>
 					|
 					<span>
-						<?php 
+						<?php
 							if (isset($reg['cedula'])) {
 								$cedula_a = $reg['cedula'];
 							} else {
 								$cedula_a = $reg['cedula_escolar'];
 							}
-							
+
 						?>
 						<a href="../Personal_Autorizado/consultar_P.php?cedula_a=<?php echo $cedula_a ?>">Informacion de todos los allegados de este alumno.</a>
 					</span>
@@ -335,12 +336,12 @@ empezarPagina();?>
 								<th>Parroquia</th>
 							</tr>
 							<tr>
-								<td>									
+								<td>
 									<input type="text" size="10" readonly value="<?php echo $reg['estado'];?>"/>
 								</td>
 								<td>
 									<input type="text" size="25" readonly value="<?php echo $reg['municipio'];?>"/>
-								<td>	
+								<td>
 									<input type="text" size="30" readonly value="<?php echo $reg['parroquia'];?>"/>
 							</tr>
 							<tr>
@@ -367,25 +368,25 @@ empezarPagina();?>
 							</tr>
 							<tr align="center">
 								<td colspan="2" >
-									<input type="text" 
-									readonly maxlength="8" 
+									<input type="text"
+									readonly maxlength="8"
 									size ="8" value="<?php echo $reg['acta_num_part_nac'];?>"/></td><td></td><td></td>
 								<td></td>
 								<td colspan="3">
-									<input type="text" 
-									readonly 
-									maxlength="8" 
+									<input type="text"
+									readonly
+									maxlength="8"
 									size ="8"  value="<?php echo $reg['acta_folio_num_part_nac'];?>" />
 								</td>
 								<td>
-									<input type="text" 
-									readonly 
-									maxlength="20" 
+									<input type="text"
+									readonly
+									maxlength="20"
 									value="<?php echo $reg['plantel_procedencia'];?>"/>
 								</td>
 								<td>
-									<input type="text" 
-									readonly 
+									<input type="text"
+									readonly
 									maxlength="20" value="<?php echo $reg['repitiente'] == 'n' ? 'No' : 'Si';?>"/>
 								</td>
 							</tr>
@@ -397,23 +398,23 @@ empezarPagina();?>
 								<th>Discapacidad</th><th>Vacunaci&oacute;n</th>
 							</tr>
 							<tr>
-								<td><input type="text" 
-											readonly 
-											maxlength="5" 
-											size ="5" 
+								<td><input type="text"
+											readonly
+											maxlength="5"
+											size ="5"
 											value="<?php echo $reg['discapacidad'];?>"/>
 								</td>
 								<td>
-									<input type="text" 
-											readonly 
-											maxlength="5" 
-											size ="5" 
+									<input type="text"
+											readonly
+											maxlength="5"
+											size ="5"
 											value="<?php echo $reg['certificado_vacuna'];?>"/>
 								</td>
-							</tr>			
+							</tr>
 							<tr>
 								<th>Altura</th><th>Peso</th>
-							</tr>			
+							</tr>
 							<tr align="center">
 								<td><input type="text" readonly maxlength="5" size ="5" value="<?php echo $reg['altura'];?>"/>
 								<font color="#ff0000">cm</font></td>
@@ -422,38 +423,38 @@ empezarPagina();?>
 							</tr>
 							<tr>
 								<th>Talla de Camisa</th><th>Talla de Pantal&oacute;n</th><th>N&uacute;m. de Calzado</th>
-							</tr>			
+							</tr>
 							<tr align="center">
 								<td>
-									<?php 
+									<?php
 										$query = "SELECT descripcion from talla where codigo = $reg[camisa];";
 										$resultado = conexion($query);
 										$datos = mysqli_fetch_assoc($resultado);
 									?>
-									<input 
-										type="text" 
-										readonly 
-										size ="4" 
+									<input
+										type="text"
+										readonly
+										size ="4"
 										value="<?php echo $datos['descripcion'];?>"/>
 								</td>
 								<td>
-									<?php 
+									<?php
 										$query = "SELECT descripcion from talla where codigo = $reg[pantalon];";
 										$resultado = conexion($query);
 										$datos = mysqli_fetch_assoc($resultado);
 									 ?>
-									<input 
-										type="text" 
-										readonly 
-										size ="4" 
+									<input
+										type="text"
+										readonly
+										size ="4"
 										value="<?php echo $datos['descripcion'];?>"/>
 								</td>
 								<td>
-									<input 
-										type="text" 
+									<input
+										type="text"
 										readonly
-										maxlength="2" 
-										size ="4" 
+										maxlength="2"
+										size ="4"
 										value="<?php echo $reg['zapato'];?>"/>
 								</td>
 							</tr>
@@ -463,7 +464,7 @@ empezarPagina();?>
 								<td>
 									<input type="button" name="enviar_btn" value="Editar" Id="enviar"/>
 								</td>
-							</tr>	
+							</tr>
 						</table>
 
 			</form>

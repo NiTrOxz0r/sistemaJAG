@@ -12,12 +12,14 @@
 			<ul>
 				<?php $index = enlaceDinamico(); ?>
 				<li><a href="<?php echo $index ?>">Inicio</a></li>
-				<?php $alumno = enlaceDinamico('alumno/body.php'); ?>
+				<?php $inscripcion = enlaceDinamico('Personal_Autorizado/form_reg_P.php'); ?>
+				<li><a href="<?php echo $inscripcion ?>">Proceso de inscripcion 2014-2015</a></li>
+				<?php $alumno = enlaceDinamico('alumno/menucon.php'); ?>
 				<li><a href="<?php echo $alumno ?>">Alumnos</a></li>
 				<?php $pa = enlaceDinamico('Personal_Autorizado/menucon.php'); ?>
 				<li><a href="<?php echo $pa ?>">Padres y Allegados</a></li>
-				<?php $curso = enlaceDinamico('cursos/menucon.php'); ?>
-				<li><a href="<?php echo $curso ?>">Docentes</a></li>
+				<?php $curso = enlaceDinamico('curso/menucon.php'); ?>
+				<li><a href="<?php echo $curso ?>">Cursos</a></li>
 				<?php $usuario = enlaceDinamico('usuario/menucon.php'); ?>
 				<li><a href="<?php echo $usuario ?>">Usuarios</a></li>
 			</ul>

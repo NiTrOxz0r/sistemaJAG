@@ -1,6 +1,6 @@
 <?php
-if(!isset($_SESSION)){ 
-	session_start(); 
+if(!isset($_SESSION)){
+	session_start();
 }
 $enlace = $_SERVER['DOCUMENT_ROOT']."/github/sistemaJAG/php/master.php";
 require_once($enlace);
@@ -11,13 +11,31 @@ validarUsuario(1);
 //DESDE empezarPagina.php
 empezarPagina();
 
+if ( isset($_GET['cedula_r']) and preg_match( "/[0-9]{8}/", $_REQUEST['cedula_r']) ) :
+	$conexion = conexion();
+	$cedula_r = mysqli_escape_string( $conexion, trim($_GET['cedula_r']) );
+	$query = "SELECT
+		persona.p_nombre,
+		persona.p_apellido,
+		relacion.descripcion as relacion
+		from persona
+		inner join personal_autorizado
+		on personal_autorizado.cod_persona = persona.codigo
+		inner join relacion
+		on personal_autorizado.relacion = relacion.codigo
+		where persona.cedula = $cedula_r;";
+	$resultado = conexion($query);
+	$datosRepresentante = mysqli_fetch_assoc($resultado);
+	mysqli_close($conexion);
+endif;
+
 //CONTENIDO:?>
 <div id="blancoAjax">
 	<div align="center">
 		<form action="insertar_A.php" method="POST" name="form_alu" id="form">
-		
+
 				<h1 align="center">REGISTRO DE ALUMNO</h1>
-				
+
 					<h2 align="center">DATOS PERSONALES</h2>
 						<table>
 							<tr>
@@ -40,27 +58,20 @@ empezarPagina();
 									<font color="#ff0000">*</font>
 								</td>
 								<td>
-									<input 
-										type="text" 
-										maxlength="10" 
-										name="cedula_escolar" 
+									<input
+										type="text"
+										maxlength="10"
+										name="cedula_escolar"
 										id="cedula_escolar"/>
 								</td>
 								<td>
-									<input 
-										type="text"  
-										maxlength="8" 
-										name="codigo_r" 
-										id="codigo_r"
-										required
-										disabled
-										hidden>
-									<input 
-										type="text"  
-										maxlength="8" 
-										name="cedula_r" 
+									<input
+										type="text"
+										maxlength="8"
+										name="cedula_r"
 										id="cedula_r"
 										required
+										value="<?php echo $cedula_r ?>"
 										disabled>
 								</td>
 							</tr>
@@ -71,11 +82,11 @@ empezarPagina();
 							</tr>
 							<tr>
 								<td>
-									<input 
-										type="text" 
-										maxlength="20" 
-										name="p_nombre" 
-										id="p_nombre" 
+									<input
+										type="text"
+										maxlength="20"
+										name="p_nombre"
+										id="p_nombre"
 										required/>
 									<font color="#ff0000">*</font>
 								</td>
@@ -83,11 +94,12 @@ empezarPagina();
 									<input type="text" maxlength="20" name="s_nombre" id="s_nombre"/>
 								</td>
 								<td>
-									<input 
-										type="text" 
-										maxlength="20" 
-										disabled 
-										name="p_nombre_r" 
+									<input
+										type="text"
+										maxlength="20"
+										disabled
+										value="<?php echo $datosRepresentante['p_nombre'].", ".$datosRepresentante['p_apellido'] ?>"
+										name="p_nombre_r"
 										id="p_nombre_r"/>
 								</td>
 							</tr>
@@ -98,11 +110,11 @@ empezarPagina();
 							</tr>
 							<tr>
 								<td>
-									<input 
-										type="text" 
-										maxlength="20" 
-										name="p_apellido" 
-										id="p_apellido" 
+									<input
+										type="text"
+										maxlength="20"
+										name="p_apellido"
+										id="p_apellido"
 										required/>
 									<font color="#ff0000">*</font>
 								</td>
@@ -111,8 +123,8 @@ empezarPagina();
 								</td>
 								<td>
 									<select required disabled name="parentesco_r" id="parentesco_r">
-										<option selected="selected" value="">
-											Seleccione
+										<option selected="selected">
+											<?php echo $datosRepresentante['relacion'] ?>
 										</option>
 									</select>
 								</td>
@@ -351,9 +363,9 @@ empezarPagina();
 								</td>
 							</tr>
 						</table>
-				
+
 				<br>
-		
+
 					<h2><i>Datos Educativos.</i></h2>
 					<b>&nbsp;Nivel a Cursar.&nbsp;&nbsp;</b>
 					<?php
