@@ -1,6 +1,6 @@
 <?php
-if(!isset($_SESSION)){ 
-  session_start(); 
+if(!isset($_SESSION)){
+  session_start();
 }
 $enlace = $_SERVER['DOCUMENT_ROOT']."/github/sistemaJAG/php/master.php";
 require_once($enlace);
@@ -12,14 +12,14 @@ validarUsuario(1);
 empezarPagina();
 
 //CONTENIDO:?>
-<div id="contenido">	
+<div id="contenido">
 	<div id="blancoAjax">
 
 		<div align="center">
 			<!-- http://www.w3schools.com/html/html_forms.asp -->
 			<form method="post" action="insertar_P.php" name="form_repre" id="form">
 
-					<h1>REGISTRO DE PADRES/REPRESENTANTE</h1>
+					<h1>REGISTRO DEL REPRESENTANTE</h1>
 						<table>
 							<tr>
 								<td colspan=2>
@@ -27,17 +27,17 @@ empezarPagina();
 									<sup>(<font color="#ff0000">*</font> indica campo obligatorio).</sup>
 								</td>
 							</tr>
-							<tr> 
+							<tr>
 								<th>C&eacute;dula</th>
 								<th>representante</th>
 							</tr>
-							<tr>  
+							<tr>
 								<td align="left">
 									<select name="nacionalidad" id="nacionalidad">
 										<option value="v">V</option>
 										<option value="e">E</option>
 									</select>
-									<input 
+									<input
 										type="text"
 										maxlength="8"
 										size="12"
@@ -61,8 +61,8 @@ empezarPagina();
 							</tr>
 							<tr>
 								<td>
-									<input 
-										type="text" 
+									<input
+										type="text"
 										name="p_nombre"
 										required
 										id="p_nombre">
@@ -85,7 +85,7 @@ empezarPagina();
 								<th>Lugar de Nacimiento</th>
 							</tr>
 							<tr>
-								<td>		
+								<td>
 									<?php	$sql = "SELECT codigo, descripcion from sexo where status = 1;";
 										$registros = conexion($sql);?>
 										<select name="sexo" required id="sexo">
@@ -100,7 +100,7 @@ empezarPagina();
 								<td>
 									<input type="date" required name="fec_nac" id="fec_nac">
 								</td>
-								<td>							
+								<td>
 									<textarea
 										name="lugar_nac"
 										id="lugar_nac"
@@ -115,26 +115,26 @@ empezarPagina();
 								<th>Tel&eacute;fono Celular/Otro</th>
 								<th>E-mail</th>
 							</tr>
-							<tr>	
+							<tr>
 								<td>
-									<input 
-										type="text"  
-										maxlength="11" 
-										name="telefono" 
+									<input
+										type="text"
+										maxlength="11"
+										name="telefono"
 										id="telefono">
 									<font color="#ff0000">*</font>
 								</td>
 								<td>
-									<input 
-										type="text" 
-										maxlength="11" 
-										name="telefono_otro" 
+									<input
+										type="text"
+										maxlength="11"
+										name="telefono_otro"
 										id="telefono_otro">
 								</td>
 								<td>
-									<input 
-										type="text" 
-										name="email" 
+									<input
+										type="text"
+										name="email"
 										id="email"
 										maxlength="50">
 								</td>
@@ -154,7 +154,7 @@ empezarPagina();
 										<?php endwhile; ?>
 									</select><font color="#ff0000">*</font>
 								</td>
-								<td>	
+								<td>
 									<select name="vive_con_alumno" required id="vive_con_alumno">
 										<option value="s">SI</option>
 										<option value="n">NO</option>
@@ -165,7 +165,7 @@ empezarPagina();
 								<th>Estado</th><th>Municipio</th><th>Parroquia</th>
 							</tr>
 							<tr>
-								<td>									
+								<td>
 									<select name="cod_est" id="cod_est"></select>
 									<font color="#ff0000">*</font>
 								</td>
@@ -174,7 +174,7 @@ empezarPagina();
 									<option value="">--Seleccionar--</option></select>
 									<font color="#ff0000">*</font>
 								</td>
-								<td>				
+								<td>
 									<select name="cod_parro" id="cod_parro">
 									<option value="">--Seleccionar--</option></select>
 									<font color="#ff0000">*</font>
@@ -207,7 +207,7 @@ empezarPagina();
 										<?php echo $fila['descripcion']?></option>
 									<?php endwhile; ?>
 									</select><font color="#ff0000">*</font>
-								</td>	
+								</td>
 								<td>
 									<?php $sql="SELECT codigo, descripcion from profesion where status = 1;";
 										$registros = conexion($sql);?>
@@ -226,23 +226,23 @@ empezarPagina();
 							</tr>
 							<tr>
 								<td>
-								<input 
+								<input
 									type="text"
 									maxlength="50"
-									name="lugar_trabajo" 
+									name="lugar_trabajo"
 									id="lugar_trabajo">
 								</td>
 								<td>
-								<input 
+								<input
 									type="text"
 									maxlength="150"
-									name="direccion_trabajo" 
+									name="direccion_trabajo"
 									id="direccion_trabajo">
 								</td>
 								<td>
-								<input 
-									type="text" 
-									maxlength="11" 
+								<input
+									type="text"
+									maxlength="11"
 									name="telefono_trabajo"
 									id="telefono_trabajo">
 								</td>
@@ -256,7 +256,6 @@ empezarPagina();
 								</td>
 							</tr>
 						</table>
-
 			</form>
 			</div>
 		<!-- esto es para ajax -->
