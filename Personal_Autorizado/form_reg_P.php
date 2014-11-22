@@ -543,11 +543,10 @@ empezarPagina();
 			 */
 			$(function (){
 				$('.mostrar').show();
+				$('.ocultar').hide();
 				$('.iniciadorMostrar').on('click', function(){
-					$('.mostrar').hide();
-					$('.ocultar').show();
-					$('.ocultar').addClass('mostrar').removeClass('ocultar');
-					$('.mostrar').addClass('ocultar').removeClass('mostrar');
+					$('.mostrar').toggle();
+					$('.ocultar').toggle();
 					$("html, body").animate({ scrollTop: 0 }, "slow");
   				return false;
 				});
