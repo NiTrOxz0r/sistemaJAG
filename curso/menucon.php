@@ -20,7 +20,7 @@ empezarPagina();
 
 			<div class="info">
 				<p>
-					Para hacer una consulta por favor seleccione el tipo de consulta que Ud. desee:
+					Para hacer una consulta por favor seleccione el tipo de consulta que Ud. desea:
 				</p>
 			</div>
 

@@ -99,6 +99,12 @@ if ( isset($_POST['tipo']) ) :
 			<!-- CONTENIDO EMPIEZA DEBAJO DE ESTO: -->
 			<!-- DETALLESE QUE NO ES UN ID SINO UNA CLASE. -->
 			<div class="contenido">
+				<div class="info">
+					<p>
+						Consulta exitosa! para actualizar un registro,
+						 puede darle a los botones que aparece al lado de los registros.
+					</p>
+				</div>
 				<table>
 					<?php $titulo = mysqli_fetch_assoc($resultado); ?>
 					<thead>
@@ -139,7 +145,7 @@ if ( isset($_POST['tipo']) ) :
 										<?php echo $datos['Cedula'] ?>
 									</td>
 									<td>
-										<a href="../usuario/actualizar_U.php?cedula=<?php echo $datos['Cedula'] ?>">
+										<a href="../usuario/actualizar_U.php?informacion=<?php echo $datos['Cedula'] ?>">
 											<button>Actualizar Docente</button>
 										</a>
 									</td>
@@ -207,6 +213,14 @@ if ( isset($_POST['tipo']) ) :
 						<?php endwhile; ?>
 					</tbody>
 				</table>
+				<div class="info">
+					<p>
+						Realizar <a href="menucon.php">otra consulta.</a>
+					</p>
+					<p>
+						Regresar al <a href="../index.php">menu principal.</a>
+					</p>
+				</div>
 			</div>
 			<!-- CONTENIDO TERMINA ARRIBA DE ESTO: -->
 		</div>
