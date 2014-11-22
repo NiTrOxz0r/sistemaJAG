@@ -240,7 +240,7 @@ empezarPagina();
 					</tr>
 				</table>
 				<span>
-					<button class="otroRegistro mostrar">Registrar otro registro</button>
+					<button class="iniciadorMostrar mostrar">Registrar otro registro</button>
 				</span>
 				<?php $n = 0; ?>
 				<h1 class="ocultar">REGISTRO DE FAMILIAR O ALLEGADO</h1>
@@ -472,6 +472,9 @@ empezarPagina();
 						</td>
 					</tr>
 				</table>
+				<span>
+					<button class="iniciadorMostrar ocultar">Registrar otro registro</button>
+				</span>
 				<table style="margin: 20px 0">
 					<tr>
 						<td align="center">
@@ -540,7 +543,7 @@ empezarPagina();
 			 */
 			$(function (){
 				$('.mostrar').show();
-				$('.otroRegistro').on('click', function(){
+				$('.iniciadorMostrar').on('click', function(){
 					$('.mostrar').hide();
 					$('.ocultar').show();
 					$('.ocultar').addClass('mostrar').removeClass('ocultar');
