@@ -257,7 +257,7 @@ empezarPagina();
 					</tr>
 					<tr>
 						<td align="left">
-							<select name="nacionalidad" id="nacionalidad_<?php echo $n ?>">
+							<select name="nacionalidad_<?php echo $n ?>" id="nacionalidad_<?php echo $n ?>">
 								<option value="v">V</option>
 								<option value="e">E</option>
 							</select>
@@ -265,14 +265,14 @@ empezarPagina();
 								type="text"
 								maxlength="8"
 								size="12"
-								name="cedula"
+								name="cedula_<?php echo $n ?>"
 								autofocus
 								required
 								id="cedula_<?php echo $n ?>">
 							<font color="#ff0000">*</font>
 						</td>
 						<td>
-							<select name="retira" id="retira_<?php echo $n ?>" required>
+							<select name="retira_<?php echo $n ?>" id="retira_<?php echo $n ?>" required>
 								<option selected="selected" value="">Seleccione</option>
 								<option value="1">Si</option>
 								<option value="0">No</option>
@@ -287,20 +287,20 @@ empezarPagina();
 						<td>
 							<input
 								type="text"
-								name="p_nombre"
+								name="p_nombre_<?php echo $n ?>"
 								required
 								id="p_nombre_<?php echo $n ?>">
 							<font color="#ff0000">*</font>
 						</td>
 						<td>
-							<input type="text" name="s_nombre" id="s_nombre_<?php echo $n ?>">
+							<input type="text" name="s_nombre_<?php echo $n ?>" id="s_nombre_<?php echo $n ?>">
 						</td>
 						<td>
-							<input type="text" name="p_apellido" required id="p_apellido_<?php echo $n ?>">
+							<input type="text" name="p_apellido_<?php echo $n ?>" required id="p_apellido_<?php echo $n ?>">
 							<font color="#ff0000">*</font>
 						</td>
 						<td>
-							<input type="text" name="s_apellido" id="s_apellido_<?php echo $n ?>">
+							<input type="text" name="s_apellido_<?php echo $n ?>" id="s_apellido_<?php echo $n ?>">
 						</td>
 					</tr>
 					<tr>
@@ -312,7 +312,7 @@ empezarPagina();
 						<td>
 							<?php	$sql = "SELECT codigo, descripcion from sexo where status = 1;";
 								$registros = conexion($sql);?>
-								<select name="sexo" required id="sexo_<?php echo $n ?>">
+								<select name="sexo_<?php echo $n ?>" required id="sexo_<?php echo $n ?>">
 									<option value="">Seleccione una opci&oacute;n </option>
 									<?php	while($fila = mysqli_fetch_array($registros)) :?>
 										<option value="<?php echo $fila['codigo']?>">
@@ -322,11 +322,11 @@ empezarPagina();
 								</select><font color="#ff0000">*</font>
 						</td>
 						<td>
-							<input type="date" required name="fec_nac" id="fec_nac_<?php echo $n ?>">
+							<input type="date" required name="fec_nac_<?php echo $n ?>" id="fec_nac_<?php echo $n ?>">
 						</td>
 						<td>
 							<textarea
-								name="lugar_nac"
+								name="lugar_nac_<?php echo $n ?>"
 								id="lugar_nac_<?php echo $n ?>"
 								cols="40"
 								rows="4"
@@ -344,7 +344,7 @@ empezarPagina();
 							<input
 								type="text"
 								maxlength="11"
-								name="telefono"
+								name="telefono_<?php echo $n ?>"
 								id="telefono_<?php echo $n ?>">
 							<font color="#ff0000">*</font>
 						</td>
@@ -352,13 +352,13 @@ empezarPagina();
 							<input
 								type="text"
 								maxlength="11"
-								name="telefono_otro"
+								name="telefono_otro_<?php echo $n ?>"
 								id="telefono_otro_<?php echo $n ?>">
 						</td>
 						<td>
 							<input
 								type="text"
-								name="email"
+								name="email_<?php echo $n ?>"
 								id="email_<?php echo $n ?>"
 								maxlength="50">
 						</td>
@@ -370,7 +370,7 @@ empezarPagina();
 						<td>
 							<?php $sql="SELECT codigo, descripcion from relacion where status = 1;";
 								$registros = conexion($sql);?>
-							<select name="relacion" required id="relacion_<?php echo $n ?>">
+							<select name="relacion_<?php echo $n ?>" required id="relacion_<?php echo $n ?>">
 								<option value="">Seleccione una opci&oacute;n</option>
 								<?php	while($fila = mysqli_fetch_array($registros)) :?>
 									<option value="<?php echo $fila['codigo']?>">
@@ -379,7 +379,7 @@ empezarPagina();
 							</select><font color="#ff0000">*</font>
 						</td>
 						<td>
-							<select name="vive_con_alumno" required id="vive_con_alumno_<?php echo $n ?>">
+							<select name="vive_con_alumno_<?php echo $n ?>" required id="vive_con_alumno_<?php echo $n ?>">
 								<option value="s">SI</option>
 								<option value="n">NO</option>
 							</select><font color="#ff0000">*</font>
@@ -390,16 +390,16 @@ empezarPagina();
 					</tr>
 					<tr>
 						<td>
-							<select name="cod_est" id="cod_est_<?php echo $n ?>"></select>
+							<select name="cod_est_<?php echo $n ?>" id="cod_est_<?php echo $n ?>"></select>
 							<font color="#ff0000">*</font>
 						</td>
 						<td>
-							<select name="cod_mun" id="cod_mun_<?php echo $n ?>" >
+							<select name="cod_mun_<?php echo $n ?>" id="cod_mun_<?php echo $n ?>" >
 							<option value="">--Seleccionar--</option></select>
 							<font color="#ff0000">*</font>
 						</td>
 						<td>
-							<select name="cod_parro" id="cod_parro_<?php echo $n ?>">
+							<select name="cod_parro_<?php echo $n ?>" id="cod_parro_<?php echo $n ?>">
 							<option value="">--Seleccionar--</option></select>
 							<font color="#ff0000">*</font>
 						</td>
@@ -413,7 +413,7 @@ empezarPagina();
 									maxlenght="150"
 									cols="50"
 									rows="4"
-									name="direcc"
+									name="direcc_<?php echo $n ?>"
 									id="direcc_<?php echo $n ?>"></textarea>
 								<font color="#ff0000">*</font>
 							</td>
@@ -425,7 +425,7 @@ empezarPagina();
 						<td>
 							<?php $sql="SELECT codigo, descripcion from nivel_instruccion where status = 1;";
 								$registros = conexion($sql);?>
-							<select name="nivel_instruccion" required id="nivel_instruccion_<?php echo $n ?>">
+							<select name="nivel_instruccion_<?php echo $n ?>" required id="nivel_instruccion_<?php echo $n ?>">
 							<?php while($fila = mysqli_fetch_array($registros)) :	?>
 								<option value="<?php echo $fila['codigo']?>">
 								<?php echo $fila['descripcion']?></option>
@@ -435,7 +435,7 @@ empezarPagina();
 						<td>
 							<?php $sql="SELECT codigo, descripcion from profesion where status = 1;";
 								$registros = conexion($sql);?>
-							<select name="profesion" id="profesion_<?php echo $n ?>">
+							<select name="profesion_<?php echo $n ?>" id="profesion_<?php echo $n ?>">
 								<option value="">Seleccione</option>
 								<?php while($fila = mysqli_fetch_array($registros)) :	?>
 									<option value="<?php echo $fila['codigo']?>">
@@ -453,21 +453,21 @@ empezarPagina();
 						<input
 							type="text"
 							maxlength="50"
-							name="lugar_trabajo"
+							name="lugar_trabajo_<?php echo $n ?>"
 							id="lugar_trabajo_<?php echo $n ?>">
 						</td>
 						<td>
 						<input
 							type="text"
 							maxlength="150"
-							name="direccion_trabajo"
+							name="direccion_trabajo_<?php echo $n ?>"
 							id="direccion_trabajo_<?php echo $n ?>">
 						</td>
 						<td>
 						<input
 							type="text"
 							maxlength="11"
-							name="telefono_trabajo"
+							name="telefono_trabajo_<?php echo $n ?>"
 							id="telefono_trabajo_<?php echo $n ?>">
 						</td>
 					</tr>
