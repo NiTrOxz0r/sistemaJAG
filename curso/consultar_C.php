@@ -1,11 +1,21 @@
 <?php
+/**
+ * @author [slayerfat] <[slayerfat@gmail.com]>
+ *
+ * {@internal [si tienen dudas sobre este archivo
+ * pregunten, no es tan dificil, solo sigan el flujo del
+ * mismo, esta tabla trae tanto a los cursos con y sis docentes
+ * y a los alumnos de cursos.]}
+ *
+ * @version [1.1]
+ */
 if(!isset($_SESSION)){
   session_start();
 }
 $enlace = $_SERVER['DOCUMENT_ROOT']."/github/sistemaJAG/php/master.php";
 require_once($enlace);
 // invocamos validarUsuario.php desde master.php
-validarUsuario();
+validarUsuario(1);
 
 //ESTA FUNCION TRAE EL HEAD Y NAVBAR:
 //DESDE empezarPagina.php
@@ -13,14 +23,15 @@ empezarPagina();
 
 if ( isset($_POST['tipo']) ) :
 	if ($_POST['tipo'] === '1') :
+		// cursos existentes por docente
 		$query = "SELECT
-			asume.codigo,
-			curso.descripcion,
-			periodo_academico.descripcion,
-			asume.comentarios,
-			persona.cedula,
-			persona.p_apellido,
-			persona.p_nombre
+			asume.codigo as Codigo,
+			curso.descripcion as 'Descripcion de curso',
+			periodo_academico.descripcion 'Periodo Academico',
+			asume.comentarios as 'Comentarios',
+			persona.p_apellido as 'Primer Apellido',
+			persona.p_nombre as 'Primer Nombre',
+			persona.cedula as 'Cedula'
 			from asume
 			inner join periodo_academico
 			on asume.periodo_academico = periodo_academico.codigo
@@ -36,11 +47,12 @@ if ( isset($_POST['tipo']) ) :
 			curso.codigo,
 			persona.p_apellido;";
 	elseif ($_POST['tipo'] === '2') :
+		// cursos existentes sin docentes
 		$query = "SELECT
-			asume.codigo,
-			curso.descripcion,
-			periodo_academico.descripcion,
-			asume.comentarios
+			asume.codigo as 'Codigo',
+			curso.descripcion as 'Descripcion de curso',
+			periodo_academico.descripcion as 'Periodo Academico',
+			asume.comentarios as 'Comentarios'
 			from asume
 			inner join periodo_academico
 			on asume.periodo_academico = periodo_academico.codigo
@@ -51,6 +63,7 @@ if ( isset($_POST['tipo']) ) :
 			periodo_academico.codigo,
 			curso.codigo;";
 	elseif ($_POST['tipo'] === '3') :
+		// alumnos existentes por curso
 		if (isset($_POST['curso'])) :
 			$conexion = conexion();
 			$curso = mysqli_escape_string($conexion, trim($_POST['curso']) );
@@ -58,13 +71,13 @@ if ( isset($_POST['tipo']) ) :
 			header('Location: menucon.php?error=curso&valor='.$_POST['curso']);
 		endif;
 		$query = "SELECT
-			asume.codigo,
-			curso.descripcion,
-			periodo_academico.descripcion,
-			persona.p_apellido,
-			persona.p_nombre,
-			persona.cedula,
-			COUNT(curso.descripcion) as total
+			asume.codigo as 'Codigo',
+			curso.descripcion as 'Descripcion de curso',
+			periodo_academico.descripcion as 'Periodo Academico',
+			persona.p_apellido as 'Primer Apellido',
+			persona.p_nombre as 'Primer Nombre',
+			persona.cedula as 'Cedula',
+			COUNT(curso.descripcion) as 'Total de alumnos'
 			from asume
 			inner join periodo_academico
 			on asume.periodo_academico = periodo_academico.codigo
@@ -86,23 +99,112 @@ if ( isset($_POST['tipo']) ) :
 			<!-- CONTENIDO EMPIEZA DEBAJO DE ESTO: -->
 			<!-- DETALLESE QUE NO ES UN ID SINO UNA CLASE. -->
 			<div class="contenido">
-				<p>
-				<?php $datos = mysqli_fetch_assoc($resultado); ?>
-					<?php foreach ($datos as $key => $value): ?>
-						<p>
-							<?php echo $key ?>
-						</p>
-						<p>
-							<?php echo $value ?>
-						</p>
-					<?php endforeach ?>
-				</p>
 				<table>
+					<?php $titulo = mysqli_fetch_assoc($resultado); ?>
 					<thead>
-
+						<?php if ($titulo): ?>
+							<?php foreach ($titulo as $campo => $valor): ?>
+								<th>
+									<?php echo $campo ?>
+								</th>
+							<?php endforeach ?>
+						<?php else: ?>
+							<th>Sin resultados</th>
+						<?php endif ?>
 					</thead>
 					<tbody>
-
+						<?php $resultado = conexion($query); ?>
+						<?php while ( $datos = mysqli_fetch_array($resultado) ) : ?>
+							<?php if ($_POST['tipo'] === '1'): // cursos con docente?>
+								<tr>
+									<td>
+										<?php echo $datos['Codigo'] ?>
+									</td>
+									<td>
+										<?php echo $datos['Descripcion de curso'] ?>
+									</td>
+									<td>
+										<?php echo $datos['Periodo Academico'] ?>
+									</td>
+									<td>
+										<?php echo $datos['Comentarios'] ?>
+									</td>
+									<td>
+										<?php echo $datos['Primer Apellido'] ?>
+									</td>
+									<td>
+										<?php echo $datos['Primer Nombre'] ?>
+									</td>
+									<td>
+										<?php echo $datos['Cedula'] ?>
+									</td>
+									<td>
+										<a href="../usuario/actualizar_U.php?cedula=<?php echo $datos['Cedula'] ?>">
+											<button>Actualizar Docente</button>
+										</a>
+									</td>
+									<td>
+										<a href="actualizar_C.php?codigo=<?php echo $datos['Codigo'] ?>">
+											<button>Actualizar Curso</button>
+										</a>
+									</td>
+								</tr>
+							<?php elseif ($_POST['tipo'] === '2'): //curso sin docente ?>
+								<tr>
+									<td>
+										<?php echo $datos['Codigo'] ?>
+									</td>
+									<td>
+										<?php echo $datos['Descripcion de curso'] ?>
+									</td>
+									<td>
+										<?php echo $datos['Periodo Academico'] ?>
+									</td>
+									<td>
+										<?php echo $datos['Comentarios'] ?>
+									</td>
+									<td>
+										<a href="actualizar_C.php?codigo=<?php echo $datos['Codigo'] ?>">
+											<button>Actualizar Curso</button>
+										</a>
+									</td>
+								</tr>
+							<?php elseif ($_POST['tipo'] === '3'): //alumnos por curso ?>
+								<tr>
+									<td>
+										<?php echo $datos['Codigo'] ?>
+									</td>
+									<td>
+										<?php echo $datos['Descripcion de curso'] ?>
+									</td>
+									<td>
+										<?php echo $datos['Periodo Academico'] ?>
+									</td>
+									<td>
+										<?php echo $datos['Primer Apellido'] ?>
+									</td>
+									<td>
+										<?php echo $datos['Primer Nombre'] ?>
+									</td>
+									<td>
+										<?php echo $datos['Cedula'] ?>
+									</td>
+									<td>
+										<?php echo $datos['Total de alumnos'] ?>
+									</td>
+									<td>
+										<a href="../alumno/actualizar_A.php?cedula=<?php echo $datos['Cedula'] ?>">
+											<button>Actualizar Alumno</button>
+										</a>
+									</td>
+									<td>
+										<a href="actualizar_C.php?codigo=<?php echo $datos['Codigo'] ?>">
+											<button>Actualizar Curso</button>
+										</a>
+									</td>
+								</tr>
+							<?php endif ?>
+						<?php endwhile; ?>
 					</tbody>
 				</table>
 			</div>
