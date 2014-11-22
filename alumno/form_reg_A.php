@@ -11,9 +11,9 @@ validarUsuario(1);
 //DESDE empezarPagina.php
 empezarPagina();
 
-if ( isset($_SESSION['cedula_r']) ) :
+if ( isset($_GET['cedula_r']) and preg_match( "/[0-9]{8}/", $_REQUEST['cedula_r']) ) :
 	$conexion = conexion();
-	$cedula_r = mysqli_escape_string( $conexion, trim($_SESSION['cedula_r']) );
+	$cedula_r = mysqli_escape_string( $conexion, trim($_GET['cedula_r']) );
 	$query = "SELECT
 		persona.p_nombre,
 		persona.p_apellido,

@@ -7,13 +7,14 @@ require_once($enlace);
 // invocamos validarUsuario.php desde master.php
 validarUsuario(1);
 
-if (isset($_POST['cedula'])) {
-	if (trim($_POST['cedula']) == "" or strlen($_POST['cedula']) <> 8) {
-		$enlace = enlaceDinamico("alumno/menucon.php");
+if (isset($_REQUEST['cedula'])) {
+	if ( trim($_REQUEST['cedula']) === ""
+		or !preg_match( "/[0-9]{8}/", $_REQUEST['cedula']) ) {
+		$enlace = enlaceDinamico("alumno/menucon.php?error=cedula&tipo=malFormada");
 		header("Location:".$enlace);
 	}else{
 		$con = conexion();
-		$cedula = mysqli_escape_string($con, $_POST['cedula']);
+		$cedula = mysqli_escape_string($con, $_REQUEST['cedula']);
 	}
 }else{
 	$enlace = enlaceDinamico("alumno/menucon.php");
