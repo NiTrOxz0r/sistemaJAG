@@ -123,7 +123,8 @@ empezarPagina();
 				</span>
 			</div>
 			<div class="info">
-				Si Ud. desea registrar a un personal interno de esta institucion puede hacerlo especificando la cedula de identidad:
+				Si Ud. desea registrar a un personal interno de esta institucion,
+				puede hacerlo especificando la cedula de identidad:
 			</div>
 			<form>
 				<table>
@@ -298,6 +299,17 @@ empezarPagina();
 					};
 				});
 			});
+		</script>
+		<!-- cedula -->
+		<script type="text/javascript">
+		$(function(){
+			$.ajax({
+				url: '../java/ajax/cedula.js',
+				type: 'POST',
+				dataType: 'script'
+			});
+			// $('')
+		});
 		</script>
 		<!-- CONTENIDO TERMINA ARRIBA DE ESTO: -->
 	</div>
