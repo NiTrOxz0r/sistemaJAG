@@ -1,3 +1,12 @@
+/**
+ * @author [Alejandro Granadillo]
+ *
+ * [validacionPI chequea los valores de cada variable presente
+ * en el formulario de registro de personal
+ * interno (docentes, directivo, administrativo).]
+ *
+ * @return {boolean} [regresa verdadero si todo bien, falso si no.]
+ */
 function validacionPI(){
 
 	//REGEX:
@@ -333,6 +342,15 @@ function validacionPI(){
 
 	return go(estatus);
 
+	/**
+	 * [go cada chequeo de cada variable
+	 * regresa falso si algo esta mal, y pone estatus = true, si estatus
+	 * se mantiene true en todo el chequeo entonces validacionPI regresa true por
+	 * medio de este metodo interno]
+	 *
+	 * @param  {boolean} e [variable de control interno.]
+	 * @return {boolean}   [regresa verdadero o falso segun chequeos internos.]
+	 */
 	function go (e){
 		if (e) {
 			return true;

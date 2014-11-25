@@ -116,12 +116,12 @@ empezarPagina();
 							$("#seudonimo_chequeo").html(datos);
 							//se comprueba si es valido o no por
 							//medio del data-disponible
-							//true si esta disponible, falso sino.
+							//true si esta disponible, falso si no.
 							var disponible = $(datos+'#disponible').data('disponible');
 							if (disponible === true) {
 								//se desactiva el boton de enviar
 								$(':submit').prop('disabled', false);
-							} else{
+							}else{
 								//se activa el boton de enviar
 								$(':submit').prop('disabled', true);
 							};

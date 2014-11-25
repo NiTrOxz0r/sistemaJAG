@@ -1,9 +1,12 @@
 <?php
 /**
+ * @author [Alejandro Granadillo]
+ *
  * @internal esto es utilizado para
  * hacer los queries por medio
  * de ajax para saber si el
  * seudonimo esta disponible
+ *
  * @see
  * usuario/form_reg_U.php
  * @example

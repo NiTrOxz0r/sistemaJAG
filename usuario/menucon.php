@@ -28,7 +28,7 @@ empezarPagina();
 				id="consulta_singular_U"
 				name="consulta_singular_U"
 				action="consultar_U.php"
-				method="post">
+				method="POST">
 				<table>
 					<thead>
 						<th>Seleccione una opcion</th>
@@ -123,23 +123,28 @@ empezarPagina();
 				</span>
 			</div>
 			<div class="info">
-				Si Ud. desea registrar a un personal interno de esta institucion,
-				puede hacerlo especificando la cedula de identidad:
+				Si Ud. desea registrar o actualizar a un personal interno de esta
+				institucion, puede hacerlo especificando la cedula de identidad:
 			</div>
-			<form>
+			<form
+				name="form_PI"
+				id="form_PI"
+				action="GET">
 				<table>
-					<thead>
-						<th>EN CONSTRUCCION</th>
-					</thead>
 					<tbody>
 						<tr>
 							<td>
-								<input type="text" disabled>
+								<input type="text" id="cedula" name="cedula">
+							</td>
+						</tr>
+						<tr>
+							<td class="chequeo" id="cedula_chequeo">
+
 							</td>
 						</tr>
 						<tr>
 							<td>
-								<input type="submit" id="submit" value="Registrar" disabled>
+								<input type="submit" id="submitDos" value="Registrar" disabled>
 							</td>
 						</tr>
 					</tbody>
@@ -149,19 +154,23 @@ empezarPagina();
 		</div>
 		<!-- validacion -->
 		<script type="text/javascript">
-			/*hecho por slayerfat, consultas o sugerencias, saben donde estoy.*/
-			//iniciamos jQuery:
+			/**
+			 * hecho por slayerfat, dudas o sugerencias ya saben donde estoy.
+			 *
+			 * validaciones de los campos relacionados a las consultas de PI.
+			 */
+			// iniciamos jQuery:
 			$(function(){
-				//cambiamos de una vez
-				//estructura del formulario:
+				// cambiamos de una vez
+				// estructura del formulario:
 				$('#informacion_titulo').css('color', '#888');
 				$('#informacion').prop('disabled', true);
 				$('#tipo_personal_titulo').css('color', '#888');
 				$('#tipo_personal').prop('disabled', true);
 				$('#submit').prop('disabled', true);
-				//se cambia la estructura del formulario
-				//dependiendo de lo que el usuario escoja en el primer select
-				//(tipo) = por cedula, por cargo, etc.
+				// se cambia la estructura del formulario
+				// dependiendo de lo que el usuario escoja en el primer select
+				// (tipo) = por cedula, por cargo, etc.
 				$('#tipo').on('change', function(){
 					var tipo = $(this).val();
 					if (tipo === '0') {
@@ -234,11 +243,11 @@ empezarPagina();
 						$("#informacion_chequeo").html('este campo no puede </br> estar vacio.');
 						$("#informacion_titulo").css('color', 'red');
 					};
-					//valores de expresiones regulares:
+					// valores de expresiones regulares:
 					var tipo = $('#tipo').val();
 					var numerosChequeo = /[^\d+]/g;
 					var	nombresChequeo = /[^A-Za-záéíóúÁÉÍÓÚ-]/g;
-					//comprobacion de campos dentro del formulario:
+					// comprobacion de campos dentro del formulario:
 					if (tipo === '1') {
 						if(campo.length < 6){
 							$('#submit').prop('disabled', true);
@@ -278,7 +287,7 @@ empezarPagina();
 						}
 					};
 				});
-				//comprobacion del select de cargo:
+				// comprobacion del select de cargo:
 				$('#informacion_lista').on('change', function(){
 					var campo = $(this).val();
 					console.log(campo);
@@ -288,7 +297,7 @@ empezarPagina();
 						$('#submit').prop('disabled', false);
 					};
 				});
-				//comprobacion del select de tipo_personal:
+				// comprobacion del select de tipo_personal:
 				$('#tipo_personal').on('change', function(){
 					var campo = $(this).val();
 					console.log(campo);
@@ -302,14 +311,51 @@ empezarPagina();
 		</script>
 		<!-- cedula -->
 		<script type="text/javascript">
-		$(function(){
-			$.ajax({
-				url: '../java/ajax/cedula.js',
-				type: 'POST',
-				dataType: 'script'
+			/**
+			 * hecho por slayerfat, dudas o sugerencias ya saben donde estoy.
+			 *
+			 * chequeo y operaciones relacionadas con ajax
+			 * para el campo cedula.
+			 */
+			$(function(){
+				$.ajax({
+					url: '../java/validacionCedula.js',
+					type: 'POST',
+					dataType: 'script'
+				});
+				$('#cedula').on('change', function(){
+					var cedula = $(this).val();
+					if ( validacionCedula(cedula) ) {
+						$("#cedula_chequeo").html('');
+						$.ajax({
+							url: '../java/ajax/general/cedula.php',
+							type: 'POST',
+							data: {cedula:cedula},
+							success: function (datos){
+								$('#cedula_chequeo').html('');
+								//se comprueba si es valido o no por
+								//medio del data-disponible
+								//true si esta disponible, falso si no.
+								var disponible = $(datos+'#disponible').data('disponible');
+								if (disponible === true) {
+									$('#submitDos').prop('disabled', false);
+									$('#submitDos').prop('value', 'Registrar');
+									$('#form_PI').prop('method', 'form_reg_PI.php');
+								}else{
+									$('#cedula_chequeo').html('Este Usuario ya se encuentra en el sistema, si desea ver detalles de	este registro o actualizar el mismo, por favor dele click al boton Ver mas.');
+									$('#submitDos').prop('disabled', false);
+									$('#submitDos').prop('value', 'Ver mas');
+									$('#form_PI').prop('method', 'form_act_PI.php');
+								};
+							},
+						});
+					}else{
+						$("#cedula_chequeo").html('Favor introduzca cedula solo numeros sin caracteres especiales, EJ: 12345678');
+						$("#cedula_titulo").css('color', 'red');
+						$('#submitDos').prop('disabled', true);
+					};
+				});
 			});
-			// $('')
-		});
 		</script>
 		<!-- CONTENIDO TERMINA ARRIBA DE ESTO: -->
 	</div>
