@@ -129,12 +129,17 @@ empezarPagina();
 			<form
 				name="form_PI"
 				id="form_PI"
-				action="GET">
+				method="GET">
 				<table>
 					<tbody>
 						<tr>
 							<td>
-								<input type="text" id="cedula" name="cedula">
+								<input
+									type="text"
+									id="cedula"
+									name="cedula"
+									maxlength="8"
+									required>
 							</td>
 						</tr>
 						<tr>
@@ -340,12 +345,12 @@ empezarPagina();
 								if (disponible === true) {
 									$('#submitDos').prop('disabled', false);
 									$('#submitDos').prop('value', 'Registrar');
-									$('#form_PI').prop('method', 'form_reg_PI.php');
+									$('#form_PI').prop('action', 'form_reg_PI.php');
 								}else{
 									$('#cedula_chequeo').html('Este Usuario ya se encuentra en el sistema, si desea ver detalles de	este registro o actualizar el mismo, por favor dele click al boton Ver mas.');
 									$('#submitDos').prop('disabled', false);
 									$('#submitDos').prop('value', 'Ver mas');
-									$('#form_PI').prop('method', 'form_act_PI.php');
+									$('#form_PI').prop('action', 'form_act_PI.php');
 								};
 							},
 						});
@@ -353,6 +358,31 @@ empezarPagina();
 						$("#cedula_chequeo").html('Favor introduzca cedula solo numeros sin caracteres especiales, EJ: 12345678');
 						$("#cedula_titulo").css('color', 'red');
 						$('#submitDos').prop('disabled', true);
+					};
+				});
+				// apenas se pretenda enviar el formulario:
+				$('#form_PI').on('submit', function (evento){
+					// se comprueba que los datos esten en orden:
+					var cedula = $('#cedula').val();
+					if ( validacionCedula(cedula) ) {
+						//se previene el envio:
+						evento.preventDefault();
+						//se mandan los datos al archivo
+						//por medio de ajax:
+						$.ajax({
+							url: 'form_reg_PI.php',
+							type: 'GET',
+							data: {
+								cedula:cedula
+							},
+							success: function (datos){
+								$('#contenido').html('');
+								$("#contenido").load().html(datos);
+							},
+						});
+						//return true;
+					}else{
+						return false;
 					};
 				});
 			});

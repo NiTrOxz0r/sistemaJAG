@@ -5,28 +5,50 @@ if(!isset($_SESSION)){
 $enlace = $_SERVER['DOCUMENT_ROOT']."/github/sistemaJAG/php/master.php";
 require_once($enlace);
 
-if ( isset($_POST['seudonimo']) && isset($_POST['clave']) ):
-	$seudonimo = $_POST['seudonimo'];
-	$clave = array('simple' => $_POST['clave']);
-	$validarForma = new ChequearUsuario($seudonimo,	$clave);
-	$hash = password_hash($clave['simple'], PASSWORD_BCRYPT, ['cost' => 12]);
-	$_SESSION['seudonimo'] = $validarForma->seudonimo;
-	$_SESSION['clave'] = $hash;
+if ( (isset($_POST['seudonimo']) && isset($_POST['clave']) )
+	|| isset($_GET['cedula']) ):
+	if ( isset($_POST['seudonimo']) && isset($_POST['clave']) ) :
+		$seudonimo = $_POST['seudonimo'];
+		$clave = array('simple' => $_POST['clave']);
+		$validarForma = new ChequearUsuario($seudonimo,	$clave);
+		$hash = password_hash($clave['simple'], PASSWORD_BCRYPT, ['cost' => 12]);
+		$_SESSION['seudonimo'] = $validarForma->seudonimo;
+		$_SESSION['clave'] = $hash;
+		$action = 'insertar_U.php';
+		$disabled = false;
+		$info = 1;
+	endif;
+	if ( isset($_GET['cedula']) && strlen($_GET['cedula']) === 8 ) :
+		$cedula = $_GET['cedula'];
+		$action = 'insertar_sinUsuario_PI.php';
+		$disabled = true;
+		$info = 2;
+	else:
+		$cedula = "";
+	endif;
 	//CONTENIDO:?>
 	<div id="contenido">
 		<div id="blancoAjax">
 			<!-- CONTENIDO EMPIEZA DEBAJO DE ESTO: -->
 			<!-- DETALLESE QUE NO ES UN ID SINO UNA CLASE. -->
 			<div class="contenido">
-				<div id="infor">
-					<p>
-						Seudonimo y clave validos!
-					</p>
-					<p>
-						Por favor continue el proceso de registro introduciendo sus datos basicos:
-					</p>
-				</div>
-				<form method="POST" name="form_PI" id="form_PI" action="insertar_U.php">
+				<?php if ($info == 1): ?>
+					<div id="info">
+						<p>
+							Seudonimo y clave validos!
+						</p>
+						<p>
+							Por favor continue el proceso de registro introduciendo sus datos basicos:
+						</p>
+					</div>
+				<?php elseif ($info == 2): ?>
+					<div id="info">
+						<p>
+							Por favor continue el proceso de registro introduciendo los datos basicos:
+						</p>
+					</div>
+				<?php endif ?>
+				<form method="POST" name="form_PI" id="form_PI" action="<?php echo $action; ?>">
 					<table>
 						<thead>
 							<th id="nacionalidad_titulo">Nacionalidad</th>
@@ -50,6 +72,8 @@ if ( isset($_POST['seudonimo']) && isset($_POST['clave']) ):
 										name="cedula"
 										id="cedula"
 										autofocus="autofocus"
+										value="<?php echo $cedula; ?>"
+										<?php echo ($disabled === (true) ? 'disabled' : null); ?>
 										required>
 								</td>
 							</tr>
@@ -322,7 +346,7 @@ if ( isset($_POST['seudonimo']) && isset($_POST['clave']) ):
 							var cod_mun = $('#cod_mun').val();
 							var cod_parro = $('#cod_parro').val();
 							$.ajax({
-								url: 'insertar_U.php',
+								url: "<?php echo $action ?>",
 								type: 'POST',
 								data: {
 									nacionalidad:nacionalidad,
@@ -402,7 +426,7 @@ if ( isset($_POST['seudonimo']) && isset($_POST['clave']) ):
 	</div>
 <?php else: ?>
 	<div id="blancoAjax">
-		Error en el proceso de inscripcion.
+		Error en el proceso de registro.
 		</br>
 		Ups! parece ser que trato de ingresar a esta pagina incorrectamente!
 	</div>
