@@ -16,7 +16,7 @@ en progreso: 70?% aprox.
 ####CSS
 en progreso: 5?% aprox.
 ####ModuloValidacion
-en progreso: 40?% aprox.
+en progreso: 65% aprox.
 ####ModuloReporte
 en progreso: 0% aprox.
 
