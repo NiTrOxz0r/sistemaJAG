@@ -9,7 +9,7 @@ validarUsuario(1);
 
 //ESTA FUNCION TRAE EL HEAD Y NAVBAR:
 //DESDE empezarPagina.php
-empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);
+empezarPagina();
 
 //CONTENIDO:?>
 <div id="contenido">
@@ -78,6 +78,6 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);
 <script type="text/javascript" src="java/ajax/cargadorOnClick.js"></script>
 
 <?php
-//FINALIZAMOS LA PAGINA:
-//trae footer.php y cola.php
-finalizarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);?>
+	//FINALIZAMOS LA PAGINA:
+	//trae footer.php y cola.php
+	finalizarPagina();?>
