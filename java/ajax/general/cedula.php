@@ -32,13 +32,30 @@ if ( isset($_POST['cedula']) ) :
 					from persona
 					inner join personal_autorizado
 					on personal_autorizado.cod_persona = persona.codigo
-					where persona.cedula = $cedula;";
+					where persona.cedula = '$cedula';";
 					$resultado = conexion($query);
 				?>
-				<?php if ($resultado->num_rows <> 0): ?>
-					<a href="consultar_P.php?cedula_r=<?php echo $_POST['cedula'] ?>">
+				<?php if ($resultado->num_rows <> 0):
+					$consultar_P = enlaceDinamico("github/sistemaJAG/Personal_Autorizado/consultar_P.php?cedula_r=$cedula") ?>
+					<a href="<?php echo $consultar_P ?>">
 						Consultar
 					</a>
+				<?php else: $otro = true;?>
+				<?php endif ?>
+				<?php if ($otro):
+					$query = "SELECT persona.cedula
+					from persona
+					inner join alumno
+					on alumno.cod_persona = persona.codigo
+					where persona.cedula = '$cedula';";
+					$resultado = conexion($query);?>
+					<?php if ($resultado->num_rows <> 0):
+						$consultar_A = enlaceDinamico("github/sistemaJAG/alumno/consultar_A.php?cedula=$cedula") ?>
+						<a href="<?php echo $consultar_A ?>">
+							Consultar
+						</a>
+					<?php else: $otro = true;?>
+					<?php endif ?>
 				<?php endif ?>
 			</span>
 		<?php endif ?>

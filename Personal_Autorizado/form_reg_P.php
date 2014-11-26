@@ -588,7 +588,7 @@ empezarPagina();
 							type: 'POST',
 							data: {cedula:cedula},
 							success: function (datos){
-								$('#cedula_chequeo').html('');
+								$('#cedula_chequeo').empty();
 								//se comprueba si es valido o no por
 								//medio del data-disponible
 								//true si esta disponible, falso si no.
