@@ -161,6 +161,10 @@ empezarPagina();
 			 *
 			 * validaciones de los campos relacionados a las consultas de PI.
 			 */
+			//debido a que las validaciones hechas por
+			//este script solo es usado en este archivo,
+			//se considero no pasar este script a un
+			//archivo aparte como otros archivos.
 			// iniciamos jQuery:
 			$(function(){
 				// cambiamos de una vez
@@ -318,6 +322,9 @@ empezarPagina();
 			 *
 			 * chequeo y operaciones relacionadas con ajax
 			 * para el campo cedula.
+			 *
+			 * no se utiliza cedula.js porque este formulario esta estructurado
+			 * diferente en comparacion a un formulario normal.
 			 */
 			$(function(){
 				$.ajax({
@@ -328,13 +335,13 @@ empezarPagina();
 				$('#cedula').on('change', function(){
 					var cedula = $(this).val();
 					if ( validacionCedula(cedula) ) {
-						$("#cedula_chequeo").html('');
+						$("#cedula_chequeo").empty();
 						$.ajax({
 							url: '../java/ajax/general/cedula.php',
 							type: 'POST',
 							data: {cedula:cedula},
 							success: function (datos){
-								$('#cedula_chequeo').html('');
+								$('#cedula_chequeo').empty();
 								//se comprueba si es valido o no por
 								//medio del data-disponible
 								//true si esta disponible, falso si no.
@@ -381,6 +388,12 @@ empezarPagina();
 				});
 			});
 		</script>
+		<!-- <script type="text/javascript">
+			// desabilitado por ser incompatible con este formulario
+			$(function(){
+				$.post('../java/ajax/cedula.js');
+			});
+		</script> -->
 		<!-- CONTENIDO TERMINA ARRIBA DE ESTO: -->
 	</div>
 </div>

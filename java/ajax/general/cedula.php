@@ -62,7 +62,7 @@ if ( isset($_POST['cedula']) ) :
 	<?php mysqli_close($con) ?>
 	<?php else: ?>
 		<span style="color:red;">
-			cedula no puede ser </br>mayor a 20 digitos ni menor a 3.
+			La cedula debe ser exactamente 8 digitos ej: 12345678.
 		</span>
 	<?php endif ?>
 <?php else: ?>

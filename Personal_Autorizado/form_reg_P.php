@@ -49,7 +49,10 @@ empezarPagina();
 						</td>
 					</tr>
 					<tr>
-						<td class="chequeo" id="cedula_chequeo_adicional">
+						<td
+							class="chequeo"
+							id="cedula_chequeo_adicional"
+							colspan="4">
 
 						</td>
 					</tr>
