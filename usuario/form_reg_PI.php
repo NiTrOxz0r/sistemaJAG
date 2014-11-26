@@ -10,6 +10,10 @@ if ( isset($_POST['seudonimo']) && isset($_POST['clave']) ):
 	$clave = array('simple' => $_POST['clave']);
 	$validarForma = new ChequearUsuario($seudonimo,	$clave);
 	$hash = password_hash($clave['simple'], PASSWORD_BCRYPT, ['cost' => 12]);
+	session_unset();
+	session_destroy();
+	session_start();
+	$_SESSION['cod_tipo_usr'] = 5;
 	$_SESSION['seudonimo'] = $validarForma->seudonimo;
 	$_SESSION['clave'] = $hash;
 	//CONTENIDO:?>
