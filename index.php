@@ -21,11 +21,11 @@ switch ($_SESSION['cod_tipo_usr']) {
 		break;
 	//desactivado:
 	case 0:
-		require "php/cuerpo/usuario/body.php";
+		require "php/cuerpo/usuario/desactivado.php";
 		break;
 	//USUARIO:
 	case 1:
-		require "php/cuerpo/usuario/body.php";
+		require "php/cuerpo/usuario/usuario.php";
 		break;
 	//USUARIO PRIV:
 	case 2:
@@ -43,6 +43,11 @@ switch ($_SESSION['cod_tipo_usr']) {
 	//USUARIO POR VERIFICAR:
 	case 5:
 		require "php/cuerpo/usuario/porVerificar.php";
+		break;
+	//USUARIO EXTERNO O VENEFICIADO:
+	//recomendacion para futuras mejoras o implementaciones de tipo de usuario
+	case 6:
+		// require "php/cuerpo/usuario/usuarioExterno.php";
 		break;
 	case 255:
 		//usando admin mientras tanto:
