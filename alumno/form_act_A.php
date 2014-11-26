@@ -5,13 +5,11 @@ if(!isset($_SESSION)){
 $enlace = $_SERVER['DOCUMENT_ROOT']."/github/sistemaJAG/php/master.php";
 require_once($enlace);
 // invocamos validarUsuario.php desde master.php
-validarUsuario(1);
+validarUsuario(1, 1, $_SESSION['cod_tipo_usr']);
 
 //ESTA FUNCION TRAE EL HEAD Y NAVBAR:
 //DESDE empezarPagina.php
-empezarPagina();
-
-
+empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);
 
 if (isset($_REQUEST['cedula'])) {
 	if ($_REQUEST['cedula'] <> "" and strlen($_REQUEST['cedula']) == 8) {
@@ -486,4 +484,4 @@ if (isset($_REQUEST['cedula'])) {
 <?php
 //FINALIZAMOS LA PAGINA:
 //trae footer.php y cola.php
-finalizarPagina();?>
+finalizarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);?>

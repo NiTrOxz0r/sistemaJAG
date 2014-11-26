@@ -5,11 +5,11 @@ if(!isset($_SESSION)){
 $enlace = $_SERVER['DOCUMENT_ROOT']."/github/sistemaJAG/php/master.php";
 require_once($enlace);
 // invocamos validarUsuario.php desde master.php
-validarUsuario();
+validarUsuario(1, 2, $_SESSION['cod_tipo_usr']);
 
 //ESTA FUNCION TRAE EL HEAD Y NAVBAR:
 //DESDE empezarPagina.php
-empezarPagina();
+empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);
 
 if ( (isset($_REQUEST['informacion'])
 	and isset($_REQUEST['tipo'])
@@ -274,13 +274,13 @@ if ( (isset($_REQUEST['informacion'])
 						</p>
 					</div>
 				</div>
-				<?php
-					//FINALIZAMOS LA PAGINA:
-					//trae footer.php y cola.php
-					finalizarPagina(); ?>
 				<!-- CONTENIDO TERMINA ARRIBA DE ESTO: -->
 			</div>
 		</div>
+		<?php
+		//FINALIZAMOS LA PAGINA:
+		//trae footer.php y cola.php
+		finalizarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']); ?>
 	<?php endif ?>
 <?php mysqli_close($conexion);?>
 <?php else: ?>

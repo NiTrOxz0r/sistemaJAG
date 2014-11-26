@@ -237,7 +237,7 @@ if ( isset($_SESSION['seudonimo']) && isset($_SESSION['clave']) && isset($_POST[
 mysqli_close($con);
 //FINALIZAMOS LA PAGINA:
 //trae footer.php y cola.php
-finalizarPagina();?>
+finalizarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);?>
 
 <?php else: ?>
 	<div id="blancoAjax">
@@ -248,5 +248,5 @@ finalizarPagina();?>
 <?php
 //FINALIZAMOS LA PAGINA:
 //trae footer.php y cola.php
-finalizarPagina();?>
+finalizarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);?>
 <?php endif ?>

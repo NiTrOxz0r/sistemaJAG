@@ -18,7 +18,7 @@ if ( isset($_POST['seudonimo']) && isset($_POST['clave']) ):
 			<!-- CONTENIDO EMPIEZA DEBAJO DE ESTO: -->
 			<!-- DETALLESE QUE NO ES UN ID SINO UNA CLASE. -->
 			<div class="contenido">
-				<div id="infor">
+				<div id="info">
 					<p>
 						Seudonimo y clave validos!
 					</p>
@@ -393,11 +393,6 @@ if ( isset($_POST['seudonimo']) && isset($_POST['clave']) ):
 					});
 				});
 			</script>
-			<?php
-			//FINALIZAMOS LA PAGINA:
-			//trae footer.php y cola.php
-			finalizarPagina();?>
-			<!-- CONTENIDO TERMINA ARRIBA DE ESTO: -->
 		</div>
 	</div>
 <?php else: ?>

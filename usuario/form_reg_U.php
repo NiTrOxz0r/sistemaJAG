@@ -9,7 +9,7 @@ validarUsuario();
 //HEAD:
 //ESTA FUNCION TRAE EL HEAD Y NAVBAR:
 //DESDE empezarPagina.php
-empezarPagina();
+empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);
 
 //CONTENIDO:?>
 <div id="contenido">
@@ -162,9 +162,9 @@ empezarPagina();
 				});
 			});
 		</script>
-	<?php
-	//FINALIZAMOS LA PAGINA:
-	//trae footer.php y cola.php
-	finalizarPagina();?>
 	</div>
 </div>
+<?php
+//FINALIZAMOS LA PAGINA:
+//trae footer.php y cola.php
+finalizarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);?>

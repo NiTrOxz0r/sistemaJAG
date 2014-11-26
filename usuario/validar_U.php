@@ -1,4 +1,25 @@
 <?php
+
+/**
+ * @author [slayerfat] <[slayerfat@gmail.com]>
+ *
+ * {@internal [si tienen dudas sobre este archivo
+ * pregunten, no es tan dificil, solo sigan el flujo del
+ * mismo, para registrar a un personal que desee ser usuario:
+ *
+ * 1. se chequea variables de entrada.
+ * 2. se validan variables de entrada por medio de ChequearUsuario.
+ * 3. se comprueba clave de BD con la de entrada.
+ * 4. se chequea usuario en BD.
+ * 5. se incia variable de sesion en sistemaJAG.
+ *
+ * y listo.
+ *
+ * este archivo fue cambiado para ajustarse a la nueva base de datos.]}
+ *
+ * @version [1.1]
+ */
+
 $enlace = $_SERVER['DOCUMENT_ROOT']."/github/sistemaJAG/php/master.php";
 require_once($enlace);
 	//se chequea si el boton enviar fue iniciado:

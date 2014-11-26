@@ -1,15 +1,15 @@
 <?php
-if(!isset($_SESSION)){ 
-	session_start(); 
+if(!isset($_SESSION)){
+	session_start();
 }
 $enlace = $_SERVER['DOCUMENT_ROOT']."/github/sistemaJAG/php/master.php";
 require_once($enlace);
 // invocamos validarUsuario.php desde master.php
-validarUsuario(1);
+validarUsuario(1, 1, $_SESSION['cod_tipo_usr']);
 
 //ESTA FUNCION TRAE EL HEAD Y NAVBAR:
 //DESDE empezarPagina.php
-empezarPagina();
+empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);
 //CONTENIDO:?>
 <div id="contenido">
 	<div id="blancoAjax">
@@ -21,7 +21,7 @@ empezarPagina();
 					$con = conexion();
 					$cedula_r = mysqli_escape_string($con, $cedula_r);
 
-					
+
 					$query = "SELECT ;";
 					$resultado = conexion($query);?>
 
@@ -119,7 +119,7 @@ empezarPagina();
 
 					//buscamos los representantes que esten relacionados
 					//con este alumno
-					$query = "SELECT 
+					$query = "SELECT
 					alumno.p_apellido as p_apellido_a,
 					alumno.p_nombre as p_nombre_a,
 					personal_autorizado.codigo as codigo_r,
@@ -142,13 +142,13 @@ empezarPagina();
 					$resultado = conexion($query);?>
 
 					<?php if ($resultado->num_rows <> 0) :?>
-						
+
 						<?php $unaVez = true; ?>
 						<?php	while ($datos = mysqli_fetch_array($resultado)) : ?>
 
-							<?php if ($unaVez): ?>						
+							<?php if ($unaVez): ?>
 								<span>
-									Personas relacionados con: 
+									Personas relacionados con:
 									<?php echo $datos['p_apellido_a']; ?>,
 									<?php echo $datos['p_nombre_a']; ?>
 								</span>
@@ -249,7 +249,7 @@ empezarPagina();
 
 					//buscamos los representantes que esten relacionados
 					//con este alumno
-					$query = "SELECT 
+					$query = "SELECT
 					alumno.p_nombre as p_nombre_a,
 					alumno.p_nombre as p_nombre_a,
 					personal_autorizado.codigo as codigo_r,
@@ -271,13 +271,13 @@ empezarPagina();
 					order by alumno.codigo;";
 					$resultado = conexion($query);?>
 					<?php if ($resultado->num_rows <> 0) :?>
-						
+
 						<?php $unaVez = true; ?>
 						<?php	while ($datos = mysqli_fetch_array($resultado)) : ?>
 
-							<?php if ($unaVez): ?>						
+							<?php if ($unaVez): ?>
 								<span>
-									Personas relacionados con: 
+									Personas relacionados con:
 									<?php echo $datos['p_apellido_a']; ?>,
 									<?php echo $datos['p_nombre_a']; ?>
 								</span>
@@ -385,4 +385,4 @@ empezarPagina();
 <?php
 //FINALIZAMOS LA PAGINA:
 //trae footer.php y cola.php
-finalizarPagina();?>
+finalizarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);?>

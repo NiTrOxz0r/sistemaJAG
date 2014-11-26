@@ -1,11 +1,11 @@
 <?php
-if(!isset($_SESSION)){ 
-  session_start(); 
+if(!isset($_SESSION)){
+  session_start();
 }
 $enlace = $_SERVER['DOCUMENT_ROOT']."/github/sistemaJAG/php/master.php";
 require_once($enlace);
 // invocamos validarUsuario.php desde master.php
-validarUsuario(1);
+validarUsuario(1, 1, $_SESSION['cod_tipo_usr']);
 
 	if (isset($_SESSION['cedula_r'])){
 
@@ -14,7 +14,7 @@ validarUsuario(1);
 		$status         =  			1;
 		$cod_usr_reg    = 			$_SESSION['codUsrMod'];
 		$cod_usr_mod   	=   		$_SESSION['codUsrMod'];
-		
+
 
 		$cedula					=	mysqli_escape_string($con, $_POST['cedula']);
 		$nacionalidad		=	mysqli_escape_string($con, $_POST['nacionalidad']);
@@ -25,7 +25,7 @@ validarUsuario(1);
 		$sexo						=	mysqli_escape_string($con, $_POST['sexo']);
 		$fec_nac				=	mysqli_escape_string($con, $_POST['fec_nac']);
 		$telefono				=	mysqli_escape_string($con, $_POST['telefono']);
-		$telefono_otro	=	mysqli_escape_string($con, $_POST['telefono_otro']);      
+		$telefono_otro	=	mysqli_escape_string($con, $_POST['telefono_otro']);
 
 	 	$queryP = "INSERT INTO persona(
 		cedula,
@@ -47,15 +47,15 @@ validarUsuario(1);
 		'$cod_usr_reg','$cod_usr_mod');";
 
 		$res = conexion($queryP);
-	  
+
 	  $query = "SELECT codigo from persona where cedula = '$cedula';";
 	  $resultado = conexion($query);
 		$datos = mysqli_fetch_assoc($resultado);
-		
+
 		$cod_persona = $datos['codigo'];
 		$cod_parroquia 		=	mysqli_escape_string($con, $_POST['cod_parro']);
 		$direccion_exacta	= mysqli_escape_string($con, $_POST['direcc']);
-		
+
 		$queryDirA = "INSERT INTO direccion
 			(
 			cod_persona,
@@ -70,7 +70,7 @@ validarUsuario(1);
 
 	  $cedula_escolar = mysqli_escape_string($con, $_POST['cedula_escolar']);
 		$lugar_nac 			= mysqli_escape_string($con, $_POST['lugar_nac']);
-		$fec_nac 				= mysqli_escape_string($con, $_POST['fec_nac']);	
+		$fec_nac 				= mysqli_escape_string($con, $_POST['fec_nac']);
 		$acta_num_part_nac 				= mysqli_escape_string($con, $_POST['acta_num_part_nac']);
 	 	$acta_folio_num_part_nac = mysqli_escape_string($con, $_POST['acta_folio_num_part_nac']);
 		$plantel_procedencia 	= mysqli_escape_string($con, $_POST['plantel_procedencia']);
@@ -83,10 +83,10 @@ validarUsuario(1);
 	 	$certificado_vacuna = mysqli_escape_string($con, $_POST['vacuna']);
 	 	$cod_discapacidad 	= mysqli_escape_string($con, $_POST['discapacidad']);
 		$cod_curso 					= mysqli_escape_string($con, $_POST['curso']);
-		
-		$query_R="SELECT a.codigo from personal_autorizado a 
+
+		$query_R="SELECT a.codigo from personal_autorizado a
 		inner join persona b on (a.cod_persona=b.codigo) where b.cedula ='$_SESSION[cedula_r]'";
-	 
+
 
 		$resultado = conexion($query_R);
 		$datos = mysqli_fetch_assoc($resultado);
@@ -116,10 +116,10 @@ validarUsuario(1);
 		'$acta_folio_num_part_nac','$plantel_procedencia','$repitiente','$altura','$peso','$camisa',
 	 	'$pantalon','$zapato','$certificado_vacuna','$cod_discapacidad','$cod_curso',
 		'$cod_representante','$status','$cod_usr_reg','$cod_usr_mod');";
-			
+
 		$res = conexion($queryA);
 
-		$query = "SELECT b.codigo from persona a, alumno b 
+		$query = "SELECT b.codigo from persona a, alumno b
 		where a.codigo=b.cod_persona and cedula = '$cedula';";
 		$resultado = conexion($query);
 		$datos = mysqli_fetch_assoc($resultado);
@@ -131,33 +131,33 @@ validarUsuario(1);
 		$query_O= "INSERT INTO obtiene
 		VALUES
 		(null, $cod_representante, $codigo_alumno, $status, $cod_usr_reg, null, $cod_usr_mod, null);";
-	  
+
 	  $res = conexion($query_O);
 
 		echo "DATOS INGRESADOS EXITOSAMENTE";
 
 
 	}else{
-		
+
 		echo " Ingresar REPRSENTANTE";
-	
+
 }
 
  //AGARRAMOS LAS VARIABLES DE VALIDACION QUE NOS INTERESAN:
-	  
+
 	  $codUsrMod = $_SESSION['codUsrMod'];
 	  $codTipoUsr = $_SESSION['cod_tipo_usr'];
 	  $seudonimo = $_SESSION['seudonimo'];
-	  
+
 	  // LA VARIABLE SE DES-CREA, DES-INICIA DESACTIVA
 	  unset($_SESSION);
-	  
+
 	  //REINICIAMOS LA VARIABLE:
-	  
+
 	  $_SESSION['codUsrMod'] = $codUsrMod;
 		$_SESSION['cod_tipo_usr'] = $codTipoUsr;
 		$_SESSION['seudonimo'] = $seudonimo;
 
 
-	finalizarPagina();
+	finalizarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);
 ?>

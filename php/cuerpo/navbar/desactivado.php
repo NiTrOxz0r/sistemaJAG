@@ -19,4 +19,11 @@
 			<i>Bienvenido! por favor Acceda al sistema.</i>
 		</div>
 	<?php endif; ?>
+<?php else: ?>
+	<div id="navbar">
+		<ul>
+			<?php $index = enlaceDinamico(); ?>
+			<li><a href="<?php echo $index ?>">Inicio</a></li>
+		</ul>
+	</div>
 <?php endif; ?>
