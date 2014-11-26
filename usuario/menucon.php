@@ -17,13 +17,11 @@ empezarPagina();
 		<!-- CONTENIDO EMPIEZA DEBAJO DE ESTO: -->
 		<!-- DETALLESE QUE NO ES UN ID SINO UNA CLASE. -->
 		<div class="contenido">
-
 			<div class="info">
 				<p>
 					Para hacer una consulta por favor seleccione el tipo de consulta que Ud. desee:
 				</p>
 			</div>
-
 			<form
 				id="consulta_singular_U"
 				name="consulta_singular_U"
@@ -114,14 +112,7 @@ empezarPagina();
 
 					</span>
 				</div>
-
 			</form>
-			<div id="error" class="chequeo">
-				<!-- chequeo por medio de ajax: -->
-				<span class="error" id="error">
-
-				</span>
-			</div>
 			<div class="info">
 				Si Ud. desea registrar o actualizar a un personal interno de esta
 				institucion, puede hacerlo especificando la cedula de identidad:
@@ -154,6 +145,12 @@ empezarPagina();
 						</tr>
 					</tbody>
 				</table>
+				<div id="error" class="chequeo">
+					<!-- chequeo por medio de ajax: -->
+					<span class="error" id="error">
+
+					</span>
+				</div>
 			</form>
 
 		</div>
@@ -362,25 +359,22 @@ empezarPagina();
 				});
 				// apenas se pretenda enviar el formulario:
 				$('#form_PI').on('submit', function (evento){
+					//se previene el envio:
+					evento.preventDefault();
 					// se comprueba que los datos esten en orden:
 					var cedula = $('#cedula').val();
 					if ( validacionCedula(cedula) ) {
-						//se previene el envio:
-						evento.preventDefault();
-						//se mandan los datos al archivo
-						//por medio de ajax:
+						var action = $(this).attr('action');
 						$.ajax({
-							url: 'form_reg_PI.php',
+							url: action,
 							type: 'GET',
-							data: {
-								cedula:cedula
-							},
+							dataType: 'html',
+							data: {cedula:cedula},
 							success: function (datos){
-								$('#contenido').html('');
-								$("#contenido").load().html(datos);
+								$("#contenido").empty().append($(datos).filter('#blancoAjax').html());
 							},
 						});
-						//return true;
+						return true;
 					}else{
 						return false;
 					};

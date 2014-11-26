@@ -162,9 +162,9 @@ empezarPagina();
 				});
 			});
 		</script>
-	<?php
-	//FINALIZAMOS LA PAGINA:
-	//trae footer.php y cola.php
-	finalizarPagina();?>
 	</div>
 </div>
+<?php
+//FINALIZAMOS LA PAGINA:
+//trae footer.php y cola.php
+finalizarPagina();?>

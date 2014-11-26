@@ -14,14 +14,13 @@ empezarPagina();
 //CONTENIDO:?>
 <div id="contenido">
 	<div id="blancoAjax">
-
 		<div align="center">
 			<!-- http://www.w3schools.com/html/html_forms.asp -->
 			<form method="post" action="insertar_P.php" name="form_repre" id="form">
 				<h1 class="mostrar">REGISTRO DEL REPRESENTANTE</h1>
 				<table class="mostrar">
 					<tr>
-						<td colspan=2>
+						<td colspan="2">
 							Entre la informaci&oacute;n:<br>
 							<sup>(<font color="#ff0000">*</font> indica campo obligatorio).</sup>
 						</td>
@@ -44,6 +43,14 @@ empezarPagina();
 								required
 								id="cedula">
 							<font color="#ff0000">*</font>
+						</td>
+						<td colspan="2" class="chequeo" id="cedula_chequeo">
+
+						</td>
+					</tr>
+					<tr>
+						<td class="chequeo" id="cedula_chequeo_adicional">
+
 						</td>
 					</tr>
 					<tr>
@@ -498,6 +505,12 @@ empezarPagina();
 		<?php $municipio = enlaceDinamico("java/mun.php"); ?>
 		<?php $parroquia = enlaceDinamico("java/parro.php"); ?>
 		<script type="text/javascript">
+			/**
+			 * Andres Leutor.
+			 * Alejandro Granadillo.
+			 * ajax necesario para estados, municipios
+			 * y parroquias dinamico.
+			 */
 			$("document").ready(function(){
 				$("#cod_est").load("<?php echo $estado ?>");
 					$("#cod_est").change(function(){
@@ -549,6 +562,57 @@ empezarPagina();
 					$('.ocultar').toggle();
 					$("html, body").animate({ scrollTop: 0 }, "slow");
   				return false;
+				});
+			});
+		</script>
+		<!-- cedula -->
+		<script type="text/javascript">
+			/**
+			 * hecho por slayerfat, dudas o sugerencias ya saben donde estoy.
+			 *
+			 * chequeo y operaciones relacionadas con ajax
+			 * para el campo cedula.
+			 */
+			$(function(){
+				$.ajax({
+					url: '../java/validacionCedula.js',
+					type: 'POST',
+					dataType: 'script'
+				});
+				$('#cedula').on('change', function(){
+					var cedula = $(this).val();
+					if ( validacionCedula(cedula) ) {
+						$("#cedula_chequeo").html('');
+						$.ajax({
+							url: '../java/ajax/general/cedula.php',
+							type: 'POST',
+							data: {cedula:cedula},
+							success: function (datos){
+								$('#cedula_chequeo').html('');
+								//se comprueba si es valido o no por
+								//medio del data-disponible
+								//true si esta disponible, falso si no.
+								var disponible = $(datos+'#disponible').data('disponible');
+								if (disponible === true) {
+									$('#cedula_chequeo_adicional').html('');
+									$('#form input, #form select, #form textarea').each(function(){
+										$(this).prop('disabled', false);
+									});
+								}else{
+									$('#form input, #form select, #form textarea').each(function(){
+										$(this).prop('disabled', true);
+									});
+									$('#cedula').prop('disabled', false);
+									$('#cedula_chequeo').html(datos);
+									$('#cedula_chequeo_adicional').html('para continuar con el registro especifique otra cedula o consulte la ya existente.');
+								};
+							},
+						});
+					}else{
+						$("#cedula_chequeo").html('Favor introduzca cedula solo numeros sin caracteres especiales, EJ: 12345678');
+						$("#cedula_titulo").css('color', 'red');
+						$('#submitDos').prop('disabled', true);
+					};
 				});
 			});
 		</script>

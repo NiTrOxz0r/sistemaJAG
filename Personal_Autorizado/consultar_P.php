@@ -137,7 +137,7 @@ empezarPagina();
 						from persona
 						inner join personal_autorizado
 						on personal_autorizado.cod_persona = persona.codigo
-						where persona.cedula = $cedula_r";
+						where persona.cedula = $cedula_r;";
 						$resultado = conexion($query); ?>
 						<?php if ($resultado->num_rows <> 0): ?>
 							<p>

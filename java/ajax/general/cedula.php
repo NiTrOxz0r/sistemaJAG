@@ -26,8 +26,23 @@ if ( isset($_POST['cedula']) ) :
 			</span>
 		<?php else: ?>
 			<span id="disponible" data-disponible="false">
+				Esta Cedula esta ya registrada en el sistema!
+				<?php
+					$query = "SELECT persona.cedula
+					from persona
+					inner join personal_autorizado
+					on personal_autorizado.cod_persona = persona.codigo
+					where persona.cedula = $cedula;";
+					$resultado = conexion($query);
+				?>
+				<?php if ($resultado->num_rows <> 0): ?>
+					<a href="consultar_P.php?cedula_r=<?php echo $_POST['cedula'] ?>">
+						Consultar
+					</a>
+				<?php endif ?>
 			</span>
 		<?php endif ?>
+	<?php mysqli_close($con) ?>
 	<?php else: ?>
 		<span style="color:red;">
 			cedula no puede ser </br>mayor a 20 digitos ni menor a 3.
