@@ -8,7 +8,7 @@ $bootstrapJS = enlaceDinamico('css/bootstrap/js/bootstrap.min.js');
 <!-- js de bootstrap -->
 <script src="<?php echo $bootstrapJS ?>"></script>
 
-<div id="footer">
+<footer id="footer">
 	<p>
 		Sistema JAG. EN CONSTRUCCION 2014.
 	</p>
@@ -16,4 +16,4 @@ $bootstrapJS = enlaceDinamico('css/bootstrap/js/bootstrap.min.js');
 	<p>
 		ENLACES...
 	</p>
-</div>
+</footer>
