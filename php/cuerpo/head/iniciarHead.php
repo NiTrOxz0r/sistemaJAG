@@ -18,6 +18,10 @@ function iniciarHead(
 	$titulo = "Sistema de inscripcion Jose Antonio Gonzalez",
 	$tipo = 0){
 
+	if(!isset($_SESSION)){
+	  session_start();
+	}
+
 	// para que cargue una vez el head:
 	static $unaVez;
 	// enlaces importantes:

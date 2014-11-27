@@ -1,7 +1,12 @@
-//hecho por slayerfat, saben donde estoy.
-//se hizo con la idea de modificar especificamente
-//al formulario de consulta de alumno
-//porque la otra funcion requeria muchas variables
+/**
+ * @author [Alejandro Granadillo]
+ * [validacionUsuario se hizo con la idea de modificar
+ * especificamente al formulario de consulta de alumno,
+ * porque la otra funcion requeria muchas variables]
+ * @return {boolean} regresa falso si algun campo es incorrecto
+ *
+ * @version 1.2
+ */
 function validacionUsuario(){
 	//estatus:
 	var estatus = false;
@@ -20,47 +25,42 @@ function validacionUsuario(){
 
 	//chequeos
 	//seudonimo:
-	if ( seudonimo.length < 3 ) {
-		document.getElementById("seudonimo").focus();
-		$("#seudonimo_chequeo").html('por favor escojer un seudonimo </br>de mas de 3 letras.');
-		$("#seudonimo_titulo").css('color', 'red');
+	if ( seudonimo == "") {
+		$('#seudonimo').parent().addClass('has-error');
+		$("#seudonimo_chequeo").html('este campo no puede estar vacio.');
 		return false;
 	}else if ( seudonimo.length > 20 ) {
-		document.getElementById("seudonimo").focus();
-		$("#seudonimo_chequeo").html('El seudonimo es muy grande, por favor introducir un maximo de 20 caracteres.');
-		$("#seudonimo_titulo").css('color', 'red');
+		$('#seudonimo').parent().addClass('has-error');
+		$("#seudonimo_chequeo").html('Seudonimo incorrecto, necesita ser un maximo de 20 caracteres');
 		return false;
-	}else if ( seudonimo == "" ) {
-		document.getElementById("seudonimo").focus();
-		$("#seudonimo_chequeo").html('este campo no puede </br> estar vacio.');
-		$("#seudonimo_titulo").css('color', 'red');
+	}else if ( seudonimo.length < 3  ) {
+		$('#seudonimo').parent().addClass('has-error');
+		$("#seudonimo_chequeo").html('Seudonimo incorrecto, necesita ser al menos 3 caracteres');
 		return false;
 	}else{
-		$("#seudonimo_chequeo").html('');
-		$("#seudonimo_titulo").css('color', 'green');
+		$('#seudonimo').parent().removeClass('has-error').addClass('has-success');
+		$("#seudonimo_chequeo").html('Seudonimo parece correcto!');
 		estatus = true;
 	}
 	//clave:
 	if (clave === false) {
-		$("#clave_chequeo").html('');
-		$("#clave_titulo").css('color', 'green');
+		$("#clave_chequeo").html('Especifique su contrase&ntilde;a');
 		estatus = true;
 	}else if ( clave == "" ) {
-		document.getElementById("clave").focus();
-		$("#clave_chequeo").html('este campo no puede </br> estar vacio');
-		$("#clave_titulo").css('color', 'red');
+		$('#clave').parent().addClass('has-error');
+		$("#clave_chequeo").html('este campo no puede estar vacio.');
 		return false;
 	}else if ( clave.length < 6) {
-		$("#clave_chequeo").html('Por favor introduzca un minimo de 6 caracteres.');
-		$("#clave_titulo").css('color', 'red');
+		$('#clave').parent().addClass('has-error');
+		$("#clave_chequeo").html('Su clave no deberia ser menor a 6 caracteres');
 		return false;
 	}else if ( clave.length > 15 ) {
-		$("#clave_chequeo").html('Por favor introduzca hasta un maximo de 15 caracteres.');
-		$("#clave_titulo").css('color', 'red');
+		$('#clave').parent().addClass('has-error');
+		$("#clave_chequeo").html('Su clave no deberia ser mayor a 15 caracteres');
 		return false;
 	}else{
-		$("#clave_chequeo").html('');
-		$("#clave_titulo").css('color', 'green');
+		$('#clave').parent().removeClass('has-error').addClass('has-success');
+		$("#clave_chequeo").html('todo parece estar en orden!');
 		estatus = true;
 	}
 	//cod_tipo_usr (nivel_educativo):

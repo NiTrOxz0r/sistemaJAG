@@ -65,9 +65,11 @@ function validarUsuario($tipo = 0, $nivelMinimo = 1, $nivelUsuario = null){
 		case 0:
 			//variable inicial que chequea el tipo de usuario:
 			if ( !isset($_SESSION['cod_tipo_usr']) ) :
-				session_destroy();
-				session_unset();
-				session_start();
+				// session_destroy();
+				// session_unset();
+				if(!isset($_SESSION)){
+				  session_start();
+				}
 				$_SESSION['cod_tipo_usr'] = null;
 			endif;
 			break;

@@ -23,8 +23,11 @@ function debugSistema(){
 	if (isset($_SESSION['seudonimo'])) {
 		echo "seudonimo: ".$_SESSION['seudonimo']."<br />";
 	}
-	if (isset($_SESSION['nombre_usuario'])) {
-		echo "nombre de usuario: ".$_SESSION['nombre_usuario']."<br />";
+	if (isset($_SESSION['p_nombre'])) {
+		echo "nombre de usuario: ".$_SESSION['p_nombre']."<br />";
+	}
+	if (isset($_SESSION['p_apellido'])) {
+		echo "apellido de usuario: ".$_SESSION['p_apellido']."<br />";
 	}
 	if (isset($_SESSION['cod_tipo_usr'])) {
 		echo "codigo tipo de usuario: ".$_SESSION['cod_tipo_usr']."<br />";

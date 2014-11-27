@@ -5,6 +5,9 @@ function finalizarPagina (
 	$tipo_cola = 0
 	){
 
+	// quitar al finalizar desarrollo:
+	// $tipo_footer = 4;
+
 	//FOOTER:
 	switch ($tipo_footer) {
 		case 0:
