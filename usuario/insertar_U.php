@@ -30,23 +30,19 @@ validarUsuario();
 if ( isset($_SESSION['seudonimo']) && isset($_SESSION['clave']) && isset($_POST['cedula']) ):
 
 	//la clave tiene que ser exactamente 60 caracteres:
-	if (strlen($_SESSION['clave']) <> 60) {
+	if (strlen($_SESSION['clave']) <> 60) :
 		header("Location: form_reg_U.php?clave=MalDefinido");
-	}
+	endif;
 	//datos para saber si es docente o no:
-	if (isset($_POST['tipo_personal'])) {
-		if ($_POST['tipo_personal'] === '1') {
-			$asume = false;
-		} elseif ($_POST['tipo_personal'] === '2') {
+	if (isset($_POST['tipo_personal'])) :
+		if ($_POST['tipo_personal'] === '3' || $_POST['tipo_personal'] === '4') :
 			$asume = true;
-		} elseif ($_POST['tipo_personal'] === '3') {
+		else:
 			$asume = false;
-		}else{
-			header("Location: form_reg_PI.php?tipo_personal=MalDefinido");
-		}
-	}else {
+		endif;
+	else:
 		header("Location: form_reg_PI.php?tipo_personal=MalDefinido");
-	}
+	endif;
 	//iniciamos variables:
 	//para el escape string:
 	$con = conexion();
@@ -227,16 +223,25 @@ if ( isset($_SESSION['seudonimo']) && isset($_SESSION['clave']) && isset($_POST[
 mysqli_close($con);
 //FINALIZAMOS LA PAGINA:
 //trae footer.php y cola.php
-finalizarPagina();?>
+finalizarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);?>
 
 <?php else: ?>
 	<div id="blancoAjax">
 		<p>
 			Problemas en registro de usuario, por favor contacte a un administrador del sistema.
 		</p>
+		<p>
+			vardump:
+		</p>
+		<p>
+			<?php var_dump($_SESSION); ?>
+		</p>
+		<p>
+			<?php var_dump($_POST); ?>
+		</p>
 	</div>
 <?php
 //FINALIZAMOS LA PAGINA:
 //trae footer.php y cola.php
-finalizarPagina();?>
+finalizarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);?>
 <?php endif ?>

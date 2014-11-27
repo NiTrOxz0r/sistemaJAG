@@ -6,11 +6,11 @@ $enlace = $_SERVER['DOCUMENT_ROOT']."/github/sistemaJAG/php/master.php";
 require_once($enlace);
 
 // invocamos validarUsuario.php desde master.php
-validarUsuario(1);
+validarUsuario(1, 3, $_SESSION['cod_tipo_usr']);
 
 //ESTA FUNCION TRAE EL HEAD Y NAVBAR:
 //DESDE empezarPagina.php
-empezarPagina();
+empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);
 
 if ( isset($_GET['cedula']) ):
 	$con = conexion();
@@ -532,7 +532,6 @@ if ( isset($_GET['cedula']) ):
 							}
 						});
 					});
-
 				});
 			</script>
 			<!-- calendario -->
@@ -548,12 +547,12 @@ if ( isset($_GET['cedula']) ):
 					});
 				});
 			</script>
-			<!-- CONTENIDO TERMINA ARRIBA DE ESTO: -->
+				<!-- CONTENIDO TERMINA ARRIBA DE ESTO: -->
 		</div>
 		<?php
-			//FINALIZAMOS LA PAGINA:
-			//trae footer.php y cola.php
-			finalizarPagina(); ?>
+		//FINALIZAMOS LA PAGINA:
+		//trae footer.php y cola.php
+		finalizarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);?>
 	<?php else: ?>
 		<div id="blancoAjax">
 			Error en el proceso de actualizacion.

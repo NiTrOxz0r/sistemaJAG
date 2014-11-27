@@ -21,7 +21,12 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);
 				<div id="usuario">
 					<h3>Estimado Usuario:</h3>
 					<p>
-						En estos momentos Ud. no esta verificado en el sistema, por favor notifique a los administradores del mismo para que su cuenta pueda accesar a las funciones del sistema.
+						En estos momentos su cuenta
+						<strong>
+							<?php echo $_SESSION['seudonimo'] ?>
+						</strong>
+						esta desactivada en el sistema, por favor notifique a los
+						administradores si desea que su cuenta sea reactivada.
 					</p>
 				</div>
 			</div>

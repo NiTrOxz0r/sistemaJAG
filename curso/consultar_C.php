@@ -15,11 +15,11 @@ if(!isset($_SESSION)){
 $enlace = $_SERVER['DOCUMENT_ROOT']."/github/sistemaJAG/php/master.php";
 require_once($enlace);
 // invocamos validarUsuario.php desde master.php
-validarUsuario(1);
+validarUsuario(1, 1, $_SESSION['cod_tipo_usr']);
 
 //ESTA FUNCION TRAE EL HEAD Y NAVBAR:
 //DESDE empezarPagina.php
-empezarPagina();
+empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);
 
 if ( isset($_POST['tipo']) ) :
 	if ($_POST['tipo'] === '1') :
@@ -225,7 +225,7 @@ if ( isset($_POST['tipo']) ) :
 			<!-- CONTENIDO TERMINA ARRIBA DE ESTO: -->
 		</div>
 	</div>
-	<?php finalizarPagina(); ?>
+	<?php finalizarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']); ?>
 
 <?php else :
 	header('Location: menucon.php?error=vacio');

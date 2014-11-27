@@ -5,33 +5,23 @@ if(!isset($_SESSION)){
 $enlace = $_SERVER['DOCUMENT_ROOT']."/github/sistemaJAG/php/master.php";
 require_once($enlace);
 
-if ( (isset($_POST['seudonimo']) && isset($_POST['clave']) )
-	|| isset($_GET['cedula']) ):
-	if ( isset($_POST['seudonimo']) && isset($_POST['clave']) ) :
-		$seudonimo = $_POST['seudonimo'];
-		$clave = array('simple' => $_POST['clave']);
-		$validarForma = new ChequearUsuario($seudonimo,	$clave);
-		$hash = password_hash($clave['simple'], PASSWORD_BCRYPT, ['cost' => 12]);
-		$_SESSION['seudonimo'] = $validarForma->seudonimo;
-		$_SESSION['clave'] = $hash;
-		$action = 'insertar_U.php';
-		$disabled = false;
-		$info = 1;
-	endif;
-	if ( isset($_GET['cedula']) && strlen($_GET['cedula']) === 8 ) :
-		$cedula = $_GET['cedula'];
-		$action = 'insertar_sinUsuario_PI.php';
-		$disabled = true;
-		$info = 2;
-	else:
-		$cedula = "";
-	endif;
+if ( isset($_POST['seudonimo']) && isset($_POST['clave']) ):
+	$seudonimo = $_POST['seudonimo'];
+	$clave = array('simple' => $_POST['clave']);
+	$validarForma = new ChequearUsuario($seudonimo,	$clave);
+	$hash = password_hash($clave['simple'], PASSWORD_BCRYPT, ['cost' => 12]);
+	session_unset();
+	session_destroy();
+	session_start();
+	$_SESSION['cod_tipo_usr'] = 5;
+	$_SESSION['seudonimo'] = $validarForma->seudonimo;
+	$_SESSION['clave'] = $hash;
 	//CONTENIDO:?>
-	<div id="blancoAjax">
-		<!-- CONTENIDO EMPIEZA DEBAJO DE ESTO: -->
-		<!-- DETALLESE QUE NO ES UN ID SINO UNA CLASE. -->
-		<div class="contenido">
-			<?php if ($info == 1): ?>
+	<div id="contenido">
+		<div id="blancoAjax">
+			<!-- CONTENIDO EMPIEZA DEBAJO DE ESTO: -->
+			<!-- DETALLESE QUE NO ES UN ID SINO UNA CLASE. -->
+			<div class="contenido">
 				<div id="info">
 					<p>
 						Seudonimo y clave validos!
@@ -411,9 +401,8 @@ if ( (isset($_POST['seudonimo']) && isset($_POST['clave']) )
 					buttonImageOnly: true,
 					dateFormat: "yyyy-mm-dd"
 				});
-			});
-		</script>
-		<!-- CONTENIDO TERMINA ARRIBA DE ESTO: -->
+			</script>
+		</div>
 	</div>
 <?php else: ?>
 	<div id="blancoAjax">

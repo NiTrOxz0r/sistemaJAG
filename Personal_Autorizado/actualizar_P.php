@@ -1,23 +1,23 @@
 <?php
 
-	if(!isset($_SESSION)){ 
-  	session_start(); 
+	if(!isset($_SESSION)){
+  	session_start();
 	}
 	$enlace = $_SERVER['DOCUMENT_ROOT']."/github/sistemaJAG/php/master.php";
 	require_once($enlace);
 // invocamos validarUsuario.php desde master.php
-	validarUsuario(1);
+	validarUsuario(1, 1, $_SESSION['cod_tipo_usr']);
 
 //ESTA FUNCION TRAE EL HEAD Y NAVBAR:
 //DESDE empezarPagina.php
-	empezarPagina();
+	empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);
 
 	$con = conexion();
 
  	$status         =  			1;
 	$cod_usr_reg    = 			$_SESSION['codUsrMod'];
 	$cod_usr_modn  	=   		$_SESSION['codUsrMod'];
-  	
+
   //ACTUALIZO LA DIRECCION DEL REPRESENTANTE
   //LA ENVIO A LA TABLA direccion_p_a
   $cedulan	=	$_POST['cedula'];
@@ -34,7 +34,7 @@
 		$status         =  			1;
 		$cod_usr_reg    = 			$_SESSION['codUsrMod'];
 		$cod_usr_mod   	=   		$_SESSION['codUsrMod'];
-		
+
 
 		$cedulan					=	mysqli_escape_string($con, $_POST['cedula']);
 		$nacionalidadn		=	mysqli_escape_string($con, $_POST['nacionalidad']);
@@ -45,9 +45,9 @@
 		$sexon						=	mysqli_escape_string($con, $_POST['sexo']);
 		$fec_nacn				=	mysqli_escape_string($con, $_POST['fec_nac']);
 		$telefonon				=	mysqli_escape_string($con, $_POST['telefono']);
-		$telefono_otron	=	mysqli_escape_string($con, $_POST['telefono_otro']);      
+		$telefono_otron	=	mysqli_escape_string($con, $_POST['telefono_otro']);
 
-	 	$queryPA = "UPDATE persona SET 
+	 	$queryPA = "UPDATE persona SET
 		cedula 			 = '$cedulan',
 		nacionalidad = '$nacionalidadn',
 		p_nombre 		 = '$p_nombren',
@@ -65,8 +65,8 @@
 
 		$cod_parroquian 		=	mysqli_escape_string($con, $_POST['cod_parro']);
 		$direccion_exactan	= mysqli_escape_string($con, $_POST['direcc']);
-		
-		$queryDirP = "UPDATE direccion SET 
+
+		$queryDirP = "UPDATE direccion SET
 		cod_parroquia 	 = '$cod_parroquian',
 	  direccion_exacta = '$direccion_exactan',
 		cod_usr_mod 		 = '$cod_usr_modn'
@@ -75,28 +75,28 @@
 	  $res = conexion($queryDirP);
 
 	  $lugar_nacn				=	mysqli_escape_string($con, $_POST['lugar_nac']);
-		$emailn						=	mysqli_escape_string($con, $_POST['email']);     
-	 	$relacionn					=	mysqli_escape_string($con, $_POST['relacion']);     
-	 	$vive_con_alumnon	=	mysqli_escape_string($con, $_POST['vive_con_alumno']);  
-	 	$nivel_instruccionn	=	mysqli_escape_string($con, $_POST['nivel_instruccion']);    
-	 	$profesionn					=	mysqli_escape_string($con, $_POST['profesion']); 
-	 	$lugar_trabajon			=	mysqli_escape_string($con, $_POST['lugar_trabajo']);   
-	 	$direccion_trabajon	=	mysqli_escape_string($con, $_POST['direccion_trabajo']);   
+		$emailn						=	mysqli_escape_string($con, $_POST['email']);
+	 	$relacionn					=	mysqli_escape_string($con, $_POST['relacion']);
+	 	$vive_con_alumnon	=	mysqli_escape_string($con, $_POST['vive_con_alumno']);
+	 	$nivel_instruccionn	=	mysqli_escape_string($con, $_POST['nivel_instruccion']);
+	 	$profesionn					=	mysqli_escape_string($con, $_POST['profesion']);
+	 	$lugar_trabajon			=	mysqli_escape_string($con, $_POST['lugar_trabajo']);
+	 	$direccion_trabajon	=	mysqli_escape_string($con, $_POST['direccion_trabajo']);
 	 	$telefono_trabajon		=	mysqli_escape_string($con, $_POST['telefono_trabajo']);
 
-	 	$query_R="SELECT cod_persona  FROM personal_autorizado a 
+	 	$query_R="SELECT cod_persona  FROM personal_autorizado a
 		inner join persona b on (cod_persona=b.codigo) WHERE cedula ='$cedulan'";
 		$resultado = conexion($query_R);
 		$datos = mysqli_fetch_assoc($resultado);
 		$cod_persona = $datos['cod_persona'];
 
 	  $queryPA = "UPDATE personal_autorizado SET
-		lugar_nac 		= '$lugar_nacn', 
-		email 				= '$emailn',   
-	 	relacion 			= '$relacionn',    
-	 	vive_con_alumno		= '$vive_con_alumnon',  
-	 	nivel_instruccion = '$nivel_instruccionn',   
-	 	profesion 				='$profesionn', 
+		lugar_nac 		= '$lugar_nacn',
+		email 				= '$emailn',
+	 	relacion 			= '$relacionn',
+	 	vive_con_alumno		= '$vive_con_alumnon',
+	 	nivel_instruccion = '$nivel_instruccionn',
+	 	profesion 				='$profesionn',
 	 	lugar_trabajo 		= '$lugar_trabajon',
 	 	direccion_trabajo = '$direccion_trabajon',
 	 	telefono_trabajo 	= '$telefono_trabajon',
@@ -113,6 +113,6 @@
 
 }
 
-	finalizarPagina();
+	finalizarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);
 
 ?>
