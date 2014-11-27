@@ -1,0 +1,168 @@
+/*quiero ser millonario*/
+
+/**{
+	border:1px solid black;
+}*/
+
+body {
+	font-family: Verdana, Arial, Sans-serif;
+	margin: 0;
+	padding: 0;
+	color: #333;
+}
+a {
+	text-decoration: none;
+	color: #DD6200;
+	font-family: 'Quicksand',sans-serif;
+	font-weight: bold;
+}
+a:visited{
+	color: #DD6200;
+}
+a:hover{
+	color: rgba(255, 146, 37, 1);
+}
+#titulo a {
+	color: white;
+}
+#titulo a:visited {
+	color: white;
+}
+#titulo a:hover{
+	color:rgb(194, 194, 194);
+}
+#footer a:hover{
+	color: #C2C2C2;
+}
+#footer a {
+	color:white;
+}
+#titulo{
+	min-height: 200px;
+	max-height: 200px;
+	padding: 0;
+	margin: 0;
+	color: white;
+	background: url(../imagenes/iutoms.png) 90% 0 no-repeat;/*firefox*/
+	/*internet explorer y chrome*/
+	background-image: url(../imagenes/iutoms.png);
+	background-repeat: no-repeat;
+	overflow: hidden;
+	background-size: 115px;
+	background-position-x: 90%;
+	background-color: white;
+}
+#titulo h1#nombre {
+	margin-top:0;margin-left:20px;
+	margin-bottom: -2px;
+	color: #333;
+}
+#nombre a {
+	font-family: Lucida, Lucida Console, monaco, monospace, courier, helvetica, sans-serif;
+}
+#titulo div#cedula {
+	margin-top:0;padding-left:20px;
+	color: #333;
+}
+#navbar {
+	background-color: #353535;
+	position: relative;
+	top: 100px;
+}
+#navbar ul {
+	background-color: #353535;
+	margin:0;
+	padding: 5px;
+	position: relative;
+	text-align: center;
+	text-decoration: none;
+}
+#navbar ul li {
+	display: inline-block;
+	margin: 0 5px;
+	padding: 4px;
+	font-family: sans-serif;
+	font-weight: normal;
+	font-size: 0.8em;
+}
+#navbar_usuario{
+	padding: 0 5px;
+	left: inherit;
+	position: relative;
+	top: 100px;
+	text-align: right;
+	font-style: italic;
+	color: #333;
+	font-size: 0.8em;
+}
+#navbar_usuario a {
+	color: #333;
+}
+#navbar_usuario a:visited {
+	color: #333;
+}
+#navbar_usuario a:hover {
+	color: rgb(194, 194, 194);
+}
+div#contenedorPrincipal {
+	padding: 0;
+	margin: 0;
+	background-color: rgba(254, 147, 41, 1);
+}
+div#contenido{
+	background-color: white;
+	padding: 0 15px 0 15px;
+	margin: 0 20px 0 20px;
+}
+div.contenido{
+	text-align: justify;
+	width: 100%;
+	margin: 0 auto;
+	padding: 10px 5px 10px 5px;
+}
+div.contenido h2 {
+	font-family: lucida, lucida grande, tahoma, geneva, sans-serif;
+}
+div.contenido img{
+	display: block; /*IMPORTANTE*/
+	width: 100%;
+	margin:0 auto; /*IMPORTANTE*/
+}
+.contenido table {
+	border:1px solid #333;
+	font-size: 0.8em;
+	margin:0 auto;
+	box-shadow: 5px 5px 5px #333;
+	border-collapse: collapse;
+}
+#listado thead {
+/*	border-top: 1px dotted #333;
+	border-bottom: 1px dotted #333;*/
+}
+#listado th{
+	padding-left: 5px;
+	padding-right: 10px;
+}
+#listado td{
+	border-top: 1px dotted #333;
+	border-bottom: 1px solid #999;
+	padding-left: 5px;
+	padding-right: 10px;
+	padding-bottom: 10px;
+}
+.ocultar {
+	display: none;
+}
+.mostrar {
+	display: initial;
+}
+#footer {
+	background-color: #353535;
+	text-align: center;
+	bottom: 2%;
+	padding: 0 10px 0 10px;
+	color: white;
+}
+#footer p {
+	margin: 0;
+}
