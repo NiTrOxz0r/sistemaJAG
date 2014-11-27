@@ -13,10 +13,10 @@
 * @see php/cuerpo/usuario/desactivado.php
 * @see php/cuerpo/usuario/usuario.php
 *
-* @param  integer $tipo chequea si necesita o no validacion.
+* @param  integer $tipo 				chequea si necesita o no validacion.
 * @param  integer $nivelMinimo  el nivel minimo para acceder a alguna pagina.
 * @param  integer $nivelUsuario el nivel del usuario para comparar
-* @return void        no regresa nada.
+* @return void        					no regresa nada.
 *
 * @version 1.3
 */

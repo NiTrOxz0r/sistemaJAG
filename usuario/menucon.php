@@ -12,16 +12,18 @@ validarUsuario(1, 3, $_SESSION['cod_tipo_usr']);
 empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);
 
 //CONTENIDO:?>
-<div id="contenido">
-	<div id="blancoAjax">
+<div id="contenido_usuario_menucon">
+	<div id="blancoAjax" class="container">
 		<!-- CONTENIDO EMPIEZA DEBAJO DE ESTO: -->
 		<!-- DETALLESE QUE NO ES UN ID SINO UNA CLASE. -->
-		<div class="contenido">
-			<div class="info">
+		<div class="contenido row">
+			<div class="info col-xs-12">
 				<p>
 					Para hacer una consulta por favor seleccione el tipo de consulta que Ud. desee:
 				</p>
 			</div>
+		</div>
+		<div class="row">
 			<form
 				id="consulta_singular_U"
 				name="consulta_singular_U"
@@ -152,7 +154,6 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);
 					</span>
 				</div>
 			</form>
-
 		</div>
 		<!-- validacion -->
 		<script type="text/javascript">
