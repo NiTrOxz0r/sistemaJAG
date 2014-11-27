@@ -45,7 +45,7 @@ if (isset($_REQUEST['cedula'])) {
 				<h2  align="center"> DATOS PERSONALES</h2>
 					<table>
 						<tr>
-							<th>C&eacute;dula</th><th>C&eacute;dula Escolar</th>
+							<th>C&eacute;dula</th>
 						</tr>
 						<tr>
 							<td align="left">
@@ -59,7 +59,6 @@ if (isset($_REQUEST['cedula'])) {
 										<option  value="e" selected="selected">E</option>
 									<?php endif ?>
 								</select>
-								<!-- HACER AJAX PARA CEDULA!!! -->
 								<input
 								type="text"
 								required
@@ -68,10 +67,22 @@ if (isset($_REQUEST['cedula'])) {
 								name="cedula"
 								id="cedula"
 								value="<?php echo $reg['cedula'];?>">
-							<font color="#ff0000">*</font>
+								<font color="#ff0000">*</font>
 							</td>
+							<td colspan="3" id="cedula_chequeo" class="chequeo">
+
+							</td>
+						<tr>
+							<td colspan="4" id="cedula_chequeo_adicional" class="chequeo">
+
+							</td>
+						</tr>
+						</tr>
+						<tr>
+							<th>C&eacute;dula Escolar</th>
+						</tr>
+						<tr>
 							<td>
-							<!-- HACER AJAX PARA CEDULA!!! -->
 							<input
 								type="text"
 								required
@@ -80,6 +91,14 @@ if (isset($_REQUEST['cedula'])) {
 								id="cedula_escolar"
 								value="<?php echo $reg['cedula_escolar'];?>"/>
 							</td>
+							<td colspan="3" id="cedula_escolar_chequeo" class="chequeo">
+
+							</td>
+						<tr>
+							<td colspan="4" id="cedula_escolar_chequeo_adicional" class="chequeo">
+
+							</td>
+						</tr>
 						</tr>
 						<tr>
 							<th>Primer Nombre</th><th>Segundo Nombre</th>
@@ -470,6 +489,86 @@ if (isset($_REQUEST['cedula'])) {
 				buttonImage: "<?php echo $imagen ?>",
 				buttonImageOnly: true,
 				dateFormat: "yyyy-mm-dd"
+			});
+		});
+	</script>
+
+	<!-- BORRAR CUANDO PASE PRUEBA -->
+	<!-- cedula -->
+	<!-- <script type="text/javascript">
+		/**
+		 * hecho por slayerfat, dudas o sugerencias ya saben donde estoy.
+		 *
+		 * chequeo y operaciones relacionadas con ajax
+		 * para el campo cedula.
+		 *
+		 * version mejorada para actualizar.
+		 */
+		$(function(){
+			$.ajax({
+				url: '../java/validacionCedula.js',
+				type: 'POST',
+				dataType: 'script'
+			});
+			var cedula = new Object();
+			cedula.original = $('#cedula').val();
+			$('#cedula').on('change', function(){
+				cedula.cambio = $(this).val();
+				if (cedula.original === cedula.cambio){
+					$('#cedula_chequeo_adicional').empty();
+					$('#cedula_chequeo').empty();
+					$('#form input, #form select, #form textarea').each(function(){
+						$(this).prop('disabled', false);
+					});
+				}else if ( validacionCedula(cedula.cambio) ) {
+					$("#cedula_chequeo").empty();
+					$.ajax({
+						url: '../java/ajax/general/cedula.php',
+						type: 'POST',
+						data: {cedula:cedula.cambio},
+						success: function (datos){
+							$('#cedula_chequeo').empty();
+							//se comprueba si es valido o no por
+							//medio del data-disponible
+							//true si esta disponible, falso si no.
+							var disponible = $(datos+'#disponible').data('disponible');
+							if (disponible === true) {
+								$('#cedula_chequeo_adicional').html('');
+								$('#form input, #form select, #form textarea').each(function(){
+									$(this).prop('disabled', false);
+								});
+							}else{
+								$('#form input, #form select, #form textarea').each(function(){
+									$(this).prop('disabled', true);
+								});
+								$('#cedula').prop('disabled', false);
+								$('#cedula_chequeo').html(datos);
+								$('#cedula_chequeo_adicional').html('para continuar con el registro especifique otra cedula o consulte la ya existente.');
+							};
+						},
+					});
+				}else{
+					$("#cedula_chequeo").html('Favor introduzca cedula solo numeros sin caracteres especiales, EJ: 12345678');
+					$("#cedula_titulo").css('color', 'red');
+					$('#submitDos').prop('disabled', true);
+				};
+			});
+		});
+	</script> -->
+	<!-- BORRAR CUANDO PASE PRUEBA -->
+
+	<!-- cedula -->
+	<script type="text/javascript">
+		$(function(){
+			$.ajax({
+				url: '../java/ajax/cedula.js',
+				type: 'POST',
+				dataType: 'script'
+			});
+			$.ajax({
+				url: '../java/ajax/cedulaEscolar.js',
+				type: 'POST',
+				dataType: 'script'
 			});
 		});
 	</script>

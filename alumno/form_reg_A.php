@@ -43,6 +43,10 @@ endif;
 								<sup>(<font color="#ff0000">*</font> indica campo obligatorio).</sup></td>
 							</tr>
 							<tr>
+								<td class="chequeo" id="cedula_chequeo_adicional"></td>
+								<td class="chequeo" id="cedula_escolar_chequeo_adicional"></td>
+							</tr>
+							<tr>
 								<th>C&eacute;dula</th>
 								<th>C&eacute;dula Escolar</th>
 								<th>Representante (cedula):</th>
@@ -70,10 +74,15 @@ endif;
 										maxlength="8"
 										name="cedula_r"
 										id="cedula_r"
+										class="bloquear"
 										required
 										value="<?php echo $cedula_r ?>"
 										disabled>
 								</td>
+							</tr>
+							<tr>
+								<td class="chequeo" id="cedula_chequeo"></td>
+								<td class="chequeo" id="cedula_escolar_chequeo"></td>
 							</tr>
 							<tr>
 								<th>Primer Nombre</th>
@@ -100,7 +109,8 @@ endif;
 										disabled
 										value="<?php echo $datosRepresentante['p_nombre'].", ".$datosRepresentante['p_apellido'] ?>"
 										name="p_nombre_r"
-										id="p_nombre_r"/>
+										id="p_nombre_r"
+										class="bloquear"/>
 								</td>
 							</tr>
 							<tr>
@@ -122,7 +132,12 @@ endif;
 									<input type="text" maxlength="20" name="s_apellido" id="s_apellido"/>
 								</td>
 								<td>
-									<select required disabled name="parentesco_r" id="parentesco_r">
+									<select
+									required
+									disabled
+									name="parentesco_r"
+									id="parentesco_r"
+									class="bloquear">
 										<option selected="selected">
 											<?php echo $datosRepresentante['relacion'] ?>
 										</option>
@@ -446,6 +461,21 @@ endif;
 				buttonImage: "<?php echo $imagen ?>",
 				buttonImageOnly: true,
 				dateFormat: "yyyy-mm-dd"
+			});
+		});
+	</script>
+	<!-- cedula -->
+	<script type="text/javascript">
+		$(function(){
+			$.ajax({
+				url: '../java/ajax/cedula.js',
+				type: 'POST',
+				dataType: 'script'
+			});
+			$.ajax({
+				url: '../java/ajax/cedulaEscolar.js',
+				type: 'POST',
+				dataType: 'script'
 			});
 		});
 	</script>

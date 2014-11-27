@@ -71,12 +71,15 @@ empezarPagina();?>
 									<input
 										id="cedula"
 										type="text"
-										readonly
 										maxlength="8"
 										size="12"
 										name="cedula"
 										value="<?php echo $reg['cedula'];?>">
 								</td>
+								<td colspan="2" class="chequeo" id="cedula_chequeo"></td>
+							</tr>
+							<tr>
+								<td colspan="3" class="chequeo" id="cedula_chequeo_adicional"></td>
 							</tr>
 							<tr>
 								<th>Primer Nombre</th>
@@ -412,6 +415,16 @@ empezarPagina();?>
 				buttonImage: "<?php echo $imagen ?>",
 				buttonImageOnly: true,
 				dateFormat: "yyyy-mm-dd"
+			});
+		});
+	</script>
+	<!-- cedula -->
+	<script type="text/javascript">
+		$(function(){
+			$.ajax({
+				url: '../java/ajax/cedula.js',
+				type: 'POST',
+				dataType: 'script'
 			});
 		});
 	</script>

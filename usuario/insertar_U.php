@@ -20,7 +20,7 @@
  */
 
 if(!isset($_SESSION)){
-    session_start();
+	session_start();
 }
 $enlace = $_SERVER['DOCUMENT_ROOT']."/github/sistemaJAG/php/master.php";
 require_once($enlace);
@@ -143,16 +143,6 @@ if ( isset($_SESSION['seudonimo']) && isset($_SESSION['clave']) && isset($_POST[
 		1, 1, null, 1, current_timestamp);";
 	$resultado = conexion($query);
 
-	// TODO LIMPiAR ESTO
-	// creo que no necesitamos nada de personal
-
-	// agarramos los datos de personal
-	// $query = "SELECT * from personal where cod_persona = $datosDePersona[codigo];";
-	// $resultado = conexion($query);
-	// if ($resultado->num_rows == 1) :
-	// 	$datosDePersonal = mysqli_fetch_assoc($resultado);
-	// endif;
-
 	//validamos campos de direccion:
 	$direccion = new ChequearDireccion(
 		$codUsrMod,
@@ -197,13 +187,13 @@ if ( isset($_SESSION['seudonimo']) && isset($_SESSION['clave']) && isset($_POST[
 	if ( $resultado->num_rows == 1 ) :
 		$datos = mysqli_fetch_assoc($resultado);
 
-		if ($asume) {
+		if ($asume) :
 			$query = "INSERT INTO asume values
 			(null, $datos[cod_docente], 34, 0,
 				'Autogenerado en registro, por sistema.',
 				1, 1, null, 1, current_timestamp);";
 			$resultado = conexion($query);
-		}
+		endif;
 		session_unset();
 		session_destroy();
 		session_start();

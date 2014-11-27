@@ -13,4 +13,4 @@ $(function(){
 		// location.hash = enlace;
 		//location.hash = $(this).attr('data-titulo');
 	});
-});   
+});
