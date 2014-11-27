@@ -5,297 +5,314 @@ if(!isset($_SESSION)){
 $enlace = $_SERVER['DOCUMENT_ROOT']."/github/sistemaJAG/php/master.php";
 require_once($enlace);
 
-if ( isset($_POST['seudonimo']) && isset($_POST['clave']) ):
-	$seudonimo = $_POST['seudonimo'];
-	$clave = array('simple' => $_POST['clave']);
-	$validarForma = new ChequearUsuario($seudonimo,	$clave);
-	$hash = password_hash($clave['simple'], PASSWORD_BCRYPT, ['cost' => 12]);
-	session_unset();
-	session_destroy();
-	session_start();
-	$_SESSION['cod_tipo_usr'] = 5;
-	$_SESSION['seudonimo'] = $validarForma->seudonimo;
-	$_SESSION['clave'] = $hash;
+if ( (isset($_POST['seudonimo']) && isset($_POST['clave']) )
+	|| isset($_GET['cedula']) ):
+	if ( isset($_POST['seudonimo']) && isset($_POST['clave']) ) :
+		$seudonimo = $_POST['seudonimo'];
+		$clave = array('simple' => $_POST['clave']);
+		$validarForma = new ChequearUsuario($seudonimo,	$clave);
+		$hash = password_hash($clave['simple'], PASSWORD_BCRYPT, ['cost' => 12]);
+		$_SESSION['seudonimo'] = $validarForma->seudonimo;
+		$_SESSION['clave'] = $hash;
+		$action = 'insertar_U.php';
+		$disabled = false;
+		$info = 1;
+		session_unset();
+		session_destroy();
+		session_start();
+		$_SESSION['cod_tipo_usr'] = 5;
+		$_SESSION['seudonimo'] = $validarForma->seudonimo;
+		$_SESSION['clave'] = $hash;
+	endif;
+	if ( isset($_GET['cedula']) && strlen($_GET['cedula']) === 8 ) :
+		$cedula = $_GET['cedula'];
+		$action = 'insertar_sinUsuario_PI.php';
+		$disabled = true;
+		$info = 2;
+	else:
+		$cedula = "";
+	endif;
 	//CONTENIDO:?>
 	<div id="contenido">
 		<div id="blancoAjax">
 			<!-- CONTENIDO EMPIEZA DEBAJO DE ESTO: -->
 			<!-- DETALLESE QUE NO ES UN ID SINO UNA CLASE. -->
 			<div class="contenido">
-				<div id="info">
-					<p>
-						Seudonimo y clave validos!
-					</p>
-					<p>
-						Por favor continue el proceso de registro introduciendo sus datos basicos:
-					</p>
-				</div>
-			<?php elseif ($info == 2): ?>
-				<div id="info">
-					<p>
-						Por favor continue el proceso de registro introduciendo los datos basicos:
-					</p>
-				</div>
-			<?php endif ?>
-			<form method="POST" name="form_PI" id="form_PI" action="<?php echo $action; ?>">
-				<table>
-					<thead>
-						<th id="nacionalidad_titulo">Nacionalidad</th>
-						<th id="cedula_titulo">C&eacute;dula</th>
-					</thead>
-					<tbody>
-						<tr>
-							<td>
-								<select
-									name="nacionalidad"
-									id="nacionalidad"
-									required>
-									<option selected="selected" value="v">V</option>
-									<option value="e">E</option>
-								</select>
-							</td>
-							<td>
-								<input
-									type="text"
-									maxlength="8"
-									name="cedula"
-									id="cedula"
-									autofocus="autofocus"
-									value="<?php echo $cedula; ?>"
-									<?php echo ($disabled === (true) ? 'disabled' : null); ?>
-									required>
-							</td>
-						</tr>
-						<tr>
-							<td class="chequeo" id="nacionalidad_chequeo">
+				<?php if ($info == 1): ?>
+					<div id="info">
+						<p>
+							Seudonimo y clave validos!
+						</p>
+						<p>
+							Por favor continue el proceso de registro introduciendo sus datos basicos:
+						</p>
+					</div>
+				<?php elseif ($info == 2): ?>
+					<div id="info">
+						<p>
+							Por favor continue el proceso de registro introduciendo los datos basicos:
+						</p>
+					</div>
+				<?php endif ?>
+				<form method="POST" name="form_PI" id="form_PI" action="<?php echo $action; ?>">
+					<table>
+						<thead>
+							<th id="nacionalidad_titulo">Nacionalidad</th>
+							<th id="cedula_titulo">C&eacute;dula</th>
+						</thead>
+						<tbody>
+							<tr>
+								<td>
+									<select
+										name="nacionalidad"
+										id="nacionalidad"
+										required>
+										<option selected="selected" value="v">V</option>
+										<option value="e">E</option>
+									</select>
+								</td>
+								<td>
+									<input
+										type="text"
+										maxlength="8"
+										name="cedula"
+										id="cedula"
+										autofocus="autofocus"
+										value="<?php echo $cedula; ?>"
+										<?php echo ($disabled === (true) ? 'disabled' : null); ?>
+										required>
+								</td>
+							</tr>
+							<tr>
+								<td class="chequeo" id="nacionalidad_chequeo">
 
-							</td>
-							<td class="chequeo" id="cedula_chequeo">
+								</td>
+								<td class="chequeo" id="cedula_chequeo">
 
-							</td>
-						</tr>
-					</tbody>
-					<thead>
-						<th id="p_nombre_titulo">Primer Nombre</th>
-						<th id="s_nombre_titulo">Segundo Nombre</th>
-						<th id="p_apellido_titulo">Primer Apellido</th>
-						<th id="s_apellido_titulo">Segundo Apellido</th>
-					</thead>
-					<tbody>
-						<tr>
-							<td>
-								<input
-									type="text"
-									name="p_nombre"
-									id="p_nombre"
-									required
-									maxlength="20">
-							</td>
-							<td>
-								<input
-									type="text"
-									name="s_nombre"
-									id="s_nombre"
-									maxlength="20">
-							</td>
-							<td>
-								<input
-									type="text"
-									name="p_apellido"
-									id="p_apellido"
-									required
-									maxlength="20">
-							</td>
-							<td>
-								<input
-									type="text"
-									name="s_apellido"
-									id="s_apellido"
-									maxlength="20">
-							</td>
-						</tr>
-						<tr>
-							<td class="chequeo" id="p_nombre_chequeo"></td>
-							<td class="chequeo" id="s_nombre_chequeo"></td>
-							<td class="chequeo" id="p_apellido_chequeo"></td>
-							<td class="chequeo" id="s_apellido_chequeo"></td>
-						</tr>
-					</tbody>
-					<thead>
-						<th id="fec_nac_titulo">Fecha de nacimiento</th>
-						<th id="sexo_titulo">Sexo</th>
-						<th id="email_titulo">Email</th>
-						<th id="titulo_titulo">Titulos y/o Certificados</th>
-					</thead>
-					<tbody>
-						<tr>
-							<td>
-								<input
-									type="text"
-									name="fec_nac"
-									id="fec_nac"
-									required>
-							</td>
-							<td>
-								<?php
-									$query = "SELECT codigo, descripcion from sexo where status = 1;";
-									$registros = conexion($query);
-								?>
-								<select name="sexo" id="sexo" required>
-									<option value="">Seleccione una opci&oacute;n </option>
-									<?php	while($fila = mysqli_fetch_array($registros)) : ?>
-										<option value="<?php echo $fila['codigo']; ?>">
-											<?php echo $fila['descripcion']; ?>
-										</option>
-									<?php endwhile; ?>
-								</select>
-							</td>
-							<td>
-								<input
-									type="text"
-									name="email"
-									id="email"
-									maxlength="40">
-							</td>
-							<td>
-								<input
-									type="text"
-									name="titulo"
-									id="titulo"
-									maxlength="80">
-							</td>
-						</tr>
-						<tr>
-							<td></td>
-							<td></td>
-							<td class="chequeo" id="email_chequeo">
+								</td>
+							</tr>
+						</tbody>
+						<thead>
+							<th id="p_nombre_titulo">Primer Nombre</th>
+							<th id="s_nombre_titulo">Segundo Nombre</th>
+							<th id="p_apellido_titulo">Primer Apellido</th>
+							<th id="s_apellido_titulo">Segundo Apellido</th>
+						</thead>
+						<tbody>
+							<tr>
+								<td>
+									<input
+										type="text"
+										name="p_nombre"
+										id="p_nombre"
+										required
+										maxlength="20">
+								</td>
+								<td>
+									<input
+										type="text"
+										name="s_nombre"
+										id="s_nombre"
+										maxlength="20">
+								</td>
+								<td>
+									<input
+										type="text"
+										name="p_apellido"
+										id="p_apellido"
+										required
+										maxlength="20">
+								</td>
+								<td>
+									<input
+										type="text"
+										name="s_apellido"
+										id="s_apellido"
+										maxlength="20">
+								</td>
+							</tr>
+							<tr>
+								<td class="chequeo" id="p_nombre_chequeo"></td>
+								<td class="chequeo" id="s_nombre_chequeo"></td>
+								<td class="chequeo" id="p_apellido_chequeo"></td>
+								<td class="chequeo" id="s_apellido_chequeo"></td>
+							</tr>
+						</tbody>
+						<thead>
+							<th id="fec_nac_titulo">Fecha de nacimiento</th>
+							<th id="sexo_titulo">Sexo</th>
+							<th id="email_titulo">Email</th>
+							<th id="titulo_titulo">Titulos y/o Certificados</th>
+						</thead>
+						<tbody>
+							<tr>
+								<td>
+									<input
+										type="text"
+										name="fec_nac"
+										id="fec_nac"
+										required>
+								</td>
+								<td>
+									<?php
+										$query = "SELECT codigo, descripcion from sexo where status = 1;";
+										$registros = conexion($query);
+									?>
+									<select name="sexo" id="sexo" required>
+										<option value="">Seleccione una opci&oacute;n </option>
+										<?php	while($fila = mysqli_fetch_array($registros)) : ?>
+											<option value="<?php echo $fila['codigo']; ?>">
+												<?php echo $fila['descripcion']; ?>
+											</option>
+										<?php endwhile; ?>
+									</select>
+								</td>
+								<td>
+									<input
+										type="text"
+										name="email"
+										id="email"
+										maxlength="40">
+								</td>
+								<td>
+									<input
+										type="text"
+										name="titulo"
+										id="titulo"
+										maxlength="80">
+								</td>
+							</tr>
+							<tr>
+								<td></td>
+								<td></td>
+								<td class="chequeo" id="email_chequeo">
 
-							</td>
-							<td class="chequeo" id="titulo_chequeo">
+								</td>
+								<td class="chequeo" id="titulo_chequeo">
 
-							</td>
-						</tr>
-					</tbody>
-					<thead>
-						<th id="nivel_instruccion_titulo">Nivel Educativo</th>
-						<th id="telefono_titulo">Telefono</th>
-						<th id="telefono_otro_titulo">Telefono Adicional</th>
-						<th id="celular_titulo">Telefono Celular</th>
-					</thead>
-					<tbody>
-						<tr>
-							<td>
-								<?php $sql="SELECT codigo, descripcion from nivel_instruccion where status = 1;";
-									$registros = conexion($sql);?>
-								<select name="nivel_instruccion" required id="nivel_instruccion">
-								<?php while($fila = mysqli_fetch_array($registros)) :	?>
-									<option value="<?php echo $fila['codigo']?>">
-									<?php echo $fila['descripcion']?></option>
-								<?php endwhile; ?>
-								</select>
-							</td>
-							<td>
-								<input
-									type="text"
-									maxlength="11"
-									name="telefono"
-									id="telefono">
-							</td>
-							<td>
-								<input
-									type="text"
-									maxlength="11"
-									name="telefono_otro"
-									id="telefono_otro">
-							</td>
-							<td>
-								<input
-									type="text"
-									maxlength="11"
-									name="celular"
-									id="celular">
-							</td>
-						</tr>
-						<tr>
-							<td></td>
-							<td class="chequeo" id="telefono_chequeo">
-
-							</td>
-							<td class="chequeo" id="telefono_otro_chequeo">
-
-							</td>
-							<td class="chequeo" id="celular_chequeo">
-
-							</td>
-						</tr>
-					</tbody>
-					<thead>
-						<th id="cargo_titulo">Cargo</th>
-						<th id="tipo_titulo">Perfil de Usuario</th>
-						<th id="direcc_titulo">Direccion (Av/Calle/Edf.)</th>
-					</thead>
-					<tbody>
-						<tr>
-							<td>
-								<?php $sql="SELECT codigo, descripcion from cargo where status = 1;";
-									$registros = conexion($sql);?>
-								<select name="cod_cargo" required id="cargo">
-								<?php while($fila = mysqli_fetch_array($registros)) :	?>
-									<option value="<?php echo $fila['codigo']?>">
-									<?php echo $fila['descripcion']?></option>
-								<?php endwhile; ?>
-								</select>
-							</td>
-							<td>
-								<?php $sql="SELECT codigo, descripcion from tipo_personal where status = 1;";
-									$registros = conexion($sql);?>
-								<select name="tipo_personal" required id="tipo_personal">
-									<option selected="selected" value="">--Seleccione--</option>
+								</td>
+							</tr>
+						</tbody>
+						<thead>
+							<th id="nivel_instruccion_titulo">Nivel Educativo</th>
+							<th id="telefono_titulo">Telefono</th>
+							<th id="telefono_otro_titulo">Telefono Adicional</th>
+							<th id="celular_titulo">Telefono Celular</th>
+						</thead>
+						<tbody>
+							<tr>
+								<td>
+									<?php $sql="SELECT codigo, descripcion from nivel_instruccion where status = 1;";
+										$registros = conexion($sql);?>
+									<select name="nivel_instruccion" required id="nivel_instruccion">
 									<?php while($fila = mysqli_fetch_array($registros)) :	?>
-											<option value="<?php echo $fila['codigo']?>">
-											<?php echo $fila['descripcion']?></option>
+										<option value="<?php echo $fila['codigo']?>">
+										<?php echo $fila['descripcion']?></option>
 									<?php endwhile; ?>
-								</select>
-							</td>
-							<td colspan="3">
-								<textarea
-										maxlenght="150"
-										cols="70"
-										rows="3"
-										name="direcc"
-										id="direcc"></textarea>
-							</td>
-						</tr>
-						<tr>
-							<td></td>
-						</tr>
-					</tbody>
-					<thead>
-						<th id="estado_titulo">Estado</th>
-						<th id="municipio_titulo">Municipio</th>
-						<th id="parroquia_titulo">Parroquia</th>
-					</thead>
-					<tbody>
-						<tr>
-							<td>
-								<select name="cod_est" id="cod_est"></select>
-							</td>
-							<td>
-								<select name="cod_mun" id="cod_mun" >
-								<option value="">--Seleccionar--</option></select>
-							</td>
-							<td>
-								<select name="cod_parro" id="cod_parro">
-								<option value="">--Seleccionar--</option></select>
-							</td>
-							<td>
-								<input type="submit" name="registrar" value="Continuar">
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</form>
-		</div>
+									</select>
+								</td>
+								<td>
+									<input
+										type="text"
+										maxlength="11"
+										name="telefono"
+										id="telefono">
+								</td>
+								<td>
+									<input
+										type="text"
+										maxlength="11"
+										name="telefono_otro"
+										id="telefono_otro">
+								</td>
+								<td>
+									<input
+										type="text"
+										maxlength="11"
+										name="celular"
+										id="celular">
+								</td>
+							</tr>
+							<tr>
+								<td></td>
+								<td class="chequeo" id="telefono_chequeo">
+
+								</td>
+								<td class="chequeo" id="telefono_otro_chequeo">
+
+								</td>
+								<td class="chequeo" id="celular_chequeo">
+
+								</td>
+							</tr>
+						</tbody>
+						<thead>
+							<th id="cargo_titulo">Cargo</th>
+							<th id="tipo_titulo">Perfil de Usuario</th>
+							<th id="direcc_titulo">Direccion (Av/Calle/Edf.)</th>
+						</thead>
+						<tbody>
+							<tr>
+								<td>
+									<?php $sql="SELECT codigo, descripcion from cargo where status = 1;";
+										$registros = conexion($sql);?>
+									<select name="cod_cargo" required id="cargo">
+									<?php while($fila = mysqli_fetch_array($registros)) :	?>
+										<option value="<?php echo $fila['codigo']?>">
+										<?php echo $fila['descripcion']?></option>
+									<?php endwhile; ?>
+									</select>
+								</td>
+								<td>
+									<?php $sql="SELECT codigo, descripcion from tipo_personal where status = 1;";
+										$registros = conexion($sql);?>
+									<select name="tipo_personal" required id="tipo_personal">
+										<option selected="selected" value="">--Seleccione--</option>
+										<?php while($fila = mysqli_fetch_array($registros)) :	?>
+												<option value="<?php echo $fila['codigo']?>">
+												<?php echo $fila['descripcion']?></option>
+										<?php endwhile; ?>
+									</select>
+								</td>
+								<td colspan="3">
+									<textarea
+											maxlenght="150"
+											cols="70"
+											rows="3"
+											name="direcc"
+											id="direcc"></textarea>
+								</td>
+							</tr>
+							<tr>
+								<td></td>
+							</tr>
+						</tbody>
+						<thead>
+							<th id="estado_titulo">Estado</th>
+							<th id="municipio_titulo">Municipio</th>
+							<th id="parroquia_titulo">Parroquia</th>
+						</thead>
+						<tbody>
+							<tr>
+								<td>
+									<select name="cod_est" id="cod_est"></select>
+								</td>
+								<td>
+									<select name="cod_mun" id="cod_mun" >
+									<option value="">--Seleccionar--</option></select>
+								</td>
+								<td>
+									<select name="cod_parro" id="cod_parro">
+									<option value="">--Seleccionar--</option></select>
+								</td>
+								<td>
+									<input type="submit" name="registrar" value="Continuar">
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</form>
+			</div>
 		<!-- calendario -->
 		<?php $cssDatepick = enlaceDinamico("java/jqDatePicker/jquery.datepick.css"); ?>
 		<link href="<?php echo $cssDatepick ?>" rel="stylesheet">
@@ -401,9 +418,10 @@ if ( isset($_POST['seudonimo']) && isset($_POST['clave']) ):
 					buttonImageOnly: true,
 					dateFormat: "yyyy-mm-dd"
 				});
-			</script>
-		</div>
+			});
+		</script>
 	</div>
+</div>
 <?php else: ?>
 	<div id="blancoAjax">
 		Error en el proceso de registro.

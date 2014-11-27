@@ -43,7 +43,7 @@ if ( isset($_SESSION['cod_tipo_usr']) ) : ?>
 		        	</a>
 		        </li>
 		        <?php $inscripcion = enlaceDinamico('Personal_Autorizado/form_reg_P.php'); ?>
-		        <li><a href="<?php echo $inscripcion ?>">Proceso de inscripcion 2014-2015</a></li>
+		        <li><a href="<?php echo $inscripcion ?>">inscripcion</a></li>
 		        <li class="dropdown">
 		          <a
 		          href="#"
@@ -87,8 +87,32 @@ if ( isset($_SESSION['cod_tipo_usr']) ) : ?>
 		    </div><!-- /.navbar-collapse -->
 		  </div><!-- /.container-fluid -->
 		</nav>
-
 	<?php else : ?>
-
+		<nav class="navbar navbar-default" role="navigation">
+		  <div class="container-fluid">
+		    <!-- Esto es para movil -->
+		    <div class="navbar-header">
+		      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar_target">
+		        <span class="sr-only">Abrir o cerrar navegacion</span>
+		        <span class="icon-bar"></span>
+		        <span class="icon-bar"></span>
+		        <span class="icon-bar"></span>
+		      </button>
+		      <?php $cerar = enlaceDinamico('cerrar.php'); ?>
+		      <a class="navbar-brand" href="<?php echo $cerrar ?>">sitemaJAG</a>
+		    </div>
+		    <!-- Esto es ocultado cuando pasa a tipo movil. -->
+		    <div class="collapse navbar-collapse" id="navbar_target">
+		      <ul class="nav navbar-nav">
+		        <li>
+		        	<?php $registrarse = enlaceDinamico('usuario/form_reg_U.php') ?>
+							<a href="<?php echo $registrarse ?>">
+								| registrarse
+							</a>
+		        </li>
+		      </ul>
+		    </div><!-- /.navbar-collapse -->
+		  </div><!-- /.container-fluid -->
+		</nav>
 	<?php endif; ?>
 <?php endif; ?>
