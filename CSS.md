@@ -4,9 +4,8 @@ estamos a la espera de saber si podremos o no usar bootstrap.
 
 de no ser asi se usara el estilo del modulo de alejandro.
 
-**
-http://getbootstrap.com/getting-started/#download
-**
+**documentacion
+(bootstrap)[http://getbootstrap.com/getting-started/#download]
 
 *** cuadrar despues.
 ```html

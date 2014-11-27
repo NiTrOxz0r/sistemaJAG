@@ -14,7 +14,7 @@ en progreso: 40%.
 ####moduloUsuario
 en progreso: 70?% aprox.
 ####CSS
-en progreso: 5?% aprox.
+en progreso: 10% aprox.
 ####ModuloValidacion
 en progreso: 40?% aprox.
 ####ModuloReporte
