@@ -17,7 +17,6 @@ switch ($_SESSION['cod_tipo_usr']) {
 	//SIN TIPO:
 	case null:
 		require "usuario/formUsuario.php";
-		echo '<script type="text/javascript" src="java/validacionUsuario.js"></script>';
 		break;
 	//desactivado:
 	case 0:

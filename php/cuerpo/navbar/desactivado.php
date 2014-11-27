@@ -1,3 +1,8 @@
+<div id="header" class="container">
+	<div class="row">
+
+	</div>
+</div>
 <?php if ( isset($_SESSION['cod_tipo_usr']) ) : ?>
 	<?php if ($_SESSION['cod_tipo_usr'] <> null) : ?>
 		<nav class="navbar navbar-default" role="navigation">

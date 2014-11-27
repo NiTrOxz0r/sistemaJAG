@@ -12,7 +12,7 @@ validarUsuario(1, 3, $_SESSION['cod_tipo_usr']);
 empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);
 
 //CONTENIDO:?>
-<div id="contenido">
+<div id="contenido_body">
 	<div id="blancoAjax">
 		<div class="container">
 			<div class="row">

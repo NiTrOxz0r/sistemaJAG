@@ -9,7 +9,7 @@ validarUsuario(1, 1, $_SESSION['cod_tipo_usr']);
 
 //ESTA FUNCION TRAE EL HEAD Y NAVBAR:
 //DESDE empezarPagina.php
-empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);
+empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr'], 'sistemaJAG | Proceso de Registro 2014-2015');
 
 //CONTENIDO:?>
 <div id="contenido">

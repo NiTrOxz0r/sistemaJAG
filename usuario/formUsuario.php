@@ -11,7 +11,7 @@ validarUsuario();
 //DESDE empezarPagina.php
 empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);
 	//CONTENIDO:?>
-	<div id="contenido">
+	<div id="contenido_formulario">
 		<div id="blancoAjax">
 			<div id="bienvenida">
 				<div>
