@@ -104,12 +104,6 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);
 							</span>
 						</div>
 					</form>
-					<!-- <div class="col-xs-12">
-						<span class="col-xs-4"></span>
-						<span class="col-xs-4 text-center italic text-capitalize">
-							<strong>con bootstrap</strong>
-						</span>
-					</div> -->
 					<form class="form-horizontal" role="form">
 						<fieldset>
 							<legend class="text-center text-capitalize">

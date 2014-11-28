@@ -23,16 +23,16 @@ if ( isset($_POST['seudonimo']) ) :
 		WHERE seudonimo = '$seudonimo';";
 		$consulta = conexion($query);
 		if ($consulta->num_rows == 0): ?>
-			<span id="disponible" data-disponible="true" style="color:green;">
+			<span id="disponible" data-disponible="true">
 				Seudonimo disponible!
 			</span>
 		<?php else: ?>
-			<span id="disponible" data-disponible="false" style="color:red;">
+			<span id="disponible" data-disponible="false">
 				Seudonimo no disponible.
 			</span>
 		<?php endif ?>
 	<?php else: ?>
-		<span style="color:red;">
+		<span>
 			Seudonimo no puede ser </br>mayor a 20 digitos ni menor a 3.
 		</span>
 	<?php endif ?>
