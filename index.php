@@ -14,49 +14,49 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);
 //CUERPO:
 echo '<div class="contenido" id="contenido">';
 switch ($_SESSION['cod_tipo_usr']) {
-	//SIN TIPO:
-	case null:
-		require "usuario/formUsuario.php";
-		break;
-	//desactivado:
-	case 0:
-		require "php/cuerpo/usuario/desactivado.php";
-		break;
-	//USUARIO:
-	case 1:
-		require "php/cuerpo/usuario/usuario.php";
-		break;
-	//USUARIO PRIV:
-	case 2:
-		echo "Validacion tipo de usuario: Usuario Privilegiado en desarrollo";
-		break;
-	//ADMIN:
-	case 3:
-			require "php/cuerpo/admin/body.php";
-			break;
-	//SUPER USUARIO:
-	case 4:
-			//usando admin mientras tanto:
-			require "php/cuerpo/admin/body.php";
-			break;
-	//USUARIO POR VERIFICAR:
-	case 5:
-		require "php/cuerpo/usuario/porVerificar.php";
-		break;
-	//USUARIO EXTERNO O VENEFICIADO:
-	//recomendacion para futuras mejoras o implementaciones de tipo de usuario
-	case 6:
-		// require "php/cuerpo/usuario/usuarioExterno.php";
-		break;
-	case 255:
-		//usando admin mientras tanto:
-		require "php/cuerpo/admin/body.php";
-		break;
-	//TIPO DESCONOCIDO:
-	default:
-		require "usuario/formUsuario.php";
-		echo '<script type="text/javascript" src="java/validacionUsuario.js"></script>';
-		break;
+  //SIN TIPO:
+  case null:
+    require "usuario/formUsuario.php";
+    break;
+  //desactivado:
+  case 0:
+    require "php/cuerpo/usuario/desactivado.php";
+    break;
+  //USUARIO:
+  case 1:
+    require "php/cuerpo/usuario/usuario.php";
+    break;
+  //USUARIO PRIV:
+  case 2:
+    echo "Validacion tipo de usuario: Usuario Privilegiado en desarrollo";
+    break;
+  //ADMIN:
+  case 3:
+      require "php/cuerpo/admin/body.php";
+      break;
+  //SUPER USUARIO:
+  case 4:
+      //usando admin mientras tanto:
+      require "php/cuerpo/admin/body.php";
+      break;
+  //USUARIO POR VERIFICAR:
+  case 5:
+    require "php/cuerpo/usuario/porVerificar.php";
+    break;
+  //USUARIO EXTERNO O VENEFICIADO:
+  //recomendacion para futuras mejoras o implementaciones de tipo de usuario
+  case 6:
+    // require "php/cuerpo/usuario/usuarioExterno.php";
+    break;
+  case 255:
+    //usando admin mientras tanto:
+    require "php/cuerpo/admin/body.php";
+    break;
+  //TIPO DESCONOCIDO:
+  default:
+    require "usuario/formUsuario.php";
+    echo '<script type="text/javascript" src="java/validacionUsuario.js"></script>';
+    break;
 }
 echo '</div>';
 
