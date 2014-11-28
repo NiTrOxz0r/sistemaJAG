@@ -1,3 +1,19 @@
 body {
 	font-family: sans-serif;
 }
+
+.redondeado {
+  border-radius: 4px;
+}
+
+.margenAbajo {
+  margin-bottom: 10px;
+}
+.margenArriba {
+  margin-top: 10px;
+}
+
+.margen {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
