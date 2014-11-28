@@ -81,7 +81,7 @@ if ( (isset($_POST['seudonimo']) && isset($_POST['clave']) )
                         </p>
                     </div>
                   </div>
-                  <div class="col-sm-3 col-sm-offset-1">
+                  <div class="col-sm-5 col-sm-offset-1">
                     <div class="form-group">
                       <label for="cedula" class="control-label">Cedula</label>
                       <input
@@ -97,9 +97,11 @@ if ( (isset($_POST['seudonimo']) && isset($_POST['clave']) )
                         required>
                       <p class="help-block" id="cedula_chequeo">
                       </p>
+                      <p class="help-block" id="cedula_chequeo_adicional">
+                      </p>
                     </div>
                   </div>
-                  <div class="col-sm-5"></div>
+                  <div class="col-sm-3"></div>
                 </div>
                 <!-- inicio de nombres -->
                 <div class="row">
@@ -182,11 +184,15 @@ if ( (isset($_POST['seudonimo']) && isset($_POST['clave']) )
                   <div class="col-sm-3">
                     <div class="form-group">
                       <label for="fec_nac" class="control-label">Fecha de nacimiento</label>
+                      <!-- readonly para que no puedan cambiar manualmente la fecha -->
+                      <!-- style cursor pointer etc... para que no parezca desabilitado -->
                       <input
                         class="form-control"
                         type="text"
                         name="fec_nac"
                         id="fec_nac"
+                        readonly="readonly"
+                        style="cursor:pointer; background-color: #FFFFFF"
                         required>
                       <p class="help-block" id="fec_nac_chequeo">
                       </p>
@@ -235,8 +241,7 @@ if ( (isset($_POST['seudonimo']) && isset($_POST['clave']) )
                         type="text"
                         name="titulo"
                         id="titulo"
-                        maxlength="80"
-                        required>
+                        maxlength="80">
                       <p class="help-block" id="titulo_chequeo">
                       </p>
                     </div>
@@ -406,7 +411,7 @@ if ( (isset($_POST['seudonimo']) && isset($_POST['clave']) )
                   </div>
                   <div class="col-sm-4">
                     <div class="row">
-                      <div class="col-xs-11">
+                      <div class="col-xs-12">
                         <div class="form-group">
                           <label class="control-label" for="cod_parro">Parroquia</label>
                           <select class="form-control" name="cod_parro" id="cod_parro">
@@ -442,6 +447,7 @@ if ( (isset($_POST['seudonimo']) && isset($_POST['clave']) )
                 <div class="col-sm-2 col-sm-offset-5">
                   <input
                   role="button"
+                  id="submit"
                   class="btn btn-default btn-block"
                   type="submit"
                   name="registrar"
@@ -518,7 +524,58 @@ if ( (isset($_POST['seudonimo']) && isset($_POST['clave']) )
           };
         });
         $('#form_PI').on('change', function (){
-          validacionPI()
+          validacionPI();
+        });
+      });
+    </script>
+    <!-- cedula -->
+    <script type="text/javascript">
+      /**
+       * hecho por slayerfat, dudas o sugerencias ya saben donde estoy.
+       *
+       * chequeo y operaciones relacionadas con ajax
+       * para el campo cedula.
+       */
+      $(function(){
+        $.ajax({
+          url: '../java/validacionCedula.js',
+          type: 'POST',
+          dataType: 'script'
+        });
+        $('#cedula').on('change', function(){
+          var cedula = $(this).val();
+          if ( validacionCedula(cedula) ) {
+            $("#cedula_chequeo").html('');
+            $.ajax({
+              url: '../java/ajax/general/cedula.php',
+              type: 'POST',
+              data: {cedula:cedula},
+              success: function (datos){
+                $('#cedula_chequeo').empty();
+                //se comprueba si es valido o no por
+                //medio del data-disponible
+                //true si esta disponible, falso si no.
+                var disponible = $(datos+'#disponible').data('disponible');
+                if (disponible === true) {
+                  $('#cedula_chequeo_adicional').html('');
+                  $('#form_PI input, #form_PI select, #form_PI textarea').each(function(){
+                    $(this).parent().removeClass('has-error');
+                    $(this).prop('disabled', false);
+                  });
+                }else{
+                  $('#form_PI input, #form_PI select, #form_PI textarea').each(function(){
+                    $(this).parent().addClass('has-error');
+                    $(this).prop('disabled', true);
+                  });
+                  $('#cedula').prop('disabled', false);
+                  $('#cedula_chequeo').html(datos);
+                  $('#cedula_chequeo_adicional').html('para continuar con el registro especifique otra cedula o consulte la ya existente.');
+                };
+              },
+            });
+          }else{
+            $('#submit').prop('disabled', true);
+          };
         });
       });
     </script>
@@ -543,6 +600,16 @@ if ( (isset($_POST['seudonimo']) && isset($_POST['clave']) )
               });
             });
           });
+        });
+      });
+    </script>
+    <!-- validacion de est, mun, parro -->
+    <script type="text/javascript">
+      $(function(){
+        $.ajax({
+          url: '../java/validacionDireccion.js',
+          type: 'POST',
+          dataType: 'script'
         });
       });
     </script>
