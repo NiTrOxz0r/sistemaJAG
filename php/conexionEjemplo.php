@@ -19,8 +19,8 @@ $resultado = conexion($query);
 // podemos hacer operaciones varias como:
 $lista = 0;
 while ( $lista == 1 /*mysqli_fetch_array($resultado)*/ ) {
-	// operaciones...
-	// logica...
+  // operaciones...
+  // logica...
 }
 
 // para update algo:
@@ -28,7 +28,7 @@ $query = "-- UPDATE tabla_x set status = 0 where cedula = $cedula;";
 $resultado = conexion($query);
 
 // tambien se puede hacer directamente como:
-$resultado = conexion("-- SELECT * from	tabla_x where cedula = $cedula and status = 1;");
+$resultado = conexion("-- SELECT * from tabla_x where cedula = $cedula and status = 1;");
 
 // y hacer diferentes operaciones segun sea necesario:
 $codigo_x = 1//mysqli_insert_id($resultado);
@@ -37,7 +37,7 @@ $codigo_x = 1//mysqli_insert_id($resultado);
 
 <!-- ejemplo -->
 <div>
-	<span>
-		el codigo x es : <?php echo $codigo_x; ?>
-	</span>
+  <span>
+    el codigo x es : <?php echo $codigo_x; ?>
+  </span>
 </div>

@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 /**
 * @author slayerfat
@@ -50,20 +50,20 @@ $codigoDireccion = '1';
 // CASO 1: generico
 
 $validarForma = new ChequearGenerico(
-	$codUsrMod,
-	$p_apellido,
-	$s_apellido,
-	$p_nombre,
-	$s_nombre,
-	$nacionalidad,
-	$cedula,
-	$telefono,
-	$telefonoOtro,
-	$fec_nac,
-	$sexo,
-	$codigoDireccion
+  $codUsrMod,
+  $p_apellido,
+  $s_apellido,
+  $p_nombre,
+  $s_nombre,
+  $nacionalidad,
+  $cedula,
+  $telefono,
+  $telefonoOtro,
+  $fec_nac,
+  $sexo,
+  $codigoDireccion
 );
-// si todo sale bien se puede seguir las 
+// si todo sale bien se puede seguir las
 // operaciones de select, insert o update
 // segun sean necesarias:
 
@@ -71,27 +71,27 @@ $query = "-- INSERT INTO tablaX values (datos) where campo = condicion;";
 $resultado = conexion($query);?>
 
 <div>
-	<p>
-		la persona 
-		<strong>
-			<?php echo $validarForma->p_nombre ?> 
-			<?php echo ($validarForma->s_nombre == 'null' ? "" : $validarForma->s_nombre) ?>,
-			<?php echo $validarForma->p_apellido ?> 
-			<?php echo ($validarForma->s_apellido == 'null' ? "" : $validarForma->s_apellido) ?>.
-		</strong>
-	</p>
-	<p>
-		ha sido registrada correctamente.
-	</p>
+  <p>
+    la persona
+    <strong>
+      <?php echo $validarForma->p_nombre ?>
+      <?php echo ($validarForma->s_nombre == 'null' ? "" : $validarForma->s_nombre) ?>,
+      <?php echo $validarForma->p_apellido ?>
+      <?php echo ($validarForma->s_apellido == 'null' ? "" : $validarForma->s_apellido) ?>.
+    </strong>
+  </p>
+  <p>
+    ha sido registrada correctamente.
+  </p>
 </div>
-<div> 
-	<h3>
-		datos dentro del objeto de clase: 
-		<?php echo get_class($validarForma); ?>
-	</h3>
-	<p>
-		<?php var_dump($validarForma); ?>
-	</p>
+<div>
+  <h3>
+    datos dentro del objeto de clase:
+    <?php echo get_class($validarForma); ?>
+  </h3>
+  <p>
+    <?php var_dump($validarForma); ?>
+  </p>
 </div>
 <?php
 // CASO 2: alumno
@@ -125,36 +125,36 @@ $codRepresentante = '1';
 $codPersonaRetira = '1';
 
 $validarForma = new ChequearAlumno(
-	$codUsrMod,
-	$p_apellido,
-	$s_apellido,
-	$p_nombre,
-	$s_nombre,
-	$nacionalidad,
-	$cedula,
-	$cedulaEscolar,
-	$telefono,
-	$telefonoOtro,
-	$fec_nac,
-	$lug_nac,
-	$sexo,
-	$codigoDireccion,
-	$actaNumero,
-	$actaFolio,
-	$plantel_procedencia,
-	$repitiente,
-	$codCurso,
-	$altura,
-	$peso,
-	$camisa,
-	$pantalon,
-	$zapato,
-	$codRepresentante,
-	$codPersonaRetira
+  $codUsrMod,
+  $p_apellido,
+  $s_apellido,
+  $p_nombre,
+  $s_nombre,
+  $nacionalidad,
+  $cedula,
+  $cedulaEscolar,
+  $telefono,
+  $telefonoOtro,
+  $fec_nac,
+  $lug_nac,
+  $sexo,
+  $codigoDireccion,
+  $actaNumero,
+  $actaFolio,
+  $plantel_procedencia,
+  $repitiente,
+  $codCurso,
+  $altura,
+  $peso,
+  $camisa,
+  $pantalon,
+  $zapato,
+  $codRepresentante,
+  $codPersonaRetira
 
 );
 
-// si todo sale bien se puede seguir las 
+// si todo sale bien se puede seguir las
 // operaciones de select, insert o update
 // segun sean necesarias:
 
@@ -162,27 +162,27 @@ $query = "-- UPDATE tablaX set campos = datos where campo = condicion;";
 $resultado = conexion($query);?>
 
 <div>
-	<p>
-		la persona 
-		<strong>
-			<?php echo $validarForma->p_nombre ?> 
-			<?php echo ($validarForma->s_nombre == 'null' ? "" : $validarForma->s_nombre) ?>,
-			<?php echo $validarForma->p_apellido ?> 
-			<?php echo ($validarForma->s_apellido == 'null' ? "" : $validarForma->s_apellido) ?>.
-		</strong>
-	</p>
-	<p>
-		ha sido registrada correctamente.
-	</p>
+  <p>
+    la persona
+    <strong>
+      <?php echo $validarForma->p_nombre ?>
+      <?php echo ($validarForma->s_nombre == 'null' ? "" : $validarForma->s_nombre) ?>,
+      <?php echo $validarForma->p_apellido ?>
+      <?php echo ($validarForma->s_apellido == 'null' ? "" : $validarForma->s_apellido) ?>.
+    </strong>
+  </p>
+  <p>
+    ha sido registrada correctamente.
+  </p>
 </div>
-<div> 
-	<h3>
-		datos dentro del objeto de clase: 
-		<?php echo get_class($validarForma); ?>
-	</h3>
-	<p>
-		<?php var_dump($validarForma); ?>
-	</p>
+<div>
+  <h3>
+    datos dentro del objeto de clase:
+    <?php echo get_class($validarForma); ?>
+  </h3>
+  <p>
+    <?php var_dump($validarForma); ?>
+  </p>
 </div>
 
 <?php
@@ -212,26 +212,26 @@ $lugarTrabajo = "";
 
 
 $validarForma = new ChequearPA(
-	$codUsrMod,
-	$p_apellido,
-	$s_apellido,
-	$p_nombre,
-	$s_nombre,
-	$nacionalidad,
-	$cedula,
-	$telefono,
-	$telefonoOtro,
-	$fec_nac,
-	$lug_nac,
-	$sexo,
-	$codigoDireccion,
-	$relacion,
-	$viveConAlumno,
-	$nivelInstruccion,
-	$profesion,
-	$telefonoTrabajo,
-	$direccionTrabajo,
-	$lugarTrabajo
+  $codUsrMod,
+  $p_apellido,
+  $s_apellido,
+  $p_nombre,
+  $s_nombre,
+  $nacionalidad,
+  $cedula,
+  $telefono,
+  $telefonoOtro,
+  $fec_nac,
+  $lug_nac,
+  $sexo,
+  $codigoDireccion,
+  $relacion,
+  $viveConAlumno,
+  $nivelInstruccion,
+  $profesion,
+  $telefonoTrabajo,
+  $direccionTrabajo,
+  $lugarTrabajo
 
 );
 
@@ -240,27 +240,27 @@ $query = "-- select * from tablaX where campo = condicion;";
 $resultado = conexion($query);?>
 
 <div>
-	<p>
-		la persona 
-		<strong>
-			<?php echo $validarForma->p_nombre ?> 
-			<?php echo ($validarForma->s_nombre == 'null' ? "" : $validarForma->s_nombre) ?>,
-			<?php echo $validarForma->p_apellido ?> 
-			<?php echo ($validarForma->s_apellido == 'null' ? "" : $validarForma->s_apellido) ?>.
-		</strong>
-	</p>
-	<p>
-		ha sido registrada correctamente.
-	</p>
+  <p>
+    la persona
+    <strong>
+      <?php echo $validarForma->p_nombre ?>
+      <?php echo ($validarForma->s_nombre == 'null' ? "" : $validarForma->s_nombre) ?>,
+      <?php echo $validarForma->p_apellido ?>
+      <?php echo ($validarForma->s_apellido == 'null' ? "" : $validarForma->s_apellido) ?>.
+    </strong>
+  </p>
+  <p>
+    ha sido registrada correctamente.
+  </p>
 </div>
-<div> 
-	<h3>
-		datos dentro del objeto de clase: 
-		<?php echo get_class($validarForma); ?>
-	</h3>
-	<p>
-		<?php var_dump($validarForma); ?>
-	</p>
+<div>
+  <h3>
+    datos dentro del objeto de clase:
+    <?php echo get_class($validarForma); ?>
+  </h3>
+  <p>
+    <?php var_dump($validarForma); ?>
+  </p>
 </div>
 
 <?php
@@ -284,21 +284,21 @@ $codTipoUsr = '2';
 $codCargo = '1';
 
 $validarForma = new ChequearPI(
-	$codUsrMod,
-	$p_apellido,
-	$s_apellido,
-	$p_nombre,
-	$s_nombre,
-	$nacionalidad,
-	$cedula,
-	$telefono,
-	$telefonoOtro,
-	$fec_nac,
-	$sexo,
-	$codigoDireccion,
-	$email,
-	$codTipoUsr,
-	$codCargo
+  $codUsrMod,
+  $p_apellido,
+  $s_apellido,
+  $p_nombre,
+  $s_nombre,
+  $nacionalidad,
+  $cedula,
+  $telefono,
+  $telefonoOtro,
+  $fec_nac,
+  $sexo,
+  $codigoDireccion,
+  $email,
+  $codTipoUsr,
+  $codCargo
 
 );
 
@@ -307,28 +307,28 @@ $query = "-- insert into tablaX values(datos) where campo = condicion;";
 $resultado = conexion($query);?>
 
 <div>
-	<p>
-		la persona 
-		<strong>
-			<?php echo $validarForma->p_nombre ?> 
-			<?php echo ($validarForma->s_nombre == 'null' ? "" : $validarForma->s_nombre) ?>,
-			<?php echo $validarForma->p_apellido ?> 
-			<?php echo ($validarForma->s_apellido == 'null' ? "" : $validarForma->s_apellido) ?>.
-		</strong>
-	</p>
-	<p>
-		ha sido registrada correctamente.
-	</p>
+  <p>
+    la persona
+    <strong>
+      <?php echo $validarForma->p_nombre ?>
+      <?php echo ($validarForma->s_nombre == 'null' ? "" : $validarForma->s_nombre) ?>,
+      <?php echo $validarForma->p_apellido ?>
+      <?php echo ($validarForma->s_apellido == 'null' ? "" : $validarForma->s_apellido) ?>.
+    </strong>
+  </p>
+  <p>
+    ha sido registrada correctamente.
+  </p>
 </div>
 
-<div> 
-	<h3>
-		datos dentro del objeto de clase: 
-		<?php echo get_class($validarForma); ?>
-	</h3>
-	<p>
-		<?php var_dump($validarForma); ?>
-	</p>
+<div>
+  <h3>
+    datos dentro del objeto de clase:
+    <?php echo get_class($validarForma); ?>
+  </h3>
+  <p>
+    <?php var_dump($validarForma); ?>
+  </p>
 </div>
 
 <?php
@@ -339,7 +339,7 @@ $resultado = conexion($query);?>
 $seudonimo = "morpheo'";
 $clave = 'nebuchadnezzar';
 
-$validarForma = new ChequearUsuario($seudonimo,	$clave);
+$validarForma = new ChequearUsuario($seudonimo, $clave);
 
 // se hace x operacion:
 $query = "-- select codigo from usuario where seudonimo = seudonimo and clave = $clave;";
@@ -368,38 +368,38 @@ $validarForma->s_apellido = 'null';
 
 
 <div>
-	<p>
-		la persona 
-		<strong>
-			<?php echo $validarForma->p_nombre ?> 
-			<?php echo ($validarForma->s_nombre == 'null' ? "" : $validarForma->s_nombre) ?>,
-			<?php echo $validarForma->p_apellido ?> 
-			<?php echo ($validarForma->s_apellido == 'null' ? "" : $validarForma->s_apellido) ?>.
-		</strong>
-	</p>
-	<p>
-		ha sido validada correctamente.
-	</p>
-	<p>
-		<strong>
-			Bienvenido: 
-			<i>
-				<u>
-					<?php echo $validarForma->p_nombre ?>!! (<strong><?php echo $validarForma->seudonimo; ?></strong>)
-				</u>
-			</i>
-		</strong>
-	</p>
+  <p>
+    la persona
+    <strong>
+      <?php echo $validarForma->p_nombre ?>
+      <?php echo ($validarForma->s_nombre == 'null' ? "" : $validarForma->s_nombre) ?>,
+      <?php echo $validarForma->p_apellido ?>
+      <?php echo ($validarForma->s_apellido == 'null' ? "" : $validarForma->s_apellido) ?>.
+    </strong>
+  </p>
+  <p>
+    ha sido validada correctamente.
+  </p>
+  <p>
+    <strong>
+      Bienvenido:
+      <i>
+        <u>
+          <?php echo $validarForma->p_nombre ?>!! (<strong><?php echo $validarForma->seudonimo; ?></strong>)
+        </u>
+      </i>
+    </strong>
+  </p>
 </div>
 
-<div> 
-	<h3>
-		datos dentro del objeto de clase: 
-		<?php echo get_class($validarForma); ?>
-	</h3>
-	<p>
-		<?php var_dump($validarForma); ?>
-	</p>
+<div>
+  <h3>
+    datos dentro del objeto de clase:
+    <?php echo get_class($validarForma); ?>
+  </h3>
+  <p>
+    <?php var_dump($validarForma); ?>
+  </p>
 </div>
 
 <?php
@@ -414,8 +414,8 @@ $clave = 'patadakunfu';
 // de la misma clase
 // lo que quiere decir que lo pueden
 // usar como les de la gana:
-$validarForma1 = new ChequearLogin($seudonimo,	$clave);
-$validarForma2 = new ChequearLogeo($seudonimo,	$clave);
+$validarForma1 = new ChequearLogin($seudonimo,  $clave);
+$validarForma2 = new ChequearLogeo($seudonimo,  $clave);
 $validarForma3 = new ChequearValidarUsuario($seudonimo,$clave);
 
 ?>
@@ -423,16 +423,16 @@ $validarForma3 = new ChequearValidarUsuario($seudonimo,$clave);
 
 <h2>pueden usar diferentes nombres para la misma validacion:</h2>
 <div>
-	<h3>chequearLogin:</h3>
-	<?php var_dump($validarForma1); ?>
+  <h3>chequearLogin:</h3>
+  <?php var_dump($validarForma1); ?>
 </div>
 <div>
-	<h3>chequearLogeo:</h3>
-	<?php var_dump($validarForma2); ?>
+  <h3>chequearLogeo:</h3>
+  <?php var_dump($validarForma2); ?>
 </div>
 <div>
-	<h3>ChequearValidarUsuario:</h3>
-	<?php var_dump($validarForma3); ?>
+  <h3>ChequearValidarUsuario:</h3>
+  <?php var_dump($validarForma3); ?>
 </div>
 
 <?php
