@@ -10,15 +10,15 @@
  * @return {bolean}          [regresa verdadero si todo esta bien, falso si no.]
  */
 function validacionCedula(cedula_x){
-	// datos de la cedula sin espacios:
-	var cedula = cedula_x.replace(/^\s+|\s+$/g, '');
-	if (cedula == "" || cedula.length != 8) {
-		return false;
-	}else if( /[^\d+]/g.exec(cedula) ){
-		return false;
-	}else{
-		return true;
-	}
+  // datos de la cedula sin espacios:
+  var cedula = cedula_x.replace(/^\s+|\s+$/g, '');
+  if (cedula == "" || cedula.length != 8) {
+    return false;
+  }else if( /[^\d+]/g.exec(cedula) ){
+    return false;
+  }else{
+    return true;
+  }
 }
 /**
  * @author Alejandro Granadillo.
@@ -33,13 +33,13 @@ function validacionCedula(cedula_x){
  * @return {bolean}          [regresa verdadero si todo esta bien, falso si no.]
  */
 function validacionCedulaEscolar(cedula_x){
-	// datos de la cedula sin espacios:
-	var cedula = cedula_x.replace(/^\s+|\s+$/g, '');
-	if (cedula == "" || cedula.length != 10) {
-		return false;
-	}else if( /[^\d+]/g.exec(cedula) ){
-		return false;
-	}else{
-		return true;
-	}
+  // datos de la cedula sin espacios:
+  var cedula = cedula_x.replace(/^\s+|\s+$/g, '');
+  if (cedula == "" || cedula.length != 10) {
+    return false;
+  }else if( /[^\d+]/g.exec(cedula) ){
+    return false;
+  }else{
+    return true;
+  }
 }

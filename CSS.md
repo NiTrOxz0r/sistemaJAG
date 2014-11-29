@@ -1,39 +1,24 @@
-se empezara a generar algo de css.
+#css.
+Segmentado en archivos segun el elemento a cambiar.
+__ver css/estilo.css y css/*.css__
 
-estamos a la espera de saber si podremos o no usar bootstrap.
-
-de no ser asi se usara el estilo del modulo de alejandro.
-
-**documentacion
+#documentacion
 (bootstrap)[http://getbootstrap.com/getting-started/#download]
 
-*** cuadrar despues.
+##no puedo aprender por uds.
+
+#tienen que saber que significa por lo menos esto:
+
 ```html
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap 101 Template</title>
-
-    <!-- Bootstrap -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
-  </head>
-  <body>
-    <h1>Hello, world!</h1>
-
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="js/bootstrap.min.js"></script>
-  </body>
-</html>
+[...]
+<div id="contenido" class="container">
+  <div id="blancoAjax" class="row">
+    <!-- CONTENIDO EMPIEZA DEBAJO DE ESTO: -->
+    <!-- DETALLESE QUE NO ES UN ID SINO UNA CLASE. -->
+    <div class="contenido col-md-12">
+    </div>
+  </div>
+</div>
+[...]
 ```
+#vean matrizBase.php

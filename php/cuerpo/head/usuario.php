@@ -4,6 +4,7 @@
 	$estilo = enlaceDinamico('css/estilo.css');
 	$jquery = enlaceDinamico('java/jquery-1.11.0.min.js');
 	$cargadorOnClick = enlaceDinamico("java/ajax/cargadorOnClick.js");
+	$bootstrap = enlaceDinamico('css/bootstrap/css/bootstrap.min.css');
 ?>
 
 <!DOCTYPE html>
@@ -11,7 +12,11 @@
 <head>
 	<title>Sistema JAG</title>
 	<link rel="stylesheet" type="text/css" href="<?php echo $estilo ?>">
+	<!-- jQuery -->
 	<script type="text/javascript" src="<?php echo $jquery ?>"></script>
+	<!-- funcion considerada deprecada -->
 	<script type="text/javascript" src="<?php echo $cargadorOnClick ?>"></script>
+	<!-- Bootstrap -->
+	<link href="<?php echo $bootstrap ?>" rel="stylesheet">
 </head>
 <body>

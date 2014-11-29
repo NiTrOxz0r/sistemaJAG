@@ -18,11 +18,11 @@ validarUsuario(1, 2, $_SESSION['cod_tipo_usr']);
 //DESDE empezarPagina.php
 empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);
 if ( isset($_GET['codigo']) ) :
-	$conexion = conexion();
-	// EN DESARROLLO
-	echo "<h1>EN DESARROLLO.</h1>";
-	mysqli_close($conexion);
+  $conexion = conexion();
+  // EN DESARROLLO
+  echo "<h1>EN DESARROLLO.</h1>";
+  mysqli_close($conexion);
 else :
-	//codigo...
+  //codigo...
 endif;
 finalizarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);?>

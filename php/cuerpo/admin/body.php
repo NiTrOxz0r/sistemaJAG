@@ -1,10 +1,11 @@
 <?php
 if(!isset($_SESSION)){
-	session_start();
+  session_start();
 }
 $enlace = $_SERVER['DOCUMENT_ROOT']."/github/sistemaJAG/php/master.php";
 require_once($enlace);
 // invocamos validarUsuario.php desde master.php
+$version = enlaceDinamico('php/cuerpo/version.php');
 validarUsuario(1, 3, $_SESSION['cod_tipo_usr']);
 
 //ESTA FUNCION TRAE EL HEAD Y NAVBAR:
@@ -12,68 +13,89 @@ validarUsuario(1, 3, $_SESSION['cod_tipo_usr']);
 empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);
 
 //CONTENIDO:?>
-<div id="contenido">
-	<div id="blancoAjax">
-		<center>
-			<h1>Sistema JAG.</h1>
-			<h2>opciones</h2>
-		</center>
-
-		<table align="center">
-			<tr>
-				<td  colspan="2" align="center">
-					&nbsp;&nbsp;
-					<a
-						class="no-click"
-						data-titulo="Registro"
-						href="Personal_Autorizado/form_reg_P.php">
-						<h2>PROCESO DE REGISTRO 2014-2015</h2>
-					</a>
-					&nbsp;&nbsp;
-				</td>
-			</tr>
-		</table>
-		<table border="1" align="center">
-			<tr>
-				<td>
-					&nbsp;&nbsp;
-					<a
-						class="no-click"
-						data-titulo="GestionarAlumno"
-						href="alumno/menucon.php">
-						<h2>Gestionar Alumno</h2>
-					</a>
-					&nbsp;&nbsp;
-				</td>
-				<td>
-					&nbsp;&nbsp;
-					<a
-						class="no-click"
-						data-titulo="personalAutorizado"
-						href="Personal_Autorizado/menucon.php">
-						<h2>Gestionar Padres y Representante</h2>
-					</a>
-					&nbsp;&nbsp;
-				</td>
-			</tr>
-			<tr>
-				<td>
-					&nbsp;&nbsp;
-					<a class="no-click" data-titulo="gestionarProfesor" href="curso/menucon.php">
-						<h2>Gestionar Cursos</h2>
-					</a>
-					&nbsp;&nbsp;
-				</td>
-				<td>
-					&nbsp;&nbsp;
-					<a class="no-click" href="usuario/menucon.php">
-						<h2>Gestionar Usuarios del sistema</h2>
-					</a>
-					&nbsp;&nbsp;
-				</td>
-			</tr>
-		</table>
-	</div>
+<div id="contenido_body">
+  <div id="blancoAjax">
+    <div class="navbar-contenido">
+      <div class="container">
+        <div class="row">
+          <div class="col-ms-12 text-left">
+            <h1>
+              Sistema de Inscripcion
+              <small>trabajo en progreso!</small>
+            </h1>
+            <h1>
+              E.B.N.B. Jose Antonio Gonzalez
+            </h1>
+            <?php include_once($version); ?>
+            <p>
+            mensaje de bienvenida, info del sistema, informacion relevante de algun proceso.
+            alguna otra cosa que sea necesario.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="sm-12">
+          <div class="jumbotron">
+            <h1>Inscripcion!</h1>
+            <p>Proceso de Registro 2014-2015</p>
+            <p>
+              <h5>Recaudos necesarios:</h5>
+              <ul>
+                <li>...</li>
+                <li>...</li>
+                <li>...</li>
+                <li>...</li>
+                <li>...</li>
+              </ul>
+            </p>
+            <p>
+              <a
+              class="btn btn-primary btn-lg"
+              href="Personal_Autorizado/form_reg_P.php"
+              role="button">
+                Empezar nuevo registro
+              </a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-6 text-center well well-lg">
+          <a
+          href="alumno/menucon.php"
+          class="btn btn-default btn-lg btn-block"
+          role="button">
+            Gestionar Alumno
+          </a>
+          <a
+          href="Personal_Autorizado/menucon.php"
+          class="btn btn-default btn-lg btn-block"
+          role="button">
+            Gestionar Padres y Representante
+          </a>
+        </div>
+        <div class="col-xs-6 text-center well well-lg">
+          <a
+          href="curso/menucon.php"
+          class="btn btn-default btn-lg btn-block"
+          role="button">
+            Gestionar Cursos
+          </a>
+          <a
+          href="usuario/menucon.php"
+          class="btn btn-default btn-lg btn-block"
+          role="button">
+            Gestionar Usuarios del sistema
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 <script type="text/javascript" src="java/ajax/cargadorOnClick.js"></script>
 
