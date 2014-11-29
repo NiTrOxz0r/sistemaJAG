@@ -5,6 +5,7 @@ if(!isset($_SESSION)){
 $enlace = $_SERVER['DOCUMENT_ROOT']."/github/sistemaJAG/php/master.php";
 require_once($enlace);
 // invocamos validarUsuario.php desde master.php
+$version = enlaceDinamico('php/cuerpo/version.php');
 validarUsuario(1, 3, $_SESSION['cod_tipo_usr']);
 
 //ESTA FUNCION TRAE EL HEAD Y NAVBAR:
@@ -14,15 +15,23 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);
 //CONTENIDO:?>
 <div id="contenido_body">
   <div id="blancoAjax">
-    <div class="container">
-      <div class="row">
-        <div class="col-ms-12 text-center">
-          <h2>
-            Sistema de Inscripcion
-          </h2>
-          <h1>
-            E.B.N.B. Jose Antonio Gonzalez
-          </h1>
+    <div class="navbar-contenido">
+      <div class="container">
+        <div class="row">
+          <div class="col-ms-12 text-left">
+            <h1>
+              Sistema de Inscripcion
+              <small>trabajo en progreso!</small>
+            </h1>
+            <h1>
+              E.B.N.B. Jose Antonio Gonzalez
+            </h1>
+            <?php include_once($version); ?>
+            <p>
+            mensaje de bienvenida, info del sistema, informacion relevante de algun proceso.
+            alguna otra cosa que sea necesario.
+            </p>
+          </div>
         </div>
       </div>
     </div>

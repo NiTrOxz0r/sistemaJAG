@@ -19,9 +19,10 @@ $(function(){
 		if (cedula.original === cedula.cambio){
 			$('#cedula_chequeo_adicional').empty();
 			$('#cedula_chequeo').empty();
-			$('#form input, #form select, #form textarea').each(function(){
-				$(this).prop('disabled', false);
-			});
+      $('#form input, #form select, #form textarea').each(function(){
+        $(this).parent().removeClass('has-error');
+        $(this).prop('disabled', false);
+      });
 		}else if ( validacionCedula(cedula.cambio) ) {
 			$("#cedula_chequeo").empty();
 			$.ajax({
@@ -37,10 +38,12 @@ $(function(){
 					if (disponible === true) {
 						$('#cedula_chequeo_adicional').empty();
 						$('#form input, #form select, #form textarea').each(function(){
-							$(this).prop('disabled', false);
+							$(this).parent().removeClass('has-error');
+              $(this).prop('disabled', false);
 						});
 					}else{
 						$('#form input, #form select, #form textarea').each(function(){
+							$(this).parent().addClass('has-error');
 							$(this).prop('disabled', true);
 						});
 						$('#cedula').prop('disabled', false);
@@ -50,8 +53,7 @@ $(function(){
 				},
 			});
 		}else{
-			$("#cedula_chequeo").html('Favor introduzca cedula solo numeros sin caracteres especiales, EJ: 12345678');
-			$("#cedula_titulo").css('color', 'red');
+			$('#submit').prop('disabled', true);
 			$('#submitDos').prop('disabled', true);
 		};
 	});

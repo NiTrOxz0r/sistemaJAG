@@ -1,0 +1,22 @@
+.navbar-contenido{
+  margin-top: -20px;
+  padding-top: 60px;
+  padding-bottom: 60px;
+  text-align: left;
+  background-color: #54995D;
+  background-image: linear-gradient(to bottom, #417C3D 0px, #54995D 100%);
+  background-repeat: repeat-x;
+  color: #C5E3BF;
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
+  font-size: 2em;
+}
+.navbar-contenido h1 {
+  color: white;
+}
+.navbar-contenido h1 small {
+  color: rgb(104, 153, 102);
+}
+.navbar-contenido p {
+  margin-right: 30%;
+
+}

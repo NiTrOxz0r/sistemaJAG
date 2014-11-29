@@ -375,13 +375,14 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);
                   //true si esta disponible, falso si no.
                   var disponible = $(datos+'#disponible').data('disponible');
                   if (disponible === true) {
+                    $('#cedula_chequeo').html('&nbsp;');
                     $('#submitDos').prop('disabled', false);
                     $('#submitDos').prop('value', 'Registrar');
                     $('#form_PI').prop('action', 'form_reg_PI.php');
                   }else{
-                    $('#cedula_chequeo').html('Este Usuario ya se encuentra en el sistema, si desea ver detalles de este registro o actualizar el mismo, por favor dele click al boton Ver mas.');
+                    $('#cedula_chequeo').html('Este Usuario ya se encuentra en el sistema.');
                     $('#submitDos').prop('disabled', false);
-                    $('#submitDos').prop('value', 'Ver mas');
+                    $('#submitDos').prop('value', 'Actualizar');
                     $('#form_PI').prop('action', 'form_act_PI.php');
                   };
                 },
@@ -406,7 +407,7 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);
                 dataType: 'html',
                 data: {cedula:cedula},
                 success: function (datos){
-                  $("#contenido").empty().append($(datos).filter('#blancoAjax').html());
+                  $("#contenido_usuario_menucon").empty().append($(datos).find('#blancoAjax').html());
                 },
               });
               return true;

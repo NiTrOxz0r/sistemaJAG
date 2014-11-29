@@ -444,7 +444,7 @@ if ( (isset($_POST['seudonimo']) && isset($_POST['clave']) )
                     </div>
                   </div>
                 </div>
-                <div class="row">
+                <div class="row margenArriba">
                   <div class="col-sm-2 col-sm-offset-5">
                     <input
                     role="button"
