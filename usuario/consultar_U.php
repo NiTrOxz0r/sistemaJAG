@@ -186,108 +186,146 @@ if ( (isset($_REQUEST['informacion'])
           </div>
           <div class="row">
             <div class="col-xs-12">
-              <table class="table table-hover table-responsive">
-                <?php while ( $datos = mysqli_fetch_array($resultado) ) : ?>
-                  <thead>
-                    <th>Primer Apellido</th>
-                    <th>Primer Nombre</th>
-                    <th>Cedula</th>
-                  </thead>
-                  <tbody>
-                    <td>
-                      <?php echo $datos['p_apellido'] ?>
-                    </td>
-                    <td>
-                      <?php echo $datos['p_nombre'] ?>
-                    </td>
-                    <td>
-                      <?php echo $datos['cedula'] ?>
-                    </td>
-                  </tbody>
-                  <thead>
-                    <th>Celular</th>
-                    <th>Telefono</th>
-                    <th>Correo electronico</th>
-                  </thead>
-                  <tbody>
-                    <td>
-                      <?php echo $datos['celular'] ?>
-                    </td>
-                    <td>
-                      <?php echo $datos['telefono'] ?>
-                    </td>
-                    <td>
-                      <?php echo $datos['email'] ?>
-                    </td>
-                  </tbody>
+              <table
+                id="tabla"
+                data-toggle="table"
+                data-search="true"
+                data-height="600"
+                data-pagination="true"
+                data-page-list="[10, 25, 50, 100]"
+                data-show-toggle="true"
+                data-show-columns="true"
+                data-click-to-select="true"
+                data-maintain-selected="true"
+                data-sort-name="p_apellido"
+                >
+                <thead>
+                  <th data-radio="true" data-switchable="false"></th>
+                  <th data-field="cedula" data-sortable="true" data-switchable="false">Cedula</th>
+                  <th data-field="p_apellido" data-sortable="true">Primer Apellido</th>
+                  <th data-field="p_nombre" data-sortable="true">Primer Nombre</th>
+                  <th data-field="celular" data-sortable="false">Celular</th>
+                  <th data-field="telefono" data-sortable="false">Telefono</th>
+                  <th data-field="email" data-sortable="true" data-visible="true">Email</th>
                   <?php if (isset($datos['curso'])): ?>
-                    <thead>
-                      <th>Cargo</th>
-                      <th>Curso Asociado</th>
-                    </thead>
-                    <tbody>
-                      <td>
-                        <?php echo $datos['cargo'] ?>
-                      </td>
-                      <td>
-                        <?php echo $datos['curso'] ?>
-                      </td>
-                    </tbody>
+                    <th data-field="cargo" data-sortable="true" data-visible="true">Cargo</th>
+                    <th data-field="curso" data-sortable="true" data-visible="true">Curso Asociado</th>
                   <?php else: ?>
-                    <thead>
-                      <th>Telefono Adicional</th>
-                      <th>Cargo</th>
-                      <th>Seudonimo</th>
-                    </thead>
-                    <tbody>
-                      <td>
-                        <?php echo $datos['telefono_otro'] ?>
-                      </td>
-                      <td>
-                        <?php echo $datos['cargo'] ?>
-                      </td>
-                      <td>
-                        <?php echo $datos['seudonimo'] ?>
-                      </td>
-                    </tbody>
+                    <th data-field="telefono_otro" data-sortable="true" data-visible="true">Telf. Ad.</th>
+                    <th data-field="cargo" data-sortable="true" data-visible="true">Cargo</th>
+                    <th data-field="seudonimo" data-sortable="true" data-visible="true">Seudonimo</th>
                   <?php endif ?>
-                  <thead>
-                    <th>Tipo usuario</th>
-                    <th>Estatus personal</th>
-                    <th>Estatus en sistema</th>
-                  </thead>
-                  <tbody>
-                    <td>
-                      <?php echo $datos['tipo_usuario'] ?>
-                    </td>
-                    <td>
-                      <?php echo $datos['status_d'] == ('1') ? 'Activo' : 'Inactivo'; ?>
-                    </td>
-                    <td>
-                      <?php echo $datos['status_u'] == ('1') ? 'Activo' : 'Inactivo'; ?>
-                    </td>
-                  </tbody>
-                  <thead>
-                    <th></th>
-                  </thead>
-                  <tbody>
-                    <td>
-                      <a href="form_act_PI.php?cedula=<?php echo $datos['cedula'] ?>">
-                        <button>Actualizar</button>
-                      </a>
-                    </td>
-                  </tbody>
-                <?php endwhile; ?>
+                  <th data-field="tipo" data-sortable="true" data-visible="true">Tipo usuario</th>
+                  <th data-field="status_p" data-sortable="true" data-visible="true">Estatus personal</th>
+                  <th data-field="status_u" data-sortable="true" data-visible="true">Estatus en sistema</th>
+                </thead>
+                <tbody>
+                  <?php while ( $datos = mysqli_fetch_array($resultado) ) : ?>
+                    <tr>
+                      <!-- ignorar (radio) -->
+                      <td></td>
+                      <!-- ignorar -->
+                      <td class="cedula" data-datos="<?php echo $datos['cedula'] ?>">
+                        <?php echo $datos['cedula'] ?>
+                      </td>
+                      <td>
+                        <?php echo $datos['p_apellido'] ?>
+                      </td>
+                      <td>
+                        <?php echo $datos['p_nombre'] ?>
+                      </td>
+                      <td>
+                        <?php echo $datos['celular'] === (null) ? 'SinRegistros':$datos['celular'] ?>
+                      </td>
+                      <td>
+                        <?php echo $datos['telefono'] === (null) ? 'SinRegistros':$datos['telefono'] ?>
+                      </td>
+                      <td>
+                        <?php echo $datos['email'] ?>
+                      </td>
+                      <?php if (isset($datos['curso'])): ?>
+                        <td>
+                          <?php echo $datos['cargo'] ?>
+                        </td>
+                        <td>
+                          <?php echo $datos['curso'] === (null) ? 'SinRegistros':$datos['curso'] ?>
+                        </td>
+                      <?php else: ?>
+                        <td>
+                          <?php echo $datos['telefono_otro'] === (null) ? 'SinRegistros':$datos['telefono_otro'] ?>
+                        </td>
+                        <td>
+                          <?php echo $datos['cargo'] ?>
+                        </td>
+                        <td>
+                          <?php echo $datos['seudonimo'] === (null) ? 'Usuario no registrado':$datos['seudonimo'] ?>
+                        </td>
+                      <?php endif ?>
+                      <td>
+                        <?php echo $datos['tipo_usuario'] ?>
+                      </td>
+                      <td>
+                        <?php echo $datos['status_d'] == ('1') ? 'Activo' : 'Inactivo'; ?>
+                      </td>
+                      <td>
+                        <?php echo $datos['status_u'] == ('1') ? 'Activo' : 'Inactivo'; ?>
+                      </td>
+                    </tr>
+                  <?php endwhile; ?>
+                </tbody>
               </table>
+               <div class="center-block">
+                 <a
+                  id="consultarRegistro"
+                  href="#"
+                  class="push-3 btn btn-warning btn-lg disabled">Consultar registro</a>
+                  <span class="label label-info">Seleccione un registro para consultarlo</span>
+               </div>
             </div>
           </div>
           <div class="row">
-            <p>
-              para hacer otra consulta
-              <a href="menucon.php">presione aqui</a>
-            </p>
+            <div class="col-xs-8 col-xs-offset-2 margen well">
+              <div class="row">
+                <div class="col-xs-12 text-center">
+                  <h4>
+                    Puede hacer otro tipo de consulta!
+                  </h4>
+                  <p>
+                    <small>
+                      <a href="menucon.php">desde aqui.</a>
+                    </small>
+                  </p>
+                  <p>
+                    <small>
+                      o si prefiere puede regresar
+                      <a href="../index.php">al menu principal.</a>
+                    </small>
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
+        <!-- CSS de bootstrap-table -->
+        <?php $tableCss = enlaceDinamico('java/bootstrap-table/src/bootstrap-table.css') ?>
+        <link rel="stylesheet" href="<?php echo $tableCss ?>">
+        <!-- JS de bootstrap-table -->
+        <?php $tableJs = enlaceDinamico('java/bootstrap-table/src/bootstrap-table.js') ?>
+        <script src="<?php echo $tableJs ?>"></script>
+        <!-- Locale a español -->
+        <?php $tableJs = enlaceDinamico('java/bootstrap-table/src/locale/bootstrap-table-es-AR.js') ?>
+        <script src="<?php echo $tableJs ?>"></script>
+        <!-- para el boton consultar -->
+        <?php $tablaBoton = enlaceDinamico('java/otros/tablaBoton-bootstrap-table.js') ?>
+        <script type="text/javascript">
+          $(function(){
+            $.ajax({
+              url: "<?php echo $tablaBoton ?>",
+              type: 'POST',
+              dataType: 'script'
+            });
+          });
+        </script>
         <!-- CONTENIDO TERMINA ARRIBA DE ESTO: -->
       </div>
     </div>
