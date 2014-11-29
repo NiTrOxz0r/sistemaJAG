@@ -1,8 +1,10 @@
 sistemaJAG
 ==========
-Repositorio en donde se manejara el codigo referente al sistema.
 
-###Sistema 55.5% aprox completado, por ahora falta:
+###Escuela Basica Nacional Bolivariana "Jose Antonio Gonzales"
+Escuela ubicada en el paraiso, caracas, venezuela.
+
+###Sistema 56.75% aprox completado, por ahora falta:
 ####FLUJO NORMAL DE FORMULARIOS
 en progreso: 99?% aprox.
 ####FLUJO ALTERNATIVO DE FORMULARIOS
@@ -12,9 +14,9 @@ en progreso: 75?% aprox.
 ####moduloCurso
 en progreso: 40%.
 ####moduloUsuario
-en progreso: 70?% aprox.
+en progreso: 80% aprox.
 ####CSS
-en progreso: 10% aprox.
+en progreso: 20% aprox.
 ####ModuloValidacion
 en progreso: 65% aprox.
 ####ModuloReporte
