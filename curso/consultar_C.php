@@ -7,7 +7,7 @@
  * mismo, esta tabla trae tanto a los cursos con y sis docentes
  * y a los alumnos de cursos.]}
  *
- * @version [1.1]
+ * @version [1.2]
  */
 if(!isset($_SESSION)){
   session_start();
@@ -25,13 +25,13 @@ if ( isset($_POST['tipo']) ) :
   if ($_POST['tipo'] === '1') :
     // cursos existentes por docente
     $query = "SELECT
-      asume.codigo as Codigo,
-      curso.descripcion as 'Descripcion de curso',
-      periodo_academico.descripcion 'Periodo Academico',
-      asume.comentarios as 'Comentarios',
-      persona.p_apellido as 'Primer Apellido',
-      persona.p_nombre as 'Primer Nombre',
-      persona.cedula as 'Cedula'
+      asume.codigo as codigo,
+      curso.descripcion as 'des_curso',
+      periodo_academico.descripcion 'periodo_academico',
+      asume.comentarios as 'comentarios',
+      persona.p_apellido as 'p_apellido',
+      persona.p_nombre as 'p_nombre',
+      persona.cedula as 'cedula'
       from asume
       inner join periodo_academico
       on asume.periodo_academico = periodo_academico.codigo
@@ -49,10 +49,10 @@ if ( isset($_POST['tipo']) ) :
   elseif ($_POST['tipo'] === '2') :
     // cursos existentes sin docentes
     $query = "SELECT
-      asume.codigo as 'Codigo',
-      curso.descripcion as 'Descripcion de curso',
-      periodo_academico.descripcion as 'Periodo Academico',
-      asume.comentarios as 'Comentarios'
+      asume.codigo as codigo,
+      curso.descripcion as 'des_curso',
+      periodo_academico.descripcion as 'periodo_academico',
+      asume.comentarios as 'comentarios'
       from asume
       inner join periodo_academico
       on asume.periodo_academico = periodo_academico.codigo
@@ -71,13 +71,13 @@ if ( isset($_POST['tipo']) ) :
       header('Location: menucon.php?error=curso&valor='.$_POST['curso']);
     endif;
     $query = "SELECT
-      asume.codigo as 'Codigo',
-      curso.descripcion as 'Descripcion de curso',
-      periodo_academico.descripcion as 'Periodo Academico',
-      persona.p_apellido as 'Primer Apellido',
-      persona.p_nombre as 'Primer Nombre',
-      persona.cedula as 'Cedula',
-      COUNT(curso.descripcion) as 'Total de alumnos'
+      asume.codigo as codigo,
+      curso.descripcion as 'des_curso',
+      periodo_academico.descripcion as 'periodo_academico',
+      persona.p_apellido as 'p_apellido',
+      persona.p_nombre as 'p_nombre',
+      persona.cedula as 'cedula',
+      COUNT(curso.descripcion) as 'total_alumnos'
       from asume
       inner join periodo_academico
       on asume.periodo_academico = periodo_academico.codigo
@@ -94,134 +94,245 @@ if ( isset($_POST['tipo']) ) :
     header('Location: menucon.php?error=tipo&valor='.$_POST['tipo']);
   endif;
   $resultado = conexion($query);?>
-  <div id="contenido">
+  <div id="contenido_consultar_C">
     <div id="blancoAjax">
       <!-- CONTENIDO EMPIEZA DEBAJO DE ESTO: -->
       <!-- DETALLESE QUE NO ES UN ID SINO UNA CLASE. -->
-      <div class="contenido">
-        <div class="info">
-          <p>
-            Consulta exitosa! para actualizar un registro,
-             puede darle a los botones que aparece al lado de los registros.
-          </p>
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-8 col-xs-offset-2 margenAbajo well">
+            <div class="row">
+              <div class="col-xs-12">
+                <h4>
+                  Listado seleccionado segun los parametros que Ud. escojio.
+                </h4>
+                <p>
+                  <small>
+                    Si desea hacer otro tipo de consulta puede
+                    <a href="menucon.php">hacerlo aqui.</a>
+                  </small>
+                </p>
+                <p>
+                  <small>
+                    puede regresar <a href="../index.php">al menu principal.</a>
+                  </small>
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
-        <table>
-          <?php $titulo = mysqli_fetch_assoc($resultado); ?>
-          <thead>
-            <?php if ($titulo): ?>
-              <?php foreach ($titulo as $campo => $valor): ?>
-                <th>
-                  <?php echo $campo ?>
-                </th>
-              <?php endforeach ?>
-            <?php else: ?>
-              <th>Sin resultados</th>
+        <div class="row">
+          <div class="col-xs-12">
+            <table
+              id="tabla"
+              data-toggle="table"
+              data-search="true"
+              data-height="550"
+              data-pagination="true"
+              data-page-list="[10, 25, 50, 100]"
+              data-show-toggle="true"
+              data-show-columns="true"
+              data-click-to-select="true"
+              data-maintain-selected="true"
+              data-sort-name="codigo">
+              <thead>
+                <!-- ignorar -->
+                <th data-radio="true" data-switchable="false"></th>
+                <!-- ignorar -->
+                <?php if ($_POST['tipo'] === '1'): ?>
+                  <th data-field="codigo" data-sortable="true">Codigo</th>
+                  <th data-field="curso" data-sortable="true">Descripcion de curso</th>
+                  <th data-field="periodo" data-sortable="true">Periodo Academico</th>
+                  <th data-field="comentarios" data-sortable="true">Comentarios</th>
+                  <th data-field="p_apellido" data-sortable="true">Primer Apellido</th>
+                  <th data-field="p_nombre" data-sortable="true">Primer Nombre</th>
+                  <th data-field="cedula" data-sortable="true" data-switchable="false">Cedula</th>
+                <?php elseif ($_POST['tipo'] === '2'): ?>
+                  <th data-field="codigo" data-sortable="true">Codigo</th>
+                  <th data-field="curso" data-sortable="true">Descripcion de curso</th>
+                  <th data-field="periodo" data-sortable="true">Periodo Academico</th>
+                  <th data-field="comentarios" data-sortable="true">Comentarios</th>
+                <?php elseif ($_POST['tipo'] === '3'): ?>
+                  <th data-field="codigo" data-sortable="true">Codigo</th>
+                  <th data-field="curso" data-sortable="true">Descripcion de curso</th>
+                  <th data-field="periodo" data-sortable="true">Periodo Academico</th>
+                  <th data-field="p_apellido" data-sortable="true">Primer Apellido</th>
+                  <th data-field="p_nombre" data-sortable="true">Primer Nombre</th>
+                  <th data-field="cedula" data-sortable="true" data-switchable="false">Cedula</th>
+                  <th data-field="total" data-sortable="true">Total de Alumnos</th>
+                <?php endif ?>
+              </thead>
+              <tbody>
+                <?php while ( $datos = mysqli_fetch_array($resultado) ) : ?>
+                  <?php if ($_POST['tipo'] === '1'): // cursos con docente?>
+                    <tr>
+                      <!-- ignorar -->
+                        <td></td>
+                      <!-- ignorar -->
+                      <td class="codigo">
+                        <?php echo $datos['codigo'] ?>
+                      </td>
+                      <td>
+                        <?php echo $datos['des_curso'] ?>
+                      </td>
+                      <td>
+                        <?php echo $datos['periodo_academico'] ?>
+                      </td>
+                      <td>
+                        <?php echo $datos['comentarios'] ?>
+                      </td>
+                      <td>
+                        <?php echo $datos['p_apellido'] ?>
+                      </td>
+                      <td>
+                        <?php echo $datos['p_nombre'] ?>
+                      </td>
+                      <td class="cedula">
+                        <?php echo $datos['cedula'] ?>
+                      </td>
+                    </tr>
+                  <?php elseif ($_POST['tipo'] === '2'): //curso sin docente ?>
+                    <tr>
+                      <!-- ignorar -->
+                        <td></td>
+                      <!-- ignorar -->
+                      <td class="codigo">
+                        <?php echo $datos['codigo'] ?>
+                      </td>
+                      <td>
+                        <?php echo $datos['des_curso'] ?>
+                      </td>
+                      <td>
+                        <?php echo $datos['periodo_academico'] ?>
+                      </td>
+                      <td>
+                        <?php echo $datos['comentarios'] ?>
+                      </td>
+                    </tr>
+                  <?php elseif ($_POST['tipo'] === '3'): //alumnos por curso ?>
+                    <tr>
+                      <!-- ignorar -->
+                        <td></td>
+                      <!-- ignorar -->
+                      <td class="codigo">
+                        <?php echo $datos['codigo'] ?>
+                      </td>
+                      <td>
+                        <?php echo $datos['des_curso'] ?>
+                      </td>
+                      <td>
+                        <?php echo $datos['periodo_academico'] ?>
+                      </td>
+                      <td>
+                        <?php echo $datos['p_apellido'] ?>
+                      </td>
+                      <td>
+                        <?php echo $datos['p_nombre'] ?>
+                      </td>
+                      <td class="cedula">
+                        <?php echo $datos['cedula'] ?>
+                      </td>
+                      <td>
+                        <?php echo $datos['total_alumnos'] ?>
+                      </td>
+                    </tr>
+                  <?php endif ?>
+                <?php endwhile; ?>
+              </tbody>
+            </table>
+            <?php if ($_POST['tipo'] === '1'): ?>
+              <?php $enlace = enlaceDinamico('usuario/form_act_PI.php') ?>
+            <?php elseif ($_POST['tipo'] === '3'): ?>
+              <?php $enlace = enlaceDinamico('alumno/form_act_A.php') ?>
             <?php endif ?>
-          </thead>
-          <tbody>
-            <?php $resultado = conexion($query); ?>
-            <?php while ( $datos = mysqli_fetch_array($resultado) ) : ?>
-              <?php if ($_POST['tipo'] === '1'): // cursos con docente?>
-                <tr>
-                  <td>
-                    <?php echo $datos['Codigo'] ?>
-                  </td>
-                  <td>
-                    <?php echo $datos['Descripcion de curso'] ?>
-                  </td>
-                  <td>
-                    <?php echo $datos['Periodo Academico'] ?>
-                  </td>
-                  <td>
-                    <?php echo $datos['Comentarios'] ?>
-                  </td>
-                  <td>
-                    <?php echo $datos['Primer Apellido'] ?>
-                  </td>
-                  <td>
-                    <?php echo $datos['Primer Nombre'] ?>
-                  </td>
-                  <td>
-                    <?php echo $datos['Cedula'] ?>
-                  </td>
-                  <td>
-                    <a href="../usuario/actualizar_U.php?informacion=<?php echo $datos['Cedula'] ?>">
-                      <button>Actualizar Docente</button>
-                    </a>
-                  </td>
-                  <td>
-                    <a href="actualizar_C.php?codigo=<?php echo $datos['Codigo'] ?>">
-                      <button>Actualizar Curso</button>
-                    </a>
-                  </td>
-                </tr>
-              <?php elseif ($_POST['tipo'] === '2'): //curso sin docente ?>
-                <tr>
-                  <td>
-                    <?php echo $datos['Codigo'] ?>
-                  </td>
-                  <td>
-                    <?php echo $datos['Descripcion de curso'] ?>
-                  </td>
-                  <td>
-                    <?php echo $datos['Periodo Academico'] ?>
-                  </td>
-                  <td>
-                    <?php echo $datos['Comentarios'] ?>
-                  </td>
-                  <td>
-                    <a href="actualizar_C.php?codigo=<?php echo $datos['Codigo'] ?>">
-                      <button>Actualizar Curso</button>
-                    </a>
-                  </td>
-                </tr>
-              <?php elseif ($_POST['tipo'] === '3'): //alumnos por curso ?>
-                <tr>
-                  <td>
-                    <?php echo $datos['Codigo'] ?>
-                  </td>
-                  <td>
-                    <?php echo $datos['Descripcion de curso'] ?>
-                  </td>
-                  <td>
-                    <?php echo $datos['Periodo Academico'] ?>
-                  </td>
-                  <td>
-                    <?php echo $datos['Primer Apellido'] ?>
-                  </td>
-                  <td>
-                    <?php echo $datos['Primer Nombre'] ?>
-                  </td>
-                  <td>
-                    <?php echo $datos['Cedula'] ?>
-                  </td>
-                  <td>
-                    <?php echo $datos['Total de alumnos'] ?>
-                  </td>
-                  <td>
-                    <a href="../alumno/form_act_A.php?cedula=<?php echo $datos['Cedula'] ?>">
-                      <button>Actualizar Alumno</button>
-                    </a>
-                  </td>
-                  <td>
-                    <a href="actualizar_C.php?codigo=<?php echo $datos['Codigo'] ?>">
-                      <button>Actualizar Curso</button>
-                    </a>
-                  </td>
-                </tr>
-              <?php endif ?>
-            <?php endwhile; ?>
-          </tbody>
-        </table>
-        <div class="info">
-          <p>
-            Realizar <a href="menucon.php">otra consulta.</a>
-          </p>
-          <p>
-            Regresar al <a href="../index.php">menu principal.</a>
-          </p>
+            <?php $enlacePrimario = enlaceDinamico('curso/form_act_C.php') ?>
+            <span
+            class="hidden"
+            data-enlace-primario="<?php echo $enlacePrimario ?>"
+            data-enlace-relacionado="<?php echo $enlace ?>"></span>
+            <div class="row center-block margen">
+              <div class="col-xs-6 col-xs-offset-3">
+                <a
+                 id="consultar-codigo"
+                 href="#"
+                 class="push-3 btn btn-warning btn-lg disabled">Consultar curso</a>
+                 <span class="label label-info">Seleccione un registro para consultarlo</span>
+              </div>
+            </div>
+            <?php if ($_POST['tipo'] <> '2'): ?>
+              <div class="row center-block margen">
+                <div class="col-xs-6 col-xs-offset-3">
+                  <a
+                   id="consultar-cedula"
+                   href="#"
+                   class="push-3 btn btn-warning btn-lg disabled">Consultar Persona</a>
+                   <span class="label label-info">Seleccione un registro para consultarlo</span>
+                </div>
+              </div>
+            <?php endif ?>
+            <div class="row center-block margen">
+              <div class="col-xs-6 col-xs-offset-3">
+                <p>
+                  <a href="menucon.php" class="btn btn-primary btn-sm" >Realizar otra consulta.</a>
+                </p>
+                <p>
+                  <a href="../index.php" class="btn btn-primary btn-sm" >Regresar al menu principal.</a>
+                </p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xs-8 col-xs-offset-2 margen well">
+                <div class="row">
+                  <div class="col-xs-12 text-center">
+                    <h4>
+                      Puede hacer otro tipo de consulta!
+                    </h4>
+                    <p>
+                      <small>
+                        <a href="menucon.php">desde aqui.</a>
+                      </small>
+                    </p>
+                    <p>
+                      <small>
+                        o si prefiere puede regresar
+                        <a href="../index.php">al menu principal.</a>
+                      </small>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
+      <!-- CSS de bootstrap-table -->
+      <?php $tableCss = enlaceDinamico('java/bootstrap-table/src/bootstrap-table.css') ?>
+      <link rel="stylesheet" href="<?php echo $tableCss ?>">
+      <!-- JS de bootstrap-table -->
+      <?php $tableJs = enlaceDinamico('java/bootstrap-table/src/bootstrap-table.js') ?>
+      <script src="<?php echo $tableJs ?>"></script>
+      <!-- Locale a español -->
+      <?php $tableJs = enlaceDinamico('java/bootstrap-table/src/locale/bootstrap-table-es-AR.js') ?>
+      <script src="<?php echo $tableJs ?>"></script>
+      <!-- para el boton consultar -->
+      <?php $tablaBotonCodigo = enlaceDinamico('java/otros/tablaBotonCodigo-bootstrap-table.js') ?>
+      <?php $tablaBotonCedula = enlaceDinamico('java/otros/tablaBotonCedula-bootstrap-table.js') ?>
+      <script type="text/javascript">
+        $(function(){
+          $.ajax({
+            url: "<?php echo $tablaBotonCodigo ?>",
+            type: 'POST',
+            dataType: 'script'
+          });
+          <?php if ($_POST['tipo'] <> '2') : ?>
+            $.ajax({
+              url: "<?php echo $tablaBotonCedula ?>",
+              type: 'POST',
+              dataType: 'script'
+            });
+          <?php endif; ?>
+        });
+      </script>
       <!-- CONTENIDO TERMINA ARRIBA DE ESTO: -->
     </div>
   </div>

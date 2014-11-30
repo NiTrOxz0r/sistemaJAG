@@ -157,12 +157,12 @@ if ( (isset($_REQUEST['informacion'])
   endif;
   $resultado = conexion($query); ?>
   <?php if ($resultado): ?>
-    <div id="contenido">
+    <div id="contenido_consultar_U">
       <div id="blancoAjax">
         <!-- CONTENIDO EMPIEZA DEBAJO DE ESTO: -->
         <!-- DETALLESE QUE NO ES UN ID SINO UNA CLASE. -->
         <div class="container">
-          <div id="row">
+          <div class="row">
             <div class="col-xs-8 col-xs-offset-2 margenAbajo well">
               <div class="row">
                 <div class="col-xs-12">
@@ -200,7 +200,9 @@ if ( (isset($_REQUEST['informacion'])
                 data-sort-name="p_apellido"
                 >
                 <thead>
+                  <!-- ignorar -->
                   <th data-radio="true" data-switchable="false"></th>
+                  <!-- ignorar -->
                   <th data-field="cedula" data-sortable="true" data-switchable="false">Cedula</th>
                   <th data-field="p_apellido" data-sortable="true">Primer Apellido</th>
                   <th data-field="p_nombre" data-sortable="true">Primer Nombre</th>
@@ -274,12 +276,16 @@ if ( (isset($_REQUEST['informacion'])
                   <?php endwhile; ?>
                 </tbody>
               </table>
-               <div class="center-block">
-                 <a
-                  id="consultarRegistro"
-                  href="#"
-                  class="push-3 btn btn-warning btn-lg disabled">Consultar registro</a>
-                  <span class="label label-info">Seleccione un registro para consultarlo</span>
+              <?php $enlacePrimario = enlaceDinamico('usuario/form_act_PI.php') ?>
+              <span class="hidden" data-enlace-primario="<?php echo $enlacePrimario ?>"></span>
+               <div class="row center-block">
+                 <div class="col-xs-6 col-xs-offset-3">
+                   <a
+                    id="consultar-cedula"
+                    href="#"
+                    class="push-3 btn btn-warning btn-lg disabled">Consultar registro</a>
+                    <span class="label label-info">Seleccione un registro para consultarlo</span>
+                 </div>
                </div>
             </div>
           </div>
@@ -316,7 +322,7 @@ if ( (isset($_REQUEST['informacion'])
         <?php $tableJs = enlaceDinamico('java/bootstrap-table/src/locale/bootstrap-table-es-AR.js') ?>
         <script src="<?php echo $tableJs ?>"></script>
         <!-- para el boton consultar -->
-        <?php $tablaBoton = enlaceDinamico('java/otros/tablaBoton-bootstrap-table.js') ?>
+        <?php $tablaBoton = enlaceDinamico('java/otros/tablaBotonCedula-bootstrap-table.js') ?>
         <script type="text/javascript">
           $(function(){
             $.ajax({

@@ -18,8 +18,7 @@ validarUsuario(1, 2, $_SESSION['cod_tipo_usr']);
 //DESDE empezarPagina.php
 empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);
 
-if ( isset($_SESSION['act_cod_curso']) and !preg_match( "/[^0-9]/", $_SESSION['act_cod_curso'])
-  and isset($_POST['docente']) and !preg_match( "/[^0-9]/", $_POST['docente'])
+if ( isset($_POST['docente']) and !preg_match( "/[^0-9][^\-1]/", $_POST['docente'])
   and isset($_POST['curso']) and !preg_match( "/[^0-9]/", $_POST['curso'])
   and isset($_POST['periodo_academico'])
   and !preg_match( "/[^0-9]/", $_POST['periodo_academico'])
@@ -30,15 +29,13 @@ if ( isset($_SESSION['act_cod_curso']) and !preg_match( "/[^0-9]/", $_SESSION['a
   $cod_curso = mysqli_escape_string( $conexion, trim($_POST['curso']) );
   $cod_periodo_academico = mysqli_escape_string( $conexion, trim($_POST['periodo_academico']) );
   $comentarios = mysqli_escape_string( $conexion, trim($_POST['comentarios']) );
+  $cod_docente = $cod_docente === ("-1") ? 'null':$cod_docente;
   $cod_docente = $cod_docente === ("") ? 'null':$cod_docente;
-  $query = "UPDATE asume set
-  cod_docente = $cod_docente,
-  cod_curso = $cod_curso,
-  periodo_academico = $cod_periodo_academico,
-  comentarios = '$comentarios',
-  cod_usr_mod = $_SESSION[codUsrMod],
-  fec_mod = current_timestamp
-  where codigo = $cod_asume;";
+  $comentarios = $comentarios === ("") ? 'Autogenerado en registro, por sistema.':$comentarios;
+  $query = "INSERT into asume
+  values
+  (null, $cod_docente, $cod_curso, $cod_periodo_academico, '$comentarios',
+    1, $_SESSION[codUsrMod], null, $_SESSION[codUsrMod], current_timestamp);";
   $resultado = conexion($query);
   if ($resultado) : ?>
     <div id="contenido_actualizar_C">
@@ -46,13 +43,13 @@ if ( isset($_SESSION['act_cod_curso']) and !preg_match( "/[^0-9]/", $_SESSION['a
         <div class="container">
           <div class="row">
             <div class="jumbotron">
-              <h1>Actualizacion exitosa!</h1>
+              <h1>Registro exitoso!</h1>
               <h4>
                 Los registros asociados
-                fueron actualizados correctamente!
+                fueron guardados correctamente!
               </h4>
               <p>
-                Si desea hacer otra actualizacion por favor dele
+                Si desea hacer otro registro por favor dele
                 <a href="menucon.php">click a este enlace</a>
               </p>
               <p>
@@ -135,4 +132,4 @@ else : ?>
     </div>
   </div>
 <?php endif; ?>
-finalizarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);?>
+<?php finalizarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);?>

@@ -12,91 +12,118 @@ validarUsuario(1, 1, $_SESSION['cod_tipo_usr']);
 empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);
 
 //CONTENIDO:?>
-<div id="contenido">
+<div id="contenido_curso_menucon">
   <div id="blancoAjax">
     <!-- CONTENIDO EMPIEZA DEBAJO DE ESTO: -->
     <!-- DETALLESE QUE NO ES UN ID SINO UNA CLASE. -->
-    <div class="contenido">
-
-      <div class="info">
-        <p>
-          Para hacer una consulta por favor seleccione el tipo de consulta que Ud. desea:
-        </p>
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-8 col-xs-offset-2 bg-primary redondeado margenAbajo">
+          <div class="row">
+            <div class="col-xs-12">
+              <h3>
+                Para hacer una consulta por favor seleccione el
+                tipo de consulta que Usted desea realizar:
+              </h3>
+            </div>
+          </div>
+        </div>
       </div>
-
-      <form
-        id="consulta_singular_U"
-        name="consulta_singular_U"
-        action="consultar_C.php"
-        method="post">
-        <table>
-          <thead>
-            <th>Seleccione una opcion</th>
-          </thead>
-          <tbody>
-            <tr>
-              <td id="tipo_titulo">Tipo de consulta:</td>
-              <td>
-                <select
-                  name="tipo"
-                  id="tipo"
-                  autofocus="autofocus"
-                  required>
-                  <option selected="selected" value="0">Por favor seleccione:</option>
-                  <option value="1">Cursos Existentes con docentes</option>
-                  <option value="2">Cursos Existentes sin docentes</option>
-                  <option value="3">Alumnos Existentes por curso</option>
-                </select>
-              </td>
-              <td class="chequeo" id="tipo_chequeo">
-
-              </td>
-            </tr>
-            <tr>
-              <td id="curso_titulo">
-                Seleccione:
-              </td>
-              <td>
-                <?php $query = "SELECT
-                  asume.codigo, curso.descripcion
-                  from asume
-                  inner join curso
-                  on asume.cod_curso = curso.codigo
-                  where asume.status = 1;";
+      <div class="row">
+        <div class="col-sm-6 col-sm-offset-3">
+          <form
+            role="form"
+            id="consulta_singular_U"
+            name="consulta_singular_U"
+            action="consultar_C.php"
+            method="POST">
+            <div class="form-group">
+              <label
+              for="tipo"
+              id="tipo_titulo"
+              class="control-label">Tipo de consulta:</label>
+              <select
+                class="form-control"
+                name="tipo"
+                id="tipo"
+                autofocus="autofocus"
+                required>
+                <option selected="selected" value="0">Por favor seleccione:</option>
+                <option value="1">Cursos Existentes con docentes</option>
+                <option value="2">Cursos Existentes sin docentes</option>
+                <option value="3">Alumnos Existentes por curso</option>
+              </select>
+              <p class="help-block" id="tipo_chequeo">
+              </p>
+            </div>
+            <div class="form-group">
+              <label
+              for="curso"
+              id="curso_titulo"
+              class="control-label">Seleccione:</label>
+              <select
+                class="form-control"
+                name="curso"
+                id="curso"
+                autofocus="autofocus"
+                required>
+                <?php
+                  // $query = "SELECT
+                  // asume.codigo, curso.descripcion
+                  // from asume
+                  // inner join curso
+                  // on asume.cod_curso = curso.codigo
+                  // where asume.status = 1;";
+                  $query = "SELECT
+                  curso.codigo, curso.descripcion
+                  from curso
+                  where curso.status = 1;";
                   $resultado = conexion($query);?>
-                <select name="curso" id="curso" required>
                   <option value="" selected="selected">--Seleccione--</option>
                   <?php while ( $datos = mysqli_fetch_array($resultado) ) : ?>
                     <option value="<?php echo $datos['codigo']; ?>">
                       <?php echo $datos['descripcion']; ?>
                     </option>
                   <?php endwhile; ?>
-                </select>
-              </td>
-              <td class="chequeo" id="curso_chequeo">
+              </select>
+              <p class="help-block" id="curso_chequeo">
+              </p>
+            </div>
+            <div class="row">
+              <div class="col-sm-6 col-sm-offset-3">
+                <input
+                type="submit"
+                id="submit"
+                value="Consultar"
+                class="btn btn-primary btn-block">
+              </div>
+            </div>
+            <div class="row">
+              <div id="error" class="chequeo">
+                <!-- chequeo por medio de ajax: -->
+                <span class="error" id="error">
 
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <input type="submit" id="submit" value="Consultar">
-              </td>
-            </tr>
-          </tbody>
-        </table>
-        <div id="error" class="chequeo">
-          <!-- chequeo por medio de ajax: -->
-          <span class="error" id="error">
-
-          </span>
+                </span>
+              </div>
+            </div>
+          </form>
         </div>
-
-      </form>
-      <div id="error" class="chequeo">
-        <!-- chequeo por medio de ajax: -->
-        <span class="error" id="error">
-
-        </span>
+      </div>
+      <div class="row">
+        <div class="col-xs-8 col-xs-offset-2 bg-info redondeado margenAbajo">
+          <div class="row">
+            <div class="col-xs-12">
+              <h3>
+                O si prefiere puede registrar un nuevo curso en el sistema:
+              </h3>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-4 col-sm-offset-4">
+          <a href="form_reg_C.php" class="btn btn-primary btn-lg btn-block">Registrar un nuevo curso</a>
+        </div>
       </div>
     </div>
     <!-- validacion -->
@@ -106,7 +133,6 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);
       $(function(){
         //cambiamos de una vez
         //estructura del formulario:
-        $('#curso_titulo').css('color', '#888');
         $('#curso').prop('disabled', true);
         $('#submit').prop('disabled', true);
         //se cambia la estructura del formulario
@@ -115,20 +141,16 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);
         $('#tipo').on('change', function(){
           var tipo = $(this).val();
           if (tipo === '0') {
-            $('#curso_titulo').css('color', '#888');
             $('#curso').prop('disabled', true);
             $('#submit').prop('disabled', true);
           }else if (tipo === '1' || tipo === '2'){
-            $('#curso_titulo').css('color', '#000');
             $('#curso').prop('disabled', true);
             $('#curso').prop('value', '');
             $('#submit').prop('disabled', false);
           }else if (tipo === '3'){
-            $('#curso_titulo').css('color', '#000');
             $('#curso').prop('disabled', false);
             $('#submit').prop('disabled', true);
           }else{
-            $('#curso_titulo').css('color', '#000');
             $('#curso').prop('disabled', false);
           };
         });

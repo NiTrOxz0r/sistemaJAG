@@ -14,7 +14,7 @@
  *
  * este archivo fue cambiado para ajustarse a la nueva base de datos.]}
  *
- * @version [1.0]
+ * @version [1.1]
  */
 
 if(!isset($_SESSION)){
@@ -23,7 +23,7 @@ if(!isset($_SESSION)){
 $enlace = $_SERVER['DOCUMENT_ROOT']."/github/sistemaJAG/php/master.php";
 require_once($enlace);
 // invocamos validarUsuario desde master.php
-validarUsuario(1);
+validarUsuario(1, 3, $_SESSION['cod_tipo_usr']);
 
 if ( isset($_POST['cedula']) && strlen($_POST['cedula']) == 8 ) :
   //datos para saber si es docente o no:
@@ -136,28 +136,60 @@ if ( isset($_POST['cedula']) && strlen($_POST['cedula']) == 8 ) :
       1, $codUsrMod, null, $codUsrMod, current_timestamp);";
     $resultado = conexion($query);
   endif; ?>
-
-  <div id="blancoAjax">
-    <h3>
-      El registro de <?php echo $p_apellido.", ".$p_nombre ?>
-    </h3>
-    <p>
-      fue realizado exitosamente!
-    </p>
-    <p>
-      <a href="menucon.php">Hacer otro Registro</a>
-    </p>
-    <p>
-      <a href="../index.php">Regresar al sistema</a>
-    </p>
+  <div id="insertar_sinU_PUI">
+    <div id="blancoAjax">
+      <div class="container">
+        <div class="row">
+          <div class="jumbotron">
+            <h1>Registro completo!</h1>
+            <h4>
+              El registro de <?php echo $p_apellido.", ".$p_nombre ?> fue realizado exitosamente!
+            </h4>
+            <p class="bg-primary">
+               <a href="menucon.php">Hacer otro Registro</a>
+            </p>
+            <p>
+              <?php $index = enlaceDinamico(); ?>
+              <a href="<?php echo $index ?>" class="btn btn-primary btn-lg">Regresar al sistema</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-  <?php finalizarPagina(); ?>
 <?php else : ?>
-  <div id="blancoAjax">
-    <p>
-      Problemas en registro de personal Interno,
-      la cedula: <?php echo $_POST['cedula'] ?> es incorrecta.
-      Por favor contacte a un administrador del sistema.
-    </p>
+  <div id="insertar_sinU_PI">
+    <div id="blancoAjax">
+      <div class="container">
+        <div class="row">
+          <div class="jumbotron">
+            <h1>Ups!</h1>
+            <p>
+              Error en el proceso de registro!
+            </p>
+            <h3>
+              <small>
+                la cedula: <?php echo $_POST['cedula'] ?> es incorrecta.
+              </small>
+            </h3>
+            <p>
+              Si desea hacer otra intento por favor dele
+              <a href="menucon.php">click a este enlace</a>
+            </p>
+            <p>
+              ¿O sera que entro en esta pagina erroneamente?
+            </p>
+            <p class="bg-warning">
+              Si este es un problema recurrente, contacte a un administrador del sistema.
+            </p>
+            <p>
+              <?php $index = enlaceDinamico(); ?>
+              <a href="<?php echo $index ?>" class="btn btn-primary btn-lg">Regresar al sistema</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 <?php endif; ?>
+<?php finalizarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']); ?>
