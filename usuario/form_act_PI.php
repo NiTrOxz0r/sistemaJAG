@@ -766,7 +766,7 @@ if ( isset($_GET['cedula']) ):
         <div class="jumbotron">
           <h1>Ups!</h1>
           <p>
-            Error en el proceso de registro!
+            Error en el proceso de actualizacion!
           </p>
           <p>
             ¿O entro en esta pagina erroneamente?
