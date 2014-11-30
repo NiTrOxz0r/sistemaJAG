@@ -9,14 +9,14 @@
  *
  * @return {boolean} [regresa verdadero si todo bien, falso si no.]
  *
- * @version 1.3
+ * @version 1.4
  */
 function validacionPI(){
 
   //REGEX:
   var estatus = false;
   var numerosChequeo = /[^\d+]/g;
-  var nombresChequeo = /[^A-Za-záéíóúÁÉÍÓÚ-\s]/g;
+  var nombresChequeo = /[^A-Za-záéíóúÑñÁÉÍÓÚ-\s]/g;
   //por alguna razon javascrip se queja si uso esta expresion:
   // ^[0-9a-zA-Z-_$#]{2,20}+\@[0-9a-zA-Z-_$#]{2,20}+\.[a-zA-Z]{2,5}\.?[a-zA-Z]{2,5}+
   // eso cacha algo@algo.com.ve
@@ -24,7 +24,7 @@ function validacionPI(){
   // esta expresion solo llega hasta algo.com ||| ignora el .ve
   var emailChequeo = /^[0-9a-zA-Z-_\$#]+@[0-9a-zA-Z-_\$#]+\.[a-zA-Z]{2,5}/;
   //datos del formulario
-  var nacionalidad = document.getElementById('nacionalidad').value;
+  var nacionalidad = document.getElementById('nacionalidad').value.replace(/^\s+|\s+$/g, '');
   var cedula = document.getElementById("cedula").value.replace(/^\s+|\s+$/g, '');
   var p_nombre = document.getElementById('p_nombre').value.replace(/^\s+|\s+$/g, '');
   var s_nombre = document.getElementById('s_nombre').value.replace(/^\s+|\s+$/g, '');
@@ -63,7 +63,7 @@ function validacionPI(){
     return false;
   }else{
     $('#cedula').parent().removeClass('has-error').addClass('has-success');
-    $("#cedula_chequeo").html('');
+    $("#cedula_chequeo").html('&nbsp;');
     estatus = true;
   }
 //NACIONALIDAD:
@@ -73,7 +73,7 @@ function validacionPI(){
     return false;
   }else{
     $('#nacionalidad').parent().removeClass('has-error').addClass('has-success');
-    $("#nacionalidad_chequeo").html('');
+    $("#nacionalidad_chequeo").html('&nbsp;');
     estatus = true;
   }
 //P_NOMBRE:
@@ -90,7 +90,7 @@ function validacionPI(){
     $('#p_nombre').parent().addClass('has-error');
     return false;
   }else{
-    $("#p_nombre_chequeo").html('');
+    $("#p_nombre_chequeo").html('&nbsp;');
     $('#p_nombre').parent().removeClass('has-error').addClass('has-success');
     $('#p_nombre').val( p_nombre.toUpperCase() );
     estatus = true;
@@ -105,7 +105,7 @@ function validacionPI(){
     $('#s_nombre').parent().addClass('has-error');
     return false;
   }else{
-    $("#s_nombre_chequeo").html('');
+    $("#s_nombre_chequeo").html('&nbsp;');
     $('#s_nombre').parent().removeClass('has-error').addClass('has-success');
     $('#s_nombre').val( s_nombre.toUpperCase() );
     estatus = true;
@@ -124,7 +124,7 @@ function validacionPI(){
     $('#p_apellido').parent().addClass('has-error');
     return false;
   }else{
-    $("#p_apellido_chequeo").html('');
+    $("#p_apellido_chequeo").html('&nbsp;');
     $('#p_apellido').parent().removeClass('has-error').addClass('has-success');
     $('#p_apellido').val( p_apellido.toUpperCase() );
     estatus = true;
@@ -139,7 +139,7 @@ function validacionPI(){
     $('#s_apellido').parent().addClass('has-error');
     return false;
   }else{
-    $("#s_apellido_chequeo").html('');
+    $("#s_apellido_chequeo").html('&nbsp;');
     $('#s_apellido').parent().removeClass('has-error').addClass('has-success');
     $('#s_apellido').val( s_apellido.toUpperCase() );
     estatus = true;
@@ -161,7 +161,7 @@ function validacionPI(){
     // $('#fec_nac').parent().addClass('has-error');
     return false;
   }else{
-    $("#fec_nac_chequeo").html('');
+    $("#fec_nac_chequeo").html('&nbsp;');
     // $('#fec_nac').parent().removeClass('has-error').addClass('has-success');
     estatus = true;
   }
@@ -171,7 +171,7 @@ function validacionPI(){
     $('#sexo').parent().addClass('has-error');
     return false;
   }else{
-    $("#sexo_chequeo").html('');
+    $("#sexo_chequeo").html('&nbsp;');
     $('#sexo').parent().removeClass('has-error').addClass('has-success');
     estatus = true;
   }
@@ -181,7 +181,7 @@ function validacionPI(){
     $('#nivel_instruccion').parent().addClass('has-error');
     return false;
   }else{
-    $("#nivel_instruccion_chequeo").html('');
+    $("#nivel_instruccion_chequeo").html('&nbsp;');
     $('#nivel_instruccion').parent().removeClass('has-error').addClass('has-success');
     estatus = true;
   }
@@ -191,7 +191,7 @@ function validacionPI(){
     $('#titulo').parent().addClass('has-error');
     return false;
   }else{
-    $("#titulo_chequeo").html('');
+    $("#titulo_chequeo").html('&nbsp;');
     $('#titulo').parent().removeClass('has-error').addClass('has-success');
     $('#titulo').val( titulo.toUpperCase() );
     estatus = true;
@@ -202,7 +202,7 @@ function validacionPI(){
     $('#telefono').parent().addClass('has-error');
     return false;
   }else if( telefono === "SinRegistro" ){
-    $("#telefono_chequeo").html('');
+    $("#telefono_chequeo").html('&nbsp;');
     $('#telefono').parent().removeClass('has-error').addClass('has-success');
     estatus = true;
   }else if( numerosChequeo.test(telefono) ){
@@ -210,7 +210,7 @@ function validacionPI(){
     $('#telefono').parent().addClass('has-error');
     return false;
   }else{
-    $("#telefono_chequeo").html('');
+    $("#telefono_chequeo").html('&nbsp;');
     $('#telefono').parent().removeClass('has-error').addClass('has-success');
     estatus = true;
   }
@@ -220,7 +220,7 @@ function validacionPI(){
     $('#telefono_otro').parent().addClass('has-error');
     return false;
   }else if( telefono_otro === "SinRegistro" ){
-    $("#telefono_otro_chequeo").html('');
+    $("#telefono_otro_chequeo").html('&nbsp;');
     $('#telefono_otro').parent().removeClass('has-error').addClass('has-success');
     estatus = true;
   }else if( numerosChequeo.test(telefono_otro) ){
@@ -228,7 +228,7 @@ function validacionPI(){
     $('#telefono_otro').parent().addClass('has-error');
     return false;
   }else{
-    $("#telefono_otro_chequeo").html('');
+    $("#telefono_otro_chequeo").html('&nbsp;');
     $('#telefono_otro').parent().removeClass('has-error').addClass('has-success');
     estatus = true;
   }
@@ -238,7 +238,7 @@ function validacionPI(){
     $('#celular').parent().addClass('has-error');
     return false;
   }else if( celular === "SinRegistro" ){
-    $("#celular_chequeo").html('');
+    $("#celular_chequeo").html('&nbsp;');
     $('#celular').parent().removeClass('has-error').addClass('has-success');
     estatus = true;
   }else if( numerosChequeo.test(celular) ){
@@ -246,7 +246,7 @@ function validacionPI(){
     $('#celular').parent().addClass('has-error');
     return false;
   }else{
-    $("#celular_chequeo").html('');
+    $("#celular_chequeo").html('&nbsp;');
     $('#celular').parent().removeClass('has-error').addClass('has-success');
     estatus = true;
   }
@@ -260,7 +260,7 @@ function validacionPI(){
     $('#email').parent().parent().addClass('has-error');
     return false;
   }else{
-    $("#email_chequeo").html('');
+    $("#email_chequeo").html('&nbsp;');
     $('#email').parent().parent().removeClass('has-error').addClass('has-success');
     estatus = true;
   }
@@ -270,7 +270,7 @@ function validacionPI(){
     $('#cargo').parent().addClass('has-error');
     return false;
   }else{
-    $("#cargo_chequeo").html('');
+    $("#cargo_chequeo").html('&nbsp;');
     $('#cargo').parent().removeClass('has-error').addClass('has-success');
     estatus = true;
   }
@@ -280,57 +280,23 @@ function validacionPI(){
     $('#tipo_personal').parent().addClass('has-error');
     return false;
   }else{
-    $("#tipo_personal_chequeo").html('');
+    $("#tipo_personal_chequeo").html('&nbsp;');
     $('#tipo_personal').parent().removeClass('has-error').addClass('has-success');
     estatus = true;
   }
 //direcc
   if(direcc != "" && direcc.length > 150){
-    $("#direcc_chequeo").html('este campo no puede ser mayor a 80 caracteres');
+    $("#direcc_chequeo").html('este campo no puede ser mayor a 150 caracteres');
     $('#direcc').parent().addClass('has-error');
     return false;
   }else{
-    $("#direcc_chequeo").html('');
+    $("#direcc_chequeo").html('&nbsp;');
     $('#direcc').parent().removeClass('has-error').addClass('has-success');
     $('#direcc').val( direcc.toUpperCase() );
     estatus = true;
   }
-//estado
-  if ( estado == '' || estado === undefined) {
-    $("#cod_est_chequeo").html('Por favor seleccione una opcion apropiada.');
-    $('#cod_est').parent().addClass('has-error');
-    $('#cod_mun').prop('disabled', true);
-    $('#cod_parro').prop('disabled', true);
-    return false;
-  }else{
-    $("#cod_est_chequeo").html('');
-    $('#cod_est').parent().removeClass('has-error').addClass('has-success');
-    $('#cod_mun').prop('disabled', false);
-    $('#cod_parro').prop('disabled', false);
-    estatus = true;
-  }
-//municipio
-  if ( municipio == '' || municipio === undefined) {
-    $("#cod_mun_chequeo").html('Por favor seleccione una opcion apropiada.');
-    $('#cod_mun').parent().addClass('has-error');
-    $('#cod_parro').prop('disabled', true);
-    return false;
-  }else{
-    $("#cod_mun_chequeo").html('');
-    $('#cod_mun').parent().removeClass('has-error').addClass('has-success');
-    $('#cod_parro').prop('disabled', false);
-    estatus = true;
-  }
-//parroquia
-  if ( parroquia == '' || parroquia === undefined) {
-    $("#cod_parro_chequeo").html('Por favor seleccione una opcion apropiada.');
-    $('#cod_parro').parent().addClass('has-error');
-    return false;
-  }else{
-    $("#cod_parro_chequeo").html('');
-    $('#cod_parro').parent().removeClass('has-error').addClass('has-success');
-    estatus = true;
-  }
+  // validacion de edo/mun/parro movido a un archivo aparte
+  // (validacionDirecion.js)
 
   return go(estatus);
 

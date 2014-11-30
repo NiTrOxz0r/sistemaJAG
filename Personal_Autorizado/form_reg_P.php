@@ -494,7 +494,21 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr'], 'sistemaJAG 
     <?php $validacionP = enlaceDinamico("java/validacionP.js"); ?>
     <script type="text/javascript" src="<?php echo $cargadorOnClick ?>"></script>
     <!-- validacion -->
-    <script language="javascript" src="<?php echo $validacionP ?>"></script>
+    <script type="text/javascript" src="<?php echo $validacionP ?>"></script>
+    <script type="text/javascript">
+      $(function(){
+        $('#form').on('change', function(){
+          validacionPA();
+        });
+        $('#submit').on('click', function(){
+          if (validacionPA()) {
+            return true;
+          }else{
+            return false;
+          }
+        });
+      });
+    </script>
     <!-- ajax de edo/mun/parr -->
     <?php $estado = enlaceDinamico("java/edo.php"); ?>
     <?php $municipio = enlaceDinamico("java/mun.php"); ?>
@@ -545,24 +559,7 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr'], 'sistemaJAG 
         });
       });
     </script>
-    <!-- NO HAY TIEMPO PARA DESARROLLAR ESTO: -->
-    <!-- mostrar y ocultar -->
-    <!-- <script type="text/javascript">
-      /**
-       * hecho por slayerfat, ya saben donde estoy.
-       */
-      $(function (){
-        $('.mostrar').show();
-        $('.ocultar').hide();
-        $('.iniciadorMostrar').on('click', function(){
-          $('.mostrar').toggle();
-          $('.ocultar').toggle();
-          $("html, body").animate({ scrollTop: 0 }, "slow");
-          return false;
-        });
-      });
-    </script> -->
-    <!-- cedula -->
+    <!-- cedula y validacionDireccion -->
     <script type="text/javascript">
       /**
        * hecho por slayerfat, dudas o sugerencias ya saben donde estoy.
@@ -571,10 +568,19 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr'], 'sistemaJAG 
        * para el campo cedula.
        */
       $(function(){
+        // cedula
         $.ajax({
-          url: '../java/cedula.js',
+          url: '../java/ajax/cedula.js',
           type: 'POST',
           dataType: 'script'
+        });
+        // se trae la validacion de edo/mun/parr
+        $(function(){
+          $.ajax({
+            url: '../java/validacionDireccion.js',
+            type: 'POST',
+            dataType: 'script'
+          });
         });
       });
       // $(function(){
@@ -620,6 +626,25 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr'], 'sistemaJAG 
       //   });
       // });
     </script>
+    <!--  -->
+    <!--  -->
+    <!-- NO HAY TIEMPO PARA DESARROLLAR ESTO: -->
+    <!-- mostrar y ocultar -->
+    <!-- <script type="text/javascript">
+      /**
+       * hecho por slayerfat, ya saben donde estoy.
+       */
+      $(function (){
+        $('.mostrar').show();
+        $('.ocultar').hide();
+        $('.iniciadorMostrar').on('click', function(){
+          $('.mostrar').toggle();
+          $('.ocultar').toggle();
+          $("html, body").animate({ scrollTop: 0 }, "slow");
+          return false;
+        });
+      });
+    </script> -->
   </div>
 </div>
 <?php
