@@ -67,12 +67,17 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);
                 id="curso"
                 autofocus="autofocus"
                 required>
-                <?php $query = "SELECT
-                  asume.codigo, curso.descripcion
-                  from asume
-                  inner join curso
-                  on asume.cod_curso = curso.codigo
-                  where asume.status = 1;";
+                <?php
+                  // $query = "SELECT
+                  // asume.codigo, curso.descripcion
+                  // from asume
+                  // inner join curso
+                  // on asume.cod_curso = curso.codigo
+                  // where asume.status = 1;";
+                  $query = "SELECT
+                  curso.codigo, curso.descripcion
+                  from curso
+                  where curso.status = 1;";
                   $resultado = conexion($query);?>
                   <option value="" selected="selected">--Seleccione--</option>
                   <?php while ( $datos = mysqli_fetch_array($resultado) ) : ?>

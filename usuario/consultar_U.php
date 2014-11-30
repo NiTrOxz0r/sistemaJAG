@@ -276,10 +276,12 @@ if ( (isset($_REQUEST['informacion'])
                   <?php endwhile; ?>
                 </tbody>
               </table>
+              <?php $enlacePrimario = enlaceDinamico('usuario/form_act_PI.php') ?>
+              <span class="hidden" data-enlace-primario="<?php echo $enlacePrimario ?>"></span>
                <div class="row center-block">
                  <div class="col-xs-6 col-xs-offset-3">
                    <a
-                    id="consultarRegistro"
+                    id="consultar-cedula"
                     href="#"
                     class="push-3 btn btn-warning btn-lg disabled">Consultar registro</a>
                     <span class="label label-info">Seleccione un registro para consultarlo</span>
