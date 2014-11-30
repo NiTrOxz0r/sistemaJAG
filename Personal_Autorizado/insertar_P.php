@@ -1,4 +1,17 @@
 <?php
+/**
+ * @author Andres Leotur
+ * @author Alejandro Granadillo
+ *
+ * @internal inserta personal autorizado.
+ *
+ * @internal ESTO NO ESTA VALIDANDO!!!!
+ * @todo añadir validaciones correspondientes.
+ *
+ * @see form_reg_P.php
+ *
+ * @version 1.1
+ */
 if(!isset($_SESSION)){
   session_start();
 }
