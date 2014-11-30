@@ -109,6 +109,22 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);
           </form>
         </div>
       </div>
+      <div class="row">
+        <div class="col-xs-8 col-xs-offset-2 bg-info redondeado margenAbajo">
+          <div class="row">
+            <div class="col-xs-12">
+              <h3>
+                O si prefiere puede registrar un nuevo curso en el sistema:
+              </h3>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-4 col-sm-offset-4">
+          <a href="form_reg_C.php" class="btn btn-primary btn-lg btn-block">Registrar un nuevo curso</a>
+        </div>
+      </div>
     </div>
     <!-- validacion -->
     <script type="text/javascript">

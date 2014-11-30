@@ -6,7 +6,7 @@ $enlace = $_SERVER['DOCUMENT_ROOT']."/github/sistemaJAG/php/master.php";
 require_once($enlace);
 
 // invocamos validarUsuario.php desde master.php
-validarUsuario(1, 3, $_SESSION['cod_tipo_usr']);
+validarUsuario(1, 2, $_SESSION['cod_tipo_usr']);
 
 //ESTA FUNCION TRAE EL HEAD Y NAVBAR:
 //DESDE empezarPagina.php
@@ -18,7 +18,7 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);?>
   $query = "SELECT * from asume where codigo = $codigo;";
   $resultado = conexion($query);
   $datos = mysqli_fetch_assoc($resultado);
-  $_SESSION['act_cod_curso'] = $datos['codigo'] ?>
+  $_SESSION['act_cod_asume'] = $datos['codigo'] ?>
   <div id="contenido_form_act_C">
     <div id="blancoAjax">
       <div class="container">
@@ -46,7 +46,7 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);?>
                     where persona.status = 1 and personal.status = 1
                     order by persona.p_apellido;";
                     $resultado = conexion($query); ?>
-                  <select id="docente" required name="docente" class="form-control">
+                  <select id="docente" name="docente" class="form-control">
                     <option value="">Sin Docente Asociado</option>
                     <?php while ( $docente = mysqli_fetch_array($resultado) ) : ?>
                       <?php if ( $datos['cod_docente'] === $docente['codigo'] ): ?>
@@ -153,8 +153,7 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);?>
                   id="submit"
                   class="btn btn-primary btn-block"
                   type="submit"
-                  name="registrar"
-                  disabled
+                  name="actualizar"
                   value="Actualizar">
                 </div>
               </div>
@@ -162,6 +161,21 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);?>
           </div>
         </div>
       </div>
+      <script type="text/javascript">
+        $(function(){
+          $('#form').on('click, change', function(){
+            if ( isNaN($('#docente').val()) ) {
+              $('#submit').prop('disabled', true);
+            }else if ( isNaN($('#curso').val()) ) {
+              $('#submit').prop('disabled', true);
+            }else if ( isNaN($('#periodo_academico').val()) ) {
+              $('#submit').prop('disabled', true);
+            }else{
+              $('#submit').prop('disabled', false);
+            };
+          });
+        });
+      </script>
     <!-- FIN DE BLANCO AJAX -->
     </div>
   </div>
