@@ -1,4 +1,15 @@
 <?php
+/**
+ * @author [Andres Leotur]
+ * @author [Alejandro Granadillo]
+ *
+ * {@internal [esta funcion genera el registro de base de datos de alumno
+ * solo requiere como condicion saber la cedula del representante.]}
+ *
+ * @todo VALIDAR ALUMNO!!!!!!!!
+ *
+ * @version 1.1
+ */
 if(!isset($_SESSION)){
   session_start();
 }
@@ -134,14 +145,79 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);
     VALUES
     (null, $cod_representante, $codigo_alumno, $status, $cod_usr_reg, null, $cod_usr_mod, null);";
 
-    $res = conexion($query_O);
+    $res = conexion($query_O);?>
 
-    echo "DATOS INGRESADOS EXITOSAMENTE";
+    <div id="contenido_actualizar_C">
+      <div id="blancoAjax">
+        <div class="container">
+          <div class="row">
+            <div class="jumbotron">
+              <h1>Registro exitoso!</h1>
+              <h4>
+                Los registros asociados
+                fueron guardados correctamente!
+              </h4>
+              <p>
+                Si desea hacer un registro de una alumno asociado a la cedula:
+                 <?php echo $cedula_r ?>, por favor dele
+                <a href="<?php echo "form_reg_A.php?cedula_r=$cedula_r" ?>">
+                  click a este enlace
+                </a>
+              </p>
+              <p>
+                <?php $index = enlaceDinamico(); ?>
+                <a href="<?php echo $index ?>" class="btn btn-primary btn-lg">Regresar al sistema</a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
-
+<?php
   }else{
 
-    echo " Ingresar REPRSENTANTE";
+    // echo " Ingresar REPRSENTANTE";?>
+    <div id="contenido_actualizar_C">
+      <div id="blancoAjax">
+        <div class="container">
+          <div class="row">
+            <div class="jumbotron">
+              <h1>Ups!</h1>
+              <p>
+                Error en el proceso de registro!
+              </p>
+              <h3>
+                <small>
+                  Lamentablemente, es posible que los datos de registro se perdieron.
+                </small>
+              </h3>
+              <?php $index = enlaceDinamico(); ?>
+              <p>
+                para ir al proceso de inscripcion <a href="<?php echo $index ?>">
+                puede seguir este enlace.
+                </a>
+              </p>
+              <p>
+                Si desea hacer una consulta por favor dele
+                <a href="menucon.php">click a este enlace.</a>
+              </p>
+              <p>
+                ¿O sera que entro en esta pagina erroneamente?
+              </p>
+              <p class="bg-warning">
+                Si este es un problema recurrente, contacte a un administrador del sistema.
+              </p>
+              <p>
+                <?php $index = enlaceDinamico(); ?>
+                <a href="<?php echo $index ?>" class="btn btn-primary btn-lg">Regresar al sistema</a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+<?php
 
 }
 
