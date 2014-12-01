@@ -35,7 +35,7 @@ endif;
     <div class="container">
       <div class="row">
         <!-- http://www.w3schools.com/html/html_forms.asp -->
-        <form action="insertar_P.php" method="POST" id="form" name="form_repre" class="form-horizontal">
+        <form action="insertar_P.php" method="POST" id="form" name="form_A" class="form-horizontal">
           <fieldset>
             <legend class="text-center">Datos del Representante</legend>
             <!-- datos del Representante -->
@@ -398,7 +398,7 @@ endif;
                       type="text"
                       name="plantel_procedencia"
                       id="plantel_procedencia"
-                      maxlength="20">
+                      maxlength="50">
                     <p class="help-block" id="plantel_procedencia_chequeo">
                     </p>
                   </div>
@@ -705,6 +705,13 @@ endif;
     <!-- validacion -->
     <?php $validacion = enlaceDinamico("java/validacionAlumno.js"); ?>
     <script type="text/javascript" src="<?php echo $validacion ?>"></script>
+    <script type="text/javascript">
+      $(function(){
+        $('#form').on('change', function(){
+          validacionAlumno();
+        });
+      });
+    </script>
     <!-- ajax de estado -->
     <?php $estado = enlaceDinamico("java/edo.php"); ?>
     <?php $municipio = enlaceDinamico("java/mun.php"); ?>
@@ -726,6 +733,16 @@ endif;
               });
             });
           });
+        });
+      });
+    </script>
+    <!-- validacion de direccion -->
+    <script type="text/javascript">
+      $(function(){
+        $.ajax({
+          url: '../java/validacionDireccion.js',
+          type: 'POST',
+          dataType: 'script'
         });
       });
     </script>

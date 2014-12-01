@@ -56,5 +56,9 @@ $(function(){
       $('#submit').prop('disabled', true);
       $('#submitDos').prop('disabled', true);
     };
+    // bloquea datos de representante:
+    $('.bloquear').each(function(){
+      $(this).prop('disabled', true);
+    });
   });
 });

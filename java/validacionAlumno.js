@@ -1,221 +1,358 @@
 /**
- * @author Erick Zerpa.
- * @author Andres Leotur
  * @author Alejandro Granadillo.
+ * @author Andres Leotur.
+ * @author Erick Zerpa.
  *
  * @internal ESTA FUNCION DEBE SER DOCUMENTADA Y LIMPIADA.
- * [validarform validacion de alumno]
- * @return {action} genera la accion de submit.
+ * [validacionAlumno validacion de alumno]
+ *
+ * @return {boolean} [regresa verdadero si los campos son validos.]
  *
  * @todo documentar mejor esta funcion (denle las gracias a Zerpa por no documentar nada.)
  *
- * @version 1.1
+ * @see alumno/form_reg_A.php
+ *
+ * @version 2.0
  */
 function validacionAlumno(){
+  // expresiones regulares:
+  var expRegpnom  = /^[a-zA-ZÑñÁáÉéÍíÓóÚú'-\s]{0,20}$/;//^[a-zA-ZÑñÁáÉéÍíÓóÚú]$/;
+  var expRegced   = /^(?:\+|-)?\d+$/;
+  var expRegtlf   = /^\d{11}$/;
+  // ver validacionPI.js
+  var emailChequeo = /^[0-9a-zA-Z-_\$#]+@[0-9a-zA-Z-_\$#]+\.[a-zA-Z]{2,5}/;
+  // variable de control:
+  var verificar = false;
+  // datos de formulario
+  var emailChequeo = /^[0-9a-zA-Z-_\$#]+@[0-9a-zA-Z-_\$#]+\.[a-zA-Z]{2,5}/;
+  var cedula = document.getElementById("cedula").value.replace(/^\s+|\s+$/g, '');
+  var cedula_escolar = document.getElementById("cedula_escolar").value.replace(/^\s+|\s+$/g, '');
+  var nacionalidad = document.getElementById("nacionalidad").value.replace(/^\s+|\s+$/g, '');
+  var p_nombre = document.getElementById("p_nombre").value.replace(/^\s+|\s+$/g, '');
+  var s_nombre = document.getElementById("s_nombre").value.replace(/^\s+|\s+$/g, '');
+  var p_apellido = document.getElementById("p_apellido").value.replace(/^\s+|\s+$/g, '');
+  var s_apellido = document.getElementById("s_apellido").value.replace(/^\s+|\s+$/g, '');
+  var sexo = document.getElementById("sexo").value.replace(/^\s+|\s+$/g, '');
+  var fec_nac = document.getElementById("fec_nac").value.replace(/^\s+|\s+$/g, '');
+  var estado = document.getElementById("cod_est").value.replace(/^\s+|\s+$/g, '');
+  var municipio = document.getElementById("cod_mun").value.replace(/^\s+|\s+$/g, '');
+  var parroquia = document.getElementById("cod_parro").value.replace(/^\s+|\s+$/g, '');
+  var direcc = document.getElementById("direcc").value.replace(/^\s+|\s+$/g, '');
+  var repitiente = document.getElementById("repitiente").value.replace(/^\s+|\s+$/g, '');
+  var lugar_nac = document.getElementById("lugar_nac").value.replace(/^\s+|\s+$/g, '');
+  var telefono = document.getElementById("telefono").value.replace(/^\s+|\s+$/g, '');
+  var telefono_otro = document.getElementById("telefono_otro").value.replace(/^\s+|\s+$/g, '');
+  var acta_num_part_nac = document.getElementById("acta_num_part_nac").value.replace(/^\s+|\s+$/g, '');
+  var acta_folio_num_part_nac = document.getElementById("acta_folio_num_part_nac").value.replace(/^\s+|\s+$/g, '');
+  var plantel_procedencia = document.getElementById("plantel_procedencia").value.replace(/^\s+|\s+$/g, '');
+  var vacuna = document.getElementById("vacuna").value.replace(/^\s+|\s+$/g, '');
+  var discapacidad = document.getElementById("discapacidad").value.replace(/^\s+|\s+$/g, '');
+  var altura = document.getElementById("altura").value.replace(/^\s+|\s+$/g, '');
+  var peso = document.getElementById("peso").value.replace(/^\s+|\s+$/g, '');
+  var camisa = document.getElementById("camisa").value.replace(/^\s+|\s+$/g, '');
+  var pantalon = document.getElementById("pantalon").value.replace(/^\s+|\s+$/g, '');
+  var zapato = document.getElementById("zapato").value.replace(/^\s+|\s+$/g, '');
 
-  var verificar = true;
-  var esnumero;
-
-  var expRegpnom   =/^[a-zA-Z]{0,20}$/;//^[a-zA-ZÑñÁáÉéÍíÓóÚú]$/;
-  var expRegced    = /^(?:\+|-)?\d+$/;
-  var expRegtlf  = /^\d{11}$/;
-
-  var cedula = document.getElementById("cedula");
-  var cedesc = document.getElementById("cedula_escolar").value;
-  var nacionalidad = document.getElementById("nacionalidad");
-  var pnombre = document.getElementById("p_nombre");
-  var snombre = document.getElementById("s_nombre");
-  var papelli = document.getElementById("p_apellido");
-  var sapelli = document.getElementById("s_apellido");
-
-  var sexo = document.getElementById("sexo");
-  var fec_nac = document.getElementById("fec_nac");
-  var edo = document.getElementById("cod_est");
-  var mun = document.getElementById("cod_mun");
-  var parro = document.getElementById("cod_parro");
-  var direcc = document.getElementById("direcc");
-  var repit = document.getElementById("repitiente");
-
-  var lugnac = document.getElementById("lugar_nac");
-  var tlf = document.getElementById("telefono");
-  var tlfo = document.getElementById("telefono_otro");
-
-  var apartida = document.getElementById("acta_num_part_nac");
-  var afpartida = document.getElementById("acta_folio_num_part_nac");
-  var plantel_proce = document.getElementById("plantel_procedencia");
-
-  var alt = document.getElementById("altura").value;
-  var peso = document.getElementById("peso").value;
-  var cam = document.getElementById("camisa").value;
-  var pant = document.getElementById("pantalon").value;
-  var zap = document.getElementById("zapato").value;
-
-  if (!cedula.value) {
-    alert("Campo de Cedula Requerido");
-    cedula.focus();
-    verificar = false;
-    console.log("se detecto: cedula: "+cedula.value);
+// cedula
+  if (cedula === "") {
+    $('#cedula').parent().addClass('has-error');
+    $("#cedula_chequeo").html('este campo no puede estar vacio.');
+    return false;
+  }else if (!expRegced.exec(cedula)) {
+    $("#cedula_chequeo").html('Favor introduzca cedula solo numeros sin caracteres especiales, EJ: 12345678');
+    $('#cedula').parent().addClass('has-error');
+    return false;
+  }else if(cedula.length < 6){
+    $('#cedula').parent().addClass('has-error');
+    $("#cedula_chequeo").html('Este campo no debe ser menor a 6 caracteres');
+    return false;
+  }else if(cedula.length > 8){
+    $('#cedula').parent().addClass('has-error');
+    $("#cedula_chequeo").html('Este campo no debe ser mayor a 8 caracteres');
+    return false;
+  }else{
+    $('#cedula').parent().removeClass('has-error').addClass('has-success');
+    $("#cedula_chequeo").html('&nbsp;');
+    verificar = true;
   }
-  else if (!expRegced.exec(cedula.value)) {
-    alert("Campo Cedula acepta solo numero sin espacio");
-    pnombre.focus();
-    verificar = false;
-    console.log("se detecto: cedula: "+cedula.value);
+// cedula_escolar
+  if (cedula_escolar === "") {
+    $('#cedula_escolar').parent().addClass('has-error');
+    $("#cedula_escolar_chequeo").html('este campo no puede estar vacio.');
+    return false;
+  }else if (!expRegced.exec(cedula_escolar)) {
+    $("#cedula_escolar_chequeo").html('Favor introduzca cedula_escolar solo numeros sin caracteres especiales, EJ: 12345678');
+    $('#cedula_escolar').parent().addClass('has-error');
+    return false;
+  }else if(cedula_escolar.length < 6){
+    $('#cedula_escolar').parent().addClass('has-error');
+    $("#cedula_escolar_chequeo").html('Este campo no debe ser menor a 6 caracteres');
+    return false;
+  }else if(cedula_escolar.length > 8){
+    $('#cedula_escolar').parent().addClass('has-error');
+    $("#cedula_escolar_chequeo").html('Este campo no debe ser mayor a 8 caracteres');
+    return false;
+  }else{
+    $('#cedula_escolar').parent().removeClass('has-error').addClass('has-success');
+    $("#cedula_escolar_chequeo").html('&nbsp;');
+    verificar = true;
   }
-  else if(isNaN(cedesc)) {
-    alert("Campo Cedula Escolar solo debe ir Numeros");
-    cedesc.focus();
-      verificar = false;
-      console.log("se detecto: cedesc: "+cedesc.value);
+// nacionalidad
+  if ( nacionalidad != 'v' && nacionalidad != 'e' ) {
+    $("#nacionalidad_chequeo").html('Algo parece estar mal. el sistema funciona mejor con firefox o chrome.');
+    $('#nacionalidad').parent().addClass('has-error');
+    return false;
+  }else{
+    $('#nacionalidad').parent().removeClass('has-error').addClass('has-success');
+    $("#nacionalidad_chequeo").html('&nbsp;');
+    verificar = true;
   }
-  else if (!pnombre.value) {
-    alert("Campo Primer Nombre Requerido");
-    pnombre.focus();
-    verificar = false;
-    console.log("se detecto: pnombre: "+pnombre.value);
+// primer nombre
+  if (p_nombre === "") {
+    $("#p_nombre_chequeo").html('este campo no puede estar vacio');
+    $('#p_nombre').parent().addClass('has-error');
+    return false;
+  }else if (!expRegpnom.exec(p_nombre)) {
+    $("#p_nombre_chequeo").html('Favor introduzca en este campo Letras sin numeros o caracteres especiales EJ: 19?=;@*');
+    $('#p_nombre').parent().addClass('has-error');
+    return false;
+  }else if (p_nombre.length > 20){
+    $("#p_nombre_chequeo").html('este campo no puede ser mayor a 20 caracteres');
+    $('#p_nombre').parent().addClass('has-error');
+    return false;
+  }else{
+    $("#p_nombre_chequeo").html('&nbsp;');
+    $('#p_nombre').parent().removeClass('has-error').addClass('has-success');
+    $('#p_nombre').val( p_nombre.toUpperCase() );
+    verificar = true;
   }
-  //funcion .exec para realizar la compracion con la expresion regular
-  else if (!expRegpnom.exec(pnombre.value)) {
-    alert("Campo nombre acepta solo letras sin espacio en blanco.");
-    pnombre.focus();
-    verificar = false;
-    console.log("se detecto: pnombre: "+pnombre.value);
-  }
-  else if (!expRegpnom.exec(snombre.value)) {
+// segundo nobmre
+  if (!expRegpnom.exec(s_nombre)) {
     alert("Segundo Nombre acepta solo letras sin espacio en blanco.");
-    snombre.focus();
-    verificar = false;
-    console.log("se detecto: snombre: "+snombre.value);
+    s_nombre.focus();
+    return false;
+  }else if(s_nombre.length > 20){
+    $("#s_nombre_chequeo").html('este campo no puede ser mayor a 20 caracteres');
+    $('#s_nombre').parent().addClass('has-error');
+    return false;
+  }else{
+    $("#s_nombre_chequeo").html('&nbsp;');
+    $('#s_nombre').parent().removeClass('has-error').addClass('has-success');
+    $('#s_nombre').val( s_nombre.toUpperCase() );
+    verificar = true;
+  }
+// primer apellido
+  if (p_apellido === "") {
+    $("#p_apellido_chequeo").html('este campo no puede estar vacio');
+    $('#p_apellido').parent().addClass('has-error');
+    return false;
+  }else if (!expRegpnom.exec(p_apellido)) {
+    $("#p_apellido_chequeo").html('Favor introduzca en este campo Letras sin numeros o caracteres especiales EJ: 19?=;@*');
+    $('#p_apellido').parent().addClass('has-error');
+    return false;
+  }else if(p_apellido.length > 20){
+    $("#p_apellido_chequeo").html('este campo no puede ser mayor a 20 caracteres');
+    $('#p_apellido').parent().addClass('has-error');
+    return false;
+  }else{
+    $("#p_apellido_chequeo").html('&nbsp;');
+    $('#p_apellido').parent().removeClass('has-error').addClass('has-success');
+    $('#p_apellido').val( p_apellido.toUpperCase() );
+    verificar = true;
+  }
+// segundo apellido
+  if(s_apellido.length > 20){
+    $("#s_apellido_chequeo").html('este campo no puede ser mayor a 20 caracteres');
+    $('#s_apellido').parent().addClass('has-error');
+    return false;
+  }else if (!expRegpnom.exec(s_apellido)) {
+    $("#s_apellido_chequeo").html('Favor introduzca en este campo Letras sin numeros o caracteres especiales EJ: 19?=;@*');
+    $('#s_apellido').parent().addClass('has-error');
+    return false;
+  }else{
+    $("#s_apellido_chequeo").html('&nbsp;');
+    $('#s_apellido').parent().removeClass('has-error').addClass('has-success');
+    $('#s_apellido').val( s_apellido.toUpperCase() );
+    verificar = true;
+  }
+// logar de nacimiento
+  if (lugar_nac.length > 50) {
+    $("#lugar_nac_chequeo").html('este campo no puede ser mayor a 50 caracteres');
+    $('#lugar_nac').parent().addClass('has-error');
+    return false;
+  }else{
+    $("#lugar_nac_chequeo").html('&nbsp;');
+    $('#lugar_nac').parent().removeClass('has-error').addClass('has-success');
+    $('#lugar_nac').val( lugar_nac.toUpperCase() );
+    estatus = true;
+  }
+// fecha de nacimiento
+// desabilitadas algunas cosoas por incompatibilidad
+// con libreria de calendario.
+// ver validacionPI.js
+  if (fec_nac == "") {
+    $("#fec_nac_chequeo").html('este campo no puede estar vacio');
+    // $('#fec_nac').parent().addClass('has-error');
+    return false;
+  }else if(fec_nac.length > 20){
+    $("#fec_nac_chequeo").html('este campo no puede ser mayor a 20 caracteres');
+    // $('#fec_nac').parent().addClass('has-error');
+    return false;
+  }else if( !/[\d]{4}[-]{1}[\d]{2}[-]{1}[\d]{2}/.test(fec_nac) ){
+    $("#fec_nac_chequeo").html('Favor introduzca en este campo el año en el siguiente formato: AAAA-MM-DD EJ: 1961-12-31');
+    // $('#fec_nac').parent().addClass('has-error');
+    return false;
+  }else{
+    $("#fec_nac_chequeo").html('&nbsp;');
+    // $('#fec_nac').parent().removeClass('has-error').addClass('has-success');
+    verificar = true;
+  }
+// sexo
+  if ( sexo != '0' && sexo != '1' ) {
+    $("#sexo_chequeo").html('Por favor seleccione una opcion apropiada.');
+    $('#sexo').parent().addClass('has-error');
+    return false;
+  }else{
+    $("#sexo_chequeo").html('&nbsp;');
+    $('#sexo').parent().removeClass('has-error').addClass('has-success');
+    verificar = true;
+  }
+// telefono
+  if(telefono.length != 11 && telefono != "" ){
+    $("#telefono_chequeo").html('este campo debe contener 11 caracteres EJ: 02127773322');
+    $('#telefono').parent().addClass('has-error');
+    return false;
+  }else if(!expRegtlf.exec(telefono) && telefono != "") {
+    $("#telefono_chequeo").html('Favor introduzca en este campo Letras sin numeros o caracteres especiales EJ: 19?=;@*');
+    $('#telefono').parent().addClass('has-error');
+    return false;
+  }else{
+    $("#telefono_chequeo").html('&nbsp;');
+    $('#telefono').parent().removeClass('has-error').addClass('has-success');
+    verificar = true;
+  }
+// telefono_otro (adicional)
+  if(telefono_otro.length != 11 && telefono_otro != "" ){
+    $("#telefono_otro_chequeo").html('este campo debe contener 11 caracteres EJ: 02127773322');
+    $('#telefono_otro').parent().addClass('has-error');
+    return false;
+  }else if(!expRegtlf.exec(telefono_otro) && telefono != "") {
+    $("#telefono_otro_chequeo").html('Favor introduzca en este campo Letras sin numeros o caracteres especiales EJ: 19?=;@*');
+    $('#telefono_otro').parent().addClass('has-error');
+    return false;
+  }else{
+    $("#telefono_otro_chequeo").html('&nbsp;');
+    $('#telefono_otro').parent().removeClass('has-error').addClass('has-success');
+    verificar = true;
+  }
+// plantel de procedencia
+  if (plantel_procedencia.length > 50) {
+    $("#plantel_procedencia_chequeo").html('Favor introduzca en este campo Letras sin numeros o caracteres especiales EJ: 19?=;@*');
+    $('#plantel_procedencia').parent().addClass('has-error');
+    return false;
+  }else{
+    $("#plantel_procedencia_chequeo").html('&nbsp;');
+    $('#plantel_procedencia').parent().removeClass('has-error').addClass('has-success');
+    verificar = true;
+  }
+// discapacidad
+  if (discapacidad === "") {
+    $("#discapacidad_chequeo").html('Por favor seleccione una opcion apropiada');
+    $('#discapacidad').parent().addClass('has-error');
+    return false;
+  }else{
+    $("#discapacidad_chequeo").html('&nbsp;');
+    $('#discapacidad').parent().removeClass('has-error').addClass('has-success');
+    verificar = true;
+  }
+// vacunacion
+  if (vacunacion === "") {
+    $("#vacunacion_chequeo").html('Por favor seleccione una opcion apropiada');
+    $('#vacunacion').parent().addClass('has-error');
+    return false;
+  }else{
+    $("#vacunacion_chequeo").html('&nbsp;');
+    $('#vacunacion').parent().removeClass('has-error').addClass('has-success');
+    verificar = true;
+  }
+// repitiente
+    if (repitiente === "") {
+      $("#repitiente_chequeo").html('Por favor seleccione una opcion apropiada');
+      $('#repitiente').parent().addClass('has-error');
+      return false;
+    }else{
+      $("#repitiente_chequeo").html('&nbsp;');
+      $('#repitiente').parent().removeClass('has-error').addClass('has-success');
+      verificar = true;
+    }
+// validacion de direccion esta ahora en validacionDireccion.js
+// direccion exacta
+  if(direcc != "" && direcc.length > 150){
+    $("#direcc_chequeo").html('este campo no puede ser mayor a 150 caracteres');
+    $('#direcc').parent().addClass('has-error');
+    return false;
+  }else{
+    $("#direcc_chequeo").html('&nbsp;');
+    $('#direcc').parent().removeClass('has-error').addClass('has-success');
+    $('#direcc').val( direcc.toUpperCase() );
+    verificar = true;
+  }
+  if(isNaN(altura)) {
+    $("#altura_chequeo").html('este campo no puede ser mayor a 150 caracteres');
+    $('#altura').parent().addClass('has-error');
+    return false;
+  }else{
+    $("#altura_chequeo").html('&nbsp;');
+    $('#altura').parent().removeClass('has-error').addClass('has-success');
+    verificar = true;
+  }
+  if(isNaN(peso)) {
+    $("#peso_chequeo").html('este campo no puede ser mayor a 150 caracteres');
+    $('#peso').parent().addClass('has-error');
+    return false;
+  }else{
+    $("#peso_chequeo").html('&nbsp;');
+    $('#peso').parent().removeClass('has-error').addClass('has-success');
+    verificar = true;
+  }
+  if(isNaN(camisa)) {
+    $("#camisa_chequeo").html('este campo no puede ser mayor a 150 caracteres');
+    $('#camisa').parent().addClass('has-error');
+    return false;
+  }else{
+    $("#camisa_chequeo").html('&nbsp;');
+    $('#camisa').parent().removeClass('has-error').addClass('has-success');
+    verificar = true;
+  }
+  if(isNaN(pantalon)) {
+    $("#pantalon_chequeo").html('este campo no puede ser mayor a 150 caracteres');
+    $('#pantalon').parent().addClass('has-error');
+    return false;
+  }else{
+    $("#pantalon_chequeo").html('&nbsp;');
+    $('#pantalon').parent().removeClass('has-error').addClass('has-success');
+    verificar = true;
+  }
+  if(isNaN(zapato)) {
+    $("#zapato_chequeo").html('este campo no puede ser mayor a 150 caracteres');
+    $('#zapato').parent().addClass('has-error');
+    return false;
+  }else{
+    $("#zapato_chequeo").html('&nbsp;');
+    $('#zapato').parent().removeClass('has-error').addClass('has-success');
+    verificar = true;
   }
 
-  else if (!papelli.value) {
-    alert("Campo Primer Apellido Requerido");
-    papelli.focus();
-    verificar = false;
-    console.log("se detecto: papelli: "+papelli.value);
-  }
-  //funcion .exec para realizar la compracion con la expresion regular
-  else if (!expRegpnom.exec(papelli.value)) {
-    alert("Primer Apellido acepta solo letras sin espacio en blanco.");
-    papelli.focus();
-    verificar = false;
-    console.log("se detecto: papelli: "+papelli.value);
-  }
-
-  else if (!expRegpnom.exec(sapelli.value)) {
-    alert("Segundo Apellido acepta solo letras sin espacio en blanco.");
-    sapelli.focus();
-    verificar = false;
-    console.log("se detecto: sapelli: "+sapelli.value);
-  }
-
-  else if (!sexo.value) {
-    alert("Campo Sexo Requerido");
-    sexo.focus();
-    verificar = false;
-    console.log("se detecto: sexo: "+sexo.value);
-  }
-
-  else if (!lugnac.value) {
-    alert("Campo Lugar de Nacimiento Requerido");
-    lugnac.focus();
-    verificar = false;
-    console.log("se detecto: lugnac: "+lugnac.value);
-  }
-
-  else if(!expRegtlf.exec(tlf.value)) {
-      alert("Introduzca Telefono Local sin caracteres especiales: ()-_.*/, y solo numeros. Ej: 02124443322");
-      tlf.focus();
-      verificar = false;
-      console.log("se detecto: tlf: "+tlf.value);
-
-  }//quite es condicional, porque con doble condicional me da error y no deja pasar a la proxima validacion
-  else if (!edo.value) {
-    alert("Campo Estado Requerido");
-    edo.focus();
-    verificar = false;
-    console.log("se detecto: edo: "+edo.value);
-  }
-  else if (!mun.value) {
-    alert("Campo Municipio Requerido");
-    mun.focus();
-    verificar = false;
-    console.log("se detecto: mun: "+mun.value);
-  }
-  else if (!parro.value) {
-    alert("Campo Parroquia Requerido");
-    parro.focus();
-    verificar = false;
-    console.log("se detecto: parro: "+parro.value);
-  }
-  else if (!direcc.value) {
-    alert("Campo Direccion Requerido");
-    direcc.focus();
-    verificar = false;
-    console.log("se detecto: direcc: "+direcc.value);
-  }
-  // la definicion de direcc cambio
-  // esto es incompatible con el nuevo esquema:
-  // else if (!expRegced.exec(direcc.value)) {
-  //  alert("Campo Direccion acepta solo letras sin espacio en blanco.");
-  //  direcc.focus();
-  //  verificar = false;
-  //  console.log("se detecto: direcc: "+direcc.value);
-  // }
-  else if (!repit.value) {
-    alert("Campo Repitiente Requerido");
-    repit.focus();
-    verificar = false;
-    console.log("se detecto: repit: "+repit.value);
-  }
-
-  else if(isNaN(alt)) {
-    alert("Altura solo Numeros");
-    alt.focus();
-      verificar = false;
-      console.log("se detecto: alt: "+alt.value);
-  }
-  else if(isNaN(peso)) {
-    alert("Peso solo Numeros");
-    peso.focus();
-      verificar = false;
-      console.log("se detecto: peso: "+peso.value);
-  }
-  else if(isNaN(cam)) {
-    alert("Talla de Camisa solo Numeros");
-    cam.focus();
-      verificar = false;
-      console.log("se detecto: cam: "+cam.value);
-  }
-  else if(isNaN(pant)) {
-    alert("Talla de Pantalon solo Numeros");
-    pant.focus();
-      verificar = false;
-      console.log("se detecto: pant: "+pant.value);
-  }
-
-  else if(isNaN(zap)) {
-    alert("Talla de Calzado solo Numeros");
-    zap.focus();
-      verificar = false;
-      console.log("se detecto: zap: "+zap.value);
-  }
-
-  else if (verificar===true) {
-    alert("Validando");
-      document.getElementById("form").submit();
+  if (verificar) {
+    return true;
   }
 
 }
-
+// deprecado
 function limpiarform(){
   //id del formulario
   document.getElementById("form").reset();
 }
-
-//Hay dos manera de llamar un elemento de html, 1ero con el objeto padre document.getElementById
-//2ndo siguiendo por el nombre del formulario más el nombre (name) no el id del elemento
-//Objeto ventana, al cargar ejecuta algo.
 
 //transformado a Jquery:
 $(function(){

@@ -20,7 +20,12 @@ $(function(){
       $('#cedula_escolar_chequeo_adicional').empty();
       $('#cedula_escolar_chequeo').empty();
       $('#form input, #form select, #form textarea').each(function(){
+        $(this).parent().removeClass('has-error');
         $(this).prop('disabled', false);
+      });
+      // bloquea datos de representante:
+      $('.bloquear').each(function(){
+        $(this).prop('disabled', true);
       });
     }else if ( validacionCedulaEscolar(cedula.cambio) ) {
       $("#cedula_escolar_chequeo").empty();
@@ -37,6 +42,7 @@ $(function(){
           if (disponible === true) {
             $('#cedula_escolar_chequeo_adicional').empty();
             $('#form input, #form select, #form textarea').each(function(){
+              $(this).parent().removeClass('has-error');
               $(this).prop('disabled', false);
             });
             // bloquea datos de representante:
@@ -45,6 +51,7 @@ $(function(){
             });
           }else{
             $('#form input, #form select, #form textarea').each(function(){
+              $(this).parent().addClass('has-error');
               $(this).prop('disabled', true);
             });
             $('#cedula_escolar').prop('disabled', false);
@@ -58,8 +65,13 @@ $(function(){
       });
     }else{
       $("#cedula_escolar_chequeo").html('Favor introduzca cedula solo numeros sin caracteres especiales, EJ: 12345678');
-      $("#cedula_escolar_titulo").css('color', 'red');
+      $(this).parent().addClass('has-error');
+      $('#submit').prop('disabled', true);
       $('#submitDos').prop('disabled', true);
+      // bloquea datos de representante:
+      $('.bloquear').each(function(){
+        $(this).prop('disabled', true);
+      });
     };
   });
 });
