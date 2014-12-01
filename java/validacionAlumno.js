@@ -81,20 +81,44 @@ function validacionAlumno(){
     $("#cedula_escolar_chequeo").html('este campo no puede estar vacio.');
     return false;
   }else if (!expRegced.exec(cedula_escolar)) {
-    $("#cedula_escolar_chequeo").html('Favor introduzca cedula_escolar solo numeros sin caracteres especiales, EJ: 12345678');
+    $("#cedula_escolar_chequeo").html('Favor introduzca cedula_escolar solo numeros sin caracteres especiales, EJ: 1234567890');
     $('#cedula_escolar').parent().addClass('has-error');
     return false;
-  }else if(cedula_escolar.length < 6){
+  }else if(cedula_escolar.length != 10){
     $('#cedula_escolar').parent().addClass('has-error');
-    $("#cedula_escolar_chequeo").html('Este campo no debe ser menor a 6 caracteres');
-    return false;
-  }else if(cedula_escolar.length > 8){
-    $('#cedula_escolar').parent().addClass('has-error');
-    $("#cedula_escolar_chequeo").html('Este campo no debe ser mayor a 8 caracteres');
+    $("#cedula_escolar_chequeo").html('Este campo debe contener 10 caracteres, EJ: 1234567890');
     return false;
   }else{
     $('#cedula_escolar').parent().removeClass('has-error').addClass('has-success');
     $("#cedula_escolar_chequeo").html('&nbsp;');
+    verificar = true;
+  }
+// acta numero partida nacimiento
+  if(isNaN(acta_num_part_nac)) {
+    $("#acta_num_part_nac_chequeo").html('este campo debe ser solo numeros');
+    $('#acta_num_part_nac').parent().addClass('has-error');
+    return false;
+  }else if(acta_num_part_nac.length > 10) {
+    $("#acta_num_part_nac_chequeo").html('este campo debe tener 10 digitos');
+    $('#acta_num_part_nac').parent().addClass('has-error');
+    return false;
+  }else{
+    $("#acta_num_part_nac_chequeo").html('&nbsp;');
+    $('#acta_num_part_nac').parent().removeClass('has-error').addClass('has-success');
+    verificar = true;
+  }
+// acta folio partida nacimiento
+  if(isNaN(acta_folio_num_part_nac)) {
+    $("#acta_folio_num_part_nac_chequeo").html('este campo debe ser solo numeros');
+    $('#acta_folio_num_part_nac').parent().addClass('has-error');
+    return false;
+  }else if(acta_folio_num_part_nac.length > 10) {
+    $("#acta_folio_num_part_nac_chequeo").html('este campo debe tener 10 digitos');
+    $('#acta_folio_num_part_nac').parent().addClass('has-error');
+    return false;
+  }else{
+    $("#acta_folio_num_part_nac_chequeo").html('&nbsp;');
+    $('#acta_folio_num_part_nac').parent().removeClass('has-error').addClass('has-success');
     verificar = true;
   }
 // nacionalidad
@@ -127,9 +151,9 @@ function validacionAlumno(){
     verificar = true;
   }
 // segundo nobmre
-  if (!expRegpnom.exec(s_nombre)) {
-    alert("Segundo Nombre acepta solo letras sin espacio en blanco.");
-    s_nombre.focus();
+  if (!expRegpnom.exec(s_nombre) && s_nombre != "") {
+    $("#s_nombre_chequeo").html('Favor introduzca en este campo Letras sin numeros o caracteres especiales EJ: 19?=;@*');
+    $('#s_nombre').parent().addClass('has-error');
     return false;
   }else if(s_nombre.length > 20){
     $("#s_nombre_chequeo").html('este campo no puede ser mayor a 20 caracteres');
@@ -253,6 +277,7 @@ function validacionAlumno(){
   }else{
     $("#plantel_procedencia_chequeo").html('&nbsp;');
     $('#plantel_procedencia').parent().removeClass('has-error').addClass('has-success');
+    $('#plantel_procedencia').val( plantel_procedencia.toUpperCase() );
     verificar = true;
   }
 // discapacidad
@@ -265,14 +290,14 @@ function validacionAlumno(){
     $('#discapacidad').parent().removeClass('has-error').addClass('has-success');
     verificar = true;
   }
-// vacunacion
-  if (vacunacion === "") {
-    $("#vacunacion_chequeo").html('Por favor seleccione una opcion apropiada');
-    $('#vacunacion').parent().addClass('has-error');
+// vacuna
+  if (vacuna === "") {
+    $("#vacuna_chequeo").html('Por favor seleccione una opcion apropiada');
+    $('#vacuna').parent().addClass('has-error');
     return false;
   }else{
-    $("#vacunacion_chequeo").html('&nbsp;');
-    $('#vacunacion').parent().removeClass('has-error').addClass('has-success');
+    $("#vacuna_chequeo").html('&nbsp;');
+    $('#vacuna').parent().removeClass('has-error').addClass('has-success');
     verificar = true;
   }
 // repitiente
@@ -286,6 +311,11 @@ function validacionAlumno(){
       verificar = true;
     }
 // validacion de direccion esta ahora en validacionDireccion.js
+  if (parroquia === "") {
+    return false;
+  } else{
+    verificar = true;
+  };
 // direccion exacta
   if(direcc != "" && direcc.length > 150){
     $("#direcc_chequeo").html('este campo no puede ser mayor a 150 caracteres');
@@ -298,7 +328,7 @@ function validacionAlumno(){
     verificar = true;
   }
   if(isNaN(altura)) {
-    $("#altura_chequeo").html('este campo no puede ser mayor a 150 caracteres');
+    $("#altura_chequeo").html('este campo debe ser solo numeros');
     $('#altura').parent().addClass('has-error');
     return false;
   }else{
@@ -307,7 +337,7 @@ function validacionAlumno(){
     verificar = true;
   }
   if(isNaN(peso)) {
-    $("#peso_chequeo").html('este campo no puede ser mayor a 150 caracteres');
+    $("#peso_chequeo").html('este campo debe ser solo numeros');
     $('#peso').parent().addClass('has-error');
     return false;
   }else{
@@ -316,7 +346,7 @@ function validacionAlumno(){
     verificar = true;
   }
   if(isNaN(camisa)) {
-    $("#camisa_chequeo").html('este campo no puede ser mayor a 150 caracteres');
+    $("#camisa_chequeo").html('este campo debe ser solo numeros');
     $('#camisa').parent().addClass('has-error');
     return false;
   }else{
@@ -325,7 +355,7 @@ function validacionAlumno(){
     verificar = true;
   }
   if(isNaN(pantalon)) {
-    $("#pantalon_chequeo").html('este campo no puede ser mayor a 150 caracteres');
+    $("#pantalon_chequeo").html('este campo debe ser solo numeros');
     $('#pantalon').parent().addClass('has-error');
     return false;
   }else{
@@ -334,7 +364,7 @@ function validacionAlumno(){
     verificar = true;
   }
   if(isNaN(zapato)) {
-    $("#zapato_chequeo").html('este campo no puede ser mayor a 150 caracteres');
+    $("#zapato_chequeo").html('este campo debe ser solo numeros');
     $('#zapato').parent().addClass('has-error');
     return false;
   }else{

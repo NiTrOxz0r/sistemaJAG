@@ -100,9 +100,9 @@ function validacionPA(){
     verificar = true;
   }
 // segundo nobmre
-  if (!expRegpnom.exec(s_nombre)) {
-    alert("Segundo Nombre acepta solo letras sin espacio en blanco.");
-    s_nombre.focus();
+  if (!expRegpnom.exec(s_nombre) && s_nombre != "") {
+    $("#s_nombre_chequeo").html('Favor introduzca en este campo Letras sin numeros o caracteres especiales EJ: 19?=;@*');
+    $('#s_nombre').parent().addClass('has-error');
     return false;
   }else if(s_nombre.length > 20){
     $("#s_nombre_chequeo").html('este campo no puede ser mayor a 20 caracteres');
@@ -263,6 +263,11 @@ function validacionPA(){
     verificar = true;
   }
 // validacion de edo/mun/parro movido a un archivo aparte
+  if (parroquia === "") {
+    return false;
+  } else{
+    estatus = true;
+  };
 // (validacionDirecion.js)
 // direccion exacta
   if(direcc != "" && direcc.length > 150){

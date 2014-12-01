@@ -35,7 +35,7 @@ endif;
     <div class="container">
       <div class="row">
         <!-- http://www.w3schools.com/html/html_forms.asp -->
-        <form action="insertar_P.php" method="POST" id="form" name="form_A" class="form-horizontal">
+        <form action="insertar_A.php" method="POST" id="form" name="form_A" class="form-horizontal">
           <fieldset>
             <legend class="text-center">Datos del Representante</legend>
             <!-- datos del Representante -->
@@ -155,7 +155,7 @@ endif;
                         <label for="cedula_escolar" class="control-label">Cedula Escolar</label>
                         <input
                           type="text"
-                          maxlength="8"
+                          maxlength="10"
                           name="cedula_escolar"
                           id="cedula_escolar"
                           class="form-control"
@@ -185,8 +185,7 @@ endif;
                             type="number"
                             name="acta_num_part_nac"
                             id="acta_num_part_nac"
-                            required
-                            maxlength="20">
+                            max="9999999999">
                           <p class="help-block" id="acta_num_part_nac_chequeo">
                           </p>
                         </div>
@@ -203,7 +202,7 @@ endif;
                             type="number"
                             name="acta_folio_num_part_nac"
                             id="acta_folio_num_part_nac"
-                            maxlength="20">
+                            max="9999999999">
                           <p class="help-block" id="acta_folio_num_part_nac_chequeo">
                           </p>
                         </div>
@@ -434,7 +433,7 @@ endif;
                       <div class="form-group">
                         <label for="vacuna" class="control-label">¿Certificado de vacunacion?</label>
                         <select class="form-control" name="vacuna" id="vacuna">
-                          <option  selected="selected">Seleccione</option>
+                          <option  selected="selected" value="">Seleccione</option>
                           <option value="s">SI</option>
                           <option value="n">NO</option>
                         </select>
@@ -450,7 +449,7 @@ endif;
                       <div class="form-group">
                         <label for="repitiente" class="control-label">¿Es repitiente?</label>
                         <select class="form-control" name="repitiente" id="repitiente">
-                          <option  selected="selected">Seleccione</option>
+                          <option  selected="selected" value="">Seleccione</option>
                           <option value="s">SI</option>
                           <option value="n">NO</option>
                         </select>
@@ -546,6 +545,11 @@ endif;
                             <?php endwhile; ?>
                           </select>
                           <p class="help-block" id="curso_chequeo">
+                          </p>
+                          <p class="help-block" id="curso_chequeo_adicional">
+                            <!-- NO TOCAR -->
+                            &nbsp;
+                            <!-- NO TOCAR -->
                           </p>
                         </div>
                       </div>
@@ -710,6 +714,14 @@ endif;
         $('#form').on('change', function(){
           validacionAlumno();
         });
+        $('#form').on('submit', function(e){
+          if (validacionAlumno()) {
+            $('#cedula_r').prop('disabled', false);
+            return true;
+          }else{
+            return false;
+          }
+        });
       });
     </script>
     <!-- ajax de estado -->
@@ -769,6 +781,17 @@ endif;
         });
         $.ajax({
           url: '../java/ajax/cedulaEscolar.js',
+          type: 'POST',
+          dataType: 'script'
+        });
+      });
+    </script>
+    <!-- ajax de curso -->
+    <!-- http://api.jquery.com/jQuery.ajax/ -->
+    <script type="text/javascript">
+      $(function(){
+        $.ajax({
+          url: '../java/ajax/alumnosEnCurso.js',
           type: 'POST',
           dataType: 'script'
         });

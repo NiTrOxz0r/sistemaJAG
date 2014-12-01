@@ -295,8 +295,13 @@ function validacionPI(){
     $('#direcc').val( direcc.toUpperCase() );
     estatus = true;
   }
-  // validacion de edo/mun/parro movido a un archivo aparte
-  // (validacionDirecion.js)
+// validacion de edo/mun/parro movido a un archivo aparte
+// (validacionDirecion.js)
+  if (parroquia === "") {
+    return false;
+  } else{
+    estatus = true;
+  };
 
   return go(estatus);
 

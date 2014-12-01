@@ -273,7 +273,6 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);
             var campo = $(this).val().replace(/^\s+|\s+$/g, '');
             if (campo === "") {
               $('#submit').prop('disabled', true);
-              $(this).focus();
               $("#informacion_chequeo").html('este campo no puede estar vacio.');
               $("#informacion_chequeo").parent().addClass('has-error');
             };
@@ -285,17 +284,14 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);
             if (tipo === '1') {
               if(campo.length < 6){
                 $('#submit').prop('disabled', true);
-                $(this).focus();
                 $("#informacion_chequeo").html('cedula no puede ser menor a 6 caracteres');
                 $("#informacion_chequeo").parent().addClass('has-error');
               }else if(campo.length > 8){
                 $('#submit').prop('disabled', true);
-                $(this).focus();
                 $("#informacion_chequeo").html('cedula no puede ser mayor a 8 caracteres');
                 $("#informacion_chequeo").parent().addClass('has-error');
               }else if( numerosChequeo.exec(campo) ){
                 $('#submit').prop('disabled', true);
-                $(this).focus();
                 $("#informacion_chequeo").html('Favor introduzca cedula solo numeros sin caracteres especiales, EJ: 12345678');
                 $("#informacion_chequeo").parent().addClass('has-error');
               }else{
@@ -306,12 +302,10 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);
             }else if( tipo === '2' || tipo === '3' ) {
               if(campo.length > 20){
                 $('#submit').prop('disabled', true);
-                $(this).focus();
                 $("#informacion_chequeo").html('este campo no puede ser mayor a 20 caracteres');
                 $("#informacion_chequeo").parent().addClass('has-error');
               }else if( nombresChequeo.test(campo) ){
                 $('#submit').prop('disabled', true);
-                $(this).focus();
                 $("#informacion_chequeo").html('Favor introduzca en este campo Letras sin numeros o caracteres especiales EJ: 19?=;@*');
                 $("#informacion_chequeo").parent().addClass('has-error');
               }else{

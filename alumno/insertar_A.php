@@ -7,7 +7,7 @@ require_once($enlace);
 // invocamos validarUsuario.php desde master.php
 validarUsuario(1, 1, $_SESSION['cod_tipo_usr']);
 
-  if (isset($_SESSION['cedula_r'])){
+  if (isset($_POST['cedula_r'])){
 
 
     $con = conexion();
@@ -83,9 +83,9 @@ validarUsuario(1, 1, $_SESSION['cod_tipo_usr']);
     $certificado_vacuna = mysqli_escape_string($con, $_POST['vacuna']);
     $cod_discapacidad   = mysqli_escape_string($con, $_POST['discapacidad']);
     $cod_curso          = mysqli_escape_string($con, $_POST['curso']);
-
+    $cedula_r = mysqli_escape_string($con, $_POST['cedula_r']);
     $query_R="SELECT a.codigo from personal_autorizado a
-    inner join persona b on (a.cod_persona=b.codigo) where b.cedula ='$_SESSION[cedula_r]'";
+    inner join persona b on (a.cod_persona=b.codigo) where b.cedula ='$cedula_r'";
 
 
     $resultado = conexion($query_R);
