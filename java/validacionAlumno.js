@@ -11,7 +11,7 @@
  *
  * @version 1.1
  */
-function validarform(){
+function validacionAlumno(){
 
   var verificar = true;
   var esnumero;
@@ -219,9 +219,7 @@ function limpiarform(){
 
 //transformado a Jquery:
 $(function(){
-  var botonEnviar, botonLimpiar;
-  botonEnviar = document.form_alu.enviar_btn;
-  botonLimpiar = document.form_alu.limpiar_btn;
-  botonEnviar.onclick = validarform;
-  botonLimpiar.onclick = limpiarform;
+  var botonEnviar;
+  botonEnviar = $('#submit');
+  botonEnviar.onclick = validacionAlumno;
 });

@@ -703,7 +703,7 @@ endif;
     <script type="text/javascript" src="<?php echo $plugin ?>"></script>
     <script type="text/javascript" src="<?php echo $datepick ?>"></script>
     <!-- validacion -->
-    <?php $validacion = enlaceDinamico("java/validacion.js"); ?>
+    <?php $validacion = enlaceDinamico("java/validacionAlumno.js"); ?>
     <script type="text/javascript" src="<?php echo $validacion ?>"></script>
     <!-- ajax de estado -->
     <?php $estado = enlaceDinamico("java/edo.php"); ?>
