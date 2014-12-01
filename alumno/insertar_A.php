@@ -7,6 +7,8 @@ require_once($enlace);
 // invocamos validarUsuario.php desde master.php
 validarUsuario(1, 1, $_SESSION['cod_tipo_usr']);
 
+empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);
+
   if (isset($_POST['cedula_r'])){
 
 
@@ -148,6 +150,8 @@ validarUsuario(1, 1, $_SESSION['cod_tipo_usr']);
     $codUsrMod = $_SESSION['codUsrMod'];
     $codTipoUsr = $_SESSION['cod_tipo_usr'];
     $seudonimo = $_SESSION['seudonimo'];
+    $p_nombre = $_SESSION['p_nombre'];
+    $p_apellido = $_SESSION['p_apellido'];
 
     // LA VARIABLE SE DES-CREA, DES-INICIA DESACTIVA
     unset($_SESSION);
@@ -157,7 +161,8 @@ validarUsuario(1, 1, $_SESSION['cod_tipo_usr']);
     $_SESSION['codUsrMod'] = $codUsrMod;
     $_SESSION['cod_tipo_usr'] = $codTipoUsr;
     $_SESSION['seudonimo'] = $seudonimo;
-
+    $_SESSION['p_nombre'] = $p_nombre;
+    $_SESSION['p_apellido'] = $p_apellido;
 
   finalizarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);
 ?>
