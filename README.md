@@ -48,13 +48,22 @@ else if (verificar=true) {
 #estado mental:
 
 @slayerfat:
+
 ![totalmente ok](http://mattburnscoventry.files.wordpress.com/2011/03/mental-breakdown.gif)
 ![en serio totalmente ok](http://25.media.tumblr.com/tumblr_m4qxy3SJz81rn19nco1_500.gif)
+
 @Phantom66:
+
 ![totalmente ok](http://stream1.gifsoup.com/view4/4741900/concerned-spock-o.gif)
+
 Joan:
+
 ![trabajando full](http://c1.thejournal.ie/media/2013/08/dudefriday.gif)
+
 erick:
+
 ![envidosos van a envidiar...](http://img0.joyreactor.com/pics/post/gif-games-programmer-1048062.gif)
+
 bryan:
+
 ![im helping](http://www.vh1.com/celebrity/bwe/images/2010/01/SIMON-CONFUSED-GIF.gif)
