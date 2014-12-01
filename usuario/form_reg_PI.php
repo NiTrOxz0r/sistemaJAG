@@ -313,7 +313,7 @@ if ( (isset($_POST['seudonimo']) && isset($_POST['clave']) )
                               class="form-control"
                               id="email"
                               name="email"
-                              maxlength="40"
+                              maxlength="50"
                               required>
                             </div>
                             <p class="help-block" id="email_chequeo">
@@ -368,7 +368,7 @@ if ( (isset($_POST['seudonimo']) && isset($_POST['clave']) )
                       <div class="row">
                         <div class="col-xs-12">
                           <div class="form-group">
-                            <label for="direcc" class="control-label">Direccion (Av/Calle/Edf.)</label>
+                            <label for="direcc" class="control-label">Informacion detallada (Av/Calle/Edf.)</label>
                             <textarea
                             class="form-control"
                             maxlenght="150"
@@ -427,7 +427,7 @@ if ( (isset($_POST['seudonimo']) && isset($_POST['clave']) )
                   </div>
                 </div>
                 <div class="row">
-                  <div class="col-sm-8 col-sm-offset-2 bg-primary" style="border-radius: 4px;">
+                  <div class="col-sm-8 col-sm-offset-2 bg-primary redondeado">
                     <div class="row">
                       <div class="col-xs-12">
                         <h4>

@@ -1,4 +1,15 @@
 <?php
+/**
+ * @author [Andres Leotur]
+ * @author [Alejandro Granadillo]
+ *
+ * {@internal [esta funcion genera el registro de base de datos de alumno
+ * solo requiere como condicion saber la cedula del representante.]}
+ *
+ * @todo VALIDAR ALUMNO!!!!!!!!
+ *
+ * @version 1.1
+ */
 if(!isset($_SESSION)){
   session_start();
 }
@@ -7,7 +18,9 @@ require_once($enlace);
 // invocamos validarUsuario.php desde master.php
 validarUsuario(1, 1, $_SESSION['cod_tipo_usr']);
 
-  if (isset($_SESSION['cedula_r'])){
+empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);
+
+  if (isset($_POST['cedula_r'])){
 
 
     $con = conexion();
@@ -83,9 +96,9 @@ validarUsuario(1, 1, $_SESSION['cod_tipo_usr']);
     $certificado_vacuna = mysqli_escape_string($con, $_POST['vacuna']);
     $cod_discapacidad   = mysqli_escape_string($con, $_POST['discapacidad']);
     $cod_curso          = mysqli_escape_string($con, $_POST['curso']);
-
+    $cedula_r = mysqli_escape_string($con, $_POST['cedula_r']);
     $query_R="SELECT a.codigo from personal_autorizado a
-    inner join persona b on (a.cod_persona=b.codigo) where b.cedula ='$_SESSION[cedula_r]'";
+    inner join persona b on (a.cod_persona=b.codigo) where b.cedula ='$cedula_r'";
 
 
     $resultado = conexion($query_R);
@@ -132,14 +145,79 @@ validarUsuario(1, 1, $_SESSION['cod_tipo_usr']);
     VALUES
     (null, $cod_representante, $codigo_alumno, $status, $cod_usr_reg, null, $cod_usr_mod, null);";
 
-    $res = conexion($query_O);
+    $res = conexion($query_O);?>
 
-    echo "DATOS INGRESADOS EXITOSAMENTE";
+    <div id="contenido_actualizar_C">
+      <div id="blancoAjax">
+        <div class="container">
+          <div class="row">
+            <div class="jumbotron">
+              <h1>Registro exitoso!</h1>
+              <h4>
+                Los registros asociados
+                fueron guardados correctamente!
+              </h4>
+              <p>
+                Si desea hacer un registro de una alumno asociado a la cedula:
+                 <?php echo $cedula_r ?>, por favor dele
+                <a href="<?php echo "form_reg_A.php?cedula_r=$cedula_r" ?>">
+                  click a este enlace
+                </a>
+              </p>
+              <p>
+                <?php $index = enlaceDinamico(); ?>
+                <a href="<?php echo $index ?>" class="btn btn-primary btn-lg">Regresar al sistema</a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
-
+<?php
   }else{
 
-    echo " Ingresar REPRSENTANTE";
+    // echo " Ingresar REPRSENTANTE";?>
+    <div id="contenido_actualizar_C">
+      <div id="blancoAjax">
+        <div class="container">
+          <div class="row">
+            <div class="jumbotron">
+              <h1>Ups!</h1>
+              <p>
+                Error en el proceso de registro!
+              </p>
+              <h3>
+                <small>
+                  Lamentablemente, es posible que los datos de registro se perdieron.
+                </small>
+              </h3>
+              <?php $index = enlaceDinamico(); ?>
+              <p>
+                para ir al proceso de inscripcion <a href="<?php echo $index ?>">
+                puede seguir este enlace.
+                </a>
+              </p>
+              <p>
+                Si desea hacer una consulta por favor dele
+                <a href="menucon.php">click a este enlace.</a>
+              </p>
+              <p>
+                ¿O sera que entro en esta pagina erroneamente?
+              </p>
+              <p class="bg-warning">
+                Si este es un problema recurrente, contacte a un administrador del sistema.
+              </p>
+              <p>
+                <?php $index = enlaceDinamico(); ?>
+                <a href="<?php echo $index ?>" class="btn btn-primary btn-lg">Regresar al sistema</a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+<?php
 
 }
 
@@ -148,6 +226,8 @@ validarUsuario(1, 1, $_SESSION['cod_tipo_usr']);
     $codUsrMod = $_SESSION['codUsrMod'];
     $codTipoUsr = $_SESSION['cod_tipo_usr'];
     $seudonimo = $_SESSION['seudonimo'];
+    $p_nombre = $_SESSION['p_nombre'];
+    $p_apellido = $_SESSION['p_apellido'];
 
     // LA VARIABLE SE DES-CREA, DES-INICIA DESACTIVA
     unset($_SESSION);
@@ -157,7 +237,8 @@ validarUsuario(1, 1, $_SESSION['cod_tipo_usr']);
     $_SESSION['codUsrMod'] = $codUsrMod;
     $_SESSION['cod_tipo_usr'] = $codTipoUsr;
     $_SESSION['seudonimo'] = $seudonimo;
-
+    $_SESSION['p_nombre'] = $p_nombre;
+    $_SESSION['p_apellido'] = $p_apellido;
 
   finalizarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);
 ?>

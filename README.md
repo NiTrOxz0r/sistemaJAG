@@ -1,6 +1,9 @@
 sistemaJAG
 ==========
 
+Sistema de inscripcion adaptado para la institucion publica E.B.N.B "Jose Antonio Gonzales"
+
+El prototipo de este sistema esta en linea en [sistemajag.esy.es/](http://sistemajag.esy.es/)
 ###Escuela Basica Nacional Bolivariana "Jose Antonio Gonzales"
 Escuela ubicada en el paraiso, caracas, venezuela.
 
@@ -32,3 +35,48 @@ en progreso: 0% aprox.
   * https://github.com/slayerfat/sistemaJAG/releases/tag/ver0.2
   * https://github.com/slayerfat/sistemaJAG/releases/tag/ver0.1
   * https://github.com/slayerfat/sistemaJAG/releases/tag/ver0.0.9c
+
+#Tesoros escondidos en el sistema:
+esta es una tremenda gema:
+```javascript
+else if (verificar=true) {
+  alert("Validando");
+  document.getElementById("form").submit();
+}
+```
+
+hermoso:
+```php
+  <select name="discapacidad" id="discapacidad">
+    <option>Seleccionar</option>
+    <? while($fila= mysqli_fetch_array($res)) : ?>
+    <?php if ($reg['cod_discapacidad']==$fila['codigo']):?>
+      <option selected="selected" value="<?=$fila['codigo'];?>"><?=$fila['descripcion'];?></option>
+      <?php else:?>
+      <? endif;?>
+      <option value="<?=$fila['codigo'];?>"><?=$fila['descripcion'];?></option>
+    <?php endwhile;?>
+</select>
+```
+#estado mental:
+
+[@slayerfat:](https://github.com/slayerfat)
+
+![totalmente ok](http://mattburnscoventry.files.wordpress.com/2011/03/mental-breakdown.gif)
+![en serio totalmente ok](http://25.media.tumblr.com/tumblr_m4qxy3SJz81rn19nco1_500.gif)
+
+[@Phantom66:](https://github.com/Phantom66)
+
+![totalmente ok](http://stream1.gifsoup.com/view4/4741900/concerned-spock-o.gif)
+
+Joan:
+
+![trabajando full](http://c1.thejournal.ie/media/2013/08/dudefriday.gif)
+
+erick:
+
+![envidosos van a envidiar...](http://img0.joyreactor.com/pics/post/gif-games-programmer-1048062.gif)
+
+bryan:
+
+![im helping](http://www.vh1.com/celebrity/bwe/images/2010/01/SIMON-CONFUSED-GIF.gif)

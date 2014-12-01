@@ -12,501 +12,507 @@ validarUsuario(1, 1, $_SESSION['cod_tipo_usr']);
 empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr'], 'sistemaJAG | Proceso de Registro 2014-2015');
 
 //CONTENIDO:?>
-<div id="contenido">
+<div id="contenido_form_reg_P">
   <div id="blancoAjax">
-    <div align="center">
-      <!-- http://www.w3schools.com/html/html_forms.asp -->
-      <form method="post" action="insertar_P.php" name="form_repre" id="form">
-        <h1 class="mostrar">REGISTRO DEL REPRESENTANTE</h1>
-        <table class="mostrar">
-          <tr>
-            <td colspan="2">
-              Entre la informaci&oacute;n:<br>
-              <sup>(<font color="#ff0000">*</font> indica campo obligatorio).</sup>
-            </td>
-          </tr>
-          <tr>
-            <th>C&eacute;dula</th>
-          </tr>
-          <tr>
-            <td align="left">
-              <select name="nacionalidad" id="nacionalidad">
-                <option value="v">V</option>
-                <option value="e">E</option>
-              </select>
-              <input
-                type="text"
-                maxlength="8"
-                size="12"
-                name="cedula"
-                autofocus
-                required
-                id="cedula">
-              <font color="#ff0000">*</font>
-            </td>
-            <td colspan="2" class="chequeo" id="cedula_chequeo">
-
-            </td>
-          </tr>
-          <tr>
-            <td
-              class="chequeo"
-              id="cedula_chequeo_adicional"
-              colspan="4">
-
-            </td>
-          </tr>
-          <tr>
-            <th>Primer Nombre</th><th>Segundo Nombre</th>
-            <th>Primer Apellido</th><th>Segundo Apellido</th>
-          </tr>
-          <tr>
-            <td>
-              <input
-                type="text"
-                name="p_nombre"
-                required
-                id="p_nombre">
-              <font color="#ff0000">*</font>
-            </td>
-            <td>
-              <input type="text" name="s_nombre" id="s_nombre">
-            </td>
-            <td>
-              <input type="text" name="p_apellido" required id="p_apellido">
-              <font color="#ff0000">*</font>
-            </td>
-            <td>
-              <input type="text" name="s_apellido" id="s_apellido">
-            </td>
-          </tr>
-          <tr>
-            <th>Sexo</th>
-            <th>Fecha de Nacimiento</th>
-            <th>Lugar de Nacimiento</th>
-          </tr>
-          <tr>
-            <td>
-              <?php $sql = "SELECT codigo, descripcion from sexo where status = 1;";
-                $registros = conexion($sql);?>
-                <select name="sexo" required id="sexo">
-                  <option value="">Seleccione una opci&oacute;n </option>
-                  <?php while($fila = mysqli_fetch_array($registros)) :?>
-                    <option value="<?php echo $fila['codigo']?>">
-                      <?php echo $fila['descripcion']?>
-                    </option>
-                  <?php endwhile; ?>
-                </select><font color="#ff0000">*</font>
-            </td>
-            <td>
-              <input type="date" required name="fec_nac" id="fec_nac">
-            </td>
-            <td>
-              <textarea
-                name="lugar_nac"
-                id="lugar_nac"
-                cols="40"
-                rows="4"
-                maxlength="50"
-                ></textarea>
-            </td>
-          </tr>
-          <tr>
-            <th>Tel&eacute;fono</th>
-            <th>Tel&eacute;fono Celular/Otro</th>
-            <th>E-mail</th>
-          </tr>
-          <tr>
-            <td>
-              <input
-                type="text"
-                maxlength="11"
-                name="telefono"
-                id="telefono">
-              <font color="#ff0000">*</font>
-            </td>
-            <td>
-              <input
-                type="text"
-                maxlength="11"
-                name="telefono_otro"
-                id="telefono_otro">
-            </td>
-            <td>
-              <input
-                type="text"
-                name="email"
-                id="email"
-                maxlength="50">
-            </td>
-          </tr>
-          <tr>
-            <th>Parentesco</th><th>Vive con el Alumno?</th>
-          </tr>
-          <tr>
-            <td>
-              <?php $sql="SELECT codigo, descripcion from relacion where status = 1;";
-                $registros = conexion($sql);?>
-              <select name="relacion" required id="relacion">
-                <option value="">Seleccione una opci&oacute;n</option>
-                <?php while($fila = mysqli_fetch_array($registros)) :?>
-                  <option value="<?php echo $fila['codigo']?>">
-                  <?php echo $fila['descripcion']?></option>
-                <?php endwhile; ?>
-              </select><font color="#ff0000">*</font>
-            </td>
-            <td>
-              <select name="vive_con_alumno" required id="vive_con_alumno">
-                <option value="s">SI</option>
-                <option value="n">NO</option>
-              </select><font color="#ff0000">*</font>
-            </td>
-          </tr>
-          <tr>
-            <th>Estado</th><th>Municipio</th><th>Parroquia</th>
-          </tr>
-          <tr>
-            <td>
-              <select name="cod_est" id="cod_est"></select>
-              <font color="#ff0000">*</font>
-            </td>
-            <td>
-              <select name="cod_mun" id="cod_mun" >
-              <option value="">--Seleccionar--</option></select>
-              <font color="#ff0000">*</font>
-            </td>
-            <td>
-              <select name="cod_parro" id="cod_parro">
-              <option value="">--Seleccionar--</option></select>
-              <font color="#ff0000">*</font>
-            </td>
-          </tr>
-          <tr>
-            <th>Direcci&oacute;n</th>
-          </tr>
-            <tr>
-              <td colspan="3">
-                <textarea
-                  maxlenght="150"
-                  cols="50"
-                  rows="4"
-                  name="direcc"
-                  id="direcc"></textarea>
-                <font color="#ff0000">*</font>
-              </td>
-            </tr>
-          <tr>
-            <th>Nivel Educativo</th><th>Profesi&oacute;n </th>
-          </tr>
-          <tr>
-            <td>
-              <?php $sql="SELECT codigo, descripcion from nivel_instruccion where status = 1;";
-                $registros = conexion($sql);?>
-              <select name="nivel_instruccion" required id="nivel_instruccion">
-              <?php while($fila = mysqli_fetch_array($registros)) : ?>
-                <option value="<?php echo $fila['codigo']?>">
-                <?php echo $fila['descripcion']?></option>
-              <?php endwhile; ?>
-              </select><font color="#ff0000">*</font>
-            </td>
-            <td>
-              <?php $sql="SELECT codigo, descripcion from profesion where status = 1;";
-                $registros = conexion($sql);?>
-              <select name="profesion" id="profesion">
-                <option value="">Seleccione</option>
-                <?php while($fila = mysqli_fetch_array($registros)) : ?>
-                  <option value="<?php echo $fila['codigo']?>">
-                  <?php echo $fila['descripcion']?></option>
-                <?php endwhile; ?>
-              </select>
-            </td>
-          </tr>
-          <tr>
-            <th>Lugar de Trabajo</th><th>Direcci&oacute;n de Trabajo</th>
-            <th>Tel&eacute;fono Laboral</th>
-          </tr>
-          <tr>
-            <td>
-            <input
-              type="text"
-              maxlength="50"
-              name="lugar_trabajo"
-              id="lugar_trabajo">
-            </td>
-            <td>
-            <input
-              type="text"
-              maxlength="150"
-              name="direccion_trabajo"
-              id="direccion_trabajo">
-            </td>
-            <td>
-            <input
-              type="text"
-              maxlength="11"
-              name="telefono_trabajo"
-              id="telefono_trabajo">
-            </td>
-          </tr>
-        </table>
-        <span>
-          <button class="iniciadorMostrar mostrar">Registrar otro registro</button>
-        </span>
-        <?php $n = 0; ?>
-        <h1 class="ocultar">REGISTRO DE FAMILIAR O ALLEGADO</h1>
-        <table class="adicional ocultar">
-          <tr>
-            <td colspan=2>
-              Entre la informaci&oacute;n:<br>
-              <sup>(<font color="#ff0000">*</font> indica campo obligatorio).</sup>
-            </td>
-          </tr>
-          <tr>
-            <th>C&eacute;dula</th>
-            <th>Esta persona puede retirar al alumno?</th>
-          </tr>
-          <tr>
-            <td align="left">
-              <select name="nacionalidad_<?php echo $n ?>" id="nacionalidad_<?php echo $n ?>">
-                <option value="v">V</option>
-                <option value="e">E</option>
-              </select>
-              <input
-                type="text"
-                maxlength="8"
-                size="12"
-                name="cedula_<?php echo $n ?>"
-                autofocus
-                required
-                id="cedula_<?php echo $n ?>">
-              <font color="#ff0000">*</font>
-            </td>
-            <td>
-              <select name="retira_<?php echo $n ?>" id="retira_<?php echo $n ?>" required>
-                <option selected="selected" value="">Seleccione</option>
-                <option value="1">Si</option>
-                <option value="0">No</option>
-              </select><font color="#ff0000">*</font>
-            </td>
-          </tr>
-          <tr>
-            <th>Primer Nombre</th><th>Segundo Nombre</th>
-            <th>Primer Apellido</th><th>Segundo Apellido</th>
-          </tr>
-          <tr>
-            <td>
-              <input
-                type="text"
-                name="p_nombre_<?php echo $n ?>"
-                required
-                id="p_nombre_<?php echo $n ?>">
-              <font color="#ff0000">*</font>
-            </td>
-            <td>
-              <input type="text" name="s_nombre_<?php echo $n ?>" id="s_nombre_<?php echo $n ?>">
-            </td>
-            <td>
-              <input type="text" name="p_apellido_<?php echo $n ?>" required id="p_apellido_<?php echo $n ?>">
-              <font color="#ff0000">*</font>
-            </td>
-            <td>
-              <input type="text" name="s_apellido_<?php echo $n ?>" id="s_apellido_<?php echo $n ?>">
-            </td>
-          </tr>
-          <tr>
-            <th>Sexo</th>
-            <th>Fecha de Nacimiento</th>
-            <th>Lugar de Nacimiento</th>
-          </tr>
-          <tr>
-            <td>
-              <?php $sql = "SELECT codigo, descripcion from sexo where status = 1;";
-                $registros = conexion($sql);?>
-                <select name="sexo_<?php echo $n ?>" required id="sexo_<?php echo $n ?>">
-                  <option value="">Seleccione una opci&oacute;n </option>
-                  <?php while($fila = mysqli_fetch_array($registros)) :?>
-                    <option value="<?php echo $fila['codigo']?>">
-                      <?php echo $fila['descripcion']?>
-                    </option>
-                  <?php endwhile; ?>
-                </select><font color="#ff0000">*</font>
-            </td>
-            <td>
-              <input type="date" required name="fec_nac_<?php echo $n ?>" id="fec_nac_<?php echo $n ?>">
-            </td>
-            <td>
-              <textarea
-                name="lugar_nac_<?php echo $n ?>"
-                id="lugar_nac_<?php echo $n ?>"
-                cols="40"
-                rows="4"
-                maxlength="50"
-                ></textarea>
-            </td>
-          </tr>
-          <tr>
-            <th>Tel&eacute;fono</th>
-            <th>Tel&eacute;fono Celular/Otro</th>
-            <th>E-mail</th>
-          </tr>
-          <tr>
-            <td>
-              <input
-                type="text"
-                maxlength="11"
-                name="telefono_<?php echo $n ?>"
-                id="telefono_<?php echo $n ?>">
-              <font color="#ff0000">*</font>
-            </td>
-            <td>
-              <input
-                type="text"
-                maxlength="11"
-                name="telefono_otro_<?php echo $n ?>"
-                id="telefono_otro_<?php echo $n ?>">
-            </td>
-            <td>
-              <input
-                type="text"
-                name="email_<?php echo $n ?>"
-                id="email_<?php echo $n ?>"
-                maxlength="50">
-            </td>
-          </tr>
-          <tr>
-            <th>Parentesco</th><th>Vive con el Alumno?</th>
-          </tr>
-          <tr>
-            <td>
-              <?php $sql="SELECT codigo, descripcion from relacion where status = 1;";
-                $registros = conexion($sql);?>
-              <select name="relacion_<?php echo $n ?>" required id="relacion_<?php echo $n ?>">
-                <option value="">Seleccione una opci&oacute;n</option>
-                <?php while($fila = mysqli_fetch_array($registros)) :?>
-                  <option value="<?php echo $fila['codigo']?>">
-                  <?php echo $fila['descripcion']?></option>
-                <?php endwhile; ?>
-              </select><font color="#ff0000">*</font>
-            </td>
-            <td>
-              <select name="vive_con_alumno_<?php echo $n ?>" required id="vive_con_alumno_<?php echo $n ?>">
-                <option value="s">SI</option>
-                <option value="n">NO</option>
-              </select><font color="#ff0000">*</font>
-            </td>
-          </tr>
-          <tr>
-            <th>Estado</th><th>Municipio</th><th>Parroquia</th>
-          </tr>
-          <tr>
-            <td>
-              <select name="cod_est_<?php echo $n ?>" id="cod_est_<?php echo $n ?>"></select>
-              <font color="#ff0000">*</font>
-            </td>
-            <td>
-              <select name="cod_mun_<?php echo $n ?>" id="cod_mun_<?php echo $n ?>" >
-              <option value="">--Seleccionar--</option></select>
-              <font color="#ff0000">*</font>
-            </td>
-            <td>
-              <select name="cod_parro_<?php echo $n ?>" id="cod_parro_<?php echo $n ?>">
-              <option value="">--Seleccionar--</option></select>
-              <font color="#ff0000">*</font>
-            </td>
-          </tr>
-          <tr>
-            <th>Direcci&oacute;n</th>
-          </tr>
-            <tr>
-              <td colspan="3">
-                <textarea
-                  maxlenght="150"
-                  cols="50"
-                  rows="4"
-                  name="direcc_<?php echo $n ?>"
-                  id="direcc_<?php echo $n ?>"></textarea>
-                <font color="#ff0000">*</font>
-              </td>
-            </tr>
-          <tr>
-            <th>Nivel Educativo</th><th>Profesi&oacute;n </th>
-          </tr>
-          <tr>
-            <td>
-              <?php $sql="SELECT codigo, descripcion from nivel_instruccion where status = 1;";
-                $registros = conexion($sql);?>
-              <select name="nivel_instruccion_<?php echo $n ?>" required id="nivel_instruccion_<?php echo $n ?>">
-              <?php while($fila = mysqli_fetch_array($registros)) : ?>
-                <option value="<?php echo $fila['codigo']?>">
-                <?php echo $fila['descripcion']?></option>
-              <?php endwhile; ?>
-              </select><font color="#ff0000">*</font>
-            </td>
-            <td>
-              <?php $sql="SELECT codigo, descripcion from profesion where status = 1;";
-                $registros = conexion($sql);?>
-              <select name="profesion_<?php echo $n ?>" id="profesion_<?php echo $n ?>">
-                <option value="">Seleccione</option>
-                <?php while($fila = mysqli_fetch_array($registros)) : ?>
-                  <option value="<?php echo $fila['codigo']?>">
-                  <?php echo $fila['descripcion']?></option>
-                <?php endwhile; ?>
-              </select>
-            </td>
-          </tr>
-          <tr>
-            <th>Lugar de Trabajo</th><th>Direcci&oacute;n de Trabajo</th>
-            <th>Tel&eacute;fono Laboral</th>
-          </tr>
-          <tr>
-            <td>
-            <input
-              type="text"
-              maxlength="50"
-              name="lugar_trabajo_<?php echo $n ?>"
-              id="lugar_trabajo_<?php echo $n ?>">
-            </td>
-            <td>
-            <input
-              type="text"
-              maxlength="150"
-              name="direccion_trabajo_<?php echo $n ?>"
-              id="direccion_trabajo_<?php echo $n ?>">
-            </td>
-            <td>
-            <input
-              type="text"
-              maxlength="11"
-              name="telefono_trabajo_<?php echo $n ?>"
-              id="telefono_trabajo_<?php echo $n ?>">
-            </td>
-          </tr>
-        </table>
-        <span>
-          <button class="iniciadorMostrar ocultar">Registrar otro registro</button>
-        </span>
-        <table style="margin: 20px 0">
-          <tr>
-            <td align="center">
-              <input type="button" name="registrar" value="Insertar">
-            </td>
-            <td align="center">
-              <input type="button" name="limpiar" id="limpiar" value="Reset">
-            </td>
-          </tr>
-        </table>
-      </form>
+    <div class="container">
+      <div class="row">
+        <!-- http://www.w3schools.com/html/html_forms.asp -->
+        <form action="insertar_P.php" method="POST" id="form" name="form_repre" class="form-horizontal">
+          <fieldset>
+            <legend class="text-center text-uppercase"><h1>Registro del representante</h1></legend>
+            <div class="container">
+              <!-- inicio de nacionalidad y cedula -->
+              <div class="row">
+                <div class="col-sm-3">
+                  <div class="form-group">
+                    <label for="nacionalidad" class="control-label">Nacionalidad</label>
+                    <select
+                      name="nacionalidad"
+                      id="nacionalidad"
+                      required
+                      class="form-control">
+                      <option selected="selected" value="v">Venezolano</option>
+                      <option value="e">Extrangero</option>
+                    </select>
+                      <p class="help-block" id="nacionalidad_chequeo">
+                      </p>
+                  </div>
+                </div>
+                <div class="col-sm-5 col-sm-offset-1">
+                  <div class="form-group">
+                    <label for="cedula" class="control-label">Cedula</label>
+                    <input
+                      type="text"
+                      maxlength="8"
+                      name="cedula"
+                      id="cedula"
+                      class="form-control"
+                      autofocus="autofocus"
+                      placeholder="Introduzca cedula ej: 12345678"
+                      required>
+                    <p class="help-block" id="cedula_chequeo">
+                    </p>
+                    <p class="help-block" id="cedula_chequeo_adicional">
+                    </p>
+                  </div>
+                </div>
+                <div class="col-sm-3"></div>
+              </div>
+              <!-- inicio de nombres -->
+              <div class="row">
+                <div class="col-sm-6">
+                  <div class="row">
+                    <div class="col-xs-11">
+                      <div class="form-group">
+                        <label for="p_nombre" class="control-label">Primer Nombre</label>
+                        <input
+                          class="form-control"
+                          type="text"
+                          name="p_nombre"
+                          id="p_nombre"
+                          required
+                          maxlength="20">
+                        <p class="help-block" id="p_nombre_chequeo">
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="row">
+                    <div class="col-xs-12">
+                      <div class="form-group">
+                        <label for="s_nombre" class="control-label">Segundo Nombre</label>
+                        <input
+                          class="form-control"
+                          type="text"
+                          name="s_nombre"
+                          id="s_nombre"
+                          maxlength="20">
+                        <p class="help-block" id="s_nombre_chequeo">
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- inicio de apellidos -->
+              <div class="row">
+                <div class="col-sm-6">
+                  <div class="row">
+                    <div class="col-xs-11">
+                      <div class="form-group">
+                        <label for="p_apellido" class="control-label">Primer apellido</label>
+                        <input
+                          class="form-control"
+                          type="text"
+                          name="p_apellido"
+                          id="p_apellido"
+                          required
+                          maxlength="20">
+                        <p class="help-block" id="p_apellido_chequeo">
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="row">
+                    <div class="col-xs-12">
+                      <div class="form-group">
+                        <label for="s_apellido" class="control-label">Segundo apellido</label>
+                        <input
+                          class="form-control"
+                          type="text"
+                          name="s_apellido"
+                          id="s_apellido"
+                          maxlength="20">
+                        <p class="help-block" id="s_apellido_chequeo">
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- lugar de nacimiento -->
+              <div class="row">
+                <div class="col-sm-12">
+                  <div class="form-group">
+                    <label for="lugar_nac" class="control-label">Lugar de nacimiento</label>
+                    <input
+                      class="form-control"
+                      type="text"
+                      name="lugar_nac"
+                      id="lugar_nac"
+                      maxlength="50">
+                    <p class="help-block" id="lugar_nac_chequeo">
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <!-- inicio de fecha de nac, sexo, nivel edc -->
+              <div class="row">
+                <div class="col-sm-4">
+                  <div class="row">
+                    <div class="col-xs-11">
+                      <div class="form-group">
+                        <label for="fec_nac" class="control-label">Fecha de nacimiento</label>
+                        <!-- readonly para que no puedan cambiar manualmente la fecha -->
+                        <!-- style cursor pointer etc... para que no parezca desabilitado -->
+                        <input
+                          class="form-control"
+                          type="text"
+                          name="fec_nac"
+                          id="fec_nac"
+                          readonly="readonly"
+                          style="cursor:pointer; background-color: #FFFFFF"
+                          required>
+                        <p class="help-block" id="fec_nac_chequeo">
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-4">
+                  <div class="row">
+                    <div class="col-xs-11">
+                      <div class="form-group">
+                        <label for="sexo" class="control-label">Sexo</label>
+                        <?php $query = "SELECT codigo, descripcion
+                          from sexo where status = 1;";
+                          $registros = conexion($query);?>
+                        <select class="form-control" name="sexo" id="sexo" required>
+                          <option value="">Seleccione una opci&oacute;n </option>
+                          <?php while($fila = mysqli_fetch_array($registros)) : ?>
+                           <option value="<?php echo $fila['codigo']; ?>">
+                             <?php echo $fila['descripcion']; ?>
+                           </option>
+                          <?php endwhile; ?>
+                         </select>
+                        <p class="help-block" id="sexo_chequeo">
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-4">
+                  <div class="row">
+                    <div class="col-xs-12">
+                      <div class="form-group">
+                        <label for="nivel_instruccion" class="control-label">Nivel Educativo</label>
+                        <?php $sql="SELECT codigo, descripcion from nivel_instruccion where status = 1;";
+                          $registros = conexion($sql);?>
+                        <select class="form-control" name="nivel_instruccion" required id="nivel_instruccion">
+                        <?php while($fila = mysqli_fetch_array($registros)) : ?>
+                          <option value="<?php echo $fila['codigo']?>">
+                          <?php echo $fila['descripcion']?></option>
+                        <?php endwhile; ?>
+                        </select>
+                        <p class="help-block" id="nivel_instruccion_chequeo">
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- inicio de telefonos y email -->
+              <div class="row">
+                <div class="col-sm-4">
+                  <div class="row">
+                    <div class="col-xs-11">
+                      <div class="form-group">
+                        <label class="control-label" for="telefono">Telefono</label>
+                        <input
+                          class="form-control"
+                          type="text"
+                          maxlength="11"
+                          name="telefono"
+                          id="telefono">
+                        <p class="help-block" id="telefono_chequeo">
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-4">
+                  <div class="row">
+                    <div class="col-xs-11">
+                      <div class="form-group">
+                        <label class="control-label" for="telefono_otro">Telefono Adicional</label>
+                        <input
+                          class="form-control"
+                          type="text"
+                          maxlength="11"
+                          name="telefono_otro"
+                          id="telefono_otro">
+                        <p class="help-block" id="telefono_otro_chequeo">
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-4">
+                  <div class="row">
+                    <div class="col-xs-12">
+                      <div class="form-group">
+                        <label class="control-label" for="email">Correo Electronico</label>
+                        <div class="input-group">
+                          <div class="input-group-addon">@</div>
+                          <input
+                          type="email"
+                          class="form-control"
+                          id="email"
+                          name="email"
+                          maxlength="50">
+                        </div>
+                        <p class="help-block" id="email_chequeo">
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- inicio de parentesco y vive_con_alumno -->
+              <div class="row">
+                <div class="col-sm-6">
+                  <div class="row">
+                    <div class="col-xs-11">
+                      <div class="form-group">
+                        <label for="relacion" class="control-label">Parentesco</label>
+                        <?php $sql="SELECT codigo, descripcion from relacion where status = 1;";
+                          $registros = conexion($sql);?>
+                        <select class="form-control" name="relacion" required id="relacion">
+                          <option value="">Seleccione una opci&oacute;n</option>
+                          <?php while($fila = mysqli_fetch_array($registros)) :?>
+                            <option value="<?php echo $fila['codigo']?>">
+                            <?php echo $fila['descripcion']?></option>
+                          <?php endwhile; ?>
+                        </select>
+                        <p class="help-block" id="relacion_chequeo">
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="row">
+                    <div class="col-xs-12">
+                      <div class="form-group">
+                        <label for="vive_con_alumno" class="control-label">¿Vive con el alumno?</label>
+                        <select class="form-control" name="vive_con_alumno" id="vive_con_alumno">
+                          <option selected="selected" value="s">SI</option>
+                          <option value="n">NO</option>
+                        </select>
+                        <p class="help-block" id="vive_con_alumno_chequeo">
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- direccion personal -->
+              <fieldset>
+                <legend class="text-center">Direccion de habitacion</legend>
+                <!-- inicio de estado, municio y parroquia -->
+                <div class="row">
+                  <div class="col-sm-4">
+                    <div class="row">
+                      <div class="col-xs-11">
+                        <div class="form-group">
+                          <label class="control-label" for="cod_est">Estado</label>
+                          <select class="form-control" name="cod_est" id="cod_est"></select>
+                          <p class="help-block" id="cod_est_chequeo">
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-sm-4">
+                    <div class="row">
+                      <div class="col-xs-11">
+                        <div class="form-group">
+                          <label class="control-label" for="cod_mun">Municipio</label>
+                          <select class="form-control" name="cod_mun" id="cod_mun" >
+                            <option value="">--Seleccionar--</option>
+                          </select>
+                          <p class="help-block" id="cod_mun_chequeo">
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-sm-4">
+                    <div class="row">
+                      <div class="col-xs-12">
+                        <div class="form-group">
+                          <label class="control-label" for="cod_parro">Parroquia</label>
+                          <select class="form-control" name="cod_parro" id="cod_parro">
+                            <option value="">--Seleccionar--</option>
+                          </select>
+                          <p class="help-block" id="cod_parro_chequeo">
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- direccion exacta -->
+                <div class="row">
+                  <div class="col-xs-12">
+                    <div class="form-group">
+                      <label for="direcc" class="control-label">Informacion detallada (Av/Calle/Edf.)</label>
+                      <textarea
+                      class="form-control"
+                      maxlenght="150"
+                      rows="2"
+                      name="direcc"
+                      id="direcc"></textarea>
+                      <p class="help-block" id="direcc_chequeo">
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </fieldset>
+              <!-- datos laborales -->
+              <fieldset>
+                <legend class="text-center">Datos Laborales</legend>
+                <!-- inicio de profesion, lugar y telefono laboral -->
+                <div class="row">
+                  <div class="col-sm-4">
+                    <div class="row">
+                      <div class="col-xs-11">
+                        <div class="form-group">
+                          <label for="profesion" class="control-label">Profesion</label>
+                          <?php $sql = "SELECT codigo, descripcion from profesion where status = 1;";
+                            $registros = conexion($sql);?>
+                          <select class="form-control" name="profesion" id="profesion">
+                            <option value="">Seleccione</option>
+                            <?php while($fila = mysqli_fetch_array($registros)) : ?>
+                              <option value="<?php echo $fila['codigo']?>">
+                              <?php echo $fila['descripcion']?></option>
+                            <?php endwhile; ?>
+                          </select>
+                          <p class="help-block" id="profesion_chequeo">
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-sm-4">
+                    <div class="row">
+                      <div class="col-xs-11">
+                        <div class="form-group">
+                          <label for="lugar_trabajo" class="control-label">Lugar de trabajo</label>
+                          <input
+                            class="form-control"
+                            type="text"
+                            name="lugar_trabajo"
+                            id="lugar_trabajo"
+                            maxlength="50">
+                          <p class="help-block" id="lugar_trabajo_chequeo">
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-sm-4">
+                    <div class="row">
+                      <div class="col-xs-12">
+                        <div class="form-group">
+                          <label for="telefono_trabajo" class="control-label">Telefono laboral</label>
+                          <input
+                            class="form-control"
+                            type="text"
+                            name="telefono_trabajo"
+                            id="telefono_trabajo"
+                            maxlength="11">
+                          <p class="help-block" id="telefono_trabajo_chequeo">
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- inicio de dir de trabajo -->
+                <div class="row">
+                  <div class="col-sm-12">
+                    <div class="row">
+                      <div class="col-xs-12">
+                        <div class="form-group">
+                          <label for="direccion_trabajo" class="control-label">Direccion de trabajo (Av/Calle/Edf.)</label>
+                          <input
+                            class="form-control"
+                            type="text"
+                            name="direccion_trabajo"
+                            id="direccion_trabajo"
+                            maxlength="150">
+                          <p class="help-block" id="direccion_trabajo_chequeo">
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </fieldset>
+            </div>
+            <div class="row">
+              <div class="col-sm-8 col-sm-offset-2 bg-primary redondeado">
+                <div class="row">
+                  <div class="col-xs-12">
+                    <h4>
+                      Por favor, asegurese que sus datos son correctos antes de
+                      continuar con el proceso de registro.
+                    </h4>
+                    <p>
+                      <em>
+                        Una vez completado este registro, el sistema
+                        continuara al registro del alumno asociado a esta persona.
+                      </em>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row margenArriba">
+              <div class="col-sm-2 col-sm-offset-5">
+                <input
+                role="button"
+                id="submit"
+                class="btn btn-default btn-block"
+                type="submit"
+                name="registrar"
+                value="Continuar">
+              </div>
+            </div>
+          </fieldset>
+        </form>
+      </div>
     </div>
     <!-- esto es para ajax -->
     <?php $cargadorOnClick = enlaceDinamico("java/ajax/cargadorOnClick.js"); ?>
     <?php $validacionP = enlaceDinamico("java/validacionP.js"); ?>
     <script type="text/javascript" src="<?php echo $cargadorOnClick ?>"></script>
     <!-- validacion -->
-    <script language="javascript" src="<?php echo $validacionP ?>"></script>
+    <script type="text/javascript" src="<?php echo $validacionP ?>"></script>
+    <script type="text/javascript">
+      $(function(){
+        $('#form').on('change', function(){
+          validacionPA();
+        });
+        $('#submit').on('click', function(){
+          if (validacionPA()) {
+            return true;
+          }else{
+            return false;
+          }
+        });
+      });
+    </script>
     <!-- ajax de edo/mun/parr -->
     <?php $estado = enlaceDinamico("java/edo.php"); ?>
     <?php $municipio = enlaceDinamico("java/mun.php"); ?>
     <?php $parroquia = enlaceDinamico("java/parro.php"); ?>
+    <!-- ajax direccion -->
     <script type="text/javascript">
       /**
        * Andres Leutor.
@@ -552,8 +558,78 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr'], 'sistemaJAG 
         });
       });
     </script>
-    <!-- mostrar y ocultar -->
+    <!-- cedula y validacionDireccion -->
     <script type="text/javascript">
+      /**
+       * hecho por slayerfat, dudas o sugerencias ya saben donde estoy.
+       *
+       * chequeo y operaciones relacionadas con ajax
+       * para el campo cedula.
+       */
+      $(function(){
+        // cedula
+        $.ajax({
+          url: '../java/ajax/cedula.js',
+          type: 'POST',
+          dataType: 'script'
+        });
+        // se trae la validacion de edo/mun/parr
+        $(function(){
+          $.ajax({
+            url: '../java/validacionDireccion.js',
+            type: 'POST',
+            dataType: 'script'
+          });
+        });
+      });
+      // $(function(){
+      //   $.ajax({
+      //     url: '../java/validacionCedula.js',
+      //     type: 'POST',
+      //     dataType: 'script'
+      //   });
+      //   $('#cedula').on('change', function(){
+      //     var cedula = $(this).val();
+      //     if ( validacionCedula(cedula) ) {
+      //       $("#cedula_chequeo").html('');
+      //       $.ajax({
+      //         url: '../java/ajax/general/cedula.php',
+      //         type: 'POST',
+      //         data: {cedula:cedula},
+      //         success: function (datos){
+      //           $('#cedula_chequeo').empty();
+      //           //se comprueba si es valido o no por
+      //           //medio del data-disponible
+      //           //true si esta disponible, falso si no.
+      //           var disponible = $(datos+'#disponible').data('disponible');
+      //           if (disponible === true) {
+      //             $('#cedula_chequeo_adicional').html('');
+      //             $('#form input, #form select, #form textarea').each(function(){
+      //               $(this).prop('disabled', false);
+      //             });
+      //           }else{
+      //             $('#form input, #form select, #form textarea').each(function(){
+      //               $(this).prop('disabled', true);
+      //             });
+      //             $('#cedula').prop('disabled', false);
+      //             $('#cedula_chequeo').html(datos);
+      //             $('#cedula_chequeo_adicional').html('para continuar con el registro especifique otra cedula o consulte la ya existente.');
+      //           };
+      //         },
+      //       });
+      //     }else{
+      //       $("#cedula_chequeo").html('Favor introduzca cedula solo numeros sin caracteres especiales, EJ: 12345678');
+      //       $("#cedula_titulo").css('color', 'red');
+      //       $('#submitDos').prop('disabled', true);
+      //     };
+      //   });
+      // });
+    </script>
+    <!--  -->
+    <!--  -->
+    <!-- NO HAY TIEMPO PARA DESARROLLAR ESTO: -->
+    <!-- mostrar y ocultar -->
+    <!-- <script type="text/javascript">
       /**
        * hecho por slayerfat, ya saben donde estoy.
        */
@@ -567,58 +643,7 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr'], 'sistemaJAG 
           return false;
         });
       });
-    </script>
-    <!-- cedula -->
-    <script type="text/javascript">
-      /**
-       * hecho por slayerfat, dudas o sugerencias ya saben donde estoy.
-       *
-       * chequeo y operaciones relacionadas con ajax
-       * para el campo cedula.
-       */
-      $(function(){
-        $.ajax({
-          url: '../java/validacionCedula.js',
-          type: 'POST',
-          dataType: 'script'
-        });
-        $('#cedula').on('change', function(){
-          var cedula = $(this).val();
-          if ( validacionCedula(cedula) ) {
-            $("#cedula_chequeo").html('');
-            $.ajax({
-              url: '../java/ajax/general/cedula.php',
-              type: 'POST',
-              data: {cedula:cedula},
-              success: function (datos){
-                $('#cedula_chequeo').empty();
-                //se comprueba si es valido o no por
-                //medio del data-disponible
-                //true si esta disponible, falso si no.
-                var disponible = $(datos+'#disponible').data('disponible');
-                if (disponible === true) {
-                  $('#cedula_chequeo_adicional').html('');
-                  $('#form input, #form select, #form textarea').each(function(){
-                    $(this).prop('disabled', false);
-                  });
-                }else{
-                  $('#form input, #form select, #form textarea').each(function(){
-                    $(this).prop('disabled', true);
-                  });
-                  $('#cedula').prop('disabled', false);
-                  $('#cedula_chequeo').html(datos);
-                  $('#cedula_chequeo_adicional').html('para continuar con el registro especifique otra cedula o consulte la ya existente.');
-                };
-              },
-            });
-          }else{
-            $("#cedula_chequeo").html('Favor introduzca cedula solo numeros sin caracteres especiales, EJ: 12345678');
-            $("#cedula_titulo").css('color', 'red');
-            $('#submitDos').prop('disabled', true);
-          };
-        });
-      });
-    </script>
+    </script> -->
   </div>
 </div>
 <?php

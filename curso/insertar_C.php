@@ -109,11 +109,11 @@ else : ?>
             </p>
             <h3>
               <small>
-                Lamentablemente, es posible que los datos de actualizacion se perdieron.
+                Lamentablemente, es posible que los datos de registro se perdieron.
               </small>
             </h3>
             <p>
-              Si desea hacer otra actualizacion por favor dele
+              Si desea hacer otro registro, por favor dele
               <a href="menucon.php">click a este enlace</a>
             </p>
             <p>

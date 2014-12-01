@@ -18,14 +18,23 @@ if ( isset($_POST['cedula_escolar']) ) :
     require_once($enlace);
     $con = conexion();
     $cedula_escolar = mysqli_escape_string($con,$_POST['cedula_escolar']);
-    $query = "SELECT codigo FROM alumno
+    $query = "SELECT cedula FROM alumno
+    inner join persona
+    on alumno.cod_persona = persona.codigo
     WHERE cedula_escolar = '$cedula_escolar';";
     $consulta = conexion($query);
     if ($consulta->num_rows == 0): ?>
       <span id="disponible" data-disponible="true">
       </span>
     <?php else: ?>
+      <?php $datos = mysqli_fetch_assoc($consulta) ?>
       <span id="disponible" data-disponible="false">
+        Esta Cedula esta ya registrada en el sistema!
+        <?php $enlace = "github/sistemaJAG/alumno/consultar_A.php?cedula=$datos[cedula]" ?>
+        <?php $consultar_A = enlaceDinamico("$enlace") ?>
+        <a href="<?php echo $consultar_A ?>">
+          Consultar
+        </a>
       </span>
     <?php endif ?>
   <?php mysqli_close($con) ?>

@@ -1,3 +1,16 @@
+/**
+ * @author Erick Zerpa.
+ * @author Andres Leotur
+ * @author Alejandro Granadillo.
+ *
+ * @internal ESTA FUNCION DEBE SER DOCUMENTADA Y LIMPIADA.
+ * [validarform validacion de alumno]
+ * @return {action} genera la accion de submit.
+ *
+ * @todo documentar mejor esta funcion (denle las gracias a Zerpa por no documentar nada.)
+ *
+ * @version 1.1
+ */
 function validarform(){
 
   var verificar = true;

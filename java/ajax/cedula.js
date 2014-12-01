@@ -23,6 +23,10 @@ $(function(){
         $(this).parent().removeClass('has-error');
         $(this).prop('disabled', false);
       });
+      // bloquea datos de representante:
+      $('.bloquear').each(function(){
+        $(this).prop('disabled', true);
+      });
     }else if ( validacionCedula(cedula.cambio) ) {
       $("#cedula_chequeo").empty();
       $.ajax({
@@ -40,6 +44,10 @@ $(function(){
             $('#form input, #form select, #form textarea').each(function(){
               $(this).parent().removeClass('has-error');
               $(this).prop('disabled', false);
+            });
+            // bloquea datos de representante:
+            $('.bloquear').each(function(){
+              $(this).prop('disabled', true);
             });
           }else{
             $('#form input, #form select, #form textarea').each(function(){
