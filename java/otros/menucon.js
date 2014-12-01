@@ -138,7 +138,7 @@ $(function(){
   $('#informacion_lista').on('change', function(){
     var campo = $(this).val();
     console.log(campo);
-    if (campo === '0') {
+    if (campo === '') {
       $('#submit').prop('disabled', true);
     }else{
       $('#submit').prop('disabled', false);

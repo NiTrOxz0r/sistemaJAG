@@ -127,7 +127,7 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);
         </div>
       </div>
       <div class="row">
-        <div class="col-xs-8 col-xs-offset-2 bg-primary redondeado margenAbajo">
+        <div class="col-xs-8 col-xs-offset-2 bg-info redondeado margenAbajo">
           <div class="row">
             <div class="col-xs-12">
               <h3>

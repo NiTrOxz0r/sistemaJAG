@@ -45,7 +45,7 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);?>
                 <option value="1">Por cedula</option>
                 <option value="2">Por Nombre</option>
                 <option value="3">Por Apellido</option>
-                <option value="4">Por Cargo</option>
+                <option value="4">Por Curso</option>
                 <option value="5">Regitro activo</option>
                 <option value="6">Regitro inactivo</option>
                 <option value="7">Todos los Registros</option>
@@ -66,7 +66,7 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);?>
                   id="informacion">
               </div>
               <div class="input-group hidden">
-                <?php $query = "SELECT codigo, descripcion from cargo where status = 1;";
+                <?php $query = "SELECT codigo, descripcion from curso where status = 1;";
                   $resultado = conexion($query);?>
                 <select class="form-control" name="informacion" id="informacion_lista">
                   <option value="" selected="selected">--Seleccione--</option>
@@ -80,7 +80,7 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);?>
               <p class="help-block" id="informacion_chequeo">
               </p>
             </div>
-            <div class="form-group">
+            <!-- <div class="form-group">
               <label
               for="tipo_personal"
               id="tipo_personal_titulo"
@@ -98,7 +98,7 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);?>
               </select>
               <p class="help-block" id="tipo_personal_chequeo">
               </p>
-            </div>
+            </div> -->
             <div class="row">
               <div class="col-sm-6 col-sm-offset-3">
                 <input
@@ -120,11 +120,11 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);?>
         </div>
       </div>
       <div class="row">
-        <div class="col-xs-8 col-xs-offset-2 bg-primary redondeado margenAbajo">
+        <div class="col-xs-8 col-xs-offset-2 bg-info redondeado margenAbajo">
           <div class="row">
             <div class="col-xs-12">
               <h3>
-                Si Ud. desea registrar o actualizar a un personal interno de esta
+                Si Ud. desea registrar o actualizar a un alumno de esta
                 institucion, puede hacerlo especificando la cedula de identidad:
               </h3>
             </div>
@@ -253,74 +253,6 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);?>
         });
       </script>
     </div>
-<!--  -->
-    <div class="contenido">
-      <center>
-        <center>
-          <h1>Alumno(a).</h1>
-          <h2>Consultar</h2>
-        </center>
-
-          <h4 align="center">Indique La Cedula del Alumno</h4>
-            <?php $action = enlaceDinamico("alumno/consultar_A.php"); ?>
-            <form action="<?php echo $action ?>" method="post" id="form_a">
-              <b>Cedula</b>
-              <input type="text" name="cedula" size="8" maxlength="8">
-              <input type="submit" value="Enviar"/>
-            </form>
-              <p>
-                <span id="cedula_chequeo_a">
-
-                </span>
-              </p>
-
-          <a href="<?php echo $index ?>">Regresar a Menu</a>
-      </center>
-    </div>
-
-    <?php $cargador = enlaceDinamico("java/ajax/cargadorOnClick.js"); ?>
-    <script type="text/javascript" src="<?php echo $cargador; ?>"></script>
-    <script type="text/javascript">
-      $(function(){
-        //cedula alumno
-        $('#form_a :submit').on('click', function(evento){
-          evento.preventDefault();
-          var campo = $('#form_a [name=cedula]').val().trim();
-          var cedRegex = /^[0-9]+$/;
-          if (campo != "" && campo.length == 8) {
-            if (campo.match(cedRegex)) {
-              $('#form_a').submit();
-              return true;
-            }else{
-              $('#cedula_chequeo_a').html('por favor introduzca la cedula sin espacios o caracteres especiales ej: 12345678');
-              return false
-            };
-
-          }else{
-            $('#cedula_chequeo_a').html('por favor introduzca la cedula sin espacios o caracteres especiales ej: 12345678');
-            return false};
-        });
-
-        //cedula Representante
-        $('#form_r :submit').on('click', function(evento){
-          evento.preventDefault();
-          var campo = $('#form_r [name=cedula]').val().trim();
-          var cedRegex = /^[0-9]+$/;
-          if (campo != "" && campo.length == 8) {
-            if (campo.match(cedRegex)) {
-              $('#form_r').submit();
-              return true;
-            }else{
-              $('#cedula_chequeo_r').html('por favor introduzca la cedula sin espacios o caracteres especiales ej: 12345678');
-              return false
-            };
-
-          }else{
-            $('#cedula_chequeo_r').html('por favor introduzca la cedula sin espacios o caracteres especiales ej: 12345678');
-            return false};
-        });
-      });
-    </script>
   </div>
 </div>
 <?php
