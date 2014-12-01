@@ -242,11 +242,11 @@ function validacionAlumno(){
     verificar = true;
   }
 // telefono
-  if(telefono.length != 11 && telefono != "" ){
+  if(telefono.length != 11 && telefono != "" && telefono != 'SinRegistro'){
     $("#telefono_chequeo").html('este campo debe contener 11 caracteres EJ: 02127773322');
     $('#telefono').parent().addClass('has-error');
     return false;
-  }else if(!expRegtlf.exec(telefono) && telefono != "") {
+  }else if(!expRegtlf.exec(telefono) && telefono != "" && telefono != 'SinRegistro') {
     $("#telefono_chequeo").html('Favor introduzca en este campo Letras sin numeros o caracteres especiales EJ: 19?=;@*');
     $('#telefono').parent().addClass('has-error');
     return false;
@@ -256,11 +256,11 @@ function validacionAlumno(){
     verificar = true;
   }
 // telefono_otro (adicional)
-  if(telefono_otro.length != 11 && telefono_otro != "" ){
+  if(telefono_otro.length != 11 && telefono_otro != "" && telefono != 'SinRegistro'){
     $("#telefono_otro_chequeo").html('este campo debe contener 11 caracteres EJ: 02127773322');
     $('#telefono_otro').parent().addClass('has-error');
     return false;
-  }else if(!expRegtlf.exec(telefono_otro) && telefono != "") {
+  }else if(!expRegtlf.exec(telefono_otro) && telefono != "" && telefono != 'SinRegistro') {
     $("#telefono_otro_chequeo").html('Favor introduzca en este campo Letras sin numeros o caracteres especiales EJ: 19?=;@*');
     $('#telefono_otro').parent().addClass('has-error');
     return false;

@@ -134,5 +134,5 @@ else : ?>
       </div>
     </div>
   </div>
-<?php endif; ?>
+<?php endif;
 finalizarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);?>

@@ -66,7 +66,7 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);
               <div class="row">
                 <div class="col-sm-6 col-sm-offset-3">
                   <input
-                    class="btn btn-default"
+                    class="btn btn-default btn-block"
                     type="submit"
                     value="Entrar en el SistemaJAG"
                     name="enviar"
