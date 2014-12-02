@@ -54,7 +54,7 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);
             <p>
               <a
               class="btn btn-primary btn-lg"
-              href="Personal_Autorizado/form_reg_P.php"
+              href="personalAutorizado/form_reg_P.php"
               role="button">
                 Empezar nuevo registro
               </a>
@@ -87,7 +87,7 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);
             Gestionar Alumno
           </a>
           <a
-          href="Personal_Autorizado/menucon.php"
+          href="personalAutorizado/menucon.php"
           class="btn btn-default btn-lg btn-block"
           role="button">
             Gestionar Padres y Representante

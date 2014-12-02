@@ -24,7 +24,7 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);
 					</a>
 				</div>
 				<div id="">
-					<a href="../../Personal_Autorizado/menucon.php">
+					<a href="../../personalAutorizado/menucon.php">
 						Consultar Representantes
 					</a>
 				</div>

@@ -547,7 +547,7 @@ if ( (isset($_POST['seudonimo']) && isset($_POST['clave']) )
               if ( validacionCedula(cedula) ) {
                 $("#cedula_chequeo").html('');
                 $.ajax({
-                  url: '../java/ajax/general/cedula.php',
+                  url: '../java/cedula.php',
                   type: 'POST',
                   data: {cedula:cedula},
                   success: function (datos){

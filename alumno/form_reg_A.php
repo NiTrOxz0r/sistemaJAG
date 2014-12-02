@@ -841,7 +841,7 @@ if($go): ?>
               </div>
             <?php else: ?>
               <?php
-              $enlace = "Personal_Autorizado/form_reg_P.php?cedula=$_GET[cedula_r]";
+              $enlace = "personalAutorizado/form_reg_P.php?cedula=$_GET[cedula_r]";
               $inscripcion = enlaceDinamico("$enlace"); ?>
               <p>
                 La cedula <?php echo $_GET['cedula'] ?>, no esta registrada en el sistema.

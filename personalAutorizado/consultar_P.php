@@ -228,7 +228,7 @@ if ( (isset($_REQUEST['informacion']) and isset($_REQUEST['tipo']) )
                   <?php endwhile; ?>
                 </tbody>
               </table>
-              <?php $enlacePrimario = enlaceDinamico('Personal_Autorizado/form_act_P.php') ?>
+              <?php $enlacePrimario = enlaceDinamico('personalAutorizado/form_act_P.php') ?>
               <span class="hidden" data-enlace-primario="<?php echo $enlacePrimario ?>"></span>
                <div class="row center-block">
                  <div class="col-xs-6 col-xs-offset-3">

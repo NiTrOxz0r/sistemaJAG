@@ -30,7 +30,7 @@ $(function(){
     }else if ( validacionCedula(cedula.cambio) ) {
       $("#cedula_chequeo").empty();
       $.ajax({
-        url: '../java/ajax/general/cedula.php',
+        url: '../java/cedula.php',
         type: 'POST',
         data: {cedula:cedula.cambio},
         success: function (datos){

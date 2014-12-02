@@ -9,7 +9,7 @@
  *
  * @return {boolean} [regresa verdadero si los campos son validos.]
  *
- * @see Personal_Autorizado/form_reg_P.php
+ * @see personalAutorizado/form_reg_P.php
  *
  * @version 2.0
  *

@@ -5,7 +5,7 @@
  * [encuentraCedula esta funcion sirve para encontrar un enlace
  * que sirva para consultar a un registro (usuario/alumno/personalAutoriza)]
  *
- * {@internal esta funcion creada a partir de java/ajax/general/cedula.php}
+ * {@internal esta funcion creada a partir de java/cedula.php}
  *
  * @see alumno/form_act_A.php
  *
@@ -30,7 +30,7 @@ function encuentraCedula($cedula_x = 0){
     $resultado = conexion($query);
     // si consigue algo, bota el resultado como un enlace a consultar PA
     if ($resultado->num_rows <> 0):
-      $consultar_P = enlaceDinamico("Personal_Autorizado/consultar_P.php?tipo=1&informacion=$cedula");
+      $consultar_P = enlaceDinamico("personalAutorizado/consultar_P.php?tipo=1&informacion=$cedula");
       mysqli_close($conexion);
       return $consultar_P;
     endif;

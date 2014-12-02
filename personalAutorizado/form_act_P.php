@@ -11,7 +11,7 @@ if ( isset($_GET['cedula']) and preg_match( "/[0-9]{8}/", $_GET['cedula']) ) :
   $con = conexion();
   $cedula = mysqli_escape_string($con, trim($_GET['cedula']));
 else:
-  $enlace = enlaceDinamico("Personal_Autorizado/menucon.php?error=1&tipo=cedula&valor=$_GET[cedula_r]");
+  $enlace = enlaceDinamico("personalAutorizado/menucon.php?error=1&tipo=cedula&valor=$_GET[cedula_r]");
   header("Location:".$enlace);
 endif;
 

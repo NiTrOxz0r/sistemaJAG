@@ -42,7 +42,7 @@ if ( isset($_SESSION['cod_tipo_usr']) ) : ?>
 								| Salir
 							</a>
 						</li>
-		        <?php $inscripcion = enlaceDinamico('Personal_Autorizado/form_reg_P.php'); ?>
+		        <?php $inscripcion = enlaceDinamico('personalAutorizado/form_reg_P.php'); ?>
 		        <li><a href="<?php echo $inscripcion ?>">inscripcion</a></li>
 		        <li class="dropdown">
 		          <a

@@ -49,6 +49,9 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr'], 'sistemaJAG 
                       class="form-control"
                       autofocus="autofocus"
                       placeholder="Introduzca cedula ej: 12345678"
+                      <?php if (isset($_GET['cedula'])): ?>
+                        value="<?php echo $_GET['cedula'] ?>"
+                      <?php endif ?>
                       required>
                     <p class="help-block" id="cedula_chequeo">
                     </p>
@@ -593,7 +596,7 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr'], 'sistemaJAG 
       //     if ( validacionCedula(cedula) ) {
       //       $("#cedula_chequeo").html('');
       //       $.ajax({
-      //         url: '../java/ajax/general/cedula.php',
+      //         url: '../java/cedula.php',
       //         type: 'POST',
       //         data: {cedula:cedula},
       //         success: function (datos){

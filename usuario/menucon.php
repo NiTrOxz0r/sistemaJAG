@@ -207,7 +207,7 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);
             if ( validacionCedula(cedula) ) {
               $("#cedula_chequeo").empty();
               $.ajax({
-                url: '../java/ajax/general/cedula.php',
+                url: '../java/cedula.php',
                 type: 'POST',
                 data: {cedula:cedula},
                 success: function (datos){

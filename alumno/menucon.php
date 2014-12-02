@@ -166,7 +166,7 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);?>
               <p class="help-block" id="cedula_r_chequeo">
                 Si este alumno va a ser registrado <strong>por primera vez</strong>,
                 es recomendable ir
-                <?php $enlaceP = enlaceDinamico('Personal_Autorizado/form_reg_P.php') ?>
+                <?php $enlaceP = enlaceDinamico('personalAutorizado/form_reg_P.php') ?>
                 <a href="<?php echo $enlaceP ?>">al proceso de inscripcion</a>,
                 de lo contrario es mejor empezar por la cedula del representante.
                 <em>No se preocupe, la cedula del alumno estara en el formulario de
@@ -223,7 +223,7 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);?>
             if ( validacionCedula(cedula) ) {
               $("#cedula_chequeo").empty();
               $.ajax({
-                url: '../java/ajax/general/cedula.php',
+                url: '../java/cedula.php',
                 type: 'POST',
                 data: {cedula:cedula},
                 success: function (datos){

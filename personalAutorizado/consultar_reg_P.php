@@ -9,14 +9,14 @@ validarUsuario(1, 1, $_SESSION['cod_tipo_usr']);
 
 if (isset($_GET['cedula_r'])) {
   if (trim($_GET['cedula_r']) == "" or strlen($_GET['cedula_r']) <> 8) {
-    $enlace = enlaceDinamico("Personal_Autorizado/menucon.php");
+    $enlace = enlaceDinamico("personalAutorizado/menucon.php");
     header("Location:".$enlace);
   }else{
     $con = conexion();
     $cedula = mysqli_escape_string($con, $_GET['cedula_r']);
   }
 }else{
-  $enlace = enlaceDinamico("Personal_Autorizado/menucon.php");
+  $enlace = enlaceDinamico("personalAutorizado/menucon.php");
   header("Location:".$enlace);
 }
 

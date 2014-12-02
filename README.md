@@ -39,8 +39,9 @@ en progreso: 0% aprox.
   * https://github.com/slayerfat/sistemaJAG/releases/tag/ver0.1
   * https://github.com/slayerfat/sistemaJAG/releases/tag/ver0.0.9c
 
-#Tesoros escondidos en el sistema:
-esta es una tremenda gema:
+#Tesoros escondidos del sistema:
+**esta es una tremenda gema!**
+creo que la mejor:
 ```javascript
 else if (verificar=true) {
   alert("Validando");
@@ -60,6 +61,37 @@ hermoso:
       <option value="<?=$fila['codigo'];?>"><?=$fila['descripcion'];?></option>
     <?php endwhile;?>
 </select>
+```
+exquisito:
+```php
+if[...]{
+    [...]
+if ($fila = mysql_fetch_array($registros)) {
+        if ($fila["cod_tpa"]==1) {
+        header("Location: admin.html");
+        }else{
+                header("Location: user.html");
+        }
+        }
+        }
+```
+sublime:
+```php
+[...]
+<br><br>
+            <b>&nbsp;T&iacutetulo:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b> <input type="text" id="titn" name="titn" size="80" maxlength="80" value="<?php echo $reg["tit"]; ?>"/><br>
+[...]
+```
+
+exotico:
+```php
+<fieldset>
+  <legend><i>Datos personales.</i></legend>
+  <b>&nbsp;Codigo:&nbsp;</b>  <input type="text" readonly name="cod" size="4" maxlength="4" value="<?php echo $reg["cod_prof"]; ?>">
+  <b>&nbsp;&nbsp;&nbsp;&nbsp;Status:&nbsp;</b>&nbsp;&nbsp;</b>
+<select name="status" readonly>
+<option value="<?php echo "" .$reg['cod_sta']?>"><?php echo "" .$reg['des_sta']?></option>
+</select><br>
 ```
 #estado mental:
 
