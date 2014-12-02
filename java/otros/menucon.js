@@ -66,7 +66,12 @@ $(function(){
       $('#tipo_personal').prop('hidden', false);
       $('#tipo_personal').parent().removeClass('hidden').addClass('show');
       $('#tipo_personal').prop('disabled', false);
-      $('#submit').prop('disabled', true);
+      // para menucon sin tipo de usuario (docente, directivo, pasante, etc.)
+      if ($('#tipo_personal').val() === "-1") {
+        $('#submit').prop('disabled', false);
+      }else{
+        $('#submit').prop('disabled', true);
+      }
     }else if (tipo === '7'){
       $('#informacion').prop('disabled', false);
       $('#informacion').prop('hidden', true);

@@ -30,6 +30,9 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);?>
             name="consulta_singular_A"
             action="consultar_A.php"
             method="POST">
+            <select id="tipo_personal" class="hidden">
+              <option value="-1" selected="selected"></option>
+            </select>
             <div class="form-group">
               <label
               for="tipo"
