@@ -740,10 +740,24 @@ if ( isset($_GET['cedula']) ):
           <div class="row">
             <div class="jumbotron">
               <h1>Ups!</h1>
-              <h2>
+              <h3>
                 La cedula: <strong><?php echo $cedula ?></strong>
-                <small>No existe como usuario interno, sera que quizo buscar a un alumno o allegado del mismo?</small>
-              </h2>
+                <small>No existe como usuario interno</small>
+              </h3>
+              <!-- !importante -->
+              <?php $enlace = encuentraCedula($_REQUEST['cedula']) ?>
+              <?php if ( $enlace ): ?>
+                <div class="bg-info">
+                  <h2>
+                    Sin embargo:
+                  </h2>
+                  <p>
+                    Esta cedula
+                    <a href="<?php echo $enlace ?> ">existe en el sistema</a>
+                  </p>
+                </div>
+                <!-- google hide me: slayerfat@gmail.com -->
+              <?php endif ?>
               <p>
                  Error en el proceso de actualizacion!
               </p>

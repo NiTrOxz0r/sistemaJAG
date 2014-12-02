@@ -221,18 +221,18 @@ if ( (isset($_REQUEST['informacion']) and isset($_REQUEST['tipo']) )
                       <td>
                         <?php echo $datos['p_nombre'] ?>
                       </td>
-                        <?php $query = "SELECT descripcion
+                      <?php $query = "SELECT descripcion
                         from curso
                         inner join asume
                         on asume.cod_curso = curso.codigo
                         where asume.cod_curso = $datos[cod_curso];";
                         $sql = conexion($query);
                         $curso = mysqli_fetch_assoc($sql);
-                        if ($sql->num_rows <> 0) :?>
-                          <td class="curso">
-                            <?php echo $curso['descripcion'] ?>
-                          </td>
-                        <?php endif ?>
+                      if ($sql->num_rows <> 0) :?>
+                        <td class="curso">
+                          <?php echo $curso['descripcion'] ?>
+                        </td>
+                      <?php endif ?>
                       <td>
                         <?php echo $datos['telefono'] === (null) ? 'SinRegistros':$datos['telefono'] ?>
                       </td>
@@ -243,9 +243,9 @@ if ( (isset($_REQUEST['informacion']) and isset($_REQUEST['tipo']) )
                         <?php echo $datos['sexo'] === ('0') ? 'Masculino':'Femenino' ?>
                       </td>
                       <?php $query = "SELECT descripcion
-                      from discapacidad where codigo = $datos[cod_discapacidad];";
-                      $sql = conexion($query);
-                      $discapacidad = mysqli_fetch_assoc($sql); ?>
+                        from discapacidad where codigo = $datos[cod_discapacidad];";
+                        $sql = conexion($query);
+                        $discapacidad = mysqli_fetch_assoc($sql); ?>
                       <td>
                         <?php echo $discapacidad['descripcion'] ?>
                       </td>
@@ -259,15 +259,17 @@ if ( (isset($_REQUEST['informacion']) and isset($_REQUEST['tipo']) )
                       where personal_autorizado.codigo = $datos[cod_representante]";
                       $sql = conexion($query);
                       $representante = mysqli_fetch_assoc($sql); ?>
-                      <td>
-                        <?php echo $representante['p_apellido'] ?>
-                      </td>
-                      <td>
-                        <?php echo $representante['p_nombre'] ?>
-                      </td>
-                      <td>
-                        <?php echo $representante['cedula'] ?>
-                      </td>
+                      <?php if ($representante): ?>
+                        <td>
+                          <?php echo $representante['p_apellido'] ?>
+                        </td>
+                        <td>
+                          <?php echo $representante['p_nombre'] ?>
+                        </td>
+                        <td>
+                          <?php echo $representante['cedula'] ?>
+                        </td>
+                      <?php endif ?>
                     </tr>
                   <?php endwhile; ?>
                 </tbody>

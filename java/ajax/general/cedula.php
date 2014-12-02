@@ -11,6 +11,8 @@
  * usuario/menucon.php
  * @example
  * usuario/menucon.php
+ *
+ * @version 1.1
  */
 if ( isset($_POST['cedula']) ) :
   if (strlen($_POST['cedula']) == 8):
@@ -25,41 +27,15 @@ if ( isset($_POST['cedula']) ) :
       <span id="disponible" data-disponible="true">
       </span>
     <?php else: ?>
-      <span id="disponible" data-disponible="false">
-        Esta Cedula esta ya registrada en el sistema!
-        <?php
-          $query = "SELECT persona.cedula
-          from persona
-          inner join personal_autorizado
-          on personal_autorizado.cod_persona = persona.codigo
-          where persona.cedula = '$cedula';";
-          $resultado = conexion($query);
-        ?>
-        <?php if ($resultado->num_rows <> 0):
-          $otro = false;
-          $consultar_P = enlaceDinamico("github/sistemaJAG/Personal_Autorizado/consultar_P.php?cedula_r=$cedula") ?>
-          <a href="<?php echo $consultar_P ?>">
-            Consultar
-          </a>
-        <?php else: $otro = true;?>
-        <?php endif ?>
-        <?php if ($otro):
-          $query = "SELECT persona.cedula
-          from persona
-          inner join alumno
-          on alumno.cod_persona = persona.codigo
-          where persona.cedula = '$cedula';";
-          $resultado = conexion($query);?>
-          <?php if ($resultado->num_rows <> 0):
-            $otro = false;
-            $consultar_A = enlaceDinamico("github/sistemaJAG/alumno/consultar_A.php?cedula=$cedula") ?>
-            <a href="<?php echo $consultar_A ?>">
-              Consultar
-            </a>
-          <?php else: $otro = true;?>
-          <?php endif ?>
-        <?php endif ?>
-      </span>
+      <?php $enlace = encuentraCedula($_REQUEST['cedula']) ?>
+      <?php if ( $enlace ): ?>
+        <span id="disponible" data-disponible="false">
+          <!-- como les quedo la pepa'e ojo?' -->
+          Esta Cedula esta ya registrada en el sistema!
+          <a href="<?php echo $enlace ?> ">Consultar</a>
+          <!-- se quedaron locos verdad? -->
+        </span>
+      <?php endif; ?>
     <?php endif ?>
   <?php mysqli_close($con) ?>
   <?php else: ?>

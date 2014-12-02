@@ -7,20 +7,13 @@ require_once($enlace);
 // invocamos validarUsuario.php desde master.php
 validarUsuario(1, 1, $_SESSION['cod_tipo_usr']);
 
-if (isset($_GET['cedula_r'])) {
-  if (trim($_GET['cedula_r']) == "" or strlen($_GET['cedula_r']) <> 8) {
-    $enlace = enlaceDinamico("Personal_Autorizado/menucon.php");
-    header("Location:".$enlace);
-  }else{
-    $con = conexion();
-    $cedula = mysqli_escape_string($con, $_GET['cedula_r']);
-  }
-}else{
-  $enlace = enlaceDinamico("Personal_Autorizado/menucon.php");
+if ( isset($_GET['cedula']) and preg_match( "/[0-9]{8}/", $_GET['cedula']) ) :
+  $con = conexion();
+  $cedula = mysqli_escape_string($con, trim($_GET['cedula']));
+else:
+  $enlace = enlaceDinamico("Personal_Autorizado/menucon.php?error=1&tipo=cedula&valor=$_GET[cedula_r]");
   header("Location:".$enlace);
-}
-
-
+endif;
 
 $sql = "SELECT a.codigo, a.cedula, a.nacionalidad, a.p_nombre , a.s_nombre, a.p_apellido, a.s_apellido, a.fec_nac,
 a.sexo, a.telefono, a.telefono_otro , cod_parroquia as cod_parro, cod_mun as cod_mun, cod_edo as cod_est,
@@ -38,13 +31,8 @@ inner join profesion j on (b.profesion=j.codigo) WHERE cedula ='$cedula';";
 
 $re = conexion($sql);
 
-if($reg = mysqli_fetch_array($re)) :
-//ESTA FUNCION TRAE EL HEAD Y NAVBAR:
-//DESDE empezarPagina.php
-
-empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);?>
-
-
+empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);
+if($reg = mysqli_fetch_array($re)) :?>
 <div id="contenido">
   <div id="blancoAjax">
 
@@ -430,19 +418,55 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);?>
   </script>
 </div>
 <?php else : ?>
-<div id="contenido">
-  <div id="blancoAjax" align="center">
-    <div class="contenido">
-      <p align=center>
-        No existe informacion referente a la cedula:
-        <strong><?php echo $cedula ?></strong>
-      </p>
+  <div id="contenido_act_P">
+    <div id="blancoAjax">
+      <div class="container">
+        <div class="row">
+          <div class="jumbotron">
+            <h1>Ups!</h1>
+            <p>
+              Error en el proceso de actualizacion!
+            </p>
+            <h3>
+              <small>
+                Lamentablemente, la cedula solicitada no es un representante
+                o allegado de algun alumno en el sistema.
+              </small>
+            </h3>
+            <!-- !importante -->
+            <?php $enlace = encuentraCedula($_REQUEST['cedula']) ?>
+            <?php if ( $enlace ): ?>
+              <!-- se quedaron locos verdad? -->
+              <div class="bg-info">
+                <h2>
+                  Sin embargo:
+                </h2>
+                <p>
+                  Esta cedula
+                  <a href="<?php echo $enlace ?> ">existe en el sistema</a>
+                </p>
+              </div>
+              <!-- google hide me: slayerfat@gmail.com -->
+            <?php endif ?>
+            <p>
+              Si desea hacer una consulta por favor dele
+              <a href="menucon.php">click a este enlace.</a>
+            </p>
+            <p>
+              ¿O sera que entro en esta pagina erroneamente?
+            </p>
+            <p class="bg-warning">
+              Si este es un problema recurrente, contacte a un administrador del sistema.
+            </p>
+            <p>
+              <?php $index = enlaceDinamico(); ?>
+              <a href="<?php echo $index ?>" class="btn btn-primary btn-lg">Regresar al sistema</a>
+            </p>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-</div>
 <?php endif ; ?>
 
-<?php
-//FINALIZAMOS LA PAGINA:
-//trae footer.php y cola.php
-finalizarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);
+<?php finalizarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']); ?>

@@ -30,9 +30,11 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);?>
             name="consulta_singular_A"
             action="consultar_A.php"
             method="POST">
+            <!-- no tocar -->
             <select id="tipo_personal" class="hidden">
               <option value="-1" selected="selected"></option>
             </select>
+            <!-- no tocar -->
             <div class="form-group">
               <label
               for="tipo"
@@ -49,8 +51,8 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);?>
                 <option value="2">Por Nombre</option>
                 <option value="3">Por Apellido</option>
                 <option value="4">Por Curso</option>
-                <option value="5">Regitro activo</option>
-                <option value="6">Regitro inactivo</option>
+                <option value="5">Registro activo</option>
+                <option value="6">Registro inactivo</option>
                 <option value="7">Todos los Registros</option>
               </select>
               <p class="help-block" id="tipo_chequeo">
