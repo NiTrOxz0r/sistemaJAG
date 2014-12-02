@@ -17,6 +17,10 @@ $(function(){
   $('#informacion').prop('disabled', true);
   $('#tipo_personal').prop('disabled', true);
   $('#submit').prop('disabled', true);
+  // para que la seleccion se mantenga en neutro
+  // y no recuerde la ultima seleccion:
+  $('#informacion').prop('value', '');
+  $('#tipo').val('0');
   // se cambia la estructura del formulario
   // dependiendo de lo que el usuario escoja en el primer select
   // (tipo) = por cedula, por cargo, etc.

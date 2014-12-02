@@ -64,7 +64,6 @@ hermoso:
 [@slayerfat:](https://github.com/slayerfat)
 
 ![totalmente ok](http://mattburnscoventry.files.wordpress.com/2011/03/mental-breakdown.gif)
-![en serio totalmente ok](http://25.media.tumblr.com/tumblr_m4qxy3SJz81rn19nco1_500.gif)
 
 [@Phantom66:](https://github.com/Phantom66)
 
@@ -76,8 +75,8 @@ Joan:
 
 erick:
 
-![envidosos van a envidiar...](http://img0.joyreactor.com/pics/post/gif-games-programmer-1048062.gif)
+![envidosos van a envidiar...](http://i.imgur.com/lz7hOlC.gif)
 
 bryan:
 
-![im helping](http://www.vh1.com/celebrity/bwe/images/2010/01/SIMON-CONFUSED-GIF.gif)
+![im helping](http://i.imgur.com/0kjLR.jpg)

@@ -11,9 +11,7 @@ validarUsuario(1, 1, $_SESSION['cod_tipo_usr']);
 //DESDE empezarPagina.php
 empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);
 
-if ( (isset($_REQUEST['informacion'])
-  and isset($_REQUEST['tipo'])
-  and isset($_REQUEST['tipo_personal']) )
+if ( (isset($_REQUEST['informacion']) and isset($_REQUEST['tipo']) )
   or $_REQUEST['tipo'] === '7' or $_REQUEST['tipo'] === '4' ) :
   $conexion = conexion();
   //tipo = tipo de consulta
@@ -206,15 +204,15 @@ if ( (isset($_REQUEST['informacion'])
                   <th data-field="cedula_r" data-sortable="true" data-switchable="false">Cedula (R)</th>
                 </thead>
                 <tbody>
-                  <?php while ( $datos = mysqli_fetch_array($resultado) ) : ?>
+                  <?php while( $datos = mysqli_fetch_array($resultado) ) : ?>
                     <tr>
                       <!-- ignorar (radio) -->
                       <td></td>
                       <!-- ignorar -->
-                      <td class="cedula" data-datos="<?php echo $datos['cedula'] ?>">
+                      <td class="cedula">
                         <?php echo $datos['cedula'] ?>
                       </td>
-                      <td class="cedula_escolar" data-datos="<?php echo $datos['cedula'] ?>">
+                      <td class="cedula_escolar">
                         <?php echo $datos['cedula_escolar'] ?>
                       </td>
                       <td>
@@ -228,9 +226,9 @@ if ( (isset($_REQUEST['informacion'])
                         inner join asume
                         on asume.cod_curso = curso.codigo
                         where asume.cod_curso = $datos[cod_curso];";
-                        $resultado = conexion($query);
-                        $curso = mysqli_fetch_assoc($resultado);
-                        if ($resultado->num_rows <> 0) :?>
+                        $sql = conexion($query);
+                        $curso = mysqli_fetch_assoc($sql);
+                        if ($sql->num_rows <> 0) :?>
                           <td class="curso">
                             <?php echo $curso['descripcion'] ?>
                           </td>
@@ -246,8 +244,8 @@ if ( (isset($_REQUEST['informacion'])
                       </td>
                       <?php $query = "SELECT descripcion
                       from discapacidad where codigo = $datos[cod_discapacidad];";
-                      $resultado = conexion($query);
-                      $discapacidad = mysqli_fetch_assoc($resultado); ?>
+                      $sql = conexion($query);
+                      $discapacidad = mysqli_fetch_assoc($sql); ?>
                       <td>
                         <?php echo $discapacidad['descripcion'] ?>
                       </td>
@@ -259,8 +257,8 @@ if ( (isset($_REQUEST['informacion'])
                       inner join personal_autorizado
                       on persona.codigo = personal_autorizado.cod_persona
                       where personal_autorizado.codigo = $datos[cod_representante]";
-                      $resultado = conexion($query);
-                      $representante = mysqli_fetch_assoc($resultado); ?>
+                      $sql = conexion($query);
+                      $representante = mysqli_fetch_assoc($sql); ?>
                       <td>
                         <?php echo $representante['p_apellido'] ?>
                       </td>

@@ -16,7 +16,7 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);?>
             <div class="col-xs-12">
               <h3>
                 Para hacer una consulta por favor seleccione el
-                tipo de consulta que Usted desea realizar:
+                tipo que Usted desea realizar:
               </h3>
             </div>
           </div>
@@ -150,6 +150,24 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);?>
               <p class="help-block" id="cedula_chequeo">
               </p>
             </div>
+            <div class="form-group hidden">
+               <label for="cedula_r" class="control-label">Cedula del representante:</label>
+              <input
+                class="form-control"
+                type="text"
+                id="cedula_r"
+                name="cedula_r"
+                maxlength="8">
+              <p class="help-block" id="cedula_r_chequeo">
+                Si este alumno va a ser registrado <strong>por primera vez</strong>,
+                es recomendable ir
+                <?php $enlaceP = enlaceDinamico('Personal_Autorizado/form_reg_P.php') ?>
+                <a href="<?php echo $enlaceP ?>">al proceso de inscripcion</a>,
+                de lo contrario es mejor empezar por la cedula del representante.
+                <em>No se preocupe, la cedula del alumno estara en el formulario de
+                registro de alumno.</em>
+              </p>
+            </div>
             <div class="row">
               <div class="col-sm-6 col-sm-offset-3">
                 <input
@@ -210,11 +228,16 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);?>
                   //true si esta disponible, falso si no.
                   var disponible = $(datos+'#disponible').data('disponible');
                   if (disponible === true) {
+                    $('#cedula_r').parent().removeClass('hidden');
+                    $('#cedula').parent().removeClass('has-error');
+                    $('#cedula').prop('readonly', true);
                     $('#cedula_chequeo').html('&nbsp;');
                     $('#submitDos').prop('disabled', false);
                     $('#submitDos').prop('value', 'Registrar');
                     $('#form_A').prop('action', 'form_reg_A.php');
                   }else{
+                    $('#cedula_r').parent().addClass('hidden');
+                    $('#cedula').parent().removeClass('has-error');
                     $('#cedula_chequeo').html('Este Usuario ya se encuentra en el sistema.');
                     $('#submitDos').prop('disabled', false);
                     $('#submitDos').prop('value', 'Actualizar');
@@ -223,28 +246,33 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);?>
                 },
               });
             }else{
-              $("#cedula_chequeo").html('Favor introduzca cedula solo numeros sin caracteres especiales, EJ: 12345678');
-              $("#cedula_titulo").css('color', 'red');
+              $("#cedula_chequeo").html('Favor introduzca cedula solo numeros, EJ: 12345678');
+              $('#cedula').parent().addClass('has-error');
               $('#submitDos').prop('disabled', true);
             };
           });
           // apenas se pretenda enviar el formulario:
           $('#form_A').on('submit', function (evento){
             //se previene el envio:
-            evento.preventDefault();
             // se comprueba que los datos esten en orden:
             var cedula = $('#cedula').val();
-            if ( validacionCedula(cedula) ) {
+            var cedula_r = $('#cedula_r').val();
+            if (!cedula_r && $('#submitDos').prop('value') != 'Registrar') {
+              cedula_r = cedula;
+            };
+            if ( validacionCedula(cedula) && validacionCedula(cedula_r)) {
               var action = $(this).attr('action');
-              $.ajax({
-                url: action,
-                type: 'GET',
-                dataType: 'html',
-                data: {cedula:cedula},
-                success: function (datos){
-                  $("#contenido_usuario_menucon").empty().append($(datos).find('#blancoAjax').html());
-                },
-              });
+              // desabilitado por no continuar
+              // la cuestion del ajax y paginas dinamicas:
+              // $.ajax({
+              //   url: action,
+              //   type: 'GET',
+              //   dataType: 'html',
+              //   data: {cedula:cedula, cedula_r:cedula_r},
+              //   success: function (datos){
+              //     $("#contenido_alumno_menucon").empty().append($(datos).find('#blancoAjax').html());
+              //   },
+              // });
               return true;
             }else{
               return false;

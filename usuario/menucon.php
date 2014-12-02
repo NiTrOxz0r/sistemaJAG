@@ -23,7 +23,7 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);
             <div class="col-xs-12">
               <h3>
                 Para hacer una consulta por favor seleccione el
-                tipo de consulta que Usted desea realizar:
+                tipo que Usted desea realizar:
               </h3>
             </div>
           </div>
