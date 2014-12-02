@@ -7,7 +7,7 @@ El prototipo de este sistema esta en linea en [sistemajag.esy.es/](http://sistem
 ###Escuela Basica Nacional Bolivariana "Jose Antonio Gonzales"
 Escuela ubicada en el paraiso, caracas, venezuela.
 
-###Sistema 69.1% aprox completado, por ahora falta:
+###Sistema 76.5% aprox completado, por ahora falta:
 ####FLUJO NORMAL DE FORMULARIOS
 en progreso: 99?% aprox.
 ####FLUJO ALTERNATIVO DE FORMULARIOS
@@ -17,9 +17,9 @@ en progreso: 75?% aprox.
 ####moduloCurso
 en progreso: 99?%.
 ####moduloUsuario
-en progreso: 80% aprox.
+en progreso: 90?% aprox.
 ####CSS
-en progreso: 50% aprox.
+en progreso: 99?% aprox.
 ####ModuloValidacion
 en progreso: 75?% aprox.
 ####ModuloReporte
