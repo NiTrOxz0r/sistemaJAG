@@ -75,7 +75,7 @@ if ($fila = mysql_fetch_array($registros)) {
         }
         }
 ```
-sublime:
+totalmente sublime:
 ```php
 [...]
 <br><br>
@@ -93,6 +93,24 @@ exotico:
 <option value="<?php echo "" .$reg['cod_sta']?>"><?php echo "" .$reg['des_sta']?></option>
 </select><br>
 ```
+maravilloso:
+
+```php
+<div id="contenido">
+  <div id="blancoAjax">
+
+    <div align="center">
+      <form>
+        [...]
+        </form>
+         <!-- validacion -->
+    <script type="text/javascript">
+      [...]
+    </script>
+</div>
+<!-- fin de archivo -->
+```
+
 #estado mental:
 
 [@slayerfat:](https://github.com/slayerfat)

@@ -333,6 +333,7 @@ if($go): ?>
                             type="text"
                             name="fec_nac"
                             id="fec_nac"
+                            placeholder="dele click para mostrar calendario"
                             readonly="readonly"
                             style="cursor:pointer; background-color: #FFFFFF"
                             required>

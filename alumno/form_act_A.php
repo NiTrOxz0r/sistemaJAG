@@ -340,6 +340,7 @@ if($reg = mysqli_fetch_array($re)) :?>
                             type="text"
                             name="fec_nac"
                             id="fec_nac"
+                            placeholder="dele click para mostrar calendario"
                             readonly="readonly"
                             value="<?php echo $reg['fec_nac'];?>"
                             style="cursor:pointer; background-color: #FFFFFF"

@@ -220,6 +220,7 @@ if ( isset($_GET['cedula']) ):
                           type="text"
                           name="fec_nac"
                           id="fec_nac"
+                          placeholder="dele click para mostrar calendario"
                           readonly="readonly"
                           style="cursor:pointer; background-color: #FFFFFF"
                           value="<?php echo $datos['fec_nac'] ?>"

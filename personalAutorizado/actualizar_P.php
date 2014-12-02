@@ -1,31 +1,31 @@
 <?php
 
-  if(!isset($_SESSION)){
-    session_start();
-  }
-  $enlace = $_SERVER['DOCUMENT_ROOT']."/github/sistemaJAG/php/master.php";
-  require_once($enlace);
+if(!isset($_SESSION)){
+  session_start();
+}
+$enlace = $_SERVER['DOCUMENT_ROOT']."/github/sistemaJAG/php/master.php";
+require_once($enlace);
 // invocamos validarUsuario.php desde master.php
-  validarUsuario(1, 1, $_SESSION['cod_tipo_usr']);
+validarUsuario(1, 1, $_SESSION['cod_tipo_usr']);
 
 //ESTA FUNCION TRAE EL HEAD Y NAVBAR:
 //DESDE empezarPagina.php
-  empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);
+empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);
 
-  $con = conexion();
+$con = conexion();
 
-  $status         =       1;
-  $cod_usr_reg    =       $_SESSION['codUsrMod'];
-  $cod_usr_modn   =       $_SESSION['codUsrMod'];
+$status         =       1;
+$cod_usr_reg    =       $_SESSION['codUsrMod'];
+$cod_usr_modn   =       $_SESSION['codUsrMod'];
 
-  //ACTUALIZO LA DIRECCION DEL REPRESENTANTE
-  //LA ENVIO A LA TABLA direccion_p_a
-  $cedulan  = $_POST['cedula'];
-  $sql="SELECT a.codigo as cod_direccion from direccion a
-   inner join persona b on (a.cod_persona=b.codigo) where cedula = '$cedulan';";
-  $resultado = conexion($sql);
-  $datos = mysqli_fetch_assoc($resultado);
-  $cod_direccion_P = $datos['cod_direccion'];
+//ACTUALIZO LA DIRECCION DEL REPRESENTANTE
+//LA ENVIO A LA TABLA direccion_p_a
+$cedulan  = $_POST['cedula'];
+$sql="SELECT a.codigo as cod_direccion from direccion a
+ inner join persona b on (a.cod_persona=b.codigo) where cedula = '$cedulan';";
+$resultado = conexion($sql);
+$datos = mysqli_fetch_assoc($resultado);
+$cod_direccion_P = $datos['cod_direccion'];
 
 
   if($resultado->num_rows== 1){

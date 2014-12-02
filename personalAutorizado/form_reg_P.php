@@ -167,6 +167,7 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr'], 'sistemaJAG 
                           type="text"
                           name="fec_nac"
                           id="fec_nac"
+                          placeholder="dele click para mostrar calendario"
                           readonly="readonly"
                           style="cursor:pointer; background-color: #FFFFFF"
                           required>
@@ -576,13 +577,11 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr'], 'sistemaJAG 
           type: 'POST',
           dataType: 'script'
         });
-        // se trae la validacion de edo/mun/parr
-        $(function(){
-          $.ajax({
-            url: '../java/validacionDireccion.js',
-            type: 'POST',
-            dataType: 'script'
-          });
+        // se trae la validacion de edo/mun/parro
+        $.ajax({
+          url: '../java/validacionDireccion.js',
+          type: 'POST',
+          dataType: 'script'
         });
       });
       // $(function(){
