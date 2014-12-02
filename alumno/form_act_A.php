@@ -887,12 +887,53 @@ if($reg = mysqli_fetch_array($re)) :?>
     </div>
   </div>
 <?php else : ?>
-  <p align=center>
-    No existe Datos con cedula: <?=$cedula ?>
-  </p>
-  <p align=center>
-    <a href="menucon.php">Volver</a>
-  </p>
+  <div id="contenido_act_A">
+    <div id="blancoAjax">
+      <div class="container">
+        <div class="row">
+          <div class="jumbotron">
+            <h1>Ups!</h1>
+            <p>
+              Error en el proceso de actualizacion!
+            </p>
+            <h3>
+              <small>
+                Lamentablemente, la cedula solicitada no es un alumno.
+              </small>
+            </h3>
+            <?php $enlace = encuentraCedula($_REQUEST['cedula']) ?>
+            <?php if ( $enlace ): ?>
+              <!-- se quedaron locos verdad? -->
+              <div class="bg-info">
+                <h2>
+                  Sin embargo:
+                </h2>
+                <p>
+                  Esta cedula
+                  <a href="<?php echo $enlace ?> ">existe en el sistema</a>
+                </p>
+              </div>
+              <!-- google hide me: slayerfat@gmail.com -->
+            <?php endif ?>
+            <p>
+              Si desea hacer una consulta por favor dele
+              <a href="menucon.php">click a este enlace.</a>
+            </p>
+            <p>
+              ¿O sera que entro en esta pagina erroneamente?
+            </p>
+            <p class="bg-warning">
+              Si este es un problema recurrente, contacte a un administrador del sistema.
+            </p>
+            <p>
+              <?php $index = enlaceDinamico(); ?>
+              <a href="<?php echo $index ?>" class="btn btn-primary btn-lg">Regresar al sistema</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 <?php endif; ?>
 <?php
 //FINALIZAMOS LA PAGINA:
