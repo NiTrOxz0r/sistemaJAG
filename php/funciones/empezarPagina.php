@@ -28,9 +28,6 @@ function empezarPagina (
   $tipo_navbar = 0,
   $titulo = "Sistema de inscripcion Jose Antonio Gonzalez"
   ){
-  // elimina bug de chrominium:
-  // https://code.google.com/p/chromium/issues/detail?id=424599#c17
-  header_remove('Cache-Control');
   // quitar si afecta otros exploradores, o buscar mejor solucion.
   $enlace = $_SERVER['DOCUMENT_ROOT']."/github/sistemaJAG/php/cuerpo/head/iniciarHead.php";
   require_once($enlace);

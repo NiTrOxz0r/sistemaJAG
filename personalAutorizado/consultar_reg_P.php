@@ -5,7 +5,7 @@ if(!isset($_SESSION)){
 $enlace = $_SERVER['DOCUMENT_ROOT']."/github/sistemaJAG/php/master.php";
 require_once($enlace);
 // invocamos validarUsuario.php desde master.php
-validarUsuario(1, 1, $_SESSION['cod_tipo_usr']);
+validarUsuario(1, 1, $_SESSION['cod_tipo_usr'], 'sistemaJAG | Consulta de representante/allegado');
 
 if (isset($_GET['cedula_r'])) {
   if (trim($_GET['cedula_r']) == "" or strlen($_GET['cedula_r']) <> 8) {
@@ -43,7 +43,7 @@ if($reg = mysqli_fetch_array($re)) :
 //ESTA FUNCION TRAE EL HEAD Y NAVBAR:
 //DESDE empezarPagina.php
 
-empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);?>
+empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr'], 'sistemaJAG | Consulta de representante/allegado');?>
 
 
 <div id="contenido">

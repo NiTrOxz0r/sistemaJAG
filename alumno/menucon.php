@@ -3,7 +3,7 @@ $enlace = $_SERVER['DOCUMENT_ROOT']."/github/sistemaJAG/php/master.php";
 require_once($enlace);
 $index = enlaceDinamico();
 validarUsuario(1, 1, $_SESSION['cod_tipo_usr']);
-empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);?>
+empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr'], 'sistemaJAG | Consulta de alumno');?>
 
 <div id="contenido_alumno_menucon">
   <div id="blancoAjax">

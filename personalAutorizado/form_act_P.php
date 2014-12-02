@@ -31,7 +31,7 @@ inner join profesion j on (b.profesion=j.codigo) WHERE cedula ='$cedula';";
 
 $re = conexion($sql);
 
-empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);
+empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr'], 'sistemaJAG | Actualizar alumno');
 if($reg = mysqli_fetch_array($re)) :?>
 <div id="contenido_act_P">
   <div id="blancoAjax">
