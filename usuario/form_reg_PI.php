@@ -192,6 +192,7 @@ if ( (isset($_POST['seudonimo']) && isset($_POST['clave']) )
                           type="text"
                           name="fec_nac"
                           id="fec_nac"
+                          placeholder="dele click para mostrar calendario"
                           readonly="readonly"
                           style="cursor:pointer; background-color: #FFFFFF"
                           required>
@@ -547,7 +548,7 @@ if ( (isset($_POST['seudonimo']) && isset($_POST['clave']) )
               if ( validacionCedula(cedula) ) {
                 $("#cedula_chequeo").html('');
                 $.ajax({
-                  url: '../java/ajax/general/cedula.php',
+                  url: '../java/cedula.php',
                   type: 'POST',
                   data: {cedula:cedula},
                   success: function (datos){

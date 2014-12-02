@@ -5,7 +5,7 @@ if(!isset($_SESSION)){
 $enlace = $_SERVER['DOCUMENT_ROOT']."/github/sistemaJAG/php/master.php";
 require_once($enlace);
 // invocamos validarUsuario.php desde master.php
-validarUsuario(1, 1, $_SESSION['cod_tipo_usr']);
+validarUsuario(1, 1, $_SESSION['cod_tipo_usr'], 'sistemaJAG | Registro de representante/allegado');
 
 //ESTA FUNCION TRAE EL HEAD Y NAVBAR:
 //DESDE empezarPagina.php
@@ -49,6 +49,9 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr'], 'sistemaJAG 
                       class="form-control"
                       autofocus="autofocus"
                       placeholder="Introduzca cedula ej: 12345678"
+                      <?php if (isset($_GET['cedula'])): ?>
+                        value="<?php echo $_GET['cedula'] ?>"
+                      <?php endif ?>
                       required>
                     <p class="help-block" id="cedula_chequeo">
                     </p>
@@ -164,6 +167,7 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr'], 'sistemaJAG 
                           type="text"
                           name="fec_nac"
                           id="fec_nac"
+                          placeholder="dele click para mostrar calendario"
                           readonly="readonly"
                           style="cursor:pointer; background-color: #FFFFFF"
                           required>
@@ -573,13 +577,11 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr'], 'sistemaJAG 
           type: 'POST',
           dataType: 'script'
         });
-        // se trae la validacion de edo/mun/parr
-        $(function(){
-          $.ajax({
-            url: '../java/validacionDireccion.js',
-            type: 'POST',
-            dataType: 'script'
-          });
+        // se trae la validacion de edo/mun/parro
+        $.ajax({
+          url: '../java/validacionDireccion.js',
+          type: 'POST',
+          dataType: 'script'
         });
       });
       // $(function(){
@@ -593,7 +595,7 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr'], 'sistemaJAG 
       //     if ( validacionCedula(cedula) ) {
       //       $("#cedula_chequeo").html('');
       //       $.ajax({
-      //         url: '../java/ajax/general/cedula.php',
+      //         url: '../java/cedula.php',
       //         type: 'POST',
       //         data: {cedula:cedula},
       //         success: function (datos){

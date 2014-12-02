@@ -9,7 +9,7 @@ validarUsuario(1, 1, $_SESSION['cod_tipo_usr']);
 
 //ESTA FUNCION TRAE EL HEAD Y NAVBAR:
 //DESDE empezarPagina.php
-empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);
+empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr'], 'sistemaJAG | Registro de alumno');
 
 if ( isset($_GET['cedula_r']) and preg_match( "/[0-9]{8}/", $_GET['cedula_r']) ) :
   $conexion = conexion();
@@ -333,6 +333,7 @@ if($go): ?>
                             type="text"
                             name="fec_nac"
                             id="fec_nac"
+                            placeholder="dele click para mostrar calendario"
                             readonly="readonly"
                             style="cursor:pointer; background-color: #FFFFFF"
                             required>
@@ -841,7 +842,7 @@ if($go): ?>
               </div>
             <?php else: ?>
               <?php
-              $enlace = "Personal_Autorizado/form_reg_P.php?cedula=$_GET[cedula_r]";
+              $enlace = "personalAutorizado/form_reg_P.php?cedula=$_GET[cedula_r]";
               $inscripcion = enlaceDinamico("$enlace"); ?>
               <p>
                 La cedula <?php echo $_GET['cedula'] ?>, no esta registrada en el sistema.

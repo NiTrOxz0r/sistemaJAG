@@ -10,7 +10,7 @@ validarUsuario(1, 3, $_SESSION['cod_tipo_usr']);
 
 //ESTA FUNCION TRAE EL HEAD Y NAVBAR:
 //DESDE empezarPagina.php
-empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);
+empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr'], 'sistemaJAG | Actualizacion de usuario');
 
 if ( isset($_GET['cedula']) ):
   $con = conexion();
@@ -220,6 +220,7 @@ if ( isset($_GET['cedula']) ):
                           type="text"
                           name="fec_nac"
                           id="fec_nac"
+                          placeholder="dele click para mostrar calendario"
                           readonly="readonly"
                           style="cursor:pointer; background-color: #FFFFFF"
                           value="<?php echo $datos['fec_nac'] ?>"
@@ -740,10 +741,24 @@ if ( isset($_GET['cedula']) ):
           <div class="row">
             <div class="jumbotron">
               <h1>Ups!</h1>
-              <h2>
+              <h3>
                 La cedula: <strong><?php echo $cedula ?></strong>
-                <small>No existe como usuario interno, sera que quizo buscar a un alumno o allegado del mismo?</small>
-              </h2>
+                <small>No existe como usuario interno</small>
+              </h3>
+              <!-- !importante -->
+              <?php $enlace = encuentraCedula($_REQUEST['cedula']) ?>
+              <?php if ( $enlace ): ?>
+                <div class="bg-info">
+                  <h2>
+                    Sin embargo:
+                  </h2>
+                  <p>
+                    Esta cedula
+                    <a href="<?php echo $enlace ?> ">existe en el sistema</a>
+                  </p>
+                </div>
+                <!-- google hide me: slayerfat@gmail.com -->
+              <?php endif ?>
               <p>
                  Error en el proceso de actualizacion!
               </p>

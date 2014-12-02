@@ -3,7 +3,7 @@ $enlace = $_SERVER['DOCUMENT_ROOT']."/github/sistemaJAG/php/master.php";
 require_once($enlace);
 $index = enlaceDinamico();
 validarUsuario(1, 1, $_SESSION['cod_tipo_usr']);
-empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);?>
+empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr'], 'sistemaJAG | Consulta de alumno');?>
 
 <div id="contenido_alumno_menucon">
   <div id="blancoAjax">
@@ -30,9 +30,11 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);?>
             name="consulta_singular_A"
             action="consultar_A.php"
             method="POST">
+            <!-- no tocar -->
             <select id="tipo_personal" class="hidden">
               <option value="-1" selected="selected"></option>
             </select>
+            <!-- no tocar -->
             <div class="form-group">
               <label
               for="tipo"
@@ -49,8 +51,8 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);?>
                 <option value="2">Por Nombre</option>
                 <option value="3">Por Apellido</option>
                 <option value="4">Por Curso</option>
-                <option value="5">Regitro activo</option>
-                <option value="6">Regitro inactivo</option>
+                <option value="5">Registro activo</option>
+                <option value="6">Registro inactivo</option>
                 <option value="7">Todos los Registros</option>
               </select>
               <p class="help-block" id="tipo_chequeo">
@@ -164,7 +166,7 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);?>
               <p class="help-block" id="cedula_r_chequeo">
                 Si este alumno va a ser registrado <strong>por primera vez</strong>,
                 es recomendable ir
-                <?php $enlaceP = enlaceDinamico('Personal_Autorizado/form_reg_P.php') ?>
+                <?php $enlaceP = enlaceDinamico('personalAutorizado/form_reg_P.php') ?>
                 <a href="<?php echo $enlaceP ?>">al proceso de inscripcion</a>,
                 de lo contrario es mejor empezar por la cedula del representante.
                 <em>No se preocupe, la cedula del alumno estara en el formulario de
@@ -221,7 +223,7 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);?>
             if ( validacionCedula(cedula) ) {
               $("#cedula_chequeo").empty();
               $.ajax({
-                url: '../java/ajax/general/cedula.php',
+                url: '../java/cedula.php',
                 type: 'POST',
                 data: {cedula:cedula},
                 success: function (datos){

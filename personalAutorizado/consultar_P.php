@@ -6,10 +6,27 @@ $enlace = $_SERVER['DOCUMENT_ROOT']."/github/sistemaJAG/php/master.php";
 require_once($enlace);
 // invocamos validarUsuario.php desde master.php
 validarUsuario(1, 1, $_SESSION['cod_tipo_usr']);
-
+// guardado por referencia:
+// $query = "SELECT persona.nacionalidad as nacionalidad_a,
+// persona.cedula as cedula,
+// alumno.cedula_escolar as cedula_escolar_a,
+// persona.p_nombre as p_nombre_a,
+// persona.s_nombre as s_nombre_a,
+// persona.p_apellido as p_apellido_a,
+// persona.s_apellido as s_apellido_a,
+// representante.cedula as cedula_r,
+// representante.p_nombre as p_apellido_r,
+// representante.p_apellido as p_nombre_r  from alumno
+// inner join persona on (alumno.cod_persona = persona.codigo),
+// personal_autorizado inner join persona as representante on
+// (personal_autorizado.cod_persona = representante.codigo)
+// where personal_autorizado.codigo=alumno.cod_representante
+// and representante.cedula = '$cedula_r';";
+//
 //ESTA FUNCION TRAE EL HEAD Y NAVBAR:
 //DESDE empezarPagina.php
-empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr'], 'sistemaJAG | Consulta de alumno');
+
+empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr'], 'sistemaJAG | Consulta de representante/allegado');
 
 if ( (isset($_REQUEST['informacion']) and isset($_REQUEST['tipo']) )
   or $_REQUEST['tipo'] === '7' or $_REQUEST['tipo'] === '4' ) :
@@ -26,117 +43,31 @@ if ( (isset($_REQUEST['informacion']) and isset($_REQUEST['tipo']) )
       $where = "WHERE persona.p_nombre LIKE '%$valor%' or persona.s_nombre LIKE '%$valor%' ";
     elseif ($_REQUEST['tipo'] === '3') :
       $where = "WHERE persona.p_apellido LIKE '%$valor%' or persona.s_apellido LIKE '%$valor%'";
-    elseif ($_REQUEST['tipo'] === '4') :
-      $where = "WHERE alumno.cod_curso = $valor";
+    // considerar una opcion para PA:
+    // elseif ($_REQUEST['tipo'] === '4') :
+    //   $where = "WHERE alumno.cod_curso = $valor";
     elseif ($_REQUEST['tipo'] === '5') :
-      $where = "where (alumno.status = 1 or persona.status = 1) ";
+      $where = "where (personal_autorizado.status = 1 or persona.status = 1) ";
     elseif ($_REQUEST['tipo'] === '6') :
-      $where = "where (alumno.status = 0 or persona.status = 0) ";
+      $where = "where (personal_autorizado.status = 0 or persona.status = 0) ";
     else:
       header('Location: menucon.php?e=1&error=tipo&q='.$_REQUEST['tipo']);
     endif;
-    // ajustamos la condicion de la busqueda:
-    // if ($_REQUEST['tipo_personal'] === '1') :
-    //   $where = $where." AND personal.tipo_personal = 1";
-    // elseif ($_REQUEST['tipo_personal'] === '2') :
-    //   $where = $where." AND personal.tipo_personal = 2";
-    // elseif ($_REQUEST['tipo_personal'] === '3') :
-    //   $where = $where." AND personal.tipo_personal = 3";
-    // elseif ($_REQUEST['tipo_personal'] === '4') :
-    //   $where = $where." AND personal.tipo_personal = 4";
-    // elseif ($_REQUEST['tipo_personal'] === '5') :
-    //   $where = $where." AND personal.tipo_personal = 5";
-    // elseif ($_REQUEST['tipo_personal'] === '0') :
-    //   $where = $where." AND personal.tipo_personal = 0";
-    // elseif ($_REQUEST['tipo_personal'] === '6') :
-    //   $where = $where." AND personal.tipo_personal = 0";
-    // endif;
-  // endif;
-  // si el pedido no es un listado general:
-  // if ($_REQUEST['tipo'] <> '7') :
-  //   // si el pedido es de un docente:
-  //   if ($_REQUEST['tipo_personal'] === '3') :
-  //     $query = "SELECT
-  //       persona.p_apellido as p_apellido,
-  //       persona.p_nombre as p_nombre,
-  //       persona.cedula as cedula,
-  //       personal.celular as celular,
-  //       persona.telefono as telefono,
-  //       personal.email as email,
-  //       cargo.descripcion as cargo,
-  //       curso.descripcion as curso,
-  //       usuario.seudonimo as seudonimo,
-  //       tipo_usuario.descripcion as tipo_usuario,
-  //       personal.status as status_d,
-  //       usuario.status as status_u
-  //       from persona
-  //       inner join personal
-  //       on personal.cod_persona = persona.codigo
-  //       inner join cargo
-  //       on personal.cod_cargo = cargo.codigo
-  //       inner join asume
-  //       on personal.codigo = asume.cod_docente
-  //       inner join curso
-  //       on asume.cod_curso = curso.codigo
-  //       inner join usuario
-  //       on personal.cod_usr = usuario.codigo
-  //       inner join tipo_usuario
-  //       on usuario.cod_tipo_usr = tipo_usuario.codigo
-  //       $where
-  //       order by
-  //       persona.p_apellido,
-  //       usuario.seudonimo,
-  //       tipo_usuario.descripcion;";
-    // si el pedido no es de un docente:
-    // elseif ($_REQUEST['tipo_personal'] === '1' or $_REQUEST['tipo_personal'] === '2'
-    //   or $_REQUEST['tipo_personal'] === '4' or $_REQUEST['tipo_personal'] === '5'
-    //   or $_REQUEST['tipo_personal'] === '0' or $_REQUEST['tipo_personal'] === '6'):
-    //   $query = "SELECT
-    //     persona.p_apellido as p_apellido,
-    //     persona.p_nombre as p_nombre,
-    //     persona.cedula as cedula,
-    //     personal.celular as celular,
-    //     persona.telefono as telefono,
-    //     persona.telefono_otro as telefono_otro,
-    //     personal.email as email,
-    //     cargo.descripcion as cargo,
-    //     usuario.seudonimo as seudonimo,
-    //     tipo_usuario.descripcion as tipo_usuario,
-    //     personal.status as status_d,
-    //     usuario.status as status_u
-    //     from persona
-    //     inner join personal
-    //     on personal.cod_persona = persona.codigo
-    //     inner join cargo
-    //     on personal.cod_cargo = cargo.codigo
-    //     inner join usuario
-    //     on personal.cod_usr = usuario.codigo
-    //     inner join tipo_usuario
-    //     on usuario.cod_tipo_usr = tipo_usuario.codigo
-    //     $where
-    //     order by
-    //     persona.p_apellido,
-    //     usuario.seudonimo,
-    //     tipo_usuario.descripcion;";
-    // else:
-    //   header('Location: menucon.php?e=2&error=tipo&q='.$_REQUEST['tipo_personal']);
-    // endif;
-    //
     $query = "SELECT *
       from persona
-      inner join alumno
-      on alumno.cod_persona = persona.codigo
+      inner join personal_autorizado
+      on personal_autorizado.cod_persona = persona.codigo
       $where
       order by
       persona.p_apellido;";
   // el pedido es un listado general:
   else:
     $where = "where (persona.status = 0 or persona.status = 1) ";
-    $where = $where."AND (alumno.status = 0 or alumno.status = 1)";
+    $where = $where."AND (personal_autorizado.status = 0 or personal_autorizado.status = 1)";
     $query = "SELECT *
       from persona
-      inner join alumno
-      on alumno.cod_persona = persona.codigo
+      inner join personal_autorizado
+      on personal_autorizado.cod_persona = persona.codigo
       $where
       order by
       persona.p_apellido;";
@@ -190,18 +121,19 @@ if ( (isset($_REQUEST['informacion']) and isset($_REQUEST['tipo']) )
                   <th data-radio="true" data-switchable="false"></th>
                   <!-- ignorar -->
                   <th data-field="cedula" data-sortable="true" data-switchable="false">Cedula</th>
-                  <th data-field="cedula_escolar" data-sortable="true" data-switchable="false">Cedula escolar</th>
                   <th data-field="p_apellido" data-sortable="true">Primer Apellido</th>
                   <th data-field="p_nombre" data-sortable="true">Primer Nombre</th>
-                  <th data-field="curso" data-sortable="true">Curso</th>
                   <th data-field="telefono" data-sortable="false">Telefono</th>
                   <th data-field="telefono_otro" data-sortable="true" data-visible="true">Telf. Ad.</th>
                   <th data-field="sexo" data-sortable="true">sexo</th>
-                  <th data-field="discapacidad" data-sortable="true">Discapacidad</th>
-                  <th data-field="vacuna" data-sortable="true">Cert. vacunacion</th>
-                  <th data-field="p_apellido_r" data-sortable="true">Primer Apellido (R)</th>
-                  <th data-field="p_nombre_r" data-sortable="true">Primer Nombre (R)</th>
-                  <th data-field="cedula_r" data-sortable="true" data-switchable="false">Cedula (R)</th>
+                  <th data-field="email" data-sortable="true">email</th>
+                  <th data-field="nivel_instruccion" data-sortable="true">nivel_instruccion</th>
+                  <th data-field="profesion" data-sortable="true">profesion</th>
+                  <th data-field="p_apellido_a" data-sortable="true">Primer Apellido (R)</th>
+                  <th data-field="p_nombre_a" data-sortable="true">Primer Nombre (R)</th>
+                  <th data-field="cedula_a" data-sortable="true" data-switchable="false">Cedula (R)</th>
+                  <th data-field="cedula_escolar" data-sortable="true" data-switchable="false">Cedula escolar</th>
+                  <th data-field="curso" data-sortable="true">Curso</th>
                 </thead>
                 <tbody>
                   <?php while( $datos = mysqli_fetch_array($resultado) ) : ?>
@@ -212,27 +144,12 @@ if ( (isset($_REQUEST['informacion']) and isset($_REQUEST['tipo']) )
                       <td class="cedula">
                         <?php echo $datos['cedula'] ?>
                       </td>
-                      <td class="cedula_escolar">
-                        <?php echo $datos['cedula_escolar'] ?>
-                      </td>
                       <td>
                         <?php echo $datos['p_apellido'] ?>
                       </td>
                       <td>
                         <?php echo $datos['p_nombre'] ?>
                       </td>
-                      <?php $query = "SELECT descripcion
-                        from curso
-                        inner join asume
-                        on asume.cod_curso = curso.codigo
-                        where asume.cod_curso = $datos[cod_curso];";
-                        $sql = conexion($query);
-                        $curso = mysqli_fetch_assoc($sql);
-                      if ($sql->num_rows <> 0) :?>
-                        <td class="curso">
-                          <?php echo $curso['descripcion'] ?>
-                        </td>
-                      <?php endif ?>
                       <td>
                         <?php echo $datos['telefono'] === (null) ? 'SinRegistros':$datos['telefono'] ?>
                       </td>
@@ -242,39 +159,76 @@ if ( (isset($_REQUEST['informacion']) and isset($_REQUEST['tipo']) )
                       <td>
                         <?php echo $datos['sexo'] === ('0') ? 'Masculino':'Femenino' ?>
                       </td>
+                      <td>
+                        <?php echo $datos['email'] === (null) ? 'SinRegistros':$datos['email'] ?>
+                      </td>
                       <?php $query = "SELECT descripcion
-                        from discapacidad where codigo = $datos[cod_discapacidad];";
+                        from nivel_instruccion
+                        where codigo = $datos[nivel_instruccion];";
                         $sql = conexion($query);
-                        $discapacidad = mysqli_fetch_assoc($sql); ?>
-                      <td>
-                        <?php echo $discapacidad['descripcion'] ?>
-                      </td>
-                      <td>
-                        <?php echo $datos['certificado_vacuna'] === ('s') ? 'Si posee':'No posee' ?>
-                      </td>
-                      <?php $query = "SELECT p_nombre, p_apellido, cedula
-                      from persona
-                      inner join personal_autorizado
-                      on persona.codigo = personal_autorizado.cod_persona
-                      where personal_autorizado.codigo = $datos[cod_representante]";
-                      $sql = conexion($query);
-                      $representante = mysqli_fetch_assoc($sql); ?>
-                      <?php if ($representante): ?>
+                        $nivel_instruccion = mysqli_fetch_assoc($sql);
+                      if ($sql->num_rows <> 0) :?>
                         <td>
-                          <?php echo $representante['p_apellido'] ?>
+                          <?php echo $nivel_instruccion['descripcion'] ?>
+                        </td>
+                      <?php endif ?>
+                      <?php $query = "SELECT descripcion
+                        from profesion
+                        where codigo = $datos[profesion];";
+                        $sql = conexion($query);
+                        $profesion = mysqli_fetch_assoc($sql);
+                      if ($sql->num_rows <> 0) :?>
+                        <td>
+                          <?php echo $profesion['descripcion'] ?>
+                        </td>
+                      <?php endif ?>
+                      <?php $query = "SELECT
+                        p_nombre,
+                        p_apellido,
+                        cedula,
+                        cedula_escolar,
+                        alumno.codigo
+                        from alumno
+                        inner join obtiene
+                        on alumno.codigo = obtiene.cod_alu
+                        inner join persona
+                        on alumno.cod_persona = persona.codigo
+                        where obtiene.cod_p_a = $datos[codigo];";
+                        $sql = conexion($query);
+                        $alumno = mysqli_fetch_assoc($sql); ?>
+                      <?php if ($alumno): ?>
+                        <td>
+                          <?php echo $alumno['p_apellido'] ?>
                         </td>
                         <td>
-                          <?php echo $representante['p_nombre'] ?>
+                          <?php echo $alumno['p_nombre'] ?>
                         </td>
                         <td>
-                          <?php echo $representante['cedula'] ?>
+                          <?php echo $alumno['cedula'] ?>
                         </td>
+                        <td class="cedula_escolar">
+                          <?php echo $alumno['cedula_escolar'] ?>
+                        </td>
+                      <?php endif ?>
+                      <?php if (isset($alumno['codigo'])): ?>
+                        <?php $query = "SELECT descripcion
+                          from curso
+                          inner join asume
+                          on asume.cod_curso = curso.codigo
+                          where asume.cod_curso = $alumno[codigo];";
+                          $sql = conexion($query);
+                          $curso = mysqli_fetch_assoc($sql);
+                        if ($sql->num_rows <> 0) :?>
+                          <td class="curso">
+                            <?php echo $curso['descripcion'] ?>
+                          </td>
+                        <?php endif ?>
                       <?php endif ?>
                     </tr>
                   <?php endwhile; ?>
                 </tbody>
               </table>
-              <?php $enlacePrimario = enlaceDinamico('alumno/form_act_A.php') ?>
+              <?php $enlacePrimario = enlaceDinamico('personalAutorizado/form_act_P.php') ?>
               <span class="hidden" data-enlace-primario="<?php echo $enlacePrimario ?>"></span>
                <div class="row center-block">
                  <div class="col-xs-6 col-xs-offset-3">

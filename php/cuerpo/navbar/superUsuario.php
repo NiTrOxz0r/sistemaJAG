@@ -42,7 +42,7 @@ if ( isset($_SESSION['cod_tipo_usr']) ) : ?>
                 | Salir
               </a>
             </li>
-            <?php $inscripcion = enlaceDinamico('Personal_Autorizado/form_reg_P.php'); ?>
+            <?php $inscripcion = enlaceDinamico('personalAutorizado/form_reg_P.php'); ?>
             <li><a href="<?php echo $inscripcion ?>">inscripcion</a></li>
             <li class="dropdown">
               <a
@@ -55,7 +55,7 @@ if ( isset($_SESSION['cod_tipo_usr']) ) : ?>
               </a>
               <ul class="dropdown-menu" role="menu">
                 <?php $alumnos = enlaceDinamico('alumno/menucon.php'); ?>
-                <?php $padres = enlaceDinamico('Personal_Autorizado/menucon.php'); ?>
+                <?php $padres = enlaceDinamico('personalAutorizado/menucon.php'); ?>
                 <?php $cursos = enlaceDinamico('curso/menucon.php'); ?>
                 <?php $usuarios = enlaceDinamico('usuario/menucon.php'); ?>
                 <li><a href="<?php echo $alumnos ?>">Alumno</a></li>

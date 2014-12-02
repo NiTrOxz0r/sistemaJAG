@@ -18,7 +18,7 @@ require_once($enlace);
 // invocamos validarUsuario.php desde master.php
 validarUsuario(1, 1, $_SESSION['cod_tipo_usr']);
 
-empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);
+empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr'], 'sistemaJAG | Registro de alumno');
 
   if (isset($_POST['cedula_r'])){
 

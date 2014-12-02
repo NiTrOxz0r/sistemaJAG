@@ -289,7 +289,7 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);?>
                   </tr>
                   <tr colspan="2">
                     <th colspan="2">
-                      <a href="../Personal_Autorizado/consultar_reg_P.php?cedula_r=<?php echo $datos['cedula_r'];?>">
+                      <a href="../personalAutorizado/consultar_reg_P.php?cedula_r=<?php echo $datos['cedula_r'];?>">
                         VER MAS
                       </a>
                     </th>
@@ -324,7 +324,7 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);?>
               }
 
             ?>
-            <a href="../Personal_Autorizado/consultar_P.php?cedula_a=<?php echo $cedula_a ?>">Informacion de todos los allegados de este alumno.</a>
+            <a href="../personalAutorizado/consultar_P.php?cedula_a=<?php echo $cedula_a ?>">Informacion de todos los allegados de este alumno.</a>
           </span>
         </div>
 

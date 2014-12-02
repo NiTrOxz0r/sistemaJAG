@@ -9,7 +9,7 @@ validarUsuario(1, 3, $_SESSION['cod_tipo_usr']);
 
 //ESTA FUNCION TRAE EL HEAD Y NAVBAR:
 //DESDE empezarPagina.php
-empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);
+empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr'], 'sistemaJAG | Consulta de usuario');
 
 //CONTENIDO:?>
 <div id="contenido_usuario_menucon">
@@ -53,8 +53,8 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);
                 <option value="2">Por Nombre</option>
                 <option value="3">Por Apellido</option>
                 <option value="4">Por Cargo</option>
-                <option value="5">Regitro activo</option>
-                <option value="6">Regitro inactivo</option>
+                <option value="5">Registro activo</option>
+                <option value="6">Registro inactivo</option>
                 <option value="7">Todos los Registros</option>
               </select>
               <p class="help-block" id="tipo_chequeo">
@@ -207,7 +207,7 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);
             if ( validacionCedula(cedula) ) {
               $("#cedula_chequeo").empty();
               $.ajax({
-                url: '../java/ajax/general/cedula.php',
+                url: '../java/cedula.php',
                 type: 'POST',
                 data: {cedula:cedula},
                 success: function (datos){
@@ -237,21 +237,23 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);
           });
           // apenas se pretenda enviar el formulario:
           $('#form_PI').on('submit', function (evento){
-            //se previene el envio:
-            evento.preventDefault();
+            // //se previene el envio:
+            // evento.preventDefault();
             // se comprueba que los datos esten en orden:
             var cedula = $('#cedula').val();
             if ( validacionCedula(cedula) ) {
-              var action = $(this).attr('action');
-              $.ajax({
-                url: action,
-                type: 'GET',
-                dataType: 'html',
-                data: {cedula:cedula},
-                success: function (datos){
-                  $("#contenido_usuario_menucon").empty().append($(datos).find('#blancoAjax').html());
-                },
-              });
+              // desabilitado por detener el desarrollo de
+              // paginas por medio dinamico de ajax.
+              // var action = $(this).attr('action');
+              // $.ajax({
+              //   url: action,
+              //   type: 'GET',
+              //   dataType: 'html',
+              //   data: {cedula:cedula},
+              //   success: function (datos){
+              //     $("#contenido_usuario_menucon").empty().append($(datos).find('#blancoAjax').html());
+              //   },
+              // });
               return true;
             }else{
               return false;
