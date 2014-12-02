@@ -901,6 +901,7 @@ if($reg = mysqli_fetch_array($re)) :?>
                 Lamentablemente, la cedula solicitada no es un alumno.
               </small>
             </h3>
+            <!-- !importante -->
             <?php $enlace = encuentraCedula($_REQUEST['cedula']) ?>
             <?php if ( $enlace ): ?>
               <!-- se quedaron locos verdad? -->

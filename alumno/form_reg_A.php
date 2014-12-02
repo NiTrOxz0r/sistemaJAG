@@ -826,14 +826,32 @@ if($go): ?>
                 Lamentablemente, es posible que los datos de registro se perdieron.
               </small>
             </h3>
-            <?php
-            $enlace = "Personal_Autorizado/form_reg_P.php?cedula=$_GET[cedula_r]";
-            $inscripcion = enlaceDinamico("$enlace"); ?>
-            <p>
-              para ir al proceso de inscripcion <a href="<?php echo $inscripcion ?>">
-              puede seguir este enlace.
-              </a>
-            </p>
+            <!-- !importante -->
+            <?php $enlace = encuentraCedula($_REQUEST['cedula']) ?>
+            <?php if ( $enlace ): ?>
+              <!-- se quedaron locos verdad? -->
+              <div class="bg-info">
+                <h2>
+                  Sin embargo:
+                </h2>
+                <p>
+                  Esta cedula
+                  <a href="<?php echo $enlace ?> ">existe en el sistema</a>
+                </p>
+              </div>
+            <?php else: ?>
+              <?php
+              $enlace = "Personal_Autorizado/form_reg_P.php?cedula=$_GET[cedula_r]";
+              $inscripcion = enlaceDinamico("$enlace"); ?>
+              <p>
+                La cedula <?php echo $_GET['cedula'] ?>, no esta registrada en el sistema.
+                <em>Para registrar a un alumno, es necesario registrar primero al representante.</em>
+                para ir al proceso de inscripcion <a href="<?php echo $inscripcion ?>">
+                puede seguir este enlace.
+                </a>
+              </p>
+              <!-- google hide me: slayerfat@gmail.com -->
+            <?php endif ?>
             <p>
               Si desea hacer una consulta por favor dele
               <a href="menucon.php">click a este enlace.</a>
