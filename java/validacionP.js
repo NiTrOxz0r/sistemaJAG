@@ -205,7 +205,20 @@ function validacionPA(){
     $("#telefono_chequeo").html('este campo debe contener 11 caracteres EJ: 02127773322');
     $('#telefono').parent().addClass('has-error');
     return false;
-  }else if(!expRegtlf.exec(telefono) && telefono != "") {
+  // por alguna razon
+  // (!expRegtlf.exec(telefono_otro) && (telefono != "" || telefono == "SinRegistro") )
+  // da verdadero... y mi cerebro no da ya para
+  // saber porque...
+  // ej: telefono = "SinRegistro" :
+  // (!expRegtlf.exec(telefono_otro) && (telefono != "" || telefono == "SinRegistro") )
+  // 1 && (1 || 0) = 0
+  // donde me equivoco???
+  // -slayerfat
+  // }else if (telefono != "" || telefono != "SinRegistro"){
+  //   $("#telefono_chequeo").html('&nbsp;');
+  //   $('#telefono').parent().removeClass('has-error').addClass('has-success');
+  //   verificar = true;
+  }else if( !expRegtlf.exec(telefono) && telefono != "" && telefono != "SinRegistro" ) {
     $("#telefono_chequeo").html('Favor introduzca en este campo Letras sin numeros o caracteres especiales EJ: 19?=;@*');
     $('#telefono').parent().addClass('has-error');
     return false;
@@ -219,7 +232,7 @@ function validacionPA(){
     $("#telefono_otro_chequeo").html('este campo debe contener 11 caracteres EJ: 02127773322');
     $('#telefono_otro').parent().addClass('has-error');
     return false;
-  }else if(!expRegtlf.exec(telefono_otro) && telefono != "") {
+  }else if(!expRegtlf.exec(telefono_otro) && telefono_otro != "" && telefono_otro != "SinRegistro") {
     $("#telefono_otro_chequeo").html('Favor introduzca en este campo Letras sin numeros o caracteres especiales EJ: 19?=;@*');
     $('#telefono_otro').parent().addClass('has-error');
     return false;
@@ -304,7 +317,9 @@ function validacionPA(){
     $("#telefono_trabajo_chequeo").html('este campo debe contener 11 caracteres EJ: 02127773322');
     $('#telefono_trabajo').parent().addClass('has-error');
     return false;
-  }else if(!expRegtlf.exec(telefono_trabajo.value) && telefono != "") {
+  }else if(!expRegtlf.exec(telefono_trabajo.value)
+      && telefono_trabajo != ""
+      && telefono_trabajo != "SinRegistro") {
     $("#telefono_trabajo_chequeo").html('Favor introduzca en este campo Letras sin numeros o caracteres especiales EJ: 19?=;@*');
     $('#telefono_trabajo').parent().addClass('has-error');
     return false;

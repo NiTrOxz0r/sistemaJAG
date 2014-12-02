@@ -14,21 +14,21 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);
 
 $con = conexion();
 
-$status         =       1;
-$cod_usr_reg    =       $_SESSION['codUsrMod'];
-$cod_usr_modn   =       $_SESSION['codUsrMod'];
+if ( isset($_POST['cedula']) and preg_match( "/[0-9]{8}/", $_GET['cedula']) ) :
+  $status         =       1;
+  $cod_usr_reg    =       $_SESSION['codUsrMod'];
+  $cod_usr_modn   =       $_SESSION['codUsrMod'];
 
-//ACTUALIZO LA DIRECCION DEL REPRESENTANTE
-//LA ENVIO A LA TABLA direccion_p_a
-$cedulan  = $_POST['cedula'];
-$sql="SELECT a.codigo as cod_direccion from direccion a
- inner join persona b on (a.cod_persona=b.codigo) where cedula = '$cedulan';";
-$resultado = conexion($sql);
-$datos = mysqli_fetch_assoc($resultado);
-$cod_direccion_P = $datos['cod_direccion'];
+  //ACTUALIZO LA DIRECCION DEL REPRESENTANTE
+  //LA ENVIO A LA TABLA direccion_p_a
+  $cedulan  = mysqli_escape_string($con, $_POST['cedula']);
+  $sql="SELECT a.codigo as cod_direccion from direccion a
+  inner join persona b on (a.cod_persona=b.codigo) where cedula = '$cedulan';";
+  $resultado = conexion($sql);
+  $datos = mysqli_fetch_assoc($resultado);
+  $cod_direccion_P = $datos['cod_direccion'];
 
-
-  if($resultado->num_rows== 1){
+  if($resultado->num_rows== 1) :
 
     $con = conexion();
     $status         =       1;
@@ -58,6 +58,7 @@ $cod_direccion_P = $datos['cod_direccion'];
     fec_nac      = '$fec_nacn',
     telefono     = '$telefonon',
     telefono_otro = '$telefono_otron',
+    fec_mod = current_timestamp,
     cod_usr_mod  = '$cod_usr_modn'
     WHERE cedula  = '$cedulan'; ";
 
@@ -69,6 +70,7 @@ $cod_direccion_P = $datos['cod_direccion'];
     $queryDirP = "UPDATE direccion SET
     cod_parroquia    = '$cod_parroquian',
     direccion_exacta = '$direccion_exactan',
+    fec_mod = current_timestamp,
     cod_usr_mod      = '$cod_usr_modn'
     WHERE codigo     ='$cod_direccion_P';";
 
@@ -100,19 +102,139 @@ $cod_direccion_P = $datos['cod_direccion'];
     lugar_trabajo     = '$lugar_trabajon',
     direccion_trabajo = '$direccion_trabajon',
     telefono_trabajo  = '$telefono_trabajon',
+    fec_mod = current_timestamp,
     cod_usr_mod       = '$cod_usr_modn'
     WHERE cod_persona = '$cod_persona'";
 
     $res = conexion($queryPA);
 
-    echo "DATOS INGRESADOS EXITOSAMENTE";
-
-  }else{
-
-    echo "No existe Registro";
-
-}
-
-  finalizarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);
-
-?>
+    if ($res) : ?>
+      <div id="contenido_actualizar_P">
+        <div id="blancoAjax">
+          <div class="container">
+            <div class="row">
+              <div class="jumbotron">
+                <h1>Actualizacion exitosa!</h1>
+                <h4>
+                  Los registros asociados
+                  fueron actualizados correctamente!
+                </h4>
+                <p>
+                  Si desea hacer otra consulta por favor dele
+                  <a href="menucon.php">click a este enlace</a>
+                </p>
+                <p>
+                  <?php $index = enlaceDinamico(); ?>
+                  <a href="<?php echo $index ?>" class="btn btn-primary btn-lg">Regresar al sistema</a>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    <?php else : ?>
+      <div id="contenido_actualizar_P">
+        <div id="blancoAjax">
+          <div class="container">
+            <div class="row">
+              <div class="jumbotron">
+                <h1>Ups!</h1>
+                <p>
+                  Error en el proceso de registro!
+                </p>
+                <h3>
+                  <small>
+                    Lamentablemente, es posible que los datos de actualizacion se perdieron.
+                  </small>
+                </h3>
+                <p>
+                  Si desea hacer otra actualizacion por favor dele
+                  <a href="form_act_P.php?cedula=<?php echo $cedulan  ?>">click a este enlace</a>
+                </p>
+                <p>
+                  ¿O sera que entro en esta pagina erroneamente?
+                </p>
+                <p class="bg-warning">
+                  Si este es un problema recurrente, contacte a un administrador del sistema.
+                </p>
+                <p>
+                  <?php $index = enlaceDinamico(); ?>
+                  <a href="<?php echo $index ?>" class="btn btn-primary btn-lg">Regresar al sistema</a>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    <?php endif;
+  else: ?>
+    <div id="contenido_actualizar_P">
+      <div id="blancoAjax">
+        <div class="container">
+          <div class="row">
+            <div class="jumbotron">
+              <h1>Ups!</h1>
+              <p>
+                Error en el proceso de registro!
+              </p>
+              <h3>
+                <small>
+                  Lamentablemente, es posible que los datos de actualizacion se perdieron.
+                </small>
+              </h3>
+              <p>
+                Si desea hacer una consulta de un representante o allegado, por favor dele
+                <a href="menucon.php">click a este enlace</a>
+              </p>
+              <p>
+                ¿O sera que entro en esta pagina erroneamente?
+              </p>
+              <p class="bg-warning">
+                Si este es un problema recurrente, contacte a un administrador del sistema.
+              </p>
+              <p>
+                <?php $index = enlaceDinamico(); ?>
+                <a href="<?php echo $index ?>" class="btn btn-primary btn-lg">Regresar al sistema</a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  <?php endif;
+else : ?>
+  <div id="contenido_actualizar_P">
+    <div id="blancoAjax">
+      <div class="container">
+        <div class="row">
+          <div class="jumbotron">
+            <h1>Ups!</h1>
+            <p>
+              Error en el proceso de registro!
+            </p>
+            <h3>
+              <small>
+                Lamentablemente, es posible que los datos de actualizacion se perdieron.
+              </small>
+            </h3>
+            <p>
+              Si desea hacer una consulta de un representante o allegado, por favor dele
+              <a href="menucon.php">click a este enlace</a>
+            </p>
+            <p>
+              ¿O sera que entro en esta pagina erroneamente?
+            </p>
+            <p class="bg-warning">
+              Si este es un problema recurrente, contacte a un administrador del sistema.
+            </p>
+            <p>
+              <?php $index = enlaceDinamico(); ?>
+              <a href="<?php echo $index ?>" class="btn btn-primary btn-lg">Regresar al sistema</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<?php endif;
+finalizarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']); ?>

@@ -38,7 +38,7 @@ if($reg = mysqli_fetch_array($re)) :?>
     <div class="container">
       <div class="row">
         <!-- http://www.w3schools.com/html/html_forms.asp -->
-        <form action="insertar_P.php" method="POST" id="form" name="form_repre" class="form-horizontal">
+        <form action="actualizar_P.php" method="POST" id="form" name="form_repre" class="form-horizontal">
           <fieldset>
             <legend class="text-center text-uppercase"><h1>Registro del representante</h1></legend>
             <div class="container">
