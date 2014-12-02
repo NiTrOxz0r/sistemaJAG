@@ -17,6 +17,10 @@ $(function(){
   $('#informacion').prop('disabled', true);
   $('#tipo_personal').prop('disabled', true);
   $('#submit').prop('disabled', true);
+  // para que la seleccion se mantenga en neutro
+  // y no recuerde la ultima seleccion:
+  $('#informacion').prop('value', '');
+  $('#tipo').val('0');
   // se cambia la estructura del formulario
   // dependiendo de lo que el usuario escoja en el primer select
   // (tipo) = por cedula, por cargo, etc.
@@ -62,7 +66,12 @@ $(function(){
       $('#tipo_personal').prop('hidden', false);
       $('#tipo_personal').parent().removeClass('hidden').addClass('show');
       $('#tipo_personal').prop('disabled', false);
-      $('#submit').prop('disabled', true);
+      // para menucon sin tipo de usuario (docente, directivo, pasante, etc.)
+      if ($('#tipo_personal').val() === "-1") {
+        $('#submit').prop('disabled', false);
+      }else{
+        $('#submit').prop('disabled', true);
+      }
     }else if (tipo === '7'){
       $('#informacion').prop('disabled', false);
       $('#informacion').prop('hidden', true);
@@ -138,7 +147,7 @@ $(function(){
   $('#informacion_lista').on('change', function(){
     var campo = $(this).val();
     console.log(campo);
-    if (campo === '0') {
+    if (campo === '') {
       $('#submit').prop('disabled', true);
     }else{
       $('#submit').prop('disabled', false);
