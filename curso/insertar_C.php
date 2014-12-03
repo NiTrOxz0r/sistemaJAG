@@ -24,7 +24,7 @@ if ( isset($_POST['docente']) and !preg_match( "/[^0-9][^\-1]/", $_POST['docente
   and !preg_match( "/[^0-9]/", $_POST['periodo_academico'])
   and isset($_POST['comentarios']) and strlen($_POST['comentarios']) <= 200 ) :
   $conexion = conexion();
-  $cod_asume = mysqli_escape_string( $conexion, trim($_SESSION['act_cod_asume']) );
+  // $cod_asume = mysqli_escape_string( $conexion, trim($_SESSION['act_cod_asume']) );
   $cod_docente = mysqli_escape_string( $conexion, trim($_POST['docente']) );
   $cod_curso = mysqli_escape_string( $conexion, trim($_POST['curso']) );
   $cod_periodo_academico = mysqli_escape_string( $conexion, trim($_POST['periodo_academico']) );

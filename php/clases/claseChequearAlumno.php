@@ -2,24 +2,21 @@
 
 /**
 * @author Granadillo Alejandro.
-* @copyright MIT/GNU/Otro??? Octurbre 2014
 *
 * @internal
 *
-*
-*
+* @todo MODIFICAR 99 al numero exacto del acta y folio
 *
 * @see chequearGenericoEjemplo.php
 * @example chequearGenericoEjemplo.php
 * @todo ampliar segun sea necesario segun
 * los objetivos necesarios:
 *
-* @version 1.0
+* @version 1.2
 *
 *
 */
 class ChequearAlumno extends ChequearGenerico{
-
   function __construct(
     $codUsrMod,
     $p_apellido,
@@ -34,7 +31,6 @@ class ChequearAlumno extends ChequearGenerico{
     $fecNac,
     $lugNac = 'null',
     $sexo,
-    $codigoDireccion,
     $actaNumero,
     $actaFolio,
     $plantel_procedencia = 'null',
@@ -45,119 +41,44 @@ class ChequearAlumno extends ChequearGenerico{
     $camisa = 'null',
     $pantalon = 'null',
     $zapato = 'null',
+    $discapacidad,
+    $vacuna,
     $codRepresentante,
     $codPersonaRetira = 'null'
-
-    ){
-
-
-    $this->p_apellido = $p_apellido;
-
-    if ($s_apellido == "") {
-      $this->s_apellido = "null";
-    }else{
-      $this->s_apellido = $s_apellido;
-    }
-
-    $this->p_nombre = $p_nombre;
-
-    $this->p_nombre = $p_nombre;
-
-    if ($s_nombre == "") {
-      $this->s_nombre = "null";
-    }else{
-      $this->s_nombre = $s_nombre;
-    }
-
-    $this->nacionalidad = $nacionalidad;
-    $this->cedula = $cedula;
-
-    if ($telefono == "") {
-      $this->telefono = "null";
-    }else{
-      $this->telefono = $telefono;
-    }
-    if ($telefonoOtro == "") {
-      $this->telefonoOtro = "null";
-    }else{
-      $this->telefonoOtro = $telefonoOtro;
-    }
-
-    $this->fecNac = $fecNac;
-
-    if ($lugNac == "") {
-      $this->lugNac = "null";
-    }else{
-      $this->lugNac = $lugNac;
-    }
-
-    $this->sexo = $sexo;
-
-    if ($codigoDireccion == "") {
-      $this->codigoDireccion = "null";
-    }else{
-      $this->codigoDireccion = $codigoDireccion;
-    }
-
-    if ($lugNac == "") {
-      $this->lugNac = "null";
-    }else{
-      $this->lugNac = $lugNac;
-    }
-
-    $this->fecMod = "current_timestamp";
-    $this->cedulaEscolar = $cedulaEscolar;
-    $this->actaNumero = $actaNumero;
-    $this->actaFolio = $actaFolio;
-
-    if ($plantel_procedencia == "") {
-      $this->plantel_procedencia = "null";
-    }else{
-      $this->plantel_procedencia = $plantel_procedencia;
-    }
-    $this->repitiente = $repitiente;
-    $this->codCurso = $codCurso;
-
-    if ($altura == "") {
-      $this->altura = "null";
-    }else{
-      $this->altura = $altura;
-    }
-
-
-    if ($peso == "") {
-      $this->peso = "null";
-    }else{
-      $this->peso = $peso;
-    }
-
-    if ($camisa == "") {
-      $this->camisa = "null";
-    }else{
-      $this->camisa = $camisa;
-    }
-
-    if ($pantalon == "") {
-      $this->pantalon = "null";
-    }else{
-      $this->pantalon = $pantalon;
-    }
-
-    if ($zapato == "") {
-      $this->zapato = "null";
-    }else{
-      $this->zapato = $zapato;
-    }
-
-    $this->codRepresentante = $codRepresentante;
-
-    if ($codPersonaRetira == "") {
-      $this->codPersonaRetira = "null";
-    }else{
-      $this->codPersonaRetira = $codPersonaRetira;
-    }
-
-
+  ){
+    //variables de la clase:
+    $conexion = conexion();//desde master.php > conexion.php
+    $this->codUsrMod = mysqli_escape_string($conexion, trim($codUsrMod));
+    $this->p_apellido = mysqli_escape_string($conexion, trim($p_apellido));
+    $this->s_apellido = mysqli_escape_string($conexion, trim($s_apellido));
+    $this->p_nombre = mysqli_escape_string($conexion, trim($p_nombre));
+    $this->s_nombre = mysqli_escape_string($conexion, trim($s_nombre));
+    $this->nacionalidad = mysqli_escape_string($conexion, trim($nacionalidad));
+    $this->cedula = mysqli_escape_string($conexion, trim($cedula));
+    $this->cedulaEscolar = mysqli_escape_string($conexion, trim($cedulaEscolar));
+    $this->telefono = mysqli_escape_string($conexion, trim($telefono));
+    $this->telefonoOtro = mysqli_escape_string($conexion, trim($telefonoOtro));
+    $this->fecNac = mysqli_escape_string($conexion, trim($fecNac));
+    $this->lugNac = mysqli_escape_string($conexion, trim($lugNac));
+    $this->sexo = mysqli_escape_string($conexion, trim($sexo));
+    $this->actaNumero = mysqli_escape_string($conexion, trim($actaNumero));
+    $this->actaFolio = mysqli_escape_string($conexion, trim($actaFolio));
+    $this->plantel_procedencia = mysqli_escape_string($conexion, trim($plantel_procedencia));
+    $this->repitiente = mysqli_escape_string($conexion, trim($repitiente));
+    $this->codCurso = mysqli_escape_string($conexion, trim($codCurso));
+    $this->altura = mysqli_escape_string($conexion, trim($altura));
+    $this->peso = mysqli_escape_string($conexion, trim($peso));
+    $this->camisa = mysqli_escape_string($conexion, trim($camisa));
+    $this->pantalon = mysqli_escape_string($conexion, trim($pantalon));
+    $this->zapato = mysqli_escape_string($conexion, trim($zapato));
+    $this->discapacidad = mysqli_escape_string($conexion, trim($discapacidad));
+    $this->vacuna = mysqli_escape_string($conexion, trim($vacuna));
+    $this->codRepresentante = mysqli_escape_string($conexion, trim($codRepresentante));
+    $this->codPersonaRetira = mysqli_escape_string($conexion, trim($codPersonaRetira));
+    //metodos internos:
+    //para poner variables nulas si es necesario:
+    self::setNull();
+    //chequeaomos la forma (el objeto como tal):
     self::chequeaForma();
     self::chequeame(); //heredado de ChequearGenerico
 
@@ -170,106 +91,76 @@ class ChequearAlumno extends ChequearGenerico{
   * tambien chequea la validez de cedula,
   * y valizacion de clave de usuario en base de datos
   * ej: nombre = juan1 < error}
-  * @version 1.1
+  * @version 1.2
   *
   *
   * @return void
-  * esta funcion no regresa nada.
-  * se asume que die() sucede si algo esta mal
-  * en las variables.
+  *
   */
 
   private function chequeame(){
-    // si cedula es mayor a 8 digitos o menor o igual a 5 digitos
-    // se devuelve a registro, cedula de 99999 <--- no existe
-    // y si existe esta muerto o loco o fuera de la ley o
-    // ALGUN AGENTE DEL CEBIN!!!
-    // de hecho 6 digitos tambien porque no creo
-    // que exista alguien vivo con cedula menor de 1 millon,
-    // pero como no tengo acceso a la onidex, lo dejo en 5.
 
-    if ( !is_numeric($this->cedulaEscolar) ) {
-      die(header("Location: form_reg_A.php?cedulaEscolarNumeric=false"));
-    }
-    if ( strlen($this->cedulaEscolar) <>10 ) {
-        header( "Location: form_reg_A.php?cedulaEscolarError=1_largo_cedulaEscolar___".strlen($cedulaEscolar) );
+    if ( $this->nacionalidad <> "'v'" and $this->nacionalidad <> "'e'" ) {
+      self::verificar("Error en: nacionalidad, se espera valor apropiado del formulario, datos: ".$this->nacionalidad);
     }
 
-    if ( $this->nacionalidad <> 'v' and $this->nacionalidad <> 'e' ) {
-      die(header("Location: form_reg_A.php?nacionalidad=notVorE"));
+    if ($this->cedula <> 'null') {
+      if ( !preg_match( '/^[\']\d{8}[\']$/', $this->cedula) ) {
+        self::verificar("Error en: cedula: solo numeros, datos: ".$this->cedula);
+      }
     }
 
+    if ( !preg_match( '/^[\']\d{10}[\']$/', $this->cedulaEscolar) ) {
+      self::verificar("Error en: cedula escolar: solo numeros, datos: ".$this->cedulaEscolar);
+    }
 
     if ( preg_match( "/^A-Za-z$^'$^áéíóú$^ÁÉÍÓÚ$/", $this->p_nombre) ) {
-      die(header("Location: form_reg_A.php?p_nombreNumeric=true"));
+      self::verificar("Error en: primer nombre: solo letas, datos: ".$this->p_nombre);
     }
 
     if ($this->s_nombre <> 'null') {
       if ( preg_match( "/^A-Za-z$^'$^áéíóú$^ÁÉÍÓÚ$/", $this->s_nombre) ) {
-        die(header("Location: form_reg_A.php?s_nombreNumeric=true"));
+        self::verificar("Error en: segundo nombre: solo letas, datos: ".$this->s_nombre);
       }
     }
 
     if ( preg_match( "/^A-Za-z$^'$^áéíóú$^ÁÉÍÓÚ$/", $this->p_apellido) ) {
-      die(header("Location: form_reg_A.php?p_apellidoNumeric=true"));
+      self::verificar("Error en: primer apellido: solo letas, datos: ".$this->p_apellido);
     }
 
     if ( $this->s_apellido <> 'null' ) {
       if ( preg_match( "/^A-Za-z$^'$^áéíóú$^ÁÉÍÓÚ$/", $this->s_apellido) ) {
-        die(header("Location: form_reg_A.php?s_apellidoNumeric=true"));
-      }
-    }
-
-    if ( $this->nacionalidad <> 'v' and $this->nacionalidad <> 'e' ) {
-      die(header("Location: form_reg_A.php?nacionalidad=notVorE"));
-    }
-
-    if ($this->cedula <> 'null') {
-      if ( !is_numeric($this->cedula) ) {
-      die(header("Location: form_reg_A.php?cedulaNumeric=false"));
-      }
-      if ( strlen($this->cedula) <>8 ) {
-        header( "Location: form_reg_A.php?cedulaError=1_largo_cedula___".strlen($cedula) );
+        self::verificar("Error en: segundo apellido: solo letas, datos: ".$this->s_apellido);
       }
     }
 
     if ($this->telefono <> 'null') {
-      if ( !is_numeric($this->telefono) ) {
-      die(header("Location: form_reg_A.php?telefonoNumeric=false"));
-      }
-      if ( !preg_match( '/^\d{11}$/', $this->telefono) ) {
-        die(header("Location: form_reg_A.php?telefonoLength=false"));
+      if ( !preg_match( '/^[\']\d{11}[\']$/', $this->telefono) ) {
+        self::verificar("Error en: telefono: se espera solo numeros: 02125559911, datos: ".$this->telefono);
       }
     }
 
     if ($this->telefonoOtro <> 'null') {
-      if ( !is_numeric($this->telefonoOtro) ) {
-      die(header("Location: form_reg_A.php?telefonoOtroNumeric=false"));
-      }
-      if ( !preg_match( '/^\d{11}$/', $this->telefonoOtro) ) {
-        die(header("Location: form_reg_A.php?telefonoOtroLength=false"));
+      if ( !preg_match( '/^[\']\d{11}[\']$/', $this->telefonoOtro) ) {
+        self::verificar("Error en: telefono: se espera solo numeros: 02125559911, datos: ".$this->telefonoOtro);
       }
     }
 
     if ($this->fecNac <> 'current_timestamp') {
-      if ( preg_match( "/[^0-9$^-]/", $this->fecNac) ) {
-      die(header("Location: form_reg_A.php?fecNacNumeric=false"));
+      if ( preg_match( "/['][^0-9$^-][']/", $this->fecNac) ) {
+        self::verificar("Error en: fecha de nacimiento se espera AAAA-MM-DD, datos: ".$this->fecNac);
       }
     }
 
-    if ($this->sexo <> '0' and $this->sexo <> '1') {
+    if ($this->sexo <> "'0'" and $this->sexo <> "'1'") {
       if ( !is_numeric($this->sexo) ) {
-      die(header("Location: form_reg_A.php?sexo=malDefinido"));
+        self::verificar("Error en: sexo: se esperan un valor apropiados del formulario, datos: ".$this->sexo);
       }
-    }
-
-    if ( !is_numeric($this->codigoDireccion) ) {
-      die(header("Location: form_reg_A.php?codigoDireccionNumeric=false"));
     }
 
     if ($this->lugNac <> 'null') {
       if ( strlen($this->lugNac) > 50 ) {
-        header( "Location: form_reg_A.php?lugNacError=1_largo_lugNac___".strlen($lugNac) );
+       self::verificar("Error en: lugar de nacimiento: datos excede limite maximo, datos: ".$this->lugNac.", largo: ".strlen($this->lugNac));
       }
     }
 
@@ -279,79 +170,176 @@ class ChequearAlumno extends ChequearGenerico{
 
     if ($this->actaNumero <> '') {
       if ( preg_match( "/[^0-9$^-]/", $this->actaNumero) ) {
-      die(header("Location: form_reg_A.php?actaNumeroNumeric=false"));
+        self::verificar("Error en: Acta numero Part. Nac: se espera solo numeros, datos: ".$this->actaNumero);
       }
       if ( strlen($this->actaNumero) > 99 ) { // modificar al numero real
-        header( "Location: form_reg_A.php?actaNumeroError=1_largo_actaNumero___".strlen($actaNumero) );
+        self::verificar("Error en: Acta numero Part. Nac: tamaño excede limite maximo, datos: ".$this->actaNumero);
       }
     }
 
     if ($this->actaFolio <> '') {
       if ( preg_match( "/[^0-9$^-]/", $this->actaFolio) ) {
-      die(header("Location: form_reg_A.php?actaFolioNumeric=false"));
+        self::verificar("Error en: Acta folio Part. Nac: se espera solo numeros, datos: ".$this->actaFolio);
       }
       if ( strlen($this->actaFolio) > 99 ) { // modificar al numero real
-        header( "Location: form_reg_A.php?actaFolioError=1_largo_actaFolio___".strlen($actaFolio) );
+        self::verificar("Error en: Acta numero Part. Nac: tamaño excede limite maximo, datos: ".$this->actaFolio);
       }
     }
 
     if ($this->plantel_procedencia <> 'null') {
       if ( strlen($this->plantel_procedencia) > 50 ) {
-        header( "Location: form_reg_A.php?plantel_procedenciaError=1_largo_plantel_procedencia___".strlen($plantel_procedencia) );
+        self::verificar("Error en: plantel de procedencia: datos excede limite maximo, datos: ".
+          $this->plantel_procedencia.", largo: ".strlen($this->plantel_procedencia));
       }
     }
 
-    if ( $this->repitiente <> 's' and $this->repitiente <> 'n' ) {
-      die(header("Location: form_reg_A.php?repitiente=notSorN"));
+    if ( $this->repitiente <> "'s'" and $this->repitiente <> "'n'" ) {
+      self::verificar("Error en: sexo: se esperan un valor apropiados del formulario, datos: ".$this->repitiente);
     }
 
     if ($this->altura <> 'null') {
       if ( !is_numeric($this->altura) ) {
-      die(header("Location: form_reg_A.php?altura=notNumeric"));
+        self::verificar("Error en: altura: se espera solo numeros, datos: ".$this->altura);
       }
       if ( strlen($this->altura) > 3 ) {
-        header( "Location: form_reg_A.php?alturaError=1_largo_altura___".strlen($altura) );
+        self::verificar("Error en: altura: tamaño excede limite maximo, datos: ".$this->altura);
       }
     }
 
     if ($this->peso <> 'null') {
       if ( !is_numeric($this->peso) ) {
-      die(header("Location: form_reg_A.php?peso=notNumeric"));
+        self::verificar("Error en: peso: se espera solo numeros, datos: ".$this->peso);
       }
       if ( strlen($this->peso) > 3 ) {
-        header( "Location: form_reg_A.php?pesoError=1_largo_peso___".strlen($peso) );
+        self::verificar("Error en: peso: tamaño excede limite maximo, datos: ".$this->peso);
       }
     }
 
     if ($this->camisa <> 'null') {
       if ( !is_numeric($this->camisa) ) {
-      die(header("Location: form_reg_A.php?camisa=notNumeric"));
+        self::verificar("Error en: camisa: se espera solo numeros, datos: ".$this->camisa);
       }
       if ( strlen($this->camisa) > 1 ) {
-        header( "Location: form_reg_A.php?camisaError=1_largo_camisa___".strlen($camisa) );
+        self::verificar("Error en: camisa: tamaño excede limite maximo, datos: ".$this->camisa);
       }
     }
 
     if ($this->pantalon <> 'null') {
       if ( !is_numeric($this->pantalon) ) {
-      die(header("Location: form_reg_A.php?pantalon=notNumeric"));
+        self::verificar("Error en: pantalon: se espera solo numeros, datos: ".$this->pantalon);
       }
       if ( strlen($this->pantalon) > 1 ) {
-        header( "Location: form_reg_A.php?pantalonError=1_largo_pantalon___".strlen($pantalon) );
+        self::verificar("Error en: pantalon: tamaño excede limite maximo, datos: ".$this->pantalon);
       }
     }
 
     if ($this->zapato <> 'null') {
       if ( !is_numeric($this->zapato) ) {
-      die(header("Location: form_reg_A.php?zapato=notNumeric"));
+        self::verificar("Error en: zapato: se espera solo numeros, datos: ".$this->zapato);
       }
       if ( strlen($this->zapato) > 2 ) {
-        header( "Location: form_reg_A.php?zapatoError=1_largo_zapato___".strlen($zapato) );
+        self::verificar("Error en: zapato: tamaño excede limite maximo, datos: ".$this->zapato);
       }
+    }
+
+    if ( preg_match( "/[^0-9]/", $this->discapacidad) ) {
+      self::verificar("Error en: tipo de discapacidad: se esperan un valor apropiados del formulario, datos: ".$this->discapacidad);
+    }
+
+    if ( $this->vacuna <> "'s'" and $this->vacuna <> "'n'" ) {
+      self::verificar("Error en: cert. vacuna: se esperan un valor apropiados del formulario, datos: ".$this->vacuna);
     }
   }
 
+  /**
+  *
+  * {@internal esto es para autogenerar el null
+  * para los campos que acepten null en la base de datos.}
+  *
+  * @return void [solo genera las variables internas de la clase]
+  */
+  private function setNull(){
+    $this->p_apellido = "'$this->p_apellido'";
 
+    if ($this->s_apellido == "") {
+      $this->s_apellido = "null";
+    }else{
+      $this->s_apellido = "'$this->s_apellido'";
+    }
+
+    $this->p_nombre = "'$this->p_nombre'";
+
+    if ($this->s_nombre == "") {
+      $this->s_nombre = "null";
+    }else{
+      $this->s_nombre = "'$this->s_nombre'";
+    }
+
+    $this->nacionalidad = "'$this->nacionalidad'";
+    $this->cedula = "'$this->cedula'";
+
+    if ($this->telefono == "") {
+      $this->telefono = "null";
+    }else{
+      $this->telefono = "'$this->telefono'";
+    }
+    if ($this->telefonoOtro == "") {
+      $this->telefonoOtro = "null";
+    }else{
+      $this->telefonoOtro = "'$this->telefonoOtro'";
+    }
+
+    $this->fecNac = "'$this->fecNac'";
+
+    if ($this->lugNac == "") {
+      $this->lugNac = "null";
+    }else{
+      $this->lugNac = "'$this->lugNac'";
+    }
+
+    $this->sexo = "'$this->sexo'";
+
+    if ($this->lugNac == "") {
+      $this->lugNac = "null";
+    }else{
+      $this->lugNac = "'$this->lugNac'";
+    }
+
+    $this->fecMod = "current_timestamp";
+    $this->cedulaEscolar = "'$this->cedulaEscolar'";
+
+    if ($this->plantel_procedencia == "") {
+      $this->plantel_procedencia = "null";
+    }else{
+      $this->plantel_procedencia = "'$this->plantel_procedencia'";
+    }
+    $this->repitiente = "'$this->repitiente'";
+
+    if ($this->altura == "") {
+      $this->altura = "null";
+    }
+
+    if ($this->peso == "") {
+      $this->peso = "null";
+    }
+
+    if ($this->camisa == "") {
+      $this->camisa = "null";
+    }
+
+    if ($this->pantalon == "") {
+      $this->pantalon = "null";
+    }
+
+    if ($this->zapato == "") {
+      $this->zapato = "null";
+    }
+
+    if ($this->codPersonaRetira == "") {
+      $this->codPersonaRetira = "null";
+    }
+    $this->vacuna = "'$this->vacuna'";
+  }
 
 }
 

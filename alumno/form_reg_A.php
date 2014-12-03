@@ -141,16 +141,21 @@ if($go): ?>
                     <div class="row">
                       <div class="col-xs-11">
                         <div class="form-group">
-                          <label for="cedula" class="control-label">Cedula</label>
+                          <label
+                            for="cedula"
+                            class="control-label">
+                            Cedula
+                          </label>
                           <input
                             type="text"
                             maxlength="8"
                             name="cedula"
                             id="cedula"
-                            class="form-control"
+                            class="form-control <?php echo $cedula === (null) ? '':'bloquear' ?>"
                             autofocus="autofocus"
                             placeholder="Introduzca cedula ej: 12345678"
                             value="<?php echo $cedula === (null) ? '':$cedula ?>"
+                            disabled="<?php echo $cedula === (null) ? 'false':'true' ?>"
                             required>
                           <p class="help-block" id="cedula_chequeo">
                           </p>
@@ -546,8 +551,16 @@ if($go): ?>
                         <div class="col-xs-11">
                           <div class="form-group">
                             <label for="curso" class="control-label">Curso a inscribirse</label>
-                            <?php $query = "SELECT codigo, descripcion
-                              from curso where status = 1;";
+                            <?php
+                              $query = "SELECT
+                              curso.descripcion as descripcion,
+                              asume.codigo as codigo
+                              from asume
+                              inner join curso
+                              on asume.cod_curso = curso.codigo
+                              where asume.status = 1;";
+                              // $query = "SELECT codigo, descripcion
+                              // from curso where status = 1;";
                               $registros = conexion($query); ?>
                             <select required class="form-control" name="curso" id="curso">
                               <option selected="selected" value="">Seleccione una opci&oacute;n</option>
@@ -730,6 +743,7 @@ if($go): ?>
           $('#form').on('submit', function(e){
             if (validacionAlumno()) {
               $('#cedula_r').prop('disabled', false);
+              $('#cedula').prop('disabled', false);
               return true;
             }else{
               return false;
