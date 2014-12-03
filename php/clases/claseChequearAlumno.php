@@ -12,7 +12,7 @@
 * @todo ampliar segun sea necesario segun
 * los objetivos necesarios:
 *
-* @version 1.2
+* @version 1.3
 *
 *
 */
@@ -165,23 +165,23 @@ class ChequearAlumno extends ChequearGenerico{
     }
 
     /**
-    * @todo MODIFICAR 99 al numero exacto del acta y folio
+    * @todo MODIFICAR 20 al numero exacto del acta y folio
     */
 
-    if ($this->actaNumero <> '') {
-      if ( preg_match( "/[^0-9$^-]/", $this->actaNumero) ) {
+    if ($this->actaNumero <> 'null') {
+      if ( preg_match( "/['][^0-9$^-][']/", $this->actaNumero) ) {
         self::verificar("Error en: Acta numero Part. Nac: se espera solo numeros, datos: ".$this->actaNumero);
       }
-      if ( strlen($this->actaNumero) > 99 ) { // modificar al numero real
+      if ( strlen($this->actaNumero) > 20 ) { // modificar al numero real
         self::verificar("Error en: Acta numero Part. Nac: tamaño excede limite maximo, datos: ".$this->actaNumero);
       }
     }
 
-    if ($this->actaFolio <> '') {
-      if ( preg_match( "/[^0-9$^-]/", $this->actaFolio) ) {
+    if ($this->actaFolio <> 'null') {
+      if ( preg_match( "/['][^0-9$^-][']/", $this->actaFolio) ) {
         self::verificar("Error en: Acta folio Part. Nac: se espera solo numeros, datos: ".$this->actaFolio);
       }
-      if ( strlen($this->actaFolio) > 99 ) { // modificar al numero real
+      if ( strlen($this->actaFolio) > 20 ) { // modificar al numero real
         self::verificar("Error en: Acta numero Part. Nac: tamaño excede limite maximo, datos: ".$this->actaFolio);
       }
     }
@@ -277,6 +277,17 @@ class ChequearAlumno extends ChequearGenerico{
 
     $this->nacionalidad = "'$this->nacionalidad'";
     $this->cedula = "'$this->cedula'";
+
+    if ($this->actaNumero == "") {
+      $this->actaNumero = "null";
+    }else{
+      $this->actaNumero = "'$this->actaNumero'";
+    }
+    if ($this->actaFolio == "") {
+      $this->actaFolio = "null";
+    }else{
+      $this->actaFolio = "'$this->actaFolio'";
+    }
 
     if ($this->telefono == "") {
       $this->telefono = "null";
