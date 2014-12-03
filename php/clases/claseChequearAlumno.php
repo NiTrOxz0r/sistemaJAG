@@ -33,7 +33,7 @@ class ChequearAlumno extends ChequearGenerico{
     $sexo,
     $actaNumero,
     $actaFolio,
-    $plantel_procedencia = 'null',
+    $plantelProcedencia = 'null',
     $repitiente,
     $codCurso,
     $altura = 'null',
@@ -63,7 +63,7 @@ class ChequearAlumno extends ChequearGenerico{
     $this->sexo = mysqli_escape_string($conexion, trim($sexo));
     $this->actaNumero = mysqli_escape_string($conexion, trim($actaNumero));
     $this->actaFolio = mysqli_escape_string($conexion, trim($actaFolio));
-    $this->plantel_procedencia = mysqli_escape_string($conexion, trim($plantel_procedencia));
+    $this->plantelProcedencia = mysqli_escape_string($conexion, trim($plantelProcedencia));
     $this->repitiente = mysqli_escape_string($conexion, trim($repitiente));
     $this->codCurso = mysqli_escape_string($conexion, trim($codCurso));
     $this->altura = mysqli_escape_string($conexion, trim($altura));
@@ -186,10 +186,10 @@ class ChequearAlumno extends ChequearGenerico{
       }
     }
 
-    if ($this->plantel_procedencia <> 'null') {
-      if ( strlen($this->plantel_procedencia) > 50 ) {
+    if ($this->plantelProcedencia <> 'null') {
+      if ( strlen($this->plantelProcedencia) > 50 ) {
         self::verificar("Error en: plantel de procedencia: datos excede limite maximo, datos: ".
-          $this->plantel_procedencia.", largo: ".strlen($this->plantel_procedencia));
+          $this->plantelProcedencia.", largo: ".strlen($this->plantelProcedencia));
       }
     }
 
@@ -299,19 +299,13 @@ class ChequearAlumno extends ChequearGenerico{
 
     $this->sexo = "'$this->sexo'";
 
-    if ($this->lugNac == "") {
-      $this->lugNac = "null";
-    }else{
-      $this->lugNac = "'$this->lugNac'";
-    }
-
     $this->fecMod = "current_timestamp";
     $this->cedulaEscolar = "'$this->cedulaEscolar'";
 
-    if ($this->plantel_procedencia == "") {
-      $this->plantel_procedencia = "null";
+    if ($this->plantelProcedencia == "") {
+      $this->plantelProcedencia = "null";
     }else{
-      $this->plantel_procedencia = "'$this->plantel_procedencia'";
+      $this->plantelProcedencia = "'$this->plantelProcedencia'";
     }
     $this->repitiente = "'$this->repitiente'";
 

@@ -30,7 +30,7 @@ if ( isset($_POST['cedula_escolar']) ) :
       <?php $datos = mysqli_fetch_assoc($consulta) ?>
       <span id="disponible" data-disponible="false">
         Esta Cedula esta ya registrada en el sistema!
-        <?php $enlace = "github/sistemaJAG/alumno/consultar_A.php?cedula=$datos[cedula]" ?>
+        <?php $enlace = "github/sistemaJAG/alumno/consultar_A.php?tipo=1&informacion=$datos[cedula]" ?>
         <?php $consultar_A = enlaceDinamico("$enlace") ?>
         <a href="<?php echo $consultar_A ?>">
           Consultar

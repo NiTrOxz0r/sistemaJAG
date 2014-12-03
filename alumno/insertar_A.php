@@ -27,12 +27,18 @@ if ( isset($_POST['cedula_r']) and preg_match( "/[0-9]{8}/", $_POST['cedula_r'])
     $con = conexion();
     $status = 1;
     $cedula = mysqli_escape_string( $con, trim($_POST['cedula_r']) );
-    $query = "SELECT a.codigo as codigo_pa, b.codigo as codigo_pa_p from personal_autorizado a
+    $query = "SELECT a.codigo as codigo_pa,
+    b.codigo as codigo_pa_p,
+    b.p_nombre as p_nombre,
+    b.p_apellido as p_apellido
+    from personal_autorizado a
     inner join persona b on (a.cod_persona=b.codigo) where b.cedula ='$cedula'";
     $resultado = conexion($query);
     $datos = mysqli_fetch_assoc($resultado);
     $cod_representante = $datos['codigo_pa'];
     $cod_representante_persona = $datos['codigo_pa_p'];
+    $p_nombre_r = $datos['p_nombre'] or die('error p_nombre');
+    $p_apellido_r = $datos['p_apellido'] or die('error p_apellido');
     $validarAlumno = new ChequearAlumno
     (
       $_SESSION['codUsrMod'],
@@ -89,13 +95,13 @@ if ( isset($_POST['cedula_r']) and preg_match( "/[0-9]{8}/", $_POST['cedula_r'])
       $status, $validarAlumno->codUsrMod ,$validarAlumno->codUsrMod,
       current_timestamp);";
     $res = conexion($queryP);
-    // $query = "SELECT b.codigo from persona a, alumno b
-    // where a.codigo = b.cod_persona and cedula = $validarAlumno->cedula;";
-    $query = "SELECT codigo from persona where cedula = $validarAlumno->cedula";
+    $query = "SELECT
+      codigo
+      from persona
+      where cedula = $validarAlumno->cedula";
     $resultado = conexion($query);
     $datos = mysqli_fetch_assoc($resultado);
     $cod_persona = $datos['codigo'];
-
     $validarDireccion = new ChequearDireccion
     (
       $_SESSION['codUsrMod'],
@@ -117,11 +123,13 @@ if ( isset($_POST['cedula_r']) and preg_match( "/[0-9]{8}/", $_POST['cedula_r'])
         cod_usr_reg,
         cod_usr_mod,
         fec_mod)
-        VALUES('$cod_persona','$cod_parroquia',
-          '$direccion_exacta', '$status',
-          '$cod_usr_reg','$cod_usr_mod',
+        VALUES('$cod_persona', $validarDireccion->codParroquia,
+          $validarDireccion->direccionExacta, '$status',
+          $validarDireccion->codUsrMod, $validarDireccion->codUsrMod,
           current_timestamp);";
+// $resultado = conexion($query, 1);
       mysqli_query($con, $query) ? null : $query_ok=false;
+      echo $query_ok === (false) ? 'dir' : null;
       $query = "INSERT INTO
         alumno (
           cod_persona,
@@ -146,25 +154,34 @@ if ( isset($_POST['cedula_r']) and preg_match( "/[0-9]{8}/", $_POST['cedula_r'])
           fec_mod
         )
         VALUES (
-          '$cod_persona','$cedula_escolar',
-          '$lugar_nac','$acta_num_part_nac',
-          '$acta_folio_num_part_nac','$plantel_procedencia',
-          '$repitiente','$altura','$peso','$camisa',
-          '$pantalon','$zapato','$certificado_vacuna',
-          '$cod_discapacidad','$cod_curso',
-          '$cod_representante','$status',
-          '$cod_usr_reg','$cod_usr_mod', current_timestamp
-        );";
+          $cod_persona, $validarAlumno->cedulaEscolar,
+          $validarAlumno->lugNac, $validarAlumno->actaNumero,
+          $validarAlumno->actaFolio, $validarAlumno->plantelProcedencia,
+          $validarAlumno->repitiente, $validarAlumno->altura,
+          $validarAlumno->peso, $validarAlumno->camisa,
+          $validarAlumno->pantalon, $validarAlumno->zapato,
+          $validarAlumno->vacuna, $validarAlumno->discapacidad,
+          $validarAlumno->codCurso, $validarAlumno->codRepresentante,
+          $status, $validarAlumno->codUsrMod,
+          $validarAlumno->codUsrMod, current_timestamp);";
+      // $resultado = conexion($query, 1);
       mysqli_query($con, $query) ? null : $query_ok=false;
-
+      echo $query_ok === (false) ? 'alu' : null;
+      $query_ok ? mysqli_commit($con) : mysqli_rollback($con);
+      $query = "SELECT codigo from alumno where cod_persona = $cod_persona";
+      $resultado = conexion($query);
+      $datosAlumno = mysqli_fetch_assoc($resultado);
       //INSERSION A LA TABLA OBTIENE:
       //RELACION ENTRE ALUMNO Y PA:
       //M > N
       $query = "INSERT INTO obtiene
       VALUES
-      (null, $cod_representante, $codigo_alumno,
-        $status, $cod_usr_reg, null, $cod_usr_mod, current_timestamp);";
+      (null, $cod_representante, $datosAlumno[codigo],
+        $status, $validarAlumno->codUsrMod, null,
+        $validarAlumno->codUsrMod, current_timestamp);";
+// $resultado = conexion($query, 1);
       mysqli_query($con, $query) ? null : $query_ok=false;
+      echo $query_ok === (false) ? 'ob' : null;
       $query_ok ? mysqli_commit($con) : mysqli_rollback($con);
       if ( $query_ok ) :
         //AGARRAMOS LAS VARIABLES DE VALIDACION QUE NOS INTERESAN:
@@ -191,13 +208,17 @@ if ( isset($_POST['cedula_r']) and preg_match( "/[0-9]{8}/", $_POST['cedula_r'])
                 <div class="jumbotron">
                   <h1>Registro exitoso!</h1>
                   <h4>
-                    Los registros asociados
+                    Los registros asociados con
+                    <em><?php echo $validarAlumno->p_apellido.", ".$validarAlumno->p_nombre ?></em>
                     fueron guardados correctamente!
                   </h4>
                   <p>
-                    Si desea hacer un registro de una alumno asociado a la cedula:
-                     <?php echo $cedula_r ?>, por favor dele
-                    <a href="<?php echo "form_reg_A.php?cedula_r=$cedula_r" ?>">
+                    Si desea hacer un registro de un alumno asociado a
+                    <?php echo $p_nombre_r ?>, <?php echo $p_apellido_r ?>
+                    con cedula
+                     <strong><?php echo $_POST['cedula_r'] ?>, </strong>
+                     por favor dele
+                    <a href="<?php echo "form_reg_A.php?cedula_r=$_POST[cedula_r]" ?>">
                       click a este enlace
                     </a>
                   </p>
@@ -257,7 +278,9 @@ if ( isset($_POST['cedula_r']) and preg_match( "/[0-9]{8}/", $_POST['cedula_r'])
           </div>
         </div>
       <?php endif;?>
-    <?php else : ?>
+    <?php else :
+      $query = "DELETE from persona where cedula = $validarAlumno->cedula;";
+      $resultado = conexion($query);?>
       <div id="contenido_actualizar_C">
         <div id="blancoAjax">
           <div class="container">
