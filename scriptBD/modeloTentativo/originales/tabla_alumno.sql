@@ -2,8 +2,9 @@ CREATE TABLE alumno (
 	codigo int unsigned auto_increment primary key,
 	cod_persona int unsigned not null,
 	cedula_escolar varchar(10) unique not null,
-	acta_num_part_nac int zerofill unique,
-	acta_folio_num_part_nac int zerofill unique,
+	-- quite los unique porque no se como son las actas y folios.
+	acta_num_part_nac varchar(20),
+	acta_folio_num_part_nac varchar(20),
 	lugar_nac varchar(50) default 'Sin Registro',
 	plantel_procedencia varchar(50),
 	repitiente enum('s','n') not null,
