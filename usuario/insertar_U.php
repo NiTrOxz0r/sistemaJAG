@@ -146,22 +146,14 @@ if ( isset($_SESSION['seudonimo']) && isset($_SESSION['clave']) && isset($_POST[
     $_POST['cod_parroquia'],
     $_POST['direcc']
     );
-  //insertamos datos:
-  $query = "INSERT INTO direccion
-  VALUES
-  (null, $direccion->codPersona, $direccion->codParroquia,
-    $direccion->direccionExacta,  1, 1, null, 1, current_timestamp);";
-  $resultado = conexion($query);
-
-  //TODO BORRAR ESTO:
-  //CREO QUE NO NECESITAMOS ESTO:
-  //buscamos el codigo de esa direccion que
-  //acabamos de insertar:
-  // $query = "SELECT codigo from direccion
-  // where cod_parroquia = $cod_parroquia and direccion_exacta = $direcc;";
-  // $resultado = conexion($query);
-  // $datos = mysqli_fetch_assoc($resultado);
-  // $codigoDireccion = $datos['codigo'];
+  if ($direccion->valido()) :
+    //insertamos datos:
+    $query = "INSERT INTO direccion
+    VALUES
+    (null, $direccion->codPersona, $direccion->codParroquia,
+      $direccion->direccionExacta,  1, 1, null, 1, current_timestamp);";
+    $resultado = conexion($query);
+  endif;
 
   //por ultimo:
   $query = "SELECT
