@@ -25,11 +25,14 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr'], 'sistemaJAG 
   if (isset($_POST['cedula_r']) and preg_match( "/[0-9]{8}/", $_POST['cedula_r'])){
 
     $con = conexion();
+    $status = 1;
     $cedula = mysqli_escape_string( $con, trim($_POST['cedula_r']) );
-    $query = "SELECT codigo from persona where cedula = '$cedula';";
+    $query = "SELECT a.codigo as codigo_pa, b.codigo as codigo_pa_p from personal_autorizado a
+    inner join persona b on (a.cod_persona=b.codigo) where b.cedula ='$cedula'";
     $resultado = conexion($query);
     $datos = mysqli_fetch_assoc($resultado);
-
+    $cod_representante = $datos['codigo_pa'];
+    $cod_representante_persona = $datos['codigo_pa_p'];
     $validarAlumno = new ChequearAlumno
     (
       $_SESSION['codUsrMod'],
@@ -44,7 +47,7 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr'], 'sistemaJAG 
       $_POST['telefono_otro'],
       $_POST['fec_nac'],
       $_POST['lugar_nac'],
-      'asdasd',
+      $_POST['sexo'],
       $_POST['acta_num_part_nac'],
       $_POST['acta_folio_num_part_nac'],
       $_POST['plantel_procedencia'],
@@ -57,7 +60,7 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr'], 'sistemaJAG 
       $_POST['zapato'],
       $_POST['discapacidad'],
       $_POST['vacuna'],
-      $datos['codigo']
+      $cod_representante
     );
   if ( $validarAlumno->valido() ) :
     $queryP = "INSERT INTO persona(
@@ -73,7 +76,8 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr'], 'sistemaJAG 
       telefono_otro,
       status,
       cod_usr_reg,
-      cod_usr_mod
+      cod_usr_mod,
+      fec_mod
     )
     VALUES
     (
@@ -82,106 +86,216 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr'], 'sistemaJAG 
       $validarAlumno->p_apellido, $validarAlumno->s_apellido,
       $validarAlumno->sexo, $validarAlumno->fecNac,
       $validarAlumno->telefono, $validarAlumno->telefonoOtro,
-      1, $validarAlumno->codUsrMod ,$validarAlumno->codUsrMod);";
+      $status, $validarAlumno->codUsrMod ,$validarAlumno->codUsrMod,
+      current_timestamp);";
+    $res = conexion($queryP);
+    $query = "SELECT b.codigo from persona a, alumno b
+    where a.codigo = b.cod_persona and cedula = $validarAlumno->cedula;";
+    $resultado = conexion($query);
+    $datos = mysqli_fetch_assoc($resultado);
+    $codigo_alumno = $datos['codigo'];
 
-    $res = conexion($queryP, 2);
-    echo "EN DESARROLLO";
-    $validarDireccion =new ChequearDireccion
+    $validarDireccion = new ChequearDireccion
     (
       $_SESSION['codUsrMod'],
       $datos['codigo'],
       $_POST['cod_parro'],
       $_POST['direcc']
     );
-
-    $queryDirA = "INSERT INTO direccion
-      (
-      cod_persona,
-      cod_parroquia,
-      direccion_exacta,
-      status,
-      cod_usr_reg,
-      cod_usr_mod)
-      VALUES('$cod_persona','$cod_parroquia','$direccion_exacta', '$status','$cod_usr_reg','$cod_usr_mod');";
-
-    $res = conexion($queryDirA);
-    $cedula_r = mysqli_escape_string($con, $_POST['cedula_r']);
-    $query_R="SELECT a.codigo from personal_autorizado a
-    inner join persona b on (a.cod_persona=b.codigo) where b.cedula ='$cedula_r'";
-
-
-    $resultado = conexion($query_R);
-    $datos = mysqli_fetch_assoc($resultado);
-    $cod_representante = $datos['codigo'];
-
-    $queryA = "INSERT INTO alumno (
-      cod_persona,
-      cedula_escolar,
-      lugar_nac,
-      acta_num_part_nac,
-      acta_folio_num_part_nac,
-      plantel_procedencia,
-      repitiente,
-      altura,
-      peso,
-      camisa,
-      pantalon,
-      zapato,
-      certificado_vacuna,
-      cod_discapacidad,
-      cod_curso,
-      cod_representante,
-      status,
-      cod_usr_reg,
-      cod_usr_mod
-      ) VALUES ('$cod_persona','$cedula_escolar','$lugar_nac','$acta_num_part_nac',
-      '$acta_folio_num_part_nac','$plantel_procedencia','$repitiente','$altura','$peso','$camisa',
-      '$pantalon','$zapato','$certificado_vacuna','$cod_discapacidad','$cod_curso',
-      '$cod_representante','$status','$cod_usr_reg','$cod_usr_mod');";
-
-    $res = conexion($queryA);
-
-    $query = "SELECT b.codigo from persona a, alumno b
-    where a.codigo=b.cod_persona and cedula = '$cedula';";
-    $resultado = conexion($query);
-    $datos = mysqli_fetch_assoc($resultado);
-    $codigo_alumno = $datos['codigo'];
-
-    //INSERSION A LA TABLA OBTIENE:
-    //RELACION ENTRE ALUMNO Y PA:
-    //M > N
-    $query_O= "INSERT INTO obtiene
-    VALUES
-    (null, $cod_representante, $codigo_alumno, $status, $cod_usr_reg, null, $cod_usr_mod, null);";
-
-    $res = conexion($query_O);?>
-
-    <div id="contenido_actualizar_C">
-      <div id="blancoAjax">
-        <div class="container">
-          <div class="row">
-            <div class="jumbotron">
-              <h1>Registro exitoso!</h1>
-              <h4>
-                Los registros asociados
-                fueron guardados correctamente!
-              </h4>
-              <p>
-                Si desea hacer un registro de una alumno asociado a la cedula:
-                 <?php echo $cedula_r ?>, por favor dele
-                <a href="<?php echo "form_reg_A.php?cedula_r=$cedula_r" ?>">
-                  click a este enlace
-                </a>
-              </p>
-              <p>
-                <?php $index = enlaceDinamico(); ?>
-                <a href="<?php echo $index ?>" class="btn btn-primary btn-lg">Regresar al sistema</a>
-              </p>
+    // implementacion nueva de ChequearDireccion
+    // validarDireccion->valido()
+    if (true === true) :
+      mysqli_autocommit($con, false);
+      $query_ok = true;
+      $query = "INSERT INTO direccion
+        (
+        cod_persona,
+        cod_parroquia,
+        direccion_exacta,
+        status,
+        cod_usr_reg,
+        cod_usr_mod,
+        fec_mod)
+        VALUES('$cod_persona','$cod_parroquia',
+          '$direccion_exacta', '$status',
+          '$cod_usr_reg','$cod_usr_mod',
+          current_timestamp);";
+      //mysqli_query($con, $query) ? null : $query_ok=false;
+      //$res = conexion($queryDirA);
+      $query = "INSERT INTO
+        alumno (
+          cod_persona,
+          cedula_escolar,
+          lugar_nac,
+          acta_num_part_nac,
+          acta_folio_num_part_nac,
+          plantel_procedencia,
+          repitiente,
+          altura,
+          peso,
+          camisa,
+          pantalon,
+          zapato,
+          certificado_vacuna,
+          cod_discapacidad,
+          cod_curso,
+          cod_representante,
+          status,
+          cod_usr_reg,
+          cod_usr_mod,
+          fec_mod
+        )
+        VALUES (
+          '$cod_persona','$cedula_escolar',
+          '$lugar_nac','$acta_num_part_nac',
+          '$acta_folio_num_part_nac','$plantel_procedencia',
+          '$repitiente','$altura','$peso','$camisa',
+          '$pantalon','$zapato','$certificado_vacuna',
+          '$cod_discapacidad','$cod_curso',
+          '$cod_representante','$status',
+          '$cod_usr_reg','$cod_usr_mod', current_timestamp
+        );";
+      //mysqli_query($con, $query) ? null : $query_ok=false;
+      //$res = conexion($queryA);
+      //
+      //INSERSION A LA TABLA OBTIENE:
+      //RELACION ENTRE ALUMNO Y PA:
+      //M > N
+      $query = "INSERT INTO obtiene
+      VALUES
+      (null, $cod_representante, $codigo_alumno,
+        $status, $cod_usr_reg, null, $cod_usr_mod, current_timestamp);";
+      // mysqli_query($con, $query) ? null : $query_ok=false;
+      // $query_ok ? mysqli_commit($con) : mysqli_rollback($con);
+      // $res = conexion($query_O);
+      if (condicionTal) : ?>
+        <div id="contenido_actualizar_C">
+          <div id="blancoAjax">
+            <div class="container">
+              <div class="row">
+                <div class="jumbotron">
+                  <h1>Registro exitoso!</h1>
+                  <h4>
+                    Los registros asociados
+                    fueron guardados correctamente!
+                  </h4>
+                  <p>
+                    Si desea hacer un registro de una alumno asociado a la cedula:
+                     <?php echo $cedula_r ?>, por favor dele
+                    <a href="<?php echo "form_reg_A.php?cedula_r=$cedula_r" ?>">
+                      click a este enlace
+                    </a>
+                  </p>
+                  <p>
+                    <?php $index = enlaceDinamico(); ?>
+                    <a href="<?php echo $index ?>" class="btn btn-primary btn-lg">Regresar al sistema</a>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      <?php else :
+        $query = "DELETE from persona where cedula = $validarAlumno->cedula;";
+        $resultado = conexion($query);?>
+        <div id="contenido_actualizar_C">
+          <div id="blancoAjax">
+            <div class="container">
+              <div class="row">
+                <div class="jumbotron">
+                  <h1>Ups!</h1>
+                  <p>
+                    Error en el proceso de registro!
+                  </p>
+                  <h3>
+                    <small>
+                      Lamentablemente, es posible que los datos de registro se perdieron.
+                    </small>
+                  </h3>
+                  <h3>
+                    para intentarlo nuevamente por favor dele click
+                    <a href="menucon.php">a este enlace</a>
+                  </h3>
+                  <?php $inscripcion = enlaceDinamico('personalAutorizado/form_reg_P.php'); ?>
+                  <p>
+                    para ir al proceso de inscripcion <a href="<?php echo $inscripcion ?>">
+                    puede seguir este enlace.
+                    </a>
+                  </p>
+                  <p>
+                    Si desea hacer una consulta por favor dele
+                    <a href="menucon.php">click a este enlace.</a>
+                  </p>
+                  <p>
+                    ¿O sera que entro en esta pagina erroneamente?
+                  </p>
+                  <p class="bg-warning">
+                    Si este es un problema recurrente, contacte a un administrador del sistema.
+                  </p>
+                  <p>
+                    <?php $index = enlaceDinamico(); ?>
+                    <a href="<?php echo $index ?>" class="btn btn-primary btn-lg">Regresar al sistema</a>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      <?php endif;?>
+    <?php else : ?>
+      <div id="contenido_actualizar_C">
+        <div id="blancoAjax">
+          <div class="container">
+            <div class="row">
+              <div class="jumbotron">
+                <h1>Ups!</h1>
+                <p>
+                  Error en el proceso de registro!
+                </p>
+                <h3>
+                  Los datos suministrados al sistema parecen ser invalidos!
+                </h3>
+                <div class="bg-danger">
+                  <p>
+                    <em>Especificamente el sistema declara:</em>
+                  </p>
+                  <p>
+                     <strong>
+                       <em>
+                         <?php echo $validarDireccion->info() ?>
+                       </em>
+                     </strong>
+                  </p>
+                </div>
+                <p class="bg-info">
+                  Si considera que esto no es un error, contacte a un administrador del sistema.
+                </p>
+                <?php $inscripcion = enlaceDinamico('personalAutorizado/form_reg_P.php'); ?>
+                <p>
+                  para ir al proceso de inscripcion <a href="<?php echo $inscripcion ?>">
+                  puede seguir este enlace.
+                  </a>
+                </p>
+                <p>
+                  Si desea hacer una consulta por favor dele
+                  <a href="menucon.php">click a este enlace.</a>
+                </p>
+                <p>
+                  ¿O sera que entro en esta pagina erroneamente?
+                </p>
+                <p class="bg-warning">
+                  Si este es un problema recurrente, contacte a un administrador del sistema.
+                </p>
+                <p>
+                  <?php $index = enlaceDinamico(); ?>
+                  <a href="<?php echo $index ?>" class="btn btn-primary btn-lg">Regresar al sistema</a>
+                </p>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    <?php endif; ?>
   <?php else : ?>
     <div id="contenido_actualizar_C">
       <div id="blancoAjax">
@@ -236,8 +350,6 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr'], 'sistemaJAG 
       </div>
     </div>
   <?php endif; ?>
-
-
 <?php
   }else{
 
