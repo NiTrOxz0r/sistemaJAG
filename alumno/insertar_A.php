@@ -22,7 +22,7 @@ validarUsuario(1, 1, $_SESSION['cod_tipo_usr']);
 
 empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr'], 'sistemaJAG | Registro de alumno');
 
-  if (isset($_POST['cedula_r']) and preg_match( "/[0-9]{8}/", $_POST['cedula_r'])){
+if ( isset($_POST['cedula_r']) and preg_match( "/[0-9]{8}/", $_POST['cedula_r']) ) :
 
     $con = conexion();
     $status = 1;
@@ -121,8 +121,7 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr'], 'sistemaJAG 
           '$direccion_exacta', '$status',
           '$cod_usr_reg','$cod_usr_mod',
           current_timestamp);";
-      //mysqli_query($con, $query) ? null : $query_ok=false;
-      //$res = conexion($queryDirA);
+      mysqli_query($con, $query) ? null : $query_ok=false;
       $query = "INSERT INTO
         alumno (
           cod_persona,
@@ -156,9 +155,8 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr'], 'sistemaJAG 
           '$cod_representante','$status',
           '$cod_usr_reg','$cod_usr_mod', current_timestamp
         );";
-      //mysqli_query($con, $query) ? null : $query_ok=false;
-      //$res = conexion($queryA);
-      //
+      mysqli_query($con, $query) ? null : $query_ok=false;
+
       //INSERSION A LA TABLA OBTIENE:
       //RELACION ENTRE ALUMNO Y PA:
       //M > N
@@ -166,10 +164,26 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr'], 'sistemaJAG 
       VALUES
       (null, $cod_representante, $codigo_alumno,
         $status, $cod_usr_reg, null, $cod_usr_mod, current_timestamp);";
-      // mysqli_query($con, $query) ? null : $query_ok=false;
-      // $query_ok ? mysqli_commit($con) : mysqli_rollback($con);
-      // $res = conexion($query_O);
-      if (condicionTal) : ?>
+      mysqli_query($con, $query) ? null : $query_ok=false;
+      $query_ok ? mysqli_commit($con) : mysqli_rollback($con);
+      if ( $query_ok ) :
+        //AGARRAMOS LAS VARIABLES DE VALIDACION QUE NOS INTERESAN:
+          $codUsrMod = $_SESSION['codUsrMod'];
+          $codTipoUsr = $_SESSION['cod_tipo_usr'];
+          $seudonimo = $_SESSION['seudonimo'];
+          $p_nombre = $_SESSION['p_nombre'];
+          $p_apellido = $_SESSION['p_apellido'];
+
+          // LA VARIABLE SE DES-CREA, DES-INICIA DESACTIVA
+          unset($_SESSION);
+
+          //REINICIAMOS LA VARIABLE:
+
+          $_SESSION['codUsrMod'] = $codUsrMod;
+          $_SESSION['cod_tipo_usr'] = $codTipoUsr;
+          $_SESSION['seudonimo'] = $seudonimo;
+          $_SESSION['p_nombre'] = $p_nombre;
+          $_SESSION['p_apellido'] = $p_apellido;?>
         <div id="contenido_actualizar_C">
           <div id="blancoAjax">
             <div class="container">
@@ -351,71 +365,46 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr'], 'sistemaJAG 
       </div>
     </div>
   <?php endif; ?>
-<?php
-  }else{
-
-    // echo " Ingresar REPRSENTANTE";?>
-    <div id="contenido_actualizar_C">
-      <div id="blancoAjax">
-        <div class="container">
-          <div class="row">
-            <div class="jumbotron">
-              <h1>Ups!</h1>
-              <p>
-                Error en el proceso de registro!
-              </p>
-              <h3>
-                <small>
-                  Lamentablemente, es posible que los datos de registro se perdieron.
-                </small>
-              </h3>
-              <?php $inscripcion = enlaceDinamico('personalAutorizado/form_reg_P.php'); ?>
-              <p>
-                para ir al proceso de inscripcion <a href="<?php echo $inscripcion ?>">
-                puede seguir este enlace.
-                </a>
-              </p>
-              <p>
-                Si desea hacer una consulta por favor dele
-                <a href="menucon.php">click a este enlace.</a>
-              </p>
-              <p>
-                ¿O sera que entro en esta pagina erroneamente?
-              </p>
-              <p class="bg-warning">
-                Si este es un problema recurrente, contacte a un administrador del sistema.
-              </p>
-              <p>
-                <?php $index = enlaceDinamico(); ?>
-                <a href="<?php echo $index ?>" class="btn btn-primary btn-lg">Regresar al sistema</a>
-              </p>
-            </div>
+<?php else:
+  // echo " Ingresar REPRSENTANTE";?>
+  <div id="contenido_actualizar_C">
+    <div id="blancoAjax">
+      <div class="container">
+        <div class="row">
+          <div class="jumbotron">
+            <h1>Ups!</h1>
+            <p>
+              Error en el proceso de registro!
+            </p>
+            <h3>
+              <small>
+                Lamentablemente, es posible que los datos de registro se perdieron.
+              </small>
+            </h3>
+            <?php $inscripcion = enlaceDinamico('personalAutorizado/form_reg_P.php'); ?>
+            <p>
+              para ir al proceso de inscripcion <a href="<?php echo $inscripcion ?>">
+              puede seguir este enlace.
+              </a>
+            </p>
+            <p>
+              Si desea hacer una consulta por favor dele
+              <a href="menucon.php">click a este enlace.</a>
+            </p>
+            <p>
+              ¿O sera que entro en esta pagina erroneamente?
+            </p>
+            <p class="bg-warning">
+              Si este es un problema recurrente, contacte a un administrador del sistema.
+            </p>
+            <p>
+              <?php $index = enlaceDinamico(); ?>
+              <a href="<?php echo $index ?>" class="btn btn-primary btn-lg">Regresar al sistema</a>
+            </p>
           </div>
         </div>
       </div>
     </div>
-<?php
-
-}
-
- //AGARRAMOS LAS VARIABLES DE VALIDACION QUE NOS INTERESAN:
-
-    $codUsrMod = $_SESSION['codUsrMod'];
-    $codTipoUsr = $_SESSION['cod_tipo_usr'];
-    $seudonimo = $_SESSION['seudonimo'];
-    $p_nombre = $_SESSION['p_nombre'];
-    $p_apellido = $_SESSION['p_apellido'];
-
-    // LA VARIABLE SE DES-CREA, DES-INICIA DESACTIVA
-    unset($_SESSION);
-
-    //REINICIAMOS LA VARIABLE:
-
-    $_SESSION['codUsrMod'] = $codUsrMod;
-    $_SESSION['cod_tipo_usr'] = $codTipoUsr;
-    $_SESSION['seudonimo'] = $seudonimo;
-    $_SESSION['p_nombre'] = $p_nombre;
-    $_SESSION['p_apellido'] = $p_apellido;
-
-  finalizarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);
-?>
+  </div>
+<?php endif;
+finalizarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);?>
