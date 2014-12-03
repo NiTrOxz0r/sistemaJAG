@@ -89,22 +89,23 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr'], 'sistemaJAG 
       $status, $validarAlumno->codUsrMod ,$validarAlumno->codUsrMod,
       current_timestamp);";
     $res = conexion($queryP);
-    $query = "SELECT b.codigo from persona a, alumno b
-    where a.codigo = b.cod_persona and cedula = $validarAlumno->cedula;";
+    // $query = "SELECT b.codigo from persona a, alumno b
+    // where a.codigo = b.cod_persona and cedula = $validarAlumno->cedula;";
+    $query = "SELECT codigo from persona where cedula = $validarAlumno->cedula";
     $resultado = conexion($query);
     $datos = mysqli_fetch_assoc($resultado);
-    $codigo_alumno = $datos['codigo'];
+    $cod_persona = $datos['codigo'];
 
     $validarDireccion = new ChequearDireccion
     (
       $_SESSION['codUsrMod'],
-      $datos['codigo'],
+      $cod_persona,
       $_POST['cod_parro'],
       $_POST['direcc']
     );
     // implementacion nueva de ChequearDireccion
     // validarDireccion->valido()
-    if (true === true) :
+    if ( $validarDireccion->valido() ) :
       mysqli_autocommit($con, false);
       $query_ok = true;
       $query = "INSERT INTO direccion

@@ -12,13 +12,11 @@
 * @todo ampliar segun sea necesario segun
 * los objetivos necesarios:
 *
-* @version 1.1
+* @version 1.2
 *
 *
 */
 class ChequearAlumno extends ChequearGenerico{
-  private $status = 1;
-  private $info = 'todo parece en orden.';
   function __construct(
     $codUsrMod,
     $p_apellido,
@@ -341,30 +339,6 @@ class ChequearAlumno extends ChequearGenerico{
       $this->codPersonaRetira = "null";
     }
     $this->vacuna = "'$this->vacuna'";
-  }
-  /**
-   * [verificar cambia la variable info a el texto de error que genera
-   * el metodo de chequeame]
-   * @param  string $info [el texto de error]
-   * @return void
-   */
-  private function verificar($info){
-    $this->info = $info;
-    $this->status = 0;
-  }
-  /**
-   * [valido para hacer chequeos externos a la clase]
-   * @return number 0 si algun chequeo falla
-   */
-  public function valido(){
-    return $this->status;
-  }
-  /**
-   * regresa la info del error
-   * @return string los datos de error de function chequeame.
-   */
-  public function info(){
-    return $this->info;
   }
 
 }

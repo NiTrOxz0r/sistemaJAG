@@ -12,7 +12,7 @@
 * @todo ampliar segun sea necesario segun
 * los objetivos necesarios:
 *
-* @version 1.0
+* @version 1.1
 *
 */
 class ChequearGenerico extends TablaPrimaria{
@@ -28,6 +28,8 @@ class ChequearGenerico extends TablaPrimaria{
   var $fecNac;
   var $sexo;
   var $codigoDireccion;
+  protected $status = 1;
+  protected $info = 'todo parece en orden.';
 
   function __construct(
     $codUsrMod,
@@ -116,11 +118,11 @@ class ChequearGenerico extends TablaPrimaria{
 
       if (!isset($campo)) {
         $togo = "Location: registro.php?".$campo."=false&clase=".$clase;
-        die(header($togo));
+        self::verificar($togo);
       }else{
         if ($valor === "") {
           $togo = "Location: registro.php?".$campo."=vacio&clase=".$clase;
-          die(header($togo));
+          self::verificar($togo);
         }
       }
     }
@@ -141,65 +143,90 @@ class ChequearGenerico extends TablaPrimaria{
     // pero como no tengo acceso a la onidex, lo dejo en 5.
 
     if ( !is_numeric($this->cedula) ) {
-      die(header("Location: registro.php?cedulaNumeric=false"));
+      self::verificar("Location: registro.php?cedulaNumeric=false");
     }
     if ( strlen($this->cedula)>8 or strlen($this->cedula)<=6 ) {
-        header( "Location: registro.php?cedulaError=1_largo_cedula___".strlen($this->cedula) );
+        self::verificar( "Location: registro.php?cedulaError=1_largo_cedula___".strlen($this->cedula) );
     }
 
     if ( preg_match( "/^A-Za-z$^'$^áéíóú$^ÁÉÍÓÚ$/", $this->p_nombre) ) {
-      die(header("Location: registro.php?p_nombreNumeric=true"));
+     self::verificar("Location: registro.php?p_nombreNumeric=true");
     }
 
     if ( preg_match( "/^A-Za-z$^'$^áéíóú$^ÁÉÍÓÚ$/", $this->s_nombre) ) {
-      die(header("Location: registro.php?s_nombreNumeric=true"));
+      self::verificar("Location: registro.php?s_nombreNumeric=true");
     }
 
     if ( preg_match( "/^A-Za-z$^'$^áéíóú$^ÁÉÍÓÚ$/", $this->p_apellido) ) {
-      die(header("Location: registro.php?p_apellidoNumeric=true"));
+      self::verificar("Location: registro.php?p_apellidoNumeric=true");
     }
 
     if ( preg_match( "/^A-Za-z$^'$^áéíóú$^ÁÉÍÓÚ$/", $this->s_apellido) ) {
-      die(header("Location: registro.php?s_apellidoNumeric=true"));
+      self::verificar("Location: registro.php?s_apellidoNumeric=true");
     }
 
     if ( $this->nacionalidad <> 'v' and $this->nacionalidad <> 'e' ) {
-      die(header("Location: registro.php?nacionalidad=notVorE"));
+      self::verificar("Location: registro.php?nacionalidad=notVorE");
     }
 
     if ($this->telefono <> 'null') {
       if ( !is_numeric($this->telefono) ) {
-      die(header("Location: registro.php?telefonoNumeric=false"));
+      self::verificar("Location: registro.php?telefonoNumeric=false");
       }
       if ( !preg_match( '/^\d{11}$/', $this->telefono) ) {
-        die(header("Location: registro.php?telefonoLength=false"));
+        self::verificar("Location: registro.php?telefonoLength=false");
       }
     }
 
     if ($this->telefonoOtro <> 'null') {
       if ( !is_numeric($this->telefonoOtro) ) {
-      die(header("Location: registro.php?telefonoOtroNumeric=false"));
+      self::verificar("Location: registro.php?telefonoOtroNumeric=false");
       }
       if ( !preg_match( '/^\d{11}$/', $this->telefonoOtro) ) {
-        die(header("Location: registro.php?telefonoOtroLength=false"));
+        self::verificar("Location: registro.php?telefonoOtroLength=false");
       }
     }
 
     if ($this->fecNac <> 'current_timestamp') {
       if ( preg_match( "/[^0-9$^-]/", $this->fecNac) ) {
-      die(header("Location: registro.php?fecNacNumeric=false"));
+      self::verificar("Location: registro.php?fecNacNumeric=false");
       }
     }
 
     if ($this->sexo <> '0' and $this->sexo <> '1') {
       if ( !is_numeric($this->telefonoOtro) ) {
-      die(header("Location: registro.php?sexo=malDefinido"));
+      self::verificar("Location: registro.php?sexo=malDefinido");
       }
     }
 
     if ( !is_numeric($this->codigoDireccion) ) {
-      die(header("Location: registro.php?codigoDireccionNumeric=false"));
+      self::verificar("Location: registro.php?codigoDireccionNumeric=false");
     }
+  }
+
+  /**
+   * [verificar cambia la variable info a el texto de error que genera
+   * el metodo de chequeame]
+   * @param  string $info [el texto de error]
+   * @return void
+   */
+  protected function verificar($info){
+    $this->info = $info;
+    $this->status = 0;
+  }
+  /**
+   * [valido para hacer chequeos externos a la clase]
+   * @return number 0 si algun chequeo falla
+   */
+  public function valido(){
+    return $this->status;
+  }
+  /**
+   * regresa la info del error
+   * @return string los datos de error de function chequeame.
+   */
+  public function info(){
+    return $this->info;
   }
 
 
