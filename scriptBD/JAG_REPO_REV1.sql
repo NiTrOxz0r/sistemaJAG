@@ -30,8 +30,8 @@ CREATE TABLE IF NOT EXISTS `alumno` (
   `codigo` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `cod_persona` int(10) unsigned NOT NULL,
   `cedula_escolar` varchar(10) NOT NULL,
-  `acta_num_part_nac` int(10) unsigned zerofill DEFAULT NULL,
-  `acta_folio_num_part_nac` int(10) unsigned zerofill DEFAULT NULL,
+  `acta_num_part_nac` varchar(20) DEFAULT NULL,
+  `acta_folio_num_part_nac` varchar(20) DEFAULT NULL,
   `lugar_nac` varchar(50) DEFAULT 'Sin Registro',
   `plantel_procedencia` varchar(50) DEFAULT NULL,
   `repitiente` enum('s','n') NOT NULL,
@@ -52,8 +52,6 @@ CREATE TABLE IF NOT EXISTS `alumno` (
   `fec_mod` timestamp NOT NULL,
   PRIMARY KEY (`codigo`),
   UNIQUE KEY `cedula_escolar` (`cedula_escolar`),
-  UNIQUE KEY `acta_num_part_nac` (`acta_num_part_nac`),
-  UNIQUE KEY `acta_folio_num_part_nac` (`acta_folio_num_part_nac`),
   KEY `cod_persona` (`cod_persona`),
   KEY `camisa` (`camisa`),
   KEY `pantalon` (`pantalon`),
@@ -91,47 +89,14 @@ CREATE TABLE IF NOT EXISTS `asume` (
   KEY `cod_docente` (`cod_docente`),
   KEY `periodo_academico` (`periodo_academico`),
   KEY `cod_curso` (`cod_curso`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=35 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
 --
 -- Dumping data for table `asume`
 --
 
 INSERT INTO `asume` (`codigo`, `cod_docente`, `cod_curso`, `periodo_academico`, `comentarios`, `status`, `cod_usr_reg`, `fec_reg`, `cod_usr_mod`, `fec_mod`) VALUES
-(1, 1, 34, 0, 'Sin curso asociado favor actualizar', 1, 1, '2014-11-19 22:40:21', 1, '2014-11-19 22:40:21'),
-(2, NULL, 1, 0, NULL, 1, 1, '2014-11-19 22:40:21', 1, '2014-11-19 22:40:21'),
-(3, NULL, 2, 0, NULL, 1, 1, '2014-11-19 22:40:21', 1, '2014-11-19 22:40:21'),
-(4, NULL, 3, 0, NULL, 1, 1, '2014-11-19 22:40:21', 1, '2014-11-19 22:40:21'),
-(5, NULL, 4, 0, NULL, 1, 1, '2014-11-19 22:40:21', 1, '2014-11-19 22:40:21'),
-(6, NULL, 5, 0, NULL, 1, 1, '2014-11-19 22:40:21', 1, '2014-11-19 22:40:21'),
-(7, NULL, 6, 0, NULL, 1, 1, '2014-11-19 22:40:21', 1, '2014-11-19 22:40:21'),
-(8, NULL, 7, 0, NULL, 1, 1, '2014-11-19 22:40:21', 1, '2014-11-19 22:40:21'),
-(9, NULL, 8, 0, NULL, 1, 1, '2014-11-19 22:40:21', 1, '2014-11-19 22:40:21'),
-(10, NULL, 9, 0, NULL, 1, 1, '2014-11-19 22:40:21', 1, '2014-11-19 22:40:21'),
-(11, NULL, 10, 0, NULL, 1, 1, '2014-11-19 22:40:21', 1, '2014-11-19 22:40:21'),
-(12, NULL, 11, 0, NULL, 1, 1, '2014-11-19 22:40:21', 1, '2014-11-19 22:40:21'),
-(13, NULL, 12, 0, NULL, 1, 1, '2014-11-19 22:40:21', 1, '2014-11-19 22:40:21'),
-(14, NULL, 13, 0, NULL, 1, 1, '2014-11-19 22:40:21', 1, '2014-11-19 22:40:21'),
-(15, NULL, 14, 0, NULL, 1, 1, '2014-11-19 22:40:21', 1, '2014-11-19 22:40:21'),
-(16, NULL, 15, 0, NULL, 1, 1, '2014-11-19 22:40:21', 1, '2014-11-19 22:40:21'),
-(17, NULL, 16, 0, NULL, 1, 1, '2014-11-19 22:40:21', 1, '2014-11-19 22:40:21'),
-(18, NULL, 17, 0, NULL, 1, 1, '2014-11-19 22:40:21', 1, '2014-11-19 22:40:21'),
-(19, NULL, 18, 0, NULL, 1, 1, '2014-11-19 22:40:21', 1, '2014-11-19 22:40:21'),
-(20, NULL, 19, 0, NULL, 1, 1, '2014-11-19 22:40:21', 1, '2014-11-19 22:40:21'),
-(21, NULL, 20, 0, NULL, 1, 1, '2014-11-19 22:40:21', 1, '2014-11-19 22:40:21'),
-(22, NULL, 21, 0, NULL, 1, 1, '2014-11-19 22:40:21', 1, '2014-11-19 22:40:21'),
-(23, NULL, 22, 0, NULL, 1, 1, '2014-11-19 22:40:21', 1, '2014-11-19 22:40:21'),
-(24, NULL, 23, 0, NULL, 1, 1, '2014-11-19 22:40:21', 1, '2014-11-19 22:40:21'),
-(25, NULL, 24, 0, NULL, 1, 1, '2014-11-19 22:40:21', 1, '2014-11-19 22:40:21'),
-(26, NULL, 25, 0, NULL, 1, 1, '2014-11-19 22:40:21', 1, '2014-11-19 22:40:21'),
-(27, NULL, 26, 0, NULL, 1, 1, '2014-11-19 22:40:21', 1, '2014-11-19 22:40:21'),
-(28, NULL, 27, 0, NULL, 1, 1, '2014-11-19 22:40:21', 1, '2014-11-19 22:40:21'),
-(29, NULL, 28, 0, NULL, 1, 1, '2014-11-19 22:40:21', 1, '2014-11-19 22:40:21'),
-(30, NULL, 29, 0, NULL, 1, 1, '2014-11-19 22:40:21', 1, '2014-11-19 22:40:21'),
-(31, NULL, 30, 0, NULL, 1, 1, '2014-11-19 22:40:21', 1, '2014-11-19 22:40:21'),
-(32, NULL, 31, 0, NULL, 1, 1, '2014-11-19 22:40:21', 1, '2014-11-19 22:40:21'),
-(33, NULL, 32, 0, NULL, 1, 1, '2014-11-19 22:40:21', 1, '2014-11-19 22:40:21'),
-(34, NULL, 33, 0, NULL, 1, 1, '2014-11-19 22:40:21', 1, '2014-11-19 22:40:21');
+(1, 1, 34, 0, 'Sin curso asociado favor actualizar', 1, 1, '2014-11-19 22:40:21', 1, '2014-11-19 22:40:21');
 
 -- --------------------------------------------------------
 
