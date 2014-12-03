@@ -1,19 +1,9 @@
 <?php
-/*importante*/
-/*chequea que los datos existan antes de
-enviarlos a la base de datos*/
-
-/*chequea que el codigo de la base de datos exista
-para hacer el query: */
-
-
-
 /**
 * @author Granadillo Alejandro.
-* @copyright MIT/GNU/Otro??? Octurbre 2014
 *
-* @internal
-*
+* @internal chequea que los datos existan antes de
+* enviarlos a la base de datos
 *
 * @deprecated
 *
@@ -23,7 +13,6 @@ para hacer el query: */
 * los objetivos necesarios:
 *
 * @version 1.0
-*
 *
 */
 class ChequearGenerico extends TablaPrimaria{
@@ -138,6 +127,10 @@ class ChequearGenerico extends TablaPrimaria{
 
   }
 
+  /**
+   * sirve para comprobar las variables de la clase.
+   * @return void se asume die cuando algo falla.
+   */
   private function chequeame(){
     // si cedula es mayor a 8 digitos o menor o igual a 5 digitos
     // se devuelve a registro, cedula de 99999 <--- no existe

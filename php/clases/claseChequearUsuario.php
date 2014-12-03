@@ -2,7 +2,6 @@
 
 /**
 * @author Granadillo Alejandro.
-* @copyright MIT/GNU/Otro??? Octurbre 2014
 *
 * {@internal [hecho con la intension de
 * chequear los datos referentes a usuario del

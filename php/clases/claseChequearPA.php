@@ -2,7 +2,6 @@
 
 /**
 * @author Granadillo Alejandro.
-* @copyright MIT/GNU/Otro??? Octurbre 2014
 *
 * @internal
 *

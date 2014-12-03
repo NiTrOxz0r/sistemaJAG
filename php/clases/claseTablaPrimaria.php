@@ -2,7 +2,6 @@
 
 /**
 * @author Granadillo Alejandro.
-* @copyright MIT/GNU/Otro??? Octurbre 2014
 *
 * @internal clase que define todas las tablas
 * primarias, es decir, todas las no referenciales
@@ -11,9 +10,9 @@
 * todas las tablas del sistema
 *
 *
-* @deprecated considerado el archivo
+* {@internal  considerado el archivo
 * o libreria principal que todas las paginas
-* y archivos o librerias adicionales, hagan referencia de.
+* y archivos o librerias adicionales, hagan referencia de.}
 *
 * @see .php
 * @example .php

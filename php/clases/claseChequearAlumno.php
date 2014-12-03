@@ -2,19 +2,17 @@
 
 /**
 * @author Granadillo Alejandro.
-* @copyright MIT/GNU/Otro??? Octurbre 2014
 *
 * @internal
 *
-*
-*
+* @todo MODIFICAR 99 al numero exacto del acta y folio
 *
 * @see chequearGenericoEjemplo.php
 * @example chequearGenericoEjemplo.php
 * @todo ampliar segun sea necesario segun
 * los objetivos necesarios:
 *
-* @version 1.0
+* @version 1.1
 *
 *
 */
@@ -49,115 +47,38 @@ class ChequearAlumno extends ChequearGenerico{
     $codPersonaRetira = 'null'
 
     ){
-
-
-    $this->p_apellido = $p_apellido;
-
-    if ($s_apellido == "") {
-      $this->s_apellido = "null";
-    }else{
-      $this->s_apellido = $s_apellido;
-    }
-
-    $this->p_nombre = $p_nombre;
-
-    $this->p_nombre = $p_nombre;
-
-    if ($s_nombre == "") {
-      $this->s_nombre = "null";
-    }else{
-      $this->s_nombre = $s_nombre;
-    }
-
-    $this->nacionalidad = $nacionalidad;
-    $this->cedula = $cedula;
-
-    if ($telefono == "") {
-      $this->telefono = "null";
-    }else{
-      $this->telefono = $telefono;
-    }
-    if ($telefonoOtro == "") {
-      $this->telefonoOtro = "null";
-    }else{
-      $this->telefonoOtro = $telefonoOtro;
-    }
-
-    $this->fecNac = $fecNac;
-
-    if ($lugNac == "") {
-      $this->lugNac = "null";
-    }else{
-      $this->lugNac = $lugNac;
-    }
-
-    $this->sexo = $sexo;
-
-    if ($codigoDireccion == "") {
-      $this->codigoDireccion = "null";
-    }else{
-      $this->codigoDireccion = $codigoDireccion;
-    }
-
-    if ($lugNac == "") {
-      $this->lugNac = "null";
-    }else{
-      $this->lugNac = $lugNac;
-    }
-
-    $this->fecMod = "current_timestamp";
-    $this->cedulaEscolar = $cedulaEscolar;
-    $this->actaNumero = $actaNumero;
-    $this->actaFolio = $actaFolio;
-
-    if ($plantel_procedencia == "") {
-      $this->plantel_procedencia = "null";
-    }else{
-      $this->plantel_procedencia = $plantel_procedencia;
-    }
-    $this->repitiente = $repitiente;
-    $this->codCurso = $codCurso;
-
-    if ($altura == "") {
-      $this->altura = "null";
-    }else{
-      $this->altura = $altura;
-    }
-
-
-    if ($peso == "") {
-      $this->peso = "null";
-    }else{
-      $this->peso = $peso;
-    }
-
-    if ($camisa == "") {
-      $this->camisa = "null";
-    }else{
-      $this->camisa = $camisa;
-    }
-
-    if ($pantalon == "") {
-      $this->pantalon = "null";
-    }else{
-      $this->pantalon = $pantalon;
-    }
-
-    if ($zapato == "") {
-      $this->zapato = "null";
-    }else{
-      $this->zapato = $zapato;
-    }
-
-    $this->codRepresentante = $codRepresentante;
-
-    if ($codPersonaRetira == "") {
-      $this->codPersonaRetira = "null";
-    }else{
-      $this->codPersonaRetira = $codPersonaRetira;
-    }
-
-
+    //variables de la clase:
+    $conexion = conexion();//desde master.php > conexion.php
+    $codUsrMod = mysqli_escape_string($conexion, $codUsrMod);
+    $p_apellido = mysqli_escape_string($conexion, $p_apellido);
+    $s_apellido = mysqli_escape_string($conexion, $s_apellido);
+    $p_nombre = mysqli_escape_string($conexion, $p_nombre);
+    $s_nombre = mysqli_escape_string($conexion, $s_nombre);
+    $nacionalidad = mysqli_escape_string($conexion, $nacionalidad);
+    $cedula = mysqli_escape_string($conexion, $cedula);
+    $cedulaEscolar = mysqli_escape_string($conexion, $cedulaEscolar);
+    $telefono = mysqli_escape_string($conexion, $telefono);
+    $telefonoOtro = mysqli_escape_string($conexion, $telefonoOtro);
+    $fecNac = mysqli_escape_string($conexion, $fecNac);
+    $lugNac = mysqli_escape_string($conexion, $lugNac);
+    $sexo = mysqli_escape_string($conexion, $sexo);
+    $codigoDireccion = mysqli_escape_string($conexion, $codigoDireccion);
+    $actaNumero = mysqli_escape_string($conexion, $actaNumero);
+    $actaFolio = mysqli_escape_string($conexion, $actaFolio);
+    $plantel_procedencia = mysqli_escape_string($conexion, $plantel_procedencia);
+    $repitiente = mysqli_escape_string($conexion, $repitiente);
+    $codCurso = mysqli_escape_string($conexion, $codCurso);
+    $altura = mysqli_escape_string($conexion, $altura);
+    $peso = mysqli_escape_string($conexion, $peso);
+    $camisa = mysqli_escape_string($conexion, $camisa);
+    $pantalon = mysqli_escape_string($conexion, $pantalon);
+    $zapato = mysqli_escape_string($conexion, $zapato);
+    $codRepresentante = mysqli_escape_string($conexion, $codRepresentante);
+    $codPersonaRetira = mysqli_escape_string($conexion, $codPersonaRetira);
+    //metodos internos:
+    //para poner variables nulas si es necesario:
+    self::setNull();
+    //chequeaomos la forma (el objeto como tal):
     self::chequeaForma();
     self::chequeame(); //heredado de ChequearGenerico
 
@@ -351,7 +272,120 @@ class ChequearAlumno extends ChequearGenerico{
     }
   }
 
+  /**
+  *
+  * {@internal esto es para autogenerar el null
+  * para los campos que acepten null en la base de datos.}
+  *
+  * @return void [solo genera las variables internas de la clase]
+  */
+  private function setNull(){
+    $this->p_apellido = $p_apellido;
 
+    if ($s_apellido == "") {
+      $this->s_apellido = "null";
+    }else{
+      $this->s_apellido = $s_apellido;
+    }
+
+    $this->p_nombre = $p_nombre;
+
+    $this->p_nombre = $p_nombre;
+
+    if ($s_nombre == "") {
+      $this->s_nombre = "null";
+    }else{
+      $this->s_nombre = $s_nombre;
+    }
+
+    $this->nacionalidad = $nacionalidad;
+    $this->cedula = $cedula;
+
+    if ($telefono == "") {
+      $this->telefono = "null";
+    }else{
+      $this->telefono = $telefono;
+    }
+    if ($telefonoOtro == "") {
+      $this->telefonoOtro = "null";
+    }else{
+      $this->telefonoOtro = $telefonoOtro;
+    }
+
+    $this->fecNac = $fecNac;
+
+    if ($lugNac == "") {
+      $this->lugNac = "null";
+    }else{
+      $this->lugNac = $lugNac;
+    }
+
+    $this->sexo = $sexo;
+
+    if ($codigoDireccion == "") {
+      $this->codigoDireccion = "null";
+    }else{
+      $this->codigoDireccion = $codigoDireccion;
+    }
+
+    if ($lugNac == "") {
+      $this->lugNac = "null";
+    }else{
+      $this->lugNac = $lugNac;
+    }
+
+    $this->fecMod = "current_timestamp";
+    $this->cedulaEscolar = $cedulaEscolar;
+    $this->actaNumero = $actaNumero;
+    $this->actaFolio = $actaFolio;
+
+    if ($plantel_procedencia == "") {
+      $this->plantel_procedencia = "null";
+    }else{
+      $this->plantel_procedencia = $plantel_procedencia;
+    }
+    $this->repitiente = $repitiente;
+    $this->codCurso = $codCurso;
+
+    if ($altura == "") {
+      $this->altura = "null";
+    }else{
+      $this->altura = $altura;
+    }
+
+
+    if ($peso == "") {
+      $this->peso = "null";
+    }else{
+      $this->peso = $peso;
+    }
+
+    if ($camisa == "") {
+      $this->camisa = "null";
+    }else{
+      $this->camisa = $camisa;
+    }
+
+    if ($pantalon == "") {
+      $this->pantalon = "null";
+    }else{
+      $this->pantalon = $pantalon;
+    }
+
+    if ($zapato == "") {
+      $this->zapato = "null";
+    }else{
+      $this->zapato = $zapato;
+    }
+
+    $this->codRepresentante = $codRepresentante;
+
+    if ($codPersonaRetira == "") {
+      $this->codPersonaRetira = "null";
+    }else{
+      $this->codPersonaRetira = $codPersonaRetira;
+    }
+  }
 
 }
 
