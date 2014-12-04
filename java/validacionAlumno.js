@@ -52,6 +52,7 @@ function validacionAlumno(){
   var camisa = document.getElementById("camisa").value.replace(/^\s+|\s+$/g, '');
   var pantalon = document.getElementById("pantalon").value.replace(/^\s+|\s+$/g, '');
   var zapato = document.getElementById("zapato").value.replace(/^\s+|\s+$/g, '');
+  var curso = document.getElementById("curso").value.replace(/^\s+|\s+$/g, '');
 
 // cedula
   if (cedula === "") {
@@ -327,6 +328,21 @@ function validacionAlumno(){
     $('#direcc').val( direcc.toUpperCase() );
     verificar = true;
   }
+// curso
+  if(curso === "") {
+    $("#curso_chequeo").html('seleccione una opcion apropiada');
+    $('#curso').parent().addClass('has-error');
+    return false;
+  }else if(isNaN(curso)) {
+    $("#curso_chequeo").html('este campo debe ser solo numeros');
+    $('#curso').parent().addClass('has-error');
+    return false;
+  }else{
+    $("#curso_chequeo").html('&nbsp;');
+    $('#curso').parent().removeClass('has-error').addClass('has-success');
+    verificar = true;
+  }
+// datos fisicos
   if(isNaN(altura)) {
     $("#altura_chequeo").html('este campo debe ser solo numeros');
     $('#altura').parent().addClass('has-error');
@@ -345,7 +361,11 @@ function validacionAlumno(){
     $('#peso').parent().removeClass('has-error').addClass('has-success');
     verificar = true;
   }
-  if(isNaN(camisa)) {
+  if(camisa === "") {
+    $("#camisa_chequeo").html('seleccione una opcion apropiada');
+    $('#camisa').parent().addClass('has-error');
+    return false;
+  }else if(isNaN(camisa)) {
     $("#camisa_chequeo").html('este campo debe ser solo numeros');
     $('#camisa').parent().addClass('has-error');
     return false;
@@ -354,7 +374,11 @@ function validacionAlumno(){
     $('#camisa').parent().removeClass('has-error').addClass('has-success');
     verificar = true;
   }
-  if(isNaN(pantalon)) {
+  if(pantalon === "") {
+    $("#camisa_chequeo").html('seleccione una opcion apropiada');
+    $('#camisa').parent().addClass('has-error');
+    return false;
+  }else if(isNaN(pantalon)) {
     $("#pantalon_chequeo").html('este campo debe ser solo numeros');
     $('#pantalon').parent().addClass('has-error');
     return false;
@@ -372,7 +396,8 @@ function validacionAlumno(){
     $('#zapato').parent().removeClass('has-error').addClass('has-success');
     verificar = true;
   }
-
+// fin de chequeos.
+  // chequea y devuelve:
   if (verificar) {
     return true;
   }

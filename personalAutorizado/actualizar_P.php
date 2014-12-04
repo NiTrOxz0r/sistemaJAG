@@ -14,7 +14,7 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr'], 'sistemaJAG 
 
 $con = conexion();
 
-if ( isset($_POST['cedula']) and preg_match( "/[0-9]{8}/", $_GET['cedula']) ) :
+if ( isset($_POST['cedula']) and preg_match( "/[0-9]{8}/", $_POST['cedula']) ) :
   $status         =       1;
   $cod_usr_reg    =       $_SESSION['codUsrMod'];
   $cod_usr_modn   =       $_SESSION['codUsrMod'];

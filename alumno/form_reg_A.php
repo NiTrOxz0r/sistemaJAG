@@ -154,8 +154,8 @@ if($go): ?>
                             class="form-control <?php echo $cedula === (null) ? '':'bloquear' ?>"
                             autofocus="autofocus"
                             placeholder="Introduzca cedula ej: 12345678"
-                            value="<?php echo $cedula === (null) ? '':$cedula ?>"
-                            disabled="<?php echo $cedula === (null) ? 'false':'true' ?>"
+                            <?php echo $cedula === (null) ? null: "value='$cedula'" ?>
+                            <?php echo $cedula === (null) ? null: "disabled='true'" ?>
                             required>
                           <p class="help-block" id="cedula_chequeo">
                           </p>
