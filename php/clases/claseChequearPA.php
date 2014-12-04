@@ -38,7 +38,7 @@ class ChequearPA extends ChequearGenerico{
     $lugarTrabajo = 'null'
   ){
     //variables de la clase:
-    $this->conexion = conexion();//desde master.php > conexion.php
+    $conexion = conexion();//desde master.php > conexion.php
     $this->codUsrMod = mysqli_escape_string($conexion, trim($codUsrMod));
     $this->p_apellido = mysqli_escape_string($conexion, trim($p_apellido));
     $this->s_apellido = mysqli_escape_string($conexion, trim($s_apellido));
@@ -140,21 +140,22 @@ class ChequearPA extends ChequearGenerico{
     }
 
     if ( preg_match( "/[^0-9]/", $this->relacion) ) {
-      self::verificar("Error en: tipo de relacion: se esperan un valor apropiados del formulario, datos: ".$this->relacion);
+      self::verificar("Error en: tipo de relacion: se espera un valor apropiado del formulario, datos: ".$this->relacion);
     }
 
     if ( $this->viveConAlumno <> "'s'" and $this->viveConAlumno <> "'n'" ) {
-      self::verificar("Error en: vive con alumno: se esperan un valor apropiados del formulario, datos: ".$this->viveConAlumno);
+      self::verificar("Error en: vive con alumno: se espera un valor apropiado del formulario, datos: ".$this->viveConAlumno);
     }
 
     if ( preg_match( "/[^0-9]/", $this->nivelInstruccion) ) {
-      self::verificar("Error en: nivel instruccion: se esperan un valor apropiados del formulario, datos: ".$this->nivelInstruccion);
+      self::verificar("Error en: nivel instruccion: se espera un valor apropiado del formulario, datos: ".$this->nivelInstruccion);
     }
 
-    if ( !preg_match( "/^[0-9a-zA-Z-_$#]{2,20}+\@[0-9a-zA-Z-_$#]{2,20}+\.[a-zA-Z]{2,5}\.?[a-zA-Z]{2,5}+/", $this->email) ) {
-      self::verificar("Error en: nivel instruccion: se esperan un valor apropiados del formulario, datos: ".$this->email);
+    if ($this->email != 'null') {
+      if ( !preg_match( "/^[0-9a-zA-Z-_$#]{2,20}+\@[0-9a-zA-Z-_$#]{2,20}+\.[a-zA-Z]{2,5}\.?[a-zA-Z]{2,5}+/", $this->email) ) {
+        self::verificar("Error en: email: se espera formato estandar: algo@algunsitio.com, datos: ".$this->email);
+      }
     }
-
     if ($this->profesion != 'null') {
       if ( preg_match( "/[^0-9]/", $this->profesion) ) {
         self::verificar("Error en: tipo de profesion: se esperan un valor apropiados del formulario, datos: ".$this->profesion);
@@ -188,90 +189,90 @@ class ChequearPA extends ChequearGenerico{
   * @return void [solo genera las variables internas de la clase]
   */
   private function setNull(){
-    $this->p_apellido = "'$p_apellido'";
+    $this->p_apellido = "'$this->p_apellido'";
 
-    if ($s_apellido == "") {
+    if ($this->s_apellido == "") {
       $this->s_apellido = "null";
     }else{
-      $this->s_apellido = "'$s_apellido'";
+      $this->s_apellido = "'$this->s_apellido'";
     }
 
-    $this->p_nombre = "'$p_nombre'";
+    $this->p_nombre = "'$this->p_nombre'";
 
-    if ($s_nombre == "") {
+    if ($this->s_nombre == "") {
       $this->s_nombre = "null";
     }else{
-      $this->s_nombre = "'$s_nombre'";
+      $this->s_nombre = "'$this->s_nombre'";
     }
 
-    $this->nacionalidad = "'$nacionalidad'";
-    $this->cedula = "'$cedula'";
+    $this->nacionalidad = "'$this->nacionalidad'";
+    $this->cedula = "'$this->cedula'";
 
-    if ($telefono == "") {
+    if ($this->telefono == "") {
       $this->telefono = "null";
     }else{
-      $this->telefono = "'$telefono'";
+      $this->telefono = "'$this->telefono'";
     }
-    if ($telefonoOtro == "") {
+    if ($this->telefonoOtro == "") {
       $this->telefonoOtro = "null";
     }else{
-      $this->telefonoOtro = "'$telefonoOtro'";
+      $this->telefonoOtro = "'$this->telefonoOtro'";
     }
 
-    if ($fecNac == "") {
+    if ($this->fecNac == "") {
       $this->fecNac = "null";
     }else{
-      $this->fecNac = "'$fecNac'";
+      $this->fecNac = "'$this->fecNac'";
     }
 
-    if ($lugNac == "") {
+    if ($this->lugNac == "") {
       $this->lugNac = "null";
     }else{
-      $this->lugNac = "'$lugNac'";
+      $this->lugNac = "'$this->lugNac'";
     }
 
     if ($this->email == "") {
       $this->email = "null";
     }else{
-      $this->email = "'$this->email'";
+      $this->email = "'$this->this->email'";
     }
 
-    $this->sexo = "'$sexo'";
+    $this->sexo = "'$this->sexo'";
 
-    if ($lugNac == "") {
+    if ($this->lugNac == "") {
       $this->lugNac = "null";
     }else{
-      $this->lugNac = "'$lugNac'";
+      $this->lugNac = "'$this->lugNac'";
     }
 
     $this->fecMod = "current_timestamp";
 
-    $this->relacion = $relacion;
-    $this->viveConAlumno = "'$viveConAlumno'";
-    $this->nivelInstruccion = $nivelInstruccion;
+    $this->relacion = $this->relacion;
+    $this->viveConAlumno = "'$this->viveConAlumno'";
+    $this->nivelInstruccion = $this->nivelInstruccion;
 
-    if ($profesion == "") {
+    if ($this->profesion == "") {
       $this->profesion = "null";
     }else{
-      $this->profesion = $profesion;
+      $this->profesion = $this->profesion;
     }
 
-    if ($telefonoTrabajo == "") {
+    if ($this->telefonoTrabajo == "") {
       $this->telefonoTrabajo = "null";
     }else{
-      $this->telefonoTrabajo = "'$telefonoTrabajo'";
+      $this->telefonoTrabajo = "'$this->telefonoTrabajo'";
     }
 
-    if ($direccionTrabajo == "") {
+    if ($this->direccionTrabajo == "") {
       $this->direccionTrabajo = "null";
     }else{
-      $this->direccionTrabajo = "'$direccionTrabajo'";
+      $this->direccionTrabajo = "'$this->direccionTrabajo'";
     }
 
-    if ($lugarTrabajo == "") {
+    if ($this->lugarTrabajo == "") {
       $this->lugarTrabajo = "null";
     }else{
-      $this->lugarTrabajo = "'$lugarTrabajo'";
+      $this->lugarTrabajo = "'$this->lugarTrabajo'";
     }
   }
 
