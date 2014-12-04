@@ -149,6 +149,7 @@ if($reg = mysqli_fetch_array($re)) :?>
                             id="cedula"
                             class="form-control"
                             autofocus="autofocus"
+                            autocomplete="off"
                             placeholder="Introduzca cedula ej: 12345678"
                             value="<?php echo $reg['cedula'];?>"
                             required>
@@ -172,6 +173,7 @@ if($reg = mysqli_fetch_array($re)) :?>
                             id="cedula_escolar"
                             class="form-control"
                             autofocus="autofocus"
+                            autocomplete="off"
                             placeholder="Introduzca cedula escolar ej: 1234567890"
                             value="<?php echo $reg['cedula_escolar'];?>"
                             required>

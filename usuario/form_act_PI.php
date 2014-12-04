@@ -114,6 +114,7 @@ if ( isset($_GET['cedula']) ):
                           id="cedula"
                           class="form-control"
                           autofocus="autofocus"
+                          autocomplete="off"
                           placeholder="Introduzca cedula ej: 12345678"
                           value="<?php echo $datos['cedula'] ?>"
                           required>

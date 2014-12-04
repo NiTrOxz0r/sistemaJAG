@@ -153,6 +153,7 @@ if($go): ?>
                             id="cedula"
                             class="form-control <?php echo $cedula === (null) ? '':'bloquear' ?>"
                             autofocus="autofocus"
+                            autocomplete="off"
                             placeholder="Introduzca cedula ej: 12345678"
                             <?php echo $cedula === (null) ? null: "value='$cedula'" ?>
                             <?php echo $cedula === (null) ? null: "disabled='true'" ?>
@@ -177,6 +178,7 @@ if($go): ?>
                             id="cedula_escolar"
                             class="form-control"
                             autofocus="autofocus"
+                            autocomplete="off"
                             placeholder="Introduzca cedula escolar ej: 1234567890"
                             required>
                           <p class="help-block" id="cedula_escolar_chequeo">
