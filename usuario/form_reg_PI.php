@@ -6,7 +6,7 @@ $enlace = $_SERVER['DOCUMENT_ROOT']."/github/sistemaJAG/php/master.php";
 require_once($enlace);
 
 if ( (isset($_POST['seudonimo']) && isset($_POST['clave']) )
-  || isset($_GET['cedula']) ):
+|| isset($_GET['cedula']) ):
   if ( isset($_POST['seudonimo']) && isset($_POST['clave']) ) :
     $seudonimo = $_POST['seudonimo'];
     $clave = array('simple' => $_POST['clave']);
@@ -20,15 +20,19 @@ if ( (isset($_POST['seudonimo']) && isset($_POST['clave']) )
     session_unset();
     session_destroy();
     session_start();
+    validarUsuario();
     $_SESSION['cod_tipo_usr_registro'] = 5;
     $_SESSION['seudonimo'] = $validarForma->seudonimo;
     $_SESSION['clave'] = $hash;
+    empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);
   endif;
-  if ( isset($_GET['cedula']) && strlen($_GET['cedula']) === 8 ) :
+  if ( isset($_GET['cedula']) && preg_match( "/[0-9]{8}/", $_GET['cedula']) ) :
+    validarUsuario(1, 3, $_SESSION['cod_tipo_usr']);
     $cedula = $_GET['cedula'];
     $action = 'insertar_sinUsuario_PI.php';
     $disabled = true;
     $info = 2;
+    empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);
   else:
     $cedula = "";
   endif;
@@ -474,55 +478,61 @@ if ( (isset($_POST['seudonimo']) && isset($_POST['clave']) )
         <script type="text/javascript">
           $(function(){
             $('#form_PI').on('submit', function (evento){
-              evento.preventDefault();
+              // DESHABILITADO POR FALTA DE TIEMPO
+              // evento.preventDefault();
+              // if ( validacionPI() ) {
+              //   var nacionalidad = $('#nacionalidad').val();
+              //   var cedula = $('#cedula').val();
+              //   var p_nombre = $('#p_nombre').val();
+              //   var s_nombre = $('#s_nombre').val();
+              //   var p_apellido = $('#p_apellido').val();
+              //   var s_apellido = $('#s_apellido').val();
+              //   var fec_nac = $('#fec_nac').val();
+              //   var sexo = $('#sexo').val();
+              //   var email = $('#email').val();
+              //   var nivel_instruccion = $('#nivel_instruccion').val();
+              //   var titulo = $('#titulo').val();
+              //   var telefono = $('#telefono').val();
+              //   var telefono_otro = $('#telefono_otro').val();
+              //   var celular = $('#celular').val();
+              //   var cargo = $('#cargo').val();
+              //   var tipo_personal = $('#tipo_personal').val();
+              //   var direcc = $('#direcc').val();
+              //   var cod_est = $('#cod_est').val();
+              //   var cod_mun = $('#cod_mun').val();
+              //   var cod_parro = $('#cod_parro').val();
+              //   $.ajax({
+              //     url: "<?php echo $action ?>",
+              //     type: 'POST',
+              //     data: {
+              //       nacionalidad:nacionalidad,
+              //       cedula:cedula,
+              //       p_nombre:p_nombre,
+              //       s_nombre:s_nombre,
+              //       p_apellido:p_apellido,
+              //       s_apellido:s_apellido,
+              //       fec_nac:fec_nac,
+              //       sexo:sexo,
+              //       email:email,
+              //       nivel_instruccion:nivel_instruccion,
+              //       titulo:titulo,
+              //       telefono:telefono,
+              //       telefono_otro:telefono_otro,
+              //       celular:celular,
+              //       cod_cargo:cargo,
+              //       tipo_personal:tipo_personal,
+              //       direcc:direcc,
+              //       cod_parroquia:cod_parro
+              //     },
+              //     success: function (datos){
+              //       $("#contenido_form_reg_PI").empty().append($(datos).filter('#blancoAjax').html());
+              //     },
+              //   });
+              // };
               if ( validacionPI() ) {
-                var nacionalidad = $('#nacionalidad').val();
-                var cedula = $('#cedula').val();
-                var p_nombre = $('#p_nombre').val();
-                var s_nombre = $('#s_nombre').val();
-                var p_apellido = $('#p_apellido').val();
-                var s_apellido = $('#s_apellido').val();
-                var fec_nac = $('#fec_nac').val();
-                var sexo = $('#sexo').val();
-                var email = $('#email').val();
-                var nivel_instruccion = $('#nivel_instruccion').val();
-                var titulo = $('#titulo').val();
-                var telefono = $('#telefono').val();
-                var telefono_otro = $('#telefono_otro').val();
-                var celular = $('#celular').val();
-                var cargo = $('#cargo').val();
-                var tipo_personal = $('#tipo_personal').val();
-                var direcc = $('#direcc').val();
-                var cod_est = $('#cod_est').val();
-                var cod_mun = $('#cod_mun').val();
-                var cod_parro = $('#cod_parro').val();
-                $.ajax({
-                  url: "<?php echo $action ?>",
-                  type: 'POST',
-                  data: {
-                    nacionalidad:nacionalidad,
-                    cedula:cedula,
-                    p_nombre:p_nombre,
-                    s_nombre:s_nombre,
-                    p_apellido:p_apellido,
-                    s_apellido:s_apellido,
-                    fec_nac:fec_nac,
-                    sexo:sexo,
-                    email:email,
-                    nivel_instruccion:nivel_instruccion,
-                    titulo:titulo,
-                    telefono:telefono,
-                    telefono_otro:telefono_otro,
-                    celular:celular,
-                    cod_cargo:cargo,
-                    tipo_personal:tipo_personal,
-                    direcc:direcc,
-                    cod_parroquia:cod_parro
-                  },
-                  success: function (datos){
-                    $("#contenido_form_reg_PI").empty().append($(datos).filter('#blancoAjax').html());
-                  },
-                });
+                return true;
+              } else{
+                return false;
               };
             });
             $('#form_PI').on('change', function (){
@@ -650,4 +660,5 @@ if ( (isset($_POST['seudonimo']) && isset($_POST['clave']) )
       </div>
     </div>
   </div>
-<?php endif; ?>
+<?php endif;
+finalizarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);?>
