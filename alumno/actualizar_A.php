@@ -137,7 +137,7 @@ if ( isset($_POST['cedula']) and preg_match( "/[0-9]{8}/", $_POST['cedula']) ) :
       mysqli_query($con, $query) ? null : $query_ok=false;
       echo $query_ok === (false) ? 'persona' : null;
       $query = "UPDATE direccion SET
-        cod_parroquia    = $validarDireccion->codPersona,
+        cod_parroquia    = $validarDireccion->codParroquia,
         direccion_exacta = $validarDireccion->direccionExacta,
         cod_usr_mod      = $validarDireccion->codUsrMod,
         fec_mod          = current_timestamp

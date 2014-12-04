@@ -54,9 +54,9 @@ if($reg = mysqli_fetch_array($re)) :?>
                       class="form-control">
                       <?php if ( $reg['nacionalidad'] == 'v' ): ?>
                         <option value="v" selected="selected">Venezolano</option>
-                        <option value="e">E</option>
+                        <option value="e">Extrangero</option>
                       <?php else: ?>
-                        <option value="v">V </option>
+                        <option value="v">Venezolano</option>
                         <option value="e" selected="selected">Extrangero</option>
                       <?php endif ?>
                     </select>

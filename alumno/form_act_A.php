@@ -199,7 +199,7 @@ if($reg = mysqli_fetch_array($re)) :?>
                               name="acta_num_part_nac"
                               id="acta_num_part_nac"
                               value="<?php echo $reg['acta_num_part_nac'];?>"
-                              max="9999999999">
+                              maxlength="20">
                             <p class="help-block" id="acta_num_part_nac_chequeo">
                             </p>
                           </div>
@@ -217,7 +217,7 @@ if($reg = mysqli_fetch_array($re)) :?>
                               name="acta_folio_num_part_nac"
                               id="acta_folio_num_part_nac"
                               value="<?php echo $reg['acta_folio_num_part_nac'];?>"
-                              max="9999999999">
+                              maxlength="20">
                             <p class="help-block" id="acta_folio_num_part_nac_chequeo">
                             </p>
                           </div>
@@ -320,6 +320,7 @@ if($reg = mysqli_fetch_array($re)) :?>
                         type="text"
                         name="lugar_nac"
                         id="lugar_nac"
+                        value="<?php echo $reg['lugar_nac'];?>"
                         maxlength="50">
                       <p class="help-block" id="lugar_nac_chequeo">
                       </p>
@@ -560,7 +561,7 @@ if($reg = mysqli_fetch_array($re)) :?>
                         maxlenght="150"
                         rows="2"
                         name="direcc"
-                        id="direcc"></textarea>
+                        id="direcc"><?php echo $reg['direccion'];?></textarea>
                         <p class="help-block" id="direcc_chequeo">
                         </p>
                       </div>
