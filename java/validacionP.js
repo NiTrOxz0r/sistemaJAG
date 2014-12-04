@@ -1,5 +1,7 @@
 /**
  * @author [Erick Zerpa]
+ *
+ * desinfectado con bombas nucleares por:
  * @author [Alejandro Granadillo]
  *
  * [validarform > validacionPA forma utilizada para validar el formulario de PA.]
@@ -317,7 +319,7 @@ function validacionPA(){
     $("#telefono_trabajo_chequeo").html('este campo debe contener 11 caracteres EJ: 02127773322');
     $('#telefono_trabajo').parent().addClass('has-error');
     return false;
-  }else if(!expRegtlf.exec(telefono_trabajo.value)
+  }else if(!expRegtlf.exec(telefono_trabajo)
       && telefono_trabajo != ""
       && telefono_trabajo != "SinRegistro") {
     $("#telefono_trabajo_chequeo").html('Favor introduzca en este campo Letras sin numeros o caracteres especiales EJ: 19?=;@*');
