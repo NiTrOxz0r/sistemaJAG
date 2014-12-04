@@ -39,8 +39,7 @@ if ( isset($_POST['cedula_r']) and preg_match( "/[0-9]{8}/", $_POST['cedula_r'])
     $cod_representante_persona = $datos['codigo_pa_p'];
     $p_nombre_r = $datos['p_nombre'] or die('error p_nombre');
     $p_apellido_r = $datos['p_apellido'] or die('error p_apellido');
-    $validarAlumno = new ChequearAlumno
-    (
+    $validarAlumno = new ChequearAlumno(
       $_SESSION['codUsrMod'],
       $_POST['p_apellido'],
       $_POST['s_apellido'],
@@ -102,8 +101,7 @@ if ( isset($_POST['cedula_r']) and preg_match( "/[0-9]{8}/", $_POST['cedula_r'])
     $resultado = conexion($query);
     $datos = mysqli_fetch_assoc($resultado);
     $cod_persona = $datos['codigo'];
-    $validarDireccion = new ChequearDireccion
-    (
+    $validarDireccion = new ChequearDireccion(
       $_SESSION['codUsrMod'],
       $cod_persona,
       $_POST['cod_parro'],
@@ -127,7 +125,7 @@ if ( isset($_POST['cedula_r']) and preg_match( "/[0-9]{8}/", $_POST['cedula_r'])
           $validarDireccion->direccionExacta, '$status',
           $validarDireccion->codUsrMod, $validarDireccion->codUsrMod,
           current_timestamp);";
-// $resultado = conexion($query, 1);
+      // $resultado = conexion($query, 1);
       mysqli_query($con, $query) ? null : $query_ok=false;
       echo $query_ok === (false) ? 'dir' : null;
       $query = "INSERT INTO
@@ -179,7 +177,7 @@ if ( isset($_POST['cedula_r']) and preg_match( "/[0-9]{8}/", $_POST['cedula_r'])
       (null, $cod_representante, $datosAlumno[codigo],
         $status, $validarAlumno->codUsrMod, null,
         $validarAlumno->codUsrMod, current_timestamp);";
-// $resultado = conexion($query, 1);
+      // $resultado = conexion($query, 1);
       mysqli_query($con, $query) ? null : $query_ok=false;
       echo $query_ok === (false) ? 'ob' : null;
       $query_ok ? mysqli_commit($con) : mysqli_rollback($con);
@@ -201,7 +199,7 @@ if ( isset($_POST['cedula_r']) and preg_match( "/[0-9]{8}/", $_POST['cedula_r'])
           $_SESSION['seudonimo'] = $seudonimo;
           $_SESSION['p_nombre'] = $p_nombre;
           $_SESSION['p_apellido'] = $p_apellido;?>
-        <div id="contenido_actualizar_C">
+        <div id="contenido_insertar_A">
           <div id="blancoAjax">
             <div class="container">
               <div class="row">
@@ -234,7 +232,7 @@ if ( isset($_POST['cedula_r']) and preg_match( "/[0-9]{8}/", $_POST['cedula_r'])
       <?php else :
         $query = "DELETE from persona where cedula = $validarAlumno->cedula;";
         $resultado = conexion($query);?>
-        <div id="contenido_actualizar_C">
+        <div id="contenido_insertar_A">
           <div id="blancoAjax">
             <div class="container">
               <div class="row">
@@ -281,7 +279,7 @@ if ( isset($_POST['cedula_r']) and preg_match( "/[0-9]{8}/", $_POST['cedula_r'])
     <?php else :
       $query = "DELETE from persona where cedula = $validarAlumno->cedula;";
       $resultado = conexion($query);?>
-      <div id="contenido_actualizar_C">
+      <div id="contenido_insertar_A">
         <div id="blancoAjax">
           <div class="container">
             <div class="row">
@@ -335,7 +333,7 @@ if ( isset($_POST['cedula_r']) and preg_match( "/[0-9]{8}/", $_POST['cedula_r'])
       </div>
     <?php endif; ?>
   <?php else : ?>
-    <div id="contenido_actualizar_C">
+    <div id="contenido_insertar_A">
       <div id="blancoAjax">
         <div class="container">
           <div class="row">
@@ -390,7 +388,7 @@ if ( isset($_POST['cedula_r']) and preg_match( "/[0-9]{8}/", $_POST['cedula_r'])
   <?php endif; ?>
 <?php else:
   // echo " Ingresar REPRSENTANTE";?>
-  <div id="contenido_actualizar_C">
+  <div id="contenido_insertar_A">
     <div id="blancoAjax">
       <div class="container">
         <div class="row">
