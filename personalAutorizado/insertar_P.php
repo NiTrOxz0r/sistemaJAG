@@ -1,16 +1,15 @@
 <?php
 /**
  * @author Andres Leotur
+ *
+ * agente autorizado del ministerio de sanidad:
  * @author Alejandro Granadillo
  *
  * @internal inserta personal autorizado.
  *
- * @internal ESTO NO ESTA VALIDANDO!!!!
- * @todo añadir validaciones correspondientes.
- *
  * @see form_reg_P.php
  *
- * @version 1.1
+ * @version 1.2
  */
 if(!isset($_SESSION)){
   session_start();
@@ -22,55 +21,69 @@ validarUsuario(1, 1, $_SESSION['cod_tipo_usr']);
 
 if (isset($_POST['cedula'])) {
 
-  $con = conexion();
-  $status         =       1;
-  $cod_usr_reg    =       $_SESSION['codUsrMod'];
-  $cod_usr_mod    =       $_SESSION['codUsrMod'];
+  $status = 1;
 
+  $validarPA = new ChequearPA(
+    $_SESSION['codUsrMod'],
+    $_POST['p_apellido'],
+    $_POST['s_apellido'],
+    $_POST['p_nombre'],
+    $_POST['s_nombre'],
+    $_POST['nacionalidad'],
+    $_POST['cedula'],
+    $_POST['telefono'],
+    $_POST['telefono_otro'],
+    $_POST['fec_nac'],
+    $_POST['lugar_nac'],
+    $_POST['email'],
+    $_POST['sexo'],
+    $_POST['relacion'],
+    $_POST['vive_con_alumno'],
+    $_POST['nivel_instruccion'],
+    $_POST['profesion'],
+    $_POST['telefono_trabajo'],
+    $_POST['direccion_trabajo'],
+    $_POST['lugar_trabajo']
+  );
 
-  $cedula_r = mysqli_escape_string($con, $_POST['cedula']);
-  $nacionalidad   = mysqli_escape_string($con, $_POST['nacionalidad']);
-  $p_nombre       = mysqli_escape_string($con, $_POST['p_nombre']);
-  $s_nombre       = mysqli_escape_string($con, $_POST['s_nombre']);
-  $p_apellido     = mysqli_escape_string($con, $_POST['p_apellido']);
-  $s_apellido     = mysqli_escape_string($con, $_POST['s_apellido']);
-  $sexo           = mysqli_escape_string($con, $_POST['sexo']);
-  $fec_nac        = mysqli_escape_string($con, $_POST['fec_nac']);
-  $telefono       = mysqli_escape_string($con, $_POST['telefono']);
-  $telefono_otro  = mysqli_escape_string($con, $_POST['telefono_otro']);
-
-  $queryP = "INSERT INTO persona(
-  cedula,
-  nacionalidad,
-  p_nombre,
-  s_nombre,
-  p_apellido,
-  s_apellido,
-  sexo,
-  fec_nac,
-  telefono,
-  telefono_otro,
-  status,
-  cod_usr_reg,
-  cod_usr_mod
+  $query = "INSERT INTO persona(
+    cedula,
+    nacionalidad,
+    p_nombre,
+    s_nombre,
+    p_apellido,
+    s_apellido,
+    sexo,
+    fec_nac,
+    telefono,
+    telefono_otro,
+    status,
+    cod_usr_reg,
+    cod_usr_mod
   )
-  VALUES('$cedula_r','$nacionalidad','$p_nombre','$s_nombre','$p_apellido',
-  '$s_apellido','$sexo','$fec_nac','$telefono','$telefono_otro','$status',
-  '$cod_usr_reg','$cod_usr_mod');";
-
-  $res = conexion($queryP);
+  VALUES('$cedula_r','$nacionalidad',
+    '$p_nombre','$s_nombre',
+    '$p_apellido',
+    '$s_apellido','$sexo',
+    '$fec_nac','$telefono',
+    '$telefono_otro','$status',
+    '$cod_usr_reg','$cod_usr_mod'
+  );";
+  // poner diferentes nombres de query es unutil y confuso:
+  // al queryP y queryDirP se asume que hay un query y un queryDir aparte
+  // de no ser asi, entonces hay redudancia.
+  // si queryPA y queryP estarian siendo usados al mismo tiempo, te lo creo.
+  // pero en este flujo, solo se usa un query a la vez.
+  // para que crear 4 variables si con una sola se hace todo?
+  // eficacia y eficiencia leotur por el amor a dios.
+  $res = conexion($query,1);
 
   $query = "SELECT codigo from persona where cedula = '$cedula_r';";
-  $resultado = conexion($query);
+  $resultado = conexion($query,1);
   $datos = mysqli_fetch_assoc($resultado);
   $cod_persona = $datos['codigo'];
 
-  //Creo una variable de Session para realizar la inscripcioón del alumno
-
-  $cod_parroquia    = mysqli_escape_string($con, $_POST['cod_parro']);
-  $direccion_exacta = mysqli_escape_string($con, $_POST['direcc']);
-
-  $queryDirP = "INSERT INTO direccion
+  $query = "INSERT INTO direccion
     (
     cod_persona,
     cod_parroquia,
@@ -80,19 +93,9 @@ if (isset($_POST['cedula'])) {
     cod_usr_mod)
     VALUES('$cod_persona','$cod_parroquia','$direccion_exacta', '$status','$cod_usr_reg','$cod_usr_mod');";
 
-  $res = conexion($queryDirP);
+  $res = conexion($query,1);
 
-  $lugar_nac        = mysqli_escape_string($con, $_POST['lugar_nac']);
-  $email            = mysqli_escape_string($con, $_POST['email']);
-  $relacion         = mysqli_escape_string($con, $_POST['relacion']);
-  $vive_con_alumno  = mysqli_escape_string($con, $_POST['vive_con_alumno']);
-  $nivel_instruccion  = mysqli_escape_string($con, $_POST['nivel_instruccion']);
-  $profesion          = mysqli_escape_string($con, $_POST['profesion']);
-  $lugar_trabajo      = mysqli_escape_string($con, $_POST['lugar_trabajo']);
-  $direccion_trabajo  = mysqli_escape_string($con, $_POST['direccion_trabajo']);
-  $telefono_trabajo   = mysqli_escape_string($con, $_POST['telefono_trabajo']);
-
-  $queryPA = "INSERT INTO personal_autorizado(
+  $query = "INSERT INTO personal_autorizado(
   cod_persona,
   lugar_nac,
   email,
@@ -110,12 +113,12 @@ if (isset($_POST['cedula'])) {
   VALUES('$cod_persona','$lugar_nac','$email','$relacion','$vive_con_alumno', '$nivel_instruccion',
   '$profesion','$lugar_trabajo','$direccion_trabajo','$telefono_trabajo','$status','$cod_usr_reg','$cod_usr_mod');";
 
-  $res = conexion($queryPA);
+  $res = conexion($query,1);
 
   header("Location:../alumno/form_reg_A.php?cedula_r=$cedula_r");
 
 }else{
-    header('Location: form_reg_P.php?error=cedula&valor=notSet');
+  header('Location: form_reg_P.php?error=cedula&valor=notSet');
 }
 
 ?>
