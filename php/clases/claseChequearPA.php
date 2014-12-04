@@ -239,12 +239,6 @@ class ChequearPA extends ChequearGenerico{
 
     $this->sexo = "'$this->sexo'";
 
-    if ($this->lugNac == "") {
-      $this->lugNac = "null";
-    }else{
-      $this->lugNac = "'$this->lugNac'";
-    }
-
     $this->fecMod = "current_timestamp";
 
     $this->relacion = $this->relacion;
