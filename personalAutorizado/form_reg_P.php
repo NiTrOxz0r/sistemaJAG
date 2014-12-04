@@ -39,6 +39,7 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr'], 'sistemaJAG 
                   </div>
                 </div>
                 <div class="col-sm-5 col-sm-offset-1">
+                  <!-- http://www.w3schools.com/tags/att_input_autocomplete.asp -->
                   <div class="form-group">
                     <label for="cedula" class="control-label">Cedula</label>
                     <input
@@ -48,6 +49,7 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr'], 'sistemaJAG 
                       id="cedula"
                       class="form-control"
                       autofocus="autofocus"
+                      autocomplete="off"
                       placeholder="Introduzca cedula ej: 12345678"
                       <?php if (isset($_GET['cedula'])): ?>
                         value="<?php echo $_GET['cedula'] ?>"

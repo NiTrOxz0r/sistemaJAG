@@ -72,6 +72,7 @@ if($reg = mysqli_fetch_array($re)) :?>
                       maxlength="8"
                       name="cedula"
                       id="cedula"
+                      autocomplete="off"
                       class="form-control"
                       autofocus="autofocus"
                       placeholder="Introduzca cedula ej: 12345678"
