@@ -6,43 +6,34 @@ Sistema de inscripcion adaptado para la institucion publica E.B.N.B "Jose Antoni
 El prototipo de este sistema esta en linea en [sistemajag.esy.es/](http://sistemajag.esy.es/)
 ###Escuela Basica Nacional Bolivariana "Jose Antonio Gonzales"
 Escuela ubicada en el paraiso, caracas, venezuela.
-
-###Sistema 76.5% aprox completado, por ahora falta:
+##version 0.5.0
+###Sistema 81% aprox completado, por ahora falta:
 ####FLUJO NORMAL DE FORMULARIOS
 en progreso: 99?% aprox.
 ####FLUJO ALTERNATIVO DE FORMULARIOS
-en progreso: 75?% aprox.
+en progreso: 85?% aprox.
 ####moduloAlumno
 en progreso: 75?% aprox.
 ####moduloCurso
-en progreso: 99?%.
+en progreso: 100%.
 ####moduloUsuario
 en progreso: 90?% aprox.
 ####CSS
-en progreso: 99?% aprox.
+en progreso: 100% aprox.
 ####ModuloValidacion
-en progreso: 75?% aprox.
+en progreso: 99?% aprox.
 ####ModuloReporte
 en progreso: 0% aprox.
 
-* versiones del sistema:
-  * https://github.com/slayerfat/sistemaJAG/releases/tag/ver0.4.5
-  * https://github.com/slayerfat/sistemaJAG/releases/tag/ver0.4.4a
-  * https://github.com/slayerfat/sistemaJAG/releases/tag/ver0.4.3b
-  * https://github.com/slayerfat/sistemaJAG/releases/tag/ver0.4.2b
-  * https://github.com/slayerfat/sistemaJAG/releases/tag/ver0.4.1c
-  * https://github.com/slayerfat/sistemaJAG/releases/tag/ver0.4
-* versiones del antiguas:
-  * https://github.com/slayerfat/sistemaJAG/releases/tag/ver0.3
-  * https://github.com/slayerfat/sistemaJAG/releases/tag/ver0.2.1m
-  * https://github.com/slayerfat/sistemaJAG/releases/tag/v0.2.1f
-  * https://github.com/slayerfat/sistemaJAG/releases/tag/ver0.2
-  * https://github.com/slayerfat/sistemaJAG/releases/tag/ver0.1
-  * https://github.com/slayerfat/sistemaJAG/releases/tag/ver0.0.9c
+* version del sistema:
+  * https://github.com/slayerfat/sistemaJAG/releases/tag/v0.5.0
+* versiones del antiguas: [ver aqui](https://github.com/slayerfat/sistemaJAG/releases)
 
 #Tesoros escondidos del sistema:
 **esta es una tremenda gema!**
+
 creo que la mejor:
+
 ```javascript
 else if (verificar=true) {
   alert("Validando");

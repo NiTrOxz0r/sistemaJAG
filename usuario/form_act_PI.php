@@ -8,10 +8,6 @@ require_once($enlace);
 // invocamos validarUsuario.php desde master.php
 validarUsuario(1, 3, $_SESSION['cod_tipo_usr']);
 
-//ESTA FUNCION TRAE EL HEAD Y NAVBAR:
-//DESDE empezarPagina.php
-empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr'], 'sistemaJAG | Actualizacion de usuario');
-
 if ( isset($_GET['cedula']) ):
   $con = conexion();
   $cedula = mysqli_escape_string($con, trim($_GET['cedula']));
@@ -61,6 +57,7 @@ if ( isset($_GET['cedula']) ):
   where persona.cedula = '$cedula';";
   $resultado = conexion($query);
   if ($resultado->num_rows == 1) :
+    empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr'], 'sistemaJAG | Actualizacion de usuario');
     $datos = mysqli_fetch_assoc($resultado);
     $_SESSION['codigo_persona'] = $datos['codigo_persona'];
     $_SESSION['codigo_direccion'] = $datos['codigo_dir'];
@@ -114,6 +111,7 @@ if ( isset($_GET['cedula']) ):
                           id="cedula"
                           class="form-control"
                           autofocus="autofocus"
+                          autocomplete="off"
                           placeholder="Introduzca cedula ej: 12345678"
                           value="<?php echo $datos['cedula'] ?>"
                           required>
@@ -215,16 +213,19 @@ if ( isset($_GET['cedula']) ):
                         <label for="fec_nac" class="control-label">Fecha de nacimiento</label>
                         <!-- readonly para que no puedan cambiar manualmente la fecha -->
                         <!-- style cursor pointer etc... para que no parezca desabilitado -->
-                        <input
-                          class="form-control"
-                          type="text"
-                          name="fec_nac"
-                          id="fec_nac"
-                          placeholder="dele click para mostrar calendario"
-                          readonly="readonly"
-                          style="cursor:pointer; background-color: #FFFFFF"
-                          value="<?php echo $datos['fec_nac'] ?>"
-                          required>
+                        <div class="input-group">
+                          <input
+                            class="form-control"
+                            type="text"
+                            name="fec_nac"
+                            id="fec_nac"
+                            placeholder="click para mostrar calendario"
+                            readonly="readonly"
+                            style="cursor:pointer; background-color: #FFFFFF"
+                            value="<?php echo $datos['fec_nac'] ?>"
+                            required>
+                          <span class="glyphicon glyphicon-calendar input-group-addon"></span>
+                        </div>
                         <p class="help-block" id="fec_nac_chequeo">
                         </p>
                       </div>
@@ -565,7 +566,7 @@ if ( isset($_GET['cedula']) ):
           </div>
         </div>
         <!-- calendario -->
-        <?php $cssDatepick = enlaceDinamico("java/jqDatePicker/jquery.datepick.css"); ?>
+        <?php $cssDatepick = enlaceDinamico("java/jqDatePicker/smoothness.datepick.css"); ?>
         <link href="<?php echo $cssDatepick ?>" rel="stylesheet">
         <?php $plugin = enlaceDinamico("java/jqDatePicker/jquery.plugin.js"); ?>
         <?php $datepick = enlaceDinamico("java/jqDatePicker/jquery.datepick.js"); ?>
@@ -579,61 +580,67 @@ if ( isset($_GET['cedula']) ):
         <script type="text/javascript">
           $(function(){
             $('#form').on('submit', function (evento){
-              evento.preventDefault();
+              // DESHABILITADO POR FALTA DE TIEMPO
+              // evento.preventDefault();
+              // if ( validacionPI() && validacionUsuario() ) {
+              //   var nacionalidad = $('#nacionalidad').val();
+              //   var cedula = $('#cedula').val();
+              //   var p_nombre = $('#p_nombre').val();
+              //   var s_nombre = $('#s_nombre').val();
+              //   var p_apellido = $('#p_apellido').val();
+              //   var s_apellido = $('#s_apellido').val();
+              //   var fec_nac = $('#fec_nac').val();
+              //   var sexo = $('#sexo').val();
+              //   var email = $('#email').val();
+              //   var nivel_instruccion = $('#nivel_instruccion').val();
+              //   var titulo = $('#titulo').val();
+              //   var telefono = $('#telefono').val();
+              //   var telefono_otro = $('#telefono_otro').val();
+              //   var celular = $('#celular').val();
+              //   var cargo = $('#cargo').val();
+              //   var tipo_personal = $('#tipo_personal').val();
+              //   var direcc = $('#direcc').val();
+              //   var cod_parroquia = $('#cod_parro').val();
+              //   var cod_usr = <?php echo $datos['cod_usr'] ?>;
+              //   var seudonimo = $('#seudonimo').val();
+              //   var cod_tipo_usr = $('#cod_tipo_usr').val();
+              //   console.log("exitos totales");
+              //   $.ajax({
+              //     url: 'actualizar_U.php',
+              //     type: 'POST',
+              //     dataType: 'html',
+              //     data: {
+              //       nacionalidad:nacionalidad,
+              //       cedula:cedula,
+              //       p_nombre:p_nombre,
+              //       s_nombre:s_nombre,
+              //       p_apellido:p_apellido,
+              //       s_apellido:s_apellido,
+              //       fec_nac:fec_nac,
+              //       sexo:sexo,
+              //       email:email,
+              //       nivel_instruccion:nivel_instruccion,
+              //       titulo:titulo,
+              //       telefono:telefono,
+              //       telefono_otro:telefono_otro,
+              //       celular:celular,
+              //       cod_cargo:cargo,
+              //       tipo_personal:tipo_personal,
+              //       direccion:direcc,
+              //       cod_parroquia:cod_parroquia,
+              //       seudonimo:seudonimo,
+              //       cod_tipo_usr:cod_tipo_usr
+              //     },
+              //     success: function (datos){
+              //       $("#contenido_form_act_PI").empty().append($(datos).find('#blancoAjax').html());
+              //     },
+              //   });
+              // };
               if ( validacionPI() && validacionUsuario() ) {
-                var nacionalidad = $('#nacionalidad').val();
-                var cedula = $('#cedula').val();
-                var p_nombre = $('#p_nombre').val();
-                var s_nombre = $('#s_nombre').val();
-                var p_apellido = $('#p_apellido').val();
-                var s_apellido = $('#s_apellido').val();
-                var fec_nac = $('#fec_nac').val();
-                var sexo = $('#sexo').val();
-                var email = $('#email').val();
-                var nivel_instruccion = $('#nivel_instruccion').val();
-                var titulo = $('#titulo').val();
-                var telefono = $('#telefono').val();
-                var telefono_otro = $('#telefono_otro').val();
-                var celular = $('#celular').val();
-                var cargo = $('#cargo').val();
-                var tipo_personal = $('#tipo_personal').val();
-                var direcc = $('#direcc').val();
-                var cod_parroquia = $('#cod_parro').val();
-                var cod_usr = <?php echo $datos['cod_usr'] ?>;
-                var seudonimo = $('#seudonimo').val();
-                var cod_tipo_usr = $('#cod_tipo_usr').val();
-                console.log("exitos totales");
-                $.ajax({
-                  url: 'actualizar_U.php',
-                  type: 'POST',
-                  dataType: 'html',
-                  data: {
-                    nacionalidad:nacionalidad,
-                    cedula:cedula,
-                    p_nombre:p_nombre,
-                    s_nombre:s_nombre,
-                    p_apellido:p_apellido,
-                    s_apellido:s_apellido,
-                    fec_nac:fec_nac,
-                    sexo:sexo,
-                    email:email,
-                    nivel_instruccion:nivel_instruccion,
-                    titulo:titulo,
-                    telefono:telefono,
-                    telefono_otro:telefono_otro,
-                    celular:celular,
-                    cod_cargo:cargo,
-                    tipo_personal:tipo_personal,
-                    direccion:direcc,
-                    cod_parroquia:cod_parroquia,
-                    seudonimo:seudonimo,
-                    cod_tipo_usr:cod_tipo_usr
-                  },
-                  success: function (datos){
-                    $("#contenido_form_act_PI").empty().append($(datos).find('#blancoAjax').html());
-                  },
-                });
-              };
+                return true;
+              }else{
+                return false;
+              }
             });
             $('#form').on('change', function(){
               validacionPI();
@@ -716,13 +723,10 @@ if ( isset($_GET['cedula']) ):
         </script>
         <!-- calendario -->
         <script type="text/javascript">
-          <?php $imagen = enlaceDinamico("java/jqDatePicker/calendar-blue.gif"); ?>
           $(function(){
             $('#fec_nac').datepick({
-              maxDate:'-h',
-              showOn: "button",
-              buttonImage: "<?php echo $imagen ?>",
-              buttonImageOnly: true,
+              maxDate:'-12Y',
+              minDate:'-100Y',
               dateFormat: "yyyy-mm-dd"
             });
           });
@@ -730,11 +734,8 @@ if ( isset($_GET['cedula']) ):
         <!-- CONTENIDO TERMINA ARRIBA DE ESTO: -->
       </div>
     </div>
-    <?php
-    //FINALIZAMOS LA PAGINA:
-    //trae footer.php y cola.php
-    finalizarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);?>
-  <?php else: ?>
+  <?php else:
+    empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr'], 'sistemaJAG | Actualizacion de usuario'); ?>
     <div id="blancoAjax">
       <div id="blancoAjax">
         <div class="container">
@@ -773,8 +774,9 @@ if ( isset($_GET['cedula']) ):
         </div>
       </div>
     </div>
-<?php endif; ?>
-<?php else: ?>
+  <?php endif; ?>
+<?php else:
+  empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr'], 'sistemaJAG | Actualizacion de usuario'); ?>
   <div id="blancoAjax">
     <div class="container">
       <div class="row">
@@ -794,3 +796,7 @@ if ( isset($_GET['cedula']) ):
     </div>
   </div>
 <?php endif; ?>
+<?php
+//FINALIZAMOS LA PAGINA:
+//trae footer.php y cola.php
+finalizarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);?>

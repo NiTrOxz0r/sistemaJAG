@@ -39,6 +39,7 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr'], 'sistemaJAG 
                   </div>
                 </div>
                 <div class="col-sm-5 col-sm-offset-1">
+                  <!-- http://www.w3schools.com/tags/att_input_autocomplete.asp -->
                   <div class="form-group">
                     <label for="cedula" class="control-label">Cedula</label>
                     <input
@@ -48,6 +49,7 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr'], 'sistemaJAG 
                       id="cedula"
                       class="form-control"
                       autofocus="autofocus"
+                      autocomplete="off"
                       placeholder="Introduzca cedula ej: 12345678"
                       <?php if (isset($_GET['cedula'])): ?>
                         value="<?php echo $_GET['cedula'] ?>"
@@ -162,15 +164,18 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr'], 'sistemaJAG 
                         <label for="fec_nac" class="control-label">Fecha de nacimiento</label>
                         <!-- readonly para que no puedan cambiar manualmente la fecha -->
                         <!-- style cursor pointer etc... para que no parezca desabilitado -->
-                        <input
-                          class="form-control"
-                          type="text"
-                          name="fec_nac"
-                          id="fec_nac"
-                          placeholder="dele click para mostrar calendario"
-                          readonly="readonly"
-                          style="cursor:pointer; background-color: #FFFFFF"
-                          required>
+                        <div class="input-group">
+                          <input
+                            class="form-control"
+                            type="text"
+                            name="fec_nac"
+                            id="fec_nac"
+                            placeholder="click para mostrar calendario"
+                            readonly="readonly"
+                            style="cursor:pointer; background-color: #FFFFFF"
+                            required>
+                          <span class="glyphicon glyphicon-calendar input-group-addon"></span>
+                        </div>
                         <p class="help-block" id="fec_nac_chequeo">
                         </p>
                       </div>
@@ -543,7 +548,7 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr'], 'sistemaJAG 
       });
     </script>
     <!-- calendario -->
-    <?php $cssDatepick = enlaceDinamico("java/jqDatePicker/jquery.datepick.css"); ?>
+    <?php $cssDatepick = enlaceDinamico("java/jqDatePicker/smoothness.datepick.css"); ?>
     <link href="<?php echo $cssDatepick ?>" rel="stylesheet">
     <?php $plugin = enlaceDinamico("java/jqDatePicker/jquery.plugin.js"); ?>
     <?php $datepick = enlaceDinamico("java/jqDatePicker/jquery.datepick.js"); ?>
@@ -551,13 +556,10 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr'], 'sistemaJAG 
     <script type="text/javascript" src="<?php echo $datepick ?>"></script>
     <!-- calendario -->
     <script type="text/javascript">
-      <?php $imagen = enlaceDinamico("java/jqDatePicker/calendar-blue.gif"); ?>
       $(function(){
         $('#fec_nac').datepick({
-          maxDate:'-h',
-          showOn: "button",
-          buttonImage: "<?php echo $imagen ?>",
-          buttonImageOnly: true,
+          maxDate:'-12Y',
+          minDate:'-100Y',
           dateFormat: "yyyy-mm-dd"
         });
       });

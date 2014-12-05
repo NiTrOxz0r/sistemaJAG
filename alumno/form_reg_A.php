@@ -141,16 +141,22 @@ if($go): ?>
                     <div class="row">
                       <div class="col-xs-11">
                         <div class="form-group">
-                          <label for="cedula" class="control-label">Cedula</label>
+                          <label
+                            for="cedula"
+                            class="control-label">
+                            Cedula
+                          </label>
                           <input
                             type="text"
                             maxlength="8"
                             name="cedula"
                             id="cedula"
-                            class="form-control"
+                            class="form-control <?php echo $cedula === (null) ? '':'bloquear' ?>"
                             autofocus="autofocus"
+                            autocomplete="off"
                             placeholder="Introduzca cedula ej: 12345678"
-                            value="<?php echo $cedula === (null) ? '':$cedula ?>"
+                            <?php echo $cedula === (null) ? null: "value='$cedula'" ?>
+                            <?php echo $cedula === (null) ? null: "disabled='true'" ?>
                             required>
                           <p class="help-block" id="cedula_chequeo">
                           </p>
@@ -172,6 +178,7 @@ if($go): ?>
                             id="cedula_escolar"
                             class="form-control"
                             autofocus="autofocus"
+                            autocomplete="off"
                             placeholder="Introduzca cedula escolar ej: 1234567890"
                             required>
                           <p class="help-block" id="cedula_escolar_chequeo">
@@ -197,7 +204,7 @@ if($go): ?>
                               type="number"
                               name="acta_num_part_nac"
                               id="acta_num_part_nac"
-                              max="9999999999">
+                              maxlength="20">
                             <p class="help-block" id="acta_num_part_nac_chequeo">
                             </p>
                           </div>
@@ -214,7 +221,7 @@ if($go): ?>
                               type="number"
                               name="acta_folio_num_part_nac"
                               id="acta_folio_num_part_nac"
-                              max="9999999999">
+                              maxlength="20">
                             <p class="help-block" id="acta_folio_num_part_nac_chequeo">
                             </p>
                           </div>
@@ -328,15 +335,18 @@ if($go): ?>
                           <label for="fec_nac" class="control-label">Fecha de nacimiento</label>
                           <!-- readonly para que no puedan cambiar manualmente la fecha -->
                           <!-- style cursor pointer etc... para que no parezca desabilitado -->
-                          <input
-                            class="form-control"
-                            type="text"
-                            name="fec_nac"
-                            id="fec_nac"
-                            placeholder="dele click para mostrar calendario"
-                            readonly="readonly"
-                            style="cursor:pointer; background-color: #FFFFFF"
-                            required>
+                          <div class="input-group">
+                            <input
+                              class="form-control"
+                              type="text"
+                              name="fec_nac"
+                              id="fec_nac"
+                              placeholder="click para mostrar calendario"
+                              readonly="readonly"
+                              style="cursor:pointer; background-color: #FFFFFF"
+                              required>
+                            <span class="glyphicon glyphicon-calendar input-group-addon"></span>
+                          </div>
                           <p class="help-block" id="fec_nac_chequeo">
                           </p>
                         </div>
@@ -546,8 +556,16 @@ if($go): ?>
                         <div class="col-xs-11">
                           <div class="form-group">
                             <label for="curso" class="control-label">Curso a inscribirse</label>
-                            <?php $query = "SELECT codigo, descripcion
-                              from curso where status = 1;";
+                            <?php
+                              $query = "SELECT
+                              curso.descripcion as descripcion,
+                              asume.codigo as codigo
+                              from asume
+                              inner join curso
+                              on asume.cod_curso = curso.codigo
+                              where asume.status = 1;";
+                              // $query = "SELECT codigo, descripcion
+                              // from curso where status = 1;";
                               $registros = conexion($query); ?>
                             <select required class="form-control" name="curso" id="curso">
                               <option selected="selected" value="">Seleccione una opci&oacute;n</option>
@@ -713,7 +731,7 @@ if($go): ?>
         </div>
       </div>
       <!-- calendario -->
-      <?php $cssDatepick = enlaceDinamico("java/jqDatePicker/jquery.datepick.css"); ?>
+      <?php $cssDatepick = enlaceDinamico("java/jqDatePicker/smoothness.datepick.css"); ?>
       <link href="<?php echo $cssDatepick ?>" rel="stylesheet">
       <?php $plugin = enlaceDinamico("java/jqDatePicker/jquery.plugin.js"); ?>
       <?php $datepick = enlaceDinamico("java/jqDatePicker/jquery.datepick.js"); ?>
@@ -730,6 +748,7 @@ if($go): ?>
           $('#form').on('submit', function(e){
             if (validacionAlumno()) {
               $('#cedula_r').prop('disabled', false);
+              $('#cedula').prop('disabled', false);
               return true;
             }else{
               return false;
@@ -773,13 +792,10 @@ if($go): ?>
       </script>
       <!-- calendario -->
       <script type="text/javascript">
-        <?php $imagen = enlaceDinamico("java/jqDatePicker/calendar-blue.gif"); ?>
         $(function(){
           $('#fec_nac').datepick({
-            maxDate:'-h',
-            showOn: "button",
-            buttonImage: "<?php echo $imagen ?>",
-            buttonImageOnly: true,
+            maxDate:'-3Y',
+            minDate:'-18Y',
             dateFormat: "yyyy-mm-dd"
           });
         });

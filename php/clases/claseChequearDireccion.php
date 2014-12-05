@@ -2,7 +2,6 @@
 
 /**
 * @author Granadillo Alejandro.
-* @copyright MIT/GNU/Otro??? Octurbre 2014
 *
 * @internal actualizado: adaptado a nueva
 * definicion de tabla direccion.
@@ -12,7 +11,7 @@
 * @todo ampliar segun sea necesario segun
 * los objetivos necesarios
 *
-* @version 1.1
+* @version 1.2
 *
 */
 class ChequearDireccion extends ChequearGenerico{
@@ -42,7 +41,7 @@ class ChequearDireccion extends ChequearGenerico{
   *
   * @internal {chequea que los datos
   * existan antes de enviarlos a la base de datos.
-  * @version 1.1
+  * @version 1.2
   *
   *
   * @return void
@@ -52,13 +51,13 @@ class ChequearDireccion extends ChequearGenerico{
   */
   private function chequeame(){
     if ( !is_numeric($this->codParroquia) ) {
-      die(header("Location: registro.php?codParroquiaNumeric=false"));
+      self::verificar("Error: se espera valor apropiado de estado, municipio y parroquia del formulario, datos: ".$this->codParroquia);
     }
     if ( !is_numeric($this->codPersona) ) {
-      die(header("Location: registro.php?codPersonaNumeric=false"));
+      self::verificar("Error faltal, datos: ".$this->codPersona);
     }
     if (strlen($this->direccionExacta) > 150) {
-      die(header("Location: registro.php?dirExacta=false&largo=".strlen($this->direccionExacta)));
+      self::verificar("Error en: direccion detallada: datos excede limite maximo, datos: ".$this->direccionExacta.", largo: ".strlen($this->direccionExacta));
     }elseif (strlen($this->direccionExacta) < 4){
       $this->direccionExacta = "'Sin Registro, favor Actualizar-$this->codPersona-Registro Autogenerado por el sistema.'";
     }

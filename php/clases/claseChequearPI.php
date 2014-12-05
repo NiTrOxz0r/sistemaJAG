@@ -2,7 +2,6 @@
 
 /**
 * @author Granadillo Alejandro.
-* @copyright MIT/GNU/Otro??? Octurbre 2014
 *
 * @internal mejorada la logica dentro de la clase
 * para estar adaptada a las definiciones
@@ -41,7 +40,7 @@ class ChequearPI extends ChequearGenerico{
     $codCargo,
     $tipoPersonal
     ){
-    //variables del objerto:
+    //variables de la clase:
     $conexion = conexion();//desde master.php > conexion.php
     $this->codUsrMod = mysqli_escape_string($conexion, trim($codUsrMod));
     $this->p_apellido = mysqli_escape_string($conexion, trim($p_apellido));
@@ -167,7 +166,7 @@ class ChequearPI extends ChequearGenerico{
   * {@internal esto es para autogenerar el null
   * para los campos que acepten null en la base de datos.}
   *
-  * @return void [solo genera las variables internas del objeto]
+  * @return void [solo genera las variables internas de la calse]
   */
   private function setNull(){
     if ($this->s_apellido == "") {

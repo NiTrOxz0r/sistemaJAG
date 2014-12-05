@@ -149,6 +149,7 @@ if($reg = mysqli_fetch_array($re)) :?>
                             id="cedula"
                             class="form-control"
                             autofocus="autofocus"
+                            autocomplete="off"
                             placeholder="Introduzca cedula ej: 12345678"
                             value="<?php echo $reg['cedula'];?>"
                             required>
@@ -172,6 +173,7 @@ if($reg = mysqli_fetch_array($re)) :?>
                             id="cedula_escolar"
                             class="form-control"
                             autofocus="autofocus"
+                            autocomplete="off"
                             placeholder="Introduzca cedula escolar ej: 1234567890"
                             value="<?php echo $reg['cedula_escolar'];?>"
                             required>
@@ -199,7 +201,7 @@ if($reg = mysqli_fetch_array($re)) :?>
                               name="acta_num_part_nac"
                               id="acta_num_part_nac"
                               value="<?php echo $reg['acta_num_part_nac'];?>"
-                              max="9999999999">
+                              maxlength="20">
                             <p class="help-block" id="acta_num_part_nac_chequeo">
                             </p>
                           </div>
@@ -217,7 +219,7 @@ if($reg = mysqli_fetch_array($re)) :?>
                               name="acta_folio_num_part_nac"
                               id="acta_folio_num_part_nac"
                               value="<?php echo $reg['acta_folio_num_part_nac'];?>"
-                              max="9999999999">
+                              maxlength="20">
                             <p class="help-block" id="acta_folio_num_part_nac_chequeo">
                             </p>
                           </div>
@@ -320,6 +322,7 @@ if($reg = mysqli_fetch_array($re)) :?>
                         type="text"
                         name="lugar_nac"
                         id="lugar_nac"
+                        value="<?php echo $reg['lugar_nac'];?>"
                         maxlength="50">
                       <p class="help-block" id="lugar_nac_chequeo">
                       </p>
@@ -335,16 +338,19 @@ if($reg = mysqli_fetch_array($re)) :?>
                           <label for="fec_nac" class="control-label">Fecha de nacimiento</label>
                           <!-- readonly para que no puedan cambiar manualmente la fecha -->
                           <!-- style cursor pointer etc... para que no parezca desabilitado -->
-                          <input
-                            class="form-control"
-                            type="text"
-                            name="fec_nac"
-                            id="fec_nac"
-                            placeholder="dele click para mostrar calendario"
-                            readonly="readonly"
-                            value="<?php echo $reg['fec_nac'];?>"
-                            style="cursor:pointer; background-color: #FFFFFF"
-                            required>
+                          <div class="input-group">
+                            <input
+                              class="form-control"
+                              type="text"
+                              name="fec_nac"
+                              id="fec_nac"
+                              placeholder="dele click para mostrar calendario"
+                              readonly="readonly"
+                              value="<?php echo $reg['fec_nac'];?>"
+                              style="cursor:pointer; background-color: #FFFFFF"
+                              required>
+                            <span class="glyphicon glyphicon-calendar input-group-addon"></span>
+                          </div>
                           <p class="help-block" id="fec_nac_chequeo">
                           </p>
                         </div>
@@ -560,7 +566,7 @@ if($reg = mysqli_fetch_array($re)) :?>
                         maxlenght="150"
                         rows="2"
                         name="direcc"
-                        id="direcc"></textarea>
+                        id="direcc"><?php echo $reg['direccion'];?></textarea>
                         <p class="help-block" id="direcc_chequeo">
                         </p>
                       </div>
@@ -840,7 +846,7 @@ if($reg = mysqli_fetch_array($re)) :?>
         });
       </script>
       <!-- calendario -->
-      <?php $cssDatepick = enlaceDinamico("java/jqDatePicker/jquery.datepick.css"); ?>
+      <?php $cssDatepick = enlaceDinamico("java/jqDatePicker/smoothness.datepick.css"); ?>
       <link href="<?php echo $cssDatepick ?>" rel="stylesheet">
       <?php $plugin = enlaceDinamico("java/jqDatePicker/jquery.plugin.js"); ?>
       <?php $datepick = enlaceDinamico("java/jqDatePicker/jquery.datepick.js"); ?>
@@ -848,13 +854,10 @@ if($reg = mysqli_fetch_array($re)) :?>
       <script type="text/javascript" src="<?php echo $datepick ?>"></script>
       <!-- calendario -->
       <script type="text/javascript">
-        <?php $imagen = enlaceDinamico("java/jqDatePicker/calendar-blue.gif"); ?>
         $(function(){
           $('#fec_nac').datepick({
-            maxDate:'-h',
-            showOn: "button",
-            buttonImage: "<?php echo $imagen ?>",
-            buttonImageOnly: true,
+            maxDate:'-3Y',
+            minDate:'-18Y',
             dateFormat: "yyyy-mm-dd"
           });
         });

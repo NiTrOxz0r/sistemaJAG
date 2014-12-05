@@ -29,12 +29,11 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr'], 'sistemaJAG 
       <div class="col-sm-6 well">
         <!-- http://www.w3schools.com/tags/ref_eventattributes.asp -->
         <form
-        role="form"
-        name="form_U"
-        id="form_U"
-        action="<?php echo $_SERVER['DOCUMENT_ROOT'].
-        '/github/sistemaJAG/usuario/form_reg_PI.php' ?>"
-        method="POST">
+          role="form"
+          name="form_U"
+          id="form_U"
+          action="form_reg_PI.php"
+          method="POST">
           <fieldset>
             <legend class="text-center">
               Datos basicos del usuario
@@ -146,26 +145,27 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr'], 'sistemaJAG 
         $('#form_U').on('submit', function (evento){
           //se comprueba que los datos esten en orden:
           if ( validacionUsuario() === true ) {
+            //DESHABILITADO POR FALTA DE TIEMPO
             //se previene el envio:
-            evento.preventDefault();
+            // evento.preventDefault();
             //se inician variables:
-            var seudonimo = $('#seudonimo').val();
-            var clave = $('#clave').val();
+            // var seudonimo = $('#seudonimo').val();
+            // var clave = $('#clave').val();
             //se mandan los datos al archivo
             //por medio de ajax:
-            $.ajax({
-              url: 'form_reg_PI.php',
-              type: 'POST',
-              data: {
-                seudonimo:seudonimo,
-                clave:clave
-              },
-              success: function (datos){
-                $('#contenido_registro_usuario').empty();
-                $("#contenido_registro_usuario").load().html(datos);
-              },
-            });
-            //return true;
+            // $.ajax({
+            //   url: 'form_reg_PI.php',
+            //   type: 'POST',
+            //   data: {
+            //     seudonimo:seudonimo,
+            //     clave:clave
+            //   },
+            //   success: function (datos){
+            //     $('#contenido_registro_usuario').empty();
+            //     $("#contenido_registro_usuario").load().html(datos);
+            //   },
+            // });
+            return true;
           }else{
             return false;
           };

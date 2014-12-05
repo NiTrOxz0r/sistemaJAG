@@ -54,9 +54,9 @@ if($reg = mysqli_fetch_array($re)) :?>
                       class="form-control">
                       <?php if ( $reg['nacionalidad'] == 'v' ): ?>
                         <option value="v" selected="selected">Venezolano</option>
-                        <option value="e">E</option>
+                        <option value="e">Extrangero</option>
                       <?php else: ?>
-                        <option value="v">V </option>
+                        <option value="v">Venezolano</option>
                         <option value="e" selected="selected">Extrangero</option>
                       <?php endif ?>
                     </select>
@@ -72,6 +72,7 @@ if($reg = mysqli_fetch_array($re)) :?>
                       maxlength="8"
                       name="cedula"
                       id="cedula"
+                      autocomplete="off"
                       class="form-control"
                       autofocus="autofocus"
                       placeholder="Introduzca cedula ej: 12345678"
@@ -195,16 +196,19 @@ if($reg = mysqli_fetch_array($re)) :?>
                         <label for="fec_nac" class="control-label">Fecha de nacimiento</label>
                         <!-- readonly para que no puedan cambiar manualmente la fecha -->
                         <!-- style cursor pointer etc... para que no parezca desabilitado -->
-                        <input
-                          class="form-control"
-                          type="text"
-                          name="fec_nac"
-                          id="fec_nac"
-                          placeholder="dele click para mostrar calendario"
-                          value="<?php echo $reg['fec_nac'];?>"
-                          readonly="readonly"
-                          style="cursor:pointer; background-color: #FFFFFF"
-                          required>
+                        <div class="input-group">
+                          <input
+                            class="form-control"
+                            type="text"
+                            name="fec_nac"
+                            id="fec_nac"
+                            placeholder="click para mostrar calendario"
+                            value="<?php echo $reg['fec_nac'];?>"
+                            readonly="readonly"
+                            style="cursor:pointer; background-color: #FFFFFF"
+                            required>
+                          <span class="glyphicon glyphicon-calendar input-group-addon"></span>
+                        </div>
                         <p class="help-block" id="fec_nac_chequeo">
                         </p>
                       </div>
@@ -915,7 +919,7 @@ if($reg = mysqli_fetch_array($re)) :?>
     });
   </script>
   <!-- calendario -->
-  <?php $cssDatepick = enlaceDinamico("java/jqDatePicker/jquery.datepick.css"); ?>
+  <?php $cssDatepick = enlaceDinamico("java/jqDatePicker/smoothness.datepick.css"); ?>
   <link href="<?php echo $cssDatepick ?>" rel="stylesheet">
   <?php $plugin = enlaceDinamico("java/jqDatePicker/jquery.plugin.js"); ?>
   <?php $datepick = enlaceDinamico("java/jqDatePicker/jquery.datepick.js"); ?>
@@ -923,13 +927,10 @@ if($reg = mysqli_fetch_array($re)) :?>
   <script type="text/javascript" src="<?php echo $datepick ?>"></script>
   <!-- calendario -->
   <script type="text/javascript">
-    <?php $imagen = enlaceDinamico("java/jqDatePicker/calendar-blue.gif"); ?>
     $(function(){
       $('#fec_nac').datepick({
-        maxDate:'-h',
-        showOn: "button",
-        buttonImage: "<?php echo $imagen ?>",
-        buttonImageOnly: true,
+        maxDate:'-12Y',
+        minDate:'-100Y',
         dateFormat: "yyyy-mm-dd"
       });
     });

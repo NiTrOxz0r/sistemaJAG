@@ -67,6 +67,7 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);?>
                     maxlength="8"
                     size="12"
                     name="cedula"
+                    autocomplete="off"
                     value="<?php echo $reg['cedula'];?>">
                 </td>
                   <td>

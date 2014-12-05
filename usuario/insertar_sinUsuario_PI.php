@@ -135,7 +135,8 @@ if ( isset($_POST['cedula']) && strlen($_POST['cedula']) == 8 ) :
       'Autogenerado en registro, por sistema.',
       1, $codUsrMod, null, $codUsrMod, current_timestamp);";
     $resultado = conexion($query);
-  endif; ?>
+  endif;
+  empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']); ?>
   <div id="insertar_sinU_PUI">
     <div id="blancoAjax">
       <div class="container">
@@ -157,7 +158,8 @@ if ( isset($_POST['cedula']) && strlen($_POST['cedula']) == 8 ) :
       </div>
     </div>
   </div>
-<?php else : ?>
+<?php else :
+  empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']); ?>
   <div id="insertar_sinU_PI">
     <div id="blancoAjax">
       <div class="container">
