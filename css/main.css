@@ -17,3 +17,8 @@ body {
   margin-top: 10px;
   margin-bottom: 10px;
 }
+
+/*para calendario*/
+.datepick-ctrl {
+  background-color: #F2F2F2;
+}
