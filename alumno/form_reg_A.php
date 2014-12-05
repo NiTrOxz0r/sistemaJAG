@@ -593,11 +593,8 @@ if($go): ?>
                             <label for="altura" class="control-label">Altura</label>
                             <input
                               class="form-control"
-                              type="number"
+                              type="text"
                               maxlength="3"
-                              size ="3"
-                              max="250"
-                              min="30"
                               placeholder="en centimetros"
                               name="altura"
                               id="altura"/>
@@ -616,9 +613,6 @@ if($go): ?>
                               class="form-control"
                               type="number"
                               maxlength="3"
-                              size ="3"
-                              max="250"
-                              min="10"
                               placeholder="en kilogramos"
                               name="peso"
                               id="peso"/>
@@ -650,6 +644,8 @@ if($go): ?>
                                 </option>
                               <?php endwhile; ?>
                             </select>
+                            <p class="help-block" id="camisa_chequeo">
+                            </p>
                           </div>
                         </div>
                       </div>
@@ -674,6 +670,8 @@ if($go): ?>
                                 </option>
                               <?php endwhile; ?>
                             </select>
+                            <p class="help-block" id="pantalon_chequeo">
+                            </p>
                           </div>
                         </div>
                       </div>
@@ -689,11 +687,15 @@ if($go): ?>
                               class="form-control"
                               type="number"
                               maxlength="2"
-                              min="4"
-                              max="50"
-                              size ="2"
+                              placeholder="en formato Frances/Europeo"
                               name="zapato"
                               id="zapato"/>
+                            <p class="help-block" id="zapato_chequeo">
+                            </p>
+                            <p class="help-block" id="zapato_chequeo_adicional">
+                             Guia para niños <a class="nueva_ventana" href="../imagenes/medida-calzado-a.jpg">de 15 a 39</a>
+                             y a partir <a class="nueva_ventana" href="../imagenes/medida-calzado-b.png">de 36 a 52</a>
+                            </p>
                           </div>
                         </div>
                       </div>
@@ -823,6 +825,15 @@ if($go): ?>
             url: '../java/ajax/alumnosEnCurso.js',
             type: 'POST',
             dataType: 'script'
+          });
+        });
+      </script>
+      <!-- enlaces de calzado -->
+      <script type="text/javascript">
+        $(function(){
+          $('a.nueva_ventana').click(function(){
+            window.open( $(this).attr('href') );
+            return false;
           });
         });
       </script>

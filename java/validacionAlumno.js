@@ -1,30 +1,30 @@
 /**
- * @author Alejandro Granadillo.
- * @author Andres Leotur.
  * @author Erick Zerpa.
+ * @author Andres Leotur.
  *
- * @internal ESTA FUNCION DEBE SER DOCUMENTADA Y LIMPIADA.
- * [validacionAlumno validacion de alumno]
+ * limpiado con ojivas nucleares por
+ * @author Alejandro Granadillo.
  *
- * @return {boolean} [regresa verdadero si los campos son validos.]
- *
- * @todo documentar mejor esta funcion (denle las gracias a Zerpa por no documentar nada.)
- *
+ * @return boolean [regresa verdadero si los campos son validos.]
  * @see alumno/form_reg_A.php
  *
- * @version 2.0
+ * @version 2.1
  */
 function validacionAlumno(){
   // expresiones regulares:
-  // /(.)\1{7,}/
-  var expRegpnom    = /^[a-zA-ZÑñÁáÉéÍíÓóÚú'-\s]{0,20}$/;
-  var expRegced     = /^(?:\+|-)?\d+$/;
-  var expRegtlf     = /^\d{11}$/;
+  var expRegpnom     = /^[a-zA-ZÑñÁáÉéÍíÓóÚú'-\s]{0,20}$/;
+  // agarra un string que tenga al menos aaa ej: pedrooo
+  var expRegRepetido = /(.)\1{2,}/;
+  // agarra lo que no sea numeros
+  var expRegced      = /^(?:\+|-)?\d+$/;
+  // solo numeros, exactamente 11
+  var expRegtlf      = /^\d{11}$/;
   // ver validacionPI.js
   var emailChequeo = /^[0-9a-zA-Z-_\$#]+@[0-9a-zA-Z-_\$#]+\.[a-zA-Z]{2,5}/;
-  // variable de control:
+  // variables de control:
   var verificar = false;
-  var n;
+  var n; // para el parse a enteros
+
   // datos de formulario
   var emailChequeo = /^[0-9a-zA-Z-_\$#]+@[0-9a-zA-Z-_\$#]+\.[a-zA-Z]{2,5}/;
   var cedula = document.getElementById("cedula").value.replace(/^\s+|\s+$/g, '');
@@ -55,7 +55,7 @@ function validacionAlumno(){
   var pantalon = document.getElementById("pantalon").value.replace(/^\s+|\s+$/g, '');
   var zapato = document.getElementById("zapato").value.replace(/^\s+|\s+$/g, '');
   var curso = document.getElementById("curso").value.replace(/^\s+|\s+$/g, '');
-
+// chequeos como tal:
 // cedula
   n = parseInt(cedula);
   if (cedula === "") {
@@ -86,6 +86,7 @@ function validacionAlumno(){
     }
   }
 // cedula_escolar
+  n = parseInt(cedula_escolar);
   if (cedula_escolar === "") {
     $('#cedula_escolar').parent().addClass('has-error');
     $("#cedula_escolar_chequeo").html('este campo no puede estar vacio.');
@@ -99,11 +100,18 @@ function validacionAlumno(){
     $("#cedula_escolar_chequeo").html('Este campo debe contener 10 caracteres, EJ: 1234567890');
     return false;
   }else{
-    $('#cedula_escolar').parent().removeClass('has-error').addClass('has-success');
-    $("#cedula_escolar_chequeo").html('&nbsp;');
-    verificar = true;
+    if (n < 100000) {
+      $('#cedula_escolar').parent().addClass('has-error');
+      $("#cedula_escolar_chequeo").html('Favor verifique este campo');
+      return false;
+    }else{
+      $('#cedula_escolar').parent().removeClass('has-error').addClass('has-success');
+      $("#cedula_escolar_chequeo").html('&nbsp;');
+      verificar = true;
+    }
   }
 // acta numero partida nacimiento
+// a espera de saber formato exacto
   if(isNaN(acta_num_part_nac)) {
     $("#acta_num_part_nac_chequeo").html('este campo debe ser solo numeros');
     $('#acta_num_part_nac').parent().addClass('has-error');
@@ -118,6 +126,7 @@ function validacionAlumno(){
     verificar = true;
   }
 // acta folio partida nacimiento
+// a espera de saber formato exacto
   if(isNaN(acta_folio_num_part_nac)) {
     $("#acta_folio_num_part_nac_chequeo").html('este campo debe ser solo numeros');
     $('#acta_folio_num_part_nac').parent().addClass('has-error');
@@ -150,6 +159,10 @@ function validacionAlumno(){
     $("#p_nombre_chequeo").html('Favor introduzca en este campo Letras sin numeros o caracteres especiales EJ: 19?=;@*');
     $('#p_nombre').parent().addClass('has-error');
     return false;
+  }else if (expRegRepetido.exec(p_nombre)) {
+    $("#p_nombre_chequeo").html('Verifique este campo, muchos caracteres repetidos');
+    $('#p_nombre').parent().addClass('has-error');
+    return false;
   }else if (p_nombre.length > 20){
     $("#p_nombre_chequeo").html('este campo no puede ser mayor a 20 caracteres');
     $('#p_nombre').parent().addClass('has-error');
@@ -167,6 +180,10 @@ function validacionAlumno(){
     return false;
   }else if(s_nombre.length > 20){
     $("#s_nombre_chequeo").html('este campo no puede ser mayor a 20 caracteres');
+    $('#s_nombre').parent().addClass('has-error');
+    return false;
+  }else if (expRegRepetido.exec(s_nombre)) {
+    $("#s_nombre_chequeo").html('Verifique este campo, muchos caracteres repetidos');
     $('#s_nombre').parent().addClass('has-error');
     return false;
   }else{
@@ -188,6 +205,10 @@ function validacionAlumno(){
     $("#p_apellido_chequeo").html('este campo no puede ser mayor a 20 caracteres');
     $('#p_apellido').parent().addClass('has-error');
     return false;
+  }else if (expRegRepetido.exec(p_apellido)) {
+    $("#p_apellido_chequeo").html('Verifique este campo, muchos caracteres repetidos');
+    $('#p_apellido').parent().addClass('has-error');
+    return false;
   }else{
     $("#p_apellido_chequeo").html('&nbsp;');
     $('#p_apellido').parent().removeClass('has-error').addClass('has-success');
@@ -201,6 +222,10 @@ function validacionAlumno(){
     return false;
   }else if (!expRegpnom.exec(s_apellido)) {
     $("#s_apellido_chequeo").html('Favor introduzca en este campo Letras sin numeros o caracteres especiales EJ: 19?=;@*');
+    $('#s_apellido').parent().addClass('has-error');
+    return false;
+  }else if (expRegRepetido.exec(s_apellido)) {
+    $("#s_apellido_chequeo").html('Verifique este campo, muchos caracteres repetidos');
     $('#s_apellido').parent().addClass('has-error');
     return false;
   }else{
@@ -284,6 +309,10 @@ function validacionAlumno(){
     $("#plantel_procedencia_chequeo").html('Favor introduzca en este campo Letras sin numeros o caracteres especiales EJ: 19?=;@*');
     $('#plantel_procedencia').parent().addClass('has-error');
     return false;
+  }else if (expRegRepetido.exec(plantel_procedencia)) {
+    $("#plantel_procedencia_chequeo").html('Verifique este campo, muchos caracteres repetidos');
+    $('#plantel_procedencia').parent().addClass('has-error');
+    return false;
   }else{
     $("#plantel_procedencia_chequeo").html('&nbsp;');
     $('#plantel_procedencia').parent().removeClass('has-error').addClass('has-success');
@@ -331,6 +360,10 @@ function validacionAlumno(){
     $("#direcc_chequeo").html('este campo no puede ser mayor a 150 caracteres');
     $('#direcc').parent().addClass('has-error');
     return false;
+  }else if (expRegRepetido.exec(direcc)) {
+    $("#direcc_chequeo").html('Verifique este campo, muchos caracteres repetidos');
+    $('#direcc').parent().addClass('has-error');
+    return false;
   }else{
     $("#direcc_chequeo").html('&nbsp;');
     $('#direcc').parent().removeClass('has-error').addClass('has-success');
@@ -352,23 +385,37 @@ function validacionAlumno(){
     verificar = true;
   }
 // datos fisicos
+  n = parseInt(altura);
   if(isNaN(altura)) {
     $("#altura_chequeo").html('este campo debe ser solo numeros');
     $('#altura').parent().addClass('has-error');
     return false;
   }else{
-    $("#altura_chequeo").html('&nbsp;');
-    $('#altura').parent().removeClass('has-error').addClass('has-success');
-    verificar = true;
+    if (n < 30 || n > 230) {
+      $('#altura').parent().addClass('has-error');
+      $("#altura_chequeo").html('Favor verifique este campo');
+      return false;
+    }else{
+      $('#altura').parent().removeClass('has-error').addClass('has-success');
+      $("#altura_chequeo").html('&nbsp;');
+      verificar = true;
+    }
   }
+  n = parseInt(peso);
   if(isNaN(peso)) {
     $("#peso_chequeo").html('este campo debe ser solo numeros');
     $('#peso').parent().addClass('has-error');
     return false;
   }else{
-    $("#peso_chequeo").html('&nbsp;');
-    $('#peso').parent().removeClass('has-error').addClass('has-success');
-    verificar = true;
+    if (n < 10 || n > 300) {
+      $('#peso').parent().addClass('has-error');
+      $("#peso_chequeo").html('Favor verifique este campo');
+      return false;
+    }else{
+      $('#peso').parent().removeClass('has-error').addClass('has-success');
+      $("#peso_chequeo").html('&nbsp;');
+      verificar = true;
+    }
   }
   if(camisa === "") {
     $("#camisa_chequeo").html('seleccione una opcion apropiada');
@@ -396,14 +443,21 @@ function validacionAlumno(){
     $('#pantalon').parent().removeClass('has-error').addClass('has-success');
     verificar = true;
   }
+  n = parseInt(zapato);
   if(isNaN(zapato)) {
     $("#zapato_chequeo").html('este campo debe ser solo numeros');
     $('#zapato').parent().addClass('has-error');
     return false;
   }else{
-    $("#zapato_chequeo").html('&nbsp;');
-    $('#zapato').parent().removeClass('has-error').addClass('has-success');
-    verificar = true;
+    if (n < 8 || n > 52) {
+      $('#zapato').parent().addClass('has-error');
+      $("#zapato_chequeo").html('Favor verifique este campo');
+      return false;
+    }else{
+      $('#zapato').parent().removeClass('has-error').addClass('has-success');
+      $("#zapato_chequeo").html('&nbsp;');
+      verificar = true;
+    }
   }
 // fin de chequeos.
   // chequea y devuelve:
