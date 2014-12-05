@@ -186,6 +186,10 @@ function validacionAlumno(){
     $("#s_nombre_chequeo").html('Verifique este campo, muchos caracteres repetidos');
     $('#s_nombre').parent().addClass('has-error');
     return false;
+  }else if (expRegRepetido.exec(s_nombre)) {
+    $("#s_nombre_chequeo").html('Verifique este campo, muchos caracteres repetidos');
+    $('#s_nombre').parent().addClass('has-error');
+    return false;
   }else{
     $("#s_nombre_chequeo").html('&nbsp;');
     $('#s_nombre').parent().removeClass('has-error').addClass('has-success');
@@ -237,6 +241,10 @@ function validacionAlumno(){
 // logar de nacimiento
   if (lugar_nac.length > 50) {
     $("#lugar_nac_chequeo").html('este campo no puede ser mayor a 50 caracteres');
+    $('#lugar_nac').parent().addClass('has-error');
+    return false;
+  }else if (expRegRepetido.exec(lugar_nac)) {
+    $("#lugar_nac_chequeo").html('Verifique este campo, muchos caracteres repetidos');
     $('#lugar_nac').parent().addClass('has-error');
     return false;
   }else{
@@ -465,11 +473,6 @@ function validacionAlumno(){
     return true;
   }
 
-}
-// deprecado
-function limpiarform(){
-  //id del formulario
-  document.getElementById("form").reset();
 }
 
 //transformado a Jquery:
