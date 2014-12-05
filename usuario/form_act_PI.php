@@ -213,16 +213,19 @@ if ( isset($_GET['cedula']) ):
                         <label for="fec_nac" class="control-label">Fecha de nacimiento</label>
                         <!-- readonly para que no puedan cambiar manualmente la fecha -->
                         <!-- style cursor pointer etc... para que no parezca desabilitado -->
-                        <input
-                          class="form-control"
-                          type="text"
-                          name="fec_nac"
-                          id="fec_nac"
-                          placeholder="dele click para mostrar calendario"
-                          readonly="readonly"
-                          style="cursor:pointer; background-color: #FFFFFF"
-                          value="<?php echo $datos['fec_nac'] ?>"
-                          required>
+                        <div class="input-group">
+                          <input
+                            class="form-control"
+                            type="text"
+                            name="fec_nac"
+                            id="fec_nac"
+                            placeholder="click para mostrar calendario"
+                            readonly="readonly"
+                            style="cursor:pointer; background-color: #FFFFFF"
+                            value="<?php echo $datos['fec_nac'] ?>"
+                            required>
+                          <span class="glyphicon glyphicon-calendar input-group-addon"></span>
+                        </div>
                         <p class="help-block" id="fec_nac_chequeo">
                         </p>
                       </div>
@@ -563,7 +566,7 @@ if ( isset($_GET['cedula']) ):
           </div>
         </div>
         <!-- calendario -->
-        <?php $cssDatepick = enlaceDinamico("java/jqDatePicker/jquery.datepick.css"); ?>
+        <?php $cssDatepick = enlaceDinamico("java/jqDatePicker/smoothness.datepick.css"); ?>
         <link href="<?php echo $cssDatepick ?>" rel="stylesheet">
         <?php $plugin = enlaceDinamico("java/jqDatePicker/jquery.plugin.js"); ?>
         <?php $datepick = enlaceDinamico("java/jqDatePicker/jquery.datepick.js"); ?>
@@ -720,13 +723,10 @@ if ( isset($_GET['cedula']) ):
         </script>
         <!-- calendario -->
         <script type="text/javascript">
-          <?php $imagen = enlaceDinamico("java/jqDatePicker/calendar-blue.gif"); ?>
           $(function(){
             $('#fec_nac').datepick({
-              maxDate:'-h',
-              showOn: "button",
-              buttonImage: "<?php echo $imagen ?>",
-              buttonImageOnly: true,
+              maxDate:'-12Y',
+              minDate:'-100Y',
               dateFormat: "yyyy-mm-dd"
             });
           });
