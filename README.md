@@ -6,7 +6,7 @@ Sistema de inscripcion adaptado para la institucion publica E.B.N.B "Jose Antoni
 El prototipo de este sistema esta en linea en [sistemajag.esy.es/](http://sistemajag.esy.es/)
 ###Escuela Basica Nacional Bolivariana "Jose Antonio Gonzales"
 Escuela ubicada en el paraiso, caracas, venezuela.
-##version 0.5.0
+##version 0.5.1
 ###Sistema 81% aprox completado, por ahora falta:
 ####FLUJO NORMAL DE FORMULARIOS
 en progreso: 99?% aprox.
