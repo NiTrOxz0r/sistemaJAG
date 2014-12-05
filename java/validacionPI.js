@@ -13,10 +13,14 @@
  */
 function validacionPI(){
 
-  //REGEX:
+  // variables de control
   var estatus = false;
+  var n; // para el parse a enteros
+  //REGEX:
   var numerosChequeo = /[^\d+]/g;
-  var nombresChequeo = /[^A-Za-záéíóúÑñÁÉÍÓÚ-\s]/g;
+  var nombresChequeo = /[^A-Za-záéíóúÑñÁÉÍÓÚ'-\s]/g;
+  // agarra un string que tenga al menos aaa ej: pedrooo
+  var expRegRepetido = /(.)\1{2,}/;
   //por alguna razon javascrip se queja si uso esta expresion:
   // ^[0-9a-zA-Z-_$#]{2,20}+\@[0-9a-zA-Z-_$#]{2,20}+\.[a-zA-Z]{2,5}\.?[a-zA-Z]{2,5}+
   // eso cacha algo@algo.com.ve
@@ -45,6 +49,7 @@ function validacionPI(){
   var municipio = document.getElementById('cod_mun').value.replace(/^\s+|\s+$/g, '');
   var parroquia = document.getElementById('cod_parro').value.replace(/^\s+|\s+$/g, '');
 // cedula:
+  n = parseInt(cedula);
   if (cedula == "") {
     $('#cedula').parent().addClass('has-error');
     $("#cedula_chequeo").html('este campo no puede estar vacio.');
@@ -62,9 +67,15 @@ function validacionPI(){
     $('#cedula').parent().addClass('has-error');
     return false;
   }else{
-    $('#cedula').parent().removeClass('has-error').addClass('has-success');
-    $("#cedula_chequeo").html('&nbsp;');
-    estatus = true;
+    if (n < 100000) {
+      $('#cedula').parent().addClass('has-error');
+      $("#cedula_chequeo").html('Favor verifique este campo');
+      return false;
+    }else{
+      $('#cedula').parent().removeClass('has-error').addClass('has-success');
+      $("#cedula_chequeo").html('&nbsp;');
+      verificar = true;
+    }
   }
 //NACIONALIDAD:
   if ( nacionalidad != 'v' && nacionalidad != 'e' ) {
@@ -89,6 +100,10 @@ function validacionPI(){
     $("#p_nombre_chequeo").html('Favor introduzca en este campo Letras sin numeros o caracteres especiales EJ: 19?=;@*');
     $('#p_nombre').parent().addClass('has-error');
     return false;
+  }else if (expRegRepetido.exec(p_nombre)) {
+    $("#p_nombre_chequeo").html('Verifique este campo, muchos caracteres repetidos');
+    $('#p_nombre').parent().addClass('has-error');
+    return false;
   }else{
     $("#p_nombre_chequeo").html('&nbsp;');
     $('#p_nombre').parent().removeClass('has-error').addClass('has-success');
@@ -102,6 +117,10 @@ function validacionPI(){
     return false;
   }else if( nombresChequeo.test(s_nombre) ){
     $("#s_nombre_chequeo").html('Favor introduzca en este campo Letras sin numeros o caracteres especiales EJ: 19?=;@*');
+    $('#s_nombre').parent().addClass('has-error');
+    return false;
+  }else if (expRegRepetido.exec(s_nombre)) {
+    $("#s_nombre_chequeo").html('Verifique este campo, muchos caracteres repetidos');
     $('#s_nombre').parent().addClass('has-error');
     return false;
   }else{
@@ -123,6 +142,10 @@ function validacionPI(){
     $("#p_apellido_chequeo").html('Favor introduzca en este campo Letras sin numeros o caracteres especiales EJ: 19?=;@*');
     $('#p_apellido').parent().addClass('has-error');
     return false;
+  }else if (expRegRepetido.exec(p_apellido)) {
+    $("#p_apellido_chequeo").html('Verifique este campo, muchos caracteres repetidos');
+    $('#p_apellido').parent().addClass('has-error');
+    return false;
   }else{
     $("#p_apellido_chequeo").html('&nbsp;');
     $('#p_apellido').parent().removeClass('has-error').addClass('has-success');
@@ -136,6 +159,10 @@ function validacionPI(){
     return false;
   }else if( nombresChequeo.test(s_apellido) ){
     $("#s_apellido_chequeo").html('Favor introduzca en este campo Letras sin numeros o caracteres especiales EJ: 19?=;@*');
+    $('#s_apellido').parent().addClass('has-error');
+    return false;
+  }else if (expRegRepetido.exec(s_apellido)) {
+    $("#s_apellido_chequeo").html('Verifique este campo, muchos caracteres repetidos');
     $('#s_apellido').parent().addClass('has-error');
     return false;
   }else{
@@ -188,6 +215,10 @@ function validacionPI(){
 //titulo
   if(titulo.length > 80){
     $("#titulo_chequeo").html('este campo no puede ser mayor a 80 caracteres');
+    $('#titulo').parent().addClass('has-error');
+    return false;
+  }else if (expRegRepetido.exec(titulo)) {
+    $("#titulo_chequeo").html('Verifique este campo, muchos caracteres repetidos');
     $('#titulo').parent().addClass('has-error');
     return false;
   }else{
@@ -287,6 +318,10 @@ function validacionPI(){
 //direcc
   if(direcc != "" && direcc.length > 150){
     $("#direcc_chequeo").html('este campo no puede ser mayor a 150 caracteres');
+    $('#direcc').parent().addClass('has-error');
+    return false;
+  }else if (expRegRepetido.exec(direcc)) {
+    $("#direcc_chequeo").html('Verifique este campo, muchos caracteres repetidos');
     $('#direcc').parent().addClass('has-error');
     return false;
   }else{
