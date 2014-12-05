@@ -4,7 +4,8 @@
  *
  * desinfectado con cloro y amonico por:
  * @author [slayerfat] <[slayerfat@gmail.com]>
- * {@internal [EN DESARROLLO]}
+ * {@internal [genera las actualizaciones respectivas de alumno
+ * validadas por medio de php (ChequearAlumno y ChequearDireccion)]}
  *
  * @version 1.2
  */
@@ -51,7 +52,7 @@ if ( isset($_POST['cedula']) and preg_match( "/[0-9]{8}/", $_POST['cedula']) ) :
     where cedula = '$cedula';";
   $resultado = conexion($sql);
   // hago esto para darle uso a ChequearAlumno y su mensaje automatizado:
-  if($resultado->num_rows== 1) :
+  if($resultado->num_rows == 1) :
     $datos = mysqli_fetch_assoc($resultado);
     $cod_direccion_A = $datos['cod_direccion'];
     $cod_persona = $datos['cod_persona'];
@@ -206,6 +207,10 @@ if ( isset($_POST['cedula']) and preg_match( "/[0-9]{8}/", $_POST['cedula']) ) :
                       Lamentablemente, es posible que los datos de actualizacion se perdieron.
                     </small>
                   </h3>
+                  <p class="bg-danger">
+                    Ocurrio un suceso inesperado en la actualizacion del registro
+                    en el sitema.
+                  </p>
                   <p>
                     Si desea hacer otra actualizacion por favor dele
                     <a href="form_act_A.php?cedula=<?php echo $cedula ?>">click a este enlace</a>
