@@ -9,22 +9,27 @@
  * @internal quitado el boton de reset por ser innecesario. esta funcion hace los
  * chequeos en el formulario de registro de representante.
  *
- * @return {boolean} [regresa verdadero si los campos son validos.]
+ * @return boolean [regresa verdadero si los campos son validos.]
  *
  * @see personalAutorizado/form_reg_P.php
  *
- * @version 2.0
+ * @version 2.1
  *
  */
 function validacionPA(){
   // expresiones regulares:
   var expRegpnom  = /^[a-zA-ZÑñÁáÉéÍíÓóÚú'-\s]{0,20}$/;//^[a-zA-ZÑñÁáÉéÍíÓóÚú]$/;
+  // agarra un string que tenga al menos aaa ej: pedrooo
+  var expRegRepetido = /(.)\1{2,}/;
+  // agarra lo que no sea numeros
   var expRegced   = /^(?:\+|-)?\d+$/;
+  // solo numeros, exactamente 11
   var expRegtlf   = /^\d{11}$/;
   // ver validacionPI.js
   var emailChequeo = /^[0-9a-zA-Z-_\$#]+@[0-9a-zA-Z-_\$#]+\.[a-zA-Z]{2,5}/;
-  // variable de control:
+  // variables de control:
   var verificar = false;
+  var n; // para el parse a enteros
   // datos de formulario
   var cedula         = document.getElementById("cedula").value.replace(/^\s+|\s+$/g, '');
   var nacionalidad   = document.getElementById("nacionalidad").value.replace(/^\s+|\s+$/g, '');
@@ -51,6 +56,7 @@ function validacionPA(){
   var telefono_trabajo   = document.getElementById("telefono_trabajo").value.replace(/^\s+|\s+$/g, '');
   // chequeos:
 // cedula
+  n = parseInt(cedula);
   if (cedula === "") {
     $('#cedula').parent().addClass('has-error');
     $("#cedula_chequeo").html('este campo no puede estar vacio.');
@@ -68,9 +74,15 @@ function validacionPA(){
     $("#cedula_chequeo").html('Este campo no debe ser mayor a 8 caracteres');
     return false;
   }else{
-    $('#cedula').parent().removeClass('has-error').addClass('has-success');
-    $("#cedula_chequeo").html('&nbsp;');
-    verificar = true;
+    if (n < 100000) {
+      $('#cedula').parent().addClass('has-error');
+      $("#cedula_chequeo").html('Favor verifique este campo');
+      return false;
+    }else{
+      $('#cedula').parent().removeClass('has-error').addClass('has-success');
+      $("#cedula_chequeo").html('&nbsp;');
+      verificar = true;
+    }
   }
 // nacionalidad
   if ( nacionalidad != 'v' && nacionalidad != 'e' ) {
@@ -89,6 +101,10 @@ function validacionPA(){
     return false;
   }else if (!expRegpnom.exec(p_nombre)) {
     $("#p_nombre_chequeo").html('Favor introduzca en este campo Letras sin numeros o caracteres especiales EJ: 19?=;@*');
+    $('#p_nombre').parent().addClass('has-error');
+    return false;
+  }else if (expRegRepetido.exec(p_nombre)) {
+    $("#p_nombre_chequeo").html('Verifique este campo, muchos caracteres repetidos');
     $('#p_nombre').parent().addClass('has-error');
     return false;
   }else if (p_nombre.length > 20){
@@ -110,6 +126,10 @@ function validacionPA(){
     $("#s_nombre_chequeo").html('este campo no puede ser mayor a 20 caracteres');
     $('#s_nombre').parent().addClass('has-error');
     return false;
+  }else if (expRegRepetido.exec(s_nombre)) {
+    $("#s_nombre_chequeo").html('Verifique este campo, muchos caracteres repetidos');
+    $('#s_nombre').parent().addClass('has-error');
+    return false;
   }else{
     $("#s_nombre_chequeo").html('&nbsp;');
     $('#s_nombre').parent().removeClass('has-error').addClass('has-success');
@@ -129,6 +149,10 @@ function validacionPA(){
     $("#p_apellido_chequeo").html('este campo no puede ser mayor a 20 caracteres');
     $('#p_apellido').parent().addClass('has-error');
     return false;
+  }else if (expRegRepetido.exec(p_apellido)) {
+    $("#p_apellido_chequeo").html('Verifique este campo, muchos caracteres repetidos');
+    $('#p_apellido').parent().addClass('has-error');
+    return false;
   }else{
     $("#p_apellido_chequeo").html('&nbsp;');
     $('#p_apellido').parent().removeClass('has-error').addClass('has-success');
@@ -144,6 +168,10 @@ function validacionPA(){
     $("#s_apellido_chequeo").html('Favor introduzca en este campo Letras sin numeros o caracteres especiales EJ: 19?=;@*');
     $('#s_apellido').parent().addClass('has-error');
     return false;
+  }else if (expRegRepetido.exec(s_apellido)) {
+    $("#s_apellido_chequeo").html('Verifique este campo, muchos caracteres repetidos');
+    $('#s_apellido').parent().addClass('has-error');
+    return false;
   }else{
     $("#s_apellido_chequeo").html('&nbsp;');
     $('#s_apellido').parent().removeClass('has-error').addClass('has-success');
@@ -153,6 +181,10 @@ function validacionPA(){
 // logar de nacimiento
   if (lugar_nac.length > 50) {
     $("#lugar_nac_chequeo").html('este campo no puede ser mayor a 50 caracteres');
+    $('#lugar_nac').parent().addClass('has-error');
+    return false;
+  }else if (expRegRepetido.exec(lugar_nac)) {
+    $("#lugar_nac_chequeo").html('Verifique este campo, muchos caracteres repetidos');
     $('#lugar_nac').parent().addClass('has-error');
     return false;
   }else{
@@ -203,23 +235,10 @@ function validacionPA(){
     verificar = true;
   }
 // telefono
-  if(telefono.length != 11 && telefono != "" ){
+  if(telefono.length != 11 && telefono != "" && telefono != 'SinRegistro'){
     $("#telefono_chequeo").html('este campo debe contener 11 caracteres EJ: 02127773322');
     $('#telefono').parent().addClass('has-error');
     return false;
-  // por alguna razon
-  // (!expRegtlf.exec(telefono_otro) && (telefono != "" || telefono == "SinRegistro") )
-  // da verdadero... y mi cerebro no da ya para
-  // saber porque...
-  // ej: telefono = "SinRegistro" :
-  // (!expRegtlf.exec(telefono_otro) && (telefono != "" || telefono == "SinRegistro") )
-  // 1 && (1 || 0) = 0
-  // donde me equivoco???
-  // -slayerfat
-  // }else if (telefono != "" || telefono != "SinRegistro"){
-  //   $("#telefono_chequeo").html('&nbsp;');
-  //   $('#telefono').parent().removeClass('has-error').addClass('has-success');
-  //   verificar = true;
   }else if( !expRegtlf.exec(telefono) && telefono != "" && telefono != "SinRegistro" ) {
     $("#telefono_chequeo").html('Favor introduzca en este campo Letras sin numeros o caracteres especiales EJ: 19?=;@*');
     $('#telefono').parent().addClass('has-error');
@@ -230,7 +249,7 @@ function validacionPA(){
     verificar = true;
   }
 // telefono_otro (adicional)
-  if(telefono_otro.length != 11 && telefono_otro != "" ){
+  if(telefono_otro.length != 11 && telefono_otro != "" && telefono != 'SinRegistro'){
     $("#telefono_otro_chequeo").html('este campo debe contener 11 caracteres EJ: 02127773322');
     $('#telefono_otro').parent().addClass('has-error');
     return false;
@@ -289,6 +308,10 @@ function validacionPA(){
     $("#direcc_chequeo").html('este campo no puede ser mayor a 150 caracteres');
     $('#direcc').parent().addClass('has-error');
     return false;
+  }else if (expRegRepetido.exec(direcc)) {
+    $("#direcc_chequeo").html('Verifique este campo, muchos caracteres repetidos');
+    $('#direcc').parent().addClass('has-error');
+    return false;
   }else{
     $("#direcc_chequeo").html('&nbsp;');
     $('#direcc').parent().removeClass('has-error').addClass('has-success');
@@ -309,13 +332,19 @@ function validacionPA(){
     $("#lugar_trabajo_chequeo").html('este campo no puede ser mayor a 50 caracteres');
     $('#lugar_trabajo').parent().addClass('has-error');
     return false;
+  }else if (expRegRepetido.exec(lugar_trabajo)) {
+    $("#lugar_trabajo_chequeo").html('Verifique este campo, muchos caracteres repetidos');
+    $('#lugar_trabajo').parent().addClass('has-error');
+    return false;
   }else{
     $("#lugar_trabajo_chequeo").html('&nbsp;');
     $('#lugar_trabajo').parent().removeClass('has-error').addClass('has-success');
     verificar = true;
   }
 // telefono de trabajo
-  if(telefono_trabajo.length != 11 && telefono_trabajo != "" ){
+  if(telefono_trabajo.length != 11
+      && telefono_trabajo != ""
+      && telefono_trabajo != "SinRegistro"){
     $("#telefono_trabajo_chequeo").html('este campo debe contener 11 caracteres EJ: 02127773322');
     $('#telefono_trabajo').parent().addClass('has-error');
     return false;
@@ -335,31 +364,20 @@ function validacionPA(){
     $("#direccion_trabajo_chequeo").html('este campo no puede ser mayor a 150 caracteres');
     $('#direccion_trabajo').parent().addClass('has-error');
     return false;
+  }else if (expRegRepetido.exec(direcc_tra)) {
+    $("#direccion_trabajo_chequeo").html('Verifique este campo, muchos caracteres repetidos');
+    $('#direccion_trabajo').parent().addClass('has-error');
+    return false;
   }else{
     $("#direccion_trabajo_chequeo").html('&nbsp;');
     $('#direccion_trabajo').parent().removeClass('has-error').addClass('has-success');
     verificar = true;
   }
-  // LOL:
-  // else if (verificar=true) {
-  //   alert("Validando");
-  //   document.getElementById("form").submit();
-  // }
-
-
   // condicional de control:
   if (verificar) {
     return true
-  };
+  }
 }
-
-
-// funcion considerada deprecada:
-function limpiarform(){
-  alert("Limpiando");
-  document.getElementById("form").reset();
-}
-
 $(function(){
   var botonEnviar;
   botonEnviar = document.form_repre.registrar;

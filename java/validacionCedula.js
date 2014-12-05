@@ -12,9 +12,12 @@
 function validacionCedula(cedula_x){
   // datos de la cedula sin espacios:
   var cedula = cedula_x.replace(/^\s+|\s+$/g, '');
+  var n = parseInt(cedula_x);
   if (cedula == "" || cedula.length != 8) {
     return false;
   }else if( /[^\d+]/g.exec(cedula) ){
+    return false;
+  }else if( n < 100000 ){
     return false;
   }else{
     return true;
@@ -35,9 +38,19 @@ function validacionCedula(cedula_x){
 function validacionCedulaEscolar(cedula_x){
   // datos de la cedula sin espacios:
   var cedula = cedula_x.replace(/^\s+|\s+$/g, '');
+  var n = parseInt(cedula_x);
   if (cedula == "" || cedula.length != 10) {
     return false;
   }else if( /[^\d+]/g.exec(cedula) ){
+    return false;
+  }else if( /(.)\1{7,}/.exec(cedula) ){
+    return false;
+  }else if( n < 1000000000 ){
+    // 1XYYYYYYYY
+    // donde
+    // 1 es el numero minimo de hijos que puede tener
+    // X es el año de nacmineto
+    // YYYYYYYY es la cedula del representante (o la suya propia)
     return false;
   }else{
     return true;
