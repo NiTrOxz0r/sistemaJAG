@@ -12,9 +12,14 @@
 function validacionCedula(cedula_x){
   // datos de la cedula sin espacios:
   var cedula = cedula_x.replace(/^\s+|\s+$/g, '');
+  var n = parseInt(cedula_x);
   if (cedula == "" || cedula.length != 8) {
     return false;
   }else if( /[^\d+]/g.exec(cedula) ){
+    return false;
+  }else if( /(.)\1{7,}/.exec(cedula) ){
+    return false;
+  }else if( n < 100000 ){
     return false;
   }else{
     return true;

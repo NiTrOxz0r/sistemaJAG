@@ -775,7 +775,7 @@ if($reg = mysqli_fetch_array($re)) :?>
           $('#form').on('submit', function(e){
             if (validacionAlumno()) {
               // $('#cedula_r').prop('disabled', false);
-              return true;
+              return false;
             }else{
               return false;
             }

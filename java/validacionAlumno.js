@@ -16,13 +16,15 @@
  */
 function validacionAlumno(){
   // expresiones regulares:
-  var expRegpnom  = /^[a-zA-ZÑñÁáÉéÍíÓóÚú'-\s]{0,20}$/;//^[a-zA-ZÑñÁáÉéÍíÓóÚú]$/;
-  var expRegced   = /^(?:\+|-)?\d+$/;
-  var expRegtlf   = /^\d{11}$/;
+  // /(.)\1{7,}/
+  var expRegpnom    = /^[a-zA-ZÑñÁáÉéÍíÓóÚú'-\s]{0,20}$/;
+  var expRegced     = /^(?:\+|-)?\d+$/;
+  var expRegtlf     = /^\d{11}$/;
   // ver validacionPI.js
   var emailChequeo = /^[0-9a-zA-Z-_\$#]+@[0-9a-zA-Z-_\$#]+\.[a-zA-Z]{2,5}/;
   // variable de control:
   var verificar = false;
+  var n;
   // datos de formulario
   var emailChequeo = /^[0-9a-zA-Z-_\$#]+@[0-9a-zA-Z-_\$#]+\.[a-zA-Z]{2,5}/;
   var cedula = document.getElementById("cedula").value.replace(/^\s+|\s+$/g, '');
@@ -55,6 +57,7 @@ function validacionAlumno(){
   var curso = document.getElementById("curso").value.replace(/^\s+|\s+$/g, '');
 
 // cedula
+  n = parseInt(cedula);
   if (cedula === "") {
     $('#cedula').parent().addClass('has-error');
     $("#cedula_chequeo").html('este campo no puede estar vacio.');
@@ -72,9 +75,15 @@ function validacionAlumno(){
     $("#cedula_chequeo").html('Este campo no debe ser mayor a 8 caracteres');
     return false;
   }else{
-    $('#cedula').parent().removeClass('has-error').addClass('has-success');
-    $("#cedula_chequeo").html('&nbsp;');
-    verificar = true;
+    if (n < 100000) {
+      $('#cedula').parent().addClass('has-error');
+      $("#cedula_chequeo").html('Favor verifique este campo');
+      return false;
+    }else{
+      $('#cedula').parent().removeClass('has-error').addClass('has-success');
+      $("#cedula_chequeo").html('&nbsp;');
+      verificar = true;
+    }
   }
 // cedula_escolar
   if (cedula_escolar === "") {
