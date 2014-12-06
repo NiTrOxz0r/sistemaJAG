@@ -133,6 +133,7 @@ else :
   $z = date('Y');
   $n = intval(date('Y'));
   $n1 = $n+1;
+  $valido = mktime(0, 0, 0, date("m")+4, 0,0);
   // variables de persona:
   $p_nombre_a = htmlentities($datos['p_nombre_a'], ENT_QUOTES);
   $p_apellido_a = htmlentities($datos['p_apellido_a'], ENT_QUOTES);
@@ -158,18 +159,13 @@ $html = <<<HTML
   <p>
     Se hace constar por medio de la presente que <strong>{$p_nombre_a} {$p_apellido_a}, C&eacute;dula de identidad n&uacute;mero: {$cedula_a}, </strong>
     asociado al representante <strong>{$p_nombre_r} {$p_apellido_r}, C&eacute;dula de identidad n&uacute;mero: {$cedula_r},</strong>
-    particip&oacute; en el proceso de inscripci&oacute;n <strong>{$n}-{$n1}</strong>
-    de la
+    formaliz&oacute; su inscripci&oacute;n y es estudiante de regular de la
     ESCUELA B&Aacute;SICA NACIONAL BOLIVARIANA "JOS&Eacute; ANTONIO GONZ&Aacute;LEZ",
-    asignado al curso <strong>{$curso}</strong>.
+    actualmente cursando en <strong>{$curso}</strong> del período academico <strong>{$n}-{$n1}</strong>
   </p>
   <p>
-    Lorem ipsum dolor sit amet,
-    consectetur adipisicing elit,
-    ed do eiusmod tempor incididunt ut
-    labore et dolore magna aliqua. Ut enim ad
-    minim veniam, quis nostrud exercitation ullamco
-    laboris nisi ut aliquip ex ea commodo consequat.
+    Esta constancia se expide por solicitud de la parte interesada en la ciudad de Caracas,
+    a los {$x} d&iacute;as del mes de {$y} de {$z} y es válida hasta el mes de {$valido} de {$n1}.
   </p>
 </div>
 <div align="center" style="margin:80px 0;">
