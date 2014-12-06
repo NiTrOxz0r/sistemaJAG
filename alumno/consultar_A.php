@@ -35,93 +35,6 @@ if ( (isset($_REQUEST['informacion']) and isset($_REQUEST['tipo']) )
     else:
       header('Location: menucon.php?e=1&error=tipo&q='.$_REQUEST['tipo']);
     endif;
-    // ajustamos la condicion de la busqueda:
-    // if ($_REQUEST['tipo_personal'] === '1') :
-    //   $where = $where." AND personal.tipo_personal = 1";
-    // elseif ($_REQUEST['tipo_personal'] === '2') :
-    //   $where = $where." AND personal.tipo_personal = 2";
-    // elseif ($_REQUEST['tipo_personal'] === '3') :
-    //   $where = $where." AND personal.tipo_personal = 3";
-    // elseif ($_REQUEST['tipo_personal'] === '4') :
-    //   $where = $where." AND personal.tipo_personal = 4";
-    // elseif ($_REQUEST['tipo_personal'] === '5') :
-    //   $where = $where." AND personal.tipo_personal = 5";
-    // elseif ($_REQUEST['tipo_personal'] === '0') :
-    //   $where = $where." AND personal.tipo_personal = 0";
-    // elseif ($_REQUEST['tipo_personal'] === '6') :
-    //   $where = $where." AND personal.tipo_personal = 0";
-    // endif;
-  // endif;
-  // si el pedido no es un listado general:
-  // if ($_REQUEST['tipo'] <> '7') :
-  //   // si el pedido es de un docente:
-  //   if ($_REQUEST['tipo_personal'] === '3') :
-  //     $query = "SELECT
-  //       persona.p_apellido as p_apellido,
-  //       persona.p_nombre as p_nombre,
-  //       persona.cedula as cedula,
-  //       personal.celular as celular,
-  //       persona.telefono as telefono,
-  //       personal.email as email,
-  //       cargo.descripcion as cargo,
-  //       curso.descripcion as curso,
-  //       usuario.seudonimo as seudonimo,
-  //       tipo_usuario.descripcion as tipo_usuario,
-  //       personal.status as status_d,
-  //       usuario.status as status_u
-  //       from persona
-  //       inner join personal
-  //       on personal.cod_persona = persona.codigo
-  //       inner join cargo
-  //       on personal.cod_cargo = cargo.codigo
-  //       inner join asume
-  //       on personal.codigo = asume.cod_docente
-  //       inner join curso
-  //       on asume.cod_curso = curso.codigo
-  //       inner join usuario
-  //       on personal.cod_usr = usuario.codigo
-  //       inner join tipo_usuario
-  //       on usuario.cod_tipo_usr = tipo_usuario.codigo
-  //       $where
-  //       order by
-  //       persona.p_apellido,
-  //       usuario.seudonimo,
-  //       tipo_usuario.descripcion;";
-    // si el pedido no es de un docente:
-    // elseif ($_REQUEST['tipo_personal'] === '1' or $_REQUEST['tipo_personal'] === '2'
-    //   or $_REQUEST['tipo_personal'] === '4' or $_REQUEST['tipo_personal'] === '5'
-    //   or $_REQUEST['tipo_personal'] === '0' or $_REQUEST['tipo_personal'] === '6'):
-    //   $query = "SELECT
-    //     persona.p_apellido as p_apellido,
-    //     persona.p_nombre as p_nombre,
-    //     persona.cedula as cedula,
-    //     personal.celular as celular,
-    //     persona.telefono as telefono,
-    //     persona.telefono_otro as telefono_otro,
-    //     personal.email as email,
-    //     cargo.descripcion as cargo,
-    //     usuario.seudonimo as seudonimo,
-    //     tipo_usuario.descripcion as tipo_usuario,
-    //     personal.status as status_d,
-    //     usuario.status as status_u
-    //     from persona
-    //     inner join personal
-    //     on personal.cod_persona = persona.codigo
-    //     inner join cargo
-    //     on personal.cod_cargo = cargo.codigo
-    //     inner join usuario
-    //     on personal.cod_usr = usuario.codigo
-    //     inner join tipo_usuario
-    //     on usuario.cod_tipo_usr = tipo_usuario.codigo
-    //     $where
-    //     order by
-    //     persona.p_apellido,
-    //     usuario.seudonimo,
-    //     tipo_usuario.descripcion;";
-    // else:
-    //   header('Location: menucon.php?e=2&error=tipo&q='.$_REQUEST['tipo_personal']);
-    // endif;
-    //
     $query = "SELECT *
       from persona
       inner join alumno
@@ -169,6 +82,32 @@ if ( (isset($_REQUEST['informacion']) and isset($_REQUEST['tipo']) )
                 </div>
               </div>
             </div>
+          </div>
+          <?php $enlacePrimario = enlaceDinamico('alumno/form_act_A.php') ?>
+          <?php $constancia = enlaceDinamico('alumno/reportes/constancia-estudio.php') ?>
+          <span class="hidden"
+            data-enlace-primario="<?php echo $enlacePrimario ?>"
+            data-enlace-constancia="<?php echo $constancia ?>"></span>
+          <div class="container">
+            <div class="row margen">
+              <div class="col-xs-6 col-xs-offset-3">
+                <span class="label label-info">Seleccione un registro para consultarlo (abajo hay mas opciones)</span>
+              </div>
+            </div>
+             <div class="row">
+               <div class="col-xs-3 col-xs-offset-3">
+                 <a
+                  id="consultar-cedula"
+                  href="#"
+                  class="push-3 btn btn-warning btn-lg disabled">Consultar registro</a>
+               </div>
+               <div class="col-xs-3">
+                 <a
+                  id="generar-constancia"
+                  href="#"
+                  class="push-3 btn btn-warning btn-lg disabled">Constancia de estudio</a>
+               </div>
+             </div>
           </div>
           <div class="row">
             <div class="col-xs-12">
@@ -274,17 +213,7 @@ if ( (isset($_REQUEST['informacion']) and isset($_REQUEST['tipo']) )
                   <?php endwhile; ?>
                 </tbody>
               </table>
-              <?php $enlacePrimario = enlaceDinamico('alumno/form_act_A.php') ?>
-              <span class="hidden" data-enlace-primario="<?php echo $enlacePrimario ?>"></span>
-               <div class="row center-block">
-                 <div class="col-xs-6 col-xs-offset-3">
-                   <a
-                    id="consultar-cedula"
-                    href="#"
-                    class="push-3 btn btn-warning btn-lg disabled">Consultar registro</a>
-                    <span class="label label-info">Seleccione un registro para consultarlo</span>
-                 </div>
-               </div>
+
             </div>
           </div>
           <div class="row">
@@ -320,11 +249,17 @@ if ( (isset($_REQUEST['informacion']) and isset($_REQUEST['tipo']) )
         <?php $tableJs = enlaceDinamico('java/bootstrap-table/src/locale/bootstrap-table-es-AR.js') ?>
         <script src="<?php echo $tableJs ?>"></script>
         <!-- para el boton consultar -->
-        <?php $tablaBoton = enlaceDinamico('java/otros/tablaBotonCedula-bootstrap-table.js') ?>
+        <?php $tablaBotonConsulta = enlaceDinamico('java/otros/tablaBotonCedula-bootstrap-table.js') ?>
+        <?php $tablaBotonconstancia = enlaceDinamico('java/otros/tablaBotonConstancia-bootstrap-table.js') ?>
         <script type="text/javascript">
           $(function(){
             $.ajax({
-              url: "<?php echo $tablaBoton ?>",
+              url: "<?php echo $tablaBotonConsulta ?>",
+              type: 'POST',
+              dataType: 'script'
+            });
+            $.ajax({
+              url: "<?php echo $tablaBotonconstancia ?>",
               type: 'POST',
               dataType: 'script'
             });

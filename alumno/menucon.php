@@ -11,6 +11,74 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr'], 'sistemaJAG 
       <!-- CONTENIDO EMPIEZA DEBAJO DE ESTO: -->
       <!-- DETALLESE QUE NO ES UN ID SINO UNA CLASE. -->
       <div class="row">
+        <div class="col-xs-8 col-xs-offset-2 bg-info redondeado margenAbajo">
+          <div class="row">
+            <div class="col-xs-12">
+              <h3>
+                Si Ud. desea registrar o actualizar a un alumno de esta
+                institucion, puede hacerlo especificando la cedula de identidad:
+              </h3>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-6 col-sm-offset-3">
+          <form
+            role="form"
+            name="form_A"
+            id="form_A"
+            method="GET">
+            <div class="form-group">
+               <label for="cedula" class="control-label">Cedula:</label>
+              <input
+                class="form-control"
+                type="text"
+                id="cedula"
+                name="cedula"
+                maxlength="8"
+                required>
+              <p class="help-block" id="cedula_chequeo">
+              </p>
+            </div>
+            <div class="form-group hidden">
+               <label for="cedula_r" class="control-label">Cedula del representante:</label>
+              <input
+                class="form-control"
+                type="text"
+                id="cedula_r"
+                name="cedula_r"
+                maxlength="8">
+              <p class="help-block" id="cedula_r_chequeo">
+                Si este alumno va a ser registrado <strong>por primera vez</strong>,
+                es recomendable ir
+                <?php $enlaceP = enlaceDinamico('personalAutorizado/form_reg_P.php') ?>
+                <a href="<?php echo $enlaceP ?>">al proceso de inscripcion</a>,
+                de lo contrario es mejor empezar por la cedula del representante.
+                <em>No se preocupe, la cedula del alumno estara en el formulario de
+                registro de alumno.</em>
+              </p>
+            </div>
+            <div class="row">
+              <div class="col-sm-6 col-sm-offset-3">
+                <input
+                type="submit"
+                id="submitDos"
+                value="Registrar"
+                class="btn btn-default btn-block"
+                disabled>
+              </div>
+            </div>
+            <div id="error" class="chequeo">
+              <!-- chequeo por medio de ajax: -->
+              <span class="error" id="error">
+
+              </span>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="row">
         <div class="col-xs-8 col-xs-offset-2 bg-primary redondeado margenAbajo">
           <div class="row">
             <div class="col-xs-12">
@@ -128,10 +196,10 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr'], 'sistemaJAG 
         <div class="col-xs-8 col-xs-offset-2 bg-info redondeado margenAbajo">
           <div class="row">
             <div class="col-xs-12">
-              <h3>
-                Si Ud. desea registrar o actualizar a un alumno de esta
-                institucion, puede hacerlo especificando la cedula de identidad:
-              </h3>
+              <h4>
+                Tambien puede generar una constancia de inscripcion
+                especificando la cedula de identidad del alumno:
+              </h4>
             </div>
           </div>
         </div>
@@ -140,45 +208,28 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr'], 'sistemaJAG 
         <div class="col-sm-6 col-sm-offset-3">
           <form
             role="form"
-            name="form_A"
-            id="form_A"
+            name="form_constancia"
+            id="form_constancia"
+            action="reportes/constancia-inscripcion.php"
             method="GET">
             <div class="form-group">
-               <label for="cedula" class="control-label">Cedula:</label>
+               <label for="constancia_cedula" class="control-label">Cedula:</label>
               <input
                 class="form-control"
                 type="text"
-                id="cedula"
+                id="constancia_cedula"
                 name="cedula"
                 maxlength="8"
                 required>
-              <p class="help-block" id="cedula_chequeo">
-              </p>
-            </div>
-            <div class="form-group hidden">
-               <label for="cedula_r" class="control-label">Cedula del representante:</label>
-              <input
-                class="form-control"
-                type="text"
-                id="cedula_r"
-                name="cedula_r"
-                maxlength="8">
-              <p class="help-block" id="cedula_r_chequeo">
-                Si este alumno va a ser registrado <strong>por primera vez</strong>,
-                es recomendable ir
-                <?php $enlaceP = enlaceDinamico('personalAutorizado/form_reg_P.php') ?>
-                <a href="<?php echo $enlaceP ?>">al proceso de inscripcion</a>,
-                de lo contrario es mejor empezar por la cedula del representante.
-                <em>No se preocupe, la cedula del alumno estara en el formulario de
-                registro de alumno.</em>
+              <p class="help-block" id="constancia_cedula_chequeo">
               </p>
             </div>
             <div class="row">
               <div class="col-sm-6 col-sm-offset-3">
                 <input
                 type="submit"
-                id="submitDos"
-                value="Registrar"
+                id="submitTres"
+                value="Generar constancia"
                 class="btn btn-default btn-block"
                 disabled>
               </div>
@@ -282,6 +333,34 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr'], 'sistemaJAG 
             }else{
               return false;
             };
+          });
+          $('#constancia_cedula').on('change', function(){
+            var constanciaCedula = $(this).val();
+            if ( validacionCedula(constanciaCedula) ) {
+              $.ajax({
+                url: '../java/cedula.php',
+                type: 'POST',
+                data: {cedula:constanciaCedula},
+                success:function(datos){
+                  var disponible = $(datos+'#disponible').data('disponible');
+                  if (disponible === true) {
+                    $('#submitTres').prop('disabled', true);
+                  }else{
+                    $('#submitTres').prop('disabled', false);
+                  }
+                },
+              });
+            }else{
+              return false;
+            }
+          });
+          $('#form_constancia').on('submit', function(){
+            var chequeo = $('#constancia_cedula').val();
+            if ( validacionCedula(chequeo) ) {
+              return true;
+            }else{
+              return false;
+            }
           });
         });
       </script>
