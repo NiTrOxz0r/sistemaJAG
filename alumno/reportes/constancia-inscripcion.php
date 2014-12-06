@@ -4,8 +4,37 @@ require_once($enlace);
 $enlace = enlaceDinamico('php/tcpdf/tcpdf.php');
 require_once($enlace);
 
+if(!isset($_SESSION)){
+session_start();
+}
+validarUsuario(1, 1, $_SESSION['cod_tipo_usr']);
 if (!( isset($_GET['cedula']) and preg_match( "/[0-9]{8}/", $_GET['cedula']) )) :
-  echo "error.";
+  empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);?>
+  <div id="contenido_actualizar_A">
+    <div id="blancoAjax">
+      <div class="container">
+        <div class="row">
+          <div class="jumbotron">
+            <h1>Ups!</h1>
+            <p>
+              Error en el proceso de reporte!
+            </p>
+            <p>
+              ¿O sera que entro en esta pagina erroneamente?
+            </p>
+            <p class="bg-warning">
+              Si este es un problema recurrente, contacte a un administrador del sistema.
+            </p>
+            <p>
+              <?php $index = enlaceDinamico(); ?>
+              <a href="<?php echo $index ?>" class="btn btn-primary btn-lg">Regresar al sistema</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<?php finalizarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);
 else :
 $conexion = conexion();
 $cedula = mysqli_escape_string($conexion, $_GET['cedula']);
@@ -129,16 +158,8 @@ $html = <<<HTML
 </div>
 <div style="text-align: justify; padding:0 40px;">
   <p>
-    Se hace constar por medio de la presente que
-    <strong>
-      {$p_nombre_a} {$p_apellido_a},
-      C&eacute;dula de identidad n&uacute;mero: {$cedula_a},
-    </strong>
-    asociado al representante
-    <strong>
-      {$p_nombre_r} {$p_apellido_r},
-      C&eacute;dula de identidad n&uacute;mero: {$cedula_r},
-    </strong>
+    Se hace constar por medio de la presente que <strong>{$p_nombre_a} {$p_apellido_a}, C&eacute;dula de identidad n&uacute;mero: {$cedula_a}, </strong>
+    asociado al representante <strong>{$p_nombre_r} {$p_apellido_r}, C&eacute;dula de identidad n&uacute;mero: {$cedula_r},</strong>
     particip&oacute; en el proceso de inscripci&oacute;n <strong>{$n}-{$n1}</strong>
     de la
     ESCUELA B&Aacute;SICA NACIONAL BOLIVARIANA "JOS&Eacute; ANTONIO GONZ&Aacute;LEZ",
