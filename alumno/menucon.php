@@ -153,25 +153,6 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr'], 'sistemaJAG 
               <p class="help-block" id="informacion_chequeo">
               </p>
             </div>
-            <!-- <div class="form-group">
-              <label
-              for="tipo_personal"
-              id="tipo_personal_titulo"
-              class="control-label">Seleccione:</label>
-              <?php $query = "SELECT codigo, descripcion from tipo_personal where status = 1;";
-                $resultado = conexion($query);?>
-              <select class="form-control" name="tipo_personal" id="tipo_personal" required>
-                <option value="" selected="selected">--Seleccione--</option>
-                <?php while ( $datos = mysqli_fetch_array($resultado) ) : ?>
-                  <option value="<?php echo $datos['codigo']; ?>">
-                    <?php echo $datos['descripcion']; ?>
-                  </option>
-                <?php endwhile; ?>
-                <option class="hidden" hidden value="6">Todos</option>
-              </select>
-              <p class="help-block" id="tipo_personal_chequeo">
-              </p>
-            </div> -->
             <div class="row">
               <div class="col-sm-6 col-sm-offset-3">
                 <input

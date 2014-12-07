@@ -31,7 +31,6 @@ if ( (isset($_REQUEST['informacion']) and isset($_REQUEST['tipo']) )
     elseif ($_REQUEST['tipo'] === '6') :
       $where = "where (alumno.status = 0 or persona.status = 0) ";
     else:
-      header('Location: menucon.php?e=1&error=tipo&q='.$_REQUEST['tipo']);
     endif;
     $query = "SELECT *
       from persona
@@ -39,7 +38,7 @@ if ( (isset($_REQUEST['informacion']) and isset($_REQUEST['tipo']) )
       on alumno.cod_persona = persona.codigo
       $where
       order by
-      persona.p_apellido;";
+      persona.p_apellido, persona.cedula;";
   // el pedido es un listado general:
   else:
     $where = "where (persona.status = 0 or persona.status = 1) ";
@@ -50,136 +49,14 @@ if ( (isset($_REQUEST['informacion']) and isset($_REQUEST['tipo']) )
       on alumno.cod_persona = persona.codigo
       $where
       order by
-      persona.p_apellido;";
+      persona.p_apellido, persona.cedula;";
   endif;
-  $resultado = conexion($query); ?>
-  <?php if ($resultado):
+  $resultado = conexion($query);
+  if ($resultado):
     // crea un nuevo documento pdf por medio de la clase TCDPF
-    $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
-    $jquery = enlaceDinamico('java/jquery-1.11.0.min.js');
-    $bootstrap = enlaceDinamico('css/bootstrap/css/bootstrap.min.css');
-    $datos = array();
-$html = <<<HTML
-<!-- jQuery -->
-<script type="text/javascript" src="<?php echo {$jquery} ?>"></script>
-<!-- Bootstrap -->
-<link href="<?php echo {$bootstrap} ?>" rel="stylesheet">
-<div id="contenido_consultar_U">
-  <div id="blancoAjax">
-    <!-- CONTENIDO EMPIEZA DEBAJO DE ESTO: -->
-    <!-- DETALLESE QUE NO ES UN ID SINO UNA CLASE. -->
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-xs-12">
-          <table
-            id="tabla"
-            class="table table-bordered"
-            data-toggle="tablex"
-            data-height="600"
-            data-sort-name="p_apellido"
-            >
-            <thead>
-              <th data-field="cedula" data-sortable="true" data-switchable="false">Cedula</th>
-              <th data-field="cedula_escolar" data-sortable="true" data-switchable="false">Cedula escolar</th>
-              <th data-field="p_apellido" data-sortable="true">Primer Apellido</th>
-              <th data-field="p_nombre" data-sortable="true">Primer Nombre</th>
-              <th data-field="curso" data-sortable="true">Curso</th>
-              <th data-field="telefono" data-sortable="false">Telefono</th>
-              <th data-field="telefono_otro" data-sortable="true" data-visible="true">Telf. Ad.</th>
-              <th data-field="sexo" data-sortable="true">sexo</th>
-              <th data-field="discapacidad" data-sortable="true">Discapacidad</th>
-              <th data-field="vacuna" data-sortable="true">Cert. vacunacion</th>
-              <th data-field="p_apellido_r" data-sortable="true">Primer Apellido (R)</th>
-              <th data-field="p_nombre_r" data-sortable="true">Primer Nombre (R)</th>
-              <th data-field="cedula_r" data-sortable="true" data-switchable="false">Cedula (R)</th>
-            </thead>
-            <tbody>
-HTML;
-              while( $datos = mysqli_fetch_array($resultado) ) :
-                $query = "SELECT descripcion
-                    from curso
-                    inner join asume
-                    on asume.cod_curso = curso.codigo
-                    where asume.cod_curso = $datos[cod_curso];";
-                    $sql = conexion($query);
-                    $curso = mysqli_fetch_assoc($sql);
-                  if ($sql->num_rows <> 0) :
-                    $curso = "<td class='curso'>$curso[descripcion]</td>";
-                  endif;
-                $query = "SELECT descripcion
-                  from discapacidad where codigo = $datos[cod_discapacidad];";
-                  $sql = conexion($query);
-                  $discapacidad = mysqli_fetch_assoc($sql);
-                $discapacidad="<td>$discapacidad[descripcion]</td>";
-$html .= <<<HTML
-                <tr>
-                  <td class="cedula">
-                    {$datos[cedula]}
-                  </td>
-                  <td class="cedula_escolar">
-                    {$datos[cedula_escolar]}
-                  </td>
-                  <td>
-                    {$datos[p_apellido]}
-                  </td>
-                  <td>
-                    {$datos[p_nombre]}
-                  </td>
-                  {$curso}
-                  <td>
-                    $datos[telefono] === (null) ? 'SinRegistros':$datos[telefono]
-                  </td>
-                  <td>
-                    $datos[telefono_otro] === (null) ? 'SinRegistros':$datos[telefono_otro]
-                  </td>
-                  <td>
-                    $datos[sexo] === ('0') ? 'Masculino':'Femenino'
-                  </td>
-                  {$discapacidad}
-                  <td>
-                    <?php $datos[certificado_vacuna] === ('s') ? 'Si posee':'No posee' ?>
-                  </td>
-                  <?php $query = "SELECT p_nombre, p_apellido, cedula
-                  from persona
-                  inner join personal_autorizado
-                  on persona.codigo = personal_autorizado.cod_persona
-                  where personal_autorizado.codigo = $datos[cod_representante]";
-                  $sql = conexion($query);
-                  $representante = mysqli_fetch_assoc($sql); ?>
-                  <?php if ($representante): ?>
-                    <td>
-                      <?php $representante[p_apellido] ?>
-                    </td>
-                    <td>
-                      <?php $representante[p_nombre] ?>
-                    </td>
-                    <td>
-                      <?php $representante[cedula] ?>
-                    </td>
-                  <?php endif ?>
-                </tr>
-HTML;
-              endwhile;
-$html .= <<<HTML
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-    <!-- CSS de bootstrap-table -->
-    <?php $tableCss = enlaceDinamico('java/bootstrap-table/src/bootstrap-table.css') ?>
-    <link rel="stylesheet" href="<?php echo $tableCss ?>">
-    <!-- JS de bootstrap-table -->
-    <?php $tableJs = enlaceDinamico('java/bootstrap-table/src/bootstrap-table.js') ?>
-    <script src="<?php echo $tableJs ?>"></script>
-    <!-- Locale a español -->
-    <?php $tableJs = enlaceDinamico('java/bootstrap-table/src/locale/bootstrap-table-es-AR.js') ?>
-    <!-- CONTENIDO TERMINA ARRIBA DE ESTO: -->
-  </div>
-</div>
-HTML;
+    $pdf = new TCPDF('L', PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
     // Informacion inicial del documento
-    $pdf->SetCreator(PDF_CREATOR);
+    $pdf->SetCreator('sistemaJAG');
     $pdf->SetAuthor('EBNB Jose Antonio Gonzalez');
     $pdf->SetTitle('Constancia de inscripcion');
 
@@ -205,10 +82,7 @@ HTML;
 
     // set image scale factor (escala imagenes)
     $pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
-
-    // set default font subsetting mode
-    $pdf->setFontSubsetting(true);
-
+    $pdf->SetFontSize(8);
     // crea una pagina
     $pdf->AddPage();
 
@@ -238,16 +112,91 @@ HTML;
     $valido = date('m');
     $valido = date('m', strtotime("+3 months", strtotime($valido)));
     $valido = $meses[$valido];
-    // variables de persona:
-    $p_nombre_a = htmlentities($datos['p_nombre_a'], ENT_QUOTES);
-    $p_apellido_a = htmlentities($datos['p_apellido_a'], ENT_QUOTES);
-    $p_nombre_r = htmlentities($datos['p_nombre_r'], ENT_QUOTES);
-    $p_apellido_r = htmlentities($datos['p_apellido_r'], ENT_QUOTES);
-    $cedula_a = htmlentities($datos['cedula_a'], ENT_QUOTES);
-    $cedula_r = htmlentities($datos['cedula_r'], ENT_QUOTES);
-    $curso = htmlentities($datos['curso'], ENT_QUOTES);
     // contenido a ejectuar para pdf:
-
+    $estilo = "<style>
+      .par { background-color:#FFF; }
+      .inpar { background-color:#EEE; }
+      table td{
+        padding: 5px;
+      }
+    </style>";
+    $encabezado = $estilo.'<table style="" cellspacing="0">';
+    $thead = '<thead>
+                <tr>
+                  <th>Cedula</th>
+                  <th>Cedula escolar</th>
+                  <th>Primer Apellido</th>
+                  <th>Primer Nombre</th>
+                  <th>Curso</th>
+                  <th>Telefono</th>
+                  <th>Telf. Ad.</th>
+                  <th>sexo</th>
+                  <th>Discapacidad</th>
+                  <th>Cert. vacunacion</th>
+                  <th>Primer Apellido (R)</th>
+                  <th>Primer Nombre (R)</th>
+                  <th>Cedula (R)</th>
+                </tr>
+              </thead>';
+    $tbody = '';
+    $c = 0;
+    while ( $datos = mysqli_fetch_array($resultado) ) :
+      $clase = ($c%2==1) ? 'inpar' : 'par';
+      $query = "SELECT descripcion
+        from curso
+        inner join asume
+        on asume.cod_curso = curso.codigo
+        where asume.cod_curso = $datos[cod_curso];";
+        $sql = conexion($query);
+        $curso = mysqli_fetch_assoc($sql);
+      if ($sql->num_rows <> 0) :
+        $infoCurso = $curso['descripcion'];
+      endif;
+      $query = "SELECT descripcion
+      from discapacidad where codigo = $datos[cod_discapacidad];";
+      $sql = conexion($query);
+      $discapacidad = mysqli_fetch_assoc($sql);
+      $telefono = $datos['telefono'] === (null) ? 'Sin Registros':$datos['telefono'];
+      $telefono_otro = $datos['telefono_otro'] === (null) ? 'Sin Registros':$datos['telefono_otro'];
+      $sexo = $datos['sexo'] === ('0') ? 'Masculino':'Femenino';
+      $vacuna = $datos['certificado_vacuna'] === ('s') ? 'Si posee':'No posee';
+      $query = "SELECT p_nombre, p_apellido, cedula
+      from persona
+      inner join personal_autorizado
+      on persona.codigo = personal_autorizado.cod_persona
+      where personal_autorizado.codigo = $datos[cod_representante]";
+      $sql = conexion($query);
+      $representante = mysqli_fetch_assoc($sql);
+      if ($representante) :
+        $p_apellido_r = $representante['p_apellido'];
+        $p_nombre_r = $representante['p_nombre'];
+        $cedula_r = $representante['cedula'];
+      else:
+        $p_apellido_r = '-';
+        $p_nombre_r = '-';
+        $cedula_r = '-';
+      endif;
+      $tbody .= '<tbody>
+                  <tr>
+                    <td class="'.$clase.'" >'.$datos['cedula'].'</td>
+                    <td class="'.$clase.'" >'.$datos['cedula_escolar'].'</td>
+                    <td class="'.$clase.'" >'.$datos['p_apellido'].'</td>
+                    <td class="'.$clase.'" >'.$datos['p_nombre'].'</td>
+                    <td class="'.$clase.'" >'.$infoCurso.'</td>
+                    <td class="'.$clase.'" >'.$telefono.'</td>
+                    <td class="'.$clase.'" >'.$telefono_otro.'</td>
+                    <td class="'.$clase.'" >'.$sexo.'</td>
+                    <td class="'.$clase.'" >'.$discapacidad['descripcion'].'</td>
+                    <td class="'.$clase.'" >'.$vacuna.'</td>
+                    <td class="'.$clase.'" >'.$p_apellido_r.'</td>
+                    <td class="'.$clase.'" >'.$p_nombre_r.'</td>
+                    <td class="'.$clase.'" >'.$cedula_r.'</td>
+                  </tr>
+                </tbody>';
+      $c++;
+    endwhile;
+    $pie = '</table>';
+    $html = $encabezado.$thead.$tbody.$pie;
     // magia:
     // Print text using writeHTMLCell()
     $pdf->writeHTMLCell(0, 0, '', '', $html, 0, 1, 0, true, '', true);
@@ -256,133 +205,10 @@ HTML;
 
     // termina el proceso y crea el archivo:
     $y = date('m');
-    $nombre = "constancia-inscripcion-$cedula_a-$x-$y-$z.pdf";
+    $nombre = "listado-alumnos-$x-$y-$z.pdf";
     $pdf->Output($nombre, 'I');
-
-    //FINALIZAMOS LA PAGINA:
-    //trae footer.php y cola.php
-    // finalizarPagina(3, 3); ?>
-  <?php endif ?>
-<?php mysqli_close($conexion);?>
-<?php else: ?>
-  <?php header('Location: menucon.php?error=vacio'); ?>
-<?php endif; ?>
-<?php if (false == true): ?>
-  $jquery = enlaceDinamico('java/jquery-1.11.0.min.js');
-  $bootstrap = enlaceDinamico('css/bootstrap/css/bootstrap.min.css');?>
-  <!-- jQuery -->
-  <script type="text/javascript" src="<?php echo $jquery ?>"></script>
-  <!-- Bootstrap -->
-  <link href="<?php echo $bootstrap ?>" rel="stylesheet">
-  <div id="contenido_consultar_U">
-    <div id="blancoAjax">
-      <!-- CONTENIDO EMPIEZA DEBAJO DE ESTO: -->
-      <!-- DETALLESE QUE NO ES UN ID SINO UNA CLASE. -->
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-xs-12">
-            <table
-              id="tabla"
-              class="table table-bordered"
-              data-toggle="tablex"
-              data-height="600"
-              data-sort-name="p_apellido"
-              >
-              <thead>
-                <th data-field="cedula" data-sortable="true" data-switchable="false">Cedula</th>
-                <th data-field="cedula_escolar" data-sortable="true" data-switchable="false">Cedula escolar</th>
-                <th data-field="p_apellido" data-sortable="true">Primer Apellido</th>
-                <th data-field="p_nombre" data-sortable="true">Primer Nombre</th>
-                <th data-field="curso" data-sortable="true">Curso</th>
-                <th data-field="telefono" data-sortable="false">Telefono</th>
-                <th data-field="telefono_otro" data-sortable="true" data-visible="true">Telf. Ad.</th>
-                <th data-field="sexo" data-sortable="true">sexo</th>
-                <th data-field="discapacidad" data-sortable="true">Discapacidad</th>
-                <th data-field="vacuna" data-sortable="true">Cert. vacunacion</th>
-                <th data-field="p_apellido_r" data-sortable="true">Primer Apellido (R)</th>
-                <th data-field="p_nombre_r" data-sortable="true">Primer Nombre (R)</th>
-                <th data-field="cedula_r" data-sortable="true" data-switchable="false">Cedula (R)</th>
-              </thead>
-              <tbody>
-                <?php while( $datos = mysqli_fetch_array($resultado) ) : ?>
-                  <tr>
-                    <td class="cedula">
-                      <?php echo $datos['cedula'] ?>
-                    </td>
-                    <td class="cedula_escolar">
-                      <?php echo $datos['cedula_escolar'] ?>
-                    </td>
-                    <td>
-                      <?php echo $datos['p_apellido'] ?>
-                    </td>
-                    <td>
-                      <?php echo $datos['p_nombre'] ?>
-                    </td>
-                    <?php $query = "SELECT descripcion
-                      from curso
-                      inner join asume
-                      on asume.cod_curso = curso.codigo
-                      where asume.cod_curso = $datos[cod_curso];";
-                      $sql = conexion($query);
-                      $curso = mysqli_fetch_assoc($sql);
-                    if ($sql->num_rows <> 0) :?>
-                      <td class="curso">
-                        <?php echo $curso['descripcion'] ?>
-                      </td>
-                    <?php endif ?>
-                    <td>
-                      <?php echo $datos['telefono'] === (null) ? 'SinRegistros':$datos['telefono'] ?>
-                    </td>
-                    <td>
-                      <?php echo $datos['telefono_otro'] === (null) ? 'SinRegistros':$datos['telefono_otro'] ?>
-                    </td>
-                    <td>
-                      <?php echo $datos['sexo'] === ('0') ? 'Masculino':'Femenino' ?>
-                    </td>
-                    <?php $query = "SELECT descripcion
-                      from discapacidad where codigo = $datos[cod_discapacidad];";
-                      $sql = conexion($query);
-                      $discapacidad = mysqli_fetch_assoc($sql); ?>
-                    <td>
-                      <?php echo $discapacidad['descripcion'] ?>
-                    </td>
-                    <td>
-                      <?php echo $datos['certificado_vacuna'] === ('s') ? 'Si posee':'No posee' ?>
-                    </td>
-                    <?php $query = "SELECT p_nombre, p_apellido, cedula
-                    from persona
-                    inner join personal_autorizado
-                    on persona.codigo = personal_autorizado.cod_persona
-                    where personal_autorizado.codigo = $datos[cod_representante]";
-                    $sql = conexion($query);
-                    $representante = mysqli_fetch_assoc($sql); ?>
-                    <?php if ($representante): ?>
-                      <td>
-                        <?php echo $representante['p_apellido'] ?>
-                      </td>
-                      <td>
-                        <?php echo $representante['p_nombre'] ?>
-                      </td>
-                      <td>
-                        <?php echo $representante['cedula'] ?>
-                      </td>
-                    <?php endif ?>
-                  </tr>
-                <?php endwhile; ?>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-      <!-- CSS de bootstrap-table -->
-      <?php $tableCss = enlaceDinamico('java/bootstrap-table/src/bootstrap-table.css') ?>
-      <link rel="stylesheet" href="<?php echo $tableCss ?>">
-      <!-- JS de bootstrap-table -->
-      <?php $tableJs = enlaceDinamico('java/bootstrap-table/src/bootstrap-table.js') ?>
-      <script src="<?php echo $tableJs ?>"></script>
-      <!-- Locale a español -->
-      <?php $tableJs = enlaceDinamico('java/bootstrap-table/src/locale/bootstrap-table-es-AR.js') ?>
-      <!-- CONTENIDO TERMINA ARRIBA DE ESTO: -->
-    </div>
-  </div>
-<?php endif ?>
+    // echo $html;
+  endif;
+mysqli_close($conexion);
+else:
+endif; ?>
