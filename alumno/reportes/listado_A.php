@@ -6,6 +6,8 @@ $enlace = $_SERVER['DOCUMENT_ROOT']."/github/sistemaJAG/php/master.php";
 require_once($enlace);
 $enlace = enlaceDinamico('php/tcpdf/tcpdf.php');
 require_once($enlace);
+$enlace = enlaceDinamico('php/clases/claseTCPDFEnvenenado.php');
+require_once($enlace);
 // invocamos validarUsuario.php desde master.php
 validarUsuario(1, 1, $_SESSION['cod_tipo_usr']);
 
@@ -54,7 +56,7 @@ if ( (isset($_REQUEST['informacion']) and isset($_REQUEST['tipo']) )
   $resultado = conexion($query);
   if ($resultado):
     // crea un nuevo documento pdf por medio de la clase TCDPF
-    $pdf = new TCPDF('L', PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
+    $pdf = new TCPDFEnvenenado('L', PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
     // Informacion inicial del documento
     $pdf->SetCreator('sistemaJAG');
     $pdf->SetAuthor('EBNB Jose Antonio Gonzalez');
@@ -63,7 +65,7 @@ if ( (isset($_REQUEST['informacion']) and isset($_REQUEST['tipo']) )
     // crea data del header y footer:
     $pdf->SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, PDF_HEADER_TITLE.' 001', PDF_HEADER_STRING, array(0,64,255), array(0,64,128));
     $pdf->setFooterData(array(0,64,0), array(0,64,128));
-    $pdf->setPrintHeader(false);
+    $pdf->setPrintHeader(true);
 
     // fuentes de header y footer
     $pdf->setHeaderFont(Array(PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN));

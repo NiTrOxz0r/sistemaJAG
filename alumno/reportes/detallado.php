@@ -50,38 +50,38 @@ if (!( isset($_GET['cedula']) and preg_match( "/[0-9]{8}/", $_GET['cedula']) )) 
 else :
   $conexion = conexion();
   $cedula = mysqli_escape_string($conexion, $_GET['cedula']);
-  $query = "SET lc_time_names = 'es_MX';";
-  $resultado = conexion($query);
   $query = "SELECT
-  datosAlumno.p_apellido as p_apellido_a,
-  datosAlumno.p_nombre as p_nombre_a,
-  datosAlumno.cedula as cedula_a,
-  datosAlumno.sexo as sexo,
-  (year(curdate()) - year(datosAlumno.fec_nac)) as edad,
-  DAYOFMONTH(datosAlumno.fec_nac) as dia,
-  MONTH(datosAlumno.fec_nac) as mes,
-  year(datosAlumno.fec_nac) as anio,
-  alumno.cedula_escolar,
-  alumno.lugar_nac,
+  persona.codigo, cedula, cedula_escolar, nacionalidad,
+  p_nombre, s_nombre, p_apellido, s_apellido,
+  sexo, fec_nac, lugar_nac, telefono, telefono_otro,
   curso.descripcion as curso,
-  periodo_academico.descripcion,
-  representante.p_apellido as p_apellido_r,
-  representante.p_nombre as p_nombre_r,
-  representante.cedula as cedula_r
-  from alumno
-  inner join personal_autorizado
-  on alumno.cod_representante = personal_autorizado.codigo
-  inner join persona as datosAlumno
-  on alumno.cod_persona = datosAlumno.codigo
-  inner join persona as representante
-  on personal_autorizado.cod_persona = representante.codigo
+  parroquia.descripcion as parroquia,
+  direccion_exacta as direccion,
+  acta_num_part_nac, acta_folio_num_part_nac,
+  plantel_procedencia, repitiente,
+  altura, peso,
+  camisa.descripcion as camisa,
+  pantalon.descripcion as pantalon,
+  zapato, certificado_vacuna,
+  discapacidad.descripcion as discapacidad
+  FROM persona
+  inner join alumno
+  on persona.codigo = alumno.cod_persona
+  inner join talla as camisa
+  on alumno.camisa = camisa.codigo
+  inner join talla as pantalon
+  on alumno.pantalon = pantalon.codigo
+  inner join discapacidad
+  on alumno.cod_discapacidad = discapacidad.codigo
   inner join asume
   on alumno.cod_curso = asume.cod_curso
   inner join curso
   on asume.cod_curso = curso.codigo
-  inner join periodo_academico
-  on asume.periodo_academico = periodo_academico.codigo
-  where datosAlumno.cedula = $cedula;";
+  inner join direccion
+  on persona.codigo = direccion.cod_persona
+  inner join parroquia
+  on direccion.cod_parroquia = parroquia.codigo
+  where cedula = '$cedula';";
   $resultado = conexion($query);
   if ($resultado->num_rows === 1) :
     $datos = mysqli_fetch_assoc($resultado);
@@ -154,66 +154,65 @@ else :
     $n = intval(date('Y'));
     $n1 = $n+1;
     // variables de persona:
-    $p_nombre_a = htmlentities($datos['p_nombre_a'], ENT_QUOTES);
-    $p_apellido_a = htmlentities($datos['p_apellido_a'], ENT_QUOTES);
-    $p_nombre_r = htmlentities($datos['p_nombre_r'], ENT_QUOTES);
-    $p_apellido_r = htmlentities($datos['p_apellido_r'], ENT_QUOTES);
-    $cedula_a = htmlentities($datos['cedula_a'], ENT_QUOTES);
-    $cedula_r = htmlentities($datos['cedula_r'], ENT_QUOTES);
-    $curso = htmlentities($datos['curso'], ENT_QUOTES);
-    $edad = $datos['edad'];
+    // $p_nombre_r = htmlentities($datos['p_nombre_r'], ENT_QUOTES);
+    // $p_apellido_r = htmlentities($datos['p_apellido_r'], ENT_QUOTES);
+    $cedula = $datos['cedula'];
+    $cedula_escolar = $datos['cedula_escolar'];
+    $nacionalidad = $datos['nacionalidad'] === ('v') ? 'Venezolano':'Extrangero';
+    $p_nombre = htmlentities($datos['p_nombre'], ENT_QUOTES);
+    $p_nombre = htmlentities($datos['p_nombre'], ENT_QUOTES);
+    $p_apellido = htmlentities($datos['p_apellido'], ENT_QUOTES);
+    $s_apellido = htmlentities($datos['s_apellido'], ENT_QUOTES);
+    if ($datos['s_apellido'] != '' && $datos['s_apellido'] != null) :
+      $s_apellido = $datos['s_apellido'];
+    else :
+      $s_apellido = '-';
+    endif;
+    $sexo = $datos['sexo'] === ('0') ? 'Masculino':'Femenino';
+    $fec_nac = $datos['fec_nac'];
     if ($datos['lugar_nac'] != '' && $datos['lugar_nac'] != null) :
-      $lug_nac = htmlentities($datos['lugar_nac'], ENT_QUOTES);
+      $lugar_nac = htmlentities($datos['lugar_nac'], ENT_QUOTES);
+    else :
+      $lugar_nac = 'SIN INFORMACION, FAVOR ACTUALIZAR';
+    endif;
+    $telefono = $datos['telefono'];
+    $telefono_otro = $datos['telefono_otro'];
+    $curso = htmlentities($datos['curso'], ENT_QUOTES);
+    $parroquia = htmlentities($datos['parroquia'], ENT_QUOTES);
+    if ($datos['direccion'] != '' && $datos['direccion'] != null) :
+      $lug_nac = $datos['direccion'];
     else :
       $lug_nac = 'SIN INFORMACION, FAVOR ACTUALIZAR';
     endif;
-    $dia_alumno = $datos['dia'];
-    $mes_alumno = $meses[$datos['mes']];
-    $anio_alumno = $datos['anio'];
-    $articulo = $datos['sexo'] === ('0') ? 'el':'la';
-    $sustantivoAlumno = $datos['sexo'] === ('0') ? 'alumno':'alumna';
-    $nacidoa = $datos['sexo'] === ('0') ? 'nacido':'nacida';
-    $inscritoa = $datos['sexo'] === ('0') ? 'inscrito':'inscrita';
+    $acta_num_part_nac = htmlentities($datos['acta_num_part_nac'], ENT_QUOTES);
+    $acta_folio_num_part_nac = htmlentities($datos['acta_folio_num_part_nac'], ENT_QUOTES);
+    $plantel_procedencia = htmlentities($datos['plantel_procedencia'], ENT_QUOTES);
+    $repitiente = $datos['repitiente'] === ('s') ? 'SI':'NO';
+    $altura = $datos['altura'];
+    $peso = $datos['peso'];
+    $camisa = $datos['camisa'];
+    $pantalon = $datos['pantalon'];
+    $zapato = $datos['zapato'];
+    $certificado_vacuna = $datos['certificado_vacuna'] === ('s') ? 'SI':'NO';
+    $discapacidad = htmlentities($datos['discapacidad'], ENT_QUOTES);
+    // $dia_alumno = $datos['dia'];
+    // $mes_alumno = $meses[$datos['mes']];
+    // $anio_alumno = $datos['anio'];
+    // $articulo = $datos['sexo'] === ('0') ? 'el':'la';
+    // $sustantivoAlumno = $datos['sexo'] === ('0') ? 'alumno':'alumna';
+    // $nacidoa = $datos['sexo'] === ('0') ? 'nacido':'nacida';
+    // $inscritoa = $datos['sexo'] === ('0') ? 'inscrito':'inscrita';
 // contenido a ejectuar para pdf:
 $html = <<<HTML
 <div>
-  <p align="right">CARACAS, {$x} DE {$y} DE {$z} </p>
-</div>
-<div style="margin:80px 0;">
-  <p align="center">CONSTANCIA DE INSCRIPCION</p>
-</div>
-<div style="text-align: justify; padding:0 40px;">
   <p>
-    Quien suscribe, Lic. IRAIDA CAROLINA PONCE, Directora de la U.E.N.B. “JOS&Eacute; ANTONIO GONZ&Aacute;LEZ”,
-    hace constar por medio de la presente que {$articulo} {$sustantivoAlumno}
-    <strong>{$p_nombre_a} {$p_apellido_a}, C&eacute;dula de identidad n&uacute;mero: {$cedula_a}, </strong>
-    de {$edad} años de edad y natural de {$lug_nac}
-    {$nacidoa} el {$dia_alumno} de {$mes_alumno} de {$anio_alumno}
-    fue {$inscritoa} para cursar en este plantel el <strong>{$curso}</strong> de
-    EDUCACIÓN INICIAL en el período escolar <strong>{$n}-{$n1}</strong>.
+    <span>Nacionalidad: <strong>{$nacionalidad}</strong></span>
+    <span>Cedula: <strong>{$cedula}</strong></span>
+    <span>Cedula Escolar: <strong>{$cedula_escolar}</strong></span>
   </p>
   <p>
-    Lorem ipsum dolor sit amet,
-    consectetur adipisicing elit,
-    ed do eiusmod tempor incididunt ut
-    labore et dolore magna aliqua. Ut enim ad
-    minim veniam, quis nostrud exercitation ullamco
-    laboris nisi ut aliquip ex ea commodo consequat.
-  </p>
-</div>
-<div align="center" style="margin:80px 0;">
-  <p>
-    __________________________________________
-  </p>
-  <p>
-    <strong>
-      Lic. IRAIDA CAROLINA PONCE
-    </strong>
-  </p>
-</div>
-<div style="position: absolute;bottom: 0px; text-align:justify">
-  <p>
-    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+    <span>Primer Apellido: <strong>{$p_apellido}</strong></span>
+    <span>Segundo Apellido: <strong>{$s_apellido}</strong></span>
   </p>
 </div>
 HTML;
@@ -225,7 +224,7 @@ HTML;
 
     // termina el proceso y crea el archivo:
     $y = date('m');
-    $nombre = "constancia-inscripcion-$cedula_a-$x-$y-$z.pdf";
+    $nombre = "reporte-$p_apellido-$cedula-$x-$y-$z.pdf";
     $pdf->Output($nombre, 'I');
   else:
     empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);?>

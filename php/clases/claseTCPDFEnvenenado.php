@@ -12,11 +12,10 @@ class TCPDFEnvenenado extends TCPDF {
 
   public function Header() {
     // Logo
-    $this->SetY(30);
     $enlace = enlaceDinamico('imagenes/logo_institucion.jpg');
-    $this->Image($enlace, 0, 0, '30', '30', 'JPG', '', 'T', true, 300, '', false, false, 0, true, false, false);
+    $this->Image($enlace, 20, 10, '30', '30', 'JPG', '', 'T', true, 300, '', false, false, 0, true, false, false);
     // Set font
-    $this->SetFont('helvetica', 'B', 12);
+    $this->SetFont('helvetica', 'B', 10);
     $this->ln();
     // Title,
   // "
