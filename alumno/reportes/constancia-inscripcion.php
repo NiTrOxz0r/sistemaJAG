@@ -13,6 +13,8 @@ $enlace = $_SERVER['DOCUMENT_ROOT']."/github/sistemaJAG/php/master.php";
 require_once($enlace);
 $enlace = enlaceDinamico('php/tcpdf/tcpdf.php');
 require_once($enlace);
+$enlace = enlaceDinamico('php/clases/claseTCPDFEnvenenado.php');
+require_once($enlace);
 
 if(!isset($_SESSION)){
 session_start();
@@ -84,7 +86,7 @@ else :
   if ($resultado->num_rows === 1) :
     $datos = mysqli_fetch_assoc($resultado);
     // crea un nuevo documento pdf por medio de la clase TCDPF
-    $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
+    $pdf = new TCPDFEnvenenado(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
 
     // Informacion inicial del documento
     $pdf->SetCreator(PDF_CREATOR);
@@ -92,9 +94,9 @@ else :
     $pdf->SetTitle('Constancia de inscripcion');
 
     // crea data del header y footer:
-    $pdf->SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, PDF_HEADER_TITLE.' 001', PDF_HEADER_STRING, array(0,64,255), array(0,64,128));
+    // $pdf->SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, PDF_HEADER_TITLE.' 001', PDF_HEADER_STRING, array(0,64,255), array(0,64,128));
     $pdf->setFooterData(array(0,64,0), array(0,64,128));
-    $pdf->setPrintHeader(false);
+    $pdf->setPrintHeader(true);
 
     // fuentes de header y footer
     $pdf->setHeaderFont(Array(PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN));
@@ -102,10 +104,10 @@ else :
 
     // set default monospaced font
     $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
-
+    define(PDF_MARGIN_HEADER20, 100);
     // crea margenes
     $pdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT);
-    $pdf->SetHeaderMargin(PDF_MARGIN_HEADER);
+    $pdf->SetHeaderMargin(PDF_MARGIN_HEADER20);
     $pdf->SetFooterMargin(PDF_MARGIN_FOOTER);
 
     // crea nuevas paginas automaticamente.
@@ -174,11 +176,6 @@ else :
     $inscritoa = $datos['sexo'] === ('0') ? 'inscrito':'inscrita';
 // contenido a ejectuar para pdf:
 $html = <<<HTML
-<div style="min-height:100px; border:2px solid black; min-width:100%;">
-  Republica bolivariana de venezuela, Ministerio del Poder Popular para la Educacion
-  Escuela Basica Nacional Bolivariana "Jose Antonio Gonzalez"
-  etc. etc. etc. el pito y la guacharaca.
-</div>
 <div>
   <p align="right">CARACAS, {$x} DE {$y} DE {$z} </p>
 </div>
