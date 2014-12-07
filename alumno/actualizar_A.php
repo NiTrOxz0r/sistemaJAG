@@ -188,10 +188,20 @@ if ( isset($_POST['cedula']) and preg_match( "/[0-9]{8}/", $_POST['cedula']) ) :
                       puede generar un pdf:
                     </small>
                   </p>
-                  <p>
-                    <a href="reportes/constancia-inscripcion.php?cedula=<?php echo $cedula ?>" class="cons-ins btn btn-info">Constancia Inscricion</a>
-                    <a href="reportes/constancia-estudio.php?cedula=<?php echo $cedula ?>" class="cons-est btn btn-info">Constancia Estudios</a>
-                  </p>
+                  <!-- botones de control -->
+                  <div class="margen">
+                    <div class="row margen">
+                      <div class="col-sm-4">
+                        <a href="reportes/constancia-inscripcion.php?cedula=<?php echo $cedula ?>" class="cons-ins btn btn-default btn-block">Constancia Inscricion</a>
+                      </div>
+                      <div class="col-sm-4">
+                        <a href="reportes/constancia-estudio.php?cedula=<?php echo $cedula ?>" class="cons-est btn btn-default btn-block">Constancia Estudios</a>
+                      </div>
+                      <div class="col-sm-4">
+                        <a href="reportes/detallado.php?cedula=<?php echo $cedula ?>" class="cons-est btn btn-default btn-block">Generar Reporte</a>
+                      </div>
+                    </div>
+                  </div>
                   <p>
                     <?php $index = enlaceDinamico(); ?>
                     <a href="<?php echo $index ?>" class="btn btn-primary btn-lg">Regresar al sistema</a>

@@ -39,20 +39,25 @@ if($reg = mysqli_fetch_array($re)) :?>
     <div id="blancoAjax">
       <div class="container">
         <div class="row">
-        <!-- botones de control -->
-        <div class="margen">
-          <div class="row">
-            <div class="col-sm-2 col-sm-offset-2">
-              <button class="actualizar btn btn-primary btn-block">Actualizar</button>
+          <!-- botones de control -->
+          <div class="margen">
+            <div class="row margen">
+              <div class="col-sm-4 col-sm-offset-4">
+                <button class="actualizar btn btn-primary btn-block">Actualizar</button>
+              </div>
             </div>
-            <div class="col-sm-3">
-              <a href="reportes/constancia-inscripcion.php?cedula=<?php echo $cedula ?>" class="cons-ins btn btn-default btn-block">Constancia Inscricion</a>
-            </div>
-            <div class="col-sm-3">
-              <a href="reportes/constancia-estudio.php?cedula=<?php echo $cedula ?>" class="cons-est btn btn-default btn-block">Constancia Estudios</a>
+            <div class="row margen">
+              <div class="col-sm-4">
+                <a href="reportes/constancia-inscripcion.php?cedula=<?php echo $cedula ?>" class="cons-ins btn btn-default btn-block">Constancia Inscricion</a>
+              </div>
+              <div class="col-sm-4">
+                <a href="reportes/constancia-estudio.php?cedula=<?php echo $cedula ?>" class="cons-est btn btn-default btn-block">Constancia Estudios</a>
+              </div>
+              <div class="col-sm-4">
+                <a href="reportes/detallado.php?cedula=<?php echo $cedula ?>" class="cons-est btn btn-default btn-block">Generar Reporte</a>
+              </div>
             </div>
           </div>
-        </div>
           <!-- http://www.w3schools.com/html/html_forms.asp -->
           <form action="actualizar_A.php" method="POST" id="form" name="form_alu" class="form-horizontal">
             <fieldset>
@@ -734,15 +739,20 @@ if($reg = mysqli_fetch_array($re)) :?>
           </form>
           <!-- botones de control -->
           <div class="margen">
-            <div class="row">
-              <div class="col-sm-2 col-sm-offset-2">
+            <div class="row margen">
+              <div class="col-sm-4 col-sm-offset-4">
                 <button class="actualizar btn btn-primary btn-block">Actualizar</button>
               </div>
-              <div class="col-sm-3">
+            </div>
+            <div class="row margen">
+              <div class="col-sm-4">
                 <a href="reportes/constancia-inscripcion.php?cedula=<?php echo $cedula ?>" class="cons-ins btn btn-default btn-block">Constancia Inscricion</a>
               </div>
-              <div class="col-sm-3">
+              <div class="col-sm-4">
                 <a href="reportes/constancia-estudio.php?cedula=<?php echo $cedula ?>" class="cons-est btn btn-default btn-block">Constancia Estudios</a>
+              </div>
+              <div class="col-sm-4">
+                <a href="reportes/detallado.php?cedula=<?php echo $cedula ?>" class="cons-est btn btn-default btn-block">Generar Reporte</a>
               </div>
             </div>
           </div>

@@ -175,6 +175,7 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr'], 'sistemaJAG 
           </form>
         </div>
       </div>
+      <!-- constancia de estudios -->
       <div class="row">
         <div class="col-xs-8 col-xs-offset-2 bg-info redondeado margenAbajo">
           <div class="row">
@@ -213,6 +214,57 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr'], 'sistemaJAG 
                 type="submit"
                 id="submitTres"
                 value="Generar constancia"
+                class="btn btn-default btn-block"
+                disabled>
+              </div>
+            </div>
+            <div id="error" class="chequeo">
+              <!-- chequeo por medio de ajax: -->
+              <span class="error" id="error">
+
+              </span>
+            </div>
+          </form>
+        </div>
+      </div>
+      <!-- reporte de alumno -->
+      <div class="row">
+        <div class="col-xs-8 col-xs-offset-2 bg-info redondeado margenAbajo">
+          <div class="row">
+            <div class="col-xs-12">
+              <h4>
+                Si desea puede generar un reporte completo de algun alumno:
+              </h4>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-6 col-sm-offset-3">
+          <form
+            role="form"
+            name="form_reporte"
+            id="form_reporte"
+            action="reportes/detallado.php"
+            method="GET">
+            <div class="form-group">
+               <label for="reporte_cedula" class="control-label">Cedula:</label>
+              <input
+                class="form-control"
+                type="text"
+                id="reporte_cedula"
+                name="cedula"
+                maxlength="8"
+                required>
+              <p class="help-block" id="constancia_cedula_chequeo">
+              </p>
+            </div>
+            <div class="row">
+              <div class="col-sm-6 col-sm-offset-3">
+                <input
+                type="submit"
+                id="submitCuatro"
+                value="Generar Reporte"
                 class="btn btn-default btn-block"
                 disabled>
               </div>
@@ -339,6 +391,34 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr'], 'sistemaJAG 
           });
           $('#form_constancia').on('submit', function(){
             var chequeo = $('#constancia_cedula').val();
+            if ( validacionCedula(chequeo) ) {
+              return true;
+            }else{
+              return false;
+            }
+          });
+          $('#reporte_cedula').on('change', function(){
+            var reporteCedula = $(this).val();
+            if ( validacionCedula(reporteCedula) ) {
+              $.ajax({
+                url: '../java/cedula.php',
+                type: 'POST',
+                data: {cedula:reporteCedula},
+                success:function(datos){
+                  var disponible = $(datos+'#disponible').data('disponible');
+                  if (disponible === true) {
+                    $('#submitCuatro').prop('disabled', true);
+                  }else{
+                    $('#submitCuatro').prop('disabled', false);
+                  }
+                },
+              });
+            }else{
+              return false;
+            }
+          });
+          $('#form_reporte').on('submit', function(){
+            var chequeo = $('#reporte_cedula').val();
             if ( validacionCedula(chequeo) ) {
               return true;
             }else{
