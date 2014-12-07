@@ -218,14 +218,14 @@ if ( (isset($_REQUEST['informacion']) and isset($_REQUEST['tipo']) )
                   <div class="col-xs-6 col-xs-offset-3">
                     <span class="label label-info">generara este listado en formato pdf</span>
                   </div>
-                </div>
+                </div><p></p>
                  <div class="row">
                    <div class="col-xs-3 col-xs-offset-3">
                     <?php $enlace = "reportes/listado_A.php?tipo=$_REQUEST[tipo]&informacion=$_REQUEST[informacion]" ?>
                      <a
                       id="generar-pdf"
                       href="<?php echo $enlace ?>"
-                      class="push-3 btn btn-primary btn-lg">Consultar registro</a>
+                      class="push-3 btn btn-primary btn-lg">Generar Reporte</a>
                    </div>
                  </div>
               </div>

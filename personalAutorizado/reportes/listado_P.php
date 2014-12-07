@@ -26,29 +26,29 @@ if ( (isset($_REQUEST['informacion']) and isset($_REQUEST['tipo']) )
       $where = "WHERE persona.p_nombre LIKE '%$valor%' or persona.s_nombre LIKE '%$valor%' ";
     elseif ($_REQUEST['tipo'] === '3') :
       $where = "WHERE persona.p_apellido LIKE '%$valor%' or persona.s_apellido LIKE '%$valor%'";
-    elseif ($_REQUEST['tipo'] === '4') :
-      $where = "WHERE alumno.cod_curso = $valor";
+    // elseif ($_REQUEST['tipo'] === '4') :
+    //   $where = "WHERE alumno.cod_curso = $valor";
     elseif ($_REQUEST['tipo'] === '5') :
-      $where = "where (alumno.status = 1 or persona.status = 1) ";
+      $where = "where (personal_autorizado.status = 1 or persona.status = 1) ";
     elseif ($_REQUEST['tipo'] === '6') :
-      $where = "where (alumno.status = 0 or persona.status = 0) ";
+      $where = "where (personal_autorizado.status = 0 or persona.status = 0) ";
     else:
     endif;
     $query = "SELECT *
       from persona
-      inner join alumno
-      on alumno.cod_persona = persona.codigo
+      inner join personal_autorizado
+      on personal_autorizado.cod_persona = persona.codigo
       $where
       order by
       persona.p_apellido, persona.cedula;";
   // el pedido es un listado general:
   else:
     $where = "where (persona.status = 0 or persona.status = 1) ";
-    $where = $where."AND (alumno.status = 0 or alumno.status = 1)";
+    $where = $where."AND (personal_autorizado.status = 0 or personal_autorizado.status = 1)";
     $query = "SELECT *
       from persona
-      inner join alumno
-      on alumno.cod_persona = persona.codigo
+      inner join personal_autorizado
+      on personal_autorizado.cod_persona = persona.codigo
       $where
       order by
       persona.p_apellido, persona.cedula;";
@@ -126,73 +126,46 @@ if ( (isset($_REQUEST['informacion']) and isset($_REQUEST['tipo']) )
     $thead = '<thead>
                 <tr>
                   <th>Cedula</th>
-                  <th>Cedula escolar</th>
                   <th>Primer Apellido</th>
                   <th>Primer Nombre</th>
-                  <th>Curso</th>
                   <th>Telefono</th>
                   <th>Telf. Ad.</th>
-                  <th>sexo</th>
-                  <th>Discapacidad</th>
-                  <th>Cert. vacunacion</th>
-                  <th>Primer Apellido (R)</th>
-                  <th>Primer Nombre (R)</th>
-                  <th>Cedula (R)</th>
+                  <th>Sexo</th>
+                  <th>Email</th>
+                  <th>Nivel Ed.</th>
+                  <th>Profesion</th>
+                  <th>Tel. Lab.</th>
                 </tr>
               </thead>';
     $tbody = '';
     $c = 0;
     while ( $datos = mysqli_fetch_array($resultado) ) :
       $clase = ($c%2==1) ? 'inpar' : 'par';
-      $query = "SELECT descripcion
-        from curso
-        inner join asume
-        on asume.cod_curso = curso.codigo
-        where asume.cod_curso = $datos[cod_curso];";
-        $sql = conexion($query);
-        $curso = mysqli_fetch_assoc($sql);
-      if ($sql->num_rows <> 0) :
-        $infoCurso = $curso['descripcion'];
-      endif;
-      $query = "SELECT descripcion
-      from discapacidad where codigo = $datos[cod_discapacidad];";
-      $sql = conexion($query);
-      $discapacidad = mysqli_fetch_assoc($sql);
-      $telefono = $datos['telefono'] === (null) ? 'Sin Registros':$datos['telefono'];
-      $telefono_otro = $datos['telefono_otro'] === (null) ? 'Sin Registros':$datos['telefono_otro'];
+      $telefono = $datos['telefono'] === (null) ? '-':$datos['telefono'];
+      $telefono_otro = $datos['telefono_otro'] === (null) ? '-':$datos['telefono_otro'];
+      $telefono_trabajo = $datos['telefono_trabajo'] === (null) ? '-':$datos['telefono_trabajo'];
       $sexo = $datos['sexo'] === ('0') ? 'Masculino':'Femenino';
-      $vacuna = $datos['certificado_vacuna'] === ('s') ? 'Si posee':'No posee';
-      $query = "SELECT p_nombre, p_apellido, cedula
-      from persona
-      inner join personal_autorizado
-      on persona.codigo = personal_autorizado.cod_persona
-      where personal_autorizado.codigo = $datos[cod_representante]";
+      $email = $datos['email'] === (null) ? '-':$datos['email'];
+      $query = "SELECT descripcion
+      from nivel_instruccion where codigo = $datos[nivel_instruccion];";
       $sql = conexion($query);
-      $representante = mysqli_fetch_assoc($sql);
-      if ($representante) :
-        $p_apellido_r = $representante['p_apellido'];
-        $p_nombre_r = $representante['p_nombre'];
-        $cedula_r = $representante['cedula'];
-      else:
-        $p_apellido_r = '-';
-        $p_nombre_r = '-';
-        $cedula_r = '-';
-      endif;
+      $nivel_instruccion = mysqli_fetch_assoc($sql);
+      $query = "SELECT descripcion
+      from profesion where codigo = $datos[profesion];";
+      $sql = conexion($query);
+      $profesion = mysqli_fetch_assoc($sql);
       $tbody .= '<tbody>
                   <tr>
                     <td class="'.$clase.'" >'.$datos['cedula'].'</td>
-                    <td class="'.$clase.'" >'.$datos['cedula_escolar'].'</td>
                     <td class="'.$clase.'" >'.$datos['p_apellido'].'</td>
                     <td class="'.$clase.'" >'.$datos['p_nombre'].'</td>
-                    <td class="'.$clase.'" >'.$infoCurso.'</td>
                     <td class="'.$clase.'" >'.$telefono.'</td>
                     <td class="'.$clase.'" >'.$telefono_otro.'</td>
                     <td class="'.$clase.'" >'.$sexo.'</td>
-                    <td class="'.$clase.'" >'.$discapacidad['descripcion'].'</td>
-                    <td class="'.$clase.'" >'.$vacuna.'</td>
-                    <td class="'.$clase.'" >'.$p_apellido_r.'</td>
-                    <td class="'.$clase.'" >'.$p_nombre_r.'</td>
-                    <td class="'.$clase.'" >'.$cedula_r.'</td>
+                    <td class="'.$clase.'" >'.$email.'</td>
+                    <td class="'.$clase.'" >'.$nivel_instruccion['descripcion'].'</td>
+                    <td class="'.$clase.'" >'.$profesion['descripcion'].'</td>
+                    <td class="'.$clase.'" >'.$telefono_trabajo.'</td>
                   </tr>
                 </tbody>';
       $c++;
