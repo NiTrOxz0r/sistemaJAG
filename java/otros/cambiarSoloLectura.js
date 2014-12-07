@@ -14,21 +14,21 @@
  */
 function cambiarSoloLectura($tabla, tipo){
   var x;
-  $tabla.find('input, select, textarea').each(function(){
+  $tabla.find('input, select, textarea').not('#fec_nac').each(function(){
     if($(this).prop('disabled')){
       x = false;
       $(this).prop('disabled', false);
-      $('#fec_nac').prop('disabled', false).css({
-        'cursor': 'pointer',
-        'background-color': '#FFFFFF'
-      });
+      // $('#fec_nac').prop('disabled', false).css({
+      //   'cursor': 'pointer',
+      //   'background-color': '#FFFFFF'
+      // });
     }else{
       x = true;
       $(this).prop('disabled', true);
-      $('#fec_nac').prop('disabled', true).css({
-        'cursor': 'not-allowed',
-        'background-color': '#eee'
-      });
+      // $('#fec_nac').prop('disabled', true).css({
+      //   'cursor': 'not-allowed',
+      //   'background-color': '#eee'
+      // });
     }
   });
   if (x) {

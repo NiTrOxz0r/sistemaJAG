@@ -306,7 +306,6 @@ if($reg = mysqli_fetch_array($re)) :?>
                               id="fec_nac"
                               placeholder="dele click para mostrar calendario"
                               readonly="readonly"
-                              disabled
                               value="<?php echo $reg['fec_nac'];?>"
                               style="cursor:pointer; background-color: #FFFFFF"
                               required>
@@ -740,10 +739,10 @@ if($reg = mysqli_fetch_array($re)) :?>
                 <button class="actualizar btn btn-primary btn-block">Actualizar</button>
               </div>
               <div class="col-sm-3">
-                <button class="cons-ins btn btn-default btn-block">Constancia Inscricion</button>
+                <a href="reportes/constancia-inscripcion.php?cedula=<?php echo $cedula ?>" class="cons-ins btn btn-default btn-block">Constancia Inscricion</a>
               </div>
               <div class="col-sm-3">
-                <button class="cons-est btn btn-default btn-block">Constancia Estudios</button>
+                <a href="reportes/constancia-estudio.php?cedula=<?php echo $cedula ?>" class="cons-est btn btn-default btn-block">Constancia Estudios</a>
               </div>
             </div>
           </div>

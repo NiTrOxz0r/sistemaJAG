@@ -168,10 +168,10 @@ else :
     $dia_alumno = $datos['dia'];
     $mes_alumno = $meses[$datos['mes']];
     $anio_alumno = $datos['anio'];
-    $articulo = $datos['sexo'] === (0) ? 'el':'la';
-    $sustantivoAlumno = $datos['sexo'] === (0) ? 'alumno':'alumna';
-    $nacidoa = $datos['sexo'] === (0) ? 'nacido':'nacida';
-    $inscritoa = $datos['sexo'] === (0) ? 'inscrito':'inscrita';
+    $articulo = $datos['sexo'] === ('0') ? 'el':'la';
+    $sustantivoAlumno = $datos['sexo'] === ('0') ? 'alumno':'alumna';
+    $nacidoa = $datos['sexo'] === ('0') ? 'nacido':'nacida';
+    $inscritoa = $datos['sexo'] === ('0') ? 'inscrito':'inscrita';
 // contenido a ejectuar para pdf:
 $html = <<<HTML
 <div style="min-height:100px; border:2px solid black; min-width:100%;">
