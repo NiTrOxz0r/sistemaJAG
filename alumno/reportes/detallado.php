@@ -56,6 +56,8 @@ else :
   sexo, fec_nac, lugar_nac, telefono, telefono_otro,
   curso.descripcion as curso,
   parroquia.descripcion as parroquia,
+  municipio.descripcion as municipio,
+  estado.descripcion as estado,
   direccion_exacta as direccion,
   acta_num_part_nac, acta_folio_num_part_nac,
   plantel_procedencia, repitiente,
@@ -81,6 +83,10 @@ else :
   on persona.codigo = direccion.cod_persona
   inner join parroquia
   on direccion.cod_parroquia = parroquia.codigo
+  inner join municipio
+  on parroquia.cod_mun = municipio.codigo
+  inner join estado
+  on municipio.cod_edo = estado.codigo
   where cedula = '$cedula';";
   $resultado = conexion($query);
   if ($resultado->num_rows === 1) :
@@ -104,10 +110,9 @@ else :
 
     // set default monospaced font
     $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
-    define('PDF_MARGIN_HEADER20', 500);
     // crea margenes
     $pdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT);
-    $pdf->SetHeaderMargin('PDF_MARGIN_HEADER20');
+    $pdf->SetHeaderMargin(500);
     $pdf->SetFooterMargin(PDF_MARGIN_FOOTER);
 
     // crea nuevas paginas automaticamente.
@@ -149,7 +154,7 @@ else :
     $n = date('m');
     $mes = $meses[$n];
     $x = date('d');
-    $y = $mes;
+    $y = $n;
     $z = date('Y');
     $n = intval(date('Y'));
     $n1 = $n+1;
@@ -160,7 +165,12 @@ else :
     $cedula_escolar = $datos['cedula_escolar'];
     $nacionalidad = $datos['nacionalidad'] === ('v') ? 'Venezolano':'Extrangero';
     $p_nombre = htmlentities($datos['p_nombre'], ENT_QUOTES);
-    $p_nombre = htmlentities($datos['p_nombre'], ENT_QUOTES);
+    $s_nombre = htmlentities($datos['s_nombre'], ENT_QUOTES);
+    if ($datos['s_nombre'] != '' && $datos['s_nombre'] != null) :
+      $s_nombre = $datos['s_nombre'];
+    else :
+      $s_nombre = '-';
+    endif;
     $p_apellido = htmlentities($datos['p_apellido'], ENT_QUOTES);
     $s_apellido = htmlentities($datos['s_apellido'], ENT_QUOTES);
     if ($datos['s_apellido'] != '' && $datos['s_apellido'] != null) :
@@ -175,24 +185,30 @@ else :
     else :
       $lugar_nac = 'SIN INFORMACION, FAVOR ACTUALIZAR';
     endif;
-    $telefono = $datos['telefono'];
-    $telefono_otro = $datos['telefono_otro'];
+    $telefono = $datos['telefono'] === (null) ? '-':$datos['telefono'];
+    $telefono_otro = $datos['telefono_otro'] === (null) ? '-':$datos['telefono_otro'];
     $curso = htmlentities($datos['curso'], ENT_QUOTES);
     $parroquia = htmlentities($datos['parroquia'], ENT_QUOTES);
+    $municipio = htmlentities($datos['municipio'], ENT_QUOTES);
+    $estado = htmlentities($datos['estado'], ENT_QUOTES);
     if ($datos['direccion'] != '' && $datos['direccion'] != null) :
-      $lug_nac = $datos['direccion'];
+      $direccion_exacta = $datos['direccion'];
     else :
-      $lug_nac = 'SIN INFORMACION, FAVOR ACTUALIZAR';
+      $direccion_exacta = 'SIN INFORMACION, FAVOR ACTUALIZAR';
     endif;
     $acta_num_part_nac = htmlentities($datos['acta_num_part_nac'], ENT_QUOTES);
     $acta_folio_num_part_nac = htmlentities($datos['acta_folio_num_part_nac'], ENT_QUOTES);
-    $plantel_procedencia = htmlentities($datos['plantel_procedencia'], ENT_QUOTES);
+    if ($datos['plantel_procedencia'] != '' && $datos['plantel_procedencia'] != null) :
+      $plantel_procedencia = htmlentities($datos['plantel_procedencia'], ENT_QUOTES);
+    else :
+      $plantel_procedencia = 'SIN INFORMACION, FAVOR ACTUALIZAR';
+    endif;
     $repitiente = $datos['repitiente'] === ('s') ? 'SI':'NO';
-    $altura = $datos['altura'];
-    $peso = $datos['peso'];
-    $camisa = $datos['camisa'];
-    $pantalon = $datos['pantalon'];
-    $zapato = $datos['zapato'];
+    $altura = $datos['altura'] === (null) ? '-':$datos['altura'];
+    $peso = $datos['peso'] === (null) ? '-':$datos['peso'];
+    $camisa = $datos['camisa'] === (null) ? '-':$datos['camisa'];
+    $pantalon = $datos['pantalon'] === (null) ? '-':$datos['pantalon'];
+    $zapato = $datos['zapato'] === (null) ? '-':$datos['zapato'];
     $certificado_vacuna = $datos['certificado_vacuna'] === ('s') ? 'SI':'NO';
     $discapacidad = htmlentities($datos['discapacidad'], ENT_QUOTES);
     // $dia_alumno = $datos['dia'];
@@ -204,16 +220,134 @@ else :
     // $inscritoa = $datos['sexo'] === ('0') ? 'inscrito':'inscrita';
 // contenido a ejectuar para pdf:
 $html = <<<HTML
+<style>
+  table{
+    border-collapse: collapse;
+    text-align: left;
+  }
+  table th{
+    width:16%;
+    padding: 15px 0;
+    margin: 10px 0;
+  }
+  table td{
+    width: 33%;
+  }
+
+</style>
+<p></p>
+<p></p>
 <div>
-  <p>
-    <span>Nacionalidad: <strong>{$nacionalidad}</strong></span>
-    <span>Cedula: <strong>{$cedula}</strong></span>
-    <span>Cedula Escolar: <strong>{$cedula_escolar}</strong></span>
-  </p>
-  <p>
-    <span>Primer Apellido: <strong>{$p_apellido}</strong></span>
-    <span>Segundo Apellido: <strong>{$s_apellido}</strong></span>
-  </p>
+<h1 align="center"><strong>REPORTE DE ALUMNO</strong></h1>
+  <div>
+    <table cellspacing="0" style="border-collapse:collapse;text-align: left;">
+      <tbody>
+        <tr>
+          <th>Nac.:</th>
+          <td><strong>{$nacionalidad}</strong></td>
+        </tr>
+        <tr>
+          <th width="48%">Numero de acta partida nacimiento:</th>
+          <td><strong>{$acta_num_part_nac}</strong></td>
+        </tr>
+        <tr>
+          <th width="48%">Numero de folio partida nacimiento:</th>
+          <td><strong>{$acta_folio_num_part_nac}</strong></td>
+        </tr>
+        <tr>
+          <th>Cedula:</th>
+          <td><strong>{$cedula}</strong></td>
+          <th>Ced. Escolar:</th>
+          <td><strong>{$cedula_escolar}</strong></td>
+        </tr>
+        <tr>
+          <th>P. Apellido:</th>
+          <td><strong>{$p_apellido}</strong></td>
+          <th>S. Apellido:</th>
+          <td><strong>{$s_apellido}</strong></td>
+        </tr>
+        <tr>
+          <th>P. Nombre:</th>
+          <td><strong>{$p_nombre}</strong></td>
+          <th>S. Nombre:</th>
+          <td><strong>{$s_nombre}</strong></td>
+        </tr>
+        <tr>
+          <th>Sexo:</th>
+          <td><strong>{$sexo}</strong></td>
+          <th>Fec. Nac.:</th>
+          <td><strong>{$fec_nac}</strong></td>
+        </tr>
+        <tr>
+          <th colspan="2" width="100%">Lugar de nacimiento:</th>
+          <td></td>
+        </tr>
+        <tr>
+          <td rowspan="1" colspan="3" width="100%"><strong>{$lugar_nac}</strong></td>
+        </tr>
+        <tr>
+          <th>Telefono:</th>
+          <td><strong>{$telefono}</strong></td>
+          <th>Telf. adc.:</th>
+          <td><strong>{$telefono_otro}</strong></td>
+        </tr>
+        <tr>
+          <th>Estado:</th>
+          <td><strong>{$estado}</strong></td>
+          <th>Municipio:</th>
+          <td><strong>{$municipio}</strong></td>
+        </tr>
+        <tr>
+          <th>Parroquia:</th>
+          <td><strong>{$parroquia}</strong></td>
+        </tr>
+        <tr>
+          <th colspan="2" width="100%">Direccion detallada:</th>
+          <td></td>
+        </tr>
+        <tr>
+          <td rowspan="1" colspan="3" width="100%"><strong>{$direccion_exacta}</strong></td>
+        </tr>
+        <tr>
+          <th width="10%">Curso:</th>
+          <td><strong>{$curso}</strong></td>
+        </tr>
+        <tr>
+          <th colspan="2" width="100%">Plantel de procedencia:</th>
+          <td></td>
+        </tr>
+        <tr>
+          <td rowspan="1" colspan="3" width="100%"><strong>{$plantel_procedencia}</strong></td>
+        </tr>
+        <tr>
+          <th>Repitiente:</th>
+          <td><strong>{$repitiente}</strong></td>
+          <th>Altura(cm):</th>
+          <td><strong>{$altura}</strong></td>
+        </tr>
+        <tr>
+          <th>Peso(kg):</th>
+          <td><strong>{$peso}</strong></td>
+          <th>camisa:</th>
+          <td><strong>{$camisa}</strong></td>
+        </tr>
+        <tr>
+          <th>Pantalon:</th>
+          <td><strong>{$pantalon}</strong></td>
+          <th>Zapato:</th>
+          <td><strong>{$zapato}</strong></td>
+        </tr>
+        <tr>
+          <th width="30%">Certificado de vacunacion:</th>
+          <td width="19%"><strong>{$certificado_vacuna}</strong></td>
+          <th width="18%">Discapacidad:</th>
+          <td><strong>{$discapacidad}</strong></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="padding:150px;">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+  <p><em>Reporte generado el: {$x}-{$y}-{$z}</em></p>
 </div>
 HTML;
     // magia:
@@ -224,7 +358,7 @@ HTML;
 
     // termina el proceso y crea el archivo:
     $y = date('m');
-    $nombre = "reporte-$p_apellido-$cedula-$x-$y-$z.pdf";
+    $nombre = "reporte-alumno-$cedula-$x-$y-$z.pdf";
     $pdf->Output($nombre, 'I');
   else:
     empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);?>

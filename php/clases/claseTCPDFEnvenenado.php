@@ -17,8 +17,7 @@ class TCPDFEnvenenado extends TCPDF {
     // Set font
     $this->SetFont('helvetica', 'B', 10);
     $this->ln();
-    // Title,
-  // "
+    // Title
     $this->Cell(0, 0, 'Republica Bolivariana de Venezuela', 0, 1, 'C', 0, '', 0);
     $this->Cell(0, 0, 'Ministerio del Poder Popular para la Educacion', 0, 1, 'C', 0, '', 0);
     $this->Cell(0, 0, 'Unidad Educativa Nacional Bolivariana "José Antonio González"', 0, 1, 'C', 0, '', 0);
