@@ -99,9 +99,11 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr'], 'sistemaJAG 
             action="consultar_A.php"
             method="POST">
             <!-- no tocar -->
-            <select id="tipo_personal" class="hidden">
-              <option value="-1" selected="selected"></option>
-            </select>
+            <div>
+              <select id="tipo_personal" class="hidden">
+                <option value="-1" selected="selected"></option>
+              </select>
+            </div>
             <!-- no tocar -->
             <div class="form-group">
               <label
