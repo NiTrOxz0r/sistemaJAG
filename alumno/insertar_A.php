@@ -211,6 +211,12 @@ if ( isset($_POST['cedula_r']) and preg_match( "/[0-9]{8}/", $_POST['cedula_r'])
                     fueron guardados correctamente!
                   </h4>
                   <p>
+                    <a id="constancia" href="<?php echo "reportes/constancia-inscripcion.php?cedula=$_POST[cedula]" ?>"
+                    class="btn btn-info btn-lg">
+                      Generar Constancia de Inscripcion
+                    </a>
+                  </p>
+                  <p>
                     Si desea hacer un registro de un alumno asociado a
                     <?php echo $p_nombre_r ?>, <?php echo $p_apellido_r ?>
                     con cedula
@@ -229,6 +235,14 @@ if ( isset($_POST['cedula_r']) and preg_match( "/[0-9]{8}/", $_POST['cedula_r'])
             </div>
           </div>
         </div>
+        <script type="text/javascript">
+        $(function(){
+          $('#constancia').on('click', function(){
+            window.open( $(this).attr('href') );
+            return false;
+          });
+        });
+        </script>
       <?php else :
         $query = "DELETE from persona where cedula = $validarAlumno->cedula;";
         $resultado = conexion($query);?>
