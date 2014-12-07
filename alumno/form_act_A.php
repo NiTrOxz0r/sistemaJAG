@@ -46,80 +46,16 @@ if($reg = mysqli_fetch_array($re)) :?>
               <button class="actualizar btn btn-primary btn-block">Actualizar</button>
             </div>
             <div class="col-sm-3">
-              <button class="cons-ins btn btn-default btn-block">Constancia Inscricion</button>
+              <a href="reportes/constancia-inscripcion.php?cedula=<?php echo $cedula ?>" class="cons-ins btn btn-default btn-block">Constancia Inscricion</a>
             </div>
             <div class="col-sm-3">
-              <button class="cons-est btn btn-default btn-block">Constancia Estudios</button>
+              <a href="reportes/constancia-estudio.php?cedula=<?php echo $cedula ?>" class="cons-est btn btn-default btn-block">Constancia Estudios</a>
             </div>
           </div>
         </div>
           <!-- http://www.w3schools.com/html/html_forms.asp -->
           <form action="actualizar_A.php" method="POST" id="form" name="form_alu" class="form-horizontal">
             <fieldset>
-              <!-- considerando dejar esto o no: -->
-              <!-- <legend class="text-center">Datos del Representante</legend>
-              datos del Representante
-              <div class="container">
-                <div class="row">
-                  <div class="col-sm-4">
-                    <div class="row">
-                      <div class="col-xs-11">
-                        <div class="form-group">
-                          <label for="cedula_r" class="control-label">Cedula</label>
-                          <input
-                            class="form-control bloquear"
-                            type="text"
-                            maxlength="8"
-                            name="cedula_r"
-                            id="cedula_r"
-                            required
-                            value="<?php echo $cedula_r ?>"
-                            disabled>
-                          <p class="help-block" id="cedula_r_chequeo">
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-sm-4">
-                    <div class="row">
-                      <div class="col-xs-11">
-                        <div class="form-group">
-                          <label for="p_nombre_r" class="control-label">Nombre y Apellido</label>
-                          <input
-                            class="form-control bloquear"
-                            type="text"
-                            disabled
-                            value="<?php echo $datosRepresentante['p_nombre'].", ".$datosRepresentante['p_apellido'] ?>"
-                            name="p_nombre_r"
-                            id="p_nombre_r"/>
-                          <p class="help-block" id="p_nombre_r_chequeo">
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-sm-4">
-                    <div class="row">
-                      <div class="col-xs-12">
-                        <div class="form-group">
-                          <label for="parentesco_r" class="control-label">Relacion o parentesco</label>
-                          <input
-                            class="form-control bloquear"
-                            type="text"
-                            maxlength="20"
-                            disabled
-                            value="<?php echo $datosRepresentante['relacion'] ?>"
-                            name="parentesco_r"
-                            id="parentesco_r"/>
-                          <p class="help-block" id="parentesco_r_chequeo">
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div> -->
               <legend class="text-center text-uppercase">
                 <h1>consulta de alumno</h1>
               </legend>

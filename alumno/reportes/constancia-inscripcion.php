@@ -48,11 +48,19 @@ if (!( isset($_GET['cedula']) and preg_match( "/[0-9]{8}/", $_GET['cedula']) )) 
 else :
   $conexion = conexion();
   $cedula = mysqli_escape_string($conexion, $_GET['cedula']);
+  $query = "SET lc_time_names = 'es_MX';";
+  $resultado = conexion($query);
   $query = "SELECT
   datosAlumno.p_apellido as p_apellido_a,
   datosAlumno.p_nombre as p_nombre_a,
   datosAlumno.cedula as cedula_a,
+  datosAlumno.sexo as sexo,
+  (year(curdate()) - year(datosAlumno.fec_nac)) as edad,
+  DAYOFMONTH(datosAlumno.fec_nac) as dia,
+  MONTH(datosAlumno.fec_nac) as mes,
+  year(datosAlumno.fec_nac) as anio,
   alumno.cedula_escolar,
+  alumno.lugar_nac,
   curso.descripcion as curso,
   periodo_academico.descripcion,
   representante.p_apellido as p_apellido_r,
@@ -125,7 +133,16 @@ else :
       '09' => 'SEPTIEMBRE',
       '10' => 'OCTUBRE',
       '11' => 'NOVIEMBRE',
-      '12' => 'DICIEMBRE'
+      '12' => 'DICIEMBRE',
+      '1' => 'ENERO',
+      '2' => 'FEBRERO',
+      '3' => 'MARZO',
+      '4' => 'ABRIL',
+      '5' => 'MAYO',
+      '6' => 'JUNIO',
+      '7' => 'JULIO',
+      '8' => 'AGOSTO',
+      '9' => 'SEPTIEMBRE'
     );
     $n = date('m');
     $mes = $meses[$n];
@@ -142,27 +159,41 @@ else :
     $cedula_a = htmlentities($datos['cedula_a'], ENT_QUOTES);
     $cedula_r = htmlentities($datos['cedula_r'], ENT_QUOTES);
     $curso = htmlentities($datos['curso'], ENT_QUOTES);
+    $edad = $datos['edad'];
+    if ($datos['lugar_nac'] != '' && $datos['lugar_nac'] != null) :
+      $lug_nac = $datos['lugar_nac'];
+    else :
+      $lug_nac = 'SIN INFORMACION, FAVOR ACTUALIZAR';
+    endif;
+    $dia_alumno = $datos['dia'];
+    $mes_alumno = $meses[$datos['mes']];
+    $anio_alumno = $datos['anio'];
+    $articulo = $datos['sexo'] === (0) ? 'el':'la';
+    $sustantivoAlumno = $datos['sexo'] === (0) ? 'alumno':'alumna';
+    $nacidoa = $datos['sexo'] === (0) ? 'nacido':'nacida';
+    $inscritoa = $datos['sexo'] === (0) ? 'inscrito':'inscrita';
 // contenido a ejectuar para pdf:
 $html = <<<HTML
 <div style="min-height:100px; border:2px solid black; min-width:100%;">
   Republica bolivariana de venezuela, Ministerio del Poder Popular para la Educacion
   Escuela Basica Nacional Bolivariana "Jose Antonio Gonzalez"
-  etc. etc. etc.
+  etc. etc. etc. el pito y la guacharaca.
 </div>
 <div>
   <p align="right">CARACAS, {$x} DE {$y} DE {$z} </p>
 </div>
 <div style="margin:80px 0;">
-  <p align="center">REGISTRO DE ESTUDIANTE</p>
+  <p align="center">CONSTANCIA DE INSCRIPCION</p>
 </div>
 <div style="text-align: justify; padding:0 40px;">
   <p>
-    Se hace constar por medio de la presente que <strong>{$p_nombre_a} {$p_apellido_a}, C&eacute;dula de identidad n&uacute;mero: {$cedula_a}, </strong>
-    asociado al representante <strong>{$p_nombre_r} {$p_apellido_r}, C&eacute;dula de identidad n&uacute;mero: {$cedula_r},</strong>
-    particip&oacute; en el proceso de inscripci&oacute;n <strong>{$n}-{$n1}</strong>
-    de la
-    ESCUELA B&Aacute;SICA NACIONAL BOLIVARIANA "JOS&Eacute; ANTONIO GONZ&Aacute;LEZ",
-    asignado al curso <strong>{$curso}</strong>.
+    Quien suscribe, Lic. IRAIDA CAROLINA PONCE, Directora de la U.E.N.B. “JOS&Eacute; ANTONIO GONZ&Aacute;LEZ”,
+    hace constar por medio de la presente que {$articulo} {$sustantivoAlumno}
+    <strong>{$p_nombre_a} {$p_apellido_a}, C&eacute;dula de identidad n&uacute;mero: {$cedula_a}, </strong>
+    de {$edad} años de edad y natural de {$lug_nac}
+    {$nacidoa} el {$dia_alumno} de {$mes_alumno} de {$anio_alumno}
+    fue {$inscritoa} para cursar en este plantel el <strong>{$curso}</strong> de
+    EDUCACIÓN INICIAL en el período escolar <strong>{$n}-{$n1}</strong>.
   </p>
   <p>
     Lorem ipsum dolor sit amet,
@@ -179,13 +210,13 @@ $html = <<<HTML
   </p>
   <p>
     <strong>
-      Persona encargada de firmar la cuestion.
+      Lic. IRAIDA CAROLINA PONCE
     </strong>
   </p>
 </div>
-<div align="center" style="float:bottom;">
+<div style="position: absolute;bottom: 0px; text-align:justify">
   <p>
-    pie de pagina
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
   </p>
 </div>
 HTML;
