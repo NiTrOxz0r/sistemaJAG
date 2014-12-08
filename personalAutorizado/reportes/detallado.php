@@ -248,7 +248,7 @@ $html = <<<HTML
         <tr>
           <th>Relacion:</th>
           <td><strong>{$relacion}</strong></td>
-          <th>Vive con Alumno:</th>
+          <th width="20%">Vive con Alumno:</th>
           <td><strong>{$vive_con_alumno}</strong></td>
         </tr>
         <tr>
@@ -288,14 +288,14 @@ $html = <<<HTML
           <td rowspan="1" colspan="3" width="100%"><strong>{$direccion_exacta}</strong></td>
         </tr>
         <tr>
-          <th>Nivel Instruccion:</th>
-          <td><strong>{$nivel_instruccion}</strong></td>
+          <th width="20%">Nivel Instruccion:</th>
+          <td width="29%"><strong>{$nivel_instruccion}</strong></td>
           <th>Profesion:</th>
           <td><strong>{$profesion}</strong></td>
         </tr>
         <tr>
-          <th>Lugar de trabajo:</th>
-          <td><strong>{$lugar_trabajo}</strong></td>
+          <th width="20%">Lugar de trabajo:</th>
+          <td width="29%"><strong>{$lugar_trabajo}</strong></td>
           <th>Telf. Lab.:</th>
           <td><strong>{$telefono_trabajo}</strong></td>
         </tr>
