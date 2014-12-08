@@ -1,13 +1,13 @@
 sistemaJAG
 ==========
 
-Sistema de inscripcion adaptado para la institucion publica E.B.N.B "Jose Antonio Gonzales"
+Sistema de inscripcion adaptado para la institucion publica U.E.N.B "José Antonio Gonzáles"
 
-El prototipo de este sistema esta en linea en [sistemajag.esy.es/](http://sistemajag.esy.es/)
-###Escuela Basica Nacional Bolivariana "Jose Antonio Gonzales"
+El prototipo de este sistema (version 0.5.0) esta en linea en [sistemajag.esy.es/](http://sistemajag.esy.es/)
+###Unidad Educativa Nacional Bolivariana "José Antonio Gonzáles"
 Escuela ubicada en el paraiso, caracas, venezuela.
-##version 0.5.1
-###Sistema 81% aprox completado, por ahora falta:
+##version 0.6.0-rc1
+###Sistema 91% aprox completado, por ahora falta:
 ####FLUJO NORMAL DE FORMULARIOS
 en progreso: 99?% aprox.
 ####FLUJO ALTERNATIVO DE FORMULARIOS
@@ -23,11 +23,13 @@ en progreso: 100% aprox.
 ####ModuloValidacion
 en progreso: 99?% aprox.
 ####ModuloReporte
-en progreso: 0% aprox.
+en progreso: 80?% aprox.
+(a espera de analisis y comentarios)
 
-* version del sistema:
-  * https://github.com/slayerfat/sistemaJAG/releases/tag/v0.5.0
-* versiones del antiguas: [ver aqui](https://github.com/slayerfat/sistemaJAG/releases)
+* versiones del sistema: [ver aqui](https://github.com/slayerfat/sistemaJAG/releases)
+
+* version master: [(ultima version considerada estable)](https://github.com/slayerfat/sistemaJAG/archive/master.zip)
+* version desarrollo: [(version en desarrollo)](https://github.com/slayerfat/sistemaJAG/archive/desarrollo.zip)
 
 #Tesoros escondidos del sistema:
 **esta es una tremenda gema!**
@@ -111,7 +113,7 @@ maravilloso:
 
 [@Phantom66:](https://github.com/Phantom66)
 
-![totalmente ok](http://stream1.gifsoup.com/view4/4741900/concerned-spock-o.gif)
+![trabajando en grandes cantidades](https://38.media.tumblr.com/ad317d02a7b30679130173591754fd09/tumblr_nb21abAizP1tjsogwo1_500.gif)
 
 Joan:
 

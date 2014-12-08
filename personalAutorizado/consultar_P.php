@@ -101,6 +101,17 @@ if ( (isset($_REQUEST['informacion']) and isset($_REQUEST['tipo']) )
               </div>
             </div>
           </div>
+          <?php $enlacePrimario = enlaceDinamico('personalAutorizado/form_act_P.php') ?>
+          <span class="hidden" data-enlace-primario="<?php echo $enlacePrimario ?>"></span>
+           <div class="row center-block">
+             <div class="col-xs-6 col-xs-offset-3">
+               <a
+                id="consultar-cedula"
+                href="#"
+                class="push-3 btn btn-warning btn-lg disabled">Consultar registro</a>
+                <span class="label label-info">Seleccione un registro para consultarlo</span>
+             </div>
+           </div>
           <div class="row">
             <div class="col-xs-12">
               <table
@@ -129,9 +140,9 @@ if ( (isset($_REQUEST['informacion']) and isset($_REQUEST['tipo']) )
                   <th data-field="email" data-sortable="true">email</th>
                   <th data-field="nivel_instruccion" data-sortable="true">nivel_instruccion</th>
                   <th data-field="profesion" data-sortable="true">profesion</th>
-                  <th data-field="p_apellido_a" data-sortable="true">Primer Apellido (R)</th>
-                  <th data-field="p_nombre_a" data-sortable="true">Primer Nombre (R)</th>
-                  <th data-field="cedula_a" data-sortable="true" data-switchable="false">Cedula (R)</th>
+                  <th data-field="p_apellido_a" data-sortable="true">Primer Apellido (A)</th>
+                  <th data-field="p_nombre_a" data-sortable="true">Primer Nombre (A)</th>
+                  <th data-field="cedula_a" data-sortable="true" data-switchable="false">Cedula (A)</th>
                   <th data-field="cedula_escolar" data-sortable="true" data-switchable="false">Cedula escolar</th>
                   <th data-field="curso" data-sortable="true">Curso</th>
                 </thead>
@@ -228,18 +239,23 @@ if ( (isset($_REQUEST['informacion']) and isset($_REQUEST['tipo']) )
                   <?php endwhile; ?>
                 </tbody>
               </table>
-              <?php $enlacePrimario = enlaceDinamico('personalAutorizado/form_act_P.php') ?>
-              <span class="hidden" data-enlace-primario="<?php echo $enlacePrimario ?>"></span>
-               <div class="row center-block">
-                 <div class="col-xs-6 col-xs-offset-3">
-                   <a
-                    id="consultar-cedula"
-                    href="#"
-                    class="push-3 btn btn-warning btn-lg disabled">Consultar registro</a>
-                    <span class="label label-info">Seleccione un registro para consultarlo</span>
-                 </div>
-               </div>
             </div>
+          </div>
+          <div class="container">
+            <div class="row margen">
+              <div class="col-xs-6 col-xs-offset-3">
+                <span class="label label-info">generara este listado en formato pdf</span>
+              </div>
+            </div>
+             <div class="row">
+               <div class="col-xs-3 col-xs-offset-3">
+                <?php $enlace = "reportes/listado_P.php?tipo=$_REQUEST[tipo]&informacion=$_REQUEST[informacion]" ?>
+                 <a
+                  id="generar-pdf"
+                  href="<?php echo $enlace ?>"
+                  class="push-3 btn btn-primary btn-lg">Generar Reporte</a>
+               </div>
+             </div>
           </div>
           <div class="row">
             <div class="col-xs-8 col-xs-offset-2 margen well">

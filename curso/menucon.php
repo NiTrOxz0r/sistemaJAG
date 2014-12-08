@@ -52,6 +52,7 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);
                 <option value="1">Cursos Existentes con docentes</option>
                 <option value="2">Cursos Existentes sin docentes</option>
                 <option value="3">Alumnos Existentes por curso</option>
+                <option value="4">Total de Alumnos por curso</option>
               </select>
               <p class="help-block" id="tipo_chequeo">
               </p>
@@ -66,6 +67,7 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);
                 name="curso"
                 id="curso"
                 autofocus="autofocus"
+                autocomplete="off"
                 required>
                 <?php
                   // $query = "SELECT
@@ -75,8 +77,10 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);
                   // on asume.cod_curso = curso.codigo
                   // where asume.status = 1;";
                   $query = "SELECT
-                  curso.codigo, curso.descripcion
-                  from curso
+                  asume.codigo, curso.descripcion
+                  from asume
+                  inner join curso
+                  on asume.cod_curso = curso.codigo
                   where curso.status = 1;";
                   $resultado = conexion($query);?>
                   <option value="" selected="selected">--Seleccione--</option>
@@ -147,7 +151,7 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);
             $('#curso').prop('disabled', true);
             $('#curso').prop('value', '');
             $('#submit').prop('disabled', false);
-          }else if (tipo === '3'){
+          }else if (tipo === '3'|| tipo === '4'){
             $('#curso').prop('disabled', false);
             $('#submit').prop('disabled', true);
           }else{

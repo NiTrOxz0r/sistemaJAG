@@ -33,9 +33,11 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr'], 'sistemaJAG 
             action="consultar_P.php"
             method="POST">
             <!-- no tocar -->
-            <select id="tipo_personal" class="hidden">
-              <option value="-1" selected="selected"></option>
-            </select>
+            <div>
+              <select id="tipo_personal" class="hidden">
+                <option value="-1" selected="selected"></option>
+              </select>
+            </div>
             <!-- no tocar -->
             <div class="form-group">
               <label
@@ -212,7 +214,7 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr'], 'sistemaJAG 
                 },
               });
             }else{
-              $("#cedula_chequeo").html('Favor introduzca una cedula valida y solo numeros, EJ: 12345678');
+              $("#cedula_chequeo").html('Favor introduzca una cedula valida, EJ: 12345678');
               $('#cedula').parent().addClass('has-error');
               $('#submitDos').prop('disabled', true);
             };
