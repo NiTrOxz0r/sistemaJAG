@@ -283,8 +283,8 @@ $html = <<<HTML
           <td rowspan="1" colspan="3" width="100%"><strong>{$direccion_exacta}</strong></td>
         </tr>
         <tr>
-          <th>Nivel Instruccion:</th>
-          <td><strong>{$nivel_instruccion}</strong></td>
+          <th width="20%">Nivel Instruccion:</th>
+          <td width="29%"><strong>{$nivel_instruccion}</strong></td>
           <th>Email:</th>
           <td><strong>{$email}</strong></td>
         </tr>
@@ -295,15 +295,15 @@ $html = <<<HTML
           <td><strong>{$cargo}</strong></td>
         </tr>
         <tr>
-          <th>Tipo de personal:</th>
-          <td><strong>{$tipo_personal}</strong></td>
-          <th>Cod. Personal:</th>
+          <th width="20%">Tipo de personal:</th>
+          <td width="29%"><strong>{$tipo_personal}</strong></td>
+          <th width="24%">Codigo de Personal:</th>
           <td><strong>{$codigo_personal}</strong></td>
         </tr>
         <tr>
           <th>Seudonimo:</th>
           <td><strong>{$seudonimo}</strong></td>
-          <th>Tipo de usuario:</th>
+          <th width="24%">Tipo de usuario:</th>
           <td><strong>{$tipo_usr}</strong></td>
         </tr>
       </tbody>
