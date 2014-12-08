@@ -6,8 +6,8 @@ Sistema de inscripcion adaptado para la institucion publica U.E.N.B "José Anton
 El prototipo de este sistema (version 0.5.0) esta en linea en [sistemajag.esy.es/](http://sistemajag.esy.es/)
 ###Unidad Educativa Nacional Bolivariana "José Antonio Gonzáles"
 Escuela ubicada en el paraiso, caracas, venezuela.
-##version 0.5.2
-###Sistema 83% aprox completado, por ahora falta:
+##version 0.6.0-rc1
+###Sistema 91% aprox completado, por ahora falta:
 ####FLUJO NORMAL DE FORMULARIOS
 en progreso: 99?% aprox.
 ####FLUJO ALTERNATIVO DE FORMULARIOS
@@ -23,11 +23,13 @@ en progreso: 100% aprox.
 ####ModuloValidacion
 en progreso: 99?% aprox.
 ####ModuloReporte
-en progreso: 15% aprox.
+en progreso: 80?% aprox.
+(a espera de analisis y comentarios)
 
-* version del sistema:
-  * https://github.com/slayerfat/sistemaJAG/releases/tag/v0.5.2
-* versiones del antiguas: [ver aqui](https://github.com/slayerfat/sistemaJAG/releases)
+* versiones del sistema: [ver aqui](https://github.com/slayerfat/sistemaJAG/releases)
+
+* version master: [(ultima version considerada estable)](https://github.com/slayerfat/sistemaJAG/archive/master.zip)
+* version desarrollo: [(version en desarrollo)](https://github.com/slayerfat/sistemaJAG/archive/desarrollo.zip)
 
 #Tesoros escondidos del sistema:
 **esta es una tremenda gema!**
