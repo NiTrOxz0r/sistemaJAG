@@ -211,7 +211,7 @@ if (isset($_POST['cedula']) and preg_match( "/[0-9]{8}/", $_POST['cedula']) ) :
         </div>
       </div>
   <?php endif;
-  else : ?>
+  else :
     empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']); ?>
     <div id="contenido_insertar_P">
       <div id="blancoAjax">

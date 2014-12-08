@@ -152,7 +152,7 @@ class ChequearPA extends ChequearGenerico{
     }
 
     if ($this->email != 'null') {
-      if ( !preg_match( "/^[0-9a-zA-Z-_$#]{2,20}+\@[0-9a-zA-Z-_$#]{2,20}+\.[a-zA-Z]{2,5}\.?[a-zA-Z]{2,5}+/", $this->email) ) {
+      if ( !preg_match( "/^['][0-9a-zA-Z-_$#]{2,20}+\@[0-9a-zA-Z-_$#]{2,20}+\.[a-zA-Z]{2,5}[']/", $this->email) ) {
         self::verificar("Error en: email: se espera formato estandar: algo@algunsitio.com, datos: ".$this->email);
       }
     }
@@ -234,7 +234,7 @@ class ChequearPA extends ChequearGenerico{
     if ($this->email == "") {
       $this->email = "null";
     }else{
-      $this->email = "'$this->this->email'";
+      $this->email = "'$this->email'";
     }
 
     $this->sexo = "'$this->sexo'";
