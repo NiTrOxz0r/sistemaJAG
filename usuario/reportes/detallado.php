@@ -51,46 +51,54 @@ else :
   $conexion = conexion();
   $cedula = mysqli_escape_string($conexion, $_GET['cedula']);
   $query = "SELECT
-  persona.codigo as codigo_persona,
-  persona.nacionalidad as nacionalidad,
-  persona.cedula as cedula,
-  persona.p_nombre as p_nombre,
-  persona.s_nombre as s_nombre,
-  persona.p_apellido as p_apellido,
-  persona.s_apellido as s_apellido,
-  persona.fec_nac as fec_nac,
-  persona.sexo as sexo,
-  persona.telefono as telefono,
-  persona.telefono_otro as telefono_otro,
-  personal.codigo as codigo_personal,
-  personal.email as email,
-  personal.titulo as titulo,
-  personal.nivel_instruccion as nivel_instruccion,
-  personal.celular as celular,
-  personal.cod_cargo as cod_cargo,
-  personal.tipo_personal as tipo_personal,
-  direccion.direccion_exacta as direcc,
-  direccion.codigo as codigo_dir,
-  parroquia.codigo as cod_parro,
-  municipio.codigo as cod_mun,
-  estado.codigo as cod_est,
-  usuario.codigo as cod_usr,
-  usuario.seudonimo as seudonimo,
-  usuario.cod_tipo_usr as cod_tipo_usr
-  from persona
-  inner join personal
-  on personal.cod_persona = persona.codigo
-  inner join usuario
-  on personal.cod_usr = usuario.codigo
-  inner join direccion
-  on persona.codigo = direccion.cod_persona
-  inner join parroquia
-  on direccion.cod_parroquia = parroquia.codigo
-  inner join municipio
-  on parroquia.cod_mun = municipio.codigo
-  inner join estado
-  on municipio.cod_edo = estado.codigo
-  where persona.cedula = '$cedula';";
+    persona.codigo as codigo_persona,
+    persona.nacionalidad as nacionalidad,
+    persona.cedula as cedula,
+    persona.p_nombre as p_nombre,
+    persona.s_nombre as s_nombre,
+    persona.p_apellido as p_apellido,
+    persona.s_apellido as s_apellido,
+    persona.fec_nac as fec_nac,
+    sexo.descripcion as sexo,
+    persona.telefono as telefono,
+    persona.telefono_otro as telefono_otro,
+    personal.codigo as codigo_personal,
+    personal.email as email,
+    personal.titulo as titulo,
+    nivel_instruccion.descripcion as nivel_instruccion,
+    personal.celular as celular,
+    cargo.descripcion as cargo,
+    tipo_personal.descripcion as tipo_personal,
+    direccion.direccion_exacta as direccion,
+    parroquia.descripcion as parroquia,
+    municipio.descripcion as municipio,
+    estado.descripcion as estado,
+    usuario.seudonimo as seudonimo,
+    tipo_usuario.descripcion as tipo_usr
+    from persona
+    inner join sexo
+    on persona.sexo = sexo.codigo
+    inner join personal
+    on personal.cod_persona = persona.codigo
+    inner join nivel_instruccion
+    on personal.nivel_instruccion = nivel_instruccion.codigo
+    inner join cargo
+    on personal.cod_cargo = cargo.codigo
+    inner join tipo_personal
+    on personal.tipo_personal = tipo_personal.codigo
+    inner join usuario
+    on personal.cod_usr = usuario.codigo
+    inner join tipo_usuario
+    on usuario.cod_tipo_usr = tipo_usuario.codigo
+    inner join direccion
+    on persona.codigo = direccion.cod_persona
+    inner join parroquia
+    on direccion.cod_parroquia = parroquia.codigo
+    inner join municipio
+    on parroquia.cod_mun = municipio.codigo
+    inner join estado
+    on municipio.cod_edo = estado.codigo
+    where persona.cedula = '$cedula';";
   $resultado = conexion($query);
   if ($resultado->num_rows === 1) :
     $datos = mysqli_fetch_assoc($resultado);
@@ -164,6 +172,7 @@ else :
     // variables de persona:
     // $p_nombre_r = htmlentities($datos['p_nombre_r'], ENT_QUOTES);
     // $p_apellido_r = htmlentities($datos['p_apellido_r'], ENT_QUOTES);
+    $codigo_personal = $datos['codigo_personal'];
     $cedula = $datos['cedula'];
     $nacionalidad = $datos['nacionalidad'] === ('v') ? 'Venezolano':'Extrangero';
     $p_nombre = htmlentities($datos['p_nombre'], ENT_QUOTES);
@@ -182,13 +191,11 @@ else :
     endif;
     $sexo = $datos['sexo'];
     $fec_nac = $datos['fec_nac'];
-    if ($datos['lugar_nac'] != '' && $datos['lugar_nac'] != null) :
-      $lugar_nac = htmlentities($datos['lugar_nac'], ENT_QUOTES);
-    else :
-      $lugar_nac = 'SIN INFORMACION, FAVOR ACTUALIZAR';
-    endif;
     $telefono = $datos['telefono'] === (null) ? '-':$datos['telefono'];
     $telefono_otro = $datos['telefono_otro'] === (null) ? '-':$datos['telefono_otro'];
+    $celular = $datos['celular'] === (null) ? '-':$datos['celular'];
+    $cargo = $datos['cargo'] === (null) ? '-':$datos['cargo'];
+    $tipo_personal = $datos['tipo_personal'] === (null) ? '-':$datos['tipo_personal'];
     $parroquia = htmlentities($datos['parroquia'], ENT_QUOTES);
     $municipio = htmlentities($datos['municipio'], ENT_QUOTES);
     $estado = htmlentities($datos['estado'], ENT_QUOTES);
@@ -198,13 +205,10 @@ else :
       $direccion_exacta = 'SIN INFORMACION, FAVOR ACTUALIZAR';
     endif;
     $email = $datos['email'] === (null) ? '-':$datos['email'];
-    $relacion = $datos['relacion'];
-    $vive_con_alumno = $datos['vive_con_alumno'] === (null) ? 'SI':'NO';
+    $titulo = $datos['titulo'] === (null) ? '-':$datos['titulo'];
     $nivel_instruccion = $datos['nivel_instruccion'];
-    $profesion = $datos['profesion'] === (null) ? '-':$datos['profesion'];
-    $lugar_trabajo = $datos['lugar_trabajo'] === (null) ? '-':$datos['lugar_trabajo'];
-    $direccion_trabajo = $datos['direccion_trabajo'] === (null) ? '-':$datos['direccion_trabajo'];
-    $telefono_trabajo = $datos['telefono_trabajo'] === (null) ? '-':$datos['telefono_trabajo'];
+    $seudonimo = $datos['seudonimo'];
+    $tipo_usr = $datos['tipo_usr'];
 // contenido a ejectuar para pdf:
 $html = <<<HTML
 <style>
@@ -225,7 +229,7 @@ $html = <<<HTML
 <p></p>
 <p></p>
 <div>
-<h1 align="center"><strong>REPORTE DE PADRES/REPRESENTANTES/OTROS</strong></h1>
+<h1 align="center"><strong>REPORTE DE PERSONAL INTERNO</strong></h1>
   <div>
     <table cellspacing="0" style="border-collapse:collapse;text-align: left;">
       <tbody>
@@ -248,23 +252,10 @@ $html = <<<HTML
           <td><strong>{$s_nombre}</strong></td>
         </tr>
         <tr>
-          <th>Relacion:</th>
-          <td><strong>{$relacion}</strong></td>
-          <th>Vive con Alumno:</th>
-          <td><strong>{$vive_con_alumno}</strong></td>
-        </tr>
-        <tr>
           <th>Sexo:</th>
           <td><strong>{$sexo}</strong></td>
           <th>Fec. Nac.:</th>
           <td><strong>{$fec_nac}</strong></td>
-        </tr>
-        <tr>
-          <th colspan="2" width="100%">Lugar de nacimiento:</th>
-          <td></td>
-        </tr>
-        <tr>
-          <td rowspan="1" colspan="3" width="100%"><strong>{$lugar_nac}</strong></td>
         </tr>
         <tr>
           <th>Telefono:</th>
@@ -273,12 +264,14 @@ $html = <<<HTML
           <td><strong>{$telefono_otro}</strong></td>
         </tr>
         <tr>
+          <th>Celular:</th>
+          <td><strong>{$celular}</strong></td>
           <th>Estado:</th>
           <td><strong>{$estado}</strong></td>
-          <th>Municipio:</th>
-          <td><strong>{$municipio}</strong></td>
         </tr>
         <tr>
+          <th>Municipio:</th>
+          <td><strong>{$municipio}</strong></td>
           <th>Parroquia:</th>
           <td><strong>{$parroquia}</strong></td>
         </tr>
@@ -292,21 +285,26 @@ $html = <<<HTML
         <tr>
           <th>Nivel Instruccion:</th>
           <td><strong>{$nivel_instruccion}</strong></td>
-          <th>Profesion:</th>
-          <td><strong>{$profesion}</strong></td>
+          <th>Email:</th>
+          <td><strong>{$email}</strong></td>
         </tr>
         <tr>
-          <th>Lugar de trabajo:</th>
-          <td><strong>{$lugar_trabajo}</strong></td>
-          <th>Telf. Lab.:</th>
-          <td><strong>{$telefono_trabajo}</strong></td>
+          <th>Titulos:</th>
+          <td><strong>{$titulo}</strong></td>
+          <th>Cargo:</th>
+          <td><strong>{$cargo}</strong></td>
         </tr>
         <tr>
-          <th colspan="2" width="100%">Direccion de trabajo:</th>
-          <td></td>
+          <th>Tipo de personal:</th>
+          <td><strong>{$tipo_personal}</strong></td>
+          <th>Cod. Personal:</th>
+          <td><strong>{$codigo_personal}</strong></td>
         </tr>
         <tr>
-          <td rowspan="1" colspan="3" width="100%"><strong>{$direccion_trabajo}</strong></td>
+          <th>Seudonimo:</th>
+          <td><strong>{$seudonimo}</strong></td>
+          <th>Tipo de usuario:</th>
+          <td><strong>{$tipo_usr}</strong></td>
         </tr>
       </tbody>
     </table>

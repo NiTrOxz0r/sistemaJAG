@@ -59,7 +59,6 @@ if ( isset($_POST['cedula']) && strlen($_POST['cedula']) == 8 ) :
   $codCargo = $_POST['cod_cargo'];
   $tipo_personal = $_POST['tipo_personal'];
   $codTipoUsr = 'null';
-  $codigoUsuario = 'null';
   //validamos los datos restantes:
   $validarPI = new ChequearPI(
     $codUsrMod,
@@ -81,13 +80,16 @@ if ( isset($_POST['cedula']) && strlen($_POST['cedula']) == 8 ) :
     $codCargo,
     $tipo_personal
     );
-  // MODIFICAR
-  // $hash = password_verify($clave, $resultado['clave']);
-  // $query = "INSERT INTO usuario
-  // VALUES
-  // (null, $validarPI->cedula, ".$validarForma->clave['completo'].",
-  //   5, 1, 1, null, 1, current_timestamp );";
-  // $resultado = conexion($query);
+  // se inserta un usuario con seudonimo y clase como la cedula de la persona.
+  $hash = password_hash($_POST['cedula'], PASSWORD_BCRYPT, ['cost' => 12]);
+  $query = "INSERT INTO usuario
+  VALUES
+  (null, $validarPI->cedula, '".$hash."',
+    5, 1, 1, null, 1, current_timestamp );";
+  $resultado = conexion($query);
+  $query = "SELECT usuario.codigo from usuario where seudonimo = $validarPI->cedula;";
+  $resultado = conexion($query);
+  $codigoUsuario = mysqli_fetch_assoc($resultado);
   //se inserta en persona
   //los datos comunes o basicos:
   $query = "INSERT INTO persona
@@ -110,7 +112,7 @@ if ( isset($_POST['cedula']) && strlen($_POST['cedula']) == 8 ) :
   values
   (null, $datosDePersona[codigo], $validarPI->celular,
     $validarPI->nivel_instruccion, $validarPI->titulo, $validarPI->email,
-    $codigoUsuario, $validarPI->codCargo, $validarPI->tipoPersonal,
+    $codigoUsuario[codigo], $validarPI->codCargo, $validarPI->tipoPersonal,
     1, $codUsrMod, null, $codUsrMod, current_timestamp);";
   $resultado = conexion($query);
 

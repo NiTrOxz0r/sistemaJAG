@@ -15,46 +15,46 @@ if ( isset($_GET['cedula']) ):
     header("Location: menucon.php?error=cedula&valor=".$cedula);
   endif;
   $query = "SELECT
-  persona.codigo as codigo_persona,
-  persona.nacionalidad as nacionalidad,
-  persona.cedula as cedula,
-  persona.p_nombre as p_nombre,
-  persona.s_nombre as s_nombre,
-  persona.p_apellido as p_apellido,
-  persona.s_apellido as s_apellido,
-  persona.fec_nac as fec_nac,
-  persona.sexo as sexo,
-  persona.telefono as telefono,
-  persona.telefono_otro as telefono_otro,
-  personal.codigo as codigo_personal,
-  personal.email as email,
-  personal.titulo as titulo,
-  personal.nivel_instruccion as nivel_instruccion,
-  personal.celular as celular,
-  personal.cod_cargo as cod_cargo,
-  personal.tipo_personal as tipo_personal,
-  direccion.direccion_exacta as direcc,
-  direccion.codigo as codigo_dir,
-  parroquia.codigo as cod_parro,
-  municipio.codigo as cod_mun,
-  estado.codigo as cod_est,
-  usuario.codigo as cod_usr,
-  usuario.seudonimo as seudonimo,
-  usuario.cod_tipo_usr as cod_tipo_usr
-  from persona
-  inner join personal
-  on personal.cod_persona = persona.codigo
-  inner join usuario
-  on personal.cod_usr = usuario.codigo
-  inner join direccion
-  on persona.codigo = direccion.cod_persona
-  inner join parroquia
-  on direccion.cod_parroquia = parroquia.codigo
-  inner join municipio
-  on parroquia.cod_mun = municipio.codigo
-  inner join estado
-  on municipio.cod_edo = estado.codigo
-  where persona.cedula = '$cedula';";
+    persona.codigo as codigo_persona,
+    persona.nacionalidad as nacionalidad,
+    persona.cedula as cedula,
+    persona.p_nombre as p_nombre,
+    persona.s_nombre as s_nombre,
+    persona.p_apellido as p_apellido,
+    persona.s_apellido as s_apellido,
+    persona.fec_nac as fec_nac,
+    persona.sexo as sexo,
+    persona.telefono as telefono,
+    persona.telefono_otro as telefono_otro,
+    personal.codigo as codigo_personal,
+    personal.email as email,
+    personal.titulo as titulo,
+    personal.nivel_instruccion as nivel_instruccion,
+    personal.celular as celular,
+    personal.cod_cargo as cod_cargo,
+    personal.tipo_personal as tipo_personal,
+    direccion.direccion_exacta as direcc,
+    direccion.codigo as codigo_dir,
+    parroquia.codigo as cod_parro,
+    municipio.codigo as cod_mun,
+    estado.codigo as cod_est,
+    usuario.codigo as cod_usr,
+    usuario.seudonimo as seudonimo,
+    usuario.cod_tipo_usr as cod_tipo_usr
+    from persona
+    inner join personal
+    on personal.cod_persona = persona.codigo
+    inner join usuario
+    on personal.cod_usr = usuario.codigo
+    inner join direccion
+    on persona.codigo = direccion.cod_persona
+    inner join parroquia
+    on direccion.cod_parroquia = parroquia.codigo
+    inner join municipio
+    on parroquia.cod_mun = municipio.codigo
+    inner join estado
+    on municipio.cod_edo = estado.codigo
+    where persona.cedula = '$cedula';";
   $resultado = conexion($query);
   if ($resultado->num_rows == 1) :
     empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr'], 'sistemaJAG | Actualizacion de usuario');
@@ -71,6 +71,19 @@ if ( isset($_GET['cedula']) ):
         <div class="container">
           <div class="row">
             <div class="col-xs-12">
+              <!-- botones de control -->
+              <div class="margen">
+                <div class="row margen">
+                  <div class="col-sm-4 col-sm-offset-4">
+                    <button class="actualizar btn btn-primary btn-block">Actualizar</button>
+                  </div>
+                </div>
+                <div class="row margen">
+                  <div class="col-sm-4 col-sm-offset-4">
+                    <a href="reportes/detallado.php?cedula=<?php echo $cedula ?>" class="cons-est btn btn-default btn-block">Generar Reporte</a>
+                  </div>
+                </div>
+              </div>
               <form
                 role="form"
                 class="form-horizontal"
@@ -78,490 +91,521 @@ if ( isset($_GET['cedula']) ):
                 id="form"
                 method="POST"
                 action="actualizar_U.php">
-                <div class="container">
-                  <!-- cedula y nacionalidad -->
-                  <div class="row">
-                    <div class="col-sm-3">
-                      <div class="form-group">
-                        <label for="nacionalidad" class="control-label">Nacionalidad</label>
-                        <select
-                          name="nacionalidad"
-                          id="nacionalidad"
-                          required
-                          class="form-control">
-                          <?php if ($datos['nacionaliad'] == 'v'): ?>
-                            <option selected="selected" value="v">Venezolan@</option>
-                            <option value="e">Extranger@</option>
-                          <?php else: ?>
-                            <option value="v">Venezolan@</option>
-                            <option selected="selected" value="e">Extranger@</option>
-                          <?php endif ?>
-                        </select>
-                          <p class="help-block" id="nacionalidad_chequeo">
+                <fieldset>
+                  <legend class="text-center text-uppercase"><h1>Consulta de Personal Interno</h1></legend>
+                  <div class="container">
+                    <!-- cedula y nacionalidad -->
+                    <div class="row">
+                      <div class="col-sm-3">
+                        <div class="form-group">
+                          <label for="nacionalidad" class="control-label">Nacionalidad</label>
+                          <select
+                            name="nacionalidad"
+                            id="nacionalidad"
+                            required
+                            disabled
+                            class="form-control">
+                            <?php if ($datos['nacionaliad'] == 'v'): ?>
+                              <option selected="selected" value="v">Venezolan@</option>
+                              <option value="e">Extranger@</option>
+                            <?php else: ?>
+                              <option value="v">Venezolan@</option>
+                              <option selected="selected" value="e">Extranger@</option>
+                            <?php endif ?>
+                          </select>
+                            <p class="help-block" id="nacionalidad_chequeo">
+                            </p>
+                        </div>
+                      </div>
+                      <div class="col-sm-5 col-sm-offset-1">
+                        <div class="form-group">
+                          <label for="cedula" class="control-label">Cedula</label>
+                          <input
+                            type="text"
+                            maxlength="8"
+                            name="cedula"
+                            id="cedula"
+                            disabled
+                            class="form-control"
+                            autofocus="autofocus"
+                            autocomplete="off"
+                            placeholder="Introduzca cedula ej: 12345678"
+                            value="<?php echo $datos['cedula'] ?>"
+                            required>
+                          <p class="help-block" id="cedula_chequeo">
                           </p>
+                          <p class="help-block" id="cedula_chequeo_adicional">
+                          </p>
+                        </div>
                       </div>
                     </div>
-                    <div class="col-sm-5 col-sm-offset-1">
-                      <div class="form-group">
-                        <label for="cedula" class="control-label">Cedula</label>
-                        <input
-                          type="text"
-                          maxlength="8"
-                          name="cedula"
-                          id="cedula"
-                          class="form-control"
-                          autofocus="autofocus"
-                          autocomplete="off"
-                          placeholder="Introduzca cedula ej: 12345678"
-                          value="<?php echo $datos['cedula'] ?>"
-                          required>
-                        <p class="help-block" id="cedula_chequeo">
-                        </p>
-                        <p class="help-block" id="cedula_chequeo_adicional">
-                        </p>
+                    <!-- inicio de nombres -->
+                    <div class="row">
+                      <div class="col-sm-6">
+                        <div class="row">
+                          <div class="col-xs-11">
+                            <div class="form-group">
+                              <label for="p_nombre" class="control-label">Primer Nombre</label>
+                              <input
+                                class="form-control"
+                                type="text"
+                                name="p_nombre"
+                                id="p_nombre"
+                                required
+                                disabled
+                                value="<?php echo $datos['p_nombre'] ?>"
+                                placeholder"campo obligatorio"
+                                maxlength="20">
+                              <p class="help-block" id="p_nombre_chequeo">
+                              </p>
+                            </div>
+                          </div>
+                        </div>
                       </div>
-                    </div>
-                  </div>
-                  <!-- inicio de nombres -->
-                  <div class="row">
-                    <div class="col-sm-6">
-                      <div class="row">
-                        <div class="col-xs-11">
-                          <div class="form-group">
-                            <label for="p_nombre" class="control-label">Primer Nombre</label>
-                            <input
-                              class="form-control"
-                              type="text"
-                              name="p_nombre"
-                              id="p_nombre"
-                              required
-                              value="<?php echo $datos['p_nombre'] ?>"
-                              placeholder"campo obligatorio"
-                              maxlength="20">
-                            <p class="help-block" id="p_nombre_chequeo">
-                            </p>
+                      <div class="col-sm-6">
+                        <div class="row">
+                          <div class="col-xs-12">
+                            <div class="form-group">
+                              <label for="s_nombre" class="control-label">Segundo Nombre</label>
+                              <input
+                                class="form-control"
+                                type="text"
+                                name="s_nombre"
+                                id="s_nombre"
+                                disabled
+                                placeholder="Sin registros, favor actualizar"
+                                value="<?php echo $datos['s_nombre'] === (null) ? 'Sin Registros':$datos['s_nombre'] ?>"
+                                maxlength="20">
+                              <p class="help-block" id="s_nombre_chequeo">
+                              </p>
+                            </div>
                           </div>
                         </div>
                       </div>
                     </div>
-                    <div class="col-sm-6">
-                      <div class="row">
-                        <div class="col-xs-12">
-                          <div class="form-group">
-                            <label for="s_nombre" class="control-label">Segundo Nombre</label>
-                            <input
-                              class="form-control"
-                              type="text"
-                              name="s_nombre"
-                              id="s_nombre"
-                              placeholder="Sin registros, favor actualizar"
-                              value="<?php echo $datos['s_nombre'] === (null) ? 'Sin Registros':$datos['s_nombre'] ?>"
-                              maxlength="20">
-                            <p class="help-block" id="s_nombre_chequeo">
-                            </p>
+                    <!-- inicio de apellidos -->
+                    <div class="row">
+                      <div class="col-sm-6">
+                        <div class="row">
+                          <div class="col-xs-11">
+                            <div class="form-group">
+                              <label for="p_apellido" class="control-label">Primer apellido</label>
+                              <input
+                                class="form-control"
+                                type="text"
+                                name="p_apellido"
+                                id="p_apellido"
+                                required
+                                disabled
+                                placeholder="campo obligatorio"
+                                value="<?php echo $datos['p_apellido'] ?>"
+                                maxlength="20">
+                              <p class="help-block" id="p_apellido_chequeo">
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-sm-6">
+                        <div class="row">
+                          <div class="col-xs-12">
+                            <div class="form-group">
+                              <label for="s_apellido" class="control-label">Segundo apellido</label>
+                              <input
+                                class="form-control"
+                                type="text"
+                                name="s_apellido"
+                                id="s_apellido"
+                                disabled
+                                placeholder="Sin registros, favor actualizar"
+                                value="<?php echo $datos['s_apellido'] === (null) ? 'Sin Registros':$datos['s_apellido'] ?>"
+                                maxlength="20">
+                              <p class="help-block" id="s_apellido_chequeo">
+                              </p>
+                            </div>
                           </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                  <!-- inicio de apellidos -->
-                  <div class="row">
-                    <div class="col-sm-6">
-                      <div class="row">
-                        <div class="col-xs-11">
-                          <div class="form-group">
-                            <label for="p_apellido" class="control-label">Primer apellido</label>
+                    <!-- inicio de fecha de nac, sexo, nivel edc, titulo -->
+                    <div class="row">
+                      <div class="col-sm-3">
+                        <div class="form-group">
+                          <label for="fec_nac" class="control-label">Fecha de nacimiento</label>
+                          <!-- readonly para que no puedan cambiar manualmente la fecha -->
+                          <!-- style cursor pointer etc... para que no parezca desabilitado -->
+                          <div class="input-group">
                             <input
                               class="form-control"
                               type="text"
-                              name="p_apellido"
-                              id="p_apellido"
-                              required
-                              placeholder="campo obligatorio"
-                              value="<?php echo $datos['p_apellido'] ?>"
-                              maxlength="20">
-                            <p class="help-block" id="p_apellido_chequeo">
-                            </p>
+                              name="fec_nac"
+                              id="fec_nac"
+                              disabled
+                              placeholder="click para mostrar calendario"
+                              readonly="readonly"
+                              style="cursor:pointer; background-color: #FFFFFF"
+                              value="<?php echo $datos['fec_nac'] ?>"
+                              required>
+                            <span class="glyphicon glyphicon-calendar input-group-addon"></span>
                           </div>
+                          <p class="help-block" id="fec_nac_chequeo">
+                          </p>
+                        </div>
+                      </div>
+                      <div class="col-sm-3 col-sm-offset-1">
+                        <div class="form-group">
+                          <label for="sexo" class="control-label">Sexo</label>
+                          <?php $query = "SELECT codigo, descripcion
+                            from sexo where status = 1;";
+                            $registros = conexion($query);?>
+                          <select disabled class="form-control" name="sexo" id="sexo" required>
+                            <?php while($fila = mysqli_fetch_array($registros)) : ?>
+                              <?php if ($datos['sexo'] == $fila['codigo']): ?>
+                                <option selected="selected" value="<?php echo $fila['codigo']; ?>">
+                                  <?php echo $fila['descripcion']; ?>
+                                </option>
+                              <?php else: ?>
+                                <option value="<?php echo $fila['codigo']; ?>">
+                                  <?php echo $fila['descripcion']; ?>
+                                </option>
+                              <?php endif ?>
+                            <?php endwhile; ?>
+                           </select>
+                          <p class="help-block" id="sexo_chequeo">
+                          </p>
+                        </div>
+                      </div>
+                      <div class="col-sm-4 col-sm-offset-1">
+                        <div class="form-group">
+                          <label for="nivel_instruccion" class="control-label">Nivel Educativo</label>
+                          <?php $sql="SELECT codigo, descripcion from nivel_instruccion where status = 1;";
+                            $registros = conexion($sql);?>
+                          <select disabled class="form-control" name="nivel_instruccion" required id="nivel_instruccion">
+                          <?php while($fila = mysqli_fetch_array($registros)) : ?>
+                            <?php if ($datos['nivel_instruccion'] == $fila['codigo']): ?>
+                              <option selected="selected" value="<?php echo $fila['codigo']?>">
+                              <?php echo $fila['descripcion']?></option>
+                            <?php else: ?>
+                              <option value="<?php echo $fila['codigo']?>">
+                              <?php echo $fila['descripcion']?></option>
+                            <?php endif ?>
+                          <?php endwhile; ?>
+                          </select>
+                          <p class="help-block" id="nivel_instruccion_chequeo">
+                          </p>
                         </div>
                       </div>
                     </div>
-                    <div class="col-sm-6">
-                      <div class="row">
-                        <div class="col-xs-12">
-                          <div class="form-group">
-                            <label for="s_apellido" class="control-label">Segundo apellido</label>
-                            <input
-                              class="form-control"
-                              type="text"
-                              name="s_apellido"
-                              id="s_apellido"
-                              placeholder="Sin registros, favor actualizar"
-                              value="<?php echo $datos['s_apellido'] === (null) ? 'Sin Registros':$datos['s_apellido'] ?>"
-                              maxlength="20">
-                            <p class="help-block" id="s_apellido_chequeo">
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <!-- inicio de fecha de nac, sexo, nivel edc, titulo -->
-                  <div class="row">
-                    <div class="col-sm-3">
-                      <div class="form-group">
-                        <label for="fec_nac" class="control-label">Fecha de nacimiento</label>
-                        <!-- readonly para que no puedan cambiar manualmente la fecha -->
-                        <!-- style cursor pointer etc... para que no parezca desabilitado -->
-                        <div class="input-group">
+                    <div class="row">
+                      <div class="col-sm-12">
+                        <div class="form-group">
+                          <label for="titulo" class="control-label">Titulos y/o Certificados</label>
                           <input
                             class="form-control"
                             type="text"
-                            name="fec_nac"
-                            id="fec_nac"
-                            placeholder="click para mostrar calendario"
-                            readonly="readonly"
-                            style="cursor:pointer; background-color: #FFFFFF"
-                            value="<?php echo $datos['fec_nac'] ?>"
-                            required>
-                          <span class="glyphicon glyphicon-calendar input-group-addon"></span>
-                        </div>
-                        <p class="help-block" id="fec_nac_chequeo">
-                        </p>
-                      </div>
-                    </div>
-                    <div class="col-sm-3 col-sm-offset-1">
-                      <div class="form-group">
-                        <label for="sexo" class="control-label">Sexo</label>
-                        <?php $query = "SELECT codigo, descripcion
-                          from sexo where status = 1;";
-                          $registros = conexion($query);?>
-                        <select class="form-control" name="sexo" id="sexo" required>
-                          <?php while($fila = mysqli_fetch_array($registros)) : ?>
-                            <?php if ($datos['sexo'] == $fila['codigo']): ?>
-                              <option selected="selected" value="<?php echo $fila['codigo']; ?>">
-                                <?php echo $fila['descripcion']; ?>
-                              </option>
-                            <?php else: ?>
-                              <option value="<?php echo $fila['codigo']; ?>">
-                                <?php echo $fila['descripcion']; ?>
-                              </option>
-                            <?php endif ?>
-                          <?php endwhile; ?>
-                         </select>
-                        <p class="help-block" id="sexo_chequeo">
-                        </p>
-                      </div>
-                    </div>
-                    <div class="col-sm-4 col-sm-offset-1">
-                      <div class="form-group">
-                        <label for="nivel_instruccion" class="control-label">Nivel Educativo</label>
-                        <?php $sql="SELECT codigo, descripcion from nivel_instruccion where status = 1;";
-                          $registros = conexion($sql);?>
-                        <select class="form-control" name="nivel_instruccion" required id="nivel_instruccion">
-                        <?php while($fila = mysqli_fetch_array($registros)) : ?>
-                          <?php if ($datos['nivel_instruccion'] == $fila['codigo']): ?>
-                            <option selected="selected" value="<?php echo $fila['codigo']?>">
-                            <?php echo $fila['descripcion']?></option>
-                          <?php else: ?>
-                            <option value="<?php echo $fila['codigo']?>">
-                            <?php echo $fila['descripcion']?></option>
-                          <?php endif ?>
-                        <?php endwhile; ?>
-                        </select>
-                        <p class="help-block" id="nivel_instruccion_chequeo">
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-sm-12">
-                      <div class="form-group">
-                        <label for="titulo" class="control-label">Titulos y/o Certificados</label>
-                        <input
-                          class="form-control"
-                          type="text"
-                          name="titulo"
-                          id="titulo"
-                          placeholder="Sin registros, favor actualizar"
-                          value="<?php echo $datos['titulo'] === (null) ? 'Sin Registros, favor actualizar':$datos['titulo'] ?>"
-                          maxlength="80">
-                        <p class="help-block" id="titulo_chequeo">
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                  <!-- inicio de telefonos y email -->
-                  <div class="row">
-                    <div class="col-sm-3">
-                      <div class="row">
-                        <div class="col-xs-11">
-                          <div class="form-group">
-                            <label class="control-label" for="telefono">Telefono</label>
-                            <input
-                              class="form-control"
-                              type="text"
-                              maxlength="11"
-                              name="telefono"
-                              placeholder="Sin registros, favor actualizar"
-                              value="<?php echo $datos['telefono'] ?>"
-                              id="telefono">
-                            <p class="help-block" id="telefono_chequeo">
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-sm-3">
-                      <div class="row">
-                        <div class="col-xs-11">
-                          <div class="form-group">
-                            <label class="control-label" for="telefono_otro">Telefono Adicional</label>
-                            <input
-                              class="form-control"
-                              type="text"
-                              maxlength="11"
-                              name="telefono_otro"
-                              placeholder="Sin registros, favor actualizar"
-                              value="<?php echo $datos['telefono_otro'] ?>"
-                              id="telefono_otro">
-                            <p class="help-block" id="telefono_otro_chequeo">
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-sm-3">
-                      <div class="row">
-                        <div class="col-xs-11">
-                          <div class="form-group">
-                            <label class="control-label" for="celular">Telefono Celular</label>
-                            <input
-                              class="form-control"
-                              type="text"
-                              maxlength="11"
-                              name="celular"
-                              placeholder="Sin registros, favor actualizar"
-                              value="<?php echo $datos['celular'] ?>"
-                              id="celular">
-                            <p class="help-block" id="celular_chequeo">
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-sm-3">
-                      <div class="row">
-                        <div class="col-xs-12">
-                          <div class="form-group">
-                            <label class="control-label" for="email">Correo Electronico</label>
-                            <div class="input-group">
-                              <div class="input-group-addon">@</div>
-                              <input
-                              type="email"
-                              class="form-control"
-                              id="email"
-                              name="email"
-                              maxlength="40"
-                              placeholder="Sin registros, favor actualizar"
-                              value="<?php echo $datos['email'] ?>"
-                              required>
-                            </div>
-                            <p class="help-block" id="email_chequeo">
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <!-- inicio de cargo, perfil y direccion exacta -->
-                  <div class="row">
-                    <div class="col-sm-3">
-                      <div class="row">
-                        <div class="col-xs-11">
-                          <div class="form-group">
-                            <label for="cargo" class="control-label">Cargo</label>
-                            <?php $sql="SELECT codigo, descripcion from cargo where status = 1;";
-                              $registros = conexion($sql);?>
-                            <select class="form-control" name="cod_cargo" required id="cargo">
-                              <?php while($fila = mysqli_fetch_array($registros)) : ?>
-                                <?php if ($datos['cod_cargo'] == $fila['codigo']): ?>
-                                  <option selected="selected" value="<?php echo $fila['codigo']?>">
-                                  <?php echo $fila['descripcion']?></option>
-                                <?php else: ?>
-                                  <option value="<?php echo $fila['codigo']?>">
-                                  <?php echo $fila['descripcion']?></option>
-                                <?php endif ?>
-                              <?php endwhile; ?>
-                            </select>
-                            <p class="help-block" id="cargo_chequeo">
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-sm-3">
-                      <div class="row">
-                        <div class="col-xs-11">
-                          <div class="form-group">
-                            <label for="tipo_personal" class="control-label">Perfil de usuario</label>
-                            <?php $sql="SELECT codigo, descripcion from tipo_personal where status = 1;";
-                              $registros = conexion($sql);?>
-                            <select class="form-control" name="tipo_personal" required id="tipo_personal">
-                              <?php while($fila = mysqli_fetch_array($registros)) : ?>
-                                <?php if ($datos['tipo_personal'] == $fila['codigo']): ?>
-                                  <option selected="selected" value="<?php echo $fila['codigo']?>">
-                                  <?php echo $fila['descripcion']?></option>
-                                <?php else: ?>
-                                  <option value="<?php echo $fila['codigo']?>">
-                                  <?php echo $fila['descripcion']?></option>
-                                <?php endif ?>
-                              <?php endwhile; ?>
-                            </select>
-                            <p class="help-block" id="tipo_personal_chequeo">
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-sm-6">
-                      <div class="row">
-                        <div class="col-xs-12">
-                          <div class="form-group">
-                            <label for="direcc" class="control-label">Direccion (Av/Calle/Edf.)</label>
-                            <textarea
-                            class="form-control"
-                            maxlenght="150"
-                            rows="2"
-                            name="direcc"
+                            name="titulo"
+                            id="titulo"
+                            disabled
                             placeholder="Sin registros, favor actualizar"
-                            id="direcc"><?php echo $datos['direcc'] ?></textarea>
-                            <p class="help-block" id="direcc_chequeo">
-                            </p>
+                            value="<?php echo $datos['titulo'] === (null) ? 'Sin Registros, favor actualizar':$datos['titulo'] ?>"
+                            maxlength="80">
+                          <p class="help-block" id="titulo_chequeo">
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- inicio de telefonos y email -->
+                    <div class="row">
+                      <div class="col-sm-3">
+                        <div class="row">
+                          <div class="col-xs-11">
+                            <div class="form-group">
+                              <label class="control-label" for="telefono">Telefono</label>
+                              <input
+                                class="form-control"
+                                type="text"
+                                maxlength="11"
+                                name="telefono"
+                                disabled
+                                placeholder="Sin registros, favor actualizar"
+                                value="<?php echo $datos['telefono'] ?>"
+                                id="telefono">
+                              <p class="help-block" id="telefono_chequeo">
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-sm-3">
+                        <div class="row">
+                          <div class="col-xs-11">
+                            <div class="form-group">
+                              <label class="control-label" for="telefono_otro">Telefono Adicional</label>
+                              <input
+                                class="form-control"
+                                type="text"
+                                maxlength="11"
+                                name="telefono_otro"
+                                disabled
+                                placeholder="Sin registros, favor actualizar"
+                                value="<?php echo $datos['telefono_otro'] ?>"
+                                id="telefono_otro">
+                              <p class="help-block" id="telefono_otro_chequeo">
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-sm-3">
+                        <div class="row">
+                          <div class="col-xs-11">
+                            <div class="form-group">
+                              <label class="control-label" for="celular">Telefono Celular</label>
+                              <input
+                                class="form-control"
+                                type="text"
+                                maxlength="11"
+                                name="celular"
+                                disabled
+                                placeholder="Sin registros, favor actualizar"
+                                value="<?php echo $datos['celular'] ?>"
+                                id="celular">
+                              <p class="help-block" id="celular_chequeo">
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-sm-3">
+                        <div class="row">
+                          <div class="col-xs-12">
+                            <div class="form-group">
+                              <label class="control-label" for="email">Correo Electronico</label>
+                              <div class="input-group">
+                                <div class="input-group-addon">@</div>
+                                <input
+                                type="email"
+                                class="form-control"
+                                id="email"
+                                name="email"
+                                maxlength="40"
+                                disabled
+                                placeholder="Sin registros, favor actualizar"
+                                value="<?php echo $datos['email'] ?>"
+                                required>
+                              </div>
+                              <p class="help-block" id="email_chequeo">
+                              </p>
+                            </div>
                           </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                  <!-- inicio de estado, municio y parroquia -->
-                  <div class="row">
-                    <div class="col-sm-4">
-                      <div class="row">
-                        <div class="col-xs-11">
-                          <div class="form-group">
-                            <label class="control-label" for="cod_est">Estado</label>
-                            <select class="form-control" name="cod_est" id="cod_est"></select>
-                            <p class="help-block" id="cod_est_chequeo">
-                            </p>
+                    <!-- inicio de cargo, perfil y direccion exacta -->
+                    <div class="row">
+                      <div class="col-sm-3">
+                        <div class="row">
+                          <div class="col-xs-11">
+                            <div class="form-group">
+                              <label for="cargo" class="control-label">Cargo</label>
+                              <?php $sql="SELECT codigo, descripcion from cargo where status = 1;";
+                                $registros = conexion($sql);?>
+                              <select disabled class="form-control" name="cod_cargo" required id="cargo">
+                                <?php while($fila = mysqli_fetch_array($registros)) : ?>
+                                  <?php if ($datos['cod_cargo'] == $fila['codigo']): ?>
+                                    <option selected="selected" value="<?php echo $fila['codigo']?>">
+                                    <?php echo $fila['descripcion']?></option>
+                                  <?php else: ?>
+                                    <option value="<?php echo $fila['codigo']?>">
+                                    <?php echo $fila['descripcion']?></option>
+                                  <?php endif ?>
+                                <?php endwhile; ?>
+                              </select>
+                              <p class="help-block" id="cargo_chequeo">
+                              </p>
+                            </div>
                           </div>
                         </div>
                       </div>
-                    </div>
-                    <div class="col-sm-4">
-                      <div class="row">
-                        <div class="col-xs-11">
-                          <div class="form-group">
-                            <label class="control-label" for="cod_mun">Municipio</label>
-                            <select class="form-control" name="cod_mun" id="cod_mun" >
-                              <option value="">--Seleccionar--</option>
-                            </select>
-                            <p class="help-block" id="cod_mun_chequeo">
-                            </p>
+                      <div class="col-sm-3">
+                        <div class="row">
+                          <div class="col-xs-11">
+                            <div class="form-group">
+                              <label for="tipo_personal" class="control-label">Perfil de usuario</label>
+                              <?php $sql="SELECT codigo, descripcion from tipo_personal where status = 1;";
+                                $registros = conexion($sql);?>
+                              <select disabled class="form-control" name="tipo_personal" required id="tipo_personal">
+                                <?php while($fila = mysqli_fetch_array($registros)) : ?>
+                                  <?php if ($datos['tipo_personal'] == $fila['codigo']): ?>
+                                    <option selected="selected" value="<?php echo $fila['codigo']?>">
+                                    <?php echo $fila['descripcion']?></option>
+                                  <?php else: ?>
+                                    <option value="<?php echo $fila['codigo']?>">
+                                    <?php echo $fila['descripcion']?></option>
+                                  <?php endif ?>
+                                <?php endwhile; ?>
+                              </select>
+                              <p class="help-block" id="tipo_personal_chequeo">
+                              </p>
+                            </div>
                           </div>
                         </div>
                       </div>
-                    </div>
-                    <div class="col-sm-4">
-                      <div class="row">
-                        <div class="col-xs-12">
-                          <div class="form-group">
-                            <label class="control-label" for="cod_parro">Parroquia</label>
-                            <select class="form-control" name="cod_parro" id="cod_parro">
-                              <option value="">--Seleccionar--</option>
-                            </select>
-                            <p class="help-block" id="cod_parro_chequeo">
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <!-- Seudonimo y tipo de usuario -->
-                  <div class="row">
-                    <div class="col-sm-4">
-                      <div class="row">
-                        <div class="col-xs-11">
-                          <div class="form-group">
-                            <label for="seudonimo" class="control-label">Seudonimo</label>
-                            <input
+                      <div class="col-sm-6">
+                        <div class="row">
+                          <div class="col-xs-12">
+                            <div class="form-group">
+                              <label for="direcc" class="control-label">Direccion (Av/Calle/Edf.)</label>
+                              <textarea
                               class="form-control"
-                              type="text"
-                              name="seudonimo"
-                              id="seudonimo"
-                              placeholder="No esta registrada"
-                              value="<?php echo $datos['seudonimo'] ?>"
-                              maxlength="20">
-                            <p class="help-block" id="seudonimo_chequeo">
-                            </p>
+                              maxlenght="150"
+                              rows="2"
+                              disabled
+                              name="direcc"
+                              placeholder="Sin registros, favor actualizar"
+                              id="direcc"><?php echo $datos['direcc'] ?></textarea>
+                              <p class="help-block" id="direcc_chequeo">
+                              </p>
+                            </div>
                           </div>
                         </div>
                       </div>
                     </div>
-                    <div class="col-sm-4">
-                      <div class="row">
-                        <div class="col-xs-11">
-                          <div class="form-group">
-                            <label for="cod_tipo_usr" class="control-label">Tipo de usuario en sistema</label>
-                            <?php $query = "SELECT codigo, descripcion
-                            from tipo_usuario where status = 1 and codigo != 255;";
-                              $resultado = conexion($query);?>
-                            <select class="form-control" name="cod_tipo_usr" id="cod_tipo_usr" required>
-                              <?php while ( $tipoUsr = mysqli_fetch_array($resultado) ) : ?>
-                                <?php if ($datos['cod_tipo_usr'] === $tipoUsr['codigo']): ?>
-                                  <option selected="selected"
-                                  value="<?php echo $tipoUsr['codigo'] ?>">
+                    <!-- inicio de estado, municio y parroquia -->
+                    <div class="row">
+                      <div class="col-sm-4">
+                        <div class="row">
+                          <div class="col-xs-11">
+                            <div class="form-group">
+                              <label class="control-label" for="cod_est">Estado</label>
+                              <select disabled class="form-control" name="cod_est" id="cod_est"></select>
+                              <p class="help-block" id="cod_est_chequeo">
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-sm-4">
+                        <div class="row">
+                          <div class="col-xs-11">
+                            <div class="form-group">
+                              <label class="control-label" for="cod_mun">Municipio</label>
+                              <select disabled class="form-control" name="cod_mun" id="cod_mun" >
+                                <option value="">--Seleccionar--</option>
+                              </select>
+                              <p class="help-block" id="cod_mun_chequeo">
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-sm-4">
+                        <div class="row">
+                          <div class="col-xs-12">
+                            <div class="form-group">
+                              <label class="control-label" for="cod_parro">Parroquia</label>
+                              <select disabled class="form-control" name="cod_parro" id="cod_parro">
+                                <option value="">--Seleccionar--</option>
+                              </select>
+                              <p class="help-block" id="cod_parro_chequeo">
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- Seudonimo y tipo de usuario -->
+                    <div class="row">
+                      <div class="col-sm-4">
+                        <div class="row">
+                          <div class="col-xs-11">
+                            <div class="form-group">
+                              <label for="seudonimo" class="control-label">Seudonimo</label>
+                              <input
+                                class="form-control"
+                                type="text"
+                                name="seudonimo"
+                                id="seudonimo"
+                                disabled
+                                placeholder="No esta registrada"
+                                value="<?php echo $datos['seudonimo'] ?>"
+                                maxlength="20">
+                              <p class="help-block" id="seudonimo_chequeo">
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-sm-4">
+                        <div class="row">
+                          <div class="col-xs-11">
+                            <div class="form-group">
+                              <label for="cod_tipo_usr" class="control-label">Tipo de usuario en sistema</label>
+                              <?php $query = "SELECT codigo, descripcion
+                              from tipo_usuario where status = 1 and codigo != 255;";
+                                $resultado = conexion($query);?>
+                              <select disabled class="form-control" name="cod_tipo_usr" id="cod_tipo_usr" required>
+                                <?php while ( $tipoUsr = mysqli_fetch_array($resultado) ) : ?>
+                                  <?php if ($datos['cod_tipo_usr'] === $tipoUsr['codigo']): ?>
+                                    <option selected="selected"
+                                    value="<?php echo $tipoUsr['codigo'] ?>">
+                                      <?php echo $tipoUsr['descripcion'] ?>
+                                    </option>
+                                  <?php endif ?>
+                                  <option value="<?php echo $tipoUsr['codigo'] ?>">
                                     <?php echo $tipoUsr['descripcion'] ?>
                                   </option>
-                                <?php endif ?>
-                                <option value="<?php echo $tipoUsr['codigo'] ?>">
-                                  <?php echo $tipoUsr['descripcion'] ?>
-                                </option>
-                              <?php endwhile; ?>
-                            </select>
-                            <p class="help-block" id="cod_tipo_usr_chequeo">
-                            </p>
+                                <?php endwhile; ?>
+                              </select>
+                              <p class="help-block" id="cod_tipo_usr_chequeo">
+                              </p>
+                            </div>
                           </div>
                         </div>
                       </div>
                     </div>
                   </div>
-                </div>
-                <!-- info adicional -->
-                <div class="row">
-                  <div class="col-sm-8 col-sm-offset-2 bg-primary redondeado">
-                    <div class="row">
-                      <div class="col-xs-12">
-                        <h4>
-                          Por favor, asegurese que los datos son correctos antes de
-                          continuar con el proceso de actualizacion.
-                        </h4>
+                  <!-- info adicional -->
+                  <div class="row">
+                    <div class="col-sm-8 col-sm-offset-2 bg-primary redondeado">
+                      <div class="row">
+                        <div class="col-xs-12">
+                          <h4>
+                            Por favor, asegurese que los datos son correctos antes de
+                            continuar con el proceso de actualizacion.
+                          </h4>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-                <!-- boton -->
-                <div class="row margenArriba">
-                  <div class="col-sm-2 col-sm-offset-5">
-                    <input
-                    role="button"
-                    id="submit"
-                    class="btn btn-default btn-block"
-                    type="submit"
-                    name="registrar"
-                    value="Continuar">
+                  <!-- boton -->
+                  <div class="row margenArriba">
+                    <div class="col-sm-2 col-sm-offset-5">
+                      <input
+                      role="button"
+                      id="submit"
+                      class="btn btn-info btn-block"
+                      type="submit"
+                      disabled
+                      name="registrar"
+                      value="Continuar">
+                    </div>
+                  </div>
+                </fieldset>
+              </form>
+              <!-- botones de control -->
+              <div class="margen">
+                <div class="row margen">
+                  <div class="col-sm-4 col-sm-offset-4">
+                    <button class="actualizar btn btn-primary btn-block">Actualizar</button>
                   </div>
                 </div>
-              </form>
+                <div class="row margen">
+                  <div class="col-sm-4 col-sm-offset-4">
+                    <a href="reportes/detallado.php?cedula=<?php echo $cedula ?>" class="cons-est btn btn-default btn-block">Generar Reporte</a>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -728,6 +772,15 @@ if ( isset($_GET['cedula']) ):
               maxDate:'-12Y',
               minDate:'-100Y',
               dateFormat: "yyyy-mm-dd"
+            });
+          });
+        </script>
+        <!-- para cambiar de solo lectura a normal -->
+        <script type="text/javascript" src="../java/otros/cambiarSoloLectura.js"></script>
+        <script type="text/javascript">
+          $(function() {
+            $('.actualizar').on('click', function(evento) {
+              cambiarSoloLectura($('#form'), 'Personal Interno');
             });
           });
         </script>
