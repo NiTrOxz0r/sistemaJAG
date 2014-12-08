@@ -43,8 +43,6 @@ function validacionCedulaEscolar(cedula_x){
     return false;
   }else if( /[^\d+]/g.exec(cedula) ){
     return false;
-  }else if( /(.)\1{7,}/.exec(cedula) ){
-    return false;
   }else if( n < 1000000000 ){
     // 1XYYYYYYYY
     // donde
