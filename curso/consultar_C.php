@@ -17,10 +17,6 @@ require_once($enlace);
 // invocamos validarUsuario.php desde master.php
 validarUsuario(1, 1, $_SESSION['cod_tipo_usr']);
 
-//ESTA FUNCION TRAE EL HEAD Y NAVBAR:
-//DESDE empezarPagina.php
-empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);
-
 if ( isset($_POST['tipo']) ) :
   if ($_POST['tipo'] === '1') :
     // cursos existentes por docente
@@ -58,7 +54,7 @@ if ( isset($_POST['tipo']) ) :
       on asume.periodo_academico = periodo_academico.codigo
       inner join curso
       on asume.cod_curso = curso.codigo
-      where asume.status = 1
+      where asume.status = 1 and asume.cod_docente = null;
       order by
       periodo_academico.codigo,
       curso.codigo;";
@@ -77,7 +73,7 @@ if ( isset($_POST['tipo']) ) :
       persona.p_apellido as 'p_apellido',
       persona.p_nombre as 'p_nombre',
       persona.cedula as 'cedula',
-      COUNT(curso.descripcion) as 'total_alumnos'
+      --COUNT(curso.descripcion) as 'total_alumnos'
       from asume
       inner join periodo_academico
       on asume.periodo_academico = periodo_academico.codigo
@@ -90,10 +86,35 @@ if ( isset($_POST['tipo']) ) :
       where asume.status = 1 and asume.cod_curso = $curso
       group by
       3,2,1,4,5,6;";
+  elseif ($_POST['tipo'] === '4'):
+    // alumnos existentes por curso
+    if (isset($_POST['curso'])) :
+      $conexion = conexion();
+      $curso = mysqli_escape_string($conexion, trim($_POST['curso']) );
+    else :
+      header('Location: menucon.php?error=curso&valor='.$_POST['curso']);
+    endif;
+    $query = "SELECT
+      asume.codigo as codigo,
+      curso.descripcion as 'des_curso',
+      periodo_academico.descripcion as 'periodo_academico',
+      asume.comentarios as comentarios,
+      COUNT(alumno.codigo) as 'total_alumnos'
+      from asume
+      inner join periodo_academico
+      on asume.periodo_academico = periodo_academico.codigo
+      inner join curso
+      on asume.cod_curso = curso.codigo
+      inner join alumno
+      on alumno.cod_curso = curso.codigo
+      where asume.status = 1 and asume.cod_curso = $curso
+      group by
+      3,2,1;";
   else:
     header('Location: menucon.php?error=tipo&valor='.$_POST['tipo']);
   endif;
-  $resultado = conexion($query);?>
+  $resultado = conexion($query);
+  empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);?>
   <div id="contenido_consultar_C">
     <div id="blancoAjax">
       <!-- CONTENIDO EMPIEZA DEBAJO DE ESTO: -->
@@ -159,6 +180,11 @@ if ( isset($_POST['tipo']) ) :
                   <th data-field="p_apellido" data-sortable="true">Primer Apellido</th>
                   <th data-field="p_nombre" data-sortable="true">Primer Nombre</th>
                   <th data-field="cedula" data-sortable="true" data-switchable="false">Cedula</th>
+                <?php elseif ($_POST['tipo'] === '4'): ?>
+                  <th data-field="codigo" data-sortable="true">Codigo</th>
+                  <th data-field="curso" data-sortable="true">Descripcion de curso</th>
+                  <th data-field="periodo" data-sortable="true">Periodo Academico</th>
+                  <th data-field="comentarios" data-sortable="true">Comentarios</th>
                   <th data-field="total" data-sortable="true">Total de Alumnos</th>
                 <?php endif ?>
               </thead>
@@ -231,6 +257,24 @@ if ( isset($_POST['tipo']) ) :
                       </td>
                       <td class="cedula">
                         <?php echo $datos['cedula'] ?>
+                      </td>
+                    </tr>
+                  <?php elseif ($_POST['tipo'] === '4'): //curso sin docente ?>
+                    <tr>
+                      <!-- ignorar -->
+                        <td></td>
+                      <!-- ignorar -->
+                      <td class="codigo">
+                        <?php echo $datos['codigo'] ?>
+                      </td>
+                      <td>
+                        <?php echo $datos['des_curso'] ?>
+                      </td>
+                      <td>
+                        <?php echo $datos['periodo_academico'] ?>
+                      </td>
+                      <td>
+                        <?php echo $datos['comentarios'] ?>
                       </td>
                       <td>
                         <?php echo $datos['total_alumnos'] ?>
