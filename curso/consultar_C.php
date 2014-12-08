@@ -80,7 +80,7 @@ if ( isset($_POST['tipo']) ) :
       inner join curso
       on asume.cod_curso = curso.codigo
       inner join alumno
-      on alumno.cod_curso = curso.codigo
+      on alumno.cod_curso = asume.cod_curso
       inner join persona
       on alumno.cod_persona = persona.codigo
       where asume.status = 1 and asume.cod_curso = $curso
@@ -144,6 +144,36 @@ if ( isset($_POST['tipo']) ) :
         </div>
         <div class="row">
           <div class="col-xs-12">
+            <?php if ($_POST['tipo'] === '1'): ?>
+              <?php $enlace = enlaceDinamico('usuario/form_act_PI.php') ?>
+            <?php elseif ($_POST['tipo'] === '3'): ?>
+              <?php $enlace = enlaceDinamico('alumno/form_act_A.php') ?>
+            <?php endif ?>
+            <?php $enlacePrimario = enlaceDinamico('curso/form_act_C.php') ?>
+            <span
+            class="hidden"
+            data-enlace-primario="<?php echo $enlacePrimario ?>"
+            data-enlace-relacionado="<?php echo $enlace ?>"></span>
+            <div class="row center-block margen">
+              <div class="col-xs-6 col-xs-offset-3">
+                <a
+                 id="consultar-codigo"
+                 href="#"
+                 class="push-3 btn btn-warning btn-lg disabled">Consultar curso</a>
+                 <span class="label label-info">Seleccione un registro para consultarlo</span>
+              </div>
+            </div>
+            <?php if ($_POST['tipo'] <> '2'): ?>
+              <div class="row center-block margen">
+                <div class="col-xs-6 col-xs-offset-3">
+                  <a
+                   id="consultar-cedula"
+                   href="#"
+                   class="push-3 btn btn-warning btn-lg disabled">Consultar Persona</a>
+                   <span class="label label-info">Seleccione un registro para consultarlo</span>
+                </div>
+              </div>
+            <?php endif ?>
             <table
               id="tabla"
               data-toggle="table"
@@ -284,62 +314,37 @@ if ( isset($_POST['tipo']) ) :
                 <?php endwhile; ?>
               </tbody>
             </table>
-            <?php if ($_POST['tipo'] === '1'): ?>
-              <?php $enlace = enlaceDinamico('usuario/form_act_PI.php') ?>
-            <?php elseif ($_POST['tipo'] === '3'): ?>
-              <?php $enlace = enlaceDinamico('alumno/form_act_A.php') ?>
-            <?php endif ?>
-            <?php $enlacePrimario = enlaceDinamico('curso/form_act_C.php') ?>
-            <span
-            class="hidden"
-            data-enlace-primario="<?php echo $enlacePrimario ?>"
-            data-enlace-relacionado="<?php echo $enlace ?>"></span>
+            <!-- reporte -->
             <div class="row center-block margen">
               <div class="col-xs-6 col-xs-offset-3">
-                <a
-                 id="consultar-codigo"
-                 href="#"
-                 class="push-3 btn btn-warning btn-lg disabled">Consultar curso</a>
-                 <span class="label label-info">Seleccione un registro para consultarlo</span>
+                <span class="label label-info">generara este listado en formato pdf</span>
               </div>
             </div>
-            <?php if ($_POST['tipo'] <> '2'): ?>
-              <div class="row center-block margen">
-                <div class="col-xs-6 col-xs-offset-3">
-                  <a
-                   id="consultar-cedula"
-                   href="#"
-                   class="push-3 btn btn-warning btn-lg disabled">Consultar Persona</a>
-                   <span class="label label-info">Seleccione un registro para consultarlo</span>
-                </div>
-              </div>
-            <?php endif ?>
             <div class="row center-block margen">
-              <div class="col-xs-6 col-xs-offset-3">
-                <p>
-                  <a href="menucon.php" class="btn btn-primary btn-sm" >Realizar otra consulta.</a>
-                </p>
-                <p>
-                  <a href="../index.php" class="btn btn-primary btn-sm" >Regresar al menu principal.</a>
-                </p>
+              <div class="col-xs-3 col-xs-offset-3">
+                <?php $enlace = "reportes/listado_C.php?tipo=$_REQUEST[tipo]&curso=$_REQUEST[curso]" ?>
+                <a
+                  id="generar-pdf"
+                  href="<?php echo $enlace ?>"
+                  class="push-3 btn btn-primary btn-lg">Generar Reporte</a>
               </div>
             </div>
             <div class="row">
-              <div class="col-xs-8 col-xs-offset-2 margen well">
+              <div class="col-xs-8 col-xs-offset-2 margenAbajo well">
                 <div class="row">
-                  <div class="col-xs-12 text-center">
+                  <div class="col-xs-12">
                     <h4>
-                      Puede hacer otro tipo de consulta!
+                      Listado seleccionado segun los parametros que Ud. escojio.
                     </h4>
                     <p>
                       <small>
-                        <a href="menucon.php">desde aqui.</a>
+                        Si desea hacer otro tipo de consulta puede
+                        <a href="menucon.php">hacerlo aqui.</a>
                       </small>
                     </p>
                     <p>
                       <small>
-                        o si prefiere puede regresar
-                        <a href="../index.php">al menu principal.</a>
+                        puede regresar <a href="../index.php">al menu principal.</a>
                       </small>
                     </p>
                   </div>
