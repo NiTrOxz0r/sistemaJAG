@@ -67,6 +67,7 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);
                 name="curso"
                 id="curso"
                 autofocus="autofocus"
+                autocomplete="off"
                 required>
                 <?php
                   // $query = "SELECT

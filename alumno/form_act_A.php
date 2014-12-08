@@ -552,8 +552,13 @@ if($reg = mysqli_fetch_array($re)) :?>
                         <div class="col-xs-11">
                           <div class="form-group">
                             <label for="curso" class="control-label">Curso a inscribirse</label>
-                            <?php $query = "SELECT codigo, descripcion
-                              from curso where status = 1;";
+                            <?php $query = "SELECT
+                              curso.descripcion as descripcion,
+                              asume.codigo as codigo
+                              from asume
+                              inner join curso
+                              on asume.cod_curso = curso.codigo
+                              where asume.status = 1;";
                               $registros = conexion($query); ?>
                             <select required disabled class="form-control" name="curso" id="curso">
                               <option selected="selected" value="">Seleccione una opci&oacute;n</option>
