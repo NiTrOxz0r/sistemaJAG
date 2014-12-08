@@ -662,4 +662,5 @@ if ( (isset($_POST['seudonimo']) && isset($_POST['clave']) )
     </div>
   </div>
 <?php endif;
+// finalizarPagina(4, 4);
 finalizarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);?>

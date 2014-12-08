@@ -240,10 +240,9 @@ if ( isset($_GET['cedula']) ):
                               type="text"
                               name="fec_nac"
                               id="fec_nac"
-                              disabled
                               placeholder="click para mostrar calendario"
                               readonly="readonly"
-                              style="cursor:pointer; background-color: #FFFFFF"
+                              style="cursor:pointer; background-color: #FFF"
                               value="<?php echo $datos['fec_nac'] ?>"
                               required>
                             <span class="glyphicon glyphicon-calendar input-group-addon"></span>

@@ -31,6 +31,20 @@ function cambiarSoloLectura($tabla, tipo){
       // });
     }
   });
+  if($('#fec_nac').prop('disabled')){
+    $('#fec_nac').prop('disabled', true);
+    // $('#fec_nac').prop('disabled', true).css({
+    //   'cursor': 'not-allowed',
+    //   'background-color': '#FFFFFF'
+    // });
+  }else{
+    x = true;
+    $('#fec_nac').prop('disabled', false);
+    // $('#fec_nac').prop('disabled', false).css({
+    //   'cursor': 'pointer',
+    //   'background-color': '#EEEEEE'
+    // });
+  }
   if (x) {
     $('#form > fieldset > legend > h1').text('consulta de '+tipo);
     $('.actualizar').removeClass('btn-info').addClass('btn-primary');
