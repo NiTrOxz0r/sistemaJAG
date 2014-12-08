@@ -51,29 +51,37 @@ else :
   $conexion = conexion();
   $cedula = mysqli_escape_string($conexion, $_GET['cedula']);
   $query = "SELECT
-  persona.cedula, persona.nacionalidad,
-  persona.p_nombre , persona.s_nombre, persona.p_apellido, persona.s_apellido,
-  persona.fec_nac,
-  sexo.descripcion as sexo,
-  persona.telefono, persona.telefono_otro,
-  parroquia.descripcion as parroquia,
-  municipio.descripcion as municipio,
-  estado.descripcion as estado,
-  direccion_exacta as direccion,
-  personal_autorizado.lugar_nac,
-  personal_autorizado.email,
-  relacion.descripcion as relacion,
-  personal_autorizado.vive_con_alumno,
-  nivel_instruccion.descripcion as nivel_instruccion,
-  profesion.descripcion as profesion,
-  personal_autorizado.lugar_trabajo,
-  personal_autorizado.direccion_trabajo,
-  personal_autorizado.telefono_trabajo
-  FROM persona
-  inner join personal_autorizado
-  on persona.codigo = personal_autorizado.cod_persona
-  inner join nivel_instruccion
-  on personal_autorizado.nivel_instruccion = nivel_instruccion.codigo
+  persona.codigo as codigo_persona,
+  persona.nacionalidad as nacionalidad,
+  persona.cedula as cedula,
+  persona.p_nombre as p_nombre,
+  persona.s_nombre as s_nombre,
+  persona.p_apellido as p_apellido,
+  persona.s_apellido as s_apellido,
+  persona.fec_nac as fec_nac,
+  persona.sexo as sexo,
+  persona.telefono as telefono,
+  persona.telefono_otro as telefono_otro,
+  personal.codigo as codigo_personal,
+  personal.email as email,
+  personal.titulo as titulo,
+  personal.nivel_instruccion as nivel_instruccion,
+  personal.celular as celular,
+  personal.cod_cargo as cod_cargo,
+  personal.tipo_personal as tipo_personal,
+  direccion.direccion_exacta as direcc,
+  direccion.codigo as codigo_dir,
+  parroquia.codigo as cod_parro,
+  municipio.codigo as cod_mun,
+  estado.codigo as cod_est,
+  usuario.codigo as cod_usr,
+  usuario.seudonimo as seudonimo,
+  usuario.cod_tipo_usr as cod_tipo_usr
+  from persona
+  inner join personal
+  on personal.cod_persona = persona.codigo
+  inner join usuario
+  on personal.cod_usr = usuario.codigo
   inner join direccion
   on persona.codigo = direccion.cod_persona
   inner join parroquia
@@ -82,13 +90,7 @@ else :
   on parroquia.cod_mun = municipio.codigo
   inner join estado
   on municipio.cod_edo = estado.codigo
-  inner join sexo
-  on persona.sexo = sexo.codigo
-  inner join relacion
-  on personal_autorizado.relacion = relacion.codigo
-  inner join profesion
-  on personal_autorizado.profesion = profesion.codigo
-  WHERE cedula ='$cedula';";
+  where persona.cedula = '$cedula';";
   $resultado = conexion($query);
   if ($resultado->num_rows === 1) :
     $datos = mysqli_fetch_assoc($resultado);

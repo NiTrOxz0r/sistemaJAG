@@ -111,7 +111,7 @@ maravilloso:
 
 [@Phantom66:](https://github.com/Phantom66)
 
-![totalmente ok](http://stream1.gifsoup.com/view4/4741900/concerned-spock-o.gif)
+![trabajando en grandes cantidades](https://38.media.tumblr.com/ad317d02a7b30679130173591754fd09/tumblr_nb21abAizP1tjsogwo1_500.gif)
 
 Joan:
 

@@ -81,7 +81,13 @@ if ( isset($_POST['cedula']) && strlen($_POST['cedula']) == 8 ) :
     $codCargo,
     $tipo_personal
     );
-
+  // MODIFICAR
+  // $hash = password_verify($clave, $resultado['clave']);
+  // $query = "INSERT INTO usuario
+  // VALUES
+  // (null, $validarPI->cedula, ".$validarForma->clave['completo'].",
+  //   5, 1, 1, null, 1, current_timestamp );";
+  // $resultado = conexion($query);
   //se inserta en persona
   //los datos comunes o basicos:
   $query = "INSERT INTO persona
@@ -118,7 +124,7 @@ if ( isset($_POST['cedula']) && strlen($_POST['cedula']) == 8 ) :
   $direccion = new ChequearDireccion(
     $codUsrMod,
     $datosDePersona['codigo'],
-    $_POST['cod_parroquia'],
+    $_POST['cod_parro'],
     $_POST['direcc']
     );
   //insertamos datos:
@@ -146,7 +152,7 @@ if ( isset($_POST['cedula']) && strlen($_POST['cedula']) == 8 ) :
             <h4>
               El registro de <?php echo $p_apellido.", ".$p_nombre ?> fue realizado exitosamente!
             </h4>
-            <p class="bg-primary">
+            <p>
                <a href="menucon.php">Hacer otro Registro</a>
             </p>
             <p>

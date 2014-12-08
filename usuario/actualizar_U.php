@@ -50,8 +50,8 @@ if (isset($_POST['tipo_personal'])  and isset($_POST['cedula']) ) :
   $validarDireccion = new ChequearDireccion (
     $_SESSION['codUsrMod'],
     $_SESSION['codigo_persona'],
-    $_POST['cod_parroquia'],
-    $_POST['direccion']
+    $_POST['cod_parro'],
+    $_POST['direcc']
     );
   // chequeamos datos del formulario:
   $validarPI = new ChequearPI(
@@ -151,6 +151,19 @@ if (isset($_POST['tipo_personal'])  and isset($_POST['cedula']) ) :
                 </strong>
                 fueron actualizados correctamente!
               </h4>
+              <p>
+                <small>
+                  puede generar un pdf:
+                </small>
+              </p>
+              <!-- botones de control -->
+              <div class="margen">
+                <div class="row margen">
+                  <div class="col-sm-4">
+                    <a href="reportes/detallado.php?cedula=<?php echo $_POST['cedula'] ?>" class="cons-est btn btn-default btn-block">Generar Reporte</a>
+                  </div>
+                </div>
+              </div>
               <p>
                 Si desea hacer otra actualizacion de un usuario por favor dele
                 <a href="menucon.php">click a este enlace</a>
