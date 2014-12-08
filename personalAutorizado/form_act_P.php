@@ -226,7 +226,7 @@ if($reg = mysqli_fetch_array($re)) :?>
                             placeholder="click para mostrar calendario"
                             value="<?php echo $reg['fec_nac'];?>"
                             readonly="readonly"
-                            style="cursor:pointer; background-color: #FFFFFF"
+                            style="cursor:pointer; background-color: #EEE"
                             required>
                           <span class="glyphicon glyphicon-calendar input-group-addon"></span>
                         </div>

@@ -16,7 +16,7 @@
  *
  * este archivo fue cambiado para ajustarse a la nueva base de datos.]}
  *
- * @version [1.6]
+ * @version [1.7]
  */
 
 if(!isset($_SESSION)){
@@ -143,7 +143,7 @@ if ( isset($_SESSION['seudonimo']) && isset($_SESSION['clave']) && isset($_POST[
   $direccion = new ChequearDireccion(
     $codUsrMod,
     $datosDePersona['codigo'],
-    $_POST['cod_parroquia'],
+    $_POST['cod_parro'],
     $_POST['direcc']
     );
   if ($direccion->valido()) :
@@ -190,7 +190,8 @@ if ( isset($_SESSION['seudonimo']) && isset($_SESSION['clave']) && isset($_POST[
     $_SESSION['seudonimo'] = $datos['seudonimo'];
     $_SESSION['p_nombre'] = $datos['p_nombre'];
     $_SESSION['p_apellido'] = $datos['p_apellido'];
-    $_SESSION['cod_tipo_usr'] = $datos['cod_tipo_usr'];?>
+    $_SESSION['cod_tipo_usr'] = $datos['cod_tipo_usr'];
+    empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr'], 'sistemaJAG | Registro de usuario');?>
     <div id="blancoAjax">
       <div class="container">
         <div class="row">
@@ -213,7 +214,8 @@ if ( isset($_SESSION['seudonimo']) && isset($_SESSION['clave']) && isset($_POST[
         </div>
       </div>
     </div>
-  <?php else: ?>
+  <?php else:
+    empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr'], 'sistemaJAG | Registro de usuario'); ?>
     <div id="blancoAjax">
       <div class="container">
         <div class="row">
@@ -255,7 +257,8 @@ mysqli_close($con);
 //trae footer.php y cola.php
 finalizarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);?>
 
-<?php else: ?>
+<?php else:
+  empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr'], 'sistemaJAG | Registro de usuario'); ?>
   <div id="blancoAjax">
     <div class="container">
       <div class="row">
@@ -288,5 +291,6 @@ finalizarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);?>
 <?php
 //FINALIZAMOS LA PAGINA:
 //trae footer.php y cola.php
-finalizarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);?>
+finalizarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);
+// finalizarPagina(4, 4);?>
 <?php endif ?>
