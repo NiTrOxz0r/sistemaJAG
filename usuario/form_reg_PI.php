@@ -99,7 +99,7 @@ if ( (isset($_POST['seudonimo']) && isset($_POST['clave']) )
                           autocomplete="off"
                           placeholder="Introduzca cedula ej: 12345678"
                           value="<?php echo $cedula; ?>"
-                          <?php echo ($disabled === (true) ? 'disabled' : null); ?>
+                          <?php echo ($disabled === (true) ? 'readonly' : null); ?>
                           required>
                         <p class="help-block" id="cedula_chequeo">
                         </p>

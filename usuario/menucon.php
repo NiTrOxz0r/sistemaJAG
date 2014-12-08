@@ -230,7 +230,7 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr'], 'sistemaJAG 
                 },
               });
             }else{
-              $("#cedula_chequeo").html('Favor introduzca una cedula valida y solo numeros, EJ: 12345678');
+              $("#cedula_chequeo").html('Favor introduzca una cedula valida, EJ: 12345678');
               $("#cedula_titulo").css('color', 'red');
               $('#submitDos').prop('disabled', true);
             };

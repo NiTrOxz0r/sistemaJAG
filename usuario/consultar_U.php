@@ -186,6 +186,17 @@ if ( (isset($_REQUEST['informacion'])
           </div>
           <div class="row">
             <div class="col-xs-12">
+              <?php $enlacePrimario = enlaceDinamico('usuario/form_act_PI.php') ?>
+              <span class="hidden" data-enlace-primario="<?php echo $enlacePrimario ?>"></span>
+              <div class="row center-block">
+                 <div class="col-xs-6 col-xs-offset-3">
+                   <a
+                    id="consultar-cedula"
+                    href="#"
+                    class="push-3 btn btn-warning btn-lg disabled">Consultar registro</a>
+                    <span class="label label-info">Seleccione un registro para consultarlo</span>
+                 </div>
+              </div>
               <table
                 id="tabla"
                 data-toggle="table"
@@ -276,18 +287,24 @@ if ( (isset($_REQUEST['informacion'])
                   <?php endwhile; ?>
                 </tbody>
               </table>
-              <?php $enlacePrimario = enlaceDinamico('usuario/form_act_PI.php') ?>
-              <span class="hidden" data-enlace-primario="<?php echo $enlacePrimario ?>"></span>
-               <div class="row center-block">
-                 <div class="col-xs-6 col-xs-offset-3">
-                   <a
-                    id="consultar-cedula"
-                    href="#"
-                    class="push-3 btn btn-warning btn-lg disabled">Consultar registro</a>
-                    <span class="label label-info">Seleccione un registro para consultarlo</span>
-                 </div>
-               </div>
             </div>
+          </div>
+          <div class="container">
+            <div class="row margen">
+              <div class="col-xs-6 col-xs-offset-3">
+                <span class="label label-info">generara este listado en formato pdf</span>
+              </div>
+            </div>
+             <div class="row">
+               <div class="col-xs-3 col-xs-offset-3">
+                <?php if (!isset($_REQUEST['tipo_personal'])) {$_REQUEST['tipo_personal'] = null;}
+                  $enlace = "reportes/listado_PI.php?tipo=$_REQUEST[tipo]&informacion=$_REQUEST[informacion]&tipo_personal=$_REQUEST[tipo_personal]" ?>
+                 <a
+                  id="generar-pdf"
+                  href="<?php echo $enlace ?>"
+                  class="push-3 btn btn-primary btn-lg">Generar Reporte</a>
+               </div>
+             </div>
           </div>
           <div class="row">
             <div class="col-xs-8 col-xs-offset-2 margen well">
