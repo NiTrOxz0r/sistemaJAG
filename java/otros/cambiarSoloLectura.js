@@ -38,7 +38,6 @@ function cambiarSoloLectura($tabla, tipo){
     //   'background-color': '#FFFFFF'
     // });
   }else{
-    x = true;
     $('#fec_nac').prop('disabled', false);
     // $('#fec_nac').prop('disabled', false).css({
     //   'cursor': 'pointer',
