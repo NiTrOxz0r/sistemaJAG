@@ -891,6 +891,7 @@ if($reg = mysqli_fetch_array($re)) :?>
           });
         });
       </script>
+      <!-- para cambiar de solo lectura a normal -->
       <script type="text/javascript" src="../java/otros/cambiarSoloLectura.js"></script>
       <script type="text/javascript">
         $(function() {

@@ -37,10 +37,23 @@ if($reg = mysqli_fetch_array($re)) :?>
   <div id="blancoAjax">
     <div class="container">
       <div class="row">
+        <!-- botones de control -->
+        <div class="margen">
+          <div class="row margen">
+            <div class="col-sm-4 col-sm-offset-4">
+              <button class="actualizar btn btn-primary btn-block">Actualizar</button>
+            </div>
+          </div>
+          <div class="row margen">
+            <div class="col-sm-4 col-sm-offset-4">
+              <a href="reportes/detallado.php?cedula=<?php echo $cedula ?>" class="cons-est btn btn-default btn-block">Generar Reporte</a>
+            </div>
+          </div>
+        </div>
         <!-- http://www.w3schools.com/html/html_forms.asp -->
         <form action="actualizar_P.php" method="POST" id="form" name="form_repre" class="form-horizontal">
           <fieldset>
-            <legend class="text-center text-uppercase"><h1>Registro del representante</h1></legend>
+            <legend class="text-center text-uppercase"><h1>Consulta de representante</h1></legend>
             <div class="container">
               <!-- inicio de nacionalidad y cedula -->
               <div class="row">
@@ -51,6 +64,7 @@ if($reg = mysqli_fetch_array($re)) :?>
                       name="nacionalidad"
                       id="nacionalidad"
                       required
+                      disabled
                       class="form-control">
                       <?php if ( $reg['nacionalidad'] == 'v' ): ?>
                         <option value="v" selected="selected">Venezolano</option>
@@ -72,6 +86,7 @@ if($reg = mysqli_fetch_array($re)) :?>
                       maxlength="8"
                       name="cedula"
                       id="cedula"
+                      disabled
                       autocomplete="off"
                       class="form-control"
                       autofocus="autofocus"
@@ -102,6 +117,7 @@ if($reg = mysqli_fetch_array($re)) :?>
                           type="text"
                           name="p_nombre"
                           id="p_nombre"
+                          disabled
                           required
                           value="<?php echo $reg['p_nombre'];?>"
                           maxlength="20">
@@ -121,6 +137,7 @@ if($reg = mysqli_fetch_array($re)) :?>
                           type="text"
                           name="s_nombre"
                           id="s_nombre"
+                          disabled
                           value="<?php echo $reg['s_nombre'];?>"
                           maxlength="20">
                         <p class="help-block" id="s_nombre_chequeo">
@@ -142,6 +159,7 @@ if($reg = mysqli_fetch_array($re)) :?>
                           type="text"
                           name="p_apellido"
                           id="p_apellido"
+                          disabled
                           required
                           value="<?php echo $reg['p_apellido'];?>"
                           maxlength="20">
@@ -161,6 +179,7 @@ if($reg = mysqli_fetch_array($re)) :?>
                           type="text"
                           name="s_apellido"
                           id="s_apellido"
+                          disabled
                           value="<?php echo $reg['s_apellido'];?>"
                           maxlength="20">
                         <p class="help-block" id="s_apellido_chequeo">
@@ -180,6 +199,7 @@ if($reg = mysqli_fetch_array($re)) :?>
                       type="text"
                       name="lugar_nac"
                       id="lugar_nac"
+                      disabled
                       value="<?php echo $reg['lugar_nac'];?>"
                       maxlength="50">
                     <p class="help-block" id="lugar_nac_chequeo">
@@ -202,6 +222,7 @@ if($reg = mysqli_fetch_array($re)) :?>
                             type="text"
                             name="fec_nac"
                             id="fec_nac"
+                            disabled
                             placeholder="click para mostrar calendario"
                             value="<?php echo $reg['fec_nac'];?>"
                             readonly="readonly"
@@ -223,7 +244,7 @@ if($reg = mysqli_fetch_array($re)) :?>
                         <?php $query = "SELECT codigo, descripcion
                           from sexo where status = 1;";
                           $registros = conexion($query);?>
-                        <select class="form-control" name="sexo" id="sexo" required>
+                        <select disabled class="form-control" name="sexo" id="sexo" required>
                           <?php while($fila = mysqli_fetch_array($registros)) : ?>
                             <?php if ( $reg['sexo'] == $fila['codigo']): ?>
                               <option
@@ -251,7 +272,7 @@ if($reg = mysqli_fetch_array($re)) :?>
                         <label for="nivel_instruccion" class="control-label">Nivel Educativo</label>
                         <?php $sql="SELECT codigo, descripcion from nivel_instruccion where status = 1;";
                           $registros = conexion($sql);?>
-                        <select class="form-control" name="nivel_instruccion" required id="nivel_instruccion">
+                        <select disabled class="form-control" name="nivel_instruccion" required id="nivel_instruccion">
                         <?php while($fila = mysqli_fetch_array($registros)) : ?>
                           <?php if ($reg['cod_instruccion']==$fila['codigo']) :?>
                             <option selected="selected" value="<?php echo $fila['codigo']?>">
@@ -283,6 +304,7 @@ if($reg = mysqli_fetch_array($re)) :?>
                           type="text"
                           maxlength="11"
                           name="telefono"
+                          disabled
                           value="<?php echo $reg['telefono'];?>"
                           id="telefono">
                         <p class="help-block" id="telefono_chequeo">
@@ -300,6 +322,7 @@ if($reg = mysqli_fetch_array($re)) :?>
                           class="form-control"
                           type="text"
                           maxlength="11"
+                          disabled
                           value="<?php echo $reg['telefono_otro'];?>"
                           name="telefono_otro"
                           id="telefono_otro">
@@ -321,6 +344,7 @@ if($reg = mysqli_fetch_array($re)) :?>
                           class="form-control"
                           id="email"
                           name="email"
+                          disabled
                           value="<?php echo $reg['email'];?>"
                           maxlength="50">
                         </div>
@@ -340,7 +364,7 @@ if($reg = mysqli_fetch_array($re)) :?>
                         <label for="relacion" class="control-label">Parentesco</label>
                         <?php $sql="SELECT codigo, descripcion from relacion where status = 1;";
                           $registros = conexion($sql);?>
-                        <select class="form-control" name="relacion" required id="relacion">
+                        <select disabled class="form-control" name="relacion" required id="relacion">
                           <?php while($fila = mysqli_fetch_array($registros)) :?>
                             <?php if ($reg['cod_relacion']==$fila['codigo']) :?>
                               <option selected="selected" value="<?php echo $fila['codigo']?>">
@@ -364,7 +388,7 @@ if($reg = mysqli_fetch_array($re)) :?>
                     <div class="col-xs-12">
                       <div class="form-group">
                         <label for="vive_con_alumno" class="control-label">¿Vive con el alumno?</label>
-                        <select class="form-control" name="vive_con_alumno" id="vive_con_alumno">
+                        <select disabled class="form-control" name="vive_con_alumno" id="vive_con_alumno">
                           <?php if ( $reg['vive_con_alumno'] == 's' ): ?>
                             <option value="s" selected="selected">Si</option>
                             <option value="n">No</option>
@@ -390,7 +414,7 @@ if($reg = mysqli_fetch_array($re)) :?>
                       <div class="col-xs-11">
                         <div class="form-group">
                           <label class="control-label" for="cod_est">Estado</label>
-                          <select class="form-control" name="cod_est" id="cod_est"></select>
+                          <select disabled class="form-control" name="cod_est" id="cod_est"></select>
                           <p class="help-block" id="cod_est_chequeo">
                           </p>
                         </div>
@@ -402,7 +426,7 @@ if($reg = mysqli_fetch_array($re)) :?>
                       <div class="col-xs-11">
                         <div class="form-group">
                           <label class="control-label" for="cod_mun">Municipio</label>
-                          <select class="form-control" name="cod_mun" id="cod_mun" >
+                          <select disabled class="form-control" name="cod_mun" id="cod_mun" >
                             <option value="">--Seleccionar--</option>
                           </select>
                           <p class="help-block" id="cod_mun_chequeo">
@@ -416,7 +440,7 @@ if($reg = mysqli_fetch_array($re)) :?>
                       <div class="col-xs-12">
                         <div class="form-group">
                           <label class="control-label" for="cod_parro">Parroquia</label>
-                          <select class="form-control" name="cod_parro" id="cod_parro">
+                          <select disabled class="form-control" name="cod_parro" id="cod_parro">
                             <option value="">--Seleccionar--</option>
                           </select>
                           <p class="help-block" id="cod_parro_chequeo">
@@ -435,6 +459,7 @@ if($reg = mysqli_fetch_array($re)) :?>
                       class="form-control"
                       maxlenght="150"
                       rows="2"
+                      disabled
                       name="direcc"
                       id="direcc"><?php echo $reg['direccion'];?></textarea>
                       <p class="help-block" id="direcc_chequeo">
@@ -455,7 +480,7 @@ if($reg = mysqli_fetch_array($re)) :?>
                           <label for="profesion" class="control-label">Profesion</label>
                           <?php $sql = "SELECT codigo, descripcion from profesion where status = 1;";
                             $registros = conexion($sql);?>
-                          <select class="form-control" name="profesion" id="profesion">
+                          <select disabled class="form-control" name="profesion" id="profesion">
                             <?php while($fila = mysqli_fetch_array($registros)) : ?>
                               <?php if ($reg['cod_profesion']==$fila['codigo']) :?>
                                 <option selected="selected" value="<?php echo $fila['codigo']?>">
@@ -484,6 +509,7 @@ if($reg = mysqli_fetch_array($re)) :?>
                             type="text"
                             name="lugar_trabajo"
                             id="lugar_trabajo"
+                            disabled
                             value="<?php echo $reg['lugar_trabajo'];?>"
                             maxlength="50">
                           <p class="help-block" id="lugar_trabajo_chequeo">
@@ -502,6 +528,7 @@ if($reg = mysqli_fetch_array($re)) :?>
                             type="text"
                             name="telefono_trabajo"
                             id="telefono_trabajo"
+                            disabled
                             value="<?php echo $reg['telefono_trabajo'];?>"
                             maxlength="11">
                           <p class="help-block" id="telefono_trabajo_chequeo">
@@ -523,6 +550,7 @@ if($reg = mysqli_fetch_array($re)) :?>
                             type="text"
                             name="direccion_trabajo"
                             id="direccion_trabajo"
+                            disabled
                             value="<?php echo $reg['direccion_trabajo'];?>"
                             maxlength="150">
                           <p class="help-block" id="direccion_trabajo_chequeo">
@@ -535,7 +563,7 @@ if($reg = mysqli_fetch_array($re)) :?>
               </fieldset>
             </div>
             <div class="row">
-              <div class="col-sm-8 col-sm-offset-2 bg-primary redondeado">
+              <div class="col-sm-8 col-sm-offset-2 bg-default text-muted redondeado">
                 <div class="row">
                   <div class="col-xs-12">
                     <h4>
@@ -560,11 +588,25 @@ if($reg = mysqli_fetch_array($re)) :?>
                 class="btn btn-default btn-block"
                 type="submit"
                 name="registrar"
+                disabled
                 value="Continuar">
               </div>
             </div>
           </fieldset>
         </form>
+        <!-- botones de control -->
+        <div class="margen">
+          <div class="row margen">
+            <div class="col-sm-4 col-sm-offset-4">
+              <button class="actualizar btn btn-primary btn-block">Actualizar</button>
+            </div>
+          </div>
+          <div class="row margen">
+            <div class="col-sm-4 col-sm-offset-4">
+              <a href="reportes/detallado.php?cedula=<?php echo $cedula ?>" class="cons-est btn btn-default btn-block">Generar Reporte</a>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
     <!-- validacion -->
@@ -676,6 +718,15 @@ if($reg = mysqli_fetch_array($re)) :?>
           url: '../java/validacionDireccion.js',
           type: 'POST',
           dataType: 'script'
+        });
+      });
+    </script>
+    <!-- para cambiar de solo lectura a normal -->
+    <script type="text/javascript" src="../java/otros/cambiarSoloLectura.js"></script>
+    <script type="text/javascript">
+      $(function() {
+        $('.actualizar').on('click', function(evento) {
+          cambiarSoloLectura($('#form'), 'representante');
         });
       });
     </script>
