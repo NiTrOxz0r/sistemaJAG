@@ -54,7 +54,7 @@ if ( isset($_POST['tipo']) ) :
       on asume.periodo_academico = periodo_academico.codigo
       inner join curso
       on asume.cod_curso = curso.codigo
-      where asume.status = 1 and asume.cod_docente = null;
+      where asume.status = 1 and asume.cod_docente = null
       order by
       periodo_academico.codigo,
       curso.codigo;";
@@ -87,7 +87,7 @@ if ( isset($_POST['tipo']) ) :
       group by
       3,2,1,4,5,6;";
   elseif ($_POST['tipo'] === '4'):
-    // alumnos existentes por curso
+    // alumnos existentes por curso (cuenta total)
     if (isset($_POST['curso'])) :
       $conexion = conexion();
       $curso = mysqli_escape_string($conexion, trim($_POST['curso']) );
