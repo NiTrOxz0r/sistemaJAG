@@ -62,8 +62,8 @@ if ( (isset($_POST['seudonimo']) && isset($_POST['clave']) )
             <form
             role="form"
             class="form-horizontal"
-            name="form_PI"
-            id="form_PI"
+            name="form"
+            id="form"
             method="POST"
             action="<?php echo $action; ?>">
               <fieldset>
@@ -481,7 +481,7 @@ if ( (isset($_POST['seudonimo']) && isset($_POST['clave']) )
         <script type="text/javascript" src="<?php echo $validacion ?>"></script>
         <script type="text/javascript">
           $(function(){
-            $('#form_PI').on('submit', function (evento){
+            $('#form').on('submit', function (evento){
               // DESHABILITADO POR FALTA DE TIEMPO
               // evento.preventDefault();
               // if ( validacionPI() ) {
@@ -539,7 +539,7 @@ if ( (isset($_POST['seudonimo']) && isset($_POST['clave']) )
                 return false;
               };
             });
-            $('#form_PI').on('change', function (){
+            $('#form').on('change', function (){
               validacionPI();
             });
           });
@@ -574,12 +574,12 @@ if ( (isset($_POST['seudonimo']) && isset($_POST['clave']) )
                     var disponible = $(datos+'#disponible').data('disponible');
                     if (disponible === true) {
                       $('#cedula_chequeo_adicional').html('');
-                      $('#form_PI input, #form_PI select, #form_PI textarea').each(function(){
+                      $('#form input, #form select, #form textarea').each(function(){
                         $(this).parent().removeClass('has-error');
                         $(this).prop('disabled', false);
                       });
                     }else{
-                      $('#form_PI input, #form_PI select, #form_PI textarea').each(function(){
+                      $('#form input, #form select, #form textarea').each(function(){
                         $(this).parent().addClass('has-error');
                         $(this).prop('disabled', true);
                       });
@@ -592,6 +592,24 @@ if ( (isset($_POST['seudonimo']) && isset($_POST['clave']) )
               }else{
                 $('#submit').prop('disabled', true);
               };
+            });
+          });
+        </script>
+        <!-- email -->
+        <script type="text/javascript">
+          $(function(){
+            $.ajax({
+              url: '../java/ajax/ClaseChequearEmail.js',
+              type: 'POST',
+              dataType: 'script',
+              success:function(){
+                email = new ChequearEmail($('#email'), 'personal');
+                email.original();
+                $('#email').on('change', function () {
+                  email.cambiar();
+                  email.chequear();
+                });
+              },
             });
           });
         </script>
