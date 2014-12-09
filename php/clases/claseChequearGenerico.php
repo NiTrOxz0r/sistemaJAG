@@ -229,7 +229,7 @@ class ChequearGenerico extends TablaPrimaria{
     return $this->info;
   }
 
-  public function cedula($cedula){
+  static function cedula($cedula){
     if ( preg_match( "/[0-9]{8}/", $cedula) ) :
       $conexion = conexion();
       $c = mysqli_escape_string($conexion, $cedula);

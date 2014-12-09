@@ -42,14 +42,14 @@ if ( isset($_POST['cedula']) and preg_match( "/[0-9]{8}/", $_POST['cedula']) ) :
   //
   // SE HACEN LOS SELECT PRIMERO
   // LUEGO LOS UPDATE E INSERTS.
-  $cedula = mysqli_escape_string( $con, trim($_POST['cedula']) );
+  $cedula = ChequearGenerico::cedula($_POST['cedula']);
   // chamo porque te encanta poner alias en estos query tan sencillos?
   $sql = "SELECT a.codigo as cod_direccion,
     b.codigo as cod_persona
     from direccion a
     inner join persona b
     on (a.cod_persona=b.codigo)
-    where cedula = '$cedula';";
+    where cedula = $cedula;";
   $resultado = conexion($sql);
   // hago esto para darle uso a ChequearAlumno y su mensaje automatizado:
   if($resultado->num_rows == 1) :

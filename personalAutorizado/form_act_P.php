@@ -222,7 +222,6 @@ if($reg = mysqli_fetch_array($re)) :?>
                             type="text"
                             name="fec_nac"
                             id="fec_nac"
-                            disabled
                             placeholder="click para mostrar calendario"
                             value="<?php echo $reg['fec_nac'];?>"
                             readonly="readonly"
