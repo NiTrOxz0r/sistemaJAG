@@ -106,11 +106,11 @@ if ( isset($_GET['cedula']) ):
                             disabled
                             class="form-control">
                             <?php if ($datos['nacionaliad'] == 'v'): ?>
-                              <option selected="selected" value="v">Venezolan@</option>
-                              <option value="e">Extranger@</option>
+                              <option selected="selected" value="v">Venezolano</option>
+                              <option value="e">Extrangero</option>
                             <?php else: ?>
-                              <option value="v">Venezolan@</option>
-                              <option selected="selected" value="e">Extranger@</option>
+                              <option value="v">Venezolano</option>
+                              <option selected="selected" value="e">Extrangero</option>
                             <?php endif ?>
                           </select>
                             <p class="help-block" id="nacionalidad_chequeo">

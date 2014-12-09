@@ -226,7 +226,7 @@ INSERT INTO `direccion` (`codigo`, `cod_persona`, `cod_parroquia`, `direccion_ex
 
 CREATE TABLE IF NOT EXISTS `discapacidad` (
   `codigo` tinyint(3) unsigned NOT NULL,
-  `descripcion` varchar(10) NOT NULL,
+  `descripcion` varchar(30) NOT NULL,
   `status` tinyint(1) unsigned NOT NULL DEFAULT '1',
   `cod_usr_reg` int(11) NOT NULL,
   `fec_reg` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -241,10 +241,10 @@ CREATE TABLE IF NOT EXISTS `discapacidad` (
 
 INSERT INTO `discapacidad` (`codigo`, `descripcion`, `status`, `cod_usr_reg`, `fec_reg`, `cod_usr_mod`, `fec_mod`) VALUES
 (0, 'No posee', 1, 1, '2014-11-18 23:23:51', 1, '2014-11-18 23:23:51'),
-(1, 'Fisico-mot', 1, 1, '2014-11-19 15:05:45', 1, '2014-11-19 15:05:45'),
-(2, 'Cognitiva ', 1, 1, '2014-11-19 15:05:45', 1, '2014-11-19 15:05:45'),
+(1, 'Fisico-motora', 1, 1, '2014-11-19 15:05:45', 1, '2014-11-19 15:05:45'),
+(2, 'Cognitiva o Intelectual', 1, 1, '2014-11-19 15:05:45', 1, '2014-11-19 15:05:45'),
 (3, 'Sensorial', 1, 1, '2014-11-19 15:05:45', 1, '2014-11-19 15:05:45'),
-(4, 'Enfermedad', 1, 1, '2014-11-19 15:05:45', 1, '2014-11-19 15:05:45'),
+(4, 'Enfermedad Organica', 1, 1, '2014-11-19 15:05:45', 1, '2014-11-19 15:05:45'),
 (5, 'Multiple', 1, 1, '2014-11-19 15:05:45', 1, '2014-11-19 15:05:45');
 
 -- --------------------------------------------------------
