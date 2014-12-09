@@ -83,6 +83,7 @@ ChequearEmail.prototype.chequear = function(){
           $('.bloquear').each(function(){
             $(this).prop('disabled', true);
           });
+          $('.actualizar').prop('disabled', false);
         }else{
           console.log('disponible: false');
           $('#form input, #form select, #form textarea').each(function(){
@@ -90,6 +91,7 @@ ChequearEmail.prototype.chequear = function(){
             $(this).prop('disabled', true);
           });
           $('#email').prop('disabled', false);
+          $('.actualizar').prop('disabled', true);
           $('#email_chequeo').html('Email en sistema!</br>para continuar con el registro especifique otro email.');
         };
       },

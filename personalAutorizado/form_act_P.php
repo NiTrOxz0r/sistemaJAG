@@ -721,6 +721,24 @@ if($reg = mysqli_fetch_array($re)) :?>
         });
       });
     </script>
+    <!-- email -->
+    <script type="text/javascript">
+      $(function(){
+        $.ajax({
+          url: '../java/ajax/ClaseChequearEmail.js',
+          type: 'POST',
+          dataType: 'script',
+          success:function(){
+            email = new ChequearEmail($('#email'), 'personal_autorizado');
+            email.original();
+            $('#email').on('change', function () {
+              email.cambiar();
+              email.chequear();
+            });
+          },
+        });
+      });
+    </script>
     <!-- para cambiar de solo lectura a normal -->
     <script type="text/javascript" src="../java/otros/cambiarSoloLectura.js"></script>
     <script type="text/javascript">
