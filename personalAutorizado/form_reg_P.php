@@ -629,6 +629,24 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr'], 'sistemaJAG 
       //   });
       // });
     </script>
+    <!-- email -->
+    <script type="text/javascript">
+      $(function(){
+        $.ajax({
+          url: '../java/ajax/ClaseChequearEmail.js',
+          type: 'POST',
+          dataType: 'script',
+          success:function(){
+            email = new ChequearEmail($('#email'), 'personal_autorizado');
+            email.original();
+            $('#email').on('change', function () {
+              email.cambiar();
+              email.chequear();
+            });
+          },
+        });
+      });
+    </script>
     <!--  -->
     <!--  -->
     <!-- NO HAY TIEMPO PARA DESARROLLAR ESTO: -->

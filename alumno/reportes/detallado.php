@@ -76,7 +76,7 @@ else :
   inner join discapacidad
   on alumno.cod_discapacidad = discapacidad.codigo
   inner join asume
-  on alumno.cod_curso = asume.cod_curso
+  on alumno.cod_curso = asume.codigo
   inner join curso
   on asume.cod_curso = curso.codigo
   inner join direccion

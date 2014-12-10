@@ -67,7 +67,7 @@ else :
     inner join persona as representante
     on personal_autorizado.cod_persona = representante.codigo
     inner join asume
-    on alumno.cod_curso = asume.cod_curso
+    on alumno.cod_curso = asume.codigo
     inner join curso
     on asume.cod_curso = curso.codigo
     inner join periodo_academico
@@ -194,7 +194,8 @@ HTML;
     $y = date('m');
     $nombre = "constancia-inscripcion-$cedula_a-$x-$y-$z.pdf";
     $pdf->Output($nombre, 'I');
-  else: ?>
+  else:
+    empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);?>
     <div id="contenido_actualizar_A">
       <div id="blancoAjax">
         <div class="container">

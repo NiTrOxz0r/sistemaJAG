@@ -33,8 +33,8 @@ if (isset($_REQUEST['cedula'])) {
   inner join estado f on (e.cod_edo=f.codigo) where cedula='$cedula';";
 
 $re = conexion($sql);
-if($reg = mysqli_fetch_array($re)) :?>
-
+if($reg = mysqli_fetch_array($re)) :
+  $_SESSION['codigo_persona'] = $reg['codigo'];?>
   <div id="contenido_act_A">
     <div id="blancoAjax">
       <div class="container">
