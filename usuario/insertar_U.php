@@ -250,13 +250,12 @@ if ( isset($_SESSION['seudonimo']) && isset($_SESSION['clave']) && isset($_POST[
     </div>
   <?php endif;?>
 
-<?php
-//cerramos $con:
-mysqli_close($con);
-//FINALIZAMOS LA PAGINA:
-//trae footer.php y cola.php
-finalizarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);?>
-
+  <?php
+  //cerramos $con:
+  mysqli_close($con);
+  //FINALIZAMOS LA PAGINA:
+  //trae footer.php y cola.php
+  finalizarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);?>
 <?php else:
   empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr'], 'sistemaJAG | Registro de usuario'); ?>
   <div id="blancoAjax">
