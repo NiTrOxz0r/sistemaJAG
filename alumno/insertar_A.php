@@ -26,13 +26,15 @@ if ( isset($_POST['cedula_r']) and preg_match( "/[0-9]{8}/", $_POST['cedula_r'])
 
     $con = conexion();
     $status = 1;
-    $cedula = mysqli_escape_string( $con, trim($_POST['cedula_r']) );
+    $cedula = ChequearGenerico::cedula($_POST['cedula_r']);
     $query = "SELECT a.codigo as codigo_pa,
     b.codigo as codigo_pa_p,
     b.p_nombre as p_nombre,
     b.p_apellido as p_apellido
     from personal_autorizado a
-    inner join persona b on (a.cod_persona=b.codigo) where b.cedula ='$cedula'";
+    inner join persona b
+    on (a.cod_persona=b.codigo)
+    where b.cedula = $cedula;";
     $resultado = conexion($query);
     $datos = mysqli_fetch_assoc($resultado);
     $cod_representante = $datos['codigo_pa'];

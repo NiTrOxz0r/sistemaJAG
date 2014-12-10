@@ -32,18 +32,17 @@ if ( isset($_POST['cedula']) and preg_match( "/[0-9]{8}/", $_POST['cedula']) ) :
   //detalla como hice cedula aqui, lo hice de las 2 maneras pa que veas
   //que no es dificil
   $sql = "SELECT
-    direccion.codigo as cod_direccion,
-    persona.codigo as cod_persona
+    direccion.codigo as cod_direccion
     from direccion
     inner join persona
     on direccion.cod_persona = persona.codigo
-    where cedula = $cedula;";
+    where persona.codigo = $_SESSION[codigo_persona];";
   $resultado = conexion($sql);
   // de aqui pa lante lo hare menos secuencial que insertar_A.php
   if($resultado->num_rows == 1) :
     $datos = mysqli_fetch_assoc($resultado);
     $cod_direccion_P = $datos['cod_direccion'];
-    $cod_persona = $datos['cod_persona'];
+    $cod_persona = $_SESSION['codigo_persona'];
   else :
     $cod_direccion_P = 'Direccion relacionada con usuario es inexistente';
     $cod_persona = 'Usuario inexistente en sistema!';
@@ -79,7 +78,7 @@ if ( isset($_POST['cedula']) and preg_match( "/[0-9]{8}/", $_POST['cedula']) ) :
   if ( !$validarPA->valido() ) :
     $info = $validarPA->info();
   elseif ( !$validarDireccion->valido() ) :
-    $info = $validarPA->info();
+    $info = $validarDireccion->info();
   else:
     mysqli_autocommit($con, false);
     $query_ok = true;

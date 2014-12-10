@@ -49,7 +49,7 @@ if (!( isset($_GET['cedula']) and preg_match( "/[0-9]{8}/", $_GET['cedula']) )) 
 <?php finalizarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);
 else :
   $conexion = conexion();
-  $cedula = mysqli_escape_string($conexion, $_GET['cedula']);
+  $cedula = ChequearGenerico::cedula($_GET['cedula']);
   $query = "SET lc_time_names = 'es_MX';";
   $resultado = conexion($query);
   $query = "SELECT
@@ -76,7 +76,7 @@ else :
   inner join persona as representante
   on personal_autorizado.cod_persona = representante.codigo
   inner join asume
-  on alumno.cod_curso = asume.cod_curso
+  on alumno.cod_curso = asume.codigo
   inner join curso
   on asume.cod_curso = curso.codigo
   inner join periodo_academico

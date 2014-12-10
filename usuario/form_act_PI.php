@@ -764,6 +764,24 @@ if ( isset($_GET['cedula']) ):
             });
           });
         </script>
+        <!-- email -->
+        <script type="text/javascript">
+          $(function(){
+            $.ajax({
+              url: '../java/ajax/ClaseChequearEmail.js',
+              type: 'POST',
+              dataType: 'script',
+              success:function(){
+                email = new ChequearEmail($('#email'), 'personal');
+                email.original();
+                $('#email').on('change', function () {
+                  email.cambiar();
+                  email.chequear();
+                });
+              },
+            });
+          });
+        </script>
         <!-- calendario -->
         <script type="text/javascript">
           $(function(){

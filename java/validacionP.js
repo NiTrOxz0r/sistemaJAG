@@ -364,7 +364,7 @@ function validacionPA(){
     $("#direccion_trabajo_chequeo").html('este campo no puede ser mayor a 150 caracteres');
     $('#direccion_trabajo').parent().addClass('has-error');
     return false;
-  }else if (expRegRepetido.exec(direcc_tra)) {
+  }else if (expRegRepetido.test(direcc_tra)) {
     $("#direccion_trabajo_chequeo").html('Verifique este campo, muchos caracteres repetidos');
     $('#direccion_trabajo').parent().addClass('has-error');
     return false;
