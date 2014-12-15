@@ -8,7 +8,7 @@
  * @return boolean [regresa verdadero si los campos son validos.]
  * @see alumno/form_reg_A.php
  *
- * @version 2.1
+ * @version 2.2
  */
 function validacionAlumno(){
   // expresiones regulares:
@@ -116,8 +116,8 @@ function validacionAlumno(){
     $("#acta_num_part_nac_chequeo").html('este campo debe ser solo numeros');
     $('#acta_num_part_nac').parent().addClass('has-error');
     return false;
-  }else if(acta_num_part_nac.length > 10) {
-    $("#acta_num_part_nac_chequeo").html('este campo debe tener 10 digitos');
+  }else if(acta_num_part_nac.length > 20) {
+    $("#acta_num_part_nac_chequeo").html('este campo debe tener 20 digitos');
     $('#acta_num_part_nac').parent().addClass('has-error');
     return false;
   }else{
@@ -131,8 +131,8 @@ function validacionAlumno(){
     $("#acta_folio_num_part_nac_chequeo").html('este campo debe ser solo numeros');
     $('#acta_folio_num_part_nac').parent().addClass('has-error');
     return false;
-  }else if(acta_folio_num_part_nac.length > 10) {
-    $("#acta_folio_num_part_nac_chequeo").html('este campo debe tener 10 digitos');
+  }else if(acta_folio_num_part_nac.length > 20) {
+    $("#acta_folio_num_part_nac_chequeo").html('este campo debe tener 20 digitos');
     $('#acta_folio_num_part_nac').parent().addClass('has-error');
     return false;
   }else{
