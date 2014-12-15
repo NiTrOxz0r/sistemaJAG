@@ -32,7 +32,7 @@ CREATE TABLE asume (
 )
 CHARACTER SET utf8
 COLLATE utf8_general_ci
-COMMENT = 'relacion de docente con curso';
+COMMENT = 'relacion de docente y alumno con cursos';
 
 /*considerar: horas administrativas, tiempo de servicio, año de ingreso,
 sumplente, asignacion especial?, capacidad tecnica especializada?, otros.*/
