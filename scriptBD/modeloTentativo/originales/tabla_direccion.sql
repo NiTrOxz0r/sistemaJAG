@@ -24,4 +24,6 @@ CREATE TABLE direccion(
     references usuario(codigo)
     on update cascade
     on delete restrict
-);
+)
+CHARACTER SET utf8
+COLLATE utf8_general_ci;

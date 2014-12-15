@@ -14,7 +14,9 @@ CREATE TABLE nivel_instruccion (
     references usuario(codigo)
     on update cascade
     on delete restrict
-);
+)
+CHARACTER SET utf8
+COLLATE utf8_general_ci;
 
 INSERT INTO `nivel_instruccion`
 (codigo, descripcion, status, cod_usr_reg, cod_usr_mod, fec_mod )

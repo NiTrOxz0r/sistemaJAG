@@ -16,7 +16,9 @@ CREATE TABLE curso (
     references usuario(codigo)
     on update cascade
     on delete restrict
-);
+)
+CHARACTER SET utf8
+COLLATE utf8_general_ci;
 
 --
 -- Volcado de datos para la tabla `cursos`

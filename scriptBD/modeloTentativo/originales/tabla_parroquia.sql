@@ -19,7 +19,9 @@ CREATE table parroquia (
     references usuario(codigo)
     on update cascade
     on delete restrict
-);
+)
+CHARACTER SET utf8
+COLLATE utf8_general_ci;
 
 INSERT INTO parroquia
   (codigo, cod_mun, descripcion,

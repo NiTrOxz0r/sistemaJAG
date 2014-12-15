@@ -39,7 +39,9 @@ CREATE TABLE personal_autorizado (
     references usuario(codigo)
     on update cascade
     on delete restrict
-);
+)
+CHARACTER SET utf8
+COLLATE utf8_general_ci;
 
 INSERT INTO personal_autorizado (
   `codigo`, `p_apellido`, `s_apellido`,

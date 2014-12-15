@@ -42,7 +42,9 @@ CREATE TABLE personal (
     references usuario(codigo)
     on update cascade
     on delete restrict
-);
+)
+CHARACTER SET utf8
+COLLATE utf8_general_ci;
 
 /*considerar: horas administrativas, tiempo de servicio, año de ingreso,
 sumplente, asignacion especial?, capacidad tecnica especializada?, otros.*/

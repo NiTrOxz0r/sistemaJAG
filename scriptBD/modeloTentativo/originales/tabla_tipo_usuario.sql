@@ -14,7 +14,9 @@ CREATE TABLE tipo_usuario (
     references usuario(codigo)
     on update cascade
     on delete restrict
-);
+)
+CHARACTER SET utf8
+COLLATE utf8_general_ci;
 
 INSERT INTO tipo_usuario
 (codigo, descripcion, cod_usr_reg, cod_usr_mod)

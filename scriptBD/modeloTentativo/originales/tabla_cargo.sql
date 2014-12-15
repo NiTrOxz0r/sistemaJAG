@@ -14,7 +14,9 @@ CREATE table cargo(
     references usuario(codigo)
     on update cascade
     on delete restrict
-);
+)
+CHARACTER SET utf8
+COLLATE utf8_general_ci;
 
 INSERT INTO cargo values
   (1, 'Sin cargo asociado', 1, 1, null, 1, current_timestamp),
