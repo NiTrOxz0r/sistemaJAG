@@ -31,7 +31,8 @@ CREATE TABLE asume (
     on delete restrict
 )
 CHARACTER SET utf8
-COLLATE utf8_general_ci;
+COLLATE utf8_general_ci
+COMMENT = 'relacion de docente con curso';
 
 /*considerar: horas administrativas, tiempo de servicio, año de ingreso,
 sumplente, asignacion especial?, capacidad tecnica especializada?, otros.*/

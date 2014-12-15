@@ -2,9 +2,8 @@ CREATE TABLE alumno (
   codigo int unsigned auto_increment primary key,
   cod_persona int unsigned not null,
   cedula_escolar varchar(10) unique not null,
-  -- quite los unique porque no se como son las actas y folios.
-  acta_num_part_nac varchar(20),
-  acta_folio_num_part_nac varchar(20),
+  acta_num_part_nac varchar(20) COMMENT 'quite los unique porque no se como son las actas y folios.',
+  acta_folio_num_part_nac varchar(20) COMMENT 'quite los unique porque no se como son las actas y folios.',
   lugar_nac varchar(50) default 'Sin Registro',
   plantel_procedencia varchar(50),
   repitiente enum('s','n') not null,
@@ -15,9 +14,10 @@ CREATE TABLE alumno (
   pantalon tinyint(1) unsigned,
   zapato tinyint(2) unsigned zerofill,
   cod_representante int unsigned not null,
-  cod_persona_retira int unsigned,
+  -- se elimino persona_retira: ver tabla obtiene
   certificado_vacuna enum ('s', 'n') not null,
   cod_discapacidad tinyint(3) unsigned not null default 0,
+  comentarios varchar(500) default null COMMENT 'pedido por Prof. Nelly en escuela',
   status tinyint(1) unsigned not null default 1,
   cod_usr_reg int unsigned unsigned not null,
   fec_reg timestamp not null default current_timestamp,
@@ -40,10 +40,6 @@ CREATE TABLE alumno (
     on update cascade
     on delete restrict,
   foreign key (cod_representante)
-    references personal_autorizado(codigo)
-    on update cascade
-    on delete restrict,
-  foreign key (cod_persona_retira)
     references personal_autorizado(codigo)
     on update cascade
     on delete restrict,
