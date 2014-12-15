@@ -6,9 +6,9 @@ CREATE TABLE suplente (
 	desde timestamp not null DEFAULT 0,
 	hasta timestamp DEFAULT 0,
 	status tinyint(1) unsigned not null default 1,
-	cod_usr_reg int not null,
+	cod_usr_reg int unsigned not null,
 	fec_reg timestamp not null default current_timestamp,
-	cod_usr_mod int not null,
+	cod_usr_mod int unsigned not null,
 	fec_mod timestamp not null DEFAULT 0,
 	foreign key (cod_profesor)
 		references personal(codigo)

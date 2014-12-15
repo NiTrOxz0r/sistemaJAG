@@ -4,9 +4,9 @@ CREATE TABLE curso (
   seccion tinyint(3) unsigned NOT NULL,
   descripcion varchar(50) NOT NULL,
   status tinyint(1) unsigned not null default 1,
-	cod_usr_reg int not null,
+	cod_usr_reg int unsigned not null,
 	fec_reg timestamp not null default current_timestamp,
-	cod_usr_mod int not null,
+	cod_usr_mod int unsigned not null,
 	fec_mod timestamp not null DEFAULT 0
 );
 
