@@ -17,7 +17,15 @@ CREATE TABLE suplente (
 	foreign key (cod_suplente)
 		references personal(codigo)
 		on update cascade
-		on delete restrict
+		on delete restrict,
+	foreign key (cod_usr_reg)
+    references usuario(codigo)
+    on update cascade
+    on delete restrict,
+  foreign key (cod_usr_mod)
+    references usuario(codigo)
+    on update cascade
+    on delete restrict
 );
 
 /*considerar: horas administrativas, tiempo de servicio, año de ingreso,

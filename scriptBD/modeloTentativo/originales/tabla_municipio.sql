@@ -1,22 +1,30 @@
 CREATE table municipio (
-	codigo smallint unsigned auto_increment primary key,
-	cod_edo tinyint(2) unsigned,
-	descripcion varchar(100) not null,
-	status tinyint(1) unsigned not null default 1,
-	cod_usr_reg int unsigned not null,
-	fec_reg timestamp not null default current_timestamp,
-	cod_usr_mod int unsigned not null,
-	fec_mod timestamp not null DEFAULT 0,
-	foreign key (cod_edo)
-		references estado(codigo)
-		on update cascade
-		on delete restrict
+  codigo smallint unsigned auto_increment primary key,
+  cod_edo tinyint(2) unsigned,
+  descripcion varchar(100) not null,
+  status tinyint(1) unsigned not null default 1,
+  cod_usr_reg int unsigned not null,
+  fec_reg timestamp not null default current_timestamp,
+  cod_usr_mod int unsigned not null,
+  fec_mod timestamp not null DEFAULT 0,
+  foreign key (cod_edo)
+    references estado(codigo)
+    on update cascade
+    on delete restrict,
+  foreign key (cod_usr_reg)
+    references usuario(codigo)
+    on update cascade
+    on delete restrict,
+  foreign key (cod_usr_mod)
+    references usuario(codigo)
+    on update cascade
+    on delete restrict
 );
 
 INSERT INTO `municipio`
 (codigo, cod_edo, descripcion,
-	status, cod_usr_reg, fec_reg,
-	cod_usr_mod, fec_mod)
+  status, cod_usr_reg, fec_reg,
+  cod_usr_mod, fec_mod)
 VALUES
 (1, 1, 'Libertador', 1, 1, null, 1, current_timestamp),
 (2, 15, 'Baruta', 1, 1, null, 1, current_timestamp),
