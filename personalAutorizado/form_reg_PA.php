@@ -39,7 +39,7 @@ if($go):?>
       <div class="container">
         <div class="row">
           <!-- http://www.w3schools.com/html/html_forms.asp -->
-          <form action="insertar_PA.php" method="POST" id="form" name="form" class="form-horizontal">
+          <form action="insertar_PA.php" method="POST" id="form" name="form_repre" class="form-horizontal">
             <fieldset>
               <legend class="text-center">Datos del Alumno</legend>
               <!-- datos del alumno -->
@@ -366,9 +366,9 @@ if($go):?>
                     </div>
                   </div>
                 </div>
-                <!-- inicio de parentesco y vive_con_alumno -->
+                <!-- inicio de parentesco, persona retira y vive_con_alumno -->
                 <div class="row">
-                  <div class="col-sm-6">
+                  <div class="col-sm-4">
                     <div class="row">
                       <div class="col-xs-11">
                         <div class="form-group">
@@ -388,9 +388,9 @@ if($go):?>
                       </div>
                     </div>
                   </div>
-                  <div class="col-sm-6">
+                  <div class="col-sm-4">
                     <div class="row">
-                      <div class="col-xs-12">
+                      <div class="col-xs-11">
                         <div class="form-group">
                           <label for="vive_con_alumno" class="control-label">¿Vive con el alumno?</label>
                           <select class="form-control" name="vive_con_alumno" id="vive_con_alumno">
@@ -398,6 +398,21 @@ if($go):?>
                             <option value="n">NO</option>
                           </select>
                           <p class="help-block" id="vive_con_alumno_chequeo">
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-sm-4">
+                    <div class="row">
+                      <div class="col-xs-12">
+                        <div class="form-group">
+                          <label for="retira_alumno" class="control-label">¿Autorizado a retirar al alumno?</label>
+                          <select class="form-control" name="retira_alumno" id="retira_alumno">
+                            <option selected="selected" value="s">SI</option>
+                            <option value="n">NO</option>
+                          </select>
+                          <p class="help-block" id="retira_alumno_chequeo">
                           </p>
                         </div>
                       </div>
