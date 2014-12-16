@@ -19,12 +19,12 @@ CHARACTER SET utf8
 COLLATE utf8_general_ci;
 
 INSERT INTO tipo_usuario
-(codigo, descripcion, cod_usr_reg, cod_usr_mod)
+(codigo, descripcion, cod_usr_reg, cod_usr_mod, fec_mod)
 values
-(0, 'Dectivado', 1, current_timestamp),
-(1, 'Usuario', 1, current_timestamp),
-(2, 'Usuario Privilegiado', 1, current_timestamp),
-(3, 'Administrador', 1, current_timestamp),
-(4, 'Super Usuario', 1, current_timestamp),
-(5, 'Por verificar', 1, current_timestamp),
-(255, 'slayerfat', 1, current_timestamp);
+(0, 'Dectivado', 1, 1, current_timestamp),
+(1, 'Usuario', 1, 1, current_timestamp),
+(2, 'Usuario Privilegiado', 1, 1, current_timestamp),
+(3, 'Administrador', 1, 1, current_timestamp),
+(4, 'Super Usuario', 1, 1, current_timestamp),
+(5, 'Por verificar', 1, 1, current_timestamp),
+(255, 'slayerfat', 1, 1, current_timestamp);
