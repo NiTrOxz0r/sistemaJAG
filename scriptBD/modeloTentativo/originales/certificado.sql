@@ -21,10 +21,12 @@ COMMENT = 'titulos o certificados de personal';
 
 insert into certificado values
   (1, '-', 1, 1, current_timestamp, 1, current_timestamp),
-  (2, 'Curso', 1, 1, current_timestamp, 1, current_timestamp),
-  (3, 'Capacitacion', 1, 1, current_timestamp, 1, current_timestamp),
-  (4, 'Diplomado', 1, 1, current_timestamp, 1, current_timestamp),
-  (5, 'Especializacion', 1, 1, current_timestamp, 1, current_timestamp),
-  (6, 'Maestria', 1, 1, current_timestamp, 1, current_timestamp),
-  (7, 'Otro', 1, 1, current_timestamp, 1, current_timestamp)
+  (2, 'Taller', 1, 1, current_timestamp, 1, current_timestamp),
+  (3, 'Curso', 1, 1, current_timestamp, 1, current_timestamp),
+  (4, 'Capacitacion', 1, 1, current_timestamp, 1, current_timestamp),
+  (5, 'Diplomado', 1, 1, current_timestamp, 1, current_timestamp),
+  (6, 'Especializacion', 1, 1, current_timestamp, 1, current_timestamp),
+  (7, 'Maestria', 1, 1, current_timestamp, 1, current_timestamp),
+  (8, 'Doctorado', 1, 1, current_timestamp, 1, current_timestamp),
+  (9, 'Otro', 1, 1, current_timestamp, 1, current_timestamp)
 ;

@@ -66,13 +66,3 @@ CREATE TABLE alumno (
 )
 CHARACTER SET utf8
 COLLATE utf8_general_ci;
-
-ALTER TABLE `alumno`
-ADD `canaima` ENUM('s', 'n') NOT NULL DEFAULT 's' COMMENT 'recurso canaima canaimitas' AFTER `comentarios`,
-ADD `bicentenario` ENUM('s', 'n') NOT NULL DEFAULT 's' COMMENT 'coleccion bicentenario' AFTER `canaima`,
-ADD `partida_nac` ENUM('s', 'n') NOT NULL DEFAULT 's' COMMENT 'recaudo fisico' AFTER `bicentenario`,
-ADD `boleta` ENUM('s', 'n') NOT NULL DEFAULT 's' COMMENT 'recaudo fisico' AFTER `partida_nac`,
-ADD `constancia_nino_sano` ENUM('s', 'n') NOT NULL DEFAULT 's' COMMENT 'recaudo fisico' AFTER `boleta`,
-ADD `fotos_representante` ENUM('s', 'n') NOT NULL DEFAULT 's' COMMENT 'recaudo fisico' AFTER `constancia_nino_sano`,
-ADD `fotocopia_cedula_pa` ENUM('s', 'n') NOT NULL DEFAULT 's' COMMENT 'recaudo fisico personal autorizado' AFTER `fotos_representante`,
-ADD `fotocopia_cedula_pr` ENUM('s', 'n') NOT NULL DEFAULT 's' COMMENT 'recaudo fisico persona que retira' AFTER `fotocopia_cedula_pa`;
