@@ -21,7 +21,7 @@ CREATE TABLE personal (
   foreign key (cod_usr)
     references usuario(codigo)
     on update cascade
-    on delete restrict,
+    on delete set null,
   foreign key (cod_persona)
     references persona(codigo)
     on update cascade

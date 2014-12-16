@@ -13,11 +13,11 @@ CREATE TABLE suplente (
 	foreign key (cod_profesor)
 		references personal(codigo)
 		on update cascade
-		on delete restrict,
+		on delete cascade,
 	foreign key (cod_suplente)
 		references personal(codigo)
 		on update cascade
-		on delete restrict,
+		on delete cascade,
 	foreign key (cod_usr_reg)
     references usuario(codigo)
     on update cascade

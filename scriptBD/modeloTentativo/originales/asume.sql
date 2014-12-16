@@ -12,7 +12,7 @@ CREATE TABLE asume (
   foreign key (cod_docente)
     references personal(codigo)
     on update cascade
-    on delete restrict,
+    on delete set null,
   foreign key (periodo_academico)
     references periodo_academico(codigo)
     on update cascade

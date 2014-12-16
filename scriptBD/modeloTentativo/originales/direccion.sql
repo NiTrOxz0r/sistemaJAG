@@ -15,7 +15,7 @@ CREATE TABLE direccion(
   foreign key (cod_persona)
     references persona(codigo)
     on update cascade
-    on delete restrict,
+    on delete cascade,
   foreign key (cod_usr_reg)
     references usuario(codigo)
     on update cascade

@@ -18,7 +18,7 @@ CREATE TABLE personal_autorizado (
   foreign key (cod_persona)
     references persona(codigo)
     on update cascade
-    on delete restrict,
+    on delete cascade,
   foreign key (relacion)
     references relacion(codigo)
     on update cascade

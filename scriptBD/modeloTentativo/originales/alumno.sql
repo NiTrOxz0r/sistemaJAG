@@ -34,7 +34,7 @@ CREATE TABLE alumno (
   foreign key (cod_persona)
     references persona(codigo)
     on update cascade
-    on delete restrict,
+    on delete cascade,
   foreign key (camisa)
     references talla(codigo)
     on update cascade
