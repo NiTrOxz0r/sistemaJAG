@@ -3,8 +3,12 @@ CREATE TABLE personal (
   cod_persona int unsigned not null,
   celular varchar(11) default "SinRegistro",
   nivel_instruccion tinyint(1) unsigned not null,
-  -- PARA ACTUALIZAR TITULO
-  titulo varchar(80) default "Sin Registros",
+  certificado_1 tinyint(3) unsigned default null,
+  descripcion_1 varchar(80) default "Sin Registros",
+  certificado_2 tinyint(3) unsigned default null,
+  descripcion_2 varchar(80) default "Sin Registros",
+  certificado_3 tinyint(3) unsigned default null,
+  descripcion_3 varchar(80) default "Sin Registros",
   email varchar(50) unique default "Sin Registro",
   cod_usr int unsigned,
   cod_cargo tinyint unsigned not null default 1,
@@ -40,6 +44,18 @@ CREATE TABLE personal (
     on delete restrict,
   foreign key (cod_usr_mod)
     references usuario(codigo)
+    on update cascade
+    on delete restrict,
+  foreign key (certificado_1)
+    references certificado(codigo)
+    on update cascade
+    on delete restrict,
+  foreign key (certificado_2)
+    references certificado(codigo)
+    on update cascade
+    on delete restrict,
+  foreign key (certificado_3)
+    references certificado(codigo)
     on update cascade
     on delete restrict
 )
