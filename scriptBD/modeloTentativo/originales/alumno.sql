@@ -4,7 +4,7 @@ CREATE TABLE alumno (
   cedula_escolar varchar(10) unique not null,
   acta_num_part_nac varchar(20) COMMENT 'quite los unique porque no se como son las actas y folios.',
   acta_folio_num_part_nac varchar(20) COMMENT 'quite los unique porque no se como son las actas y folios.',
-  lugar_nac varchar(50) default 'Sin Registro',
+  lugar_nac varchar(50) not null default '-',
   plantel_procedencia varchar(50),
   repitiente enum('s','n') not null,
   cod_curso int unsigned not null,
@@ -17,7 +17,7 @@ CREATE TABLE alumno (
   -- se elimino persona_retira: ver tabla obtiene
   certificado_vacuna enum ('s', 'n') not null,
   cod_discapacidad tinyint(3) unsigned not null default 0,
-  comentarios varchar(500) default null COMMENT 'pedido por Prof. Nelly en escuela',
+  comentarios varchar(500) not null default '-' COMMENT 'pedido por Prof. Nelly en escuela',
   canaima enum('s','n') not null default 's' COMMENT 'recurso canaima canaimitas',
   bicentenario enum('s','n') not null default 's' COMMENT 'coleccion bicentenario',
   partida_nac enum('s','n') not null default 's' COMMENT 'recaudo fisico',
@@ -66,3 +66,13 @@ CREATE TABLE alumno (
 )
 CHARACTER SET utf8
 COLLATE utf8_general_ci;
+
+ALTER TABLE `alumno`
+ADD `canaima` ENUM('s', 'n') NOT NULL DEFAULT 's' COMMENT 'recurso canaima canaimitas' AFTER `comentarios`,
+ADD `bicentenario` ENUM('s', 'n') NOT NULL DEFAULT 's' COMMENT 'coleccion bicentenario' AFTER `canaima`,
+ADD `partida_nac` ENUM('s', 'n') NOT NULL DEFAULT 's' COMMENT 'recaudo fisico' AFTER `bicentenario`,
+ADD `boleta` ENUM('s', 'n') NOT NULL DEFAULT 's' COMMENT 'recaudo fisico' AFTER `partida_nac`,
+ADD `constancia_nino_sano` ENUM('s', 'n') NOT NULL DEFAULT 's' COMMENT 'recaudo fisico' AFTER `boleta`,
+ADD `fotos_representante` ENUM('s', 'n') NOT NULL DEFAULT 's' COMMENT 'recaudo fisico' AFTER `constancia_nino_sano`,
+ADD `fotocopia_cedula_pa` ENUM('s', 'n') NOT NULL DEFAULT 's' COMMENT 'recaudo fisico personal autorizado' AFTER `fotos_representante`,
+ADD `fotocopia_cedula_pr` ENUM('s', 'n') NOT NULL DEFAULT 's' COMMENT 'recaudo fisico persona que retira' AFTER `fotocopia_cedula_pa`;

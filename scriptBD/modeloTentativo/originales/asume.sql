@@ -3,7 +3,7 @@ CREATE TABLE asume (
   cod_docente int unsigned,
   cod_curso tinyint(3) unsigned not null,
   periodo_academico tinyint(3) unsigned not null,
-  comentarios varchar(200) default 'Sin Comentarios',
+  comentarios varchar(200) not null default '-',
   status tinyint(1) unsigned not null default 1,
   cod_usr_reg int unsigned not null,
   fec_reg timestamp not null default current_timestamp,

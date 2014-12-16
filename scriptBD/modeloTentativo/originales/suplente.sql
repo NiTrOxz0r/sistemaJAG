@@ -2,7 +2,7 @@ CREATE TABLE suplente (
 	codigo int unsigned auto_increment primary key,
 	cod_profesor int unsigned not null,
 	cod_suplente int unsigned not null,
-	comentarios varchar(200) default 'Sin Comentarios',
+	comentarios varchar(200) not null default '-',
 	desde timestamp not null DEFAULT 0,
 	hasta timestamp DEFAULT 0,
 	status tinyint(1) unsigned not null default 1,
