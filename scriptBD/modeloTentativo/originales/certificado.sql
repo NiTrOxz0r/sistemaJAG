@@ -24,9 +24,10 @@ insert into certificado values
   (2, 'Taller', 1, 1, current_timestamp, 1, current_timestamp),
   (3, 'Curso', 1, 1, current_timestamp, 1, current_timestamp),
   (4, 'Capacitacion', 1, 1, current_timestamp, 1, current_timestamp),
-  (5, 'Diplomado', 1, 1, current_timestamp, 1, current_timestamp),
-  (6, 'Especializacion', 1, 1, current_timestamp, 1, current_timestamp),
-  (7, 'Maestria', 1, 1, current_timestamp, 1, current_timestamp),
-  (8, 'Doctorado', 1, 1, current_timestamp, 1, current_timestamp),
-  (9, 'Otro', 1, 1, current_timestamp, 1, current_timestamp)
+  (5, 'Certificado', 1, 1, current_timestamp, 1, current_timestamp),
+  (6, 'Diplomado', 1, 1, current_timestamp, 1, current_timestamp),
+  (7, 'Especializacion', 1, 1, current_timestamp, 1, current_timestamp),
+  (8, 'Maestria', 1, 1, current_timestamp, 1, current_timestamp),
+  (9, 'Doctorado', 1, 1, current_timestamp, 1, current_timestamp),
+  (10, 'Otro', 1, 1, current_timestamp, 1, current_timestamp)
 ;

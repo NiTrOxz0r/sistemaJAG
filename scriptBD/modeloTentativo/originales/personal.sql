@@ -9,6 +9,8 @@ CREATE TABLE personal (
   descripcion_2 varchar(80) not null default "-",
   certificado_3 tinyint(3) unsigned not null default 1,
   descripcion_3 varchar(80) not null default "-",
+  certificado_4 tinyint(3) unsigned not null default 1,
+  descripcion_4 varchar(80) not null default "-",
   email varchar(50) unique not null,
   cod_usr int unsigned,
   cod_cargo tinyint unsigned not null default 1,

@@ -157,11 +157,12 @@ INSERT INTO `certificado` (`codigo`, `descripcion`, `status`, `cod_usr_reg`, `fe
 (2, 'Taller', 1, 1, '2014-12-16 18:22:44', 1, '2014-12-16 18:22:44'),
 (3, 'Curso', 1, 1, '2014-12-16 18:22:44', 1, '2014-12-16 18:22:44'),
 (4, 'Capacitacion', 1, 1, '2014-12-16 18:22:44', 1, '2014-12-16 18:22:44'),
-(5, 'Diplomado', 1, 1, '2014-12-16 18:22:44', 1, '2014-12-16 18:22:44'),
-(6, 'Especializacion', 1, 1, '2014-12-16 18:22:44', 1, '2014-12-16 18:22:44'),
-(7, 'Maestria', 1, 1, '2014-12-16 18:22:44', 1, '2014-12-16 18:22:44'),
-(8, 'Doctorado', 1, 1, '2014-12-16 18:22:44', 1, '2014-12-16 18:22:44'),
-(9, 'Otro', 1, 1, '2014-12-16 18:22:44', 1, '2014-12-16 18:22:44');
+(5, 'Certificado', 1, 1, '2014-12-16 18:22:44', 1, '2014-12-16 18:22:44'),
+(6, 'Diplomado', 1, 1, '2014-12-16 18:22:44', 1, '2014-12-16 18:22:44'),
+(7, 'Especializacion', 1, 1, '2014-12-16 18:22:44', 1, '2014-12-16 18:22:44'),
+(8, 'Maestria', 1, 1, '2014-12-16 18:22:44', 1, '2014-12-16 18:22:44'),
+(9, 'Doctorado', 1, 1, '2014-12-16 18:22:44', 1, '2014-12-16 18:22:44'),
+(10, 'Otro', 1, 1, '2014-12-16 18:22:44', 1, '2014-12-16 18:22:44');
 
 -- --------------------------------------------------------
 
@@ -1774,12 +1775,14 @@ CREATE TABLE IF NOT EXISTS `personal` (
   `cod_persona` int(10) unsigned NOT NULL,
   `celular` varchar(11) DEFAULT '-',
   `nivel_instruccion` tinyint(1) unsigned NOT NULL,
-  `certificado_1` tinyint(3) NOT NULL DEFAULT '1',
+  `certificado_1` tinyint(3) unsigned NOT NULL DEFAULT '1',
   `descripcion_1` varchar(80) NOT NULL DEFAULT '-',
-  `certificado_2` tinyint(3) NOT NULL DEFAULT '1',
+  `certificado_2` tinyint(3) unsigned NOT NULL DEFAULT '1',
   `descripcion_2` varchar(80) NOT NULL DEFAULT '-',
-  `certificado_3` tinyint(3) NOT NULL DEFAULT '1',
+  `certificado_3` tinyint(3) unsigned NOT NULL DEFAULT '1',
   `descripcion_3` varchar(80) NOT NULL DEFAULT '-',
+  `certificado_4` tinyint(3) unsigned NOT NULL DEFAULT '1',
+  `descripcion_4` varchar(80) NOT NULL DEFAULT '-',
   `email` varchar(50) NOT NULL,
   `cod_usr` int(10) unsigned DEFAULT NULL,
   `cod_cargo` tinyint(3) unsigned NOT NULL DEFAULT '1',
@@ -1797,7 +1800,11 @@ CREATE TABLE IF NOT EXISTS `personal` (
   KEY `tipo_personal` (`tipo_personal`),
   KEY `cod_cargo` (`cod_cargo`),
   KEY `cod_usr_reg` (`cod_usr_reg`),
-  KEY `cod_usr_mod` (`cod_usr_mod`)
+  KEY `cod_usr_mod` (`cod_usr_mod`),
+  KEY `certificado_4` (`certificado_4`),
+  KEY `certificado_1` (`certificado_1`),
+  KEY `certificado_2` (`certificado_2`),
+  KEY `certificado_3` (`certificado_3`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
@@ -2291,13 +2298,17 @@ ALTER TABLE `persona`
 -- Constraints for table `personal`
 --
 ALTER TABLE `personal`
-  ADD CONSTRAINT `personal_ibfk_2` FOREIGN KEY (`cod_persona`) REFERENCES `persona` (`codigo`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `personal_ibfk_11` FOREIGN KEY (`certificado_3`) REFERENCES `certificado` (`codigo`) ON UPDATE CASCADE,
   ADD CONSTRAINT `personal_ibfk_1` FOREIGN KEY (`cod_usr`) REFERENCES `usuario` (`codigo`) ON DELETE SET NULL ON UPDATE CASCADE,
+  ADD CONSTRAINT `personal_ibfk_10` FOREIGN KEY (`certificado_2`) REFERENCES `certificado` (`codigo`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `personal_ibfk_2` FOREIGN KEY (`cod_persona`) REFERENCES `persona` (`codigo`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `personal_ibfk_3` FOREIGN KEY (`nivel_instruccion`) REFERENCES `nivel_instruccion` (`codigo`) ON UPDATE CASCADE,
   ADD CONSTRAINT `personal_ibfk_4` FOREIGN KEY (`cod_cargo`) REFERENCES `cargo` (`codigo`) ON UPDATE CASCADE,
   ADD CONSTRAINT `personal_ibfk_5` FOREIGN KEY (`tipo_personal`) REFERENCES `tipo_personal` (`codigo`) ON UPDATE CASCADE,
   ADD CONSTRAINT `personal_ibfk_6` FOREIGN KEY (`cod_usr_reg`) REFERENCES `usuario` (`codigo`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `personal_ibfk_7` FOREIGN KEY (`cod_usr_mod`) REFERENCES `usuario` (`codigo`) ON UPDATE CASCADE;
+  ADD CONSTRAINT `personal_ibfk_7` FOREIGN KEY (`cod_usr_mod`) REFERENCES `usuario` (`codigo`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `personal_ibfk_8` FOREIGN KEY (`certificado_4`) REFERENCES `certificado` (`codigo`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `personal_ibfk_9` FOREIGN KEY (`certificado_1`) REFERENCES `certificado` (`codigo`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `personal_autorizado`
