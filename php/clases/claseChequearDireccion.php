@@ -11,7 +11,7 @@
 * @todo ampliar segun sea necesario segun
 * los objetivos necesarios
 *
-* @version 1.2
+* @version 1.3
 *
 */
 class ChequearDireccion extends ChequearGenerico{

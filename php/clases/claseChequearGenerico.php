@@ -12,7 +12,7 @@
 * @todo ampliar segun sea necesario segun
 * los objetivos necesarios:
 *
-* @version 1.1
+* @version 1.2
 *
 */
 class ChequearGenerico extends TablaPrimaria{
@@ -34,22 +34,22 @@ class ChequearGenerico extends TablaPrimaria{
   function __construct(
     $codUsrMod,
     $p_apellido,
-    $s_apellido = 'null',
+    $s_apellido = 'default',
     $p_nombre,
-    $s_nombre = 'null',
+    $s_nombre = 'default',
     $nacionalidad,
     $cedula,
-    $telefono = 'null',
-    $telefonoOtro = 'null',
+    $telefono = 'default',
+    $telefonoOtro = 'default',
     $fecNac,
     $sexo,
-    $codigoDireccion = 'null'
+    $codigoDireccion = 'default'
   ){
     $this->codUsrMod = $codUsrMod;
     $this->p_apellido = $p_apellido;
 
     if ($s_apellido == "") {
-      $this->s_apellido = "null";
+      $this->s_apellido = "default";
     }else{
       $this->s_apellido = $s_apellido;
     }
@@ -57,7 +57,7 @@ class ChequearGenerico extends TablaPrimaria{
     $this->p_nombre = $p_nombre;
 
     if ($s_nombre == "") {
-      $this->s_nombre = "null";
+      $this->s_nombre = "default";
     }else{
       $this->s_nombre = $s_nombre;
     }
@@ -66,12 +66,12 @@ class ChequearGenerico extends TablaPrimaria{
     $this->cedula = $cedula;
 
     if ($telefono == "") {
-      $this->telefono = "null";
+      $this->telefono = "default";
     }else{
       $this->telefono = $telefono;
     }
     if ($telefonoOtro == "") {
-      $this->telefonoOtro = "null";
+      $this->telefonoOtro = "default";
     }else{
       $this->telefonoOtro = $telefonoOtro;
     }
@@ -80,7 +80,7 @@ class ChequearGenerico extends TablaPrimaria{
     $this->sexo = $sexo;
 
     if ($codigoDireccion == "") {
-      $this->codigoDireccion = "null";
+      $this->codigoDireccion = "default";
     }else{
       $this->codigoDireccion = $codigoDireccion;
     }
@@ -169,7 +169,7 @@ class ChequearGenerico extends TablaPrimaria{
       self::verificar("Location: registro.php?nacionalidad=notVorE");
     }
 
-    if ($this->telefono <> 'null') {
+    if ($this->telefono <> 'default') {
       if ( !is_numeric($this->telefono) ) {
       self::verificar("Location: registro.php?telefonoNumeric=false");
       }
@@ -178,7 +178,7 @@ class ChequearGenerico extends TablaPrimaria{
       }
     }
 
-    if ($this->telefonoOtro <> 'null') {
+    if ($this->telefonoOtro <> 'default') {
       if ( !is_numeric($this->telefonoOtro) ) {
       self::verificar("Location: registro.php?telefonoOtroNumeric=false");
       }
