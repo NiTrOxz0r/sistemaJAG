@@ -9,7 +9,7 @@
  *
  * @return {boolean} [regresa verdadero si todo bien, falso si no.]
  *
- * @version 1.4
+ * @version 1.5
  */
 function validacionPI(){
 
@@ -37,7 +37,14 @@ function validacionPI(){
   var fec_nac = document.getElementById('fec_nac').value.replace(/^\s+|\s+$/g, '');
   var sexo = document.getElementById('sexo').value.replace(/^\s+|\s+$/g, '');
   var email = document.getElementById('email').value.replace(/^\s+|\s+$/g, '');
-  var titulo = document.getElementById('titulo').value.replace(/^\s+|\s+$/g, '');
+  var certificado_1 = document.getElementById('certificado_1').value.replace(/^\s+|\s+$/g, '');
+  var certificado_2 = document.getElementById('certificado_2').value.replace(/^\s+|\s+$/g, '');
+  var certificado_3 = document.getElementById('certificado_3').value.replace(/^\s+|\s+$/g, '');
+  var certificado_4 = document.getElementById('certificado_4').value.replace(/^\s+|\s+$/g, '');
+  var descripcion_1 = document.getElementById('descripcion_1').value.replace(/^\s+|\s+$/g, '');
+  var descripcion_2 = document.getElementById('descripcion_2').value.replace(/^\s+|\s+$/g, '');
+  var descripcion_3 = document.getElementById('descripcion_3').value.replace(/^\s+|\s+$/g, '');
+  var descripcion_4 = document.getElementById('descripcion_4').value.replace(/^\s+|\s+$/g, '');
   var nivel_instruccion = document.getElementById('nivel_instruccion').value.replace(/^\s+|\s+$/g, '');
   var celular = document.getElementById('celular').value.replace(/^\s+|\s+$/g, '');
   var telefono = document.getElementById('telefono').value.replace(/^\s+|\s+$/g, '');
@@ -212,19 +219,99 @@ function validacionPI(){
     $('#nivel_instruccion').parent().removeClass('has-error').addClass('has-success');
     estatus = true;
   }
-//titulo
-  if(titulo.length > 80){
-    $("#titulo_chequeo").html('este campo no puede ser mayor a 80 caracteres');
-    $('#titulo').parent().addClass('has-error');
-    return false;
-  }else if (expRegRepetido.exec(titulo)) {
-    $("#titulo_chequeo").html('Verifique este campo, muchos caracteres repetidos');
-    $('#titulo').parent().addClass('has-error');
+//titulos y certificados
+  // chequeos de select de certificados
+  if ( certificado_1 == '' || numerosChequeo.test(certificado_1) ) {
+    $("#certificado_1_chequeo").html('Por favor seleccione una opcion apropiada.');
+    $('#certificado_1').parent().addClass('has-error');
     return false;
   }else{
-    $("#titulo_chequeo").html('&nbsp;');
-    $('#titulo').parent().removeClass('has-error').addClass('has-success');
-    $('#titulo').val( titulo.toUpperCase() );
+    $("#certificado_1_chequeo").html('&nbsp;');
+    $('#certificado_1').parent().removeClass('has-error').addClass('has-success');
+    estatus = true;
+  }
+  if ( certificado_2 == '' || numerosChequeo.test(certificado_2) ) {
+    $("#certificado_2_chequeo").html('Por favor seleccione una opcion apropiada.');
+    $('#certificado_2').parent().addClass('has-error');
+    return false;
+  }else{
+    $("#certificado_2_chequeo").html('&nbsp;');
+    $('#certificado_2').parent().removeClass('has-error').addClass('has-success');
+    estatus = true;
+  }
+  if ( certificado_3 == '' || numerosChequeo.test(certificado_3) ) {
+    $("#certificado_3_chequeo").html('Por favor seleccione una opcion apropiada.');
+    $('#certificado_3').parent().addClass('has-error');
+    return false;
+  }else{
+    $("#certificado_3_chequeo").html('&nbsp;');
+    $('#certificado_3').parent().removeClass('has-error').addClass('has-success');
+    estatus = true;
+  }
+  if ( certificado_4 == '' || numerosChequeo.test(certificado_4) ) {
+    $("#certificado_4_chequeo").html('Por favor seleccione una opcion apropiada.');
+    $('#certificado_4').parent().addClass('has-error');
+    return false;
+  }else{
+    $("#certificado_4_chequeo").html('&nbsp;');
+    $('#certificado_4').parent().removeClass('has-error').addClass('has-success');
+    estatus = true;
+  }
+  // chequeos de descripciones
+  if(descripcion_1.length > 80){
+    $("#descripcion_1_chequeo").html('este campo no puede ser mayor a 80 caracteres');
+    $('#descripcion_1').parent().addClass('has-error');
+    return false;
+  }else if (expRegRepetido.exec(descripcion_1)) {
+    $("#descripcion_1_chequeo").html('Verifique este campo, muchos caracteres repetidos');
+    $('#descripcion_1').parent().addClass('has-error');
+    return false;
+  }else{
+    $("#descripcion_1_chequeo").html('&nbsp;');
+    $('#descripcion_1').parent().removeClass('has-error').addClass('has-success');
+    $('#descripcion_1').val( descripcion_1.toUpperCase() );
+    estatus = true;
+  }
+  if(descripcion_2.length > 80){
+    $("#descripcion_2_chequeo").html('este campo no puede ser mayor a 80 caracteres');
+    $('#descripcion_2').parent().addClass('has-error');
+    return false;
+  }else if (expRegRepetido.exec(descripcion_2)) {
+    $("#descripcion_2_chequeo").html('Verifique este campo, muchos caracteres repetidos');
+    $('#descripcion_2').parent().addClass('has-error');
+    return false;
+  }else{
+    $("#descripcion_2_chequeo").html('&nbsp;');
+    $('#descripcion_2').parent().removeClass('has-error').addClass('has-success');
+    $('#descripcion_2').val( descripcion_2.toUpperCase() );
+    estatus = true;
+  }
+  if(descripcion_3.length > 80){
+    $("#descripcion_3_chequeo").html('este campo no puede ser mayor a 80 caracteres');
+    $('#descripcion_3').parent().addClass('has-error');
+    return false;
+  }else if (expRegRepetido.exec(descripcion_3)) {
+    $("#descripcion_3_chequeo").html('Verifique este campo, muchos caracteres repetidos');
+    $('#descripcion_3').parent().addClass('has-error');
+    return false;
+  }else{
+    $("#descripcion_3_chequeo").html('&nbsp;');
+    $('#descripcion_3').parent().removeClass('has-error').addClass('has-success');
+    $('#descripcion_3').val( descripcion_3.toUpperCase() );
+    estatus = true;
+  }
+  if(descripcion_4.length > 80){
+    $("#descripcion_4_chequeo").html('este campo no puede ser mayor a 80 caracteres');
+    $('#descripcion_4').parent().addClass('has-error');
+    return false;
+  }else if (expRegRepetido.exec(descripcion_4)) {
+    $("#descripcion_4_chequeo").html('Verifique este campo, muchos caracteres repetidos');
+    $('#descripcion_4').parent().addClass('has-error');
+    return false;
+  }else{
+    $("#descripcion_4_chequeo").html('&nbsp;');
+    $('#descripcion_4').parent().removeClass('has-error').addClass('has-success');
+    $('#descripcion_4').val( descripcion_4.toUpperCase() );
     estatus = true;
   }
 //telefono

@@ -52,7 +52,14 @@ if ( isset($_POST['cedula']) && strlen($_POST['cedula']) == 8 ) :
   $telefono = $_POST['telefono'];
   $telefonoOtro = $_POST['telefono_otro'];
   $nivel_instruccion = $_POST['nivel_instruccion'];
-  $titulo = $_POST['titulo'];
+  $certificado_1 = $_POST['certificado_1'];
+  $descripcion_1 = $_POST['descripcion_1'];
+  $certificado_2 = $_POST['certificado_2'];
+  $descripcion_2 = $_POST['descripcion_2'];
+  $certificado_3 = $_POST['certificado_3'];
+  $descripcion_3 = $_POST['descripcion_3'];
+  $certificado_4 = $_POST['certificado_4'];
+  $descripcion_4 = $_POST['descripcion_4'];
   $fecNac = $_POST['fec_nac'];
   $sexo = $_POST['sexo'];
   $email = $_POST['email'];
@@ -72,7 +79,14 @@ if ( isset($_POST['cedula']) && strlen($_POST['cedula']) == 8 ) :
     $telefono,
     $telefonoOtro,
     $nivel_instruccion,
-    $titulo,
+    $certificado_1,
+    $descripcion_1,
+    $certificado_2,
+    $descripcion_2,
+    $certificado_3,
+    $descripcion_3,
+    $certificado_4,
+    $descripcion_4,
     $fecNac,
     $sexo,
     $email,
@@ -110,9 +124,19 @@ if ( isset($_POST['cedula']) && strlen($_POST['cedula']) == 8 ) :
   //los datos no comunes o especificos:
   $query = "INSERT INTO personal
   values
-  (null, $datosDePersona[codigo], $validarPI->celular,
-    $validarPI->nivel_instruccion, $validarPI->titulo, $validarPI->email,
-    $codigoUsuario[codigo], $validarPI->codCargo, $validarPI->tipoPersonal,
+  (null, $datosDePersona[codigo],
+    $validarPI->celular,
+    $validarPI->nivel_instruccion,
+    $validarPI->certificado_1,
+    $validarPI->descripcion_1,
+    $validarPI->certificado_2,
+    $validarPI->descripcion_2,
+    $validarPI->certificado_3,
+    $validarPI->descripcion_3,
+    $validarPI->certificado_4,
+    $validarPI->descripcion_4,
+    $validarPI->email, $codigoUsuario[codigo],
+    $validarPI->codCargo, $validarPI->tipoPersonal,
     1, $codUsrMod, null, $codUsrMod, current_timestamp);";
   $resultado = conexion($query);
 
