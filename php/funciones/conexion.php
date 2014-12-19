@@ -43,6 +43,7 @@ function conexion($query = 0, $condicion = 0){
     or die('Error del query: '.$query.
       '<br />'.mysqli_errno($conexion).
       '<br /> 1062: campo unico o primario repetido.'.
+      '<br /> 1064: error de sintaxis en query.'.
       '<br /> 1048: campo no nulo insertardo como nulo.'
       );
 

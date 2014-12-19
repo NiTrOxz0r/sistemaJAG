@@ -156,7 +156,7 @@ if ( isset($_SESSION['seudonimo']) && isset($_SESSION['clave']) && isset($_POST[
       values
       (null, $datosDePersona[codigo],
         $validarPI->celular,
-        $validarPI->nivel_instruccion,
+        $validarPI->nivelInstruccion,
         $validarPI->certificado_1,
         $validarPI->descripcion_1,
         $validarPI->certificado_2,
