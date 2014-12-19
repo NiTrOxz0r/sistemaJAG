@@ -156,29 +156,29 @@ class ChequearPI extends ChequearGenerico{
       self::verificar("Error en: nivel de instruccion: se espera un valor apropiado del formulario, datos: ".$this->nivelInstruccion);
     }
 
-    if ( preg_match( "/[^0-9]/", $this->certificado_1) ) {
+    if ( preg_match( "/[\'][^0-9][\']/", $this->certificado_1) ) {
       self::verificar("Error en: tipo de titulo y/o certificado 1: se espera un valor apropiado del formulario, datos: ".$this->certificado_1);
     }
-    if ( preg_match( "/[^0-9]/", $this->certificado_2) ) {
+    if ( preg_match( "/[\'][^0-9][\']/", $this->certificado_2) ) {
       self::verificar("Error en: tipo de titulo y/o certificado 2: se espera un valor apropiado del formulario, datos: ".$this->certificado_2);
     }
-    if ( preg_match( "/[^0-9]/", $this->certificado_3) ) {
+    if ( preg_match( "/[\'][^0-9][\']/", $this->certificado_3) ) {
       self::verificar("Error en: tipo de titulo y/o certificado 3: se espera un valor apropiado del formulario, datos: ".$this->certificado_3);
     }
-    if ( preg_match( "/[^0-9]/", $this->certificado_4) ) {
+    if ( preg_match( "/[\'][^0-9][\']/", $this->certificado_4) ) {
       self::verificar("Error en: tipo de titulo y/o certificado 4: se espera un valor apropiado del formulario, datos: ".$this->certificado_4);
     }
 
-    if ( preg_match( "/[^0-9a-zA-Z-_áéíóúÁÉÍÓÚÑñ]/", $this->descripcion_1) ) {
+    if ( preg_match( "/^[\'][^0-9a-zA-Z-_áéíóúÁÉÍÓÚÑñ][\']$/", $this->descripcion_1) ) {
       self::verificar("Error en: descripcion de titulo y/o certificado 1: se espera un valor apropiado del formulario, datos: ".$this->descripcion_1);
     }
-    if ( preg_match( "/[^0-9a-zA-Z-_áéíóúÁÉÍÓÚÑñ]/", $this->descripcion_2) ) {
+    if ( preg_match( "/^[\'][^0-9a-zA-Z-_áéíóúÁÉÍÓÚÑñ][\']$/", $this->descripcion_2) ) {
       self::verificar("Error en: descripcion de titulo y/o certificado 2: se espera un valor apropiado del formulario, datos: ".$this->descripcion_2);
     }
-    if ( preg_match( "/[^0-9a-zA-Z-_áéíóúÁÉÍÓÚÑñ]/", $this->descripcion_3) ) {
+    if ( preg_match( "/^[\'][^0-9a-zA-Z-_áéíóúÁÉÍÓÚÑñ][\']$/", $this->descripcion_3) ) {
       self::verificar("Error en: descripcion de titulo y/o certificado 3: se espera un valor apropiado del formulario, datos: ".$this->descripcion_3);
     }
-    if ( preg_match( "/[^0-9a-zA-Z-_áéíóúÁÉÍÓÚÑñ]/", $this->descripcion_4) ) {
+    if ( preg_match( "/^[\'][^0-9a-zA-Z-_áéíóúÁÉÍÓÚÑñ][\']$/", $this->descripcion_4) ) {
       self::verificar("Error en: descripcion de titulo y/o certificado 4: se espera un valor apropiado del formulario, datos: ".$this->descripcion_4);
     }
 

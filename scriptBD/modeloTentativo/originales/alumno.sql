@@ -4,7 +4,7 @@ CREATE TABLE alumno (
   cedula_escolar varchar(10) unique not null,
   acta_num_part_nac varchar(20) COMMENT 'quite los unique porque no se como son las actas y folios.',
   acta_folio_num_part_nac varchar(20) COMMENT 'quite los unique porque no se como son las actas y folios.',
-  lugar_nac varchar(50) not null default '-',
+  lugar_nac varchar(50) default '-',
   plantel_procedencia varchar(50),
   repitiente enum('s','n') not null,
   cod_curso int unsigned not null,
@@ -17,7 +17,7 @@ CREATE TABLE alumno (
   -- se elimino persona_retira: ver tabla obtiene
   certificado_vacuna enum ('s', 'n') not null,
   cod_discapacidad tinyint(3) unsigned not null default 0,
-  comentarios varchar(500) not null default '-' COMMENT 'pedido por Prof. Nelly en escuela',
+  comentarios varchar(500) default '-' COMMENT 'pedido por Prof. Nelly en escuela',
   canaima enum('s','n') not null default 's' COMMENT 'recurso canaima canaimitas',
   bicentenario enum('s','n') not null default 's' COMMENT 'coleccion bicentenario',
   partida_nac enum('s','n') not null default 's' COMMENT 'recaudo fisico',

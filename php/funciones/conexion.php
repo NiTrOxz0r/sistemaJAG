@@ -42,7 +42,9 @@ function conexion($query = 0, $condicion = 0){
     $resultado = mysqli_query($conexion,$query)
     or die('Error del query: '.$query.
       '<br />'.mysqli_errno($conexion).
-      '<br /> 1062: campo unico o primario repetido.');
+      '<br /> 1062: campo unico o primario repetido.'.
+      '<br /> 1048: campo no nulo insertardo como nulo.'
+      );
 
     // de una vez se cierra la conexion
     // a la base de datos para evitar errores.

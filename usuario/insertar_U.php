@@ -302,7 +302,10 @@ if ( isset($_SESSION['seudonimo']) && isset($_SESSION['clave']) && isset($_POST[
       default:
         $info = 'error desconocido!';
         break;
-    endswitch;?>
+    endswitch;
+    $query = "DELETE from usuario where seudonimo = $validarForma->seudonimo;";
+    $resultado = conexion($query);
+    empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr'], 'sistemaJAG | Registro de usuario');?>
     <div id="contenido_insertar_U">
       <div id="blancoAjax">
         <div class="container">
