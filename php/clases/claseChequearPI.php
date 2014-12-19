@@ -10,12 +10,13 @@
 * {@internal clase modificada para que
 * de una vez haga un mysqli_escape_string}
 *
-* @see chequearGenericoEjemplo.php
-* @example chequearGenericoEjemplo.php
+* @see chequearGenericoEjemplo.php (viejo)
+* @see usuario/insertar_U.php
+* @example chequearGenericoEjemplo.php (viejo)
 * @todo ampliar segun sea necesario segun
 * los objetivos necesarios
 *
-* @version 1.5
+* @version 1.6
 *
 */
 class ChequearPI extends ChequearGenerico{
@@ -31,8 +32,15 @@ class ChequearPI extends ChequearGenerico{
     $celular = 'null',
     $telefono = 'null',
     $telefonoOtro = 'null',
-    $nivel_instruccion,
-    $titulo = 'null',
+    $nivelInstruccion,
+    $certificado_1 = 'null',
+    $descripcion_1 = 'null',
+    $certificado_2 = 'null',
+    $descripcion_2 = 'null',
+    $certificado_3 = 'null',
+    $descripcion_3 = 'null',
+    $certificado_4 = 'null',
+    $descripcion_4 = 'null',
     $fecNac,
     $sexo,
     $email = 'null',
@@ -52,8 +60,15 @@ class ChequearPI extends ChequearGenerico{
     $this->celular = mysqli_escape_string($conexion, trim($celular));
     $this->telefono = mysqli_escape_string($conexion, trim($telefono));
     $this->telefonoOtro = mysqli_escape_string($conexion, trim($telefonoOtro));
-    $this->nivel_instruccion = mysqli_escape_string($conexion, trim($nivel_instruccion));
-    $this->titulo = mysqli_escape_string($conexion, trim($titulo));
+    $this->nivelInstruccion = mysqli_escape_string($conexion, trim($nivelInstruccion));
+    $this->certificado_1 = mysqli_escape_string($conexion, trim($certificado_1));
+    $this->certificado_2 = mysqli_escape_string($conexion, trim($certificado_2));
+    $this->certificado_3 = mysqli_escape_string($conexion, trim($certificado_3));
+    $this->certificado_4 = mysqli_escape_string($conexion, trim($certificado_4));
+    $this->descripcion_1 = mysqli_escape_string($conexion, trim($descripcion_1));
+    $this->descripcion_2 = mysqli_escape_string($conexion, trim($descripcion_2));
+    $this->descripcion_3 = mysqli_escape_string($conexion, trim($descripcion_3));
+    $this->descripcion_4 = mysqli_escape_string($conexion, trim($descripcion_4));
     $this->fecNac = mysqli_escape_string($conexion, trim($fecNac));
     $this->sexo = mysqli_escape_string($conexion, trim($sexo));
     $this->email = mysqli_escape_string($conexion, trim($email));
@@ -76,53 +91,41 @@ class ChequearPI extends ChequearGenerico{
   * tambien chequea la validez de cedula,
   * y valizacion de clave de usuario en base de datos
   * ej: nombre = juan1 < error}
-  * @version 1.1
   *
+  * @version 1.2
   *
-  * @return void
-  * esta funcion no regresa nada.
-  * se asume que die() sucede si algo esta mal
-  * en las variables.
+  * @return void llama a verificar si falla algo
   */
   private function chequeame(){
 
-
-    // si cedula es mayor a 8 digitos o menor o igual a 5 digitos
-    // se devuelve a registro, cedula de 99999 <--- no existe
-    // y si existe esta muerto o loco o fuera de la ley o
-    // ALGUN AGENTE DEL CEBIN!!!
-    // de hecho 6 digitos tambien porque no creo
-    // que exista alguien vivo con cedula menor de 1 millon,
-    // pero como no tengo acceso a la onidex, lo dejo en 5.
-
-    if ($this->cedula <> "null") {
-      if ( !preg_match( "/^'\d{8}'$/", $this->cedula) ) {
-        die( header( "Location: registro.php?cedulaError=1_largo_cedula___".strlen($this->cedula) ) );
-      }
-    }
-
-    if ( preg_match( "/^A-Za-z$^'$^áéíóú$^ÁÉÍÓÚ$/", $this->p_nombre) ) {
-      die(header("Location: registro.php?p_nombreNumeric=true"));
-    }
-
-    if ($this->s_nombre <> "null") {
-      if ( preg_match( "/^A-Za-z$^'$^áéíóú$^ÁÉÍÓÚ$/", $this->s_nombre) ) {
-        die(header("Location: registro.php?s_nombreNumeric=true"));
-      }
-    }
-
-    if ( preg_match( "/^A-Za-z$^'$^áéíóú$^ÁÉÍÓÚ$/", $this->p_apellido) ) {
-      die(header("Location: registro.php?p_apellidoNumeric=true"));
-    }
-
-    if ( $this->s_apellido <> "null" ) {
-      if ( preg_match( "/^A-Za-z$^'$^áéíóú$^ÁÉÍÓÚ$/", $this->s_apellido) ) {
-        die(header("Location: registro.php?s_apellidoNumeric=true"));
-      }
-    }
-
     if ( $this->nacionalidad <> "'v'" and $this->nacionalidad <> "'e'" ) {
-      die(header("Location: registro.php?nacionalidad=notVorE"));
+      self::verificar("Error en: nacionalidad, se espera valor apropiado del formulario, datos: ".$this->nacionalidad);
+    }
+
+    if ($this->cedula <> 'null') {
+      if ( !preg_match( '/^[\']\d{8}[\']$/', $this->cedula) ) {
+        self::verificar("Error en: cedula: solo numeros, datos: ".$this->cedula);
+      }
+    }
+
+    if ( preg_match( "[^a-zA-Z-_áéíóúÁÉÍÓÚÑñ']", $this->p_nombre) ) {
+      self::verificar("Error en: primer nombre: solo letas, datos: ".$this->p_nombre);
+    }
+
+    if ($this->s_nombre <> 'null') {
+      if ( preg_match( "[^a-zA-Z-_áéíóúÁÉÍÓÚÑñ']", $this->s_nombre) ) {
+        self::verificar("Error en: segundo nombre: solo letas, datos: ".$this->s_nombre);
+      }
+    }
+
+    if ( preg_match( "[^a-zA-ZáéíóúÁÉÍÓÚÑñ']", $this->p_apellido) ) {
+      self::verificar("Error en: primer apellido: solo letas, datos: ".$this->p_apellido);
+    }
+
+    if ( $this->s_apellido <> 'null' ) {
+      if ( preg_match( "[^a-zA-Z-_áéíóúÁÉÍÓÚÑñ']", $this->s_apellido) ) {
+        self::verificar("Error en: segundo apellido: solo letas, datos: ".$this->s_apellido);
+      }
     }
 
     if ($this->celular <> "null") {
@@ -131,31 +134,75 @@ class ChequearPI extends ChequearGenerico{
       }
     }
 
-    if ($this->telefono <> "null") {
-      if ( !preg_match( "/^'\d{11}'$/", $this->telefono) ) {
-        die(header("Location: registro.php?telefonoLength=false&value=$this->telefono"));
+    if ($this->celular <> 'null') {
+      if ( !preg_match( '/^[\']\d{11}[\']$/', $this->celular) ) {
+        self::verificar("Error en: celular: se espera solo numeros: 02125559911, datos: ".$this->celular);
       }
     }
 
-    if ($this->telefonoOtro <> "null") {
-      if ( !preg_match( "/^'\d{11}'$/", $this->telefonoOtro) ) {
-        die(header("Location: registro.php?telefonoOtroLength=false&value=$this->telefonoOtro"));
+    if ($this->telefono <> 'null') {
+      if ( !preg_match( '/^[\']\d{11}[\']$/', $this->telefono) ) {
+        self::verificar("Error en: telefono: se espera solo numeros: 02125559911, datos: ".$this->telefono);
       }
+    }
+
+    if ($this->telefonoOtro <> 'null') {
+      if ( !preg_match( '/^[\']\d{11}[\']$/', $this->telefonoOtro) ) {
+        self::verificar("Error en: telefono: se espera solo numeros: 02125559911, datos: ".$this->telefonoOtro);
+      }
+    }
+
+    if ( preg_match( "/[^0-9]/", $this->nivelInstruccion) ) {
+      self::verificar("Error en: nivel de instruccion: se espera un valor apropiado del formulario, datos: ".$this->nivelInstruccion);
+    }
+
+    if ( preg_match( "/[^0-9]/", $this->certificado_1) ) {
+      self::verificar("Error en: tipo de titulo y/o certificado 1: se espera un valor apropiado del formulario, datos: ".$this->certificado_1);
+    }
+    if ( preg_match( "/[^0-9]/", $this->certificado_2) ) {
+      self::verificar("Error en: tipo de titulo y/o certificado 2: se espera un valor apropiado del formulario, datos: ".$this->certificado_2);
+    }
+    if ( preg_match( "/[^0-9]/", $this->certificado_3) ) {
+      self::verificar("Error en: tipo de titulo y/o certificado 3: se espera un valor apropiado del formulario, datos: ".$this->certificado_3);
+    }
+    if ( preg_match( "/[^0-9]/", $this->certificado_4) ) {
+      self::verificar("Error en: tipo de titulo y/o certificado 4: se espera un valor apropiado del formulario, datos: ".$this->certificado_4);
+    }
+
+    if ( preg_match( "/[^0-9a-zA-Z-_áéíóúÁÉÍÓÚÑñ]/", $this->descripcion_1) ) {
+      self::verificar("Error en: descripcion de titulo y/o certificado 1: se espera un valor apropiado del formulario, datos: ".$this->descripcion_1);
+    }
+    if ( preg_match( "/[^0-9a-zA-Z-_áéíóúÁÉÍÓÚÑñ]/", $this->descripcion_2) ) {
+      self::verificar("Error en: descripcion de titulo y/o certificado 2: se espera un valor apropiado del formulario, datos: ".$this->descripcion_2);
+    }
+    if ( preg_match( "/[^0-9a-zA-Z-_áéíóúÁÉÍÓÚÑñ]/", $this->descripcion_3) ) {
+      self::verificar("Error en: descripcion de titulo y/o certificado 3: se espera un valor apropiado del formulario, datos: ".$this->descripcion_3);
+    }
+    if ( preg_match( "/[^0-9a-zA-Z-_áéíóúÁÉÍÓÚÑñ]/", $this->descripcion_4) ) {
+      self::verificar("Error en: descripcion de titulo y/o certificado 4: se espera un valor apropiado del formulario, datos: ".$this->descripcion_4);
     }
 
     if ($this->fecNac <> 'current_timestamp') {
-      if ( preg_match( "/^[\d]{4}[-]{1}[\d]{2}[-]{1}[\d]{2}$/", $this->fecNac) ) {
-      die(header("Location: registro.php?fecNacNumeric=false&value=$this->fecNac"));
+      if ( preg_match( "/['][^0-9$^-][']/", $this->fecNac) ) {
+        self::verificar("Error en: fecha de nacimiento se espera AAAA-MM-DD, datos: ".$this->fecNac);
       }
     }
 
     if ($this->sexo <> "'0'" and $this->sexo <> "'1'") {
       if ( !is_numeric($this->sexo) ) {
-      die(header("Location: registro.php?sexo=malDefinido"));
+        self::verificar("Error en: sexo: se esperan un valor apropiados del formulario, datos: ".$this->sexo);
       }
     }
-    if ( preg_match('/[a-zA-Z-*{\"}@!"#$%\/&)=_]/', $this->tipoPersonal) ) {
-      die(header("Location: registro.php?tipoPersonalNumeric=false"));
+    if ($this->email != 'null') {
+      if ( !preg_match( "/^['][0-9a-zA-Z-_$#]{2,20}+\@[0-9a-zA-Z-_$#]{2,20}+\.[a-zA-Z]{2,5}[']/", $this->email) ) {
+        self::verificar("Error en: email: se espera formato estandar: algo@algunsitio.com, datos: ".$this->email);
+      }
+    }
+    if ( preg_match( "/[^0-9]/", $this->tipoPersonal) ) {
+      self::verificar("Error en: tipo de personal: se espera un valor apropiado del formulario, datos: ".$this->tipoPersonal);
+    }
+    if ( preg_match( "/[^0-9]/", $this->codCargo) ) {
+      self::verificar("Error en: tipo de cargo: se espera un valor apropiado del formulario, datos: ".$this->codCargo);
     }
 
   }
@@ -174,11 +221,8 @@ class ChequearPI extends ChequearGenerico{
     }else{
       $this->s_apellido = "'$this->s_apellido'";
     }
-
     $this->p_apellido = "'$this->p_apellido'";
-
     $this->p_nombre = "'$this->p_nombre'";
-
     if ($this->s_nombre == "") {
       $this->s_nombre = "null";
     }else{
@@ -188,12 +232,6 @@ class ChequearPI extends ChequearGenerico{
     $this->nacionalidad = "'$this->nacionalidad'";
     $this->cedula = "'$this->cedula'";
 
-    $this->nivel_instruccion = "'$this->nivel_instruccion'";
-    if ($this->titulo == "") {
-      $this->titulo = "null";
-    }else{
-      $this->titulo = "'$this->titulo'";
-    }
     if ($this->celular == "") {
       $this->celular = "null";
     }else{
@@ -208,6 +246,47 @@ class ChequearPI extends ChequearGenerico{
       $this->telefonoOtro = "null";
     }else{
       $this->telefonoOtro = "'$this->telefonoOtro'";
+    }
+
+    if ($this->certificado_1 == "") {
+      $this->certificado_1 = "null";
+    }else{
+      $this->certificado_1 = "'$this->certificado_1'";
+    }
+    if ($this->certificado_2 == "") {
+      $this->certificado_2 = "null";
+    }else{
+      $this->certificado_2 = "'$this->certificado_2'";
+    }
+    if ($this->certificado_3 == "") {
+      $this->certificado_3 = "null";
+    }else{
+      $this->certificado_3 = "'$this->certificado_3'";
+    }
+    if ($this->certificado_4 == "") {
+      $this->certificado_4 = "null";
+    }else{
+      $this->certificado_4 = "'$this->certificado_4'";
+    }
+    if ($this->descripcion_1 == "") {
+      $this->descripcion_1 = "null";
+    }else{
+      $this->descripcion_1 = "'$this->descripcion_1'";
+    }
+    if ($this->descripcion_2 == "") {
+      $this->descripcion_2 = "null";
+    }else{
+      $this->descripcion_2 = "'$this->descripcion_2'";
+    }
+    if ($this->descripcion_3 == "") {
+      $this->descripcion_3 = "null";
+    }else{
+      $this->descripcion_3 = "'$this->descripcion_3'";
+    }
+    if ($this->descripcion_4 == "") {
+      $this->descripcion_4 = "null";
+    }else{
+      $this->descripcion_4 = "'$this->descripcion_4'";
     }
 
     $this->fecNac = "'$this->fecNac'";

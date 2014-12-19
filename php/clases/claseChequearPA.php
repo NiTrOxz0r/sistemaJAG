@@ -88,22 +88,22 @@ class ChequearPA extends ChequearGenerico{
       }
     }
 
-    if ( preg_match( "/^A-Za-z$^'$^áéíóú$^ÁÉÍÓÚ$/", $this->p_nombre) ) {
+    if ( preg_match( "/[^a-zA-Z-_áéíóúÁÉÍÓÚÑñ']/", $this->p_nombre) ) {
       self::verificar("Error en: primer nombre: solo letas, datos: ".$this->p_nombre);
     }
 
     if ($this->s_nombre <> 'null') {
-      if ( preg_match( "/^A-Za-z$^'$^áéíóú$^ÁÉÍÓÚ$/", $this->s_nombre) ) {
+      if ( preg_match( "/[^a-zA-Z-_áéíóúÁÉÍÓÚÑñ']/", $this->s_nombre) ) {
         self::verificar("Error en: segundo nombre: solo letas, datos: ".$this->s_nombre);
       }
     }
 
-    if ( preg_match( "/^A-Za-z$^'$^áéíóú$^ÁÉÍÓÚ$/", $this->p_apellido) ) {
+    if ( preg_match( "/[^a-zA-Z-_áéíóúÁÉÍÓÚÑñ']/", $this->p_apellido) ) {
       self::verificar("Error en: primer apellido: solo letas, datos: ".$this->p_apellido);
     }
 
     if ( $this->s_apellido <> 'null' ) {
-      if ( preg_match( "/^A-Za-z$^'$^áéíóú$^ÁÉÍÓÚ$/", $this->s_apellido) ) {
+      if ( preg_match( "/[^a-zA-Z-_áéíóúÁÉÍÓÚÑñ']/", $this->s_apellido) ) {
         self::verificar("Error en: segundo apellido: solo letas, datos: ".$this->s_apellido);
       }
     }
