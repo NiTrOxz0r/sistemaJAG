@@ -150,13 +150,13 @@ class ChequearAlumno extends ChequearGenerico{
       }
     }
 
-    if ($this->telefono <> 'default') {
+    if ($this->telefono <> 'default' && $this->telefono <> "'-'") {
       if ( !preg_match( '/^[\']\d{11}[\']$/', $this->telefono) ) {
         self::verificar("Error en: telefono: se espera solo numeros: 02125559911, datos: ".$this->telefono);
       }
     }
 
-    if ($this->telefonoOtro <> 'default') {
+    if ($this->telefonoOtro <> 'default' && $this->telefonoOtro <> "'-'") {
       if ( !preg_match( '/^[\']\d{11}[\']$/', $this->telefonoOtro) ) {
         self::verificar("Error en: telefono: se espera solo numeros: 02125559911, datos: ".$this->telefonoOtro);
       }

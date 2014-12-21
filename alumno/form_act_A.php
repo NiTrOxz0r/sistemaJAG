@@ -22,10 +22,45 @@ if (isset($_REQUEST['cedula'])) {
 }
 
 
-  $sql = "SELECT a.codigo, cedula, cedula_escolar, nacionalidad, p_nombre, s_nombre, p_apellido, s_apellido, sexo,
-  fec_nac, lugar_nac, telefono, telefono_otro, cod_parroquia as cod_parro, cod_mun as cod_mun, cod_edo as cod_est,
-  direccion_exacta as direccion, acta_num_part_nac, acta_folio_num_part_nac, plantel_procedencia, repitiente,
-  altura, peso, camisa, pantalon, zapato, cod_curso, certificado_vacuna, cod_discapacidad FROM persona a
+  $sql = "SELECT
+  a.codigo,
+  cedula,
+  cedula_escolar,
+  nacionalidad,
+  p_nombre,
+  s_nombre,
+  p_apellido,
+  s_apellido,
+  sexo,
+  fec_nac,
+  lugar_nac,
+  telefono,
+  telefono_otro,
+  cod_parroquia as cod_parro,
+  cod_mun as cod_mun, cod_edo as cod_est,
+  direccion_exacta as direccion,
+  acta_num_part_nac,
+  acta_folio_num_part_nac,
+  plantel_procedencia,
+  repitiente,
+  altura,
+  peso,
+  camisa,
+  pantalon,
+  zapato,
+  cod_curso,
+  certificado_vacuna,
+  cod_discapacidad,
+  comentarios,
+  canaima,
+  bicentenario,
+  partida_nac,
+  boleta,
+  constancia_nino_sano,
+  fotos_representante,
+  fotocopia_cedula_pa,
+  fotocopia_cedula_pr
+  FROM persona a
   inner join alumno b on (a.codigo=b.cod_persona)
   inner join direccion c on (a.codigo=c.cod_persona)
   inner join parroquia d on (c.cod_parroquia=d.codigo)
@@ -713,7 +748,94 @@ if($reg = mysqli_fetch_array($re)) :
                     </div>
                   </div>
                 </fieldset>
+                <!-- recaudos -->
+                <fieldset class="margenAbajo">
+                  <legend class="text-center">Recaudos en fisico</legend>
+                  <div class="col-xs-12">
+                    <div class="checkbox">
+                      <label class="col-xs-6">
+                        <input
+                          type="checkbox"
+                          value="s"
+                          disabled
+                          <?php echo $reg['partida_nac'] === ('s') ? 'checked': null ?>
+                          name="partida_nac">
+                        Partida de nacimiento.
+                      </label>
+                      <label class="col-xs-6">
+                        <input
+                          type="checkbox"
+                          value="s"
+                          disabled
+                          <?php echo $reg['constancia_nino_sano'] === ('s') ? 'checked': null ?>
+                          name="constancia_nino_sano">
+                        Constancia del niño sano.
+                      </label>
+                    </div>
+                    <div class="checkbox">
+                      <label class="col-xs-6">
+                        <input
+                          type="checkbox"
+                          value="s"
+                          disabled
+                          <?php echo $reg['canaima'] === ('s') ? 'checked': null ?>
+                          name="canaima">
+                        Recurso Canaima.
+                      </label>
+                      <label class="col-xs-6">
+                        <input
+                          type="checkbox"
+                          value="s"
+                          disabled
+                          <?php echo $reg['bicentenario'] === ('s') ? 'checked': null ?>
+                          name="bicentenario">
+                        Coleccion Bicentenario.
+                      </label>
+                    </div>
+                    <div class="checkbox">
+                      <label class="col-xs-6">
+                        <input
+                          type="checkbox"
+                          value="s"
+                          disabled
+                          <?php echo $reg['boleta'] === ('s') ? 'checked': null ?>
+                          name="boleta">
+                        Boleta de estudios.
+                      </label>
+                      <label class="col-xs-6">
+                        <input
+                          type="checkbox"
+                          value="s"
+                          disabled
+                          <?php echo $reg['fotos_representante'] === ('s') ? 'checked': null ?>
+                          name="fotos_representante">
+                        Fotos tipo carnet del representante.
+                      </label>
+                    </div>
+                    <div class="checkbox">
+                      <label class="col-xs-6">
+                        <input
+                          type="checkbox"
+                          value="s"
+                          disabled
+                          <?php echo $reg['fotocopia_cedula_pa'] === ('s') ? 'checked': null ?>
+                          name="fotocopia_cedula_pa">
+                        Fotocopia Cedula de identidad del representante.
+                      </label>
+                      <label class="col-xs-6">
+                        <input
+                          type="checkbox"
+                          value="s"
+                          disabled
+                          <?php echo $reg['fotocopia_cedula_pr'] === ('s') ? 'checked': null ?>
+                          name="fotocopia_cedula_pr">
+                        Fotocopia Cedula de identidad de los allegados (si aplica).
+                      </label>
+                    </div>
+                  </div>
+                </fieldset>
               </div>
+              <!-- info -->
               <div class="row">
                 <div class="col-sm-8 col-sm-offset-2 bg-default redondeado text-muted text-center">
                   <div class="row">
@@ -728,6 +850,7 @@ if($reg = mysqli_fetch_array($re)) :
                   </div>
                 </div>
               </div>
+              <!-- boton -->
               <div class="row margen">
                 <div class="col-sm-2 col-sm-offset-5">
                   <input
