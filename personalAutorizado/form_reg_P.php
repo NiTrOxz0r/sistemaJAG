@@ -4,6 +4,13 @@ if(!isset($_SESSION)){
 }
 $enlace = $_SERVER['DOCUMENT_ROOT']."/github/sistemaJAG/php/master.php";
 require_once($enlace);
+
+// campos de requisitos de alumno:
+if (isset($_POST)) :
+  $_SESSION['requisitos'] = $_POST;
+else :
+  $_SESSION['requisitos'] = null;
+endif;
 // invocamos validarUsuario.php desde master.php
 validarUsuario(1, 1, $_SESSION['cod_tipo_usr'], 'sistemaJAG | Registro de representante/allegado');
 

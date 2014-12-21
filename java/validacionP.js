@@ -320,7 +320,7 @@ function validacionPA(){
   }
 // profesion
   if (profesion === "") {
-    $("#profesion_chequeo").html('este campo no puede ser mayor a 150 caracteres');
+    $("#profesion_chequeo").html('este campo es necesario.');
     $('#profesion').parent().addClass('has-error');
     return false;
   }else{

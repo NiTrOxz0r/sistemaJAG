@@ -39,6 +39,12 @@ if ( isset($_GET['cedula_r']) and preg_match( "/[0-9]{8}/", $_GET['cedula_r']) )
   mysqli_close($conexion);
 endif;
 
+if (isset($_SESSION['requisitos'])) :
+  $requisitos = $_SESSION['requisitos'];
+else :
+  $requisitos = null;
+endif;
+
 //CONTENIDO:
 if($go): ?>
   <div id="contenido_form_reg_A">
@@ -623,6 +629,7 @@ if($go): ?>
                       </div>
                     </div>
                   </div>
+                  <!-- camisa, pantalon, zapato -->
                   <div class="row">
                     <div class="col-sm-4">
                       <div class="row">
@@ -702,7 +709,54 @@ if($go): ?>
                     </div>
                   </div>
                 </fieldset>
+                <!-- recaudos -->
+                <fieldset class="margenAbajo">
+                  <legend class="text-center">Recaudos en fisico</legend>
+                  <div class="col-xs-12">
+                    <div class="checkbox">
+                      <label class="col-xs-6">
+                        <input type="checkbox" value="s" name="partida_nac">
+                        Partida de nacimiento.
+                      </label>
+                      <label class="col-xs-6">
+                        <input type="checkbox" value="s" name="constancia_nino_sano">
+                        Constancia del niño sano.
+                      </label>
+                    </div>
+                    <div class="checkbox">
+                      <label class="col-xs-6">
+                        <input type="checkbox" value="s" name="canaima">
+                        Recurso Canaima.
+                      </label>
+                      <label class="col-xs-6">
+                        <input type="checkbox" value="s" name="bicentenario">
+                        Coleccion Bicentenario.
+                      </label>
+                    </div>
+                    <div class="checkbox">
+                      <label class="col-xs-6">
+                        <input type="checkbox" value="s" name="boleta">
+                        Boleta de estudios.
+                      </label>
+                      <label class="col-xs-6">
+                        <input type="checkbox" value="s" name="fotos_representante">
+                        Fotos tipo carnet del representante.
+                      </label>
+                    </div>
+                    <div class="checkbox">
+                      <label class="col-xs-6">
+                        <input type="checkbox" value="s" name="fotocopia_cedula_pa">
+                        Fotocopia Cedula de identidad del representante.
+                      </label>
+                      <label class="col-xs-6">
+                        <input type="checkbox" value="s" name="fotocopia_cedula_pa">
+                        Fotocopia Cedula de identidad de los allegados (si aplica).
+                      </label>
+                    </div>
+                  </div>
+                </fieldset>
               </div>
+              <!-- info adicional -->
               <div class="row">
                 <div class="col-sm-8 col-sm-offset-2 bg-primary redondeado">
                   <div class="row">
@@ -717,6 +771,7 @@ if($go): ?>
                   </div>
                 </div>
               </div>
+              <!-- boton -->
               <div class="row margenArriba">
                 <div class="col-sm-2 col-sm-offset-5">
                   <input
