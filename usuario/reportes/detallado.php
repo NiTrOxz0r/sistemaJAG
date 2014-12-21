@@ -64,7 +64,14 @@ else :
     persona.telefono_otro as telefono_otro,
     personal.codigo as codigo_personal,
     personal.email as email,
-    personal.titulo as titulo,
+    certificado_1.descripcion as certificado_1,
+    certificado_2.descripcion as certificado_2,
+    certificado_3.descripcion as certificado_3,
+    certificado_4.descripcion as certificado_4,
+    personal.descripcion_1,
+    personal.descripcion_2,
+    personal.descripcion_3,
+    personal.descripcion_4,
     nivel_instruccion.descripcion as nivel_instruccion,
     personal.celular as celular,
     cargo.descripcion as cargo,
@@ -80,6 +87,14 @@ else :
     on persona.sexo = sexo.codigo
     inner join personal
     on personal.cod_persona = persona.codigo
+    inner join certificado as certificado_1
+    on personal.certificado_1 = certificado_1.codigo
+    inner join certificado as certificado_2
+    on personal.certificado_2 = certificado_2.codigo
+    inner join certificado as certificado_3
+    on personal.certificado_3 = certificado_3.codigo
+    inner join certificado as certificado_4
+    on personal.certificado_4 = certificado_4.codigo
     inner join nivel_instruccion
     on personal.nivel_instruccion = nivel_instruccion.codigo
     inner join cargo
@@ -205,8 +220,15 @@ else :
       $direccion_exacta = 'SIN INFORMACION, FAVOR ACTUALIZAR';
     endif;
     $email = $datos['email'] === (null) ? '-':$datos['email'];
-    $titulo = $datos['titulo'] === (null) ? '-':$datos['titulo'];
     $nivel_instruccion = $datos['nivel_instruccion'];
+    $certificado_1 = $datos['certificado_1'];
+    $certificado_2 = $datos['certificado_2'];
+    $certificado_3 = $datos['certificado_3'];
+    $certificado_4 = $datos['certificado_4'];
+    $descripcion_1 = $datos['descripcion_1'];
+    $descripcion_2 = $datos['descripcion_2'];
+    $descripcion_3 = $datos['descripcion_3'];
+    $descripcion_4 = $datos['descripcion_4'];
     $seudonimo = $datos['seudonimo'];
     $tipo_usr = $datos['tipo_usr'];
 // contenido a ejectuar para pdf:
@@ -289,8 +311,33 @@ $html = <<<HTML
           <td><strong>{$email}</strong></td>
         </tr>
         <tr>
-          <th>Titulos:</th>
-          <td><strong>{$titulo}</strong></td>
+          <th width="40%">Titulos y/o Certificados:</th>
+        </tr>
+        <tr>
+          <th width="08%">Tipo:</th>
+          <td width="25%"><strong>{$certificado_1}</strong></td>
+          <th>Descripcion:</th>
+          <td width="51%"><strong>{$descripcion_1}</strong></td>
+        </tr>
+        <tr>
+          <th width="08%">Tipo:</th>
+          <td width="25%"><strong>{$certificado_2}</strong></td>
+          <th>Descripcion:</th>
+          <td width="51%"><strong>{$descripcion_2}</strong></td>
+        </tr>
+        <tr>
+          <th width="08%">Tipo:</th>
+          <td width="25%"><strong>{$certificado_3}</strong></td>
+          <th>Descripcion:</th>
+          <td width="51%"><strong>{$descripcion_3}</strong></td>
+        </tr>
+        <tr>
+          <th width="08%">Tipo:</th>
+          <td width="25%"><strong>{$certificado_4}</strong></td>
+          <th>Descripcion:</th>
+          <td width="51%"><strong>{$descripcion_4}</strong></td>
+        </tr>
+        <tr>
           <th>Cargo:</th>
           <td><strong>{$cargo}</strong></td>
         </tr>
@@ -336,7 +383,7 @@ HTML;
               </p>
               <p class="bg-danger">
                 La cedula: <strong><?php echo $_GET['cedula'] ?></strong>,
-                no esta registrada como Padre/allegado.
+                no esta registrada como Personal de esta Institucion.
               </p>
               <!-- !importante -->
               <?php $enlace = encuentraCedula($_REQUEST['cedula']) ?>
@@ -351,18 +398,6 @@ HTML;
                     <a href="<?php echo $enlace ?> ">existe en el sistema</a>
                   </p>
                 </div>
-              <?php else: ?>
-                <?php
-                $enlace = "personalAutorizado/form_reg_P.php?cedula=$_GET[cedula_r]";
-                $inscripcion = enlaceDinamico("$enlace"); ?>
-                <p>
-                  La cedula <?php echo $_GET['cedula'] ?>, no esta registrada en el sistema.
-                  <em>Para registrar a un alumno, es necesario registrar primero al representante.</em>
-                  para ir al proceso de inscripcion <a href="<?php echo $inscripcion ?>">
-                  puede seguir este enlace.
-                  </a>
-                </p>
-                <!-- google hide me: slayerfat@gmail.com -->
               <?php endif ?>
               <p>
                 ¿O sera que entro en esta pagina erroneamente?
