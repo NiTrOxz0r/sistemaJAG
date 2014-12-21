@@ -36,7 +36,9 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);?>
                   nivel_instruccion.descripcion as nivel_instruccion,
                   persona.p_nombre,
                   persona.p_apellido,
-                  persona.s_apellido
+                  persona.s_apellido,
+                  persona.telefono,
+                  personal.email
                   from personal
                   inner join certificado as certificado_1
                   on personal.certificado_1 = certificado_1.codigo
@@ -88,7 +90,9 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);?>
                       <?php echo $docente['p_apellido'] ?>,
                       <?php echo $docente['s_apellido'] === ('-') ? null : $docente['s_apellido'].", " ?>
                       <?php echo $docente['p_nombre'] ?>,
-                      <?php echo $docente['nivel_instruccion'] ?>.
+                      <?php echo $docente['nivel_instruccion'] ?>,
+                      <?php echo $docente['telefono'] === ('-') ? null : $docente['telefono'].", " ?>
+                      <?php echo $docente['email'] ?>.
                     </option>
                   <?php endwhile; ?>
                 </select>
