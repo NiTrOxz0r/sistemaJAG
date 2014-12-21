@@ -315,11 +315,11 @@ function validacionPI(){
     estatus = true;
   }
 //telefono
-  if(telefono.length != 11 && telefono != "" ){
+  if(telefono.length != 11 && telefono != "" && telefono != '-' ){
     $("#telefono_chequeo").html('este campo no puede ser mayor a 11 caracteres EJ: 02127773322');
     $('#telefono').parent().addClass('has-error');
     return false;
-  }else if( telefono === "SinRegistro" ){
+  }else if( telefono === "-" ){
     $("#telefono_chequeo").html('&nbsp;');
     $('#telefono').parent().removeClass('has-error').addClass('has-success');
     estatus = true;
@@ -333,11 +333,11 @@ function validacionPI(){
     estatus = true;
   }
 //telefono_otro
-  if(telefono_otro.length != 11 && telefono_otro != "" ){
+  if(telefono_otro.length != 11 && telefono_otro != "" && telefono_otro != '-' ){
     $("#telefono_otro_chequeo").html('este campo no puede ser mayor a 11 caracteres EJ: 02127773322');
     $('#telefono_otro').parent().addClass('has-error');
     return false;
-  }else if( telefono_otro === "SinRegistro" ){
+  }else if( telefono_otro === "-" ){
     $("#telefono_otro_chequeo").html('&nbsp;');
     $('#telefono_otro').parent().removeClass('has-error').addClass('has-success');
     estatus = true;
@@ -351,11 +351,11 @@ function validacionPI(){
     estatus = true;
   }
 //celular
-  if(celular.length != 11 && celular != "" ){
+  if(celular.length != 11 && celular != "" && celular != '-' ){
     $("#celular_chequeo").html('este campo no puede ser mayor a 11 caracteres EJ: 02127773322');
     $('#celular').parent().addClass('has-error');
     return false;
-  }else if( celular === "SinRegistro" ){
+  }else if( celular === "-" ){
     $("#celular_chequeo").html('&nbsp;');
     $('#celular').parent().removeClass('has-error').addClass('has-success');
     estatus = true;

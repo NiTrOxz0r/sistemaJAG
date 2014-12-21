@@ -126,27 +126,21 @@ class ChequearPI extends ChequearGenerico{
       }
     }
 
-    if ($this->celular <> "default") {
-      if ( !preg_match( "/^'\d{11}'$/", $this->celular) ) {
-        die(header("Location: registro.php?celularLength=false&value=$this->celular"));
-      }
-    }
-
-    if ($this->celular <> 'default') {
+    if ($this->celular <> 'default' && $this->celular <> "'-'") {
       if ( !preg_match( '/^[\']\d{11}[\']$/', $this->celular) ) {
-        self::verificar("Error en: celular: se espera solo numeros: 02125559911, datos: ".$this->celular);
+        self::verificar("Error en: celular: se espera solo numeros: 02125559911, datos: ".var_dump($this->celular));
       }
     }
 
-    if ($this->telefono <> 'default') {
+    if ($this->telefono <> 'default' && $this->telefono <> "'-'") {
       if ( !preg_match( '/^[\']\d{11}[\']$/', $this->telefono) ) {
         self::verificar("Error en: telefono: se espera solo numeros: 02125559911, datos: ".$this->telefono);
       }
     }
 
-    if ($this->telefonoOtro <> 'default') {
+    if ($this->telefonoOtro <> 'default' && $this->telefonoOtro <> "'-'") {
       if ( !preg_match( '/^[\']\d{11}[\']$/', $this->telefonoOtro) ) {
-        self::verificar("Error en: telefono: se espera solo numeros: 02125559911, datos: ".$this->telefonoOtro);
+        self::verificar("Error en: telefono adicional: se espera solo numeros: 02125559911, datos: ".$this->telefonoOtro);
       }
     }
 
