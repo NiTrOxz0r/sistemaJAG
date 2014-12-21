@@ -40,7 +40,46 @@ if ( isset($_GET['cedula_r']) and preg_match( "/[0-9]{8}/", $_GET['cedula_r']) )
 endif;
 
 if (isset($_SESSION['requisitos'])) :
-  $requisitos = $_SESSION['requisitos'];
+  if ( isset($_SESSION['requisitos']['partida_nac']) ) :
+    $requisitos['partida_nac'] = 'checked';
+  else :
+    $requisitos['partida_nac'] = null;
+  endif;
+  if ( isset($_SESSION['requisitos']['constancia_nino_sano']) ) :
+    $requisitos['constancia_nino_sano'] = 'checked';
+  else :
+    $requisitos['constancia_nino_sano'] = null;
+  endif;
+  if ( isset($_SESSION['requisitos']['canaima']) ) :
+    $requisitos['canaima'] = 'checked';
+  else :
+    $requisitos['canaima'] = null;
+  endif;
+  if ( isset($_SESSION['requisitos']['bicentenario']) ) :
+    $requisitos['bicentenario'] = 'checked';
+  else :
+    $requisitos['bicentenario'] = null;
+  endif;
+  if ( isset($_SESSION['requisitos']['boleta']) ) :
+    $requisitos['boleta'] = 'checked';
+  else :
+    $requisitos['boleta'] = null;
+  endif;
+  if ( isset($_SESSION['requisitos']['fotos_representante']) ) :
+    $requisitos['fotos_representante'] = 'checked';
+  else :
+    $requisitos['fotos_representante'] = null;
+  endif;
+  if ( isset($_SESSION['requisitos']['fotocopia_cedula_pa']) ) :
+    $requisitos['fotocopia_cedula_pa'] = 'checked';
+  else :
+    $requisitos['fotocopia_cedula_pa'] = null;
+  endif;
+  if ( isset($_SESSION['requisitos']['fotocopia_cedula_pa']) ) :
+    $requisitos['fotocopia_cedula_pa'] = 'checked';
+  else :
+    $requisitos['fotocopia_cedula_pa'] = null;
+  endif;
 else :
   $requisitos = null;
 endif;
@@ -715,41 +754,73 @@ if($go): ?>
                   <div class="col-xs-12">
                     <div class="checkbox">
                       <label class="col-xs-6">
-                        <input type="checkbox" value="s" name="partida_nac">
+                        <input
+                          type="checkbox"
+                          value="s"
+                          <?php echo $requisitos['partida_nac'] ?>
+                          name="partida_nac">
                         Partida de nacimiento.
                       </label>
                       <label class="col-xs-6">
-                        <input type="checkbox" value="s" name="constancia_nino_sano">
+                        <input
+                          type="checkbox"
+                          value="s"
+                          <?php echo $requisitos['constancia_nino_sano'] ?>
+                          name="constancia_nino_sano">
                         Constancia del niño sano.
                       </label>
                     </div>
                     <div class="checkbox">
                       <label class="col-xs-6">
-                        <input type="checkbox" value="s" name="canaima">
+                        <input
+                          type="checkbox"
+                          value="s"
+                          <?php echo $requisitos['canaima'] ?>
+                          name="canaima">
                         Recurso Canaima.
                       </label>
                       <label class="col-xs-6">
-                        <input type="checkbox" value="s" name="bicentenario">
+                        <input
+                          type="checkbox"
+                          value="s"
+                          <?php echo $requisitos['bicentenario'] ?>
+                          name="bicentenario">
                         Coleccion Bicentenario.
                       </label>
                     </div>
                     <div class="checkbox">
                       <label class="col-xs-6">
-                        <input type="checkbox" value="s" name="boleta">
+                        <input
+                          type="checkbox"
+                          value="s"
+                          <?php echo $requisitos['boleta'] ?>
+                          name="boleta">
                         Boleta de estudios.
                       </label>
                       <label class="col-xs-6">
-                        <input type="checkbox" value="s" name="fotos_representante">
+                        <input
+                          type="checkbox"
+                          value="s"
+                          <?php echo $requisitos['fotos_representante'] ?>
+                          name="fotos_representante">
                         Fotos tipo carnet del representante.
                       </label>
                     </div>
                     <div class="checkbox">
                       <label class="col-xs-6">
-                        <input type="checkbox" value="s" name="fotocopia_cedula_pa">
+                        <input
+                          type="checkbox"
+                          value="s"
+                          <?php echo $requisitos['fotocopia_cedula_pa'] ?>
+                          name="fotocopia_cedula_pa">
                         Fotocopia Cedula de identidad del representante.
                       </label>
                       <label class="col-xs-6">
-                        <input type="checkbox" value="s" name="fotocopia_cedula_pa">
+                        <input
+                          type="checkbox"
+                          value="s"
+                          <?php echo $requisitos['fotocopia_cedula_pa'] ?>
+                          name="fotocopia_cedula_pa">
                         Fotocopia Cedula de identidad de los allegados (si aplica).
                       </label>
                     </div>
