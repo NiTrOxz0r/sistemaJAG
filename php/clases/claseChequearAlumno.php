@@ -189,7 +189,7 @@ class ChequearAlumno extends ChequearGenerico{
       if ( preg_match( "/['][^0-9$^-][']/", $this->actaNumero) ) {
         self::verificar("Error en: Acta numero Part. Nac: se espera solo numeros, datos: ".$this->actaNumero);
       }
-      if ( strlen($this->actaNumero) > 20 ) { // modificar al numero real
+      if ( strlen($this->actaNumero) > 22 ) { // modificar al numero real
         self::verificar("Error en: Acta numero Part. Nac: tamaño excede limite maximo, datos: ".$this->actaNumero);
       }
     }
@@ -198,7 +198,7 @@ class ChequearAlumno extends ChequearGenerico{
       if ( preg_match( "/['][^0-9$^-][']/", $this->actaFolio) ) {
         self::verificar("Error en: Acta folio Part. Nac: se espera solo numeros, datos: ".$this->actaFolio);
       }
-      if ( strlen($this->actaFolio) > 20 ) { // modificar al numero real
+      if ( strlen($this->actaFolio) > 22 ) { // modificar al numero real
         self::verificar("Error en: Acta numero Part. Nac: tamaño excede limite maximo, datos: ".$this->actaFolio);
       }
     }

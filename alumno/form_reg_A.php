@@ -244,7 +244,7 @@ if($go): ?>
                             <label for="acta_num_part_nac" class="control-label">Numero de acta</label>
                             <input
                               class="form-control"
-                              type="number"
+                              type="text"
                               name="acta_num_part_nac"
                               id="acta_num_part_nac"
                               maxlength="20">
@@ -261,7 +261,7 @@ if($go): ?>
                             <label for="acta_folio_num_part_nac" class="control-label">Numero de folio</label>
                             <input
                               class="form-control"
-                              type="number"
+                              type="text"
                               name="acta_folio_num_part_nac"
                               id="acta_folio_num_part_nac"
                               maxlength="20">

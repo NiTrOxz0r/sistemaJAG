@@ -272,12 +272,19 @@ if ( isset($_POST['cedula_r']) and preg_match( "/[0-9]{8}/", $_POST['cedula_r'])
                     </a>
                   </p>
                   <p>
-                    Si desea hacer un registro de un alumno asociado a
+                    Si desea hacer un registro de un nuevo alumno, asociado a
                     <?php echo $p_nombre_r ?>, <?php echo $p_apellido_r ?>
                     con cedula
                      <strong><?php echo $_POST['cedula_r'] ?>, </strong>
                      por favor dele
                     <a href="<?php echo "form_reg_A.php?cedula_r=$_POST[cedula_r]" ?>">
+                      click a este enlace
+                    </a>
+                  </p>
+                  <p>
+                    En cambio si desea hacer un registro de un allegado a
+                    este nuevo alumno, por favor dele
+                    <a href="<?php echo "../personalAutorizado/form_reg_PA.php?cedula_r=$_POST[cedula_r]" ?>">
                       click a este enlace
                     </a>
                   </p>
