@@ -51,6 +51,7 @@ class ChequearAlumno extends ChequearGenerico{
     $fotosR = 'default',
     $fotoCedulaPA = 'default',
     $fotoCedulaPR = 'default',
+    $comentarios = 'default',
     $codRepresentante,
     $codPersonaRetira = 'default'
   ){
@@ -93,13 +94,13 @@ class ChequearAlumno extends ChequearGenerico{
       'fotoCedulaPA' => mysqli_escape_string($conexion, trim($fotoCedulaPA)),
       'fotoCedulaPR' => mysqli_escape_string($conexion, trim($fotoCedulaPR)),
       );
+    $this->comentarios = mysqli_escape_string($conexion, trim($comentarios));
     //metodos internos:
     //para poner variables nulas si es necesario:
     self::setNull();
     //chequeaomos la forma (el objeto como tal):
     self::chequeaForma();
     self::chequeame(); //heredado de ChequearGenerico
-
   }
 
   /**
@@ -272,6 +273,13 @@ class ChequearAlumno extends ChequearGenerico{
         self::verificar("Error en: recaudos de $campo: se esperan un valor apropiados del formulario, datos: ".$valor);
       endif;
     endforeach;
+
+    if ($this->comentarios <> 'default') {
+      if ( strlen($this->comentarios) > 500 ) {
+        self::verificar("Error en: comentarios: datos excede limite maximo, datos: ".
+          $this->comentarios.", largo: ".strlen($this->comentarios));
+      }
+    }
   }
 
   /**
@@ -376,6 +384,10 @@ class ChequearAlumno extends ChequearGenerico{
         $this->recaudos[$campo] = "'$valor'";
       endif;
     endforeach;
+
+    if ($this->comentarios == "") {
+      $this->comentarios = "default";
+    }
   }
 
 }

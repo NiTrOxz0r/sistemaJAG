@@ -824,6 +824,24 @@ if($go): ?>
                     </div>
                   </div>
                 </fieldset>
+                <!-- comentarios -->
+                <fieldset>
+                  <legend class="text-center">Comentarios</legend>
+                  <div class="row">
+                    <div class="col-xs-12">
+                      <div class="form-group">
+                        <textarea
+                        class="form-control"
+                        maxlenght="500"
+                        rows="2"
+                        name="comentarios"
+                        id="comentarios"></textarea>
+                        <p class="help-block" id="comentarios_chequeo">
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </fieldset>
               </div>
               <!-- info adicional -->
               <div class="row">
@@ -979,7 +997,7 @@ if($go): ?>
               </small>
             </h3>
             <!-- !importante -->
-            <?php $enlace = encuentraCedula($_REQUEST['cedula']) ?>
+            <?php $enlace = encuentraCedula($_REQUEST['cedula_r']) ?>
             <?php if ( $enlace ): ?>
               <!-- se quedaron locos verdad? -->
               <div class="bg-info">

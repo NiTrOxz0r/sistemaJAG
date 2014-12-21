@@ -834,6 +834,25 @@ if($reg = mysqli_fetch_array($re)) :
                     </div>
                   </div>
                 </fieldset>
+                <!-- comentarios -->
+                <fieldset>
+                  <legend class="text-center">Comentarios</legend>
+                  <div class="row">
+                    <div class="col-xs-12">
+                      <div class="form-group">
+                        <textarea
+                        class="form-control"
+                        disabled
+                        maxlenght="500"
+                        rows="2"
+                        name="comentarios"
+                        id="comentarios"></textarea>
+                        <p class="help-block" id="comentarios_chequeo">
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </fieldset>
               </div>
               <!-- info -->
               <div class="row">

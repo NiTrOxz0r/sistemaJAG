@@ -123,6 +123,7 @@ if ( isset($_POST['cedula']) and preg_match( "/[0-9]{8}/", $_POST['cedula']) ) :
     $_POST['fotos_representante'],
     $_POST['fotocopia_cedula_pa'],
     $_POST['fotocopia_cedula_pr'],
+    $_POST['comentarios'],
     $cod_persona
   );
   if ( $validarAlumno->valido() ) :
@@ -177,15 +178,16 @@ if ( isset($_POST['cedula']) and preg_match( "/[0-9]{8}/", $_POST['cedula']) ) :
         cod_discapacidad        = $validarAlumno->discapacidad,
         cod_curso               = $validarAlumno->codCurso,
         cod_usr_mod             = $validarAlumno->codUsrMod,
-        partida_nac = ".$validarAlumno->recaudos['partidaNac'].",
-        constancia_nino_sano = ".$validarAlumno->recaudos['constanciaSano'].",
-        canaima = ".$validarAlumno->recaudos['canaima'].",
-        bicentenario = ".$validarAlumno->recaudos['bicentenario'].",
-        boleta = ".$validarAlumno->recaudos['boleta'].",
-        fotos_representante = ".$validarAlumno->recaudos['fotosR'].",
-        fotocopia_cedula_pa = ".$validarAlumno->recaudos['fotoCedulaPA'].",
-        fotocopia_cedula_pr = ".$validarAlumno->recaudos['fotoCedulaPR'].",
-        fec_mod = current_timestamp
+        comentarios             = $validarAlumno->comentarios,
+        partida_nac             = ".$validarAlumno->recaudos['partidaNac'].",
+        constancia_nino_sano    = ".$validarAlumno->recaudos['constanciaSano'].",
+        canaima                 = ".$validarAlumno->recaudos['canaima'].",
+        bicentenario            = ".$validarAlumno->recaudos['bicentenario'].",
+        boleta                  = ".$validarAlumno->recaudos['boleta'].",
+        fotos_representante     = ".$validarAlumno->recaudos['fotosR'].",
+        fotocopia_cedula_pa     = ".$validarAlumno->recaudos['fotoCedulaPA'].",
+        fotocopia_cedula_pr     = ".$validarAlumno->recaudos['fotoCedulaPR'].",
+        fec_mod                 = current_timestamp
         WHERE cod_persona = $cod_persona;";
       mysqli_query($con, $query) ? null : $query_ok=false;
       echo $query_ok === (false) ? 'alu' : null;

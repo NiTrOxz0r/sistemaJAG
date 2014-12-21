@@ -85,6 +85,7 @@ if ( isset($_POST['cedula_r']) and preg_match( "/[0-9]{8}/", $_POST['cedula_r'])
       $_POST['fotos_representante'],
       $_POST['fotocopia_cedula_pa'],
       $_POST['fotocopia_cedula_pr'],
+      $_POST['comentarios'],
       $cod_representante
     );
     // die( var_dump( $validarAlumno->recaudos['partidaNac'] ) );
@@ -173,6 +174,7 @@ if ( isset($_POST['cedula_r']) and preg_match( "/[0-9]{8}/", $_POST['cedula_r'])
           fotos_representante,
           fotocopia_cedula_pa,
           fotocopia_cedula_pr,
+          comentarios,
           cod_representante,
           status,
           cod_usr_reg,
@@ -202,7 +204,8 @@ if ( isset($_POST['cedula_r']) and preg_match( "/[0-9]{8}/", $_POST['cedula_r'])
           $validarAlumno->recaudos['boleta'].",".
           $validarAlumno->recaudos['fotosR'].",".
           $validarAlumno->recaudos['fotoCedulaPA'].",".
-          $validarAlumno->recaudos['fotoCedulaPR'].",
+          $validarAlumno->recaudos['fotoCedulaPR'].",".
+          $validarAlumno->comentarios.",
           $validarAlumno->codRepresentante,
           $status, $validarAlumno->codUsrMod,
           $validarAlumno->codUsrMod, current_timestamp);";
