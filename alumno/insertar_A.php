@@ -87,7 +87,7 @@ if ( isset($_POST['cedula_r']) and preg_match( "/[0-9]{8}/", $_POST['cedula_r'])
       $_POST['fotocopia_cedula_pr'],
       $cod_representante
     );
-    die(var_dump($validarAlumno));
+    // die( var_dump( $validarAlumno->recaudos['partidaNac'] ) );
   if ( $validarAlumno->valido() ) :
     $queryP = "INSERT INTO persona(
       cedula,
@@ -105,8 +105,7 @@ if ( isset($_POST['cedula_r']) and preg_match( "/[0-9]{8}/", $_POST['cedula_r'])
       cod_usr_mod,
       fec_mod
     )
-    VALUES
-    (
+    VALUES(
       $validarAlumno->cedula, $validarAlumno->nacionalidad,
       $validarAlumno->p_nombre, $validarAlumno->s_nombre,
       $validarAlumno->p_apellido, $validarAlumno->s_apellido,
@@ -166,6 +165,14 @@ if ( isset($_POST['cedula_r']) and preg_match( "/[0-9]{8}/", $_POST['cedula_r'])
           certificado_vacuna,
           cod_discapacidad,
           cod_curso,
+          partida_nac,
+          constancia_nino_sano,
+          canaima,
+          bicentenario,
+          boleta,
+          fotos_representante,
+          fotocopia_cedula_pa,
+          fotocopia_cedula_pr,
           cod_representante,
           status,
           cod_usr_reg,
@@ -173,14 +180,30 @@ if ( isset($_POST['cedula_r']) and preg_match( "/[0-9]{8}/", $_POST['cedula_r'])
           fec_mod
         )
         VALUES (
-          $cod_persona, $validarAlumno->cedulaEscolar,
-          $validarAlumno->lugNac, $validarAlumno->actaNumero,
-          $validarAlumno->actaFolio, $validarAlumno->plantelProcedencia,
-          $validarAlumno->repitiente, $validarAlumno->altura,
-          $validarAlumno->peso, $validarAlumno->camisa,
-          $validarAlumno->pantalon, $validarAlumno->zapato,
-          $validarAlumno->vacuna, $validarAlumno->discapacidad,
-          $validarAlumno->codCurso, $validarAlumno->codRepresentante,
+          $cod_persona,
+          $validarAlumno->cedulaEscolar,
+          $validarAlumno->lugNac,
+          $validarAlumno->actaNumero,
+          $validarAlumno->actaFolio,
+          $validarAlumno->plantelProcedencia,
+          $validarAlumno->repitiente,
+          $validarAlumno->altura,
+          $validarAlumno->peso,
+          $validarAlumno->camisa,
+          $validarAlumno->pantalon,
+          $validarAlumno->zapato,
+          $validarAlumno->vacuna,
+          $validarAlumno->discapacidad,
+          $validarAlumno->codCurso,".
+          $validarAlumno->recaudos['partidaNac'].",".
+          $validarAlumno->recaudos['constanciaSano'].",".
+          $validarAlumno->recaudos['canaima'].",".
+          $validarAlumno->recaudos['bicentenario'].",".
+          $validarAlumno->recaudos['boleta'].",".
+          $validarAlumno->recaudos['fotosR'].",".
+          $validarAlumno->recaudos['fotoCedulaPA'].",".
+          $validarAlumno->recaudos['fotoCedulaPR'].",
+          $validarAlumno->codRepresentante,
           $status, $validarAlumno->codUsrMod,
           $validarAlumno->codUsrMod, current_timestamp);";
       // $resultado = conexion($query, 1);
@@ -194,10 +217,18 @@ if ( isset($_POST['cedula_r']) and preg_match( "/[0-9]{8}/", $_POST['cedula_r'])
       //RELACION ENTRE ALUMNO Y PA:
       //M > N
       $query = "INSERT INTO obtiene
-      VALUES
-      (null, $cod_representante, $datosAlumno[codigo],
-        $status, $validarAlumno->codUsrMod, null,
-        $validarAlumno->codUsrMod, current_timestamp);";
+      VALUES(
+        null,
+        $cod_representante,
+        $datosAlumno[codigo],
+        default,
+        default,
+        $status,
+        $validarAlumno->codUsrMod,
+        null,
+        $validarAlumno->codUsrMod,
+        current_timestamp
+        );";
       // $resultado = conexion($query, 1);
       mysqli_query($con, $query) ? null : $query_ok=false;
       echo $query_ok === (false) ? 'ob' : null;
@@ -229,7 +260,7 @@ if ( isset($_POST['cedula_r']) and preg_match( "/[0-9]{8}/", $_POST['cedula_r'])
                   <h4>
                     Los registros asociados con
                     <em><?php echo $validarAlumno->p_apellido.", ".$validarAlumno->p_nombre ?></em>
-                    fueron guardados correctamente!
+                    fueron almacenados correctamente!
                   </h4>
                   <p>
                     <a id="constancia" href="<?php echo "reportes/constancia-inscripcion.php?cedula=$_POST[cedula]" ?>"
