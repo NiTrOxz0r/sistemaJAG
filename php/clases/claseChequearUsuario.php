@@ -86,7 +86,7 @@ class ChequearUsuario extends ChequearGenerico{
   * esta implementacion es diferente ya que
   * es la iniciacion al sistema, esta pensado
   * para ser usado una sola vez.}
-  * @version 1.1
+  * @version 1.2
   *
   * @return void
   * esta funcion no regresa nada.
@@ -96,29 +96,23 @@ class ChequearUsuario extends ChequearGenerico{
   protected function chequeaForma(){
 
     $clase = get_class($this);
-    $togo = "Location: registro.php?seudonimo=false&clase=".$clase;
     if ($this->seudonimo == "''") {
-      die( header($togo) );
+      self::verificar("Error en: seudonimo: campo vacio.");
     }
-    $togo = "Location: registro.php?seudonimo=$this->seudonimo&length=".strlen($this->seudonimo)."&clase=".$clase;
     if ( strlen($this->seudonimo) < 5 or strlen($this->seudonimo) > 22) {
-      die( header($togo) );
+      self::verificar("Error en: seudonimo: largo incorrecto, datos: ".strlen($this->seudonimo));
     }
     if ($this->clave <> null) :
-      $togo = "Location: registro.php?clave=false&clase=".$clase;
       if ($this->clave == "") {
-        die( header($togo) );
+        self::verificar("Error en: clave: campo vacio.");
       }
       if ( $this->clave['completo'] <> null ) {
-        $togo = "Location: registro.php?completo=1&clave=length_is_".strlen($this->clave['completo'])."&contenido=".$this->clave['completo']."&clase=".$clase;
         if ( strlen($this->clave['completo']) <> 62) {
-          die( header($togo) );
+          self::verificar("Error en: clave: error fatal.");
         }
       }elseif ( $this->clave['simple'] <> null ) {
-        $togo = "Location: registro.php?simple=1&clave=length_is_".
-        strlen($this->clave['simple'])."&clase=".$clase;
         if ( strlen($this->clave['simple']) < 7 or strlen($this->clave['simple']) > 16) {
-          die( header($togo) );
+          self::verificar("Error en: clave: largo incorrecto, datos: ".strlen($this->clave['simple']));
         }
       }
     endif;

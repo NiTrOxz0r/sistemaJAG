@@ -18,24 +18,24 @@ class ChequearPA extends ChequearGenerico{
   function __construct(
     $codUsrMod,
     $p_apellido,
-    $s_apellido = 'null',
+    $s_apellido = 'default',
     $p_nombre,
-    $s_nombre = 'null',
+    $s_nombre = 'default',
     $nacionalidad,
     $cedula,
-    $telefono = 'null',
-    $telefonoOtro = 'null',
-    $fecNac = 'null',
-    $lugNac = 'null',
-    $email = 'null',
+    $telefono = 'default',
+    $telefonoOtro = 'default',
+    $fecNac = 'default',
+    $lugNac = 'default',
+    $email = 'default',
     $sexo,
     $relacion,
     $viveConAlumno,
     $nivelInstruccion,
-    $profesion = 'null',
-    $telefonoTrabajo = 'null',
-    $direccionTrabajo = 'null',
-    $lugarTrabajo = 'null'
+    $profesion = 'default',
+    $telefonoTrabajo = 'default',
+    $direccionTrabajo = 'default',
+    $lugarTrabajo = 'default'
   ){
     //variables de la clase:
     $conexion = conexion();//desde master.php > conexion.php
@@ -82,39 +82,39 @@ class ChequearPA extends ChequearGenerico{
       self::verificar("Error en: nacionalidad, se espera valor apropiado del formulario, datos: ".$this->nacionalidad);
     }
 
-    if ($this->cedula <> 'null') {
+    if ($this->cedula <> 'default') {
       if ( !preg_match( '/^[\']\d{8}[\']$/', $this->cedula) ) {
         self::verificar("Error en: cedula: solo numeros, datos: ".$this->cedula);
       }
     }
 
-    if ( preg_match( "/^A-Za-z$^'$^áéíóú$^ÁÉÍÓÚ$/", $this->p_nombre) ) {
+    if ( preg_match( "/[^a-zA-Z-_áéíóúÁÉÍÓÚÑñ']/", $this->p_nombre) ) {
       self::verificar("Error en: primer nombre: solo letas, datos: ".$this->p_nombre);
     }
 
-    if ($this->s_nombre <> 'null') {
-      if ( preg_match( "/^A-Za-z$^'$^áéíóú$^ÁÉÍÓÚ$/", $this->s_nombre) ) {
+    if ($this->s_nombre <> 'default') {
+      if ( preg_match( "/[^a-zA-Z-_áéíóúÁÉÍÓÚÑñ']/", $this->s_nombre) ) {
         self::verificar("Error en: segundo nombre: solo letas, datos: ".$this->s_nombre);
       }
     }
 
-    if ( preg_match( "/^A-Za-z$^'$^áéíóú$^ÁÉÍÓÚ$/", $this->p_apellido) ) {
+    if ( preg_match( "/[^a-zA-Z-_áéíóúÁÉÍÓÚÑñ']/", $this->p_apellido) ) {
       self::verificar("Error en: primer apellido: solo letas, datos: ".$this->p_apellido);
     }
 
-    if ( $this->s_apellido <> 'null' ) {
-      if ( preg_match( "/^A-Za-z$^'$^áéíóú$^ÁÉÍÓÚ$/", $this->s_apellido) ) {
+    if ( $this->s_apellido <> 'default' ) {
+      if ( preg_match( "/[^a-zA-Z-_áéíóúÁÉÍÓÚÑñ']/", $this->s_apellido) ) {
         self::verificar("Error en: segundo apellido: solo letas, datos: ".$this->s_apellido);
       }
     }
 
-    if ($this->telefono <> 'null') {
+    if ($this->telefono <> 'default') {
       if ( !preg_match( '/^[\']\d{11}[\']$/', $this->telefono) ) {
         self::verificar("Error en: telefono: se espera solo numeros: 02125559911, datos: ".$this->telefono);
       }
     }
 
-    if ($this->telefonoOtro <> 'null') {
+    if ($this->telefonoOtro <> 'default') {
       if ( !preg_match( '/^[\']\d{11}[\']$/', $this->telefonoOtro) ) {
         self::verificar("Error en: telefono: se espera solo numeros: 02125559911, datos: ".$this->telefonoOtro);
       }
@@ -133,7 +133,7 @@ class ChequearPA extends ChequearGenerico{
       }
     }
 
-    if ($this->lugNac <> 'null') {
+    if ($this->lugNac <> 'default') {
       if ( strlen($this->lugNac) > 50 ) {
        self::verificar("Error en: lugar de nacimiento: datos excede limite maximo, datos: ".$this->lugNac.", largo: ".strlen($this->lugNac));
       }
@@ -151,30 +151,30 @@ class ChequearPA extends ChequearGenerico{
       self::verificar("Error en: nivel instruccion: se espera un valor apropiado del formulario, datos: ".$this->nivelInstruccion);
     }
 
-    if ($this->email != 'null') {
+    if ($this->email != 'default') {
       if ( !preg_match( "/^['][0-9a-zA-Z-_$#]{2,20}+\@[0-9a-zA-Z-_$#]{2,20}+\.[a-zA-Z]{2,5}[']/", $this->email) ) {
         self::verificar("Error en: email: se espera formato estandar: algo@algunsitio.com, datos: ".$this->email);
       }
     }
-    if ($this->profesion != 'null') {
+    if ($this->profesion != 'default') {
       if ( preg_match( "/[^0-9]/", $this->profesion) ) {
         self::verificar("Error en: tipo de profesion: se esperan un valor apropiados del formulario, datos: ".$this->profesion);
       }
     }
 
-    if ($this->telefonoTrabajo <> 'null') {
+    if ($this->telefonoTrabajo <> 'default') {
       if ( !preg_match( '/^[\']\d{11}[\']$/', $this->telefonoTrabajo) ) {
         self::verificar("Error en: telefono de trabajo: se espera solo numeros: 02125559911, datos: ".$this->telefonoTrabajo);
       }
     }
 
-    if ($this->direccionTrabajo <> 'null') {
+    if ($this->direccionTrabajo <> 'default') {
       if ( strlen($this->direccionTrabajo) > 150 ) {
         self::verificar("Error en: dir. de trabajo: datos excede limite maximo, datos: ".$this->direccionTrabajo.", largo: ".strlen($this->lugNac));
       }
     }
 
-    if ($this->lugarTrabajo <> 'null') {
+    if ($this->lugarTrabajo <> 'default') {
       if ( strlen($this->lugarTrabajo) > 50 ) {
         self::verificar("Error en: lugar de trabajo: datos excede limite maximo, datos: ".$this->lugarTrabajo.", largo: ".strlen($this->lugNac));
       }
@@ -192,7 +192,7 @@ class ChequearPA extends ChequearGenerico{
     $this->p_apellido = "'$this->p_apellido'";
 
     if ($this->s_apellido == "") {
-      $this->s_apellido = "null";
+      $this->s_apellido = 'default';
     }else{
       $this->s_apellido = "'$this->s_apellido'";
     }
@@ -200,7 +200,7 @@ class ChequearPA extends ChequearGenerico{
     $this->p_nombre = "'$this->p_nombre'";
 
     if ($this->s_nombre == "") {
-      $this->s_nombre = "null";
+      $this->s_nombre = 'default';
     }else{
       $this->s_nombre = "'$this->s_nombre'";
     }
@@ -209,30 +209,30 @@ class ChequearPA extends ChequearGenerico{
     $this->cedula = "'$this->cedula'";
 
     if ($this->telefono == "") {
-      $this->telefono = "null";
+      $this->telefono = 'default';
     }else{
       $this->telefono = "'$this->telefono'";
     }
     if ($this->telefonoOtro == "") {
-      $this->telefonoOtro = "null";
+      $this->telefonoOtro = 'default';
     }else{
       $this->telefonoOtro = "'$this->telefonoOtro'";
     }
 
     if ($this->fecNac == "") {
-      $this->fecNac = "null";
+      $this->fecNac = 'default';
     }else{
       $this->fecNac = "'$this->fecNac'";
     }
 
     if ($this->lugNac == "") {
-      $this->lugNac = "null";
+      $this->lugNac = 'default';
     }else{
       $this->lugNac = "'$this->lugNac'";
     }
 
     if ($this->email == "") {
-      $this->email = "null";
+      $this->email = 'default';
     }else{
       $this->email = "'$this->email'";
     }
@@ -246,25 +246,25 @@ class ChequearPA extends ChequearGenerico{
     $this->nivelInstruccion = $this->nivelInstruccion;
 
     if ($this->profesion == "") {
-      $this->profesion = "null";
+      $this->profesion = 'default';
     }else{
       $this->profesion = $this->profesion;
     }
 
     if ($this->telefonoTrabajo == "") {
-      $this->telefonoTrabajo = "null";
+      $this->telefonoTrabajo = 'default';
     }else{
       $this->telefonoTrabajo = "'$this->telefonoTrabajo'";
     }
 
     if ($this->direccionTrabajo == "") {
-      $this->direccionTrabajo = "null";
+      $this->direccionTrabajo = 'default';
     }else{
       $this->direccionTrabajo = "'$this->direccionTrabajo'";
     }
 
     if ($this->lugarTrabajo == "") {
-      $this->lugarTrabajo = "null";
+      $this->lugarTrabajo = 'default';
     }else{
       $this->lugarTrabajo = "'$this->lugarTrabajo'";
     }

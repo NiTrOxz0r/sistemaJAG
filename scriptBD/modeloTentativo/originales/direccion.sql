@@ -2,7 +2,7 @@ CREATE TABLE direccion(
   codigo int unsigned auto_increment primary key,
   cod_persona int unsigned not null,
   cod_parroquia smallint unsigned default null,
-  direccion_exacta varchar(150) not null default '-',
+  direccion_exacta varchar(150) default '-',
   status tinyint(1) unsigned not null default 1,
   cod_usr_reg int unsigned not null,
   fec_reg timestamp not null default current_timestamp,

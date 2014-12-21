@@ -32,38 +32,87 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);?>
                   </label>
                   <?php
                     $query ="SELECT
-                    personal.codigo,
-                    personal.titulo,
-                    nivel_instruccion.descripcion as nivel_instruccion,
-                    persona.p_nombre,
-                    persona.p_apellido,
-                    persona.s_apellido
-                    from personal
-                    inner join nivel_instruccion
-                    on personal.nivel_instruccion = nivel_instruccion.codigo
-                    inner join persona
-                    on personal.cod_persona = persona.codigo
-                    where persona.status = 1 and personal.status = 1
-                    order by persona.p_apellido;";
+                      personal.codigo,
+                      certificado_1.descripcion as certificado_1,
+                      certificado_2.descripcion as certificado_2,
+                      certificado_3.descripcion as certificado_3,
+                      certificado_4.descripcion as certificado_4,
+                      personal.descripcion_1,
+                      personal.descripcion_2,
+                      personal.descripcion_3,
+                      personal.descripcion_4,
+                      nivel_instruccion.descripcion as nivel_instruccion,
+                      persona.p_nombre,
+                      persona.p_apellido,
+                      persona.s_apellido,
+                      persona.telefono,
+                      personal.email
+                      from personal
+                      inner join certificado as certificado_1
+                      on personal.certificado_1 = certificado_1.codigo
+                      inner join certificado as certificado_2
+                      on personal.certificado_2 = certificado_2.codigo
+                      inner join certificado as certificado_3
+                      on personal.certificado_3 = certificado_3.codigo
+                      inner join certificado as certificado_4
+                      on personal.certificado_4 = certificado_4.codigo
+                      inner join nivel_instruccion
+                      on personal.nivel_instruccion = nivel_instruccion.codigo
+                      inner join persona
+                      on personal.cod_persona = persona.codigo
+                      where persona.status = 1 and personal.status = 1
+                      order by persona.p_apellido;";
                     $resultado = conexion($query); ?>
                   <select id="docente" name="docente" class="form-control">
                     <option value="">Sin Docente Asociado</option>
-                    <?php while ( $docente = mysqli_fetch_array($resultado) ) : ?>
+                    <?php while ( $docente = mysqli_fetch_array($resultado) ) :
+                      $certInfo = "";
+                      if ($docente['certificado_1'] !== '-') :
+                        $certInfo .= "<strong>$docente[certificado_1]:</strong>
+                                </br>
+                                <span>$docente[descripcion_1].</span>
+                                </br>";
+                      endif;
+                      if ($docente['certificado_2'] !== '-') :
+                        $certInfo .= "<strong>$docente[certificado_2]:</strong>
+                                </br>
+                                <span>$docente[descripcion_2].</span>
+                                </br>";
+                      endif;
+                      if ($docente['certificado_3'] !== '-') :
+                        $certInfo .= "<strong>$docente[certificado_3]:</strong>
+                                </br>
+                                <span>$docente[descripcion_3].</span>
+                                </br>";
+                      endif;
+                      if ($docente['certificado_4'] !== '-') :
+                        $certInfo .= "<strong>$docente[certificado_4]:</strong>
+                                </br>
+                                <span>$docente[descripcion_4].</span>
+                                </br>";
+                      endif;?>
                       <?php if ( $datos['cod_docente'] === $docente['codigo'] ): ?>
-                        <option selected="selected" value="<?php echo $docente['codigo'] ?>">
+                        <option
+                          data-contenido="<?php echo $certInfo ?>"
+                          selected="selected"
+                          value="<?php echo $docente['codigo'] ?>">
                           <?php echo $docente['p_apellido'] ?>,
-                          <?php echo $docente['s_apellido'] === (null) ? null : $docente['s_apellido'].", " ?>
+                          <?php echo $docente['s_apellido'] === ('-') ? null : $docente['s_apellido'].", " ?>
                           <?php echo $docente['p_nombre'] ?>,
                           <?php echo $docente['nivel_instruccion'] ?>,
-                          <?php echo $docente['titulo'] === (null) ? null : $docente['titulo'] ?>.
+                          <?php echo $docente['telefono'] === ('-') ? null : $docente['telefono'].", " ?>
+                          <?php echo $docente['email'] ?>.
                         </option>
                       <?php else: ?>
-                        <option value="<?php echo $docente['codigo'] ?>">
+                        <option
+                          data-contenido="<?php echo $certInfo ?>"
+                          value="<?php echo $docente['codigo'] ?>">
                           <?php echo $docente['p_apellido'] ?>,
-                          <?php echo $docente['s_apellido'] === (null) ? null : $docente['s_apellido'].", " ?>
+                          <?php echo $docente['s_apellido'] === ('-') ? null : $docente['s_apellido'].", " ?>
                           <?php echo $docente['p_nombre'] ?>,
-                          <?php echo $docente['nivel_instruccion'] ?>
-                          <?php echo $docente['titulo'] === (null) ? null : ", ".$docente['titulo'] ?>.
+                          <?php echo $docente['nivel_instruccion'] ?>,
+                          <?php echo $docente['telefono'] === ('-') ? null : $docente['telefono'].", " ?>
+                          <?php echo $docente['email'] ?>.
                         </option>
                       <?php endif ?>
                     <?php endwhile; ?>
@@ -173,6 +222,30 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);?>
             }else{
               $('#submit').prop('disabled', false);
             };
+          });
+        });
+      </script>
+      <!-- menu dinamico -->
+      <script type="text/javascript">
+        // slayerfat
+        // se quedaron locos verdad?
+        $(function() {
+          $('#docente').on('change', function() {
+            var tipo = $(this).val();
+            var datos = $(this).children('option:selected').data('contenido');
+            if (tipo != 'null' && tipo != '-1') {
+              $(this).popover({
+                  html: true,
+                  trigger: 'manual',
+                  title: "Certificados",
+                  placement: "right",
+                  content: function (){
+                    return $(this).children('option:selected').data('contenido')
+                  }
+              }).popover('show');
+            }else{
+              $(this).popover('destroy');
+            }
           });
         });
       </script>
