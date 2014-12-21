@@ -42,7 +42,7 @@ if ( isset($_POST['cedula']) and preg_match( "/[0-9]{8}/", $_POST['cedula']) ) :
   //
   // SE HACEN LOS SELECT PRIMERO
   // LUEGO LOS UPDATE E INSERTS.
-  $cedula = ChequearGenerico::cedula($_POST['cedula']);
+  $cedula = ChequearGenerico::cedula($_POST['cedula'], 1);
   // chamo porque te encanta poner alias en estos query tan sencillos?
   $sql = "SELECT a.codigo as cod_direccion
     from direccion a
