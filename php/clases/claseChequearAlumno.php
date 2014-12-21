@@ -12,7 +12,7 @@
 * @todo ampliar segun sea necesario segun
 * los objetivos necesarios:
 *
-* @version 1.4
+* @version 1.5
 *
 *
 */
@@ -43,6 +43,15 @@ class ChequearAlumno extends ChequearGenerico{
     $zapato = 'default',
     $discapacidad,
     $vacuna,
+    $partidaNac = 'default',
+    $constanciaSano = 'default',
+    $canaima = 'default',
+    $bicentenario = 'default',
+    $boleta = 'default',
+    $fotosR = 'default',
+    $fotoCedulaPA = 'default',
+    $fotoCedulaPR = 'default',
+    $comentarios = 'default',
     $codRepresentante,
     $codPersonaRetira = 'default'
   ){
@@ -75,13 +84,23 @@ class ChequearAlumno extends ChequearGenerico{
     $this->vacuna = mysqli_escape_string($conexion, trim($vacuna));
     $this->codRepresentante = mysqli_escape_string($conexion, trim($codRepresentante));
     $this->codPersonaRetira = mysqli_escape_string($conexion, trim($codPersonaRetira));
+    $this->recaudos = array(
+      'partidaNac' => mysqli_escape_string($conexion, trim($partidaNac)),
+      'constanciaSano' => mysqli_escape_string($conexion, trim($constanciaSano)),
+      'canaima' => mysqli_escape_string($conexion, trim($canaima)),
+      'bicentenario' => mysqli_escape_string($conexion, trim($bicentenario)),
+      'boleta' => mysqli_escape_string($conexion, trim($boleta)),
+      'fotosR' => mysqli_escape_string($conexion, trim($fotosR)),
+      'fotoCedulaPA' => mysqli_escape_string($conexion, trim($fotoCedulaPA)),
+      'fotoCedulaPR' => mysqli_escape_string($conexion, trim($fotoCedulaPR)),
+      );
+    $this->comentarios = mysqli_escape_string($conexion, trim($comentarios));
     //metodos internos:
     //para poner variables nulas si es necesario:
     self::setNull();
     //chequeaomos la forma (el objeto como tal):
     self::chequeaForma();
     self::chequeame(); //heredado de ChequearGenerico
-
   }
 
   /**
@@ -132,13 +151,13 @@ class ChequearAlumno extends ChequearGenerico{
       }
     }
 
-    if ($this->telefono <> 'default') {
+    if ($this->telefono <> 'default' && $this->telefono <> "'-'") {
       if ( !preg_match( '/^[\']\d{11}[\']$/', $this->telefono) ) {
         self::verificar("Error en: telefono: se espera solo numeros: 02125559911, datos: ".$this->telefono);
       }
     }
 
-    if ($this->telefonoOtro <> 'default') {
+    if ($this->telefonoOtro <> 'default' && $this->telefonoOtro <> "'-'") {
       if ( !preg_match( '/^[\']\d{11}[\']$/', $this->telefonoOtro) ) {
         self::verificar("Error en: telefono: se espera solo numeros: 02125559911, datos: ".$this->telefonoOtro);
       }
@@ -247,6 +266,20 @@ class ChequearAlumno extends ChequearGenerico{
     if ( $this->vacuna <> "'s'" and $this->vacuna <> "'n'" ) {
       self::verificar("Error en: cert. vacuna: se esperan un valor apropiados del formulario, datos: ".$this->vacuna);
     }
+
+    // recaudos fisicos
+    foreach ($this->recaudos as $campo => $valor) :
+      if ($valor <> "'s'" and $valor <> "'n'" ) :
+        self::verificar("Error en: recaudos de $campo: se esperan un valor apropiados del formulario, datos: ".$valor);
+      endif;
+    endforeach;
+
+    if ($this->comentarios <> 'default') {
+      if ( strlen($this->comentarios) > 500 ) {
+        self::verificar("Error en: comentarios: datos excede limite maximo, datos: ".
+          $this->comentarios.", largo: ".strlen($this->comentarios));
+      }
+    }
   }
 
   /**
@@ -342,6 +375,19 @@ class ChequearAlumno extends ChequearGenerico{
       $this->codPersonaRetira = "default";
     }
     $this->vacuna = "'$this->vacuna'";
+
+    // recaudos fisicos
+    foreach ($this->recaudos as $campo => $valor) :
+      if ($valor === '') :
+        $this->recaudos[$campo] = 'default';
+      else :
+        $this->recaudos[$campo] = "'$valor'";
+      endif;
+    endforeach;
+
+    if ($this->comentarios == "") {
+      $this->comentarios = "default";
+    }
   }
 
 }

@@ -390,7 +390,7 @@ HTML;
                 </div>
               <?php else: ?>
                 <?php
-                $enlace = "personalAutorizado/form_reg_P.php?cedula=$_GET[cedula_r]";
+                $enlace = "personalAutorizado/form_reg_P.php";
                 $inscripcion = enlaceDinamico("$enlace"); ?>
                 <p>
                   La cedula <?php echo $_GET['cedula'] ?>, no esta registrada en el sistema.
