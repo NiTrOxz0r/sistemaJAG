@@ -591,6 +591,7 @@ if ( (isset($_POST['seudonimo']) && isset($_POST['clave']) )
                     </div>
                   </fieldset>
                 </div>
+                <!-- info adicional -->
                 <div class="row">
                   <div class="col-sm-8 col-sm-offset-2 bg-primary redondeado">
                     <div class="row">
@@ -609,6 +610,7 @@ if ( (isset($_POST['seudonimo']) && isset($_POST['clave']) )
                     </div>
                   </div>
                 </div>
+                <!-- boton -->
                 <div class="row margenArriba">
                   <div class="col-sm-2 col-sm-offset-5">
                     <input

@@ -28,7 +28,7 @@
  *-slayerfat.]}
  *
  *
- * @version [1.7]
+ * @version [1.8]
  */
 if(!isset($_SESSION)){
   session_start();
