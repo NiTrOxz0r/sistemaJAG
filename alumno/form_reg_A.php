@@ -75,13 +75,11 @@ if (isset($_SESSION['requisitos'])) :
   else :
     $requisitos['fotocopia_cedula_pa'] = null;
   endif;
-  if ( isset($_SESSION['requisitos']['fotocopia_cedula_pa']) ) :
-    $requisitos['fotocopia_cedula_pa'] = 'checked';
+  if ( isset($_SESSION['requisitos']['fotocopia_cedula_pr']) ) :
+    $requisitos['fotocopia_cedula_pr'] = 'checked';
   else :
-    $requisitos['fotocopia_cedula_pa'] = null;
+    $requisitos['fotocopia_cedula_pr'] = null;
   endif;
-else :
-  $requisitos = null;
 endif;
 
 //CONTENIDO:
@@ -819,8 +817,8 @@ if($go): ?>
                         <input
                           type="checkbox"
                           value="s"
-                          <?php echo $requisitos['fotocopia_cedula_pa'] ?>
-                          name="fotocopia_cedula_pa">
+                          <?php echo $requisitos['fotocopia_cedula_pr'] ?>
+                          name="fotocopia_cedula_pr">
                         Fotocopia Cedula de identidad de los allegados (si aplica).
                       </label>
                     </div>

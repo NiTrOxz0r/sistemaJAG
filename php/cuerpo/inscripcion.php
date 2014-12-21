@@ -60,7 +60,7 @@
               </div>
               <div class="checkbox">
                 <label>
-                  <input type="checkbox" value="s" name="fotocopia_cedula_pa">
+                  <input type="checkbox" value="s" name="fotocopia_cedula_pr">
                   Fotocopia Cedula de identidad de los allegados (si aplica).
                 </label>
               </div>

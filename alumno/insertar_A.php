@@ -41,6 +41,16 @@ if ( isset($_POST['cedula_r']) and preg_match( "/[0-9]{8}/", $_POST['cedula_r'])
     $cod_representante_persona = $datos['codigo_pa_p'];
     $p_nombre_r = $datos['p_nombre'] or die('error p_nombre');
     $p_apellido_r = $datos['p_apellido'] or die('error p_apellido');
+    // chequeo de recaudos fisicos:
+    $_POST['partida_nac'] = (isset($_POST['partida_nac'])) ? $_POST['partida_nac'] : 'n' ;
+    $_POST['constancia_nino_sano'] = (isset($_POST['constancia_nino_sano'])) ? $_POST['constancia_nino_sano'] : 'n' ;
+    $_POST['canaima'] = (isset($_POST['canaima'])) ? $_POST['canaima'] : 'n' ;
+    $_POST['bicentenario'] = (isset($_POST['bicentenario'])) ? $_POST['bicentenario'] : 'n' ;
+    $_POST['boleta'] = (isset($_POST['boleta'])) ? $_POST['boleta'] : 'n' ;
+    $_POST['fotos_representante'] = (isset($_POST['fotos_representante'])) ? $_POST['fotos_representante'] : 'n' ;
+    $_POST['fotocopia_cedula_pa'] = (isset($_POST['fotocopia_cedula_pa'])) ? $_POST['fotocopia_cedula_pa'] : 'n' ;
+    $_POST['fotocopia_cedula_pr'] = (isset($_POST['fotocopia_cedula_pr'])) ? $_POST['fotocopia_cedula_pr'] : 'n' ;
+    // iniciacion del objeto validarAlumno
     $validarAlumno = new ChequearAlumno(
       $_SESSION['codUsrMod'],
       $_POST['p_apellido'],
@@ -67,8 +77,17 @@ if ( isset($_POST['cedula_r']) and preg_match( "/[0-9]{8}/", $_POST['cedula_r'])
       $_POST['zapato'],
       $_POST['discapacidad'],
       $_POST['vacuna'],
+      $_POST['partida_nac'],
+      $_POST['constancia_nino_sano'],
+      $_POST['canaima'],
+      $_POST['bicentenario'],
+      $_POST['boleta'],
+      $_POST['fotos_representante'],
+      $_POST['fotocopia_cedula_pa'],
+      $_POST['fotocopia_cedula_pr'],
       $cod_representante
     );
+    die(var_dump($validarAlumno));
   if ( $validarAlumno->valido() ) :
     $queryP = "INSERT INTO persona(
       cedula,

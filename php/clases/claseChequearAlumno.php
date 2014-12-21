@@ -12,7 +12,7 @@
 * @todo ampliar segun sea necesario segun
 * los objetivos necesarios:
 *
-* @version 1.4
+* @version 1.5
 *
 *
 */
@@ -43,6 +43,14 @@ class ChequearAlumno extends ChequearGenerico{
     $zapato = 'default',
     $discapacidad,
     $vacuna,
+    $partidaNac = 'default',
+    $constanciaSano = 'default',
+    $canaima = 'default',
+    $bicentenario = 'default',
+    $boleta = 'default',
+    $fotosR = 'default',
+    $fotoCedulaPA = 'default',
+    $fotoCedulaPR = 'default',
     $codRepresentante,
     $codPersonaRetira = 'default'
   ){
@@ -75,6 +83,16 @@ class ChequearAlumno extends ChequearGenerico{
     $this->vacuna = mysqli_escape_string($conexion, trim($vacuna));
     $this->codRepresentante = mysqli_escape_string($conexion, trim($codRepresentante));
     $this->codPersonaRetira = mysqli_escape_string($conexion, trim($codPersonaRetira));
+    $this->recaudos = array(
+      'partidaNac' => mysqli_escape_string($conexion, trim($partidaNac)),
+      'constanciaSano' => mysqli_escape_string($conexion, trim($constanciaSano)),
+      'canaima' => mysqli_escape_string($conexion, trim($canaima)),
+      'bicentenario' => mysqli_escape_string($conexion, trim($bicentenario)),
+      'boleta' => mysqli_escape_string($conexion, trim($boleta)),
+      'fotosR' => mysqli_escape_string($conexion, trim($fotosR)),
+      'fotoCedulaPA' => mysqli_escape_string($conexion, trim($fotoCedulaPA)),
+      'fotoCedulaPR' => mysqli_escape_string($conexion, trim($fotoCedulaPR)),
+      );
     //metodos internos:
     //para poner variables nulas si es necesario:
     self::setNull();
@@ -247,6 +265,13 @@ class ChequearAlumno extends ChequearGenerico{
     if ( $this->vacuna <> "'s'" and $this->vacuna <> "'n'" ) {
       self::verificar("Error en: cert. vacuna: se esperan un valor apropiados del formulario, datos: ".$this->vacuna);
     }
+
+    // recaudos fisicos
+    foreach ($this->recaudos as $campo => $valor) :
+      if ($valor <> "'s'" and $valor <> "'n'" ) :
+        self::verificar("Error en: recaudos de $campo: se esperan un valor apropiados del formulario, datos: ".$valor);
+      endif;
+    endforeach;
   }
 
   /**
@@ -342,6 +367,15 @@ class ChequearAlumno extends ChequearGenerico{
       $this->codPersonaRetira = "default";
     }
     $this->vacuna = "'$this->vacuna'";
+
+    // recaudos fisicos
+    foreach ($this->recaudos as $campo => $valor) :
+      if ($valor === '') :
+        $this->recaudos[$campo] = 'default';
+      else :
+        $this->recaudos[$campo] = "'$valor'";
+      endif;
+    endforeach;
   }
 
 }
