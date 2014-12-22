@@ -55,6 +55,7 @@ function validacionAlumno(){
   var pantalon = document.getElementById("pantalon").value.replace(/^\s+|\s+$/g, '');
   var zapato = document.getElementById("zapato").value.replace(/^\s+|\s+$/g, '');
   var curso = document.getElementById("curso").value.replace(/^\s+|\s+$/g, '');
+  var comentarios = document.getElementById("comentarios").value.replace(/^\s+|\s+$/g, '');
 // chequeos como tal:
 // cedula
   n = parseInt(cedula);
@@ -314,7 +315,7 @@ function validacionAlumno(){
   }
 // plantel de procedencia
   if (plantel_procedencia.length > 50) {
-    $("#plantel_procedencia_chequeo").html('Favor introduzca en este campo Letras sin numeros o caracteres especiales EJ: 19?=;@*');
+    $("#plantel_procedencia_chequeo").html('Este campo excede el limite maximo de caracteres permitidos.');
     $('#plantel_procedencia').parent().addClass('has-error');
     return false;
   }else if (expRegRepetido.exec(plantel_procedencia)) {
@@ -479,6 +480,21 @@ function validacionAlumno(){
       verificar = true;
     }
   }
+// comentarios
+    if (comentarios.length > 500) {
+      $("#comentarios_chequeo").html('Este campo excede el limite maximo de caracteres permitidos.');
+      $('#comentarios').parent().addClass('has-error');
+      return false;
+    }else if (expRegRepetido.exec(comentarios)) {
+      $("#comentarios_chequeo").html('Verifique este campo, muchos caracteres repetidos');
+      $('#comentarios').parent().addClass('has-error');
+      return false;
+    }else{
+      $("#comentarios_chequeo").html('&nbsp;');
+      $('#comentarios').parent().removeClass('has-error').addClass('has-success');
+      $('#comentarios').val( comentarios.toUpperCase() );
+      verificar = true;
+    }
 // fin de chequeos.
   // chequea y devuelve:
   if (verificar) {

@@ -5,7 +5,7 @@ CREATE TABLE alumno (
   acta_num_part_nac varchar(20) COMMENT 'quite los unique porque no se como son las actas y folios.',
   acta_folio_num_part_nac varchar(20) COMMENT 'quite los unique porque no se como son las actas y folios.',
   lugar_nac varchar(50) default '-',
-  plantel_procedencia varchar(50),
+  plantel_procedencia varchar(50) default '-',
   repitiente enum('s','n') not null,
   cod_curso int unsigned not null,
   altura tinyint(3) unsigned zerofill not null COMMENT 'adaptado segun Prof Nelly en escuela',

@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS `alumno` (
   `acta_num_part_nac` varchar(20) DEFAULT NULL COMMENT 'quitado not null',
   `acta_folio_num_part_nac` varchar(20) DEFAULT NULL,
   `lugar_nac` varchar(50) DEFAULT '-',
-  `plantel_procedencia` varchar(50) DEFAULT NULL,
+  `plantel_procedencia` varchar(50) DEFAULT '-',
   `repitiente` enum('s','n') NOT NULL,
   `cod_curso` int(10) unsigned NOT NULL DEFAULT '1',
   `altura` tinyint(3) unsigned zerofill NOT NULL COMMENT 'adaptado segun Prof Nelly en escuela',
