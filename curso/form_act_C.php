@@ -90,6 +90,9 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);?>
                                 </br>
                                 <span>$docente[descripcion_4].</span>
                                 </br>";
+                      endif;
+                      if ($certInfo === "") :
+                        $certInfo = "<strong>Sin Registros</strong>";
                       endif;?>
                       <?php if ( $datos['cod_docente'] === $docente['codigo'] ): ?>
                         <option

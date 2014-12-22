@@ -33,8 +33,8 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);
         <div class="col-sm-6 col-sm-offset-3">
           <form
             role="form"
-            id="consulta_singular_U"
-            name="consulta_singular_U"
+            id="consulta_singular_C"
+            name="consulta_singular_C"
             action="consultar_C.php"
             method="POST">
             <div class="form-group">
@@ -118,7 +118,7 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);
           <div class="row">
             <div class="col-xs-12">
               <h3>
-                O si prefiere puede registrar un nuevo curso en el sistema:
+                Si prefiere puede registrar un curso en el sistema.
               </h3>
             </div>
           </div>
@@ -127,6 +127,72 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);
       <div class="row">
         <div class="col-sm-4 col-sm-offset-4">
           <a href="form_reg_C.php" class="btn btn-primary btn-lg btn-block">Registrar un nuevo curso</a>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-8 col-xs-offset-2 bg-info redondeado margen">
+          <div class="row">
+            <div class="col-xs-12">
+              <h3>
+                O puede actualizar un curso en el sistema.
+              </h3>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-6 col-sm-offset-3">
+          <form
+            role="form"
+            id="actualizacion_singular_C"
+            name="actualizacion_singular_C"
+            action="form_act_C.php"
+            method="GET">
+            <div class="form-group">
+              <label
+              for="codigo"
+              id="codigo_titulo"
+              class="control-label">Seleccione:</label>
+              <select
+                class="form-control"
+                name="codigo"
+                id="codigo"
+                autofocus="autofocus"
+                autocomplete="off"
+                required>
+                <?php
+                  // $query = "SELECT
+                  // asume.codigo, curso.descripcion
+                  // from asume
+                  // inner join curso
+                  // on asume.cod_curso = curso.codigo
+                  // where asume.status = 1;";
+                  $query = "SELECT
+                  asume.codigo, curso.descripcion
+                  from asume
+                  inner join curso
+                  on asume.cod_curso = curso.codigo
+                  where curso.status = 1;";
+                  $resultado = conexion($query);?>
+                  <?php while ( $datos = mysqli_fetch_array($resultado) ) : ?>
+                    <option value="<?php echo $datos['codigo']; ?>">
+                      <?php echo $datos['descripcion']; ?>
+                    </option>
+                  <?php endwhile; ?>
+              </select>
+              <p class="help-block" id="codigo_chequeo">
+              </p>
+            </div>
+            <div class="row">
+              <div class="col-sm-6 col-sm-offset-3">
+                <input
+                type="submit"
+                id="submit"
+                value="Actualizar"
+                class="btn btn-primary btn-block">
+              </div>
+            </div>
+          </form>
         </div>
       </div>
     </div>
