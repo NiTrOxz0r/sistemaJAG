@@ -76,7 +76,9 @@ function validacionUsuario(){
   }
   // repeticion de clave
   if (estatus) {
-    if ( clave_repetida == '' ) {
+    if (clave_repetida === false) {
+      estatus = true;
+    }else if ( clave_repetida == '' ) {
       // $('#clave').parent().addClass('has-error');
       $("#clave_chequeo").html('&nbsp;');
       return false;

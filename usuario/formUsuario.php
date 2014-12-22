@@ -14,6 +14,15 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);
   <div id="contenido_formulario">
     <div id="blancoAjax">
       <div class="container">
+        <?php if (isset($_REQUEST['error']) || isset($_REQUEST['validacionUsuario'])): ?>
+          <div id="loginError" class="row margen">
+            <h1 class="bg-danger redondeado" style="padding: 20px 10px;">
+              Para ingresar al sistema, debe estar acreditado!
+              </br>
+              <small>por favor ingrese sus datos.</small>
+            </h1>
+          </div>
+        <?php endif ?>
         <div id="bienvenida" class="row">
           <div class="jumbotron">
             <h1>Bienvenid@!</h1>
@@ -42,7 +51,6 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);
                   name="seudonimo"
                   id="seudonimo"
                   class="form-control"
-                  autofocus="autofocus"
                   required="required"
                   placeholder="Instroduzca Usuario">
                   <p class="help-block" id="seudonimo_chequeo">
