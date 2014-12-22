@@ -50,8 +50,9 @@ if ( (isset($_REQUEST['informacion'])
       $where = $where." AND personal.tipo_personal = 5";
     elseif ($_REQUEST['tipo_personal'] === '0') :
       $where = $where." AND personal.tipo_personal = 0";
+    // ninguno
     elseif ($_REQUEST['tipo_personal'] === '6') :
-      $where = $where." AND personal.tipo_personal = 0";
+      // $where = $where." AND personal.tipo_personal = 6";
     endif;
   endif;
   // si el pedido no es un listado general:
@@ -191,9 +192,8 @@ if ( (isset($_REQUEST['informacion'])
               <div class="row center-block">
                  <div class="col-xs-6 col-xs-offset-3">
                    <a
-                    id="consultar-cedula"
                     href="#"
-                    class="push-3 btn btn-warning btn-lg disabled">Consultar registro</a>
+                    class="inyectar-cedula push-3 btn btn-warning btn-lg disabled">Consultar registro</a>
                     <span class="label label-info">Seleccione un registro para consultarlo</span>
                  </div>
               </div>

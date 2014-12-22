@@ -97,9 +97,8 @@ if ( (isset($_REQUEST['informacion']) and isset($_REQUEST['tipo']) )
              <div class="row">
                <div class="col-xs-3 col-xs-offset-3">
                  <a
-                  id="consultar-cedula"
                   href="#"
-                  class="push-3 btn btn-warning btn-lg disabled">Consultar registro</a>
+                  class="inyectar-cedula push-3 btn btn-warning btn-lg disabled">Consultar registro</a>
                </div>
                <div class="col-xs-3">
                  <a
@@ -213,22 +212,6 @@ if ( (isset($_REQUEST['informacion']) and isset($_REQUEST['tipo']) )
                   <?php endwhile; ?>
                 </tbody>
               </table>
-              <div class="container">
-                <div class="row margen">
-                  <div class="col-xs-6 col-xs-offset-3">
-                    <span class="label label-info">generara este listado en formato pdf</span>
-                  </div>
-                </div><p></p>
-                 <div class="row">
-                   <div class="col-xs-3 col-xs-offset-3">
-                    <?php $enlace = "reportes/listado_A.php?tipo=$_REQUEST[tipo]&informacion=$_REQUEST[informacion]" ?>
-                     <a
-                      id="generar-pdf"
-                      href="<?php echo $enlace ?>"
-                      class="push-3 btn btn-primary btn-lg">Generar Reporte</a>
-                   </div>
-                 </div>
-              </div>
             </div>
           </div>
           <div class="row">
