@@ -267,7 +267,11 @@ function validacionPA(){
     $("#email_chequeo").html('este campo no puede ser mayor a 40 caracteres');
     $('#email').parent().parent().addClass('has-error');
     return false;
-  }else if( !emailChequeo.test(email) && email != ""){
+  }else if(email == ''){
+    $("#email_chequeo").html('este campo no puede estar vacio.');
+    $('#email').parent().parent().addClass('has-error');
+    return false;
+  }else if( !emailChequeo.test(email)){
     $("#email_chequeo").html('Favor introduzca en este campo correctamente EJ: suNombre71@dominio.com.ve');
     $('#email').parent().parent().addClass('has-error');
     return false;

@@ -64,7 +64,7 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);
                   </p>
               </div>
               <div class="row">
-                <div class="col-sm-6 col-sm-offset-3">
+                <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
                   <input
                     class="btn btn-default btn-block"
                     type="submit"

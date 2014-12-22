@@ -344,6 +344,7 @@ if($reg = mysqli_fetch_array($re)) :
                           class="form-control"
                           id="email"
                           name="email"
+                          required
                           disabled
                           value="<?php echo $reg['email'];?>"
                           maxlength="50">

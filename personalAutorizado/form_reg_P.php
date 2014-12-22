@@ -279,6 +279,7 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr'], 'sistemaJAG 
                           class="form-control"
                           id="email"
                           name="email"
+                          required
                           maxlength="50">
                         </div>
                         <p class="help-block" id="email_chequeo">
