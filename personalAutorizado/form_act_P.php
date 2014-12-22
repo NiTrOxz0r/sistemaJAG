@@ -479,7 +479,10 @@ if($reg = mysqli_fetch_array($re)) :
                       <div class="col-xs-11">
                         <div class="form-group">
                           <label for="profesion" class="control-label">Profesion</label>
-                          <?php $sql = "SELECT codigo, descripcion from profesion where status = 1;";
+                          <?php $sql =
+                            "(SELECT codigo, descripcion from profesion where status = 1 and descripcion LIKE 'SIN PROFESION')
+                            UNION
+                            (SELECT codigo, descripcion from profesion where status = 1 and descripcion NOT LIKE 'SIN PROFESION');";
                             $registros = conexion($sql);?>
                           <select disabled class="form-control" name="profesion" id="profesion">
                             <?php while($fila = mysqli_fetch_array($registros)) : ?>
