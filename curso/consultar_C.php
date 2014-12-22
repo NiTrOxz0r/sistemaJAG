@@ -80,7 +80,7 @@ if ( isset($_POST['tipo']) ) :
       inner join curso
       on asume.cod_curso = curso.codigo
       inner join alumno
-      on alumno.cod_curso = asume.cod_curso
+      on alumno.cod_curso = asume.codigo
       inner join persona
       on alumno.cod_persona = persona.codigo
       where asume.status = 1 and asume.cod_curso = $curso
@@ -106,7 +106,7 @@ if ( isset($_POST['tipo']) ) :
       inner join curso
       on asume.cod_curso = curso.codigo
       inner join alumno
-      on alumno.cod_curso = curso.codigo
+      on alumno.cod_curso = asume.codigo
       where asume.status = 1 and asume.cod_curso = $curso
       group by
       3,2,1;";

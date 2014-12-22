@@ -77,7 +77,7 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);
                   // on asume.cod_curso = curso.codigo
                   // where asume.status = 1;";
                   $query = "SELECT
-                  asume.codigo, curso.descripcion
+                  asume.cod_curso, curso.descripcion
                   from asume
                   inner join curso
                   on asume.cod_curso = curso.codigo
@@ -85,7 +85,7 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);
                   $resultado = conexion($query);?>
                   <option value="" selected="selected">--Seleccione--</option>
                   <?php while ( $datos = mysqli_fetch_array($resultado) ) : ?>
-                    <option value="<?php echo $datos['codigo']; ?>">
+                    <option value="<?php echo $datos['cod_curso']; ?>">
                       <?php echo $datos['descripcion']; ?>
                     </option>
                   <?php endwhile; ?>
