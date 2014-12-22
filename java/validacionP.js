@@ -267,7 +267,11 @@ function validacionPA(){
     $("#email_chequeo").html('este campo no puede ser mayor a 40 caracteres');
     $('#email').parent().parent().addClass('has-error');
     return false;
-  }else if( !emailChequeo.test(email) && email != ""){
+  }else if(email == ''){
+    $("#email_chequeo").html('este campo no puede estar vacio.');
+    $('#email').parent().parent().addClass('has-error');
+    return false;
+  }else if( !emailChequeo.test(email)){
     $("#email_chequeo").html('Favor introduzca en este campo correctamente EJ: suNombre71@dominio.com.ve');
     $('#email').parent().parent().addClass('has-error');
     return false;
@@ -277,14 +281,25 @@ function validacionPA(){
     verificar = true;
   }
 // relacion o parentesco
+  n = $('#relacion :selected').html().replace(/^\s+|\s+$/g, '');
   if (parentesco === "") {
     $("#relacion_chequeo").html('Por favor seleccione una opcion apropiada');
     $('#relacion').parent().addClass('has-error');
     return false;
   }else{
-    $("#relacion_chequeo").html('&nbsp;');
-    $('#relacion').parent().removeClass('has-error').addClass('has-success');
-    verificar = true;
+    if ( n === 'Madre' && sexo != '1' ) {
+      $("#relacion_chequeo").html('Relacion entre parentesco y sexo no concuerdan.');
+      $('#relacion').parent().addClass('has-error');
+      return false;
+    }else if ( n === 'Padre' && sexo != '0' ) {
+      $("#relacion_chequeo").html('Relacion entre parentesco y sexo no concuerdan.');
+      $('#relacion').parent().addClass('has-error');
+      return false;
+    }else{
+      $("#relacion_chequeo").html('&nbsp;');
+      $('#relacion').parent().removeClass('has-error').addClass('has-success');
+      verificar = true;
+    }
   }
 // vive_con_alumno
   if (vive_con_alumno != "s" && vive_con_alumno != "n") {

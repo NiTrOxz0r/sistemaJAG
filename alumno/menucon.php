@@ -141,7 +141,12 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr'], 'sistemaJAG 
                   id="informacion">
               </div>
               <div class="input-group hidden">
-                <?php $query = "SELECT codigo, descripcion from curso where status = 1;";
+                <?php $query = "SELECT
+                  asume.codigo, curso.descripcion
+                  from asume
+                  inner join curso
+                  on asume.cod_curso = curso.codigo
+                  where curso.status = 1;";
                   $resultado = conexion($query);?>
                 <select class="form-control" name="informacion" id="informacion_lista">
                   <option value="" selected="selected">--Seleccione--</option>

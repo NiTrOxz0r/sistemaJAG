@@ -80,7 +80,7 @@ if ( isset($_POST['tipo']) ) :
       inner join curso
       on asume.cod_curso = curso.codigo
       inner join alumno
-      on alumno.cod_curso = asume.cod_curso
+      on alumno.cod_curso = asume.codigo
       inner join persona
       on alumno.cod_persona = persona.codigo
       where asume.status = 1 and asume.cod_curso = $curso
@@ -106,7 +106,7 @@ if ( isset($_POST['tipo']) ) :
       inner join curso
       on asume.cod_curso = curso.codigo
       inner join alumno
-      on alumno.cod_curso = curso.codigo
+      on alumno.cod_curso = asume.codigo
       where asume.status = 1 and asume.cod_curso = $curso
       group by
       3,2,1;";
@@ -167,9 +167,8 @@ if ( isset($_POST['tipo']) ) :
               <div class="row center-block margen">
                 <div class="col-xs-6 col-xs-offset-3">
                   <a
-                   id="consultar-cedula"
                    href="#"
-                   class="push-3 btn btn-warning btn-lg disabled">Consultar Persona</a>
+                   class="inyectar-cedula push-3 btn btn-warning btn-lg disabled">Consultar Persona</a>
                    <span class="label label-info">Seleccione un registro para consultarlo</span>
                 </div>
               </div>
@@ -322,7 +321,12 @@ if ( isset($_POST['tipo']) ) :
             </div>
             <div class="row center-block margen">
               <div class="col-xs-3 col-xs-offset-3">
-                <?php $enlace = "reportes/listado_C.php?tipo=$_REQUEST[tipo]&curso=$_REQUEST[curso]" ?>
+                <?php if (isset($_REQUEST['curso'])): ?>
+                  <?php $enlace = "reportes/listado_C.php?tipo=$_REQUEST[tipo]&curso=$_REQUEST[curso]" ?>
+                <?php else: ?>
+                  <?php $enlace = "reportes/listado_C.php?tipo=$_REQUEST[tipo]" ?>
+                <?php endif ?>
+
                 <a
                   id="generar-pdf"
                   href="<?php echo $enlace ?>"

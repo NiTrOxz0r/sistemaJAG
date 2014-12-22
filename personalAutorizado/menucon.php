@@ -109,8 +109,9 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr'], 'sistemaJAG 
         <div class="col-xs-8 col-xs-offset-2 bg-info redondeado margenAbajo">
           <div class="row">
             <div class="col-xs-12">
-              <h3>
-                Si Ud. desea registrar o actualizar a un alumno de esta
+              <h3 class="text-justify">
+                Si Ud. desea registrar o actualizar a un padre, representante
+                o allegado de un alumno en esta
                 institucion, puede hacerlo especificando la cedula de identidad:
               </h3>
             </div>

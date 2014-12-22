@@ -67,8 +67,22 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr'], 'sistemaJAG 
                   Especifique su contrase&ntilde;a
                 </p>
             </div>
+            <div class="form-group">
+              <label for="clave_repetida" class="control-label">&nbsp;</label>
+              <input
+                class="form-control"
+                type="password"
+                name="clave_repetida"
+                id="clave_repetida"
+                required="required"
+                maxlength="15"
+                disabled
+                placeholder="">
+                <p class="help-block" id="clave_repetida_chequeo">
+                </p>
+            </div>
             <div class="row">
-              <div class="col-sm-6 col-sm-offset-3">
+              <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
                 <input
                   class="btn btn-default btn-block"
                   type="submit"
@@ -138,7 +152,7 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr'], 'sistemaJAG 
           });
         });
         //comprobacion de la clave:
-        $("#clave").change(function(){
+        $("#clave, #clave_repetida").change(function(){
           validacionUsuario();
         });
         //apenas se pretenda enviar el formulario:
