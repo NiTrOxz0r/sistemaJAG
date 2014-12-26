@@ -114,7 +114,6 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr'], 'sistemaJAG 
                 class="form-control"
                 name="tipo"
                 id="tipo"
-                autofocus="autofocus"
                 required>
                 <option selected="selected" value="0">--Seleccione--</option>
                 <option value="1">Por cedula</option>
@@ -357,7 +356,7 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr'], 'sistemaJAG 
               cedula_r = cedula;
             };
             if ( validacionCedula(cedula) && validacionCedula(cedula_r)) {
-              var action = $(this).attr('action');
+              // var action = $(this).attr('action');
               // desabilitado por no continuar
               // la cuestion del ajax y paginas dinamicas:
               // $.ajax({

@@ -11,8 +11,8 @@ validarUsuario(1, 1, $_SESSION['cod_tipo_usr'], 'sistemaJAG | Registro de allega
 //DESDE empezarPagina.php
 empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr'], 'sistemaJAG | Proceso de Registro 2014-2015');
 
-if ( isset($_GET['cedula']) and preg_match( "/[0-9]{6,8}/", $_GET['cedula']) ) :
-  $cedula = ChequearGenerico::cedula($_GET['cedula'], 1);
+if ( isset($_GET['cedula_a']) and preg_match( "/[0-9]{6,8}/", $_GET['cedula_a']) ) :
+  $cedula_a = ChequearGenerico::cedula($_GET['cedula_a'], 1);
   $query = "SELECT
     persona.p_nombre,
     persona.p_apellido,
@@ -21,7 +21,7 @@ if ( isset($_GET['cedula']) and preg_match( "/[0-9]{6,8}/", $_GET['cedula']) ) :
     from persona
     inner join alumno
     on alumno.cod_persona = persona.codigo
-    where persona.cedula = $cedula;";
+    where persona.cedula = $cedula_a;";
   $resultado = conexion($query);
   if ($resultado->num_rows <> 0) :
     $datosAlumno = mysqli_fetch_assoc($resultado);
@@ -30,8 +30,13 @@ if ( isset($_GET['cedula']) and preg_match( "/[0-9]{6,8}/", $_GET['cedula']) ) :
     $go = false;
   endif;
 else:
-  $cedula = false;
+  $cedula_a = false;
   $go = false;
+endif;
+if (isset($_GET['cedula']) and preg_match( "/[0-9]{6,8}/", $_GET['cedula'])) :
+  $cedula = ChequearGenerico::cedula($_GET['cedula'], 1);
+else :
+  $cedula = null;
 endif;
 //CONTENIDO:
 if($go):?>
@@ -139,6 +144,10 @@ if($go):?>
                         class="form-control"
                         autofocus="autofocus"
                         autocomplete="off"
+                        <?php if ($cedula): ?>
+                          <?php echo "disabled" ?>
+                          <?php echo 'value="'.$cedula.'"' ?>
+                        <?php endif ?>
                         placeholder="Introduzca cedula ej: 12345678"
                         required>
                       <p class="help-block" id="cedula_chequeo">
@@ -785,7 +794,7 @@ if($go):?>
               </small>
             </h3>
             <!-- !importante -->
-            <?php $enlace = encuentraCedula($cedula) ?>
+            <?php $enlace = encuentraCedula($cedula_a) ?>
             <?php if ( $enlace ): ?>
               <!-- se quedaron locos verdad? -->
               <div class="bg-info">
@@ -800,9 +809,9 @@ if($go):?>
             <?php else:
               $enlace = "personalAutorizado/form_reg_P.php";
               $inscripcion = enlaceDinamico("$enlace"); ?>
-              <?php if ($cedula !== false): ?>
+              <?php if ($cedula_a !== false): ?>
                 <p>
-                  La cedula <?php echo $cedula ?> del alumno no esta registrada en el sistema!
+                  La cedula <?php echo $cedula_a ?> del alumno no esta registrada en el sistema!
                   <em>Para registrar a un allegado, es necesario registrar primero a un alumno.</em>
                   es importante destacar que es necesario registrar a un representante antes de
                   registrar a un alumno, para ir al proceso de inscripcion <a href="<?php echo $inscripcion ?>">
