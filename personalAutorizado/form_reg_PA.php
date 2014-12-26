@@ -12,8 +12,7 @@ validarUsuario(1, 1, $_SESSION['cod_tipo_usr'], 'sistemaJAG | Registro de allega
 empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr'], 'sistemaJAG | Proceso de Registro 2014-2015');
 
 if ( isset($_GET['cedula']) and preg_match( "/[0-9]{8}/", $_GET['cedula']) ) :
-  $conexion = conexion();
-  $cedula = mysqli_escape_string( $conexion, trim($_GET['cedula']) );
+  $cedula = ChequearGenerico::cedula($_GET['cedula'], 1);
   $query = "SELECT
     persona.p_nombre,
     persona.p_apellido,
@@ -30,11 +29,13 @@ if ( isset($_GET['cedula']) and preg_match( "/[0-9]{8}/", $_GET['cedula']) ) :
   else :
     $go = false;
   endif;
-  mysqli_close($conexion);
+else:
+  $cedula = false;
+  $go = false;
 endif;
 //CONTENIDO:
 if($go):?>
-  <div id="contenido_form_reg_P">
+  <div id="contenido_form_reg_PA">
     <div id="blancoAjax">
       <div class="container">
         <div class="row">
@@ -769,7 +770,7 @@ if($go):?>
     </div>
   </div>
 <?php else: ?>
-  <div id="contenido_form_reg_A">
+  <div id="contenido_form_reg_PA">
     <div id="blancoAjax">
       <div class="container">
         <div class="row">
@@ -784,7 +785,7 @@ if($go):?>
               </small>
             </h3>
             <!-- !importante -->
-            <?php $enlace = encuentraCedula($_GET['cedula']) ?>
+            <?php $enlace = encuentraCedula($cedula) ?>
             <?php if ( $enlace ): ?>
               <!-- se quedaron locos verdad? -->
               <div class="bg-info">
@@ -796,17 +797,28 @@ if($go):?>
                   <a href="<?php echo $enlace ?> ">existe en el sistema</a>
                 </p>
               </div>
-            <?php else: ?>
-              <?php
-              $enlace = "personalAutorizado/form_reg_P.php?cedula=$_GET[cedula]";
+            <?php else:
+              $enlace = "personalAutorizado/form_reg_P.php";
               $inscripcion = enlaceDinamico("$enlace"); ?>
-              <p>
-                La cedula <?php echo $_GET['cedula'] ?>, no esta registrada en el sistema.
-                <em>Para registrar a un alumno, es necesario registrar primero al representante.</em>
-                para ir al proceso de inscripcion <a href="<?php echo $inscripcion ?>">
-                puede seguir este enlace.
-                </a>
-              </p>
+              <?php if ($cedula !== false): ?>
+                <p>
+                  La cedula <?php echo $cedula ?> del alumno no esta registrada en el sistema!
+                  <em>Para registrar a un allegado, es necesario registrar primero a un alumno.</em>
+                  es importante destacar que es necesario registrar a un representante antes de
+                  registrar a un alumno, para ir al proceso de inscripcion <a href="<?php echo $inscripcion ?>">
+                  puede seguir este enlace.
+                  </a>
+                </p>
+              <?php else: ?>
+                <p>
+                  Ninguna cedula fue especificada para continuar con el proceso de registro.
+                  <em>Para registrar a un alumno, es necesario registrar primero al representante.</em>
+                  para ir al proceso de inscripcion <a href="<?php echo $inscripcion ?>">
+                  puede seguir este enlace.
+                  </a>
+                </p>
+              <?php endif ?>
+
               <!-- google hide me: slayerfat@gmail.com -->
             <?php endif ?>
             <p>
