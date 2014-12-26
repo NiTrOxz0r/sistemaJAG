@@ -11,7 +11,7 @@ validarUsuario(1, 1, $_SESSION['cod_tipo_usr'], 'sistemaJAG | Registro de allega
 //DESDE empezarPagina.php
 empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr'], 'sistemaJAG | Proceso de Registro 2014-2015');
 
-if ( isset($_GET['cedula']) and preg_match( "/[0-9]{8}/", $_GET['cedula']) ) :
+if ( isset($_GET['cedula']) and preg_match( "/[0-9]{6,8}/", $_GET['cedula']) ) :
   $cedula = ChequearGenerico::cedula($_GET['cedula'], 1);
   $query = "SELECT
     persona.p_nombre,
@@ -811,7 +811,8 @@ if($go):?>
                 </p>
               <?php else: ?>
                 <p>
-                  Ninguna cedula fue especificada para continuar con el proceso de registro.
+                  Parece haber algo extraño con los datos requeridos con el proceso de registro.
+                  La cedula puede estar vacia o puede estar incorrectamente especificada.
                   <em>Para registrar a un alumno, es necesario registrar primero al representante.</em>
                   para ir al proceso de inscripcion <a href="<?php echo $inscripcion ?>">
                   puede seguir este enlace.

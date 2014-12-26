@@ -16,7 +16,7 @@
  */
 function encuentraCedula($cedula_x = 0){
   // chequeo basico
-  if ( $cedula_x and preg_match( "/[0-9]{8}/", $cedula_x) ) :
+  if ( $cedula_x and preg_match( "/[0-9]{6,8}/", $cedula_x) ) :
     $enlace = $_SERVER['DOCUMENT_ROOT']."/github/sistemaJAG/php/master.php";
     require_once($enlace);
     $cedula = ChequearGenerico::cedula($cedula_x);

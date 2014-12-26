@@ -24,7 +24,7 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr'], 'sistemaJAG 
 
 $con = conexion();
 
-if ( isset($_POST['cedula']) and preg_match( "/[0-9]{8}/", $_POST['cedula']) ) :
+if ( isset($_POST['cedula']) and preg_match( "/[0-9]{6,8}/", $_POST['cedula']) ) :
   $status = 1;
   // $cedula = mysqli_escape_string( $con, trim($_POST['cedula']) );
   $cedula = ChequearGenerico::cedula($_POST['cedula']);

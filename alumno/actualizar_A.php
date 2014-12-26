@@ -21,7 +21,7 @@ validarUsuario(1, 1, $_SESSION['cod_tipo_usr']);
 //DESDE empezarPagina.php
 empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr'], 'sistemaJAG | Actualizacion de alumno');
 
-if ( isset($_POST['cedula']) and preg_match( "/[0-9]{8}/", $_POST['cedula']) ) :
+if ( isset($_POST['cedula']) and preg_match( "/[0-9]{6,8}/", $_POST['cedula']) ) :
 
   $con = conexion();
   $status = 1;

@@ -236,9 +236,9 @@ class ChequearGenerico extends TablaPrimaria{
    * @return string         la cedula validada con o sin comillas.
    */
   static function cedula($cedula, $tipo = null){
-    if ( preg_match( "/[0-9]{8}/", $cedula) ) :
+    if ( preg_match( "/[0-9]{6,8}/", $cedula, $n) ) :
       $conexion = conexion();
-      $c = mysqli_escape_string($conexion, $cedula);
+      $c = mysqli_escape_string($conexion, $n[0]);
       mysqli_close($conexion);
       if (!$tipo):
         return "'$c'";

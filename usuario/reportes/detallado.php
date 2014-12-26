@@ -20,7 +20,7 @@ if(!isset($_SESSION)){
 session_start();
 }
 validarUsuario(1, 1, $_SESSION['cod_tipo_usr']);
-if (!( isset($_GET['cedula']) and preg_match( "/[0-9]{8}/", $_GET['cedula']) )) :
+if (!( isset($_GET['cedula']) and preg_match( "/[0-9]{6,8}/", $_GET['cedula']) )) :
   empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);?>
   <div id="reporte_PI">
     <div id="blancoAjax">
