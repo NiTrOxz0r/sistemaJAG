@@ -20,7 +20,7 @@ if(!isset($_SESSION)){
 session_start();
 }
 validarUsuario(1, 1, $_SESSION['cod_tipo_usr']);
-if (!( isset($_GET['cedula']) and preg_match( "/[0-9]{8}/", $_GET['cedula']) )) :
+if (!( isset($_GET['cedula']) and preg_match( "/[0-9]{6,8}/", $_GET['cedula']) )) :
   empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);?>
   <div id="contenido_actualizar_A">
     <div id="blancoAjax">
@@ -97,6 +97,7 @@ else :
     // $pdf->SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, PDF_HEADER_TITLE.' 001', PDF_HEADER_STRING, array(0,64,255), array(0,64,128));
     $pdf->setFooterData(array(0,64,0), array(0,64,128));
     $pdf->setPrintHeader(true);
+    $pdf->setPrintFooter(false);
 
     // fuentes de header y footer
     $pdf->setHeaderFont(Array(PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN));
@@ -192,14 +193,6 @@ $html = <<<HTML
     fue {$inscritoa} para cursar en este plantel el <strong>{$curso}</strong> de
     EDUCACIÓN INICIAL en el período escolar <strong>{$n}-{$n1}</strong>.
   </p>
-  <p>
-    Lorem ipsum dolor sit amet,
-    consectetur adipisicing elit,
-    ed do eiusmod tempor incididunt ut
-    labore et dolore magna aliqua. Ut enim ad
-    minim veniam, quis nostrud exercitation ullamco
-    laboris nisi ut aliquip ex ea commodo consequat.
-  </p>
 </div>
 <div align="center" style="margin:80px 0;">
   <p>
@@ -209,11 +202,6 @@ $html = <<<HTML
     <strong>
       Lic. IRAIDA CAROLINA PONCE
     </strong>
-  </p>
-</div>
-<div style="position: absolute;bottom: 0px; text-align:justify">
-  <p>
-    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
   </p>
 </div>
 HTML;

@@ -11,9 +11,8 @@ validarUsuario(1, 1, $_SESSION['cod_tipo_usr'], 'sistemaJAG | Registro de allega
 //DESDE empezarPagina.php
 empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr'], 'sistemaJAG | Proceso de Registro 2014-2015');
 
-if ( isset($_GET['cedula']) and preg_match( "/[0-9]{8}/", $_GET['cedula']) ) :
-  $conexion = conexion();
-  $cedula = mysqli_escape_string( $conexion, trim($_GET['cedula']) );
+if ( isset($_GET['cedula_a']) and preg_match( "/[0-9]{6,8}/", $_GET['cedula_a']) ) :
+  $cedula_a = ChequearGenerico::cedula($_GET['cedula_a'], 1);
   $query = "SELECT
     persona.p_nombre,
     persona.p_apellido,
@@ -22,7 +21,7 @@ if ( isset($_GET['cedula']) and preg_match( "/[0-9]{8}/", $_GET['cedula']) ) :
     from persona
     inner join alumno
     on alumno.cod_persona = persona.codigo
-    where persona.cedula = $cedula;";
+    where persona.cedula = $cedula_a;";
   $resultado = conexion($query);
   if ($resultado->num_rows <> 0) :
     $datosAlumno = mysqli_fetch_assoc($resultado);
@@ -30,11 +29,18 @@ if ( isset($_GET['cedula']) and preg_match( "/[0-9]{8}/", $_GET['cedula']) ) :
   else :
     $go = false;
   endif;
-  mysqli_close($conexion);
+else:
+  $cedula_a = false;
+  $go = false;
+endif;
+if (isset($_GET['cedula']) and preg_match( "/[0-9]{6,8}/", $_GET['cedula'])) :
+  $cedula = ChequearGenerico::cedula($_GET['cedula'], 1);
+else :
+  $cedula = null;
 endif;
 //CONTENIDO:
 if($go):?>
-  <div id="contenido_form_reg_P">
+  <div id="contenido_form_reg_PA">
     <div id="blancoAjax">
       <div class="container">
         <div class="row">
@@ -138,6 +144,10 @@ if($go):?>
                         class="form-control"
                         autofocus="autofocus"
                         autocomplete="off"
+                        <?php if ($cedula): ?>
+                          <?php echo "disabled" ?>
+                          <?php echo 'value="'.$cedula.'"' ?>
+                        <?php endif ?>
                         placeholder="Introduzca cedula ej: 12345678"
                         required>
                       <p class="help-block" id="cedula_chequeo">
@@ -492,7 +502,10 @@ if($go):?>
                         <div class="col-xs-11">
                           <div class="form-group">
                             <label for="profesion" class="control-label">Profesion</label>
-                            <?php $sql = "SELECT codigo, descripcion from profesion where status = 1;";
+                            <?php $sql =
+                              "SELECT codigo, descripcion from profesion where status = 1 and descripcion LIKE 'SIN PROFESION'
+                              UNION
+                              SELECT codigo, descripcion from profesion where status = 1 and descripcion NOT LIKE 'SIN PROFESION';";
                               $registros = conexion($sql);?>
                             <select class="form-control" name="profesion" id="profesion">
                               <option value="">Seleccione</option>
@@ -563,6 +576,25 @@ if($go):?>
                     </div>
                   </div>
                 </fieldset>
+                <!-- comentarios -->
+                <fieldset>
+                  <legend class="text-center">Comentarios</legend>
+                  <div class="row">
+                    <div class="col-xs-12">
+                      <div class="form-group">
+                        <textarea
+                        class="form-control"
+                        maxlenght="500"
+                        rows="2"
+                        placeholder="comentario referente a la relacion"
+                        name="comentarios"
+                        id="comentarios"></textarea>
+                        <p class="help-block" id="comentarios_chequeo">
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </fieldset>
               </div>
               <div class="row">
                 <div class="col-sm-8 col-sm-offset-2 bg-primary redondeado">
@@ -610,8 +642,10 @@ if($go):?>
           });
           $('#submit').on('click', function(){
             if (validacionPA()) {
+              $('#cedula_a').prop('disabled', false);
               return true;
             }else{
+              $('#cedula_a').prop('disabled', true);
               return false;
             }
           });
@@ -686,48 +720,6 @@ if($go):?>
             dataType: 'script'
           });
         });
-        // $(function(){
-        //   $.ajax({
-        //     url: '../java/validacionCedula.js',
-        //     type: 'POST',
-        //     dataType: 'script'
-        //   });
-        //   $('#cedula').on('change', function(){
-        //     var cedula = $(this).val();
-        //     if ( validacionCedula(cedula) ) {
-        //       $("#cedula_chequeo").html('');
-        //       $.ajax({
-        //         url: '../java/cedula.php',
-        //         type: 'POST',
-        //         data: {cedula:cedula},
-        //         success: function (datos){
-        //           $('#cedula_chequeo').empty();
-        //           //se comprueba si es valido o no por
-        //           //medio del data-disponible
-        //           //true si esta disponible, falso si no.
-        //           var disponible = $(datos+'#disponible').data('disponible');
-        //           if (disponible === true) {
-        //             $('#cedula_chequeo_adicional').html('');
-        //             $('#form input, #form select, #form textarea').each(function(){
-        //               $(this).prop('disabled', false);
-        //             });
-        //           }else{
-        //             $('#form input, #form select, #form textarea').each(function(){
-        //               $(this).prop('disabled', true);
-        //             });
-        //             $('#cedula').prop('disabled', false);
-        //             $('#cedula_chequeo').html(datos);
-        //             $('#cedula_chequeo_adicional').html('para continuar con el registro especifique otra cedula o consulte la ya existente.');
-        //           };
-        //         },
-        //       });
-        //     }else{
-        //       $("#cedula_chequeo").html('Favor introduzca cedula solo numeros sin caracteres especiales, EJ: 12345678');
-        //       $("#cedula_titulo").css('color', 'red');
-        //       $('#submitDos').prop('disabled', true);
-        //     };
-        //   });
-        // });
       </script>
       <!-- email -->
       <script type="text/javascript">
@@ -747,29 +739,10 @@ if($go):?>
           });
         });
       </script>
-      <!--  -->
-      <!--  -->
-      <!-- NO HAY TIEMPO PARA DESARROLLAR ESTO: -->
-      <!-- mostrar y ocultar -->
-      <!-- <script type="text/javascript">
-        /**
-         * hecho por slayerfat, ya saben donde estoy.
-         */
-        $(function (){
-          $('.mostrar').show();
-          $('.ocultar').hide();
-          $('.iniciadorMostrar').on('click', function(){
-            $('.mostrar').toggle();
-            $('.ocultar').toggle();
-            $("html, body").animate({ scrollTop: 0 }, "slow");
-            return false;
-          });
-        });
-      </script> -->
     </div>
   </div>
 <?php else: ?>
-  <div id="contenido_form_reg_A">
+  <div id="contenido_form_reg_PA">
     <div id="blancoAjax">
       <div class="container">
         <div class="row">
@@ -784,7 +757,7 @@ if($go):?>
               </small>
             </h3>
             <!-- !importante -->
-            <?php $enlace = encuentraCedula($_GET['cedula']) ?>
+            <?php $enlace = encuentraCedula($cedula_a) ?>
             <?php if ( $enlace ): ?>
               <!-- se quedaron locos verdad? -->
               <div class="bg-info">
@@ -796,17 +769,29 @@ if($go):?>
                   <a href="<?php echo $enlace ?> ">existe en el sistema</a>
                 </p>
               </div>
-            <?php else: ?>
-              <?php
-              $enlace = "personalAutorizado/form_reg_P.php?cedula=$_GET[cedula]";
+            <?php else:
+              $enlace = "personalAutorizado/form_reg_P.php";
               $inscripcion = enlaceDinamico("$enlace"); ?>
-              <p>
-                La cedula <?php echo $_GET['cedula'] ?>, no esta registrada en el sistema.
-                <em>Para registrar a un alumno, es necesario registrar primero al representante.</em>
-                para ir al proceso de inscripcion <a href="<?php echo $inscripcion ?>">
-                puede seguir este enlace.
-                </a>
-              </p>
+              <?php if ($cedula_a !== false): ?>
+                <p>
+                  La cedula <?php echo $cedula_a ?> del alumno no esta registrada en el sistema!
+                  <em>Para registrar a un allegado, es necesario registrar primero a un alumno.</em>
+                  es importante destacar que es necesario registrar a un representante antes de
+                  registrar a un alumno, para ir al proceso de inscripcion <a href="<?php echo $inscripcion ?>">
+                  puede seguir este enlace.
+                  </a>
+                </p>
+              <?php else: ?>
+                <p>
+                  Parece haber algo extraño con los datos requeridos con el proceso de registro.
+                  La cedula puede estar vacia o puede estar incorrectamente especificada.
+                  <em>Para registrar a un alumno, es necesario registrar primero al representante.</em>
+                  para ir al proceso de inscripcion <a href="<?php echo $inscripcion ?>">
+                  puede seguir este enlace.
+                  </a>
+                </p>
+              <?php endif ?>
+
               <!-- google hide me: slayerfat@gmail.com -->
             <?php endif ?>
             <p>

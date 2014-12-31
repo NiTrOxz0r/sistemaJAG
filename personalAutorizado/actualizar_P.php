@@ -24,7 +24,7 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr'], 'sistemaJAG 
 
 $con = conexion();
 
-if ( isset($_POST['cedula']) and preg_match( "/[0-9]{8}/", $_POST['cedula']) ) :
+if ( isset($_POST['cedula']) and preg_match( "/[0-9]{6,8}/", $_POST['cedula']) ) :
   $status = 1;
   // $cedula = mysqli_escape_string( $con, trim($_POST['cedula']) );
   $cedula = ChequearGenerico::cedula($_POST['cedula']);
@@ -143,6 +143,14 @@ if ( isset($_POST['cedula']) and preg_match( "/[0-9]{8}/", $_POST['cedula']) ) :
                 <h3>
                   <small>fueron actualizados correctamente!</small>
                 </h3>
+                <!-- generar pdf -->
+                <div class="margen">
+                  <div class="row margen">
+                    <div class="col-sm-4">
+                      <a href="reportes/detallado.php?cedula=<?php echo $_POST['cedula'] ?>" class="cons-est btn btn-default btn-block">Generar Reporte</a>
+                    </div>
+                  </div>
+                </div>
                 <p>
                   Si desea hacer otra consulta por favor dele
                   <a href="menucon.php">click a este enlace</a>

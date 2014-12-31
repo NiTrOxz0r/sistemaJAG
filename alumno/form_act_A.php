@@ -845,6 +845,7 @@ if($reg = mysqli_fetch_array($re)) :
                         disabled
                         maxlenght="500"
                         rows="2"
+                        value="<?php echo $reg['comentarios'] ?>"
                         name="comentarios"
                         id="comentarios"></textarea>
                         <p class="help-block" id="comentarios_chequeo">

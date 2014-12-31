@@ -26,7 +26,7 @@ if ( (isset($_POST['seudonimo']) && isset($_POST['clave']) )
     $_SESSION['clave'] = $hash;
     empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);
   endif;
-  if ( isset($_GET['cedula']) && preg_match( "/[0-9]{8}/", $_GET['cedula']) ) :
+  if ( isset($_GET['cedula']) && preg_match( "/[0-9]{6,8}/", $_GET['cedula']) ) :
     validarUsuario(1, 3, $_SESSION['cod_tipo_usr']);
     $cedula = $_GET['cedula'];
     $action = 'insertar_sinUsuario_PI.php';

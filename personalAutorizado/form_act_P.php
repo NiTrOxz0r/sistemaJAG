@@ -7,7 +7,7 @@ require_once($enlace);
 // invocamos validarUsuario.php desde master.php
 validarUsuario(1, 1, $_SESSION['cod_tipo_usr']);
 
-if ( isset($_GET['cedula']) and preg_match( "/[0-9]{8}/", $_GET['cedula']) ) :
+if ( isset($_GET['cedula']) and preg_match( "/[0-9]{6,8}/", $_GET['cedula']) ) :
   $con = conexion();
   $cedula = mysqli_escape_string($con, trim($_GET['cedula']));
 else:

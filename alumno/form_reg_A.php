@@ -11,7 +11,7 @@ validarUsuario(1, 1, $_SESSION['cod_tipo_usr']);
 //DESDE empezarPagina.php
 empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr'], 'sistemaJAG | Registro de alumno');
 
-if ( isset($_GET['cedula_r']) and preg_match( "/[0-9]{8}/", $_GET['cedula_r']) ) :
+if ( isset($_GET['cedula_r']) and preg_match( "/[0-9]{6,8}/", $_GET['cedula_r']) ) :
   $conexion = conexion();
   $cedula_r = mysqli_escape_string( $conexion, trim($_GET['cedula_r']) );
   $query = "SELECT
@@ -31,7 +31,7 @@ if ( isset($_GET['cedula_r']) and preg_match( "/[0-9]{8}/", $_GET['cedula_r']) )
   else :
     $go = false;
   endif;
-  if ( isset($_GET['cedula']) and preg_match( "/[0-9]{8}/", $_GET['cedula']) ) :
+  if ( isset($_GET['cedula']) and preg_match( "/[0-9]{6,8}/", $_GET['cedula']) ) :
     $cedula = $_GET['cedula'];
   else:
     $cedula = null;

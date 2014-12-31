@@ -22,7 +22,7 @@ validarUsuario(1, 1, $_SESSION['cod_tipo_usr']);
 
 empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr'], 'sistemaJAG | Registro de alumno');
 
-if ( isset($_POST['cedula_r']) and preg_match( "/[0-9]{8}/", $_POST['cedula_r']) ) :
+if ( isset($_POST['cedula_r']) and preg_match( "/[0-9]{6,8}/", $_POST['cedula_r']) ) :
 
     $con = conexion();
     $status = 1;
@@ -272,22 +272,29 @@ if ( isset($_POST['cedula_r']) and preg_match( "/[0-9]{8}/", $_POST['cedula_r'])
                     </a>
                   </p>
                   <p>
-                    Si desea hacer un registro de un nuevo alumno, asociado a
+                    Si desea crear un registro de un nuevo alumno, asociado a
                     <?php echo $p_nombre_r ?>, <?php echo $p_apellido_r ?>
                     con cedula
-                     <strong><?php echo $_POST['cedula_r'] ?>, </strong>
-                     por favor dele
-                    <a href="<?php echo "form_reg_A.php?cedula_r=$_POST[cedula_r]" ?>">
-                      click a este enlace
-                    </a>
+                    <strong><?php echo $_POST['cedula_r'] ?></strong>
                   </p>
+                  <div class="margen">
+                    <a
+                      class="btn btn-default"
+                      href="<?php echo "form_reg_A.php?cedula_r=$_POST[cedula_r]" ?>">
+                      Registrar nuevo Alumno
+                    </a>
+                  </div>
                   <p>
-                    En cambio si desea hacer un registro de un allegado a
-                    este nuevo alumno, por favor dele
-                    <a href="<?php echo "../personalAutorizado/form_reg_PA.php?cedula_r=$_POST[cedula_r]" ?>">
-                      click a este enlace
-                    </a>
+                    Adicionalmente puede hacer un registro de un allegado a
+                    este alumno
                   </p>
+                  <div class="margen">
+                    <a
+                      class="btn btn-default"
+                      href="<?php echo "../personalAutorizado/form_reg_PA.php?cedula_a=$_POST[cedula]" ?>">
+                      Registrar Allegado
+                    </a>
+                  </div>
                   <p>
                     <?php $index = enlaceDinamico(); ?>
                     <a href="<?php echo $index ?>" class="btn btn-primary btn-lg">Regresar al sistema</a>

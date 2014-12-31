@@ -21,7 +21,7 @@ validarUsuario(1, 1, $_SESSION['cod_tipo_usr']);
 //DESDE empezarPagina.php
 empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr'], 'sistemaJAG | Actualizacion de alumno');
 
-if ( isset($_POST['cedula']) and preg_match( "/[0-9]{8}/", $_POST['cedula']) ) :
+if ( isset($_POST['cedula']) and preg_match( "/[0-9]{6,8}/", $_POST['cedula']) ) :
 
   $con = conexion();
   $status = 1;
@@ -192,7 +192,7 @@ if ( isset($_POST['cedula']) and preg_match( "/[0-9]{8}/", $_POST['cedula']) ) :
       mysqli_query($con, $query) ? null : $query_ok=false;
       echo $query_ok === (false) ? 'alu' : null;
       $query_ok ? mysqli_commit($con) : mysqli_rollback($con);
-      // $res = conexion($queryA);
+      // $res = conexion($query,2);
       if ($query_ok) : ?>
         <div id="contenido_actualizar_A">
           <div id="blancoAjax">
@@ -208,12 +208,7 @@ if ( isset($_POST['cedula']) and preg_match( "/[0-9]{8}/", $_POST['cedula']) ) :
                     Si desea hacer otra consulta por favor dele
                     <a href="menucon.php">click a este enlace</a>
                   </p>
-                  <p>
-                    <small>
-                      puede generar un pdf:
-                    </small>
-                  </p>
-                  <!-- botones de control -->
+                  <!-- generacion de pdf -->
                   <div class="margen">
                     <div class="row margen">
                       <div class="col-sm-4">

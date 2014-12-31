@@ -48,7 +48,6 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr'], 'sistemaJAG 
                 class="form-control"
                 name="tipo"
                 id="tipo"
-                autofocus="autofocus"
                 required>
                 <option selected="selected" value="0">--Seleccione--</option>
                 <option value="1">Por cedula</option>
@@ -122,8 +121,8 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr'], 'sistemaJAG 
         <div class="col-sm-6 col-sm-offset-3">
           <form
             role="form"
-            name="form_A"
-            id="form_A"
+            name="form_p"
+            id="form_p"
             method="GET">
             <div class="form-group">
                <label for="cedula" class="control-label">Cedula:</label>
@@ -135,6 +134,36 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr'], 'sistemaJAG 
                 maxlength="8"
                 required>
               <p class="help-block" id="cedula_chequeo">
+                &nbsp;
+              </p>
+            </div>
+            <div class="row">
+              <div class="col-sm-6 col-sm-offset-3">
+                <div class="radio disabled">
+                  <label>
+                    <input type="radio" name="tipo" id="representante" value="0" checked disabled>
+                    Registrar como representante.
+                  </label>
+                </div>
+                <div class="radio disabled">
+                  <label>
+                    <input type="radio" name="tipo" id="allegado" value="1" disabled>
+                    Registrar como allegado.
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="form-group hidden">
+              <label for="cedula_a" class="control-label">Cedula del Alumno:</label>
+              <input
+                class="form-control"
+                type="text"
+                id="cedula_a"
+                name="cedula_a"
+                maxlength="8">
+              <p class="help-block" id="cedula_a_chequeo">
+                Es necesario la cedula del alumno para continuar con el proceso
+                de registro de un allegado.
               </p>
             </div>
             <div class="row">
@@ -197,20 +226,28 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr'], 'sistemaJAG 
                   //true si esta disponible, falso si no.
                   var disponible = $(datos+'#disponible').data('disponible');
                   if (disponible === true) {
-                    $('#cedula_r').parent().removeClass('hidden');
+                    // seleccion de representante o allegado
+                    $("input[name='tipo']").each(function() {
+                      $(this).prop('disabled', false);
+                      $(this).parent().parent().removeClass('disabled');
+                    });
                     $('#cedula').parent().removeClass('has-error');
                     $('#cedula').prop('readonly', true);
                     $('#cedula_chequeo').html('&nbsp;');
                     $('#submitDos').prop('disabled', false);
                     $('#submitDos').prop('value', 'Registrar');
-                    $('#form_A').prop('action', 'form_reg_P.php');
+                    $('#form_p').prop('action', 'form_reg_P.php');
                   }else{
-                    $('#cedula_r').parent().addClass('hidden');
+                    // seleccion de representante o allegado
+                    $("input[name='tipo']").each(function() {
+                      $(this).prop('disabled', true);
+                      $(this).parent().parent().addClass('disabled');
+                    });
                     $('#cedula').parent().removeClass('has-error');
-                    $('#cedula_chequeo').html('Este Usuario ya se encuentra en el sistema.');
+                    $('#cedula_chequeo').html('&nbsp;');
                     $('#submitDos').prop('disabled', false);
                     $('#submitDos').prop('value', 'Actualizar');
-                    $('#form_A').prop('action', 'form_act_P.php');
+                    $('#form_p').prop('action', 'form_act_P.php');
                   };
                 },
               });
@@ -220,24 +257,35 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr'], 'sistemaJAG 
               $('#submitDos').prop('disabled', true);
             };
           });
+          // para saber si va a ser un representante o allegado:
+          $("input[name='tipo']").change(function() {
+            var tipo = $('input[name=tipo]:checked', '#form_p').val();
+            if (tipo == '0') {
+              $('#cedula_a').parent().addClass('hidden');
+              $('#form_p').prop('action', 'form_reg_P.php');
+            }else{
+              $('#cedula_a').parent().removeClass('hidden');
+              $('#form_p').prop('action', 'form_reg_PA.php');
+            }
+          });
           // apenas se pretenda enviar el formulario:
-          $('#form_A').on('submit', function (evento){
+          $('#form_p').on('submit', function (evento){
             //se previene el envio:
             // se comprueba que los datos esten en orden:
             var cedula = $('#cedula').val();
-            var cedula_r = $('#cedula_r').val();
-            if (!cedula_r && $('#submitDos').prop('value') != 'Registrar') {
-              cedula_r = cedula;
+            var cedula_a = $('#cedula_a').val();
+            if (!cedula_a && $('#submitDos').prop('value') != 'Registrar') {
+              cedula_a = cedula;
             };
-            if ( validacionCedula(cedula) && validacionCedula(cedula_r)) {
-              var action = $(this).attr('action');
+            if ( validacionCedula(cedula) && validacionCedula(cedula_a)) {
+              // var action = $(this).attr('action');
               // desabilitado por no continuar
               // la cuestion del ajax y paginas dinamicas:
               // $.ajax({
               //   url: action,
               //   type: 'GET',
               //   dataType: 'html',
-              //   data: {cedula:cedula, cedula_r:cedula_r},
+              //   data: {cedula:cedula, cedula_a:cedula_a},
               //   success: function (datos){
               //     $("#contenido_alumno_menucon").empty().append($(datos).find('#blancoAjax').html());
               //   },

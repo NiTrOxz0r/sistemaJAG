@@ -387,6 +387,8 @@ class ChequearAlumno extends ChequearGenerico{
 
     if ($this->comentarios == "") {
       $this->comentarios = "default";
+    }else{
+      $this->comentarios = "'$this->comentarios'";
     }
   }
 
