@@ -576,6 +576,24 @@ if($go):?>
                     </div>
                   </div>
                 </fieldset>
+                <!-- comentarios -->
+                <fieldset>
+                  <legend class="text-center">Comentarios</legend>
+                  <div class="row">
+                    <div class="col-xs-12">
+                      <div class="form-group">
+                        <textarea
+                        class="form-control"
+                        maxlenght="500"
+                        rows="2"
+                        name="comentarios"
+                        id="comentarios"></textarea>
+                        <p class="help-block" id="comentarios_chequeo">
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </fieldset>
               </div>
               <div class="row">
                 <div class="col-sm-8 col-sm-offset-2 bg-primary redondeado">
@@ -623,8 +641,10 @@ if($go):?>
           });
           $('#submit').on('click', function(){
             if (validacionPA()) {
+              $('#cedula_a').prop('disabled', false);
               return true;
             }else{
+              $('#cedula_a').prop('disabled', true);
               return false;
             }
           });
@@ -699,48 +719,6 @@ if($go):?>
             dataType: 'script'
           });
         });
-        // $(function(){
-        //   $.ajax({
-        //     url: '../java/validacionCedula.js',
-        //     type: 'POST',
-        //     dataType: 'script'
-        //   });
-        //   $('#cedula').on('change', function(){
-        //     var cedula = $(this).val();
-        //     if ( validacionCedula(cedula) ) {
-        //       $("#cedula_chequeo").html('');
-        //       $.ajax({
-        //         url: '../java/cedula.php',
-        //         type: 'POST',
-        //         data: {cedula:cedula},
-        //         success: function (datos){
-        //           $('#cedula_chequeo').empty();
-        //           //se comprueba si es valido o no por
-        //           //medio del data-disponible
-        //           //true si esta disponible, falso si no.
-        //           var disponible = $(datos+'#disponible').data('disponible');
-        //           if (disponible === true) {
-        //             $('#cedula_chequeo_adicional').html('');
-        //             $('#form input, #form select, #form textarea').each(function(){
-        //               $(this).prop('disabled', false);
-        //             });
-        //           }else{
-        //             $('#form input, #form select, #form textarea').each(function(){
-        //               $(this).prop('disabled', true);
-        //             });
-        //             $('#cedula').prop('disabled', false);
-        //             $('#cedula_chequeo').html(datos);
-        //             $('#cedula_chequeo_adicional').html('para continuar con el registro especifique otra cedula o consulte la ya existente.');
-        //           };
-        //         },
-        //       });
-        //     }else{
-        //       $("#cedula_chequeo").html('Favor introduzca cedula solo numeros sin caracteres especiales, EJ: 12345678');
-        //       $("#cedula_titulo").css('color', 'red');
-        //       $('#submitDos').prop('disabled', true);
-        //     };
-        //   });
-        // });
       </script>
       <!-- email -->
       <script type="text/javascript">
@@ -760,25 +738,6 @@ if($go):?>
           });
         });
       </script>
-      <!--  -->
-      <!--  -->
-      <!-- NO HAY TIEMPO PARA DESARROLLAR ESTO: -->
-      <!-- mostrar y ocultar -->
-      <!-- <script type="text/javascript">
-        /**
-         * hecho por slayerfat, ya saben donde estoy.
-         */
-        $(function (){
-          $('.mostrar').show();
-          $('.ocultar').hide();
-          $('.iniciadorMostrar').on('click', function(){
-            $('.mostrar').toggle();
-            $('.ocultar').toggle();
-            $("html, body").animate({ scrollTop: 0 }, "slow");
-            return false;
-          });
-        });
-      </script> -->
     </div>
   </div>
 <?php else: ?>

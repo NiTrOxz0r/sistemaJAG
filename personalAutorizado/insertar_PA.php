@@ -20,6 +20,7 @@ if (isset($_POST['cedula'])
   and preg_match( "/[0-9]{6,8}/", $_POST['cedula'])
   and isset($_POST['cedula_a'])
   and preg_match( "/[0-9]{6,8}/", $_POST['cedula_a']) ) :
+  // validacion de cedula de alumno
   $cedula_a = ChequearGenerico::cedula($_POST['cedula_a']);
   if ($cedula_a) :
     $query = "SELECT alumno.codigo
@@ -38,6 +39,28 @@ if (isset($_POST['cedula'])
   else :
     $go = false;
     $info = 'alumno';
+  endif;
+  // validacion de retirar alumno
+  if ($_POST['retira_alumno'] == 's' or $_POST['retira_alumno'] == 'n') :
+    $puedeRetirar = $_POST['retira_alumno'];
+    $puedeRetirar = "'$puedeRetirar'";
+  else :
+    $go = false;
+    $info = 'retirar';
+  endif;
+  // validacion de comentarios
+  if ( strlen($_POST['comentarios']) < 500 ) :
+    if (trim($_POST['comentarios']) === '') :
+      $comentarios = 'default';
+    else :
+      $con = conexion();
+      $comentarios = mysqli_escape_string( $con, trim($_POST['comentarios']) );
+      mysqli_close($con);
+      $comentarios = "'$comentarios'";
+    endif;
+  else :
+    $go = false;
+    $info = 'comentarios';
   endif;
   if ($go):
     $status = 1;
@@ -164,10 +187,52 @@ if (isset($_POST['cedula'])
           $validarPA->codUsrMod,
           current_timestamp
         );";
-
         $res = conexion($query);
 
-        header("Location:../alumno/form_reg_A.php?cedula_r=$_POST[cedula]");
+        $query = "SELECT personal_autorizado.codigo
+        from personal_autorizado
+        inner join persona
+        on personal_autorizado.cod_persona = persona.codigo
+        where persona.codigo = $validarDireccion->codPersona;";
+        $resultado = conexion($query);
+        $datosRepresentante = mysqli_fetch_assoc($resultado);
+
+        $query = "INSERT INTO obtiene
+        VALUES(
+          null,
+          $datosRepresentante[codigo],
+          $datosAlumno[codigo],
+          $puedeRetirar,
+          $comentarios,
+          $status,
+          $validarPA->codUsrMod,
+          null,
+          $validarPA->codUsrMod,
+          current_timestamp
+          );";
+        $resultado = conexion($query);?>
+        <div id="contenido_insertar_PA">
+          <div id="blancoAjax">
+            <div class="container">
+              <div class="row">
+                <div class="jumbotron">
+                  <h1>Registro exitoso!</h1>
+                  <div class="margen">
+                    <a
+                      class="btn btn-default"
+                      href="<?php echo "../personalAutorizado/form_reg_PA.php?cedula_a=$_POST[cedula_a]" ?>">
+                      Registrar Allegado
+                    </a>
+                  </div>
+                  <p>
+                    <?php $index = enlaceDinamico(); ?>
+                    <a href="<?php echo $index ?>" class="btn btn-primary btn-lg">Regresar al sistema</a>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       else :
         empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']); ?>
         <div id="contenido_insertar_P">
