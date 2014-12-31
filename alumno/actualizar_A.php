@@ -192,7 +192,7 @@ if ( isset($_POST['cedula']) and preg_match( "/[0-9]{6,8}/", $_POST['cedula']) )
       mysqli_query($con, $query) ? null : $query_ok=false;
       echo $query_ok === (false) ? 'alu' : null;
       $query_ok ? mysqli_commit($con) : mysqli_rollback($con);
-      // $res = conexion($queryA);
+      // $res = conexion($query,2);
       if ($query_ok) : ?>
         <div id="contenido_actualizar_A">
           <div id="blancoAjax">

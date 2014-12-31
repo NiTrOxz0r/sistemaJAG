@@ -284,7 +284,7 @@ if ( isset($_POST['cedula_r']) and preg_match( "/[0-9]{6,8}/", $_POST['cedula_r'
                   <p>
                     En cambio si desea hacer un registro de un allegado a
                     este nuevo alumno, por favor dele
-                    <a href="<?php echo "../personalAutorizado/form_reg_PA.php?cedula_r=$_POST[cedula_r]" ?>">
+                    <a href="<?php echo "../personalAutorizado/form_reg_PA.php?cedula_a=$_POST[cedula]" ?>">
                       click a este enlace
                     </a>
                   </p>
