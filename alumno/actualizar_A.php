@@ -208,12 +208,7 @@ if ( isset($_POST['cedula']) and preg_match( "/[0-9]{6,8}/", $_POST['cedula']) )
                     Si desea hacer otra consulta por favor dele
                     <a href="menucon.php">click a este enlace</a>
                   </p>
-                  <p>
-                    <small>
-                      puede generar un pdf:
-                    </small>
-                  </p>
-                  <!-- botones de control -->
+                  <!-- generacion de pdf -->
                   <div class="margen">
                     <div class="row margen">
                       <div class="col-sm-4">

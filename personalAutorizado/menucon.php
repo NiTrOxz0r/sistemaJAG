@@ -244,7 +244,7 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr'], 'sistemaJAG 
                       $(this).parent().parent().addClass('disabled');
                     });
                     $('#cedula').parent().removeClass('has-error');
-                    $('#cedula_chequeo').html('nbsp;');
+                    $('#cedula_chequeo').html('&nbsp;');
                     $('#submitDos').prop('disabled', false);
                     $('#submitDos').prop('value', 'Actualizar');
                     $('#form_p').prop('action', 'form_act_P.php');

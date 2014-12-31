@@ -231,12 +231,7 @@ if (isset($_POST['tipo_personal'])  and isset($_POST['cedula']) ) :
                   </strong>
                   fueron actualizados correctamente!
                 </h4>
-                <p>
-                  <small>
-                    puede generar un pdf:
-                  </small>
-                </p>
-                <!-- botones de control -->
+                <!-- generar pdf -->
                 <div class="margen">
                   <div class="row margen">
                     <div class="col-sm-4">

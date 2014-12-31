@@ -235,11 +235,11 @@ function validacionPA(){
     verificar = true;
   }
 // telefono
-  if(telefono.length != 11 && telefono != "" && telefono != 'SinRegistro'){
+  if(telefono.length != 11 && telefono != "" && telefono != '-'){
     $("#telefono_chequeo").html('este campo debe contener 11 caracteres EJ: 02127773322');
     $('#telefono').parent().addClass('has-error');
     return false;
-  }else if( !expRegtlf.exec(telefono) && telefono != "" && telefono != "SinRegistro" ) {
+  }else if( !expRegtlf.exec(telefono) && telefono != "" && telefono != "-" ) {
     $("#telefono_chequeo").html('Favor introduzca en este campo Letras sin numeros o caracteres especiales EJ: 19?=;@*');
     $('#telefono').parent().addClass('has-error');
     return false;
@@ -249,11 +249,11 @@ function validacionPA(){
     verificar = true;
   }
 // telefono_otro (adicional)
-  if(telefono_otro.length != 11 && telefono_otro != "" && telefono != 'SinRegistro'){
+  if(telefono_otro.length != 11 && telefono_otro != "" && telefono != '-'){
     $("#telefono_otro_chequeo").html('este campo debe contener 11 caracteres EJ: 02127773322');
     $('#telefono_otro').parent().addClass('has-error');
     return false;
-  }else if(!expRegtlf.exec(telefono_otro) && telefono_otro != "" && telefono_otro != "SinRegistro") {
+  }else if(!expRegtlf.exec(telefono_otro) && telefono_otro != "" && telefono_otro != "-") {
     $("#telefono_otro_chequeo").html('Favor introduzca en este campo Letras sin numeros o caracteres especiales EJ: 19?=;@*');
     $('#telefono_otro').parent().addClass('has-error');
     return false;
@@ -359,13 +359,13 @@ function validacionPA(){
 // telefono de trabajo
   if(telefono_trabajo.length != 11
       && telefono_trabajo != ""
-      && telefono_trabajo != "SinRegistro"){
+      && telefono_trabajo != "-"){
     $("#telefono_trabajo_chequeo").html('este campo debe contener 11 caracteres EJ: 02127773322');
     $('#telefono_trabajo').parent().addClass('has-error');
     return false;
   }else if(!expRegtlf.exec(telefono_trabajo)
       && telefono_trabajo != ""
-      && telefono_trabajo != "SinRegistro") {
+      && telefono_trabajo != "-") {
     $("#telefono_trabajo_chequeo").html('Favor introduzca en este campo Letras sin numeros o caracteres especiales EJ: 19?=;@*');
     $('#telefono_trabajo').parent().addClass('has-error');
     return false;
