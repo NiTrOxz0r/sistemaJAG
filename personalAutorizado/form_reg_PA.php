@@ -586,6 +586,7 @@ if($go):?>
                         class="form-control"
                         maxlenght="500"
                         rows="2"
+                        placeholder="comentario referente a la relacion"
                         name="comentarios"
                         id="comentarios"></textarea>
                         <p class="help-block" id="comentarios_chequeo">

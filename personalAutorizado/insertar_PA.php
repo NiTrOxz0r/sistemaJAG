@@ -210,7 +210,8 @@ if (isset($_POST['cedula'])
           $validarPA->codUsrMod,
           current_timestamp
           );";
-        $resultado = conexion($query);?>
+        $resultado = conexion($query);
+        empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']); ?>
         <div id="contenido_insertar_PA">
           <div id="blancoAjax">
             <div class="container">
@@ -221,7 +222,7 @@ if (isset($_POST['cedula'])
                     <a
                       class="btn btn-default"
                       href="<?php echo "../personalAutorizado/form_reg_PA.php?cedula_a=$_POST[cedula_a]" ?>">
-                      Registrar Allegado
+                      Registrar otro Allegado
                     </a>
                   </div>
                   <p>
@@ -233,7 +234,7 @@ if (isset($_POST['cedula'])
             </div>
           </div>
         </div>
-      else :
+      <?php else :
         empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']); ?>
         <div id="contenido_insertar_P">
           <div id="blancoAjax">
@@ -344,10 +345,44 @@ if (isset($_POST['cedula'])
       </div>
     <?php endif;
   else:
-  endif;
+    empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']); ?>
+    <div id="contenido_insertar_PA">
+      <div id="blancoAjax">
+        <div class="container">
+          <div class="row">
+            <div class="jumbotron">
+              <h1>Ups!</h1>
+              <p>
+                Error en el proceso de registro!
+              </p>
+              <h3>
+                <small>
+                  Lamentablemente, es posible que los datos de registro se perdieron.
+                </small>
+              </h3>
+              <p>
+                Si desea hacer una consulta por favor dele
+                <a href="menucon.php">click a este enlace.</a>
+              </p>
+              <p>
+                ¿O sera que entro en esta pagina erroneamente?
+              </p>
+              <p class="bg-warning">
+                Si este es un problema recurrente, contacte a un administrador del sistema.
+              </p>
+              <p>
+                <?php $index = enlaceDinamico(); ?>
+                <a href="<?php echo $index ?>" class="btn btn-primary btn-lg">Regresar al sistema</a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  <?php endif;
 else:
   empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']); ?>
-  <div id="contenido_insertar_P">
+  <div id="contenido_insertar_PA">
     <div id="blancoAjax">
       <div class="container">
         <div class="row">
