@@ -792,7 +792,7 @@ if($go):?>
                 </p>
               <?php endif ?>
 
-              <!-- google hide me: slayerfat@gmail.com -->
+              <!-- google hire me: slayerfat@gmail.com -->
             <?php endif ?>
             <p>
               Si desea hacer una consulta por favor dele

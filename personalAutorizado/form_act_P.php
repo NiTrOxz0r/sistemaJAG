@@ -783,7 +783,7 @@ if($reg = mysqli_fetch_array($re)) :
                   <a href="<?php echo $enlace ?> ">existe en el sistema</a>
                 </p>
               </div>
-              <!-- google hide me: slayerfat@gmail.com -->
+              <!-- google hire me: slayerfat@gmail.com -->
             <?php endif ?>
             <p>
               Si desea hacer una consulta por favor dele

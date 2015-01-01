@@ -9,41 +9,51 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr'], 'sistemaJAG 
 
 if ( isset($_REQUEST['cedula']) ) :
   $cedula_a = ChequearGenerico::cedula($_REQUEST['cedula']);
-  $query = "google hire me: slayerfat@gmail.com;";
-  $resultado = conexion($query); ?>
-  <?php if ($resultado): ?>
+  $query = "SELECT p_apellido, p_nombre, codigo
+    from persona
+    where cedula = $cedula_a;";
+  $resultado = conexion($query);
+  $datosAlumno = mysqli_fetch_assoc($resultado);
+  $query = "SELECT
+    persona.p_apellido,
+    persona.p_nombre,
+    persona.cedula,
+    persona.telefono,
+    personal_autorizado.telefono_trabajo,
+    personal_autorizado.email,
+    personal_autorizado.vive_con_alumno,
+    relacion.descripcion as relacion
+    from persona
+    inner join personal_autorizado
+    on persona.codigo = personal_autorizado.cod_persona
+    inner join relacion
+    on personal_autorizado.relacion = relacion.codigo
+    inner join obtiene
+      on personal_autorizado.codigo = obtiene.cod_p_a
+      where obtiene.cod_alu = (SELECT alumno.codigo
+        from alumno
+        inner join persona
+        on alumno.cod_persona = persona.codigo
+        where persona.cedula = $cedula_a);";
+  $resultado = conexion($query);
+  if ($resultado): ?>
     <div id="contenido_consultar_U">
       <div id="blancoAjax">
         <!-- CONTENIDO EMPIEZA DEBAJO DE ESTO: -->
         <!-- DETALLESE QUE NO ES UN ID SINO UNA CLASE. -->
         <div class="container">
           <div class="row">
-            <div class="col-xs-8 col-xs-offset-2 margenAbajo well">
-              <div class="row">
-                <div class="col-xs-12">
-                  <h4>
-                    Listado seleccionado segun los parametros que Ud. escojio.
-                  </h4>
-                  <p>
-                    <small>
-                      Si desea hacer otro tipo de consulta puede
-                      <a href="menucon.php">hacerlo aqui.</a>
-                    </small>
-                  </p>
-                  <p>
-                    <small>
-                      puede regresar <a href="../index.php">al menu principal.</a>
-                    </small>
-                  </p>
-                </div>
-              </div>
+            <div class="col-xs-8 col-xs-offset-2 margenAbajo">
+              <h3 class="text-center text-uppercase">
+                Allegados de <?php echo $datosAlumno['p_apellido'] ?>,
+                <?php echo $datosAlumno['p_nombre'] ?>
+              </h3>
             </div>
           </div>
-          <?php $enlacePrimario = enlaceDinamico('alumno/form_act_A.php') ?>
-          <?php $constancia = enlaceDinamico('alumno/reportes/constancia-estudio.php') ?>
+          <?php $enlacePrimario = enlaceDinamico('personalAutorizado/form_act_P.php') ?>
           <span class="hidden"
-            data-enlace-primario="<?php echo $enlacePrimario ?>"
-            data-enlace-constancia="<?php echo $constancia ?>"></span>
+            data-enlace-primario="<?php echo $enlacePrimario ?>">
+          </span>
           <div class="container">
             <div class="row margen">
               <div class="col-xs-6 col-xs-offset-3">
@@ -55,12 +65,6 @@ if ( isset($_REQUEST['cedula']) ) :
                  <a
                   href="#"
                   class="inyectar-cedula push-3 btn btn-warning btn-lg disabled">Consultar registro</a>
-               </div>
-               <div class="col-xs-3">
-                 <a
-                  id="generar-constancia"
-                  href="#"
-                  class="push-3 btn btn-warning btn-lg disabled">Constancia de estudio</a>
                </div>
              </div>
           </div>
@@ -84,18 +88,13 @@ if ( isset($_REQUEST['cedula']) ) :
                   <th data-radio="true" data-switchable="false"></th>
                   <!-- ignorar -->
                   <th data-field="cedula" data-sortable="true" data-switchable="false">Cedula</th>
-                  <th data-field="cedula_escolar" data-sortable="true" data-switchable="false">Cedula escolar</th>
                   <th data-field="p_apellido" data-sortable="true">Primer Apellido</th>
                   <th data-field="p_nombre" data-sortable="true">Primer Nombre</th>
-                  <th data-field="curso" data-sortable="true">Grado y Seccion</th>
+                  <th data-field="email" data-sortable="true">Email</th>
+                  <th data-field="vive_con_alumno" data-sortable="true">Vive con Alumno</th>
+                  <th data-field="relacion" data-sortable="true">Relacion</th>
                   <th data-field="telefono" data-sortable="false">Telefono</th>
-                  <th data-field="telefono_otro" data-sortable="true" data-visible="true">Telf. Ad.</th>
-                  <th data-field="sexo" data-sortable="true">Sexo</th>
-                  <th data-field="discapacidad" data-sortable="true">Discapacidad</th>
-                  <th data-field="vacuna" data-sortable="true">Cert. vacunacion</th>
-                  <th data-field="p_apellido_r" data-sortable="true">Primer Apellido (R)</th>
-                  <th data-field="p_nombre_r" data-sortable="true">Primer Nombre (R)</th>
-                  <th data-field="cedula_r" data-sortable="true" data-switchable="false">Cedula (R)</th>
+                  <th data-field="telefono_trabajo" data-sortable="true" data-visible="true">Telf. Lab.</th>
                 </thead>
                 <tbody>
                   <?php while( $datos = mysqli_fetch_array($resultado) ) : ?>
@@ -106,68 +105,27 @@ if ( isset($_REQUEST['cedula']) ) :
                       <td class="cedula">
                         <?php echo $datos['cedula'] ?>
                       </td>
-                      <td class="cedula_escolar">
-                        <?php echo $datos['cedula_escolar'] ?>
-                      </td>
                       <td>
                         <?php echo $datos['p_apellido'] ?>
                       </td>
                       <td>
                         <?php echo $datos['p_nombre'] ?>
                       </td>
-                      <?php $query = "SELECT descripcion
-                        from curso
-                        inner join asume
-                        on asume.cod_curso = curso.codigo
-                        where asume.codigo = $datos[cod_curso];";
-                        $sql = conexion($query);
-                        $curso = mysqli_fetch_assoc($sql);
-                      if ($sql->num_rows <> 0) :?>
-                        <td class="curso">
-                          <?php echo $curso['descripcion'] ?>
-                        </td>
-                      <?php else: ?>
-                        <td>
-                          <?php echo "-" ?>
-                        </td>
-                      <?php endif ?>
                       <td>
-                        <?php echo $datos['telefono'] === (null) ? '-':$datos['telefono'] ?>
+                        <?php echo $datos['email'] ?>
                       </td>
                       <td>
-                        <?php echo $datos['telefono_otro'] === (null) ? '-':$datos['telefono_otro'] ?>
+                        <?php echo $datos['vive_con_alumno'] === ('s') ? 'si':'no' ?>
                       </td>
                       <td>
-                        <?php echo $datos['sexo'] === ('0') ? 'Masculino':'Femenino' ?>
-                      </td>
-                      <?php $query = "SELECT descripcion
-                        from discapacidad where codigo = $datos[cod_discapacidad];";
-                        $sql = conexion($query);
-                        $discapacidad = mysqli_fetch_assoc($sql); ?>
-                      <td>
-                        <?php echo $discapacidad['descripcion'] ?>
+                        <?php echo $datos['relacion'] ?>
                       </td>
                       <td>
-                        <?php echo $datos['certificado_vacuna'] === ('s') ? 'Si posee':'No posee' ?>
+                        <?php echo $datos['telefono'] ?>
                       </td>
-                      <?php $query = "SELECT p_nombre, p_apellido, cedula
-                      from persona
-                      inner join personal_autorizado
-                      on persona.codigo = personal_autorizado.cod_persona
-                      where personal_autorizado.codigo = $datos[cod_representante]";
-                      $sql = conexion($query);
-                      $representante = mysqli_fetch_assoc($sql); ?>
-                      <?php if ($representante): ?>
-                        <td>
-                          <?php echo $representante['p_apellido'] ?>
-                        </td>
-                        <td>
-                          <?php echo $representante['p_nombre'] ?>
-                        </td>
-                        <td>
-                          <?php echo $representante['cedula'] ?>
-                        </td>
-                      <?php endif ?>
+                      <td>
+                        <?php echo $datos['telefono_trabajo'] ?>
+                      </td>
                     </tr>
                   <?php endwhile; ?>
                 </tbody>
@@ -208,16 +166,10 @@ if ( isset($_REQUEST['cedula']) ) :
         <script src="<?php echo $tableJs ?>"></script>
         <!-- para el boton consultar -->
         <?php $tablaBotonConsulta = enlaceDinamico('java/otros/tablaBotonCedula-bootstrap-table.js') ?>
-        <?php $tablaBotonconstancia = enlaceDinamico('java/otros/tablaBotonConstancia-bootstrap-table.js') ?>
         <script type="text/javascript">
           $(function(){
             $.ajax({
               url: "<?php echo $tablaBotonConsulta ?>",
-              type: 'POST',
-              dataType: 'script'
-            });
-            $.ajax({
-              url: "<?php echo $tablaBotonconstancia ?>",
               type: 'POST',
               dataType: 'script'
             });

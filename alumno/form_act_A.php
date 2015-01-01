@@ -68,17 +68,6 @@ $sql = "SELECT
 $re = conexion($sql);
 if($reg = mysqli_fetch_array($re)) :
   $_SESSION['codigo_persona'] = $reg['codigo'];
-  // $query = "SELECT persona.cedula
-  //   from persona
-  //   inner join personal_autorizado
-  //   on persona.codigo = personal_autorizado.cod_persona
-  //   inner join obtiene
-  //   on personal_autorizado.codigo = obtiene.cod_p_a
-  //   where obtiene.cod_alu = (SELECT alumno.codigo
-  //     from alumno
-  //     inner join persona
-  //     on alumno.cod_persona = persona.codigo
-  //     where persona.cedula = '$cedula');";
   $query = "SELECT persona.cedula
     from persona
     inner join personal_autorizado
@@ -1120,7 +1109,7 @@ if($reg = mysqli_fetch_array($re)) :
                   <a href="<?php echo $enlace ?> ">existe en el sistema</a>
                 </p>
               </div>
-              <!-- google hide me: slayerfat@gmail.com -->
+              <!-- google hire me: slayerfat@gmail.com -->
             <?php endif ?>
             <p>
               Si desea hacer una consulta por favor dele

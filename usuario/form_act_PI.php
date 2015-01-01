@@ -1051,7 +1051,7 @@ if ( isset($_GET['cedula']) ):
                     <a href="<?php echo $enlace ?> ">existe en el sistema</a>
                   </p>
                 </div>
-                <!-- google hide me: slayerfat@gmail.com -->
+                <!-- google hire me: slayerfat@gmail.com -->
               <?php endif ?>
               <p>
                  Error en el proceso de actualizacion!
