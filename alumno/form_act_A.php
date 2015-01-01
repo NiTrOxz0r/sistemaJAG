@@ -78,7 +78,7 @@ if($reg = mysqli_fetch_array($re)) :
   //     from alumno
   //     inner join persona
   //     on alumno.cod_persona = persona.codigo
-  //     where persona.cedula = '45544451');";
+  //     where persona.cedula = '$cedula');";
   $query = "SELECT persona.cedula
     from persona
     inner join personal_autorizado
@@ -88,9 +88,18 @@ if($reg = mysqli_fetch_array($re)) :
       from alumno
       inner join persona
       on alumno.cod_persona = persona.codigo
-      where persona.cedula = '45544451');";
+      where persona.cedula = '$cedula');";
   $resultado = conexion($query);
   $cedula_r = mysqli_fetch_array($resultado);
+  $query = "SELECT asume.cod_curso
+    from asume
+    inner join alumno
+    on asume.codigo = alumno.cod_curso
+    inner join persona
+    on alumno.cod_persona = persona.codigo
+    where cedula = '$cedula'";
+  $resultado = conexion($query);
+  $codCurso = mysqli_fetch_array($resultado);
   ?>
   <div id="contenido_act_A">
     <div id="blancoAjax">
@@ -122,7 +131,7 @@ if($reg = mysqli_fetch_array($re)) :
                 <a href="#" class="cons-est btn btn-info btn-block">Consultar Allegados</a>
               </div>
               <div class="col-sm-4">
-                <a href="#" class="cons-est btn btn-info btn-block">Consultar Curso</a>
+                <a href="../curso/consultar_C.php?tipo=3&curso=<?php echo $codCurso['cod_curso'] ?>" class="cons-est btn btn-info btn-block">Consultar Curso</a>
               </div>
             </div>
           </div>
