@@ -6,24 +6,24 @@ Sistema de inscripcion adaptado para la institucion publica U.E.N.B "José Anton
 El prototipo de este sistema (version 0.6.1) esta en linea en [sistemajag.esy.es/](http://sistemajag.esy.es/)
 ###Unidad Educativa Nacional Bolivariana "José Antonio Gonzáles"
 Escuela ubicada en el paraiso, caracas, venezuela.
-##version 0.6.1
-###Sistema 91% aprox completado, por ahora falta:
+##version 0.6.2
+###Sistema 95.4% aprox completado, por ahora falta:
 ####FLUJO NORMAL DE FORMULARIOS
 en progreso: 99?% aprox.
 ####FLUJO ALTERNATIVO DE FORMULARIOS
 en progreso: 85?% aprox.
 ####moduloAlumno
-en progreso: 75?% aprox.
+en progreso: 85?% aprox.
 ####moduloCurso
 en progreso: 100%.
 ####moduloUsuario
-en progreso: 90?% aprox.
+en progreso: 95?% aprox.
 ####CSS
 en progreso: 100% aprox.
 ####ModuloValidacion
-en progreso: 99?% aprox.
+en progreso: 100%.
 ####ModuloReporte
-en progreso: 80?% aprox.
+en progreso: 99?% aprox.
 (a espera de analisis y comentarios)
 
 * versiones del sistema: [ver aqui](https://github.com/slayerfat/sistemaJAG/releases)
