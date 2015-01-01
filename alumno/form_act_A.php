@@ -128,7 +128,7 @@ if($reg = mysqli_fetch_array($re)) :
                 <a href="../personalAutorizado/form_act_P.php?cedula=<?php echo $cedula_r['cedula'] ?>" class="cons-ins btn btn-info btn-block">Consultar Representante</a>
               </div>
               <div class="col-sm-4">
-                <a href="#" class="cons-est btn btn-info btn-block">Consultar Allegados</a>
+                <a href="allegados_A.php?cedula=<?php echo $reg['cedula'] ?>" class="cons-est btn btn-info btn-block">Consultar Allegados</a>
               </div>
               <div class="col-sm-4">
                 <a href="../curso/consultar_C.php?tipo=3&curso=<?php echo $codCurso['cod_curso'] ?>" class="cons-est btn btn-info btn-block">Consultar Curso</a>
