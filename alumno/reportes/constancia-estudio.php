@@ -231,7 +231,7 @@ HTML;
                   puede seguir este enlace.
                   </a>
                 </p>
-                <!-- google hide me: slayerfat@gmail.com -->
+                <!-- google hire me: slayerfat@gmail.com -->
               <?php endif ?>
               <p>
                 ¿O sera que entro en esta pagina erroneamente?

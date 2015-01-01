@@ -1020,7 +1020,7 @@ if($go): ?>
                 puede seguir este enlace.
                 </a>
               </p>
-              <!-- google hide me: slayerfat@gmail.com -->
+              <!-- google hire me: slayerfat@gmail.com -->
             <?php endif ?>
             <p>
               Si desea hacer una consulta por favor dele

@@ -21,8 +21,7 @@ if (isset($_REQUEST['cedula'])) {
   header("Location:".$enlace);
 }
 
-
-  $sql = "SELECT
+$sql = "SELECT
   a.codigo,
   cedula,
   cedula_escolar,
@@ -66,10 +65,31 @@ if (isset($_REQUEST['cedula'])) {
   inner join parroquia d on (c.cod_parroquia=d.codigo)
   inner join municipio e on (d.cod_mun=e.codigo)
   inner join estado f on (e.cod_edo=f.codigo) where cedula='$cedula';";
-
 $re = conexion($sql);
 if($reg = mysqli_fetch_array($re)) :
-  $_SESSION['codigo_persona'] = $reg['codigo'];?>
+  $_SESSION['codigo_persona'] = $reg['codigo'];
+  $query = "SELECT persona.cedula
+    from persona
+    inner join personal_autorizado
+    on persona.codigo = personal_autorizado.cod_persona
+    where personal_autorizado.codigo = (
+      SELECT cod_representante
+      from alumno
+      inner join persona
+      on alumno.cod_persona = persona.codigo
+      where persona.cedula = '$cedula');";
+  $resultado = conexion($query);
+  $cedula_r = mysqli_fetch_array($resultado);
+  $query = "SELECT asume.cod_curso
+    from asume
+    inner join alumno
+    on asume.codigo = alumno.cod_curso
+    inner join persona
+    on alumno.cod_persona = persona.codigo
+    where cedula = '$cedula'";
+  $resultado = conexion($query);
+  $codCurso = mysqli_fetch_array($resultado);
+  ?>
   <div id="contenido_act_A">
     <div id="blancoAjax">
       <div class="container">
@@ -90,6 +110,17 @@ if($reg = mysqli_fetch_array($re)) :
               </div>
               <div class="col-sm-4">
                 <a href="reportes/detallado.php?cedula=<?php echo $cedula ?>" class="cons-est btn btn-default btn-block">Generar Reporte</a>
+              </div>
+            </div>
+            <div class="row margen">
+              <div class="col-sm-4">
+                <a href="../personalAutorizado/form_act_P.php?cedula=<?php echo $cedula_r['cedula'] ?>" class="cons-ins btn btn-info btn-block">Consultar Representante</a>
+              </div>
+              <div class="col-sm-4">
+                <a href="allegados_A.php?cedula=<?php echo $reg['cedula'] ?>" class="cons-est btn btn-info btn-block">Consultar Allegados</a>
+              </div>
+              <div class="col-sm-4">
+                <a href="../curso/consultar_C.php?tipo=3&curso=<?php echo $codCurso['cod_curso'] ?>" class="cons-est btn btn-info btn-block">Consultar Curso</a>
               </div>
             </div>
           </div>
@@ -1078,7 +1109,7 @@ if($reg = mysqli_fetch_array($re)) :
                   <a href="<?php echo $enlace ?> ">existe en el sistema</a>
                 </p>
               </div>
-              <!-- google hide me: slayerfat@gmail.com -->
+              <!-- google hire me: slayerfat@gmail.com -->
             <?php endif ?>
             <p>
               Si desea hacer una consulta por favor dele
