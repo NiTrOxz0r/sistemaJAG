@@ -51,7 +51,7 @@ if ( isset($_SESSION['cod_tipo_usr']) ) : ?>
 		          data-toggle="dropdown"
 		          role="button"
 		          aria-expanded="false">
-		          	Consultar <span class="caret"></span>
+		          	Gestionar <span class="caret"></span>
 		          </a>
 		          <ul class="dropdown-menu" role="menu">
 		            <li><a href="#">Alumno</a></li>

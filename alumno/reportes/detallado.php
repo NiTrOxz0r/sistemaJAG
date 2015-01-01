@@ -20,7 +20,7 @@ if(!isset($_SESSION)){
 session_start();
 }
 validarUsuario(1, 1, $_SESSION['cod_tipo_usr']);
-if (!( isset($_GET['cedula']) and preg_match( "/[0-9]{8}/", $_GET['cedula']) )) :
+if (!( isset($_GET['cedula']) and preg_match( "/[0-9]{6,8}/", $_GET['cedula']) )) :
   empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);?>
   <div id="contenido_actualizar_A">
     <div id="blancoAjax">
@@ -54,6 +54,7 @@ else :
   persona.codigo, cedula, cedula_escolar, nacionalidad,
   p_nombre, s_nombre, p_apellido, s_apellido,
   sexo, fec_nac, lugar_nac, telefono, telefono_otro,
+  alumno.comentarios,
   curso.descripcion as curso,
   parroquia.descripcion as parroquia,
   municipio.descripcion as municipio,
@@ -211,6 +212,7 @@ else :
     $zapato = $datos['zapato'] === (null) ? '-':$datos['zapato'];
     $certificado_vacuna = $datos['certificado_vacuna'] === ('s') ? 'SI':'NO';
     $discapacidad = htmlentities($datos['discapacidad'], ENT_QUOTES);
+    $comentarios = htmlentities($datos['comentarios'], ENT_QUOTES);
     // $dia_alumno = $datos['dia'];
     // $mes_alumno = $meses[$datos['mes']];
     // $anio_alumno = $datos['anio'];
@@ -343,10 +345,17 @@ $html = <<<HTML
           <th width="18%">Discapacidad:</th>
           <td><strong>{$discapacidad}</strong></td>
         </tr>
+        <tr>
+          <th colspan="2" width="100%">Comentarios:</th>
+          <td></td>
+        </tr>
+        <tr>
+          <td rowspan="1" colspan="3" width="100%"><strong>{$comentarios}</strong></td>
+        </tr>
       </tbody>
     </table>
   </div>
-  <p style="padding:150px;">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+  <p style="padding:150px;"></p>
   <p><em>Reporte generado el: {$x}-{$y}-{$z}</em></p>
 </div>
 HTML;
@@ -390,7 +399,7 @@ HTML;
                 </div>
               <?php else: ?>
                 <?php
-                $enlace = "personalAutorizado/form_reg_P.php?cedula=$_GET[cedula_r]";
+                $enlace = "personalAutorizado/form_reg_P.php";
                 $inscripcion = enlaceDinamico("$enlace"); ?>
                 <p>
                   La cedula <?php echo $_GET['cedula'] ?>, no esta registrada en el sistema.
@@ -399,7 +408,7 @@ HTML;
                   puede seguir este enlace.
                   </a>
                 </p>
-                <!-- google hide me: slayerfat@gmail.com -->
+                <!-- google hire me: slayerfat@gmail.com -->
               <?php endif ?>
               <p>
                 ¿O sera que entro en esta pagina erroneamente?

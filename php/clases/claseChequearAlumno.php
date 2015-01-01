@@ -12,7 +12,7 @@
 * @todo ampliar segun sea necesario segun
 * los objetivos necesarios:
 *
-* @version 1.3
+* @version 1.5
 *
 *
 */
@@ -20,31 +20,40 @@ class ChequearAlumno extends ChequearGenerico{
   function __construct(
     $codUsrMod,
     $p_apellido,
-    $s_apellido = 'null',
+    $s_apellido = 'default',
     $p_nombre,
-    $s_nombre = 'null',
+    $s_nombre = 'default',
     $nacionalidad,
-    $cedula = 'null',
+    $cedula = 'default',
     $cedulaEscolar,
-    $telefono = 'null',
-    $telefonoOtro = 'null',
+    $telefono = 'default',
+    $telefonoOtro = 'default',
     $fecNac,
-    $lugNac = 'null',
+    $lugNac = 'default',
     $sexo,
     $actaNumero,
     $actaFolio,
-    $plantelProcedencia = 'null',
+    $plantelProcedencia = 'default',
     $repitiente,
     $codCurso,
-    $altura = 'null',
-    $peso = 'null',
-    $camisa = 'null',
-    $pantalon = 'null',
-    $zapato = 'null',
+    $altura = 'default',
+    $peso = 'default',
+    $camisa = 'default',
+    $pantalon = 'default',
+    $zapato = 'default',
     $discapacidad,
     $vacuna,
+    $partidaNac = 'default',
+    $constanciaSano = 'default',
+    $canaima = 'default',
+    $bicentenario = 'default',
+    $boleta = 'default',
+    $fotosR = 'default',
+    $fotoCedulaPA = 'default',
+    $fotoCedulaPR = 'default',
+    $comentarios = 'default',
     $codRepresentante,
-    $codPersonaRetira = 'null'
+    $codPersonaRetira = 'default'
   ){
     //variables de la clase:
     $conexion = conexion();//desde master.php > conexion.php
@@ -75,13 +84,23 @@ class ChequearAlumno extends ChequearGenerico{
     $this->vacuna = mysqli_escape_string($conexion, trim($vacuna));
     $this->codRepresentante = mysqli_escape_string($conexion, trim($codRepresentante));
     $this->codPersonaRetira = mysqli_escape_string($conexion, trim($codPersonaRetira));
+    $this->recaudos = array(
+      'partidaNac' => mysqli_escape_string($conexion, trim($partidaNac)),
+      'constanciaSano' => mysqli_escape_string($conexion, trim($constanciaSano)),
+      'canaima' => mysqli_escape_string($conexion, trim($canaima)),
+      'bicentenario' => mysqli_escape_string($conexion, trim($bicentenario)),
+      'boleta' => mysqli_escape_string($conexion, trim($boleta)),
+      'fotosR' => mysqli_escape_string($conexion, trim($fotosR)),
+      'fotoCedulaPA' => mysqli_escape_string($conexion, trim($fotoCedulaPA)),
+      'fotoCedulaPR' => mysqli_escape_string($conexion, trim($fotoCedulaPR)),
+      );
+    $this->comentarios = mysqli_escape_string($conexion, trim($comentarios));
     //metodos internos:
     //para poner variables nulas si es necesario:
     self::setNull();
     //chequeaomos la forma (el objeto como tal):
     self::chequeaForma();
     self::chequeame(); //heredado de ChequearGenerico
-
   }
 
   /**
@@ -91,7 +110,7 @@ class ChequearAlumno extends ChequearGenerico{
   * tambien chequea la validez de cedula,
   * y valizacion de clave de usuario en base de datos
   * ej: nombre = juan1 < error}
-  * @version 1.2
+  * @version 1.3
   *
   *
   * @return void
@@ -104,43 +123,41 @@ class ChequearAlumno extends ChequearGenerico{
       self::verificar("Error en: nacionalidad, se espera valor apropiado del formulario, datos: ".$this->nacionalidad);
     }
 
-    if ($this->cedula <> 'null') {
-      if ( !preg_match( '/^[\']\d{8}[\']$/', $this->cedula) ) {
-        self::verificar("Error en: cedula: solo numeros, datos: ".$this->cedula);
-      }
+    if ( !preg_match( '/^[\']\d{8}[\']$/', $this->cedula) ) {
+      self::verificar("Error en: cedula: solo numeros, datos: ".$this->cedula);
     }
 
     if ( !preg_match( '/^[\']\d{10}[\']$/', $this->cedulaEscolar) ) {
       self::verificar("Error en: cedula escolar: solo numeros, datos: ".$this->cedulaEscolar);
     }
 
-    if ( preg_match( "/^A-Za-z$^'$^áéíóú$^ÁÉÍÓÚ$/", $this->p_nombre) ) {
+    if ( preg_match( "/[^a-zA-Z-_áéíóúÁÉÍÓÚÑñ']/", $this->p_nombre) ) {
       self::verificar("Error en: primer nombre: solo letas, datos: ".$this->p_nombre);
     }
 
-    if ($this->s_nombre <> 'null') {
-      if ( preg_match( "/^A-Za-z$^'$^áéíóú$^ÁÉÍÓÚ$/", $this->s_nombre) ) {
+    if ($this->s_nombre <> 'default') {
+      if ( preg_match( "/[^a-zA-Z-_áéíóúÁÉÍÓÚÑñ']/", $this->s_nombre) ) {
         self::verificar("Error en: segundo nombre: solo letas, datos: ".$this->s_nombre);
       }
     }
 
-    if ( preg_match( "/^A-Za-z$^'$^áéíóú$^ÁÉÍÓÚ$/", $this->p_apellido) ) {
+    if ( preg_match( "/[^a-zA-Z-_áéíóúÁÉÍÓÚÑñ']/", $this->p_apellido) ) {
       self::verificar("Error en: primer apellido: solo letas, datos: ".$this->p_apellido);
     }
 
-    if ( $this->s_apellido <> 'null' ) {
-      if ( preg_match( "/^A-Za-z$^'$^áéíóú$^ÁÉÍÓÚ$/", $this->s_apellido) ) {
+    if ( $this->s_apellido <> 'default' ) {
+      if ( preg_match( "/[^a-zA-Z-_áéíóúÁÉÍÓÚÑñ']/", $this->s_apellido) ) {
         self::verificar("Error en: segundo apellido: solo letas, datos: ".$this->s_apellido);
       }
     }
 
-    if ($this->telefono <> 'null') {
+    if ($this->telefono <> 'default' && $this->telefono <> "'-'") {
       if ( !preg_match( '/^[\']\d{11}[\']$/', $this->telefono) ) {
         self::verificar("Error en: telefono: se espera solo numeros: 02125559911, datos: ".$this->telefono);
       }
     }
 
-    if ($this->telefonoOtro <> 'null') {
+    if ($this->telefonoOtro <> 'default' && $this->telefonoOtro <> "'-'") {
       if ( !preg_match( '/^[\']\d{11}[\']$/', $this->telefonoOtro) ) {
         self::verificar("Error en: telefono: se espera solo numeros: 02125559911, datos: ".$this->telefonoOtro);
       }
@@ -158,7 +175,7 @@ class ChequearAlumno extends ChequearGenerico{
       }
     }
 
-    if ($this->lugNac <> 'null') {
+    if ($this->lugNac <> 'default') {
       if ( strlen($this->lugNac) > 50 ) {
        self::verificar("Error en: lugar de nacimiento: datos excede limite maximo, datos: ".$this->lugNac.", largo: ".strlen($this->lugNac));
       }
@@ -168,25 +185,25 @@ class ChequearAlumno extends ChequearGenerico{
     * @todo MODIFICAR 20 al numero exacto del acta y folio
     */
 
-    if ($this->actaNumero <> 'null') {
+    if ($this->actaNumero <> 'default') {
       if ( preg_match( "/['][^0-9$^-][']/", $this->actaNumero) ) {
         self::verificar("Error en: Acta numero Part. Nac: se espera solo numeros, datos: ".$this->actaNumero);
       }
-      if ( strlen($this->actaNumero) > 20 ) { // modificar al numero real
+      if ( strlen($this->actaNumero) > 22 ) { // modificar al numero real
         self::verificar("Error en: Acta numero Part. Nac: tamaño excede limite maximo, datos: ".$this->actaNumero);
       }
     }
 
-    if ($this->actaFolio <> 'null') {
+    if ($this->actaFolio <> 'default') {
       if ( preg_match( "/['][^0-9$^-][']/", $this->actaFolio) ) {
         self::verificar("Error en: Acta folio Part. Nac: se espera solo numeros, datos: ".$this->actaFolio);
       }
-      if ( strlen($this->actaFolio) > 20 ) { // modificar al numero real
+      if ( strlen($this->actaFolio) > 22 ) { // modificar al numero real
         self::verificar("Error en: Acta numero Part. Nac: tamaño excede limite maximo, datos: ".$this->actaFolio);
       }
     }
 
-    if ($this->plantelProcedencia <> 'null') {
+    if ($this->plantelProcedencia <> 'default') {
       if ( strlen($this->plantelProcedencia) > 50 ) {
         self::verificar("Error en: plantel de procedencia: datos excede limite maximo, datos: ".
           $this->plantelProcedencia.", largo: ".strlen($this->plantelProcedencia));
@@ -197,7 +214,7 @@ class ChequearAlumno extends ChequearGenerico{
       self::verificar("Error en: sexo: se esperan un valor apropiados del formulario, datos: ".$this->repitiente);
     }
 
-    if ($this->altura <> 'null') {
+    if ($this->altura <> 'default') {
       if ( !is_numeric($this->altura) ) {
         self::verificar("Error en: altura: se espera solo numeros, datos: ".$this->altura);
       }
@@ -206,7 +223,7 @@ class ChequearAlumno extends ChequearGenerico{
       }
     }
 
-    if ($this->peso <> 'null') {
+    if ($this->peso <> 'default') {
       if ( !is_numeric($this->peso) ) {
         self::verificar("Error en: peso: se espera solo numeros, datos: ".$this->peso);
       }
@@ -215,7 +232,7 @@ class ChequearAlumno extends ChequearGenerico{
       }
     }
 
-    if ($this->camisa <> 'null') {
+    if ($this->camisa <> 'default') {
       if ( !is_numeric($this->camisa) ) {
         self::verificar("Error en: camisa: se espera solo numeros, datos: ".$this->camisa);
       }
@@ -224,7 +241,7 @@ class ChequearAlumno extends ChequearGenerico{
       }
     }
 
-    if ($this->pantalon <> 'null') {
+    if ($this->pantalon <> 'default') {
       if ( !is_numeric($this->pantalon) ) {
         self::verificar("Error en: pantalon: se espera solo numeros, datos: ".$this->pantalon);
       }
@@ -233,7 +250,7 @@ class ChequearAlumno extends ChequearGenerico{
       }
     }
 
-    if ($this->zapato <> 'null') {
+    if ($this->zapato <> 'default') {
       if ( !is_numeric($this->zapato) ) {
         self::verificar("Error en: zapato: se espera solo numeros, datos: ".$this->zapato);
       }
@@ -249,12 +266,26 @@ class ChequearAlumno extends ChequearGenerico{
     if ( $this->vacuna <> "'s'" and $this->vacuna <> "'n'" ) {
       self::verificar("Error en: cert. vacuna: se esperan un valor apropiados del formulario, datos: ".$this->vacuna);
     }
+
+    // recaudos fisicos
+    foreach ($this->recaudos as $campo => $valor) :
+      if ($valor <> "'s'" and $valor <> "'n'" ) :
+        self::verificar("Error en: recaudos de $campo: se esperan un valor apropiados del formulario, datos: ".$valor);
+      endif;
+    endforeach;
+
+    if ($this->comentarios <> 'default') {
+      if ( strlen($this->comentarios) > 500 ) {
+        self::verificar("Error en: comentarios: datos excede limite maximo, datos: ".
+          $this->comentarios.", largo: ".strlen($this->comentarios));
+      }
+    }
   }
 
   /**
   *
-  * {@internal esto es para autogenerar el null
-  * para los campos que acepten null en la base de datos.}
+  * {@internal esto es para autogenerar el default
+  * para los campos que acepten default en la base de datos.}
   *
   * @return void [solo genera las variables internas de la clase]
   */
@@ -262,7 +293,7 @@ class ChequearAlumno extends ChequearGenerico{
     $this->p_apellido = "'$this->p_apellido'";
 
     if ($this->s_apellido == "") {
-      $this->s_apellido = "null";
+      $this->s_apellido = "default";
     }else{
       $this->s_apellido = "'$this->s_apellido'";
     }
@@ -270,7 +301,7 @@ class ChequearAlumno extends ChequearGenerico{
     $this->p_nombre = "'$this->p_nombre'";
 
     if ($this->s_nombre == "") {
-      $this->s_nombre = "null";
+      $this->s_nombre = "default";
     }else{
       $this->s_nombre = "'$this->s_nombre'";
     }
@@ -279,23 +310,23 @@ class ChequearAlumno extends ChequearGenerico{
     $this->cedula = "'$this->cedula'";
 
     if ($this->actaNumero == "") {
-      $this->actaNumero = "null";
+      $this->actaNumero = "default";
     }else{
       $this->actaNumero = "'$this->actaNumero'";
     }
     if ($this->actaFolio == "") {
-      $this->actaFolio = "null";
+      $this->actaFolio = "default";
     }else{
       $this->actaFolio = "'$this->actaFolio'";
     }
 
     if ($this->telefono == "") {
-      $this->telefono = "null";
+      $this->telefono = "default";
     }else{
       $this->telefono = "'$this->telefono'";
     }
     if ($this->telefonoOtro == "") {
-      $this->telefonoOtro = "null";
+      $this->telefonoOtro = "default";
     }else{
       $this->telefonoOtro = "'$this->telefonoOtro'";
     }
@@ -303,7 +334,7 @@ class ChequearAlumno extends ChequearGenerico{
     $this->fecNac = "'$this->fecNac'";
 
     if ($this->lugNac == "") {
-      $this->lugNac = "null";
+      $this->lugNac = "default";
     }else{
       $this->lugNac = "'$this->lugNac'";
     }
@@ -314,36 +345,51 @@ class ChequearAlumno extends ChequearGenerico{
     $this->cedulaEscolar = "'$this->cedulaEscolar'";
 
     if ($this->plantelProcedencia == "") {
-      $this->plantelProcedencia = "null";
+      $this->plantelProcedencia = "default";
     }else{
       $this->plantelProcedencia = "'$this->plantelProcedencia'";
     }
     $this->repitiente = "'$this->repitiente'";
 
     if ($this->altura == "") {
-      $this->altura = "null";
+      $this->altura = "default";
     }
 
     if ($this->peso == "") {
-      $this->peso = "null";
+      $this->peso = "default";
     }
 
     if ($this->camisa == "") {
-      $this->camisa = "null";
+      $this->camisa = "default";
     }
 
     if ($this->pantalon == "") {
-      $this->pantalon = "null";
+      $this->pantalon = "default";
     }
 
     if ($this->zapato == "") {
-      $this->zapato = "null";
+      $this->zapato = "default";
     }
 
     if ($this->codPersonaRetira == "") {
-      $this->codPersonaRetira = "null";
+      $this->codPersonaRetira = "default";
     }
     $this->vacuna = "'$this->vacuna'";
+
+    // recaudos fisicos
+    foreach ($this->recaudos as $campo => $valor) :
+      if ($valor === '') :
+        $this->recaudos[$campo] = 'default';
+      else :
+        $this->recaudos[$campo] = "'$valor'";
+      endif;
+    endforeach;
+
+    if ($this->comentarios == "") {
+      $this->comentarios = "default";
+    }else{
+      $this->comentarios = "'$this->comentarios'";
+    }
   }
 
 }

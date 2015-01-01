@@ -19,7 +19,7 @@ if(!isset($_SESSION)){
 session_start();
 }
 validarUsuario(1, 1, $_SESSION['cod_tipo_usr']);
-if (!( isset($_GET['cedula']) and preg_match( "/[0-9]{8}/", $_GET['cedula']) )) :
+if (!( isset($_GET['cedula']) and preg_match( "/[0-9]{6,8}/", $_GET['cedula']) )) :
   empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);?>
   <div id="contenido_actualizar_A">
     <div id="blancoAjax">
@@ -88,6 +88,7 @@ else :
     $pdf->SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, PDF_HEADER_TITLE.' 001', PDF_HEADER_STRING, array(0,64,255), array(0,64,128));
     $pdf->setFooterData(array(0,64,0), array(0,64,128));
     $pdf->setPrintHeader(true);
+    $pdf->setPrintFooter(false);
 
     // fuentes de header y footer
     $pdf->setHeaderFont(Array(PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN));
@@ -131,7 +132,7 @@ else :
     $n = date('m');
     $mes = $meses[$n];
     $x = date('d');
-    $y = $mes;
+    $y = $n;
     $z = date('Y');
     $n = intval(date('Y'));
     $n1 = $n+1;
@@ -150,25 +151,26 @@ else :
 // contenido a ejectuar para pdf:
 $html = <<<HTML
 <div>
-  <p align="right">CARACAS, {$x} DE {$y} DE {$z} </p>
+  <p align="right">CARACAS, {$x} DE {$mes} DE {$z} </p>
 </div>
 <div style="margin:80px 0;">
   <p align="center">CONSTANCIA DE ESTUDIOS</p>
 </div>
 <div style="text-align: justify; padding:0 40px;">
   <p>
-    Se hace constar por medio de la presente que <strong>{$p_nombre_a} {$p_apellido_a}, C&eacute;dula de identidad n&uacute;mero: {$cedula_a}, </strong>
-    asociado al representante <strong>{$p_nombre_r} {$p_apellido_r}, C&eacute;dula de identidad n&uacute;mero: {$cedula_r},</strong>
+    Se hace constar por medio de la presente que <strong>{$p_nombre_a} {$p_apellido_a}</strong>, C&eacute;dula de identidad n&uacute;mero: <strong>{$cedula_a},</strong>
+    asociado al representante <strong>{$p_nombre_r} {$p_apellido_r}</strong>, C&eacute;dula de identidad n&uacute;mero: <strong>{$cedula_r},</strong>
     formaliz&oacute; su inscripci&oacute;n y es estudiante de regular de la
     ESCUELA B&Aacute;SICA NACIONAL BOLIVARIANA "JOS&Eacute; ANTONIO GONZ&Aacute;LEZ",
-    actualmente cursando en <strong>{$curso}</strong> del período academico <strong>{$n}-{$n1}</strong>
+    actualmente cursando en <strong>{$curso}</strong> del período academico <strong>{$n}-{$n1}.</strong>
   </p>
   <p>
     Esta constancia se expide por solicitud de la parte interesada en la ciudad de Caracas,
-    a los {$x} d&iacute;as del mes de {$y} de {$z} y es válida hasta el mes de {$valido} de {$n1}.
+    a los {$x} d&iacute;as del mes de {$mes} de {$z} y es válida hasta el mes de {$valido} de {$n1}.
   </p>
 </div>
-<div align="center" style="margin:80px 0;">
+<div align="center" style="margin:180px 0;">
+  <p></p><p></p>
   <p>
     __________________________________________
   </p>
@@ -176,11 +178,6 @@ $html = <<<HTML
     <strong>
       Lic. IRAIDA CAROLINA PONCE
     </strong>
-  </p>
-</div>
-<div align="center" style="float:bottom;">
-  <p>
-    pie de pagina
   </p>
 </div>
 HTML;
@@ -194,6 +191,7 @@ HTML;
     $y = date('m');
     $nombre = "constancia-inscripcion-$cedula_a-$x-$y-$z.pdf";
     $pdf->Output($nombre, 'I');
+    // echo $html;
   else:
     empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);?>
     <div id="contenido_actualizar_A">
@@ -233,7 +231,7 @@ HTML;
                   puede seguir este enlace.
                   </a>
                 </p>
-                <!-- google hide me: slayerfat@gmail.com -->
+                <!-- google hire me: slayerfat@gmail.com -->
               <?php endif ?>
               <p>
                 ¿O sera que entro en esta pagina erroneamente?

@@ -35,34 +35,8 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);
         </div>
       </div>
     </div>
-    <div class="container-fluid">
-      <div class="row">
-        <div class="sm-12">
-          <div class="jumbotron">
-            <h1>Inscripcion!</h1>
-            <p>Proceso de Registro 2014-2015</p>
-            <p>
-              <h5>Recaudos necesarios:</h5>
-              <ul>
-                <li>...</li>
-                <li>...</li>
-                <li>...</li>
-                <li>...</li>
-                <li>...</li>
-              </ul>
-            </p>
-            <p>
-              <a
-              class="btn btn-primary btn-lg"
-              href="personalAutorizado/form_reg_P.php"
-              role="button">
-                Empezar nuevo registro
-              </a>
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
+    <?php $inscripcion = enlaceDinamico('php/cuerpo/inscripcion.php'); ?>
+    <?php require_once($inscripcion) ?>
     <div class="container">
       <div class="row well well-lg">
         <div class="col-sm-6 text-center">

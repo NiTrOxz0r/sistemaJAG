@@ -106,9 +106,8 @@ if ( (isset($_REQUEST['informacion']) and isset($_REQUEST['tipo']) )
            <div class="row center-block">
              <div class="col-xs-6 col-xs-offset-3">
                <a
-                id="consultar-cedula"
                 href="#"
-                class="push-3 btn btn-warning btn-lg disabled">Consultar registro</a>
+                class="inyectar-cedula push-3 btn btn-warning btn-lg disabled">Consultar registro</a>
                 <span class="label label-info">Seleccione un registro para consultarlo</span>
              </div>
            </div>

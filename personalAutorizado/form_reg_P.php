@@ -4,6 +4,13 @@ if(!isset($_SESSION)){
 }
 $enlace = $_SERVER['DOCUMENT_ROOT']."/github/sistemaJAG/php/master.php";
 require_once($enlace);
+
+// campos de requisitos de alumno:
+if (isset($_POST)) :
+  $_SESSION['requisitos'] = $_POST;
+else :
+  $_SESSION['requisitos'] = null;
+endif;
 // invocamos validarUsuario.php desde master.php
 validarUsuario(1, 1, $_SESSION['cod_tipo_usr'], 'sistemaJAG | Registro de representante/allegado');
 
@@ -272,6 +279,7 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr'], 'sistemaJAG 
                           class="form-control"
                           id="email"
                           name="email"
+                          required
                           maxlength="50">
                         </div>
                         <p class="help-block" id="email_chequeo">
@@ -392,7 +400,10 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr'], 'sistemaJAG 
                       <div class="col-xs-11">
                         <div class="form-group">
                           <label for="profesion" class="control-label">Profesion</label>
-                          <?php $sql = "SELECT codigo, descripcion from profesion where status = 1;";
+                          <?php $sql =
+                            "SELECT codigo, descripcion from profesion where status = 1 and descripcion LIKE 'SIN PROFESION'
+                            UNION
+                            SELECT codigo, descripcion from profesion where status = 1 and descripcion NOT LIKE 'SIN PROFESION';";
                             $registros = conexion($sql);?>
                           <select class="form-control" name="profesion" id="profesion">
                             <option value="">Seleccione</option>

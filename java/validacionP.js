@@ -235,11 +235,11 @@ function validacionPA(){
     verificar = true;
   }
 // telefono
-  if(telefono.length != 11 && telefono != "" && telefono != 'SinRegistro'){
+  if(telefono.length != 11 && telefono != "" && telefono != '-'){
     $("#telefono_chequeo").html('este campo debe contener 11 caracteres EJ: 02127773322');
     $('#telefono').parent().addClass('has-error');
     return false;
-  }else if( !expRegtlf.exec(telefono) && telefono != "" && telefono != "SinRegistro" ) {
+  }else if( !expRegtlf.exec(telefono) && telefono != "" && telefono != "-" ) {
     $("#telefono_chequeo").html('Favor introduzca en este campo Letras sin numeros o caracteres especiales EJ: 19?=;@*');
     $('#telefono').parent().addClass('has-error');
     return false;
@@ -249,11 +249,11 @@ function validacionPA(){
     verificar = true;
   }
 // telefono_otro (adicional)
-  if(telefono_otro.length != 11 && telefono_otro != "" && telefono != 'SinRegistro'){
+  if(telefono_otro.length != 11 && telefono_otro != "" && telefono != '-'){
     $("#telefono_otro_chequeo").html('este campo debe contener 11 caracteres EJ: 02127773322');
     $('#telefono_otro').parent().addClass('has-error');
     return false;
-  }else if(!expRegtlf.exec(telefono_otro) && telefono_otro != "" && telefono_otro != "SinRegistro") {
+  }else if(!expRegtlf.exec(telefono_otro) && telefono_otro != "" && telefono_otro != "-") {
     $("#telefono_otro_chequeo").html('Favor introduzca en este campo Letras sin numeros o caracteres especiales EJ: 19?=;@*');
     $('#telefono_otro').parent().addClass('has-error');
     return false;
@@ -267,7 +267,11 @@ function validacionPA(){
     $("#email_chequeo").html('este campo no puede ser mayor a 40 caracteres');
     $('#email').parent().parent().addClass('has-error');
     return false;
-  }else if( !emailChequeo.test(email) && email != ""){
+  }else if(email == ''){
+    $("#email_chequeo").html('este campo no puede estar vacio.');
+    $('#email').parent().parent().addClass('has-error');
+    return false;
+  }else if( !emailChequeo.test(email)){
     $("#email_chequeo").html('Favor introduzca en este campo correctamente EJ: suNombre71@dominio.com.ve');
     $('#email').parent().parent().addClass('has-error');
     return false;
@@ -277,14 +281,25 @@ function validacionPA(){
     verificar = true;
   }
 // relacion o parentesco
+  n = $('#relacion :selected').html().replace(/^\s+|\s+$/g, '');
   if (parentesco === "") {
     $("#relacion_chequeo").html('Por favor seleccione una opcion apropiada');
     $('#relacion').parent().addClass('has-error');
     return false;
   }else{
-    $("#relacion_chequeo").html('&nbsp;');
-    $('#relacion').parent().removeClass('has-error').addClass('has-success');
-    verificar = true;
+    if ( n === 'Madre' && sexo != '1' ) {
+      $("#relacion_chequeo").html('Relacion entre parentesco y sexo no concuerdan.');
+      $('#relacion').parent().addClass('has-error');
+      return false;
+    }else if ( n === 'Padre' && sexo != '0' ) {
+      $("#relacion_chequeo").html('Relacion entre parentesco y sexo no concuerdan.');
+      $('#relacion').parent().addClass('has-error');
+      return false;
+    }else{
+      $("#relacion_chequeo").html('&nbsp;');
+      $('#relacion').parent().removeClass('has-error').addClass('has-success');
+      verificar = true;
+    }
   }
 // vive_con_alumno
   if (vive_con_alumno != "s" && vive_con_alumno != "n") {
@@ -320,7 +335,7 @@ function validacionPA(){
   }
 // profesion
   if (profesion === "") {
-    $("#profesion_chequeo").html('este campo no puede ser mayor a 150 caracteres');
+    $("#profesion_chequeo").html('este campo es necesario.');
     $('#profesion').parent().addClass('has-error');
     return false;
   }else{
@@ -344,13 +359,13 @@ function validacionPA(){
 // telefono de trabajo
   if(telefono_trabajo.length != 11
       && telefono_trabajo != ""
-      && telefono_trabajo != "SinRegistro"){
+      && telefono_trabajo != "-"){
     $("#telefono_trabajo_chequeo").html('este campo debe contener 11 caracteres EJ: 02127773322');
     $('#telefono_trabajo').parent().addClass('has-error');
     return false;
   }else if(!expRegtlf.exec(telefono_trabajo)
       && telefono_trabajo != ""
-      && telefono_trabajo != "SinRegistro") {
+      && telefono_trabajo != "-") {
     $("#telefono_trabajo_chequeo").html('Favor introduzca en este campo Letras sin numeros o caracteres especiales EJ: 19?=;@*');
     $('#telefono_trabajo').parent().addClass('has-error');
     return false;

@@ -50,8 +50,9 @@ if ( (isset($_REQUEST['informacion'])
       $where = $where." AND personal.tipo_personal = 5";
     elseif ($_REQUEST['tipo_personal'] === '0') :
       $where = $where." AND personal.tipo_personal = 0";
+    // ninguno
     elseif ($_REQUEST['tipo_personal'] === '6') :
-      $where = $where." AND personal.tipo_personal = 0";
+      // $where = $where." AND personal.tipo_personal = 0";
     endif;
   endif;
   // si el pedido no es un listado general:

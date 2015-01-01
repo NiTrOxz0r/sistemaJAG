@@ -7,7 +7,7 @@ require_once($enlace);
 // invocamos validarUsuario.php desde master.php
 validarUsuario(1, 1, $_SESSION['cod_tipo_usr']);
 
-if ( isset($_GET['cedula']) and preg_match( "/[0-9]{8}/", $_GET['cedula']) ) :
+if ( isset($_GET['cedula']) and preg_match( "/[0-9]{6,8}/", $_GET['cedula']) ) :
   $con = conexion();
   $cedula = mysqli_escape_string($con, trim($_GET['cedula']));
 else:
@@ -46,15 +46,18 @@ if($reg = mysqli_fetch_array($re)) :
             </div>
           </div>
           <div class="row margen">
-            <div class="col-sm-4 col-sm-offset-4">
+            <div class="col-sm-4 col-sm-offset-2">
               <a href="reportes/detallado.php?cedula=<?php echo $cedula ?>" class="cons-est btn btn-default btn-block">Generar Reporte</a>
+            </div>
+            <div class="col-sm-4">
+              <a href="allegados_P.php?cedula=<?php echo $cedula ?>" class="btn btn-info btn-block">Consultar Alumnos Asociados</a>
             </div>
           </div>
         </div>
         <!-- http://www.w3schools.com/html/html_forms.asp -->
         <form action="actualizar_P.php" method="POST" id="form" name="form_repre" class="form-horizontal">
           <fieldset>
-            <legend class="text-center text-uppercase"><h1>Consulta de representante</h1></legend>
+            <legend class="text-center text-uppercase"><h1>Consulta de allegado</h1></legend>
             <div class="container">
               <!-- inicio de nacionalidad y cedula -->
               <div class="row">
@@ -344,6 +347,7 @@ if($reg = mysqli_fetch_array($re)) :
                           class="form-control"
                           id="email"
                           name="email"
+                          required
                           disabled
                           value="<?php echo $reg['email'];?>"
                           maxlength="50">
@@ -478,7 +482,10 @@ if($reg = mysqli_fetch_array($re)) :
                       <div class="col-xs-11">
                         <div class="form-group">
                           <label for="profesion" class="control-label">Profesion</label>
-                          <?php $sql = "SELECT codigo, descripcion from profesion where status = 1;";
+                          <?php $sql =
+                            "SELECT codigo, descripcion from profesion where status = 1 and descripcion LIKE 'SIN PROFESION'
+                            UNION
+                            SELECT codigo, descripcion from profesion where status = 1 and descripcion NOT LIKE 'SIN PROFESION';";
                             $registros = conexion($sql);?>
                           <select disabled class="form-control" name="profesion" id="profesion">
                             <?php while($fila = mysqli_fetch_array($registros)) : ?>
@@ -744,7 +751,7 @@ if($reg = mysqli_fetch_array($re)) :
     <script type="text/javascript">
       $(function() {
         $('.actualizar').on('click', function(evento) {
-          cambiarSoloLectura($('#form'), 'representante');
+          cambiarSoloLectura($('#form'), 'allegado');
         });
       });
     </script>
@@ -779,7 +786,7 @@ if($reg = mysqli_fetch_array($re)) :
                   <a href="<?php echo $enlace ?> ">existe en el sistema</a>
                 </p>
               </div>
-              <!-- google hide me: slayerfat@gmail.com -->
+              <!-- google hire me: slayerfat@gmail.com -->
             <?php endif ?>
             <p>
               Si desea hacer una consulta por favor dele

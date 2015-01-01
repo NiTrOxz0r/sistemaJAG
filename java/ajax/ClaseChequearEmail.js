@@ -26,7 +26,7 @@ function ChequearEmail($email, tabla){
  */
 ChequearEmail.prototype.cambiar = function(){
   this.cambio = this.email.val();
-  console.log('en cambiar, valor: '+this.cambio);
+  // console.log('en cambiar, valor: '+this.cambio);
 }
 
 /**
@@ -34,17 +34,17 @@ ChequearEmail.prototype.cambiar = function(){
  */
 ChequearEmail.prototype.original = function(){
   this.original = this.email.val();
-  console.log('en original: '+this.original);
+  // console.log('en original: '+this.original);
 }
 
 /**
  * [chequear hace todos los chequeos del campo]
  */
 ChequearEmail.prototype.chequear = function(){
-  console.log('dentro de chequear:');
+  // console.log('dentro de chequear:');
   if (this.original === undefined) {return false;}
   if (this.original === this.cambio){
-    console.log('original y cambio son iguales!');
+    // console.log('original y cambio son iguales!');
     $('#email_chequeo_adicional').empty();
     $('#email_chequeo').empty();
     $('#form input, #form select, #form textarea').each(function(){
@@ -56,7 +56,7 @@ ChequearEmail.prototype.chequear = function(){
       $(this).prop('disabled', true);
     });
   }else if ( validacionEmail(this.cambio) ) {
-    console.log('validacion de email: true');
+    // console.log('validacion de email: true');
     $("#email_chequeo").empty();
     $.ajax({
       url: '../java/email.php',
@@ -66,14 +66,14 @@ ChequearEmail.prototype.chequear = function(){
         tabla:this.tabla
       },
       success: function (datos){
-        console.log('ajax success');
+        // console.log('ajax success');
         $('#email_chequeo').empty();
         //se comprueba si es valido o no por
         //medio del data-disponible
         //true si esta disponible, falso si no.
         var disponible = $(datos+'#disponible').data('disponible');
         if (disponible === true) {
-          console.log('disponible: true');
+          // console.log('disponible: true');
           $('#email_chequeo_adicional').empty();
           $('#form input, #form select, #form textarea').each(function(){
             $(this).parent().removeClass('has-error');
@@ -85,7 +85,7 @@ ChequearEmail.prototype.chequear = function(){
           });
           $('.actualizar').prop('disabled', false);
         }else{
-          console.log('disponible: false');
+          // console.log('disponible: false');
           $('#form input, #form select, #form textarea').each(function(){
             $(this).parent().addClass('has-error');
             $(this).prop('disabled', true);
@@ -96,11 +96,11 @@ ChequearEmail.prototype.chequear = function(){
         };
       },
       error: function() {
-        console.log('error ajax');
+        // console.log('error ajax');
       }
     });
   }else{
-    console.log('validacion email: false');
+    // console.log('validacion email: false');
     $('#email_chequeo').html('correo debe estar en este formato: algo@algunDominio.com.');
     $('#submit').prop('disabled', true);
     $('#submitDos').prop('disabled', true);

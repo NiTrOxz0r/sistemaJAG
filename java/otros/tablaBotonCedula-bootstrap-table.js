@@ -21,8 +21,8 @@ $(function(){
       var datos = $('.selected').children('.cedula').text().replace(/^\s+|\s+$/g, '');
       if (datos) {
         var valor = enlace+'?cedula='+datos;
-        $('#consultar-cedula').attr('href', valor);
-        $('#consultar-cedula').removeClass('disabled btn-warning').addClass('btn-primary');
+        $('.inyectar-cedula').attr('href', valor);
+        $('.inyectar-cedula').removeClass('disabled btn-warning').addClass('btn-primary');
       };
     };
   });

@@ -11,7 +11,7 @@ validarUsuario(1, 1, $_SESSION['cod_tipo_usr']);
 //DESDE empezarPagina.php
 empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr'], 'sistemaJAG | Registro de alumno');
 
-if ( isset($_GET['cedula_r']) and preg_match( "/[0-9]{8}/", $_GET['cedula_r']) ) :
+if ( isset($_GET['cedula_r']) and preg_match( "/[0-9]{6,8}/", $_GET['cedula_r']) ) :
   $conexion = conexion();
   $cedula_r = mysqli_escape_string( $conexion, trim($_GET['cedula_r']) );
   $query = "SELECT
@@ -31,12 +31,55 @@ if ( isset($_GET['cedula_r']) and preg_match( "/[0-9]{8}/", $_GET['cedula_r']) )
   else :
     $go = false;
   endif;
-  if ( isset($_GET['cedula']) and preg_match( "/[0-9]{8}/", $_GET['cedula']) ) :
+  if ( isset($_GET['cedula']) and preg_match( "/[0-9]{6,8}/", $_GET['cedula']) ) :
     $cedula = $_GET['cedula'];
   else:
     $cedula = null;
   endif;
   mysqli_close($conexion);
+endif;
+
+if (isset($_SESSION['requisitos'])) :
+  if ( isset($_SESSION['requisitos']['partida_nac']) ) :
+    $requisitos['partida_nac'] = 'checked';
+  else :
+    $requisitos['partida_nac'] = null;
+  endif;
+  if ( isset($_SESSION['requisitos']['constancia_nino_sano']) ) :
+    $requisitos['constancia_nino_sano'] = 'checked';
+  else :
+    $requisitos['constancia_nino_sano'] = null;
+  endif;
+  if ( isset($_SESSION['requisitos']['canaima']) ) :
+    $requisitos['canaima'] = 'checked';
+  else :
+    $requisitos['canaima'] = null;
+  endif;
+  if ( isset($_SESSION['requisitos']['bicentenario']) ) :
+    $requisitos['bicentenario'] = 'checked';
+  else :
+    $requisitos['bicentenario'] = null;
+  endif;
+  if ( isset($_SESSION['requisitos']['boleta']) ) :
+    $requisitos['boleta'] = 'checked';
+  else :
+    $requisitos['boleta'] = null;
+  endif;
+  if ( isset($_SESSION['requisitos']['fotos_representante']) ) :
+    $requisitos['fotos_representante'] = 'checked';
+  else :
+    $requisitos['fotos_representante'] = null;
+  endif;
+  if ( isset($_SESSION['requisitos']['fotocopia_cedula_pa']) ) :
+    $requisitos['fotocopia_cedula_pa'] = 'checked';
+  else :
+    $requisitos['fotocopia_cedula_pa'] = null;
+  endif;
+  if ( isset($_SESSION['requisitos']['fotocopia_cedula_pr']) ) :
+    $requisitos['fotocopia_cedula_pr'] = 'checked';
+  else :
+    $requisitos['fotocopia_cedula_pr'] = null;
+  endif;
 endif;
 
 //CONTENIDO:
@@ -201,7 +244,7 @@ if($go): ?>
                             <label for="acta_num_part_nac" class="control-label">Numero de acta</label>
                             <input
                               class="form-control"
-                              type="number"
+                              type="text"
                               name="acta_num_part_nac"
                               id="acta_num_part_nac"
                               maxlength="20">
@@ -218,7 +261,7 @@ if($go): ?>
                             <label for="acta_folio_num_part_nac" class="control-label">Numero de folio</label>
                             <input
                               class="form-control"
-                              type="number"
+                              type="text"
                               name="acta_folio_num_part_nac"
                               id="acta_folio_num_part_nac"
                               maxlength="20">
@@ -623,6 +666,7 @@ if($go): ?>
                       </div>
                     </div>
                   </div>
+                  <!-- camisa, pantalon, zapato -->
                   <div class="row">
                     <div class="col-sm-4">
                       <div class="row">
@@ -702,7 +746,104 @@ if($go): ?>
                     </div>
                   </div>
                 </fieldset>
+                <!-- recaudos -->
+                <fieldset class="margenAbajo">
+                  <legend class="text-center">Recaudos en fisico</legend>
+                  <div class="col-xs-12">
+                    <div class="checkbox">
+                      <label class="col-xs-6">
+                        <input
+                          type="checkbox"
+                          value="s"
+                          <?php echo $requisitos['partida_nac'] ?>
+                          name="partida_nac">
+                        Partida de nacimiento.
+                      </label>
+                      <label class="col-xs-6">
+                        <input
+                          type="checkbox"
+                          value="s"
+                          <?php echo $requisitos['constancia_nino_sano'] ?>
+                          name="constancia_nino_sano">
+                        Constancia del niño sano.
+                      </label>
+                    </div>
+                    <div class="checkbox">
+                      <label class="col-xs-6">
+                        <input
+                          type="checkbox"
+                          value="s"
+                          <?php echo $requisitos['canaima'] ?>
+                          name="canaima">
+                        Recurso Canaima.
+                      </label>
+                      <label class="col-xs-6">
+                        <input
+                          type="checkbox"
+                          value="s"
+                          <?php echo $requisitos['bicentenario'] ?>
+                          name="bicentenario">
+                        Coleccion Bicentenario.
+                      </label>
+                    </div>
+                    <div class="checkbox">
+                      <label class="col-xs-6">
+                        <input
+                          type="checkbox"
+                          value="s"
+                          <?php echo $requisitos['boleta'] ?>
+                          name="boleta">
+                        Boleta de estudios.
+                      </label>
+                      <label class="col-xs-6">
+                        <input
+                          type="checkbox"
+                          value="s"
+                          <?php echo $requisitos['fotos_representante'] ?>
+                          name="fotos_representante">
+                        Fotos tipo carnet del representante.
+                      </label>
+                    </div>
+                    <div class="checkbox">
+                      <label class="col-xs-6">
+                        <input
+                          type="checkbox"
+                          value="s"
+                          <?php echo $requisitos['fotocopia_cedula_pa'] ?>
+                          name="fotocopia_cedula_pa">
+                        Fotocopia Cedula de identidad del representante.
+                      </label>
+                      <label class="col-xs-6">
+                        <input
+                          type="checkbox"
+                          value="s"
+                          <?php echo $requisitos['fotocopia_cedula_pr'] ?>
+                          name="fotocopia_cedula_pr">
+                        Fotocopia Cedula de identidad de los allegados (si aplica).
+                      </label>
+                    </div>
+                  </div>
+                </fieldset>
+                <!-- comentarios -->
+                <fieldset>
+                  <legend class="text-center">Comentarios</legend>
+                  <div class="row">
+                    <div class="col-xs-12">
+                      <div class="form-group">
+                        <textarea
+                        class="form-control"
+                        maxlenght="500"
+                        rows="2"
+                        name="comentarios"
+                        id="comentarios"></textarea>
+                        <p class="help-block" id="comentarios_chequeo">
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </fieldset>
               </div>
+              <!-- info adicional -->
               <div class="row">
                 <div class="col-sm-8 col-sm-offset-2 bg-primary redondeado">
                   <div class="row">
@@ -717,6 +858,7 @@ if($go): ?>
                   </div>
                 </div>
               </div>
+              <!-- boton -->
               <div class="row margenArriba">
                 <div class="col-sm-2 col-sm-offset-5">
                   <input
@@ -855,7 +997,7 @@ if($go): ?>
               </small>
             </h3>
             <!-- !importante -->
-            <?php $enlace = encuentraCedula($_REQUEST['cedula']) ?>
+            <?php $enlace = encuentraCedula($_REQUEST['cedula_r']) ?>
             <?php if ( $enlace ): ?>
               <!-- se quedaron locos verdad? -->
               <div class="bg-info">
@@ -878,7 +1020,7 @@ if($go): ?>
                 puede seguir este enlace.
                 </a>
               </p>
-              <!-- google hide me: slayerfat@gmail.com -->
+              <!-- google hire me: slayerfat@gmail.com -->
             <?php endif ?>
             <p>
               Si desea hacer una consulta por favor dele

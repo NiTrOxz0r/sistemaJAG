@@ -91,15 +91,14 @@ if ( (isset($_REQUEST['informacion']) and isset($_REQUEST['tipo']) )
           <div class="container">
             <div class="row margen">
               <div class="col-xs-6 col-xs-offset-3">
-                <span class="label label-info">Seleccione un registro para consultarlo (abajo hay mas opciones)</span>
+                <span class="label label-info">Seleccione un registro.</span>
               </div>
             </div>
              <div class="row">
                <div class="col-xs-3 col-xs-offset-3">
                  <a
-                  id="consultar-cedula"
                   href="#"
-                  class="push-3 btn btn-warning btn-lg disabled">Consultar registro</a>
+                  class="inyectar-cedula push-3 btn btn-warning btn-lg disabled">Consultar registro</a>
                </div>
                <div class="col-xs-3">
                  <a
@@ -132,10 +131,10 @@ if ( (isset($_REQUEST['informacion']) and isset($_REQUEST['tipo']) )
                   <th data-field="cedula_escolar" data-sortable="true" data-switchable="false">Cedula escolar</th>
                   <th data-field="p_apellido" data-sortable="true">Primer Apellido</th>
                   <th data-field="p_nombre" data-sortable="true">Primer Nombre</th>
-                  <th data-field="curso" data-sortable="true">Curso</th>
+                  <th data-field="curso" data-sortable="true">Grado y Seccion</th>
                   <th data-field="telefono" data-sortable="false">Telefono</th>
                   <th data-field="telefono_otro" data-sortable="true" data-visible="true">Telf. Ad.</th>
-                  <th data-field="sexo" data-sortable="true">sexo</th>
+                  <th data-field="sexo" data-sortable="true">Sexo</th>
                   <th data-field="discapacidad" data-sortable="true">Discapacidad</th>
                   <th data-field="vacuna" data-sortable="true">Cert. vacunacion</th>
                   <th data-field="p_apellido_r" data-sortable="true">Primer Apellido (R)</th>
@@ -164,19 +163,23 @@ if ( (isset($_REQUEST['informacion']) and isset($_REQUEST['tipo']) )
                         from curso
                         inner join asume
                         on asume.cod_curso = curso.codigo
-                        where asume.cod_curso = $datos[cod_curso];";
+                        where asume.codigo = $datos[cod_curso];";
                         $sql = conexion($query);
                         $curso = mysqli_fetch_assoc($sql);
                       if ($sql->num_rows <> 0) :?>
                         <td class="curso">
                           <?php echo $curso['descripcion'] ?>
                         </td>
+                      <?php else: ?>
+                        <td>
+                          <?php echo "-" ?>
+                        </td>
                       <?php endif ?>
                       <td>
-                        <?php echo $datos['telefono'] === (null) ? 'SinRegistros':$datos['telefono'] ?>
+                        <?php echo $datos['telefono'] === (null) ? '-':$datos['telefono'] ?>
                       </td>
                       <td>
-                        <?php echo $datos['telefono_otro'] === (null) ? 'SinRegistros':$datos['telefono_otro'] ?>
+                        <?php echo $datos['telefono_otro'] === (null) ? '-':$datos['telefono_otro'] ?>
                       </td>
                       <td>
                         <?php echo $datos['sexo'] === ('0') ? 'Masculino':'Femenino' ?>
@@ -213,22 +216,6 @@ if ( (isset($_REQUEST['informacion']) and isset($_REQUEST['tipo']) )
                   <?php endwhile; ?>
                 </tbody>
               </table>
-              <div class="container">
-                <div class="row margen">
-                  <div class="col-xs-6 col-xs-offset-3">
-                    <span class="label label-info">generara este listado en formato pdf</span>
-                  </div>
-                </div><p></p>
-                 <div class="row">
-                   <div class="col-xs-3 col-xs-offset-3">
-                    <?php $enlace = "reportes/listado_A.php?tipo=$_REQUEST[tipo]&informacion=$_REQUEST[informacion]" ?>
-                     <a
-                      id="generar-pdf"
-                      href="<?php echo $enlace ?>"
-                      class="push-3 btn btn-primary btn-lg">Generar Reporte</a>
-                   </div>
-                 </div>
-              </div>
             </div>
           </div>
           <div class="row">

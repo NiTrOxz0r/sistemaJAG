@@ -21,7 +21,7 @@ validarUsuario(1, 1, $_SESSION['cod_tipo_usr']);
 //DESDE empezarPagina.php
 empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr'], 'sistemaJAG | Actualizacion de alumno');
 
-if ( isset($_POST['cedula']) and preg_match( "/[0-9]{8}/", $_POST['cedula']) ) :
+if ( isset($_POST['cedula']) and preg_match( "/[0-9]{6,8}/", $_POST['cedula']) ) :
 
   $con = conexion();
   $status = 1;
@@ -42,7 +42,7 @@ if ( isset($_POST['cedula']) and preg_match( "/[0-9]{8}/", $_POST['cedula']) ) :
   //
   // SE HACEN LOS SELECT PRIMERO
   // LUEGO LOS UPDATE E INSERTS.
-  $cedula = ChequearGenerico::cedula($_POST['cedula']);
+  $cedula = ChequearGenerico::cedula($_POST['cedula'], 1);
   // chamo porque te encanta poner alias en estos query tan sencillos?
   $sql = "SELECT a.codigo as cod_direccion
     from direccion a
@@ -81,6 +81,14 @@ if ( isset($_POST['cedula']) and preg_match( "/[0-9]{8}/", $_POST['cedula']) ) :
 
   // se validan TODOS los campos y luego
   // se hace el update, no de forma secuencial.
+  $_POST['partida_nac'] = (isset($_POST['partida_nac'])) ? $_POST['partida_nac'] : 'n' ;
+  $_POST['constancia_nino_sano'] = (isset($_POST['constancia_nino_sano'])) ? $_POST['constancia_nino_sano'] : 'n' ;
+  $_POST['canaima'] = (isset($_POST['canaima'])) ? $_POST['canaima'] : 'n' ;
+  $_POST['bicentenario'] = (isset($_POST['bicentenario'])) ? $_POST['bicentenario'] : 'n' ;
+  $_POST['boleta'] = (isset($_POST['boleta'])) ? $_POST['boleta'] : 'n' ;
+  $_POST['fotos_representante'] = (isset($_POST['fotos_representante'])) ? $_POST['fotos_representante'] : 'n' ;
+  $_POST['fotocopia_cedula_pa'] = (isset($_POST['fotocopia_cedula_pa'])) ? $_POST['fotocopia_cedula_pa'] : 'n' ;
+  $_POST['fotocopia_cedula_pr'] = (isset($_POST['fotocopia_cedula_pr'])) ? $_POST['fotocopia_cedula_pr'] : 'n' ;
   $validarAlumno = new ChequearAlumno(
     $_SESSION['codUsrMod'],
     $_POST['p_apellido'],
@@ -107,6 +115,15 @@ if ( isset($_POST['cedula']) and preg_match( "/[0-9]{8}/", $_POST['cedula']) ) :
     $_POST['zapato'],
     $_POST['discapacidad'],
     $_POST['vacuna'],
+    $_POST['partida_nac'],
+    $_POST['constancia_nino_sano'],
+    $_POST['canaima'],
+    $_POST['bicentenario'],
+    $_POST['boleta'],
+    $_POST['fotos_representante'],
+    $_POST['fotocopia_cedula_pa'],
+    $_POST['fotocopia_cedula_pr'],
+    $_POST['comentarios'],
     $cod_persona
   );
   if ( $validarAlumno->valido() ) :
@@ -161,12 +178,21 @@ if ( isset($_POST['cedula']) and preg_match( "/[0-9]{8}/", $_POST['cedula']) ) :
         cod_discapacidad        = $validarAlumno->discapacidad,
         cod_curso               = $validarAlumno->codCurso,
         cod_usr_mod             = $validarAlumno->codUsrMod,
-        fec_mod = current_timestamp
+        comentarios             = $validarAlumno->comentarios,
+        partida_nac             = ".$validarAlumno->recaudos['partidaNac'].",
+        constancia_nino_sano    = ".$validarAlumno->recaudos['constanciaSano'].",
+        canaima                 = ".$validarAlumno->recaudos['canaima'].",
+        bicentenario            = ".$validarAlumno->recaudos['bicentenario'].",
+        boleta                  = ".$validarAlumno->recaudos['boleta'].",
+        fotos_representante     = ".$validarAlumno->recaudos['fotosR'].",
+        fotocopia_cedula_pa     = ".$validarAlumno->recaudos['fotoCedulaPA'].",
+        fotocopia_cedula_pr     = ".$validarAlumno->recaudos['fotoCedulaPR'].",
+        fec_mod                 = current_timestamp
         WHERE cod_persona = $cod_persona;";
       mysqli_query($con, $query) ? null : $query_ok=false;
       echo $query_ok === (false) ? 'alu' : null;
       $query_ok ? mysqli_commit($con) : mysqli_rollback($con);
-      // $res = conexion($queryA);
+      // $res = conexion($query,2);
       if ($query_ok) : ?>
         <div id="contenido_actualizar_A">
           <div id="blancoAjax">
@@ -182,12 +208,7 @@ if ( isset($_POST['cedula']) and preg_match( "/[0-9]{8}/", $_POST['cedula']) ) :
                     Si desea hacer otra consulta por favor dele
                     <a href="menucon.php">click a este enlace</a>
                   </p>
-                  <p>
-                    <small>
-                      puede generar un pdf:
-                    </small>
-                  </p>
-                  <!-- botones de control -->
+                  <!-- generacion de pdf -->
                   <div class="margen">
                     <div class="row margen">
                       <div class="col-sm-4">

@@ -22,7 +22,7 @@ validarUsuario(1, 1, $_SESSION['cod_tipo_usr']);
 
 empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr'], 'sistemaJAG | Registro de alumno');
 
-if ( isset($_POST['cedula_r']) and preg_match( "/[0-9]{8}/", $_POST['cedula_r']) ) :
+if ( isset($_POST['cedula_r']) and preg_match( "/[0-9]{6,8}/", $_POST['cedula_r']) ) :
 
     $con = conexion();
     $status = 1;
@@ -41,6 +41,16 @@ if ( isset($_POST['cedula_r']) and preg_match( "/[0-9]{8}/", $_POST['cedula_r'])
     $cod_representante_persona = $datos['codigo_pa_p'];
     $p_nombre_r = $datos['p_nombre'] or die('error p_nombre');
     $p_apellido_r = $datos['p_apellido'] or die('error p_apellido');
+    // chequeo de recaudos fisicos:
+    $_POST['partida_nac'] = (isset($_POST['partida_nac'])) ? $_POST['partida_nac'] : 'n' ;
+    $_POST['constancia_nino_sano'] = (isset($_POST['constancia_nino_sano'])) ? $_POST['constancia_nino_sano'] : 'n' ;
+    $_POST['canaima'] = (isset($_POST['canaima'])) ? $_POST['canaima'] : 'n' ;
+    $_POST['bicentenario'] = (isset($_POST['bicentenario'])) ? $_POST['bicentenario'] : 'n' ;
+    $_POST['boleta'] = (isset($_POST['boleta'])) ? $_POST['boleta'] : 'n' ;
+    $_POST['fotos_representante'] = (isset($_POST['fotos_representante'])) ? $_POST['fotos_representante'] : 'n' ;
+    $_POST['fotocopia_cedula_pa'] = (isset($_POST['fotocopia_cedula_pa'])) ? $_POST['fotocopia_cedula_pa'] : 'n' ;
+    $_POST['fotocopia_cedula_pr'] = (isset($_POST['fotocopia_cedula_pr'])) ? $_POST['fotocopia_cedula_pr'] : 'n' ;
+    // iniciacion del objeto validarAlumno
     $validarAlumno = new ChequearAlumno(
       $_SESSION['codUsrMod'],
       $_POST['p_apellido'],
@@ -67,8 +77,18 @@ if ( isset($_POST['cedula_r']) and preg_match( "/[0-9]{8}/", $_POST['cedula_r'])
       $_POST['zapato'],
       $_POST['discapacidad'],
       $_POST['vacuna'],
+      $_POST['partida_nac'],
+      $_POST['constancia_nino_sano'],
+      $_POST['canaima'],
+      $_POST['bicentenario'],
+      $_POST['boleta'],
+      $_POST['fotos_representante'],
+      $_POST['fotocopia_cedula_pa'],
+      $_POST['fotocopia_cedula_pr'],
+      $_POST['comentarios'],
       $cod_representante
     );
+    // die( var_dump( $validarAlumno->recaudos['partidaNac'] ) );
   if ( $validarAlumno->valido() ) :
     $queryP = "INSERT INTO persona(
       cedula,
@@ -86,8 +106,7 @@ if ( isset($_POST['cedula_r']) and preg_match( "/[0-9]{8}/", $_POST['cedula_r'])
       cod_usr_mod,
       fec_mod
     )
-    VALUES
-    (
+    VALUES(
       $validarAlumno->cedula, $validarAlumno->nacionalidad,
       $validarAlumno->p_nombre, $validarAlumno->s_nombre,
       $validarAlumno->p_apellido, $validarAlumno->s_apellido,
@@ -147,6 +166,15 @@ if ( isset($_POST['cedula_r']) and preg_match( "/[0-9]{8}/", $_POST['cedula_r'])
           certificado_vacuna,
           cod_discapacidad,
           cod_curso,
+          partida_nac,
+          constancia_nino_sano,
+          canaima,
+          bicentenario,
+          boleta,
+          fotos_representante,
+          fotocopia_cedula_pa,
+          fotocopia_cedula_pr,
+          comentarios,
           cod_representante,
           status,
           cod_usr_reg,
@@ -154,14 +182,31 @@ if ( isset($_POST['cedula_r']) and preg_match( "/[0-9]{8}/", $_POST['cedula_r'])
           fec_mod
         )
         VALUES (
-          $cod_persona, $validarAlumno->cedulaEscolar,
-          $validarAlumno->lugNac, $validarAlumno->actaNumero,
-          $validarAlumno->actaFolio, $validarAlumno->plantelProcedencia,
-          $validarAlumno->repitiente, $validarAlumno->altura,
-          $validarAlumno->peso, $validarAlumno->camisa,
-          $validarAlumno->pantalon, $validarAlumno->zapato,
-          $validarAlumno->vacuna, $validarAlumno->discapacidad,
-          $validarAlumno->codCurso, $validarAlumno->codRepresentante,
+          $cod_persona,
+          $validarAlumno->cedulaEscolar,
+          $validarAlumno->lugNac,
+          $validarAlumno->actaNumero,
+          $validarAlumno->actaFolio,
+          $validarAlumno->plantelProcedencia,
+          $validarAlumno->repitiente,
+          $validarAlumno->altura,
+          $validarAlumno->peso,
+          $validarAlumno->camisa,
+          $validarAlumno->pantalon,
+          $validarAlumno->zapato,
+          $validarAlumno->vacuna,
+          $validarAlumno->discapacidad,
+          $validarAlumno->codCurso,".
+          $validarAlumno->recaudos['partidaNac'].",".
+          $validarAlumno->recaudos['constanciaSano'].",".
+          $validarAlumno->recaudos['canaima'].",".
+          $validarAlumno->recaudos['bicentenario'].",".
+          $validarAlumno->recaudos['boleta'].",".
+          $validarAlumno->recaudos['fotosR'].",".
+          $validarAlumno->recaudos['fotoCedulaPA'].",".
+          $validarAlumno->recaudos['fotoCedulaPR'].",".
+          $validarAlumno->comentarios.",
+          $validarAlumno->codRepresentante,
           $status, $validarAlumno->codUsrMod,
           $validarAlumno->codUsrMod, current_timestamp);";
       // $resultado = conexion($query, 1);
@@ -175,10 +220,18 @@ if ( isset($_POST['cedula_r']) and preg_match( "/[0-9]{8}/", $_POST['cedula_r'])
       //RELACION ENTRE ALUMNO Y PA:
       //M > N
       $query = "INSERT INTO obtiene
-      VALUES
-      (null, $cod_representante, $datosAlumno[codigo],
-        $status, $validarAlumno->codUsrMod, null,
-        $validarAlumno->codUsrMod, current_timestamp);";
+      VALUES(
+        null,
+        $cod_representante,
+        $datosAlumno[codigo],
+        default,
+        default,
+        $status,
+        $validarAlumno->codUsrMod,
+        null,
+        $validarAlumno->codUsrMod,
+        current_timestamp
+        );";
       // $resultado = conexion($query, 1);
       mysqli_query($con, $query) ? null : $query_ok=false;
       echo $query_ok === (false) ? 'ob' : null;
@@ -210,7 +263,7 @@ if ( isset($_POST['cedula_r']) and preg_match( "/[0-9]{8}/", $_POST['cedula_r'])
                   <h4>
                     Los registros asociados con
                     <em><?php echo $validarAlumno->p_apellido.", ".$validarAlumno->p_nombre ?></em>
-                    fueron guardados correctamente!
+                    fueron almacenados correctamente!
                   </h4>
                   <p>
                     <a id="constancia" href="<?php echo "reportes/constancia-inscripcion.php?cedula=$_POST[cedula]" ?>"
@@ -219,15 +272,29 @@ if ( isset($_POST['cedula_r']) and preg_match( "/[0-9]{8}/", $_POST['cedula_r'])
                     </a>
                   </p>
                   <p>
-                    Si desea hacer un registro de un alumno asociado a
+                    Si desea crear un registro de un nuevo alumno, asociado a
                     <?php echo $p_nombre_r ?>, <?php echo $p_apellido_r ?>
                     con cedula
-                     <strong><?php echo $_POST['cedula_r'] ?>, </strong>
-                     por favor dele
-                    <a href="<?php echo "form_reg_A.php?cedula_r=$_POST[cedula_r]" ?>">
-                      click a este enlace
-                    </a>
+                    <strong><?php echo $_POST['cedula_r'] ?></strong>
                   </p>
+                  <div class="margen">
+                    <a
+                      class="btn btn-default"
+                      href="<?php echo "form_reg_A.php?cedula_r=$_POST[cedula_r]" ?>">
+                      Registrar nuevo Alumno
+                    </a>
+                  </div>
+                  <p>
+                    Adicionalmente puede hacer un registro de un allegado a
+                    este alumno
+                  </p>
+                  <div class="margen">
+                    <a
+                      class="btn btn-default"
+                      href="<?php echo "../personalAutorizado/form_reg_PA.php?cedula_a=$_POST[cedula]" ?>">
+                      Registrar Allegado
+                    </a>
+                  </div>
                   <p>
                     <?php $index = enlaceDinamico(); ?>
                     <a href="<?php echo $index ?>" class="btn btn-primary btn-lg">Regresar al sistema</a>

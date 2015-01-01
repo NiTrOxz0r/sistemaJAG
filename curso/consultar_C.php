@@ -17,8 +17,8 @@ require_once($enlace);
 // invocamos validarUsuario.php desde master.php
 validarUsuario(1, 1, $_SESSION['cod_tipo_usr']);
 
-if ( isset($_POST['tipo']) ) :
-  if ($_POST['tipo'] === '1') :
+if ( isset($_REQUEST['tipo']) ) :
+  if ($_REQUEST['tipo'] === '1') :
     // cursos existentes por docente
     $query = "SELECT
       asume.codigo as codigo,
@@ -42,7 +42,7 @@ if ( isset($_POST['tipo']) ) :
       periodo_academico.codigo,
       curso.codigo,
       persona.p_apellido;";
-  elseif ($_POST['tipo'] === '2') :
+  elseif ($_REQUEST['tipo'] === '2') :
     // cursos existentes sin docentes
     $query = "SELECT
       asume.codigo as codigo,
@@ -58,13 +58,13 @@ if ( isset($_POST['tipo']) ) :
       order by
       periodo_academico.codigo,
       curso.codigo;";
-  elseif ($_POST['tipo'] === '3') :
+  elseif ($_REQUEST['tipo'] === '3') :
     // alumnos existentes por curso
-    if (isset($_POST['curso'])) :
+    if (isset($_REQUEST['curso'])) :
       $conexion = conexion();
-      $curso = mysqli_escape_string($conexion, trim($_POST['curso']) );
+      $curso = mysqli_escape_string($conexion, trim($_REQUEST['curso']) );
     else :
-      header('Location: menucon.php?error=curso&valor='.$_POST['curso']);
+      header('Location: menucon.php?error=curso&valor='.$_REQUEST['curso']);
     endif;
     $query = "SELECT
       asume.codigo as codigo,
@@ -80,19 +80,19 @@ if ( isset($_POST['tipo']) ) :
       inner join curso
       on asume.cod_curso = curso.codigo
       inner join alumno
-      on alumno.cod_curso = asume.cod_curso
+      on alumno.cod_curso = asume.codigo
       inner join persona
       on alumno.cod_persona = persona.codigo
       where asume.status = 1 and asume.cod_curso = $curso
       group by
       3,2,1,4,5,6;";
-  elseif ($_POST['tipo'] === '4'):
+  elseif ($_REQUEST['tipo'] === '4'):
     // alumnos existentes por curso (cuenta total)
-    if (isset($_POST['curso'])) :
+    if (isset($_REQUEST['curso'])) :
       $conexion = conexion();
-      $curso = mysqli_escape_string($conexion, trim($_POST['curso']) );
+      $curso = mysqli_escape_string($conexion, trim($_REQUEST['curso']) );
     else :
-      header('Location: menucon.php?error=curso&valor='.$_POST['curso']);
+      header('Location: menucon.php?error=curso&valor='.$_REQUEST['curso']);
     endif;
     $query = "SELECT
       asume.codigo as codigo,
@@ -106,12 +106,12 @@ if ( isset($_POST['tipo']) ) :
       inner join curso
       on asume.cod_curso = curso.codigo
       inner join alumno
-      on alumno.cod_curso = curso.codigo
+      on alumno.cod_curso = asume.codigo
       where asume.status = 1 and asume.cod_curso = $curso
       group by
       3,2,1;";
   else:
-    header('Location: menucon.php?error=tipo&valor='.$_POST['tipo']);
+    header('Location: menucon.php?error=tipo&valor='.$_REQUEST['tipo']);
   endif;
   $resultado = conexion($query);
   empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);?>
@@ -144,9 +144,9 @@ if ( isset($_POST['tipo']) ) :
         </div>
         <div class="row">
           <div class="col-xs-12">
-            <?php if ($_POST['tipo'] === '1'): ?>
+            <?php if ($_REQUEST['tipo'] === '1'): ?>
               <?php $enlace = enlaceDinamico('usuario/form_act_PI.php') ?>
-            <?php elseif ($_POST['tipo'] === '3'): ?>
+            <?php elseif ($_REQUEST['tipo'] === '3'): ?>
               <?php $enlace = enlaceDinamico('alumno/form_act_A.php') ?>
             <?php endif ?>
             <?php $enlacePrimario = enlaceDinamico('curso/form_act_C.php') ?>
@@ -163,13 +163,12 @@ if ( isset($_POST['tipo']) ) :
                  <span class="label label-info">Seleccione un registro para consultarlo</span>
               </div>
             </div>
-            <?php if ($_POST['tipo'] <> '2'): ?>
+            <?php if ($_REQUEST['tipo'] <> '2'): ?>
               <div class="row center-block margen">
                 <div class="col-xs-6 col-xs-offset-3">
                   <a
-                   id="consultar-cedula"
                    href="#"
-                   class="push-3 btn btn-warning btn-lg disabled">Consultar Persona</a>
+                   class="inyectar-cedula push-3 btn btn-warning btn-lg disabled">Consultar Persona</a>
                    <span class="label label-info">Seleccione un registro para consultarlo</span>
                 </div>
               </div>
@@ -190,7 +189,7 @@ if ( isset($_POST['tipo']) ) :
                 <!-- ignorar -->
                 <th data-radio="true" data-switchable="false"></th>
                 <!-- ignorar -->
-                <?php if ($_POST['tipo'] === '1'): ?>
+                <?php if ($_REQUEST['tipo'] === '1'): ?>
                   <th data-field="codigo" data-sortable="true">Codigo</th>
                   <th data-field="curso" data-sortable="true">Descripcion de curso</th>
                   <th data-field="periodo" data-sortable="true">Periodo Academico</th>
@@ -198,19 +197,19 @@ if ( isset($_POST['tipo']) ) :
                   <th data-field="p_apellido" data-sortable="true">Primer Apellido</th>
                   <th data-field="p_nombre" data-sortable="true">Primer Nombre</th>
                   <th data-field="cedula" data-sortable="true" data-switchable="false">Cedula</th>
-                <?php elseif ($_POST['tipo'] === '2'): ?>
+                <?php elseif ($_REQUEST['tipo'] === '2'): ?>
                   <th data-field="codigo" data-sortable="true">Codigo</th>
                   <th data-field="curso" data-sortable="true">Descripcion de curso</th>
                   <th data-field="periodo" data-sortable="true">Periodo Academico</th>
                   <th data-field="comentarios" data-sortable="true">Comentarios</th>
-                <?php elseif ($_POST['tipo'] === '3'): ?>
+                <?php elseif ($_REQUEST['tipo'] === '3'): ?>
                   <th data-field="codigo" data-sortable="true">Codigo</th>
                   <th data-field="curso" data-sortable="true">Descripcion de curso</th>
                   <th data-field="periodo" data-sortable="true">Periodo Academico</th>
                   <th data-field="p_apellido" data-sortable="true">Primer Apellido</th>
                   <th data-field="p_nombre" data-sortable="true">Primer Nombre</th>
                   <th data-field="cedula" data-sortable="true" data-switchable="false">Cedula</th>
-                <?php elseif ($_POST['tipo'] === '4'): ?>
+                <?php elseif ($_REQUEST['tipo'] === '4'): ?>
                   <th data-field="codigo" data-sortable="true">Codigo</th>
                   <th data-field="curso" data-sortable="true">Descripcion de curso</th>
                   <th data-field="periodo" data-sortable="true">Periodo Academico</th>
@@ -220,7 +219,7 @@ if ( isset($_POST['tipo']) ) :
               </thead>
               <tbody>
                 <?php while ( $datos = mysqli_fetch_array($resultado) ) : ?>
-                  <?php if ($_POST['tipo'] === '1'): // cursos con docente?>
+                  <?php if ($_REQUEST['tipo'] === '1'): // cursos con docente?>
                     <tr>
                       <!-- ignorar -->
                         <td></td>
@@ -247,7 +246,7 @@ if ( isset($_POST['tipo']) ) :
                         <?php echo $datos['cedula'] ?>
                       </td>
                     </tr>
-                  <?php elseif ($_POST['tipo'] === '2'): //curso sin docente ?>
+                  <?php elseif ($_REQUEST['tipo'] === '2'): //curso sin docente ?>
                     <tr>
                       <!-- ignorar -->
                         <td></td>
@@ -265,7 +264,7 @@ if ( isset($_POST['tipo']) ) :
                         <?php echo $datos['comentarios'] ?>
                       </td>
                     </tr>
-                  <?php elseif ($_POST['tipo'] === '3'): //alumnos por curso ?>
+                  <?php elseif ($_REQUEST['tipo'] === '3'): //alumnos por curso ?>
                     <tr>
                       <!-- ignorar -->
                         <td></td>
@@ -289,7 +288,7 @@ if ( isset($_POST['tipo']) ) :
                         <?php echo $datos['cedula'] ?>
                       </td>
                     </tr>
-                  <?php elseif ($_POST['tipo'] === '4'): //curso sin docente ?>
+                  <?php elseif ($_REQUEST['tipo'] === '4'): //curso sin docente ?>
                     <tr>
                       <!-- ignorar -->
                         <td></td>
@@ -322,7 +321,12 @@ if ( isset($_POST['tipo']) ) :
             </div>
             <div class="row center-block margen">
               <div class="col-xs-3 col-xs-offset-3">
-                <?php $enlace = "reportes/listado_C.php?tipo=$_REQUEST[tipo]&curso=$_REQUEST[curso]" ?>
+                <?php if (isset($_REQUEST['curso'])): ?>
+                  <?php $enlace = "reportes/listado_C.php?tipo=$_REQUEST[tipo]&curso=$_REQUEST[curso]" ?>
+                <?php else: ?>
+                  <?php $enlace = "reportes/listado_C.php?tipo=$_REQUEST[tipo]" ?>
+                <?php endif ?>
+
                 <a
                   id="generar-pdf"
                   href="<?php echo $enlace ?>"
@@ -373,7 +377,7 @@ if ( isset($_POST['tipo']) ) :
             type: 'POST',
             dataType: 'script'
           });
-          <?php if ($_POST['tipo'] <> '2') : ?>
+          <?php if ($_REQUEST['tipo'] <> '2') : ?>
             $.ajax({
               url: "<?php echo $tablaBotonCedula ?>",
               type: 'POST',

@@ -12,7 +12,7 @@
 * @todo ampliar segun sea necesario segun
 * los objetivos necesarios:
 *
-* @version 1.1
+* @version 1.2
 *
 */
 class ChequearGenerico extends TablaPrimaria{
@@ -34,22 +34,22 @@ class ChequearGenerico extends TablaPrimaria{
   function __construct(
     $codUsrMod,
     $p_apellido,
-    $s_apellido = 'null',
+    $s_apellido = 'default',
     $p_nombre,
-    $s_nombre = 'null',
+    $s_nombre = 'default',
     $nacionalidad,
     $cedula,
-    $telefono = 'null',
-    $telefonoOtro = 'null',
+    $telefono = 'default',
+    $telefonoOtro = 'default',
     $fecNac,
     $sexo,
-    $codigoDireccion = 'null'
+    $codigoDireccion = 'default'
   ){
     $this->codUsrMod = $codUsrMod;
     $this->p_apellido = $p_apellido;
 
     if ($s_apellido == "") {
-      $this->s_apellido = "null";
+      $this->s_apellido = "default";
     }else{
       $this->s_apellido = $s_apellido;
     }
@@ -57,7 +57,7 @@ class ChequearGenerico extends TablaPrimaria{
     $this->p_nombre = $p_nombre;
 
     if ($s_nombre == "") {
-      $this->s_nombre = "null";
+      $this->s_nombre = "default";
     }else{
       $this->s_nombre = $s_nombre;
     }
@@ -66,12 +66,12 @@ class ChequearGenerico extends TablaPrimaria{
     $this->cedula = $cedula;
 
     if ($telefono == "") {
-      $this->telefono = "null";
+      $this->telefono = "default";
     }else{
       $this->telefono = $telefono;
     }
     if ($telefonoOtro == "") {
-      $this->telefonoOtro = "null";
+      $this->telefonoOtro = "default";
     }else{
       $this->telefonoOtro = $telefonoOtro;
     }
@@ -80,7 +80,7 @@ class ChequearGenerico extends TablaPrimaria{
     $this->sexo = $sexo;
 
     if ($codigoDireccion == "") {
-      $this->codigoDireccion = "null";
+      $this->codigoDireccion = "default";
     }else{
       $this->codigoDireccion = $codigoDireccion;
     }
@@ -146,11 +146,11 @@ class ChequearGenerico extends TablaPrimaria{
       self::verificar("Location: registro.php?cedulaNumeric=false");
     }
     if ( strlen($this->cedula)>8 or strlen($this->cedula)<=6 ) {
-        self::verificar( "Location: registro.php?cedulaError=1_largo_cedula___".strlen($this->cedula) );
+      self::verificar( "Location: registro.php?cedulaError=1_largo_cedula___".strlen($this->cedula) );
     }
 
     if ( preg_match( "/^A-Za-z$^'$^áéíóú$^ÁÉÍÓÚ$/", $this->p_nombre) ) {
-     self::verificar("Location: registro.php?p_nombreNumeric=true");
+      self::verificar("Location: registro.php?p_nombreNumeric=true");
     }
 
     if ( preg_match( "/^A-Za-z$^'$^áéíóú$^ÁÉÍÓÚ$/", $this->s_nombre) ) {
@@ -169,18 +169,18 @@ class ChequearGenerico extends TablaPrimaria{
       self::verificar("Location: registro.php?nacionalidad=notVorE");
     }
 
-    if ($this->telefono <> 'null') {
+    if ($this->telefono <> 'default') {
       if ( !is_numeric($this->telefono) ) {
-      self::verificar("Location: registro.php?telefonoNumeric=false");
+        self::verificar("Location: registro.php?telefonoNumeric=false");
       }
       if ( !preg_match( '/^\d{11}$/', $this->telefono) ) {
         self::verificar("Location: registro.php?telefonoLength=false");
       }
     }
 
-    if ($this->telefonoOtro <> 'null') {
+    if ($this->telefonoOtro <> 'default') {
       if ( !is_numeric($this->telefonoOtro) ) {
-      self::verificar("Location: registro.php?telefonoOtroNumeric=false");
+        self::verificar("Location: registro.php?telefonoOtroNumeric=false");
       }
       if ( !preg_match( '/^\d{11}$/', $this->telefonoOtro) ) {
         self::verificar("Location: registro.php?telefonoOtroLength=false");
@@ -189,13 +189,13 @@ class ChequearGenerico extends TablaPrimaria{
 
     if ($this->fecNac <> 'current_timestamp') {
       if ( preg_match( "/[^0-9$^-]/", $this->fecNac) ) {
-      self::verificar("Location: registro.php?fecNacNumeric=false");
+        self::verificar("Location: registro.php?fecNacNumeric=false");
       }
     }
 
     if ($this->sexo <> '0' and $this->sexo <> '1') {
       if ( !is_numeric($this->telefonoOtro) ) {
-      self::verificar("Location: registro.php?sexo=malDefinido");
+        self::verificar("Location: registro.php?sexo=malDefinido");
       }
     }
 
@@ -229,12 +229,22 @@ class ChequearGenerico extends TablaPrimaria{
     return $this->info;
   }
 
-  static function cedula($cedula){
-    if ( preg_match( "/[0-9]{8}/", $cedula) ) :
+  /**
+   * [cedula usado para validar solo cedulas en el sistema]
+   * @param  string $cedula la cedula a validar
+   * @param  mixed  $tipo   tipo de cedula a devolver, con o sin comillas
+   * @return string         la cedula validada con o sin comillas.
+   */
+  static function cedula($cedula, $tipo = null){
+    if ( preg_match( "/[0-9]{6,8}/", $cedula, $n) ) :
       $conexion = conexion();
-      $c = mysqli_escape_string($conexion, $cedula);
+      $c = mysqli_escape_string($conexion, $n[0]);
       mysqli_close($conexion);
-      return "'$c'";
+      if (!$tipo):
+        return "'$c'";
+      else:
+        return $c;
+      endif;
     else :
       return false;
     endif;

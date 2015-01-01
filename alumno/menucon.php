@@ -114,7 +114,6 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr'], 'sistemaJAG 
                 class="form-control"
                 name="tipo"
                 id="tipo"
-                autofocus="autofocus"
                 required>
                 <option selected="selected" value="0">--Seleccione--</option>
                 <option value="1">Por cedula</option>
@@ -141,7 +140,12 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr'], 'sistemaJAG 
                   id="informacion">
               </div>
               <div class="input-group hidden">
-                <?php $query = "SELECT codigo, descripcion from curso where status = 1;";
+                <?php $query = "SELECT
+                  asume.codigo, curso.descripcion
+                  from asume
+                  inner join curso
+                  on asume.cod_curso = curso.codigo
+                  where curso.status = 1;";
                   $resultado = conexion($query);?>
                 <select class="form-control" name="informacion" id="informacion_lista">
                   <option value="" selected="selected">--Seleccione--</option>
@@ -352,7 +356,7 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr'], 'sistemaJAG 
               cedula_r = cedula;
             };
             if ( validacionCedula(cedula) && validacionCedula(cedula_r)) {
-              var action = $(this).attr('action');
+              // var action = $(this).attr('action');
               // desabilitado por no continuar
               // la cuestion del ajax y paginas dinamicas:
               // $.ajax({
