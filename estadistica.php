@@ -119,6 +119,70 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']); ?>
                   </h4>
                 </div>
               </div>
+              <!-- por peso -->
+              <div class="row">
+                <div class="col-sm-6">
+                  <h4>
+                    Media de peso en niños (kg): <strong>algo</strong>
+                  </h4>
+                </div>
+                <div class="col-sm-6">
+                  <h4>
+                    Media de peso en niñas (kg): <strong>algo</strong>
+                  </h4>
+                </div>
+              </div>
+              <!-- por altura min/max -->
+              <div class="row">
+                <div class="col-sm-6">
+                  <h4>
+                    Mayor altura (cm):
+                    <strong>algo</strong>
+                    <a href="#">apellido, nombre</a>
+                  </h4>
+                </div>
+                <div class="col-sm-6">
+                  <h4>
+                    Menor altura (cm):
+                    <strong>algo</strong>
+                    <a href="#">apellido, nombre</a>
+                  </h4>
+                </div>
+              </div>
+              <!-- por altura -->
+              <div class="row">
+                <div class="col-sm-6">
+                  <h4>
+                    Media de altura en niños (cm): <strong>algo</strong>
+                  </h4>
+                </div>
+                <div class="col-sm-6">
+                  <h4>
+                    Media de altura en niñas (cm): <strong>algo</strong>
+                  </h4>
+                </div>
+              </div>
+              <!-- por repitiente -->
+              <div class="row">
+                <div class="col-sm-6">
+                  <h4>
+                    Alumnos repitientes: <strong>algo</strong>
+                  </h4>
+                </div>
+                <div class="col-sm-6">
+                  <h4>
+                    Alumnos no repitientes: <strong>algo</strong>
+                  </h4>
+                </div>
+              </div>
+              <!-- por cursos -->
+              <div class="row">
+                <div class="col-sm-12">
+                  <h4>
+                    <strong>alumnos en cursos... 1,2,3,4,5,6</strong>
+                  </h4>
+                </div>
+              </div>
             </div>
           </div>
         </div>
