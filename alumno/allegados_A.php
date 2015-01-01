@@ -22,19 +22,21 @@ if ( isset($_REQUEST['cedula']) ) :
     personal_autorizado.telefono_trabajo,
     personal_autorizado.email,
     personal_autorizado.vive_con_alumno,
-    relacion.descripcion as relacion
+    relacion.descripcion as relacion,
+    obtiene.puede_retirar,
+    obtiene.comentarios
     from persona
     inner join personal_autorizado
     on persona.codigo = personal_autorizado.cod_persona
     inner join relacion
     on personal_autorizado.relacion = relacion.codigo
     inner join obtiene
-      on personal_autorizado.codigo = obtiene.cod_p_a
-      where obtiene.cod_alu = (SELECT alumno.codigo
-        from alumno
-        inner join persona
-        on alumno.cod_persona = persona.codigo
-        where persona.cedula = $cedula_a);";
+    on personal_autorizado.codigo = obtiene.cod_p_a
+    where obtiene.cod_alu = (SELECT alumno.codigo
+      from alumno
+      inner join persona
+      on alumno.cod_persona = persona.codigo
+      where persona.cedula = $cedula_a);";
   $resultado = conexion($query);
   if ($resultado): ?>
     <div id="contenido_consultar_U">
@@ -95,6 +97,8 @@ if ( isset($_REQUEST['cedula']) ) :
                   <th data-field="relacion" data-sortable="true">Relacion</th>
                   <th data-field="telefono" data-sortable="false">Telefono</th>
                   <th data-field="telefono_trabajo" data-sortable="true" data-visible="true">Telf. Lab.</th>
+                  <th data-field="puede_retirar" data-sortable="true" data-visible="true">Puede retirar</th>
+                  <th data-field="comentarios" data-sortable="true" data-visible="true">Comentarios</th>
                 </thead>
                 <tbody>
                   <?php while( $datos = mysqli_fetch_array($resultado) ) : ?>
@@ -125,6 +129,12 @@ if ( isset($_REQUEST['cedula']) ) :
                       </td>
                       <td>
                         <?php echo $datos['telefono_trabajo'] ?>
+                      </td>
+                      <td>
+                        <?php echo $datos['puede_retirar'] === ('s') ? 'si':'no' ?>
+                      </td>
+                      <td>
+                        <?php echo $datos['comentarios'] ?>
                       </td>
                     </tr>
                   <?php endwhile; ?>

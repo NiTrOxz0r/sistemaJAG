@@ -8,36 +8,40 @@ validarUsuario(1, 1, $_SESSION['cod_tipo_usr']);
 empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr'], 'sistemaJAG | Consulta de alumno');
 
 if ( isset($_REQUEST['cedula']) ) :
-  $cedula_a = ChequearGenerico::cedula($_REQUEST['cedula']);
+  $cedula = ChequearGenerico::cedula($_REQUEST['cedula']);
   $query = "SELECT p_apellido, p_nombre, codigo
     from persona
-    where cedula = $cedula_a;";
+    where cedula = $cedula;";
   $resultado = conexion($query);
-  $datosAlumno = mysqli_fetch_assoc($resultado);
+  $datosAllegado = mysqli_fetch_assoc($resultado);
   $query = "SELECT
     persona.p_apellido,
     persona.p_nombre,
     persona.cedula,
+    persona.fec_nac,
     persona.telefono,
-    personal_autorizado.telefono_trabajo,
-    personal_autorizado.email,
-    personal_autorizado.vive_con_alumno,
-    relacion.descripcion as relacion
+    persona.sexo,
+    alumno.cedula_escolar,
+    curso.descripcion as curso,
+    obtiene.puede_retirar,
+    obtiene.comentarios
     from persona
-    inner join personal_autorizado
-    on persona.codigo = personal_autorizado.cod_persona
-    inner join relacion
-    on personal_autorizado.relacion = relacion.codigo
+    inner join alumno
+    on persona.codigo = alumno.cod_persona
     inner join obtiene
-      on personal_autorizado.codigo = obtiene.cod_p_a
-      where obtiene.cod_alu = (SELECT alumno.codigo
-        from alumno
-        inner join persona
-        on alumno.cod_persona = persona.codigo
-        where persona.cedula = $cedula_a);";
+    on alumno.codigo = obtiene.cod_alu
+    inner join asume
+    on alumno.cod_curso = asume.codigo
+    inner join curso
+    on asume.cod_curso = curso.codigo
+    where obtiene.cod_p_a = (SELECT personal_autorizado.codigo
+      from personal_autorizado
+      inner join persona
+      on personal_autorizado.cod_persona = persona.codigo
+      where persona.cedula = $cedula);";
   $resultado = conexion($query);
   if ($resultado): ?>
-    <div id="contenido_consultar_U">
+    <div id="contenido_allegados_P">
       <div id="blancoAjax">
         <!-- CONTENIDO EMPIEZA DEBAJO DE ESTO: -->
         <!-- DETALLESE QUE NO ES UN ID SINO UNA CLASE. -->
@@ -45,12 +49,12 @@ if ( isset($_REQUEST['cedula']) ) :
           <div class="row">
             <div class="col-xs-8 col-xs-offset-2 margenAbajo">
               <h3 class="text-center text-uppercase">
-                Allegados de <?php echo $datosAlumno['p_apellido'] ?>,
-                <?php echo $datosAlumno['p_nombre'] ?>
+                Alumnos Allegados de <?php echo $datosAllegado['p_apellido'] ?>,
+                <?php echo $datosAllegado['p_nombre'] ?>
               </h3>
             </div>
           </div>
-          <?php $enlacePrimario = enlaceDinamico('personalAutorizado/form_act_P.php') ?>
+          <?php $enlacePrimario = enlaceDinamico('alumno/form_act_A.php') ?>
           <span class="hidden"
             data-enlace-primario="<?php echo $enlacePrimario ?>">
           </span>
@@ -88,13 +92,15 @@ if ( isset($_REQUEST['cedula']) ) :
                   <th data-radio="true" data-switchable="false"></th>
                   <!-- ignorar -->
                   <th data-field="cedula" data-sortable="true" data-switchable="false">Cedula</th>
+                  <th data-field="cedula_escolar" data-sortable="true">Cedula Escolar</th>
                   <th data-field="p_apellido" data-sortable="true">Primer Apellido</th>
                   <th data-field="p_nombre" data-sortable="true">Primer Nombre</th>
-                  <th data-field="email" data-sortable="true">Email</th>
-                  <th data-field="vive_con_alumno" data-sortable="true">Vive con Alumno</th>
-                  <th data-field="relacion" data-sortable="true">Relacion</th>
+                  <th data-field="sexo" data-sortable="true">Sexo</th>
+                  <th data-field="fec_nac" data-sortable="true">Fecha. Nac.</th>
                   <th data-field="telefono" data-sortable="false">Telefono</th>
-                  <th data-field="telefono_trabajo" data-sortable="true" data-visible="true">Telf. Lab.</th>
+                  <th data-field="curso" data-sortable="false">Grado y seccion</th>
+                  <th data-field="puede_retirar" data-sortable="true" data-visible="true">Puede retirar</th>
+                  <th data-field="comentarios" data-sortable="true" data-visible="true">Comentarios</th>
                 </thead>
                 <tbody>
                   <?php while( $datos = mysqli_fetch_array($resultado) ) : ?>
@@ -106,25 +112,31 @@ if ( isset($_REQUEST['cedula']) ) :
                         <?php echo $datos['cedula'] ?>
                       </td>
                       <td>
+                        <?php echo $datos['cedula_escolar'] ?>
+                      </td>
+                      <td>
                         <?php echo $datos['p_apellido'] ?>
                       </td>
                       <td>
                         <?php echo $datos['p_nombre'] ?>
                       </td>
                       <td>
-                        <?php echo $datos['email'] ?>
+                        <?php echo $datos['sexo'] === ('0') ? 'Masculino':'Femenino' ?>
                       </td>
                       <td>
-                        <?php echo $datos['vive_con_alumno'] === ('s') ? 'si':'no' ?>
-                      </td>
-                      <td>
-                        <?php echo $datos['relacion'] ?>
+                        <?php echo $datos['fec_nac'] ?>
                       </td>
                       <td>
                         <?php echo $datos['telefono'] ?>
                       </td>
                       <td>
-                        <?php echo $datos['telefono_trabajo'] ?>
+                        <?php echo $datos['curso'] ?>
+                      </td>
+                      <td>
+                        <?php echo $datos['puede_retirar'] === ('s') ? 'si':'no' ?>
+                      </td>
+                      <td>
+                        <?php echo $datos['comentarios'] ?>
                       </td>
                     </tr>
                   <?php endwhile; ?>

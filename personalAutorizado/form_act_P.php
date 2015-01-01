@@ -46,15 +46,18 @@ if($reg = mysqli_fetch_array($re)) :
             </div>
           </div>
           <div class="row margen">
-            <div class="col-sm-4 col-sm-offset-4">
+            <div class="col-sm-4 col-sm-offset-2">
               <a href="reportes/detallado.php?cedula=<?php echo $cedula ?>" class="cons-est btn btn-default btn-block">Generar Reporte</a>
+            </div>
+            <div class="col-sm-4">
+              <a href="allegados_P.php?cedula=<?php echo $cedula ?>" class="btn btn-info btn-block">Consultar Alumnos Asociados</a>
             </div>
           </div>
         </div>
         <!-- http://www.w3schools.com/html/html_forms.asp -->
         <form action="actualizar_P.php" method="POST" id="form" name="form_repre" class="form-horizontal">
           <fieldset>
-            <legend class="text-center text-uppercase"><h1>Consulta de representante</h1></legend>
+            <legend class="text-center text-uppercase"><h1>Consulta de allegado</h1></legend>
             <div class="container">
               <!-- inicio de nacionalidad y cedula -->
               <div class="row">
@@ -748,7 +751,7 @@ if($reg = mysqli_fetch_array($re)) :
     <script type="text/javascript">
       $(function() {
         $('.actualizar').on('click', function(evento) {
-          cambiarSoloLectura($('#form'), 'representante');
+          cambiarSoloLectura($('#form'), 'allegado');
         });
       });
     </script>
