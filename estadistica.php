@@ -300,4 +300,6 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']); ?>
     </div>
   </div>
 </div>
+<!-- graficos -->
+<script src="java/Chart.js/Chart.min.js"></script>
 <?php finalizarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']); ?>
