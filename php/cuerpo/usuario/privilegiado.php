@@ -44,21 +44,27 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);
           href="curso/menucon.php"
           class="btn btn-default btn-lg btn-block"
           role="button">
-            Consultar Cursos
+            Gestionar Cursos
           </a>
           <a
-          href="alumno/menucon.php"
+          href="usuario/menucon.php"
           class="btn btn-default btn-lg btn-block"
           role="button">
-            Consultar Alumno
+            Consultar Usuarios del sistema
           </a>
         </div>
         <div class="col-sm-6 text-center">
           <a
+          href="alumno/menucon.php"
+          class="btn btn-default btn-lg btn-block"
+          role="button">
+            Gestionar Alumno
+          </a>
+          <a
           href="personalAutorizado/menucon.php"
           class="btn btn-default btn-lg btn-block"
           role="button">
-            Consultar Padres y Representante
+            Gestionar Padres y Representante
           </a>
         </div>
       </div>

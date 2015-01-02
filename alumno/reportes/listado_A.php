@@ -122,7 +122,7 @@ if ( (isset($_REQUEST['informacion']) and isset($_REQUEST['tipo']) )
         padding: 5px;
       }
     </style>";
-    $encabezado = $estilo.'<p></p><p></p><table style="" cellspacing="0">';
+    $encabezado = $estilo.'<p></p><p></p><p><center><h1 style="text-align:center;">Listado de Alumnos</h1></center></p><table style="" cellspacing="0">';
     $thead = '<thead>
                 <tr>
                   <th>Cedula</th>
@@ -197,7 +197,8 @@ if ( (isset($_REQUEST['informacion']) and isset($_REQUEST['tipo']) )
                 </tbody>';
       $c++;
     endwhile;
-    $pie = '</table>';
+    $y = date('m');
+    $pie = '</table><p><em>reporte generado el: '.$x.'-'.$y.'-'.$z.'</em></p>';
     $html = $encabezado.$thead.$tbody.$pie;
     // magia:
     // Print text using writeHTMLCell()
@@ -206,7 +207,6 @@ if ( (isset($_REQUEST['informacion']) and isset($_REQUEST['tipo']) )
     // ---------------------------------------------------------
 
     // termina el proceso y crea el archivo:
-    $y = date('m');
     $nombre = "listado-alumnos-$x-$y-$z.pdf";
     $pdf->Output($nombre, 'I');
     // echo $html;

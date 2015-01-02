@@ -51,14 +51,15 @@ if ( isset($_SESSION['cod_tipo_usr']) ) : ?>
 		          data-toggle="dropdown"
 		          role="button"
 		          aria-expanded="false">
-		          	Gestionar <span class="caret"></span>
+		          	Consultar <span class="caret"></span>
 		          </a>
+		          <?php $alumnos = enlaceDinamico('alumno/menucon.php'); ?>
+		          <?php $padres = enlaceDinamico('personalAutorizado/menucon.php'); ?>
+		          <?php $cursos = enlaceDinamico('curso/menucon.php'); ?>
 		          <ul class="dropdown-menu" role="menu">
-		            <li><a href="#">Alumno</a></li>
-		            <li><a href="#">Padres/Allegados</a></li>
-		            <li><a href="#">Cursos</a></li>
-		            <li class="divider"></li>
-		            <li><a href="#">Usuarios</a></li>
+		            <li><a href="<?php echo $alumnos ?>">Alumno</a></li>
+		            <li><a href="<?php echo $padres ?>">Padres/Allegados</a></li>
+		            <li><a href="<?php echo $cursos ?>">Cursos</a></li>
 		          </ul>
 		        </li>
 		      </ul>

@@ -28,7 +28,7 @@ switch ($_SESSION['cod_tipo_usr']) {
     break;
   //USUARIO PRIV:
   case 2:
-    echo "Validacion tipo de usuario: Usuario Privilegiado en desarrollo";
+    require "php/cuerpo/usuario/privilegiado.php";
     break;
   //ADMIN:
   case 3:

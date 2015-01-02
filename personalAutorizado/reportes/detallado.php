@@ -223,7 +223,7 @@ $html = <<<HTML
 <p></p>
 <p></p>
 <div>
-<h1 align="center"><strong>REPORTE DE PADRES/REPRESENTANTES/OTROS</strong></h1>
+<h1 align="center"><strong>REPORTE DE REPRESENTANTES/ALLEGADOS</strong></h1>
   <div>
     <table cellspacing="0" style="border-collapse:collapse;text-align: left;">
       <tbody>
@@ -309,7 +309,7 @@ $html = <<<HTML
       </tbody>
     </table>
   </div>
-  <p style="padding:150px;">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+  <p style="padding:150px;">&nbsp;</p>
   <p><em>Reporte generado el: {$x}-{$y}-{$z}</em></p>
 </div>
 HTML;
