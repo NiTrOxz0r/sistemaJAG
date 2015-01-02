@@ -355,7 +355,7 @@ $html = <<<HTML
       </tbody>
     </table>
   </div>
-  <p style="padding:150px;"></p>
+  <p style="padding:150px;">&nbsp;</p>
   <p><em>Reporte generado el: {$x}-{$y}-{$z}</em></p>
 </div>
 HTML;

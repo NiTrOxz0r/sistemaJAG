@@ -158,7 +158,7 @@ if ( (isset($_REQUEST['informacion'])
           padding: 5px;
         }
       </style>";
-      $encabezado = $estilo.'<p></p><p></p><table style="" cellspacing="0">';
+      $encabezado = $estilo.'<p></p><p></p><p><center><h1 style="text-align:center;">Listado de Personal</h1></center></p><table style="" cellspacing="0">';
       $thead = '<thead>
                   <tr>
                     <th>Cedula</th>
@@ -200,7 +200,10 @@ if ( (isset($_REQUEST['informacion'])
                   </tbody>';
         $c++;
       endwhile;
-      $pie = '</table>';
+      $x = date('d');
+      $z = date('Y');
+      $y = date('m');
+      $pie = '</table><p><em>reporte generado el: '.$x.'-'.$y.'-'.$z.'</em></p>';
       $html = $encabezado.$thead.$tbody.$pie;
     else:
       $estilo = "<style>
@@ -210,7 +213,7 @@ if ( (isset($_REQUEST['informacion'])
           padding: 5px;
         }
       </style>";
-      $encabezado = $estilo.'<p></p><p></p><table style="" cellspacing="0">';
+      $encabezado = $estilo.'<p></p><p></p><p><center><h1 style="text-align:center;">Listado de Personal</h1></center></p><table style="" cellspacing="0">';
       $thead = '<thead>
                   <tr>
                     <th>Cedula</th>
@@ -254,7 +257,10 @@ if ( (isset($_REQUEST['informacion'])
                   </tbody>';
         $c++;
       endwhile;
-      $pie = '</table>';
+      $x = date('d');
+      $z = date('Y');
+      $y = date('m');
+      $pie = '</table><p><em>reporte generado el: '.$x.'-'.$y.'-'.$z.'</em></p>';
       $html = $encabezado.$thead.$tbody.$pie;
     endif;
     // crea un nuevo documento pdf por medio de la clase TCDPF

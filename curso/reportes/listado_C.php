@@ -117,7 +117,7 @@ if ( isset($_GET['tipo']) ) :
           padding: 5px;
         }
       </style>";
-      $encabezado = $estilo.'<p></p><p></p><table style="" cellspacing="0">';
+      $encabezado = $estilo.'<p></p><p></p><p><center><h1 style="text-align:center;">Listado de Cursos</h1></center></p><table style="" cellspacing="0">';
       $thead = '<thead>
                   <tr>
                     <th>Codigo</th>
@@ -265,7 +265,10 @@ if ( isset($_GET['tipo']) ) :
                   </tbody>';
         $c++;
       endwhile;
-      $pie = '</table>';
+      $x = date('d');
+      $z = date('Y');
+      $y = date('m');
+      $pie = '</table><p><em>reporte generado el: '.$x.'-'.$y.'-'.$z.'</em></p>';
       $html = $encabezado.$thead.$tbody.$pie;
     endif;
     // crea un nuevo documento pdf por medio de la clase TCDPF
@@ -318,9 +321,7 @@ if ( isset($_GET['tipo']) ) :
     );
     $n = date('m');
     $mes = $meses[$n];
-    $x = date('d');
     $y = $mes;
-    $z = date('Y');
     $n = intval(date('Y'));
     $n1 = $n+1;
     // mes actual mas 4

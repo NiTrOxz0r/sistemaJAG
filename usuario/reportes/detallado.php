@@ -307,8 +307,8 @@ $html = <<<HTML
         <tr>
           <th width="20%">Nivel Instruccion:</th>
           <td width="29%"><strong>{$nivel_instruccion}</strong></td>
-          <th>Email:</th>
-          <td><strong>{$email}</strong></td>
+          <th width="8%">Email:</th>
+          <td width="35%"><strong>{$email}</strong></td>
         </tr>
         <tr>
           <th width="40%">Titulos y/o Certificados:</th>
@@ -338,7 +338,7 @@ $html = <<<HTML
           <td width="51%"><strong>{$descripcion_4}</strong></td>
         </tr>
         <tr>
-          <th>Cargo:</th>
+          <th width="20%">Cargo:</th>
           <td><strong>{$cargo}</strong></td>
         </tr>
         <tr>
@@ -348,15 +348,15 @@ $html = <<<HTML
           <td><strong>{$codigo_personal}</strong></td>
         </tr>
         <tr>
-          <th>Seudonimo:</th>
-          <td><strong>{$seudonimo}</strong></td>
+          <th width="20%">Seudonimo:</th>
+          <td width="29%"><strong>{$seudonimo}</strong></td>
           <th width="24%">Tipo de usuario:</th>
           <td><strong>{$tipo_usr}</strong></td>
         </tr>
       </tbody>
     </table>
   </div>
-  <p style="padding:150px;">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+  <p style="padding:150px;">&nbsp;</p>
   <p><em>Reporte generado el: {$x}-{$y}-{$z}</em></p>
 </div>
 HTML;
