@@ -286,6 +286,35 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']); ?>
                 </div>
               </div>
               <!-- por cursos -->
+              <?php
+              // si es despues de inscripciones año actual - año mas 1
+              // si es antes de inscripciones año menos 1 - año actual
+              if ( intval(date('m')) > 7 ) :
+                $n = date('Y');
+                $n1 = intval(date('Y')) + 1;
+              else :
+                $n1 = date('Y');
+                $n  = intval(date('Y')) - 1;
+              endif;
+              $query = "SELECT
+                asume.codigo as codigo,
+                curso.descripcion as 'des_curso',
+                COUNT(alumno.codigo) as 'total_alumnos'
+                from asume
+                inner join periodo_academico
+                on asume.periodo_academico = periodo_academico.codigo
+                inner join curso
+                on asume.cod_curso = curso.codigo
+                inner join alumno
+                on alumno.cod_curso = asume.codigo
+                where asume.status = 1
+                and asume.periodo_academico = (SELECT codigo
+                  from periodo_academico
+                  where descripcion like '%$n-$n1%')
+                group by
+                2,1;";
+              $resultado = conexion($query);
+              $datos = mysqli_fetch_assoc($resultado); ?>
               <div class="row">
                 <div class="col-sm-12">
                   <h4>
