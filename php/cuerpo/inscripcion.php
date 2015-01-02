@@ -10,7 +10,7 @@
             <ul>
               <li>Partida de Nacimiento.</li>
               <li>Boleta de notas.</li>
-              <li>Cedula Laminada y fotocopia.</li>
+              <li>Cédula Laminada y fotocopia.</li>
               <li>Constancia de estudios (si aplica).</li>
             </ul>
             <h4>Tambien es recomendable destacar los documentos en mano requeridos para el proceso de Inscripcion.</h4>
@@ -37,7 +37,7 @@
               <div class="checkbox">
                 <label>
                   <input type="checkbox" value="s" name="bicentenario">
-                  Coleccion Bicentenario.
+                  Colección Bicentenario.
                 </label>
               </div>
               <div class="checkbox">

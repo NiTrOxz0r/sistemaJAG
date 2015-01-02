@@ -161,11 +161,11 @@ if ( (isset($_REQUEST['informacion'])
       $encabezado = $estilo.'<p></p><p></p><p><center><h1 style="text-align:center;">Listado de Personal</h1></center></p><table style="" cellspacing="0">';
       $thead = '<thead>
                   <tr>
-                    <th>Cedula</th>
+                    <th>Cédula</th>
                     <th>Primer Apellido</th>
                     <th>Primer Nombre</th>
                     <th>Celular</th>
-                    <th>Telefono</th>
+                    <th>Teléfono</th>
                     <th>Telf. Ad.</th>
                     <th>Nivel Instruccion</th>
                     <th>Email</th>
@@ -216,11 +216,11 @@ if ( (isset($_REQUEST['informacion'])
       $encabezado = $estilo.'<p></p><p></p><p><center><h1 style="text-align:center;">Listado de Personal</h1></center></p><table style="" cellspacing="0">';
       $thead = '<thead>
                   <tr>
-                    <th>Cedula</th>
+                    <th>Cédula</th>
                     <th>Primer Apellido</th>
                     <th>Primer Nombre</th>
                     <th>Celular</th>
-                    <th>Telefono</th>
+                    <th>Teléfono</th>
                     <th>Telf. Ad.</th>
                     <th>Nivel Instruccion</th>
                     <th>Email</th>

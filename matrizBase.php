@@ -19,7 +19,7 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);
 
 //CONTENIDO:?>
 <!-- esto va en head.php -->
-<!-- pero se pone aqui por demostracion. -->
+<!-- pero se pone aquí por demostracion. -->
 <!-- Bootstrap -->
 <link href="css/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <!-- DETALLESE QUE EL TIENE QUE SER UNICA PARA NO GENERAR CONFLICTOS CON AJAX Y JQUERY -->

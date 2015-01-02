@@ -36,7 +36,7 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr'], 'sistemaJAG 
           method="POST">
           <fieldset>
             <legend class="text-center">
-              Datos basicos del usuario
+              Datos básicos del usuario
             </legend>
             <div class="form-group">
               <label for="seudonimo" class="control-label">Seudonimo</label>

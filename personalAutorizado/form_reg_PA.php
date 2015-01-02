@@ -55,7 +55,7 @@ if($go):?>
                     <div class="row">
                       <div class="col-xs-11">
                         <div class="form-group">
-                          <label for="cedula_a" class="control-label">Cedula</label>
+                          <label for="cedula_a" class="control-label">Cédula</label>
                           <input
                             class="form-control bloquear"
                             type="text"
@@ -75,7 +75,7 @@ if($go):?>
                     <div class="row">
                       <div class="col-xs-11">
                         <div class="form-group">
-                          <label for="cedula_a" class="control-label">Cedula Escolar</label>
+                          <label for="cedula_a" class="control-label">Cédula Escolar</label>
                           <input
                             class="form-control bloquear"
                             type="text"
@@ -126,7 +126,7 @@ if($go):?>
                         required
                         class="form-control">
                         <option selected="selected" value="v">Venezolano</option>
-                        <option value="e">Extrangero</option>
+                        <option value="e">Extranjero</option>
                       </select>
                         <p class="help-block" id="nacionalidad_chequeo">
                         </p>
@@ -135,7 +135,7 @@ if($go):?>
                   <div class="col-sm-5 col-sm-offset-1">
                     <!-- http://www.w3schools.com/tags/att_input_autocomplete.asp -->
                     <div class="form-group">
-                      <label for="cedula" class="control-label">Cedula</label>
+                      <label for="cedula" class="control-label">Cédula</label>
                       <input
                         type="text"
                         maxlength="8"
@@ -325,7 +325,7 @@ if($go):?>
                     <div class="row">
                       <div class="col-xs-11">
                         <div class="form-group">
-                          <label class="control-label" for="telefono">Telefono</label>
+                          <label class="control-label" for="telefono">Teléfono</label>
                           <input
                             class="form-control"
                             type="text"
@@ -342,7 +342,7 @@ if($go):?>
                     <div class="row">
                       <div class="col-xs-11">
                         <div class="form-group">
-                          <label class="control-label" for="telefono_otro">Telefono Adicional</label>
+                          <label class="control-label" for="telefono_otro">Teléfono Adicional</label>
                           <input
                             class="form-control"
                             type="text"
@@ -431,7 +431,7 @@ if($go):?>
                 </div>
                 <!-- direccion personal -->
                 <fieldset>
-                  <legend class="text-center">Direccion de habitacion</legend>
+                  <legend class="text-center">Dirección de habitación</legend>
                   <!-- inicio de estado, municio y parroquia -->
                   <div class="row">
                     <div class="col-sm-4">
@@ -479,7 +479,7 @@ if($go):?>
                   <div class="row">
                     <div class="col-xs-12">
                       <div class="form-group">
-                        <label for="direcc" class="control-label">Informacion detallada (Av/Calle/Edf.)</label>
+                        <label for="direcc" class="control-label">Información detallada (Av/Calle/Edf.)</label>
                         <textarea
                         class="form-control"
                         maxlenght="150"
@@ -541,7 +541,7 @@ if($go):?>
                       <div class="row">
                         <div class="col-xs-12">
                           <div class="form-group">
-                            <label for="telefono_trabajo" class="control-label">Telefono laboral</label>
+                            <label for="telefono_trabajo" class="control-label">Teléfono laboral</label>
                             <input
                               class="form-control"
                               type="text"
@@ -601,7 +601,7 @@ if($go):?>
                   <div class="row">
                     <div class="col-xs-12">
                       <h4>
-                        Por favor, asegurese que sus datos son correctos antes de
+                        Por favor, asegúrese que sus datos son correctos antes de
                         continuar con el proceso de registro.
                       </h4>
                       <p>
@@ -777,7 +777,7 @@ if($go):?>
                   La cedula <?php echo $cedula_a ?> del alumno no esta registrada en el sistema!
                   <em>Para registrar a un allegado, es necesario registrar primero a un alumno.</em>
                   es importante destacar que es necesario registrar a un representante antes de
-                  registrar a un alumno, para ir al proceso de inscripcion <a href="<?php echo $inscripcion ?>">
+                  registrar a un alumno, para ir al proceso de inscripción <a href="<?php echo $inscripcion ?>">
                   puede seguir este enlace.
                   </a>
                 </p>
@@ -786,7 +786,7 @@ if($go):?>
                   Parece haber algo extraño con los datos requeridos con el proceso de registro.
                   La cedula puede estar vacia o puede estar incorrectamente especificada.
                   <em>Para registrar a un alumno, es necesario registrar primero al representante.</em>
-                  para ir al proceso de inscripcion <a href="<?php echo $inscripcion ?>">
+                  para ir al proceso de inscripción <a href="<?php echo $inscripcion ?>">
                   puede seguir este enlace.
                   </a>
                 </p>
@@ -799,7 +799,7 @@ if($go):?>
               <a href="menucon.php">click a este enlace.</a>
             </p>
             <p>
-              ¿O sera que entro en esta pagina erroneamente?
+              ¿O será que entro en esta pagina erróneamente?
             </p>
             <p class="bg-warning">
               Si este es un problema recurrente, contacte a un administrador del sistema.

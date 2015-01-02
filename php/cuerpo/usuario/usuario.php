@@ -28,7 +28,7 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);
             </h1>
             <?php include_once($version); ?>
             <p>
-            mensaje de bienvenida, info del sistema, informacion relevante de algun proceso.
+            mensaje de bienvenida, info del sistema, informacion relevante de algún proceso.
             alguna otra cosa que sea necesario.
             </p>
           </div>

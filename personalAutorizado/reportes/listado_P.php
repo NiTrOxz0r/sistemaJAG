@@ -125,10 +125,10 @@ if ( (isset($_REQUEST['informacion']) and isset($_REQUEST['tipo']) )
     $encabezado = $estilo.'<p></p><p></p><p><center><h1 style="text-align:center;">Listado de Allegados</h1></center></p><table style="" cellspacing="0">';
     $thead = '<thead>
                 <tr>
-                  <th>Cedula</th>
+                  <th>Cédula</th>
                   <th>Primer Apellido</th>
                   <th>Primer Nombre</th>
-                  <th>Telefono</th>
+                  <th>Teléfono</th>
                   <th>Telf. Ad.</th>
                   <th>Sexo</th>
                   <th>Email</th>

@@ -99,7 +99,7 @@ if($go): ?>
                     <div class="row">
                       <div class="col-xs-11">
                         <div class="form-group">
-                          <label for="cedula_r" class="control-label">Cedula</label>
+                          <label for="cedula_r" class="control-label">Cédula</label>
                           <input
                             class="form-control bloquear"
                             type="text"
@@ -137,7 +137,7 @@ if($go): ?>
                     <div class="row">
                       <div class="col-xs-12">
                         <div class="form-group">
-                          <label for="parentesco_r" class="control-label">Relacion o parentesco</label>
+                          <label for="parentesco_r" class="control-label">Relación o parentesco</label>
                           <input
                             class="form-control bloquear"
                             type="text"
@@ -172,7 +172,7 @@ if($go): ?>
                             required
                             class="form-control">
                             <option selected="selected" value="v">Venezolano</option>
-                            <option value="e">Extrangero</option>
+                            <option value="e">Extranjero</option>
                           </select>
                             <p class="help-block" id="nacionalidad_chequeo">
                             </p>
@@ -187,7 +187,7 @@ if($go): ?>
                           <label
                             for="cedula"
                             class="control-label">
-                            Cedula
+                            Cédula
                           </label>
                           <input
                             type="text"
@@ -213,7 +213,7 @@ if($go): ?>
                     <div class="row">
                       <div class="col-xs-12">
                         <div class="form-group">
-                          <label for="cedula_escolar" class="control-label">Cedula Escolar</label>
+                          <label for="cedula_escolar" class="control-label">Cédula Escolar</label>
                           <input
                             type="text"
                             maxlength="10"
@@ -275,7 +275,7 @@ if($go): ?>
                 </fieldset>
                 <!-- nombres y apellidos -->
                 <fieldset>
-                  <legend class="text-center">Datos basicos</legend>
+                  <legend class="text-center">Datos básicos</legend>
                   <!-- inicio de nombres -->
                   <div class="row">
                     <div class="col-sm-6">
@@ -422,7 +422,7 @@ if($go): ?>
                     <div class="row">
                       <div class="col-xs-11">
                         <div class="form-group">
-                          <label class="control-label" for="telefono">Telefono</label>
+                          <label class="control-label" for="telefono">Teléfono</label>
                           <input
                             class="form-control"
                             type="text"
@@ -439,7 +439,7 @@ if($go): ?>
                     <div class="row">
                       <div class="col-xs-11">
                         <div class="form-group">
-                          <label class="control-label" for="telefono_otro">Telefono Adicional</label>
+                          <label class="control-label" for="telefono_otro">Teléfono Adicional</label>
                           <input
                             class="form-control"
                             type="text"
@@ -497,7 +497,7 @@ if($go): ?>
                     <div class="row">
                       <div class="col-xs-11">
                         <div class="form-group">
-                          <label for="vacuna" class="control-label">¿Certificado de vacunacion?</label>
+                          <label for="vacuna" class="control-label">¿Certificado de vacunación?</label>
                           <select class="form-control" name="vacuna" id="vacuna">
                             <option  selected="selected" value="">Seleccione</option>
                             <option value="s">SI</option>
@@ -528,7 +528,7 @@ if($go): ?>
                 </div>
                 <!-- direccion personal -->
                 <fieldset>
-                  <legend class="text-center">Direccion de habitacion</legend>
+                  <legend class="text-center">Dirección de habitación</legend>
                   <!-- inicio de estado, municio y parroquia -->
                   <div class="row">
                     <div class="col-sm-4">
@@ -576,7 +576,7 @@ if($go): ?>
                   <div class="row">
                     <div class="col-xs-12">
                       <div class="form-group">
-                        <label for="direcc" class="control-label">Informacion detallada (Av/Calle/Edf.)</label>
+                        <label for="direcc" class="control-label">Información detallada (Av/Calle/Edf.)</label>
                         <textarea
                         class="form-control"
                         maxlenght="150"
@@ -591,7 +591,7 @@ if($go): ?>
                 </fieldset>
                 <!-- datos de curso y fisico -->
                 <fieldset>
-                  <legend class="text-center">Datos Antropologicos y curso</legend>
+                  <legend class="text-center">Datos Antropológicos y curso</legend>
                   <!-- inicio de Curso alutra y peso -->
                   <div class="row">
                     <div class="col-sm-4">
@@ -699,7 +699,7 @@ if($go): ?>
                         <div class="col-xs-11">
                           <div class="form-group">
                             <label for="pantalon" class="control-label">
-                              Talla de pantalon
+                              Talla de pantalón
                             </label>
                             <?php $query = "SELECT codigo, descripcion
                               from talla where status = 1 order by codigo;";
@@ -748,7 +748,7 @@ if($go): ?>
                 </fieldset>
                 <!-- recaudos -->
                 <fieldset class="margenAbajo">
-                  <legend class="text-center">Recaudos en fisico</legend>
+                  <legend class="text-center">Recaudos en físico</legend>
                   <div class="col-xs-12">
                     <div class="checkbox">
                       <label class="col-xs-6">
@@ -783,7 +783,7 @@ if($go): ?>
                           value="s"
                           <?php echo $requisitos['bicentenario'] ?>
                           name="bicentenario">
-                        Coleccion Bicentenario.
+                        Colección Bicentenario.
                       </label>
                     </div>
                     <div class="checkbox">
@@ -811,7 +811,7 @@ if($go): ?>
                           value="s"
                           <?php echo $requisitos['fotocopia_cedula_pa'] ?>
                           name="fotocopia_cedula_pa">
-                        Fotocopia Cedula de identidad del representante.
+                        Fotocopia Cédula de identidad del representante.
                       </label>
                       <label class="col-xs-6">
                         <input
@@ -819,7 +819,7 @@ if($go): ?>
                           value="s"
                           <?php echo $requisitos['fotocopia_cedula_pr'] ?>
                           name="fotocopia_cedula_pr">
-                        Fotocopia Cedula de identidad de los allegados (si aplica).
+                        Fotocopia Cédula de identidad de los allegados (si aplica).
                       </label>
                     </div>
                   </div>
@@ -849,7 +849,7 @@ if($go): ?>
                   <div class="row">
                     <div class="col-xs-12">
                       <h4>
-                        Por favor, asegurese que los datos son correctos antes de
+                        Por favor, asegúrese que los datos son correctos antes de
                         continuar con el proceso de registro.
                       </h4>
                       <p>
@@ -1016,7 +1016,7 @@ if($go): ?>
               <p>
                 La cedula <?php echo $_GET['cedula'] ?>, no esta registrada en el sistema.
                 <em>Para registrar a un alumno, es necesario registrar primero al representante.</em>
-                para ir al proceso de inscripcion <a href="<?php echo $inscripcion ?>">
+                para ir al proceso de inscripción <a href="<?php echo $inscripcion ?>">
                 puede seguir este enlace.
                 </a>
               </p>
@@ -1027,7 +1027,7 @@ if($go): ?>
               <a href="menucon.php">click a este enlace.</a>
             </p>
             <p>
-              ¿O sera que entro en esta pagina erroneamente?
+              ¿O será que entro en esta pagina erróneamente?
             </p>
             <p class="bg-warning">
               Si este es un problema recurrente, contacte a un administrador del sistema.

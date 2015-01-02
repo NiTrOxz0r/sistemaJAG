@@ -39,7 +39,7 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr'], 'sistemaJAG 
                       required
                       class="form-control">
                       <option selected="selected" value="v">Venezolano</option>
-                      <option value="e">Extrangero</option>
+                      <option value="e">Extranjero</option>
                     </select>
                       <p class="help-block" id="nacionalidad_chequeo">
                       </p>
@@ -48,7 +48,7 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr'], 'sistemaJAG 
                 <div class="col-sm-5 col-sm-offset-1">
                   <!-- http://www.w3schools.com/tags/att_input_autocomplete.asp -->
                   <div class="form-group">
-                    <label for="cedula" class="control-label">Cedula</label>
+                    <label for="cedula" class="control-label">Cédula</label>
                     <input
                       type="text"
                       maxlength="8"
@@ -237,7 +237,7 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr'], 'sistemaJAG 
                   <div class="row">
                     <div class="col-xs-11">
                       <div class="form-group">
-                        <label class="control-label" for="telefono">Telefono</label>
+                        <label class="control-label" for="telefono">Teléfono</label>
                         <input
                           class="form-control"
                           type="text"
@@ -254,7 +254,7 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr'], 'sistemaJAG 
                   <div class="row">
                     <div class="col-xs-11">
                       <div class="form-group">
-                        <label class="control-label" for="telefono_otro">Telefono Adicional</label>
+                        <label class="control-label" for="telefono_otro">Teléfono Adicional</label>
                         <input
                           class="form-control"
                           type="text"
@@ -329,7 +329,7 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr'], 'sistemaJAG 
               </div>
               <!-- direccion personal -->
               <fieldset>
-                <legend class="text-center">Direccion de habitacion</legend>
+                <legend class="text-center">Dirección de habitación</legend>
                 <!-- inicio de estado, municio y parroquia -->
                 <div class="row">
                   <div class="col-sm-4">
@@ -377,7 +377,7 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr'], 'sistemaJAG 
                 <div class="row">
                   <div class="col-xs-12">
                     <div class="form-group">
-                      <label for="direcc" class="control-label">Informacion detallada (Av/Calle/Edf.)</label>
+                      <label for="direcc" class="control-label">Información detallada (Av/Calle/Edf.)</label>
                       <textarea
                       class="form-control"
                       maxlenght="150"
@@ -439,7 +439,7 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr'], 'sistemaJAG 
                     <div class="row">
                       <div class="col-xs-12">
                         <div class="form-group">
-                          <label for="telefono_trabajo" class="control-label">Telefono laboral</label>
+                          <label for="telefono_trabajo" class="control-label">Teléfono laboral</label>
                           <input
                             class="form-control"
                             type="text"
@@ -480,7 +480,7 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr'], 'sistemaJAG 
                 <div class="row">
                   <div class="col-xs-12">
                     <h4>
-                      Por favor, asegurese que sus datos son correctos antes de
+                      Por favor, asegúrese que sus datos son correctos antes de
                       continuar con el proceso de registro.
                     </h4>
                     <p>

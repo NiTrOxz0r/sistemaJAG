@@ -155,7 +155,7 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);?>
                   name="comentarios"
                   id="comentarios"
                   class="form-control"
-                  placeholder="Puede agregar los comentarios que desee aqui!">
+                  placeholder="Puede agregar los comentarios que desee aquí!">
                 <p class="help-block" id="comentarios_chequeo">
                 </p>
               </div>

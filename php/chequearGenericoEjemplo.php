@@ -4,7 +4,7 @@
 * @author slayerfat
 *
 * DOCUMENTACION SOBRE COMO USAR LAS VALIDACIONES:
-* aqui se podra ver como usar las VALIDACIONES
+* aquí se podra ver como usar las VALIDACIONES
 * segun el tipo de formulario (alumno, usuario, personalautorizado, etc)
 *
 */

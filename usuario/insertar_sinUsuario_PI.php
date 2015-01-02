@@ -103,7 +103,7 @@ if ( isset($_POST['cedula']) && strlen($_POST['cedula']) == 8 ) :
       $_POST['direcc']
       );
     if ($direccion->valido()) :
-      // se inserta un usuario con seudonimo y clase como la cedula de la persona.
+      // se inserta un usuario con seudonimo y clase como la cédula de la persona.
       $hash = password_hash($_POST['cedula'], PASSWORD_BCRYPT, ['cost' => 12]);
       $query = "INSERT INTO usuario
       VALUES
@@ -219,11 +219,11 @@ if ( isset($_POST['cedula']) && strlen($_POST['cedula']) == 8 ) :
                 Error en el proceso de registro!
               </p>
               <h3>
-                Los datos suministrados al sistema parecen ser invalidos!
+                Los datos suministrados al sistema parecen ser inválidos!
               </h3>
               <div class="bg-danger">
                 <p>
-                  <em>Especificamente el sistema declara:</em>
+                  <em>Específicamente el sistema declara:</em>
                 </p>
                 <p>
                    <strong>
@@ -234,7 +234,7 @@ if ( isset($_POST['cedula']) && strlen($_POST['cedula']) == 8 ) :
                 </p>
               </div>
               <p>
-                ¿O sera que entro en esta pagina erroneamente?
+                ¿O será que entro en esta pagina erróneamente?
               </p>
               <p class="bg-warning">
                 Si este es un problema recurrente, contacte a un administrador del sistema.
@@ -262,7 +262,7 @@ else :
             </p>
             <h3>
               <small>
-                la cedula: <?php echo $_POST['cedula'] ?> es incorrecta.
+                la cédula: <?php echo $_POST['cedula'] ?> es incorrecta.
               </small>
             </h3>
             <p>
@@ -270,7 +270,7 @@ else :
               <a href="menucon.php">click a este enlace</a>
             </p>
             <p>
-              ¿O sera que entro en esta pagina erroneamente?
+              ¿O será que entro en esta pagina erróneamente?
             </p>
             <p class="bg-warning">
               Si este es un problema recurrente, contacte a un administrador del sistema.

@@ -76,10 +76,10 @@ if($reg = mysqli_fetch_array($re)) :
                       class="form-control">
                       <?php if ( $reg['nacionalidad'] == 'v' ): ?>
                         <option value="v" selected="selected">Venezolano</option>
-                        <option value="e">Extrangero</option>
+                        <option value="e">Extranjero</option>
                       <?php else: ?>
                         <option value="v">Venezolano</option>
-                        <option value="e" selected="selected">Extrangero</option>
+                        <option value="e" selected="selected">Extranjero</option>
                       <?php endif ?>
                     </select>
                       <p class="help-block" id="nacionalidad_chequeo">
@@ -88,7 +88,7 @@ if($reg = mysqli_fetch_array($re)) :
                 </div>
                 <div class="col-sm-5 col-sm-offset-1">
                   <div class="form-group">
-                    <label for="cedula" class="control-label">Cedula</label>
+                    <label for="cedula" class="control-label">Cédula</label>
                     <input
                       type="text"
                       maxlength="8"
@@ -305,7 +305,7 @@ if($reg = mysqli_fetch_array($re)) :
                   <div class="row">
                     <div class="col-xs-11">
                       <div class="form-group">
-                        <label class="control-label" for="telefono">Telefono</label>
+                        <label class="control-label" for="telefono">Teléfono</label>
                         <input
                           class="form-control"
                           type="text"
@@ -324,7 +324,7 @@ if($reg = mysqli_fetch_array($re)) :
                   <div class="row">
                     <div class="col-xs-11">
                       <div class="form-group">
-                        <label class="control-label" for="telefono_otro">Telefono Adicional</label>
+                        <label class="control-label" for="telefono_otro">Teléfono Adicional</label>
                         <input
                           class="form-control"
                           type="text"
@@ -414,7 +414,7 @@ if($reg = mysqli_fetch_array($re)) :
               </div>
               <!-- direccion personal -->
               <fieldset>
-                <legend class="text-center">Direccion de habitacion</legend>
+                <legend class="text-center">Dirección de habitación</legend>
                 <!-- inicio de estado, municio y parroquia -->
                 <div class="row">
                   <div class="col-sm-4">
@@ -462,7 +462,7 @@ if($reg = mysqli_fetch_array($re)) :
                 <div class="row">
                   <div class="col-xs-12">
                     <div class="form-group">
-                      <label for="direcc" class="control-label">Informacion detallada (Av/Calle/Edf.)</label>
+                      <label for="direcc" class="control-label">Información detallada (Av/Calle/Edf.)</label>
                       <textarea
                       class="form-control"
                       maxlenght="150"
@@ -533,7 +533,7 @@ if($reg = mysqli_fetch_array($re)) :
                     <div class="row">
                       <div class="col-xs-12">
                         <div class="form-group">
-                          <label for="telefono_trabajo" class="control-label">Telefono laboral</label>
+                          <label for="telefono_trabajo" class="control-label">Teléfono laboral</label>
                           <input
                             class="form-control"
                             type="text"
@@ -578,7 +578,7 @@ if($reg = mysqli_fetch_array($re)) :
                 <div class="row">
                   <div class="col-xs-12">
                     <h4>
-                      Por favor, asegurese que sus datos son correctos antes de
+                      Por favor, asegúrese que sus datos son correctos antes de
                       continuar con el proceso de registro.
                     </h4>
                     <p>
@@ -773,12 +773,12 @@ if($reg = mysqli_fetch_array($re)) :
           <div class="jumbotron">
             <h1>Ups!</h1>
             <p>
-              Error en el proceso de actualizacion!
+              Error en el proceso de actualización!
             </p>
             <h3>
               <small>
-                Lamentablemente, la cedula solicitada no es un representante
-                o allegado de algun alumno en el sistema.
+                Lamentablemente, la cédula solicitada no es un representante
+                o allegado de algún alumno en el sistema.
               </small>
             </h3>
             <!-- !importante -->
@@ -801,7 +801,7 @@ if($reg = mysqli_fetch_array($re)) :
               <a href="menucon.php">click a este enlace.</a>
             </p>
             <p>
-              ¿O sera que entro en esta pagina erroneamente?
+              ¿O será que entro en esta pagina erróneamente?
             </p>
             <p class="bg-warning">
               Si este es un problema recurrente, contacte a un administrador del sistema.

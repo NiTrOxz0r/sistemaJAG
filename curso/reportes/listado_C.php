@@ -126,7 +126,7 @@ if ( isset($_GET['tipo']) ) :
                     <th>Comentarios</th>
                     <th>Primer Apellido</th>
                     <th>Primer Nombre</th>
-                    <th>Cedula</th>
+                    <th>Cédula</th>
                   </tr>
                 </thead>';
       $tbody = '';
@@ -208,9 +208,9 @@ if ( isset($_GET['tipo']) ) :
                   <tr>
                     <th>Primer Apellido</th>
                     <th>Primer Nombre</th>
-                    <th>Cedula</th>
-                    <th>Cedula Escolar</th>
-                    <th>Telefono</th>
+                    <th>Cédula</th>
+                    <th>Cédula Escolar</th>
+                    <th>Teléfono</th>
                   </tr>
                 </thead>';
       $tbody = '';

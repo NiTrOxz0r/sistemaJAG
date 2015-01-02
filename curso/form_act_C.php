@@ -192,7 +192,7 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);?>
                     id="comentarios"
                     class="form-control"
                     value="<?php echo $datos['comentarios'] ?>"
-                    placeholder="Puede agregar los comentarios que desee aqui!">
+                    placeholder="Puede agregar los comentarios que desee aquí!">
                   <p class="help-block" id="comentarios_chequeo">
                   </p>
                 </div>
@@ -264,7 +264,7 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);?>
         <div class="jumbotron">
           <h1>Ups!</h1>
           <p>
-            Error en el proceso de actualizacion!
+            Error en el proceso de actualización!
           </p>
           <p>
             ¿O entro en esta pagina erroneamente?

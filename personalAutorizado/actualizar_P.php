@@ -4,8 +4,8 @@
  *
  * desinfectado con cloro y amonico por:
  * @author [slayerfat] <[slayerfat@gmail.com]>
- * {@internal [genera una actualizacion de algun registro
- * por medio de form_act_P, con las actualizaciones respectivas
+ * {@internal [genera una actualización de algún registro
+ * por medio de form_act_P, con las actualizaciónes respectivas
  * gracias a (ChequearAlumno y ChequearDireccion)]}
  *
  * @version 1.1
@@ -29,7 +29,7 @@ if ( isset($_POST['cedula']) and preg_match( "/[0-9]{6,8}/", $_POST['cedula']) )
   // $cedula = mysqli_escape_string( $con, trim($_POST['cedula']) );
   $cedula = ChequearGenerico::cedula($_POST['cedula']);
   //MODIFICADO: ver actualizar_A linea 27 en adelante
-  //detalla como hice cedula aqui, lo hice de las 2 maneras pa que veas
+  //detalla como hice cedula aquí, lo hice de las 2 maneras pa que veas
   //que no es dificil
   $sql = "SELECT
     direccion.codigo as cod_direccion
@@ -38,7 +38,7 @@ if ( isset($_POST['cedula']) and preg_match( "/[0-9]{6,8}/", $_POST['cedula']) )
     on direccion.cod_persona = persona.codigo
     where persona.codigo = $_SESSION[codigo_persona];";
   $resultado = conexion($sql);
-  // de aqui pa lante lo hare menos secuencial que insertar_A.php
+  // de aquí pa lante lo hare menos secuencial que insertar_A.php
   if($resultado->num_rows == 1) :
     $datos = mysqli_fetch_assoc($resultado);
     $cod_direccion_P = $datos['cod_direccion'];
@@ -132,7 +132,7 @@ if ( isset($_POST['cedula']) and preg_match( "/[0-9]{6,8}/", $_POST['cedula']) )
           <div class="container">
             <div class="row">
               <div class="jumbotron">
-                <h1>Actualizacion exitosa!</h1>
+                <h1>Actualización exitosa!</h1>
                 <h3>
                   <small>Los registros asociados con </small>
                 </h3>
@@ -176,19 +176,19 @@ if ( isset($_POST['cedula']) and preg_match( "/[0-9]{6,8}/", $_POST['cedula']) )
                 </p>
                 <h3>
                   <small>
-                    Lamentablemente, es posible que los datos de actualizacion se perdieron.
+                    Lamentablemente, es posible que los datos de actualización se perdieron.
                   </small>
                 </h3>
                 <p class="bg-danger">
-                  Ocurrio un suceso inesperado en la actualizacion del registro
-                  en el sitema.
+                  Ocurrió un suceso inesperado en la actualización del registro
+                  en el sistema.
                 </p>
                 <p>
-                  Si desea hacer otra actualizacion por favor dele
+                  Si desea hacer otra actualización por favor dele
                   <a href="form_act_P.php?cedula=<?php echo $cedulan  ?>">click a este enlace</a>
                 </p>
                 <p>
-                  ¿O sera que entro en esta pagina erroneamente?
+                  ¿O será que entro en esta pagina erróneamente?
                 </p>
                 <p class="bg-warning">
                   Si este es un problema recurrente, contacte a un administrador del sistema.
@@ -215,11 +215,11 @@ if ( isset($_POST['cedula']) and preg_match( "/[0-9]{6,8}/", $_POST['cedula']) )
                 Error en el proceso de registro!
               </p>
               <h3>
-                Los datos suministrados al sistema parecen ser invalidos!
+                Los datos suministrados al sistema parecen ser inválidos!
               </h3>
               <div class="bg-danger">
                 <p>
-                  <em>Especificamente el sistema declara:</em>
+                  <em>Específicamente el sistema declara:</em>
                 </p>
                 <p>
                    <strong>
@@ -234,7 +234,7 @@ if ( isset($_POST['cedula']) and preg_match( "/[0-9]{6,8}/", $_POST['cedula']) )
               </p>
               <?php $inscripcion = enlaceDinamico('personalAutorizado/form_reg_P.php'); ?>
               <p>
-                para ir al proceso de inscripcion <a href="<?php echo $inscripcion ?>">
+                para ir al proceso de inscripción <a href="<?php echo $inscripcion ?>">
                 puede seguir este enlace.
                 </a>
               </p>
@@ -243,7 +243,7 @@ if ( isset($_POST['cedula']) and preg_match( "/[0-9]{6,8}/", $_POST['cedula']) )
                 <a href="menucon.php">click a este enlace.</a>
               </p>
               <p>
-                ¿O sera que entro en esta pagina erroneamente?
+                ¿O será que entro en esta pagina erróneamente?
               </p>
               <p class="bg-warning">
                 Si este es un problema recurrente, contacte a un administrador del sistema.
@@ -270,7 +270,7 @@ else : ?>
             </p>
             <h3>
               <small>
-                Lamentablemente, es posible que los datos de actualizacion se perdieron.
+                Lamentablemente, es posible que los datos de actualización se perdieron.
               </small>
             </h3>
             <p>
@@ -278,7 +278,7 @@ else : ?>
               <a href="menucon.php">click a este enlace</a>
             </p>
             <p>
-              ¿O sera que entro en esta pagina erroneamente?
+              ¿O será que entro en esta pagina erróneamente?
             </p>
             <p class="bg-warning">
               Si este es un problema recurrente, contacte a un administrador del sistema.

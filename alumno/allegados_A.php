@@ -89,13 +89,13 @@ if ( isset($_REQUEST['cedula']) ) :
                   <!-- ignorar -->
                   <th data-radio="true" data-switchable="false"></th>
                   <!-- ignorar -->
-                  <th data-field="cedula" data-sortable="true" data-switchable="false">Cedula</th>
+                  <th data-field="cedula" data-sortable="true" data-switchable="false">Cédula</th>
                   <th data-field="p_apellido" data-sortable="true">Primer Apellido</th>
                   <th data-field="p_nombre" data-sortable="true">Primer Nombre</th>
                   <th data-field="email" data-sortable="true">Email</th>
                   <th data-field="vive_con_alumno" data-sortable="true">Vive con Alumno</th>
-                  <th data-field="relacion" data-sortable="true">Relacion</th>
-                  <th data-field="telefono" data-sortable="false">Telefono</th>
+                  <th data-field="relacion" data-sortable="true">Relación</th>
+                  <th data-field="telefono" data-sortable="false">Teléfono</th>
                   <th data-field="telefono_trabajo" data-sortable="true" data-visible="true">Telf. Lab.</th>
                   <th data-field="puede_retirar" data-sortable="true" data-visible="true">Puede retirar</th>
                   <th data-field="comentarios" data-sortable="true" data-visible="true">Comentarios</th>
@@ -151,13 +151,13 @@ if ( isset($_REQUEST['cedula']) ) :
                   </h4>
                   <p>
                     <small>
-                      <a href="menucon.php">desde aqui.</a>
+                      <a href="menucon.php">desde aquí.</a>
                     </small>
                   </p>
                   <p>
                     <small>
                       o si prefiere puede regresar
-                      <a href="../index.php">al menu principal.</a>
+                      <a href="../index.php">al menú principal.</a>
                     </small>
                   </p>
                 </div>

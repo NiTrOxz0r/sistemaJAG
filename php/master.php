@@ -24,16 +24,16 @@
 *
 *
 */
-// aqui esta la funcion basica mysqli_connect y mysqli_query
+// aquí esta la funcion basica mysqli_connect y mysqli_query
 require "funciones/conexion.php";
 
 // libreria de password_hash para
 // compatibilidad con php < 5.5
 require "funciones/password.php";
-// aqui esta la funcion que trae head y navbar:
+// aquí esta la funcion que trae head y navbar:
 require "funciones/empezarPagina.php";
 
-// aqui esta la funcion que trae footer y cola:
+// aquí esta la funcion que trae footer y cola:
 require "funciones/finalizarPagina.php";
 
 // usado para ver variables de session nada mas:

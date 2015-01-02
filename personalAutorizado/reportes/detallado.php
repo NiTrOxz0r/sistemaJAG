@@ -3,7 +3,7 @@
  * @author Alejnadro Granadillo. <[slayerfat@gmail.com]>
  *
  * @internal genera un pdf con los datos del query expresado, requiere
- * al menos la cedula del alumno para generar el reporte o da mensaje de error.
+ * al menos la cédula del alumno para generar el reporte o da mensaje de error.
  *
  * @see insertar_A.php
  *
@@ -32,7 +32,7 @@ if (!( isset($_GET['cedula']) and preg_match( "/[0-9]{6,8}/", $_GET['cedula']) )
               Error en el proceso de reporte!
             </p>
             <p>
-              ¿O sera que entro en esta pagina erroneamente?
+              ¿O será que entro en esta pagina erróneamente?
             </p>
             <p class="bg-warning">
               Si este es un problema recurrente, contacte a un administrador del sistema.
@@ -183,7 +183,7 @@ else :
     if ($datos['lugar_nac'] != '' && $datos['lugar_nac'] != null) :
       $lugar_nac = htmlentities($datos['lugar_nac'], ENT_QUOTES);
     else :
-      $lugar_nac = 'SIN INFORMACION, FAVOR ACTUALIZAR';
+      $lugar_nac = 'SIN INFORMACIÓN, FAVOR ACTUALIZAR';
     endif;
     $telefono = $datos['telefono'] === (null) ? '-':$datos['telefono'];
     $telefono_otro = $datos['telefono_otro'] === (null) ? '-':$datos['telefono_otro'];
@@ -193,7 +193,7 @@ else :
     if ($datos['direccion'] != '' && $datos['direccion'] != null) :
       $direccion_exacta = $datos['direccion'];
     else :
-      $direccion_exacta = 'SIN INFORMACION, FAVOR ACTUALIZAR';
+      $direccion_exacta = 'SIN INFORMACIÓN, FAVOR ACTUALIZAR';
     endif;
     $email = $datos['email'] === (null) ? '-':$datos['email'];
     $relacion = $datos['relacion'];
@@ -230,7 +230,7 @@ $html = <<<HTML
         <tr>
           <th>Nac.:</th>
           <td><strong>{$nacionalidad}</strong></td>
-          <th>Cedula:</th>
+          <th>Cédula:</th>
           <td><strong>{$cedula}</strong></td>
         </tr>
         <tr>
@@ -246,7 +246,7 @@ $html = <<<HTML
           <td><strong>{$s_nombre}</strong></td>
         </tr>
         <tr>
-          <th>Relacion:</th>
+          <th>Relación:</th>
           <td><strong>{$relacion}</strong></td>
           <th width="20%">Vive con Alumno:</th>
           <td><strong>{$vive_con_alumno}</strong></td>
@@ -265,7 +265,7 @@ $html = <<<HTML
           <td rowspan="1" colspan="3" width="100%"><strong>{$lugar_nac}</strong></td>
         </tr>
         <tr>
-          <th>Telefono:</th>
+          <th>Teléfono:</th>
           <td><strong>{$telefono}</strong></td>
           <th>Telf. adc.:</th>
           <td><strong>{$telefono_otro}</strong></td>
@@ -358,14 +358,14 @@ HTML;
                 <p>
                   La cedula <?php echo $_GET['cedula'] ?>, no esta registrada en el sistema.
                   <em>Para registrar a un alumno, es necesario registrar primero al representante.</em>
-                  para ir al proceso de inscripcion <a href="<?php echo $inscripcion ?>">
+                  para ir al proceso de inscripción <a href="<?php echo $inscripcion ?>">
                   puede seguir este enlace.
                   </a>
                 </p>
                 <!-- google hire me: slayerfat@gmail.com -->
               <?php endif ?>
               <p>
-                ¿O sera que entro en esta pagina erroneamente?
+                ¿O será que entro en esta pagina erróneamente?
               </p>
               <p class="bg-warning">
                 Si este es un problema recurrente, contacte a un administrador del sistema.

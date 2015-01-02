@@ -120,10 +120,10 @@ if ( isset($_GET['cedula']) ):
                                 class="form-control">
                                 <?php if ($datos['nacionaliad'] == 'v'): ?>
                                   <option selected="selected" value="v">Venezolano</option>
-                                  <option value="e">Extrangero</option>
+                                  <option value="e">Extranjero</option>
                                 <?php else: ?>
                                   <option value="v">Venezolano</option>
-                                  <option selected="selected" value="e">Extrangero</option>
+                                  <option selected="selected" value="e">Extranjero</option>
                                 <?php endif ?>
                               </select>
                                 <p class="help-block" id="nacionalidad_chequeo">
@@ -136,7 +136,7 @@ if ( isset($_GET['cedula']) ):
                         <div class="row">
                           <div class="col-sm-9">
                             <div class="form-group">
-                              <label for="cedula" class="control-label">Cedula</label>
+                              <label for="cedula" class="control-label">Cédula</label>
                               <input
                                 type="text"
                                 maxlength="8"
@@ -536,13 +536,13 @@ if ( isset($_GET['cedula']) ):
                     </fieldset>
                     <!-- inicio de telefonos y email -->
                     <fieldset>
-                      <legend class="text-center">Informacion de contacto</legend>
+                      <legend class="text-center">Información de contacto</legend>
                       <div class="row">
                         <div class="col-sm-3">
                           <div class="row">
                             <div class="col-xs-11">
                               <div class="form-group">
-                                <label class="control-label" for="telefono">Telefono</label>
+                                <label class="control-label" for="telefono">Teléfono</label>
                                 <input
                                   class="form-control"
                                   type="text"
@@ -562,7 +562,7 @@ if ( isset($_GET['cedula']) ):
                           <div class="row">
                             <div class="col-xs-11">
                               <div class="form-group">
-                                <label class="control-label" for="telefono_otro">Telefono Adicional</label>
+                                <label class="control-label" for="telefono_otro">Teléfono Adicional</label>
                                 <input
                                   class="form-control"
                                   type="text"
@@ -582,7 +582,7 @@ if ( isset($_GET['cedula']) ):
                           <div class="row">
                             <div class="col-xs-11">
                               <div class="form-group">
-                                <label class="control-label" for="celular">Telefono Celular</label>
+                                <label class="control-label" for="celular">Teléfono Celular</label>
                                 <input
                                   class="form-control"
                                   type="text"
@@ -797,8 +797,8 @@ if ( isset($_GET['cedula']) ):
                       <div class="row">
                         <div class="col-xs-12">
                           <h4>
-                            Por favor, asegurese que los datos son correctos antes de
-                            continuar con el proceso de actualizacion.
+                            Por favor, asegúrese que los datos son correctos antes de
+                            continuar con el proceso de actualización.
                           </h4>
                         </div>
                       </div>
@@ -1062,7 +1062,7 @@ if ( isset($_GET['cedula']) ):
                 <!-- google hire me: slayerfat@gmail.com -->
               <?php endif ?>
               <p>
-                 Error en el proceso de actualizacion!
+                 Error en el proceso de actualización!
               </p>
               <p>
                 ¿O entro en esta pagina erroneamente?
@@ -1084,7 +1084,7 @@ if ( isset($_GET['cedula']) ):
         <div class="jumbotron">
           <h1>Ups!</h1>
           <p>
-            Error en el proceso de actualizacion!
+            Error en el proceso de actualización!
           </p>
           <p>
             ¿O entro en esta pagina erroneamente?

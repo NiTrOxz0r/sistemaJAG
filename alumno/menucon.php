@@ -16,7 +16,7 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr'], 'sistemaJAG 
             <div class="col-xs-12">
               <h3>
                 Si Ud. desea registrar o actualizar a un alumno de esta
-                institucion, puede hacerlo especificando la cedula de identidad:
+                institución, puede hacerlo especificando la cédula de identidad:
               </h3>
             </div>
           </div>
@@ -30,7 +30,7 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr'], 'sistemaJAG 
             id="form_A"
             method="GET">
             <div class="form-group">
-               <label for="cedula" class="control-label">Cedula:</label>
+               <label for="cedula" class="control-label">Cédula:</label>
               <input
                 class="form-control"
                 type="text"
@@ -42,7 +42,7 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr'], 'sistemaJAG 
               </p>
             </div>
             <div class="form-group hidden">
-               <label for="cedula_r" class="control-label">Cedula del representante:</label>
+               <label for="cedula_r" class="control-label">Cédula del representante:</label>
               <input
                 class="form-control"
                 type="text"
@@ -53,9 +53,9 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr'], 'sistemaJAG 
                 Si este alumno va a ser registrado <strong>por primera vez</strong>,
                 es recomendable ir
                 <?php $enlaceP = enlaceDinamico('personalAutorizado/form_reg_P.php') ?>
-                <a href="<?php echo $enlaceP ?>">al proceso de inscripcion</a>,
-                de lo contrario es mejor empezar por la cedula del representante.
-                <em>No se preocupe, la cedula del alumno estara en el formulario de
+                <a href="<?php echo $enlaceP ?>">al proceso de inscripción</a>,
+                de lo contrario es mejor empezar por la cédula del representante.
+                <em>No se preocupe, la cédula del alumno estará en el formulario de
                 registro de alumno.</em>
               </p>
             </div>
@@ -116,7 +116,7 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr'], 'sistemaJAG 
                 id="tipo"
                 required>
                 <option selected="selected" value="0">--Seleccione--</option>
-                <option value="1">Por cedula</option>
+                <option value="1">Por cédula</option>
                 <option value="2">Por Nombre</option>
                 <option value="3">Por Apellido</option>
                 <option value="4">Por Curso</option>
@@ -186,7 +186,7 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr'], 'sistemaJAG 
             <div class="col-xs-12">
               <h4>
                 Tambien puede generar una constancia de inscripcion
-                especificando la cedula de identidad del alumno:
+                especificando la cédula de identidad del alumno:
               </h4>
             </div>
           </div>
@@ -201,7 +201,7 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr'], 'sistemaJAG 
             action="reportes/constancia-inscripcion.php"
             method="GET">
             <div class="form-group">
-               <label for="constancia_cedula" class="control-label">Cedula:</label>
+               <label for="constancia_cedula" class="control-label">Cédula:</label>
               <input
                 class="form-control"
                 type="text"
@@ -237,7 +237,7 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr'], 'sistemaJAG 
           <div class="row">
             <div class="col-xs-12">
               <h4>
-                Si desea puede generar un reporte completo de algun alumno:
+                Si desea puede generar un reporte completo de algún alumno:
               </h4>
             </div>
           </div>
@@ -252,7 +252,7 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr'], 'sistemaJAG 
             action="reportes/detallado.php"
             method="GET">
             <div class="form-group">
-               <label for="reporte_cedula" class="control-label">Cedula:</label>
+               <label for="reporte_cedula" class="control-label">Cédula:</label>
               <input
                 class="form-control"
                 type="text"

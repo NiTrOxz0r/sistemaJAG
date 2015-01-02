@@ -2,7 +2,7 @@
 /**
  * @author Alejandro Granadillo
  * [empezarPagina sirve para generar escuetamente el encabezado
- * de alguna pagina y su respectivo menu de navegacion superior.]
+ * de algúna pagina y su respectivo menu de navegacion superior.]
  * {@internal [verifiquen como esta estructurada esta funcion, no tiene ciencia,
  * solo vean que por cada tipo de usuario, hace algo diferente.]}
  * @see index.php

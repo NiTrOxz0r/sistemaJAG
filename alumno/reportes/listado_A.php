@@ -125,19 +125,19 @@ if ( (isset($_REQUEST['informacion']) and isset($_REQUEST['tipo']) )
     $encabezado = $estilo.'<p></p><p></p><p><center><h1 style="text-align:center;">Listado de Alumnos</h1></center></p><table style="" cellspacing="0">';
     $thead = '<thead>
                 <tr>
-                  <th>Cedula</th>
-                  <th>Cedula escolar</th>
+                  <th>Cédula</th>
+                  <th>Cédula escolar</th>
                   <th>Primer Apellido</th>
                   <th>Primer Nombre</th>
                   <th>Curso</th>
-                  <th>Telefono</th>
+                  <th>Teléfono</th>
                   <th>Telf. Ad.</th>
                   <th>sexo</th>
                   <th>Discapacidad</th>
-                  <th>Cert. vacunacion</th>
+                  <th>Cert. vacunación</th>
                   <th>Primer Apellido (R)</th>
                   <th>Primer Nombre (R)</th>
-                  <th>Cedula (R)</th>
+                  <th>Cédula (R)</th>
                 </tr>
               </thead>';
     $tbody = '';

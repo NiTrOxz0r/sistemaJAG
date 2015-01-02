@@ -3,7 +3,7 @@
  * @author Alejnadro Granadillo. <[slayerfat@gmail.com]>
  *
  * @internal genera un pdf con los datos del query expresado, requiere
- * al menos la cedula del alumno para generar el reporte o da mensaje de error.
+ * al menos la cédula del alumno para generar el reporte o da mensaje de error.
  *
  * @see insertar_A.php
  *
@@ -32,7 +32,7 @@ if (!( isset($_GET['cedula']) and preg_match( "/[0-9]{6,8}/", $_GET['cedula']) )
               Error en el proceso de reporte!
             </p>
             <p>
-              ¿O sera que entro en esta pagina erroneamente?
+              ¿O será que entro en esta pagina erróneamente?
             </p>
             <p class="bg-warning">
               Si este es un problema recurrente, contacte a un administrador del sistema.
@@ -217,7 +217,7 @@ else :
     if ($datos['direccion'] != '' && $datos['direccion'] != null) :
       $direccion_exacta = $datos['direccion'];
     else :
-      $direccion_exacta = 'SIN INFORMACION, FAVOR ACTUALIZAR';
+      $direccion_exacta = 'SIN INFORMACIÓN, FAVOR ACTUALIZAR';
     endif;
     $email = $datos['email'] === (null) ? '-':$datos['email'];
     $nivel_instruccion = $datos['nivel_instruccion'];
@@ -258,7 +258,7 @@ $html = <<<HTML
         <tr>
           <th>Nac.:</th>
           <td><strong>{$nacionalidad}</strong></td>
-          <th>Cedula:</th>
+          <th>Cédula:</th>
           <td><strong>{$cedula}</strong></td>
         </tr>
         <tr>
@@ -280,7 +280,7 @@ $html = <<<HTML
           <td><strong>{$fec_nac}</strong></td>
         </tr>
         <tr>
-          <th>Telefono:</th>
+          <th>Teléfono:</th>
           <td><strong>{$telefono}</strong></td>
           <th>Telf. adc.:</th>
           <td><strong>{$telefono_otro}</strong></td>
@@ -400,7 +400,7 @@ HTML;
                 </div>
               <?php endif ?>
               <p>
-                ¿O sera que entro en esta pagina erroneamente?
+                ¿O será que entro en esta pagina erróneamente?
               </p>
               <p class="bg-warning">
                 Si este es un problema recurrente, contacte a un administrador del sistema.
