@@ -6,7 +6,7 @@ $enlace = $_SERVER['DOCUMENT_ROOT']."/github/sistemaJAG/php/master.php";
 require_once($enlace);
 
 // invocamos validarUsuario.php desde master.php
-validarUsuario(1, 3, $_SESSION['cod_tipo_usr']);
+validarUsuario(1, 2, $_SESSION['cod_tipo_usr']);
 
 if ( isset($_GET['cedula']) ):
   $con = conexion();
@@ -82,7 +82,11 @@ if ( isset($_GET['cedula']) ):
               <div class="margen">
                 <div class="row margen">
                   <div class="col-sm-4 col-sm-offset-4">
-                    <button class="actualizar btn btn-primary btn-block">Actualizar</button>
+                    <?php if ($_SESSION['cod_tipo_usr'] < 3): ?>
+                      <button class="actualizar btn btn-primary btn-block disabled">Actualizar</button>
+                    <?php else: ?>
+                      <button class="actualizar btn btn-primary btn-block">Actualizar</button>
+                    <?php endif ?>
                   </div>
                 </div>
                 <div class="row margen">
@@ -819,7 +823,11 @@ if ( isset($_GET['cedula']) ):
               <div class="margen">
                 <div class="row margen">
                   <div class="col-sm-4 col-sm-offset-4">
-                    <button class="actualizar btn btn-primary btn-block">Actualizar</button>
+                    <?php if ($_SESSION['cod_tipo_usr'] < 3): ?>
+                      <button class="actualizar btn btn-primary btn-block disabled">Actualizar</button>
+                    <?php else: ?>
+                      <button class="actualizar btn btn-primary btn-block">Actualizar</button>
+                    <?php endif ?>
                   </div>
                 </div>
                 <div class="row margen">
