@@ -12,32 +12,62 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']); ?>
       <!-- info -->
       <div class="row">
         <div class="contenido col-md-12">
-          <h1>Lorem ipsum dolor sit amet</h1>
+          <h1>
+            SistemaJAG
+            </br>
+            <small>
+              SISTEMA INFORMÁTICO DE INSCRIPCIÓN
+              <em>"JOSÉ ANTONIO GONZÁLEZ"</em>
+            </small>
+          </h1>
           <p>
             <h2 class="text-justify">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-              sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-              Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-              reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-              Excepteur sint occaecat cupidatat non proident, sunt in culpa
-              qui officia deserunt mollit anim id est laborum.
+              Tomando en cuenta los beneficios de los procesos dentro de los sistemas
+              de informacion modernos el equipo de programadores encagargados de desarrollar
+              el <strong>sistemaJAG</strong> para la <em>U.E.N.B. José Antonio González</em>,
+              tomando en cuenta las ideas expresadas en el sigiente extracto:
+            </h2>
+            <blockquote>
+              <p>
+                Las bondades que dan los nuevos sistemas de información,
+                automatización y administración de base de datos en el
+                área informática pueden ser tomados en cuenta a la hora
+                de considerar una solución adaptable y factible en la
+                problemática de la E. B. N. B. José Antonio González,
+                ya que se puede crear y moldear aplicaciones y sistemas
+                que adapten a las necesidades de esta institución, además
+                de disminuir el tiempo para recabar los datos, archivarlos
+                y aminorar el número de personas para efectuar esta actividad.
+              </p>
+              <footer>
+                Planteamiento del problema - proyecto II
+              </footer>
+            </blockquote>
+            <h2>
+              da pie a crear segun las necesidades de la institucion, procesos
+              que manipulen de manera exacta, los datos existentes en el sistema,
+              de tal manera que genere informacion itul para todo usuario que llegue a
+              usar este sistema.
             </h2>
           </p>
+          <blockquote>
+            <p>La informacion es tan inutil como aquellos que no la comprendan.</p>
+            <footer>Alejandro Granadillo.</footer>
+          </blockquote>
         </div>
       </div>
       <!-- personas -->
       <div class="row">
         <div class="col-md-12">
-          <h2>Personas <small><a href="#">descargar informe</a></small></h2>
+          <h2>Personas en sistemaJAG:</h2>
           <div class="row">
             <div class="col-sm-12">
               <!-- info -->
               <div class="row">
                 <div class="col-sm-12">
                   <h4 class="text-justify">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                    sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                    Informacion general de los registros existentes de todas
+                    las personas en el sistema.
                   </h4>
                 </div>
               </div>
@@ -79,10 +109,12 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']); ?>
               </div>
               <!-- grafico -->
               <div class="row">
-                <div class="center-block" style="width:850px">
+                <div class="center-block" style="width:75%">
                   <h4 class="text-center">Relacion de genero</h4>
-                  <canvas id="pieSexoTotal" height="400" width="400"></canvas>
-                  <canvas id="poligonoSexoTotal" height="400" width="400"></canvas>
+                  <center>
+                    <canvas id="pieSexoTotal" height="400" width="400"></canvas>
+                    <canvas id="poligonoSexoTotal" height="400" width="400"></canvas>
+                  </center>
                 </div>
               </div>
             </div>
@@ -92,15 +124,15 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']); ?>
       <!-- alumnos -->
       <div class="row">
         <div class="col-md-12">
-          <h2>Alumnos <small><a href="#">descargar informe</a></small></h2>
+          <h2>Alumnos en sistemaJAG:</h2>
           <div class="row">
             <div class="col-sm-12">
               <!-- info -->
               <div class="row">
                 <div class="col-sm-12">
                   <h4 class="text-justify">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                    sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                    Informacion general de los registros existentes de todas
+                    los alumnos en el sistema.
                   </h4>
                 </div>
               </div>
@@ -144,7 +176,7 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']); ?>
               </div>
               <!-- grafico -->
               <div class="row">
-                <div class="center-block" style="width:850px">
+                <div class="center-block" style="width:75%">
                   <h4 class="text-center">Relacion de genero</h4>
                   <canvas id="pieSexo" height="400" width="400"></canvas>
                   <canvas id="poligonoSexo" height="400" width="400"></canvas>
@@ -303,10 +335,12 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']); ?>
               </div>
               <!-- grafico -->
               <div class="row">
-                <div class="center-block" style="width:850px">
+                <div class="center-block" style="width:75%">
                   <h4 class="text-center">Relacion de repitientes</h4>
-                  <canvas id="pieRepitiente" height="400" width="400"></canvas>
-                  <canvas id="poligonoRepitiente" height="400" width="400"></canvas>
+                  <center>
+                    <canvas id="pieRepitiente" height="400" width="400"></canvas>
+                    <canvas id="poligonoRepitiente" height="400" width="400"></canvas>
+                  </center>
                 </div>
               </div>
               <!-- por cursos -->
@@ -342,7 +376,9 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']); ?>
               <div class="row">
                 <div class="center-block" style="width:400px">
                   <h4 class="text-center">Alumnos existentes por cursos</h4>
-                  <canvas id="pieCursos" height="400" width="400"></canvas>
+                  <center>
+                    <canvas id="pieCursos" height="400" width="400"></canvas>
+                  </center>
                 </div>
               </div>
             </div>
@@ -429,8 +465,14 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']); ?>
   ?>
   // cursos
   datos = [
-    <?php while ( $datosCurso = mysqli_fetch_array($cursosQuery) ) :
-      $i = rand(0, 12); ?>
+    <?php $n = -1;
+    while ( $datosCurso = mysqli_fetch_array($cursosQuery) ) :
+      $i = rand(0, 12);
+      while ( $n === $i ) :
+        $i = rand(0, 12);
+      endwhile;
+      $n = $i;
+        ?>
       {
         value: <?php echo $datosCurso['total_alumnos'] ?>,
         color: <?php echo $colores[$i][0] ?>,
