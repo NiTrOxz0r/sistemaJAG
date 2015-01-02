@@ -62,19 +62,27 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']); ?>
               FROM persona
               where status = 1;";
               $resultado = conexion($query);
-              $datos = mysqli_fetch_assoc($resultado); ?>
+              $datosSexoTotal = mysqli_fetch_assoc($resultado); ?>
               <div class="row">
                 <div class="col-sm-6">
                   <h4>
                     Personas de sexo Masculino:
-                    <strong><?php echo $datos['hombres'] ?></strong>
+                    <strong><?php echo $datosSexoTotal['hombres'] ?></strong>
                   </h4>
                 </div>
                 <div class="col-sm-6">
                   <h4>
                     Personas de sexo Femenino:
-                    <strong><?php echo $datos['mujeres'] ?></strong>
+                    <strong><?php echo $datosSexoTotal['mujeres'] ?></strong>
                   </h4>
+                </div>
+              </div>
+              <!-- grafico -->
+              <div class="row">
+                <div class="center-block" style="width:850px">
+                  <h4 class="text-center">Relacion de genero</h4>
+                  <canvas id="pieSexoTotal" height="400" width="400"></canvas>
+                  <canvas id="poligonoSexoTotal" height="400" width="400"></canvas>
                 </div>
               </div>
             </div>
@@ -119,19 +127,27 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']); ?>
               on persona.codigo = alumno.cod_persona
               where alumno.status = 1;";
               $resultado = conexion($query);
-              $datos = mysqli_fetch_assoc($resultado); ?>
+              $datosSexo = mysqli_fetch_assoc($resultado); ?>
               <div class="row">
                 <div class="col-sm-6">
                   <h4>
                     Alumnos de sexo Masculino:
-                    <strong><?php echo $datos['ninos'] ?></strong>
+                    <strong><?php echo $datosSexo['ninos'] ?></strong>
                   </h4>
                 </div>
                 <div class="col-sm-6">
                   <h4>
                     Alumnos de sexo Femenino:
-                    <strong><?php echo $datos['ninas'] ?></strong>
+                    <strong><?php echo $datosSexo['ninas'] ?></strong>
                   </h4>
+                </div>
+              </div>
+              <!-- grafico -->
+              <div class="row">
+                <div class="center-block" style="width:850px">
+                  <h4 class="text-center">Relacion de genero</h4>
+                  <canvas id="pieSexo" height="400" width="400"></canvas>
+                  <canvas id="poligonoSexo" height="400" width="400"></canvas>
                 </div>
               </div>
               <!-- por peso min/max -->
@@ -270,19 +286,27 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']); ?>
                 FROM alumno
                 where alumno.status = 1;";
               $resultado = conexion($query);
-              $datos = mysqli_fetch_assoc($resultado); ?>
+              $datosRepitiente = mysqli_fetch_assoc($resultado); ?>
               <div class="row">
                 <div class="col-sm-6">
                   <h4>
                     Alumnos repitientes:
-                    <strong><?php echo $datos['si'] ?></strong>
+                    <strong><?php echo $datosRepitiente['si'] ?></strong>
                   </h4>
                 </div>
                 <div class="col-sm-6">
                   <h4>
                     Alumnos no repitientes:
-                    <strong><?php echo $datos['no'] ?></strong>
+                    <strong><?php echo $datosRepitiente['no'] ?></strong>
                   </h4>
+                </div>
+              </div>
+              <!-- grafico -->
+              <div class="row">
+                <div class="center-block" style="width:850px">
+                  <h4 class="text-center">Relacion de repitientes</h4>
+                  <canvas id="pieRepitiente" height="400" width="400"></canvas>
+                  <canvas id="poligonoRepitiente" height="400" width="400"></canvas>
                 </div>
               </div>
               <!-- por cursos -->
@@ -314,6 +338,7 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']); ?>
                 group by
                 2,1;";
               $cursosQuery = conexion($query); ?>
+              <!-- grafico -->
               <div class="row">
                 <div class="center-block" style="width:400px">
                   <h4 class="text-center">Alumnos existentes por cursos</h4>
@@ -330,9 +355,10 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']); ?>
 <!-- graficos -->
 <script src="java/Chart.js/Chart.min.js"></script>
 <script type="text/javascript">
+  // hecho por slayerfat.
+  // documentacion: http://www.chartjs.org/docs/
   var datos = [];
   <?php
-    $i = 0;
     $colores = [
       0 => [
         0 => "'#F7464A'",
@@ -373,18 +399,44 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']); ?>
         0 => "'#3399FF'",
         1 => "'#99CCFF'",
         'color' => 'azul'
-      ]
+      ],
+      8 => [
+        0 => "'#444C52'",
+        1 => "'#8292A0'",
+        'color' => 'azulOscuro'
+      ],
+      9 => [
+        0 => "'#E29A18'",
+        1 => "'#EDC16F'",
+        'color' => 'ocre'
+      ],
+      10 => [
+        0 => "'#8918E2'",
+        1 => "'#B76DF2'",
+        'color' => 'moradito'
+      ],
+      11 => [
+        0 => "'#17C5D3'",
+        1 => "'#6DE8F2'",
+        'color' => 'azulTurquesa2'
+      ],
+      12 => [
+        0 => "'#4A46EA'",
+        1 => "'#7E7BED'",
+        'color' => 'azulMorado'
+      ],
     ];
   ?>
+  // cursos
   datos = [
-    <?php while ( $datosCurso = mysqli_fetch_array($cursosQuery) ) : ?>
+    <?php while ( $datosCurso = mysqli_fetch_array($cursosQuery) ) :
+      $i = rand(0, 12); ?>
       {
         value: <?php echo $datosCurso['total_alumnos'] ?>,
         color: <?php echo $colores[$i][0] ?>,
         highlight: <?php echo $colores[$i][1] ?>,
         label: '<?php echo $datosCurso["des_curso"] ?>'
       },
-      <?php  $i++; ?>
     <?php endwhile; ?>
   ];
   var opciones = [
@@ -396,5 +448,113 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']); ?>
   var elemento = $("#pieCursos").get(0).getContext("2d");
   // esto traeria el primer nodo de la coleccion.
   var pieCursos = new Chart(elemento).Pie(datos, opciones);
+  // repitientes
+  datos = [
+    {
+      value: <?php echo $datosRepitiente['no'] ?>,
+      color: <?php echo $colores[1][0] ?>,
+      highlight: <?php echo $colores[1][1] ?>,
+      label: 'No repitiente'
+    },
+    {
+      value: <?php echo $datosRepitiente['si'] ?>,
+      color: <?php echo $colores[0][0] ?>,
+      highlight: <?php echo $colores[0][1] ?>,
+      label: 'repitiente'
+    }
+  ];
+  var elemento = $("#pieRepitiente").get(0).getContext("2d");
+  var pieRepitiente = new Chart(elemento).Pie(datos, opciones);
+  // repitientes poligono
+  var datos = {
+      labels: ["No repitiente", "Repitiente"],
+      datasets: [
+        {
+          label: "repitientes",
+          fillColor: "rgba(51, 122, 183, 0.5)",
+          strokeColor: "rgba(51, 122, 183,0.8)",
+          highlightFill: "rgba(111, 181, 240,0.75)",
+          highlightStroke: "rgba(111, 181, 240,1)",
+          data: [
+            <?php echo $datosRepitiente['no'] ?>,
+            <?php echo $datosRepitiente['si'] ?>
+          ]
+        }
+      ]
+  };
+  var elemento = $("#poligonoRepitiente").get(0).getContext("2d");
+  var poligonoRepitiente = new Chart(elemento).Bar(datos, opciones);
+  // sexo
+  datos = [
+    {
+      value: <?php echo $datosSexo['ninos'] ?>,
+      color: <?php echo $colores[7][0] ?>,
+      highlight: <?php echo $colores[7][1] ?>,
+      label: 'Masculino'
+    },
+    {
+      value: <?php echo $datosSexo['ninas'] ?>,
+      color: <?php echo $colores[10][0] ?>,
+      highlight: <?php echo $colores[10][1] ?>,
+      label: 'Femenino'
+    }
+  ];
+  var elemento = $("#pieSexo").get(0).getContext("2d");
+  var pieSexo = new Chart(elemento).Pie(datos, opciones);
+  // sexo poligono
+  var datos = {
+      labels: ["Masculino", "Femenino"],
+      datasets: [
+        {
+          label: "generos",
+          fillColor: "rgba(51, 122, 183, 0.5)",
+          strokeColor: "rgba(51, 122, 183,0.8)",
+          highlightFill: "rgba(111, 181, 240,0.75)",
+          highlightStroke: "rgba(111, 181, 240,1)",
+          data: [
+            <?php echo $datosSexo['ninos'] ?>,
+            <?php echo $datosSexo['ninas'] ?>
+          ]
+        }
+      ]
+  };
+  var elemento = $("#poligonoSexo").get(0).getContext("2d");
+  var poligonoSexo = new Chart(elemento).Bar(datos, opciones);
+  // sexo total
+  datos = [
+    {
+      value: <?php echo $datosSexoTotal['hombres'] ?>,
+      color: <?php echo $colores[7][0] ?>,
+      highlight: <?php echo $colores[7][1] ?>,
+      label: 'Masculino'
+    },
+    {
+      value: <?php echo $datosSexoTotal['mujeres'] ?>,
+      color: <?php echo $colores[10][0] ?>,
+      highlight: <?php echo $colores[10][1] ?>,
+      label: 'Femenino'
+    }
+  ];
+  var elemento = $("#pieSexoTotal").get(0).getContext("2d");
+  var pieSexoTotal = new Chart(elemento).Pie(datos, opciones);
+  // sexo poligono
+  var datos = {
+      labels: ["Masculino", "Femenino"],
+      datasets: [
+        {
+          label: "generos",
+          fillColor: "rgba(51, 122, 183, 0.5)",
+          strokeColor: "rgba(51, 122, 183,0.8)",
+          highlightFill: "rgba(111, 181, 240,0.75)",
+          highlightStroke: "rgba(111, 181, 240,1)",
+          data: [
+            <?php echo $datosSexoTotal['hombres'] ?>,
+            <?php echo $datosSexoTotal['mujeres'] ?>
+          ]
+        }
+      ]
+  };
+  var elemento = $("#poligonoSexoTotal").get(0).getContext("2d");
+  var poligonoSexoTotal = new Chart(elemento).Bar(datos, opciones);
 </script>
 <?php finalizarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']); ?>
