@@ -313,13 +313,11 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']); ?>
                   where descripcion like '%$n-$n1%')
                 group by
                 2,1;";
-              $resultado = conexion($query);
-              $datos = mysqli_fetch_assoc($resultado); ?>
+              $cursosQuery = conexion($query); ?>
               <div class="row">
-                <div class="col-sm-12">
-                  <h4>
-                    <strong>alumnos en cursos... 1,2,3,4,5,6</strong>
-                  </h4>
+                <div class="center-block" style="width:400px">
+                  <h4 class="text-center">Alumnos existentes por cursos</h4>
+                  <canvas id="pieCursos" height="400" width="400"></canvas>
                 </div>
               </div>
             </div>
@@ -331,4 +329,72 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']); ?>
 </div>
 <!-- graficos -->
 <script src="java/Chart.js/Chart.min.js"></script>
+<script type="text/javascript">
+  var datos = [];
+  <?php
+    $i = 0;
+    $colores = [
+      0 => [
+        0 => "'#F7464A'",
+        1 => "'#FF5A5E'",
+        'color' => 'rojo'
+      ],
+      1 => [
+        0 => "'#46BFBD'",
+        1 => "'#5AD3D1'",
+        'color' => 'verdeTurquesa'
+      ],
+      2 => [
+        0 => "'#FDB45C'",
+        1 => "'#FFC870'",
+        'color' => 'amarillo'
+      ],
+      3 => [
+        0 => "'#B48EAD'",
+        1 => "'#C69CBE'",
+        'color' => 'purpura'
+      ],
+      4 => [
+        0 => "'#949FB1'",
+        1 => "'#A8B3C5'",
+        'color' => 'gris'
+      ],
+      5 => [
+        0 => "'#4D5360'",
+        1 => "'#616774'",
+        'color' => 'grisOscuro'
+      ],
+      6 => [
+        0 => "'#33CC33'",
+        1 => "'#99FF99'",
+        'color' => 'verde'
+      ],
+      7 => [
+        0 => "'#3399FF'",
+        1 => "'#99CCFF'",
+        'color' => 'azul'
+      ]
+    ];
+  ?>
+  datos = [
+    <?php while ( $datosCurso = mysqli_fetch_array($cursosQuery) ) : ?>
+      {
+        value: <?php echo $datosCurso['total_alumnos'] ?>,
+        color: <?php echo $colores[$i][0] ?>,
+        highlight: <?php echo $colores[$i][1] ?>,
+        label: '<?php echo $datosCurso["des_curso"] ?>'
+      },
+      <?php  $i++; ?>
+    <?php endwhile; ?>
+  ];
+  var opciones = [
+    {
+      responsive: true,
+    }
+  ];
+  // agarra el elemento con jQuery - usando metodo de jQuery .get().
+  var elemento = $("#pieCursos").get(0).getContext("2d");
+  // esto traeria el primer nodo de la coleccion.
+  var pieCursos = new Chart(elemento).Pie(datos, opciones);
+</script>
 <?php finalizarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']); ?>
