@@ -63,25 +63,22 @@ if ( isset($_SESSION['cod_tipo_usr']) ) : ?>
 		        </li>
 		      </ul>
 		      <ul class="nav navbar-nav navbar-right">
-		        <li><a href="#">Manual de uso</a></li>
+		        <?php $info = enlaceDinamico('estadistica.php'); ?>
+		        <li><a href="<?php echo $info ?>">Informacion del sistema</a></li>
 		        <li class="dropdown">
-		        	<a
-		        	href="#"
-		        	class="dropdown-toggle"
-		        	data-toggle="dropdown"
-		        	role="button"
-		        	aria-expanded="false">
-		        		Alumno <span class="caret"></span>
-		        	</a>
-		        	<ul class="dropdown-menu" role="menu">
-		        	  <li><a href="#">Registrar</a></li>
-		        	  <li><a href="#">Consultar</a></li>
-		        	  <li><a href="#">Actualizar</a></li>
-		        	  <li class="divider"></li>
-		        	  <li><a href="#">Ayuda al usuario</a></li>
-		        	  <li class="divider"></li>
-		        	  <li><a href="#">Manual de uso</a></li>
-		        	</ul>
+		          <a
+		          href="#"
+		          class="dropdown-toggle"
+		          data-toggle="dropdown"
+		          role="button"
+		          aria-expanded="false">
+		            Manual <span class="caret"></span>
+		          </a>
+		          <ul class="dropdown-menu" role="menu">
+		            <li><a href="#">Ayuda al usuario</a></li>
+		            <li class="divider"></li>
+		            <li><a href="#">Manual de uso</a></li>
+		          </ul>
 		        </li>
 		      </ul>
 		    </div><!-- /.navbar-collapse -->
