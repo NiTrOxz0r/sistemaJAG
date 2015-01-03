@@ -107,11 +107,41 @@ $bootstrapJS = enlaceDinamico('css/bootstrap/js/bootstrap.min.js');
   <p id="mainTitulo">
     <strong>sistemaJAG 2014.</strong>
   </p>
+  <!-- imagen de footer -->
   <script type="text/javascript">
     <?php $enlace = 'imagenes/'.rand(1,15).'.png';
     $imagen = enlaceDinamico($enlace) ?>
     $(function() {
+      // imagen inicial
       $('#imgCodigos').css('background-image','url(<?php echo $imagen ?>)');
+      // dimensiones del explorador del usuario
+      var alto = $( window ).height();
+      var ancho = $( window ).width();
+      // mueve la imagen segun la posicion de x o y.
+      $('#footer').mousemove(function(event) {
+        var x = ((event.clientX*10)/ancho).toFixed(2);
+        var y = ((event.clientY*10)/alto).toFixed(2);
+        // console.log('x: '+5+x);
+        // console.log('y: '+5+y);
+        $('#imgCodigos').css({
+          'background-position': 4+x+'%'+' '+4+y+'%',
+          '-moz-background-position': 4+x+'%'+' '+4+y+'%',
+        });
+      });
+
+      //cada 10000ms activa la funcion
+      window.setInterval(function(){
+          cambiarFooterImage();
+      }, 10000);
+
+      //cambia la imagen de fondo de footer
+      function cambiarFooterImage() {
+        <?php $enlace = enlaceDinamico('imagenes/') ?>
+        var enlace = "<?php echo $enlace ?>"+Math.floor(Math.random()*(15)+1)+".png";
+        $('#imgCodigos').css({
+          'background-image' : 'URL('+enlace+')'
+        });
+      }
     });
   </script>
 </footer>
