@@ -21,12 +21,10 @@
 }
 
 #footerLogo {
-  height: 100px;
-  background-color: #333;
-  /*background-image: */
-  background-size: cover;
-  background-position: 50%;
   margin-bottom: 50px;
+}
+#footerLogo img:hover {
+    opacity: 0.7;
 }
 
 #imgCodigos {
