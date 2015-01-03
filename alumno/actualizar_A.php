@@ -4,7 +4,7 @@
  *
  * desinfectado con cloro y amonico por:
  * @author [slayerfat] <[slayerfat@gmail.com]>
- * {@internal [genera las actualizaciones respectivas de alumno
+ * {@internal [genera las actualizaciónes respectivas de alumno
  * validadas por medio de php (ChequearAlumno y ChequearDireccion)]}
  *
  * @version 1.2
@@ -199,7 +199,7 @@ if ( isset($_POST['cedula']) and preg_match( "/[0-9]{6,8}/", $_POST['cedula']) )
             <div class="container">
               <div class="row">
                 <div class="jumbotron">
-                  <h1>Actualizacion exitosa!</h1>
+                  <h1>Actualización exitosa!</h1>
                   <h4>
                     Los registros asociados
                     fueron actualizados correctamente!
@@ -212,7 +212,7 @@ if ( isset($_POST['cedula']) and preg_match( "/[0-9]{6,8}/", $_POST['cedula']) )
                   <div class="margen">
                     <div class="row margen">
                       <div class="col-sm-4">
-                        <a href="reportes/constancia-inscripcion.php?cedula=<?php echo $cedula ?>" class="cons-ins btn btn-default btn-block">Constancia Inscricion</a>
+                        <a href="reportes/constancia-inscripcion.php?cedula=<?php echo $cedula ?>" class="cons-ins btn btn-default btn-block">Constancia Inscrición</a>
                       </div>
                       <div class="col-sm-4">
                         <a href="reportes/constancia-estudio.php?cedula=<?php echo $cedula ?>" class="cons-est btn btn-default btn-block">Constancia Estudios</a>
@@ -243,19 +243,19 @@ if ( isset($_POST['cedula']) and preg_match( "/[0-9]{6,8}/", $_POST['cedula']) )
                   </p>
                   <h3>
                     <small>
-                      Lamentablemente, es posible que los datos de actualizacion se perdieron.
+                      Lamentablemente, es posible que los datos de actualización se perdieron.
                     </small>
                   </h3>
                   <p class="bg-danger">
-                    Ocurrio un suceso inesperado en la actualizacion del registro
-                    en el sitema.
+                    Ocurrió un suceso inesperado en la actualización del registro
+                    en el sistema.
                   </p>
                   <p>
-                    Si desea hacer otra actualizacion por favor dele
+                    Si desea hacer otra actualización por favor dele
                     <a href="form_act_A.php?cedula=<?php echo $cedula ?>">click a este enlace</a>
                   </p>
                   <p>
-                    ¿O sera que entro en esta pagina erroneamente?
+                    ¿O será que entro en esta pagina erróneamente?
                   </p>
                   <p class="bg-warning">
                     Si este es un problema recurrente, contacte a un administrador del sistema.
@@ -281,11 +281,11 @@ if ( isset($_POST['cedula']) and preg_match( "/[0-9]{6,8}/", $_POST['cedula']) )
                   Error en el proceso de registro!
                 </p>
                 <h3>
-                  Los datos suministrados al sistema parecen ser invalidos!
+                  Los datos suministrados al sistema parecen ser inválidos!
                 </h3>
                 <div class="bg-danger">
                   <p>
-                    <em>Especificamente el sistema declara:</em>
+                    <em>Específicamente el sistema declara:</em>
                   </p>
                   <p>
                      <strong>
@@ -300,7 +300,7 @@ if ( isset($_POST['cedula']) and preg_match( "/[0-9]{6,8}/", $_POST['cedula']) )
                 </p>
                 <?php $inscripcion = enlaceDinamico('personalAutorizado/form_reg_P.php'); ?>
                 <p>
-                  para ir al proceso de inscripcion <a href="<?php echo $inscripcion ?>">
+                  para ir al proceso de inscripción <a href="<?php echo $inscripcion ?>">
                   puede seguir este enlace.
                   </a>
                 </p>
@@ -309,7 +309,7 @@ if ( isset($_POST['cedula']) and preg_match( "/[0-9]{6,8}/", $_POST['cedula']) )
                   <a href="menucon.php">click a este enlace.</a>
                 </p>
                 <p>
-                  ¿O sera que entro en esta pagina erroneamente?
+                  ¿O será que entro en esta pagina erróneamente?
                 </p>
                 <p class="bg-warning">
                   Si este es un problema recurrente, contacte a un administrador del sistema.
@@ -335,11 +335,11 @@ if ( isset($_POST['cedula']) and preg_match( "/[0-9]{6,8}/", $_POST['cedula']) )
                 Error en el proceso de registro!
               </p>
               <h3>
-                Los datos suministrados al sistema parecen ser invalidos!
+                Los datos suministrados al sistema parecen ser inválidos!
               </h3>
               <div class="bg-danger">
                 <p>
-                  <em>Especificamente el sistema declara:</em>
+                  <em>Específicamente el sistema declara:</em>
                 </p>
                 <p>
                    <strong>
@@ -354,7 +354,7 @@ if ( isset($_POST['cedula']) and preg_match( "/[0-9]{6,8}/", $_POST['cedula']) )
               </p>
               <?php $inscripcion = enlaceDinamico('personalAutorizado/form_reg_P.php'); ?>
               <p>
-                para ir al proceso de inscripcion <a href="<?php echo $inscripcion ?>">
+                para ir al proceso de inscripción <a href="<?php echo $inscripcion ?>">
                 puede seguir este enlace.
                 </a>
               </p>
@@ -363,7 +363,7 @@ if ( isset($_POST['cedula']) and preg_match( "/[0-9]{6,8}/", $_POST['cedula']) )
                 <a href="menucon.php">click a este enlace.</a>
               </p>
               <p>
-                ¿O sera que entro en esta pagina erroneamente?
+                ¿O será que entro en esta pagina erróneamente?
               </p>
               <p class="bg-warning">
                 Si este es un problema recurrente, contacte a un administrador del sistema.
@@ -390,7 +390,7 @@ else: ?>
             </p>
             <h3>
               <small>
-                Lamentablemente, es posible que los datos de actualizacion se perdieron.
+                Lamentablemente, es posible que los datos de actualización se perdieron.
               </small>
             </h3>
             <p>
@@ -398,7 +398,7 @@ else: ?>
               <a href="menucon.php">click a este enlace</a>
             </p>
             <p>
-              ¿O sera que entro en esta pagina erroneamente?
+              ¿O será que entro en esta pagina erróneamente?
             </p>
             <p class="bg-warning">
               Si este es un problema recurrente, contacte a un administrador del sistema.

@@ -46,13 +46,13 @@ if ( /*isset($_SESSION['act_cod_curso']) and !preg_match( "/[^0-9]/", $_SESSION[
         <div class="container">
           <div class="row">
             <div class="jumbotron">
-              <h1>Actualizacion exitosa!</h1>
+              <h1>Actualización exitosa!</h1>
               <h4>
                 Los registros asociados
                 fueron actualizados correctamente!
               </h4>
               <p>
-                Si desea hacer otra actualizacion por favor dele
+                Si desea hacer otra actualización por favor dele
                 <a href="menucon.php">click a este enlace</a>
               </p>
               <p>
@@ -76,15 +76,15 @@ if ( /*isset($_SESSION['act_cod_curso']) and !preg_match( "/[^0-9]/", $_SESSION[
               </p>
               <h3>
                 <small>
-                  Lamentablemente, es posible que los datos de actualizacion se perdieron.
+                  Lamentablemente, es posible que los datos de actualización se perdieron.
                 </small>
               </h3>
               <p>
-                Si desea hacer otra actualizacion por favor dele
+                Si desea hacer otra actualización por favor dele
                 <a href="menucon.php">click a este enlace</a>
               </p>
               <p>
-                ¿O sera que entro en esta pagina erroneamente?
+                ¿O será que entro en esta pagina erróneamente?
               </p>
               <p class="bg-warning">
                 Si este es un problema recurrente, contacte a un administrador del sistema.
@@ -112,15 +112,15 @@ else : ?>
             </p>
             <h3>
               <small>
-                Lamentablemente, es posible que los datos de actualizacion se perdieron.
+                Lamentablemente, es posible que los datos de actualización se perdieron.
               </small>
             </h3>
             <p>
-              Si desea hacer otra actualizacion por favor dele
+              Si desea hacer otra actualización por favor dele
               <a href="menucon.php">click a este enlace</a>
             </p>
             <p>
-              ¿O sera que entro en esta pagina erroneamente?
+              ¿O será que entro en esta pagina erróneamente?
             </p>
             <p class="bg-warning">
               Si este es un problema recurrente, contacte a un administrador del sistema.

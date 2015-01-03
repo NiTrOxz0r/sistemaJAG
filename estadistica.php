@@ -110,7 +110,7 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']); ?>
               <!-- grafico -->
               <div class="row">
                 <div class="center-block" style="width:75%">
-                  <h4 class="text-center">Relacion de genero</h4>
+                  <h4 class="text-center">Relación de genero</h4>
                   <center>
                     <canvas id="pieSexoTotal" height="400" width="400"></canvas>
                     <canvas id="poligonoSexoTotal" height="400" width="400"></canvas>
@@ -177,7 +177,7 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']); ?>
               <!-- grafico -->
               <div class="row">
                 <div class="center-block" style="width:75%">
-                  <h4 class="text-center">Relacion de genero</h4>
+                  <h4 class="text-center">Relación de genero</h4>
                   <canvas id="pieSexo" height="400" width="400"></canvas>
                   <canvas id="poligonoSexo" height="400" width="400"></canvas>
                 </div>
@@ -336,7 +336,7 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']); ?>
               <!-- grafico -->
               <div class="row">
                 <div class="center-block" style="width:75%">
-                  <h4 class="text-center">Relacion de repitientes</h4>
+                  <h4 class="text-center">Relación de repitientes</h4>
                   <center>
                     <canvas id="pieRepitiente" height="400" width="400"></canvas>
                     <canvas id="poligonoRepitiente" height="400" width="400"></canvas>
@@ -345,8 +345,8 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']); ?>
               </div>
               <!-- por cursos -->
               <?php
-              // si es despues de inscripciones año actual - año mas 1
-              // si es antes de inscripciones año menos 1 - año actual
+              // si es despues de inscripciónes año actual - año mas 1
+              // si es antes de inscripciónes año menos 1 - año actual
               if ( intval(date('m')) > 7 ) :
                 $n = date('Y');
                 $n1 = intval(date('Y')) + 1;

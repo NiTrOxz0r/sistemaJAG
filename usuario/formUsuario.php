@@ -26,7 +26,7 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);
         <div id="bienvenida" class="row">
           <div class="jumbotron">
             <h1>Bienvenid@!</h1>
-            <h4>Sistema de Inscripcion de la E.B.N.B "Jose Antonio Gonzalez"</h4>
+            <h4>Sistema de Inscripción de la E.B.N.B "Jose Antonio Gonzalez"</h4>
             <p>
               Para Utilizar este sistema debe estar registrado como usuario.
             </p>
@@ -45,16 +45,16 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);
             action="usuario/validar_U.php"
             method="POST">
               <div class="form-group">
-                <label for="seudonimo" class="control-label">Seudonimo</label>
+                <label for="seudonimo" class="control-label">Seudónimo</label>
                 <input
                   type="text"
                   name="seudonimo"
                   id="seudonimo"
                   class="form-control"
                   required="required"
-                  placeholder="Instroduzca Usuario">
+                  placeholder="Introduzca Usuario">
                   <p class="help-block" id="seudonimo_chequeo">
-                    Instroduzca su seudonimo en el sistemaJAG
+                    Introduzca su seudónimo en el sistemaJAG
                   </p>
               </div>
               <div class="form-group">
@@ -66,7 +66,7 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);
                   id="clave"
                   required="required"
                   maxlength="15"
-                  placeholder="Instroduzca Clave">
+                  placeholder="Introduzca Clave">
                   <p class="help-block" id="clave_chequeo">
                     Especifique su contrase&ntilde;a
                   </p>

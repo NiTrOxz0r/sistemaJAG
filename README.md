@@ -1,32 +1,32 @@
 sistemaJAG
 ==========
 
-Sistema de inscripcion adaptado para la institucion publica U.E.N.B "José Antonio Gonzáles"
+Sistema de inscripción adaptado para la institucion publica U.E.N.B "José Antonio Gonzáles"
 
-El prototipo de este sistema (version 0.6.1) esta en linea en [sistemajag.esy.es/](http://sistemajag.esy.es/)
+El prototipo de este sistema (version 0.6.3) esta en linea en [sistemajag.esy.es/](http://sistemajag.esy.es/)
 ###Unidad Educativa Nacional Bolivariana "José Antonio Gonzáles"
-Escuela ubicada en el paraiso, caracas, venezuela.
-##version 0.6.2
+Escuela ubicada en el Paraíso, Caracas, Venezuela.
+##version 0.6.3
 ###Sistema 95.4% aprox completado, por ahora falta:
 ####FLUJO NORMAL DE FORMULARIOS
 en progreso: 99?% aprox.
 ####FLUJO ALTERNATIVO DE FORMULARIOS
-en progreso: 85?% aprox.
+en progreso: 99?% aprox.
 ####moduloAlumno
-en progreso: 85?% aprox.
+en progreso: 99?% aprox.
 ####moduloCurso
 en progreso: 100%.
 ####moduloUsuario
-en progreso: 95?% aprox.
+en progreso: 99?% aprox.
 ####CSS
 en progreso: 100% aprox.
 ####ModuloValidacion
 en progreso: 100%.
 ####ModuloReporte
 en progreso: 99?% aprox.
-(a espera de analisis y comentarios)
+(a espera de análisis y comentarios)
 
-* versiones del sistema: [ver aqui](https://github.com/slayerfat/sistemaJAG/releases)
+* versiones del sistema: [ver aquí](https://github.com/slayerfat/sistemaJAG/releases)
 * version master: [(ultima version considerada estable)](https://github.com/slayerfat/sistemaJAG/archive/master.zip)
 * version de desarrollo: [(version en desarrollo)](https://github.com/slayerfat/sistemaJAG/archive/desarrollo.zip)
 
@@ -76,7 +76,7 @@ totalmente sublime:
 [...]
 ```
 
-exotico:
+exótico:
 ```php
 <fieldset>
   <legend><i>Datos personales.</i></legend>

@@ -27,7 +27,7 @@ if ( isset($_SESSION['cod_tipo_usr']) ) : ?>
 		        <span class="icon-bar"></span>
 		      </button>
 		      <?php $index = enlaceDinamico(); ?>
-		      <a class="navbar-brand" href="<?php echo $index ?>">sitemaJAG</a>
+		      <a class="navbar-brand" href="<?php echo $index ?>">sistemaJAG</a>
 		    </div>
 		    <!-- Esto es ocultado cuando pasa a tipo movil. -->
 		    <div class="collapse navbar-collapse" id="navbar_target">
@@ -43,7 +43,7 @@ if ( isset($_SESSION['cod_tipo_usr']) ) : ?>
 							</a>
 						</li>
 		        <?php $inscripcion = enlaceDinamico('personalAutorizado/form_reg_P.php'); ?>
-		        <li><a href="<?php echo $inscripcion ?>">inscripcion</a></li>
+		        <li><a href="<?php echo $inscripcion ?>">inscripción</a></li>
 		        <li class="dropdown">
 		          <a
 		          href="#"
@@ -68,7 +68,7 @@ if ( isset($_SESSION['cod_tipo_usr']) ) : ?>
 		      </ul>
 		      <ul class="nav navbar-nav navbar-right">
             <?php $info = enlaceDinamico('estadistica.php'); ?>
-            <li><a href="<?php echo $info ?>">Informacion del sistema</a></li>
+            <li><a href="<?php echo $info ?>">Información del sistema</a></li>
             <li class="dropdown">
               <a
               href="#"
@@ -100,7 +100,7 @@ if ( isset($_SESSION['cod_tipo_usr']) ) : ?>
 		        <span class="icon-bar"></span>
 		      </button>
 		      <?php $cerar = enlaceDinamico('cerrar.php'); ?>
-		      <a class="navbar-brand" href="<?php echo $cerrar ?>">sitemaJAG</a>
+		      <a class="navbar-brand" href="<?php echo $cerrar ?>">sistemaJAG</a>
 		    </div>
 		    <!-- Esto es ocultado cuando pasa a tipo movil. -->
 		    <div class="collapse navbar-collapse" id="navbar_target">

@@ -16,7 +16,7 @@
 		        <span class="icon-bar"></span>
 		      </button>
 		      <?php $index = enlaceDinamico(); ?>
-		      <a class="navbar-brand" href="<?php echo $index ?>">sitemaJAG</a>
+		      <a class="navbar-brand" href="<?php echo $index ?>">sistemaJAG</a>
 		    </div>
 		    <!-- Esto es ocultado cuando pasa a tipo movil. -->
 		    <div class="collapse navbar-collapse" id="navbar_target">
@@ -46,7 +46,7 @@
 		        <span class="icon-bar"></span>
 		      </button>
 		      <?php $index = enlaceDinamico(); ?>
-		      <a class="navbar-brand" href="<?php echo $index ?>">sitemaJAG</a>
+		      <a class="navbar-brand" href="<?php echo $index ?>">sistemaJAG</a>
 		    </div>
 		    <!-- Esto es ocultado cuando pasa a tipo movil. -->
 		    <div class="collapse navbar-collapse" id="navbar_target">
@@ -76,7 +76,7 @@
 	        <span class="icon-bar"></span>
 	      </button>
 	      <?php $index = enlaceDinamico(); ?>
-	      <a class="navbar-brand" href="<?php echo $index ?>">sitemaJAG</a>
+	      <a class="navbar-brand" href="<?php echo $index ?>">sistemaJAG</a>
 	    </div>
 	    <!-- Esto es ocultado cuando pasa a tipo movil. -->
 	    <div class="collapse navbar-collapse" id="navbar_target">

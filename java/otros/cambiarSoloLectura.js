@@ -3,10 +3,10 @@
  *
  * [cambiarSoloLectura una funcion sencilla que hice para
  * cambiar el estado del formulario de consulta (readonly = true)
- * a actualizacion (disabled = false)]
+ * a actualización (disabled = false)]
  *
  * @param  {object} $tabla   el objeto del formulario a ser manipulado.
- * @param  {string} tipo     el tipo de consulta o actualizacion a
+ * @param  {string} tipo     el tipo de consulta o actualización a
  *                           mostrar en mensaje (alumno/usuario/representante)
  * @return {void}
  *
@@ -49,7 +49,7 @@ function cambiarSoloLectura($tabla, tipo){
     $('.actualizar').removeClass('btn-info').addClass('btn-primary');
     $('#submit').addClass('btn-info').removeClass('btn-primary');
   }else{
-    $('#form > fieldset > legend > h1').text('actualizacion de '+tipo);
+    $('#form > fieldset > legend > h1').text('actualización de '+tipo);
     $('.actualizar').addClass('btn-info').removeClass('btn-primary');
     $('#submit').removeClass('btn-info').addClass('btn-primary');
   }

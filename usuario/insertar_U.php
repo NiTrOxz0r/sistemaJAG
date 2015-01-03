@@ -242,7 +242,7 @@ if ( isset($_SESSION['seudonimo']) && isset($_SESSION['clave']) && isset($_POST[
                 Ud. ya es miembro de este sistema, por favor contacte a un administrador para empezar a usar las diferentes actividades.
               </p>
               <p class="bg-info">
-                Ud. tendra acceso limitado al sistemaJAG mientras su cuenta es validada por un administrador.
+                Ud. tendrá acceso limitado al sistemaJAG mientras su cuenta es validada por un administrador.
               </p>
               <p>
                 <?php $index = enlaceDinamico(); ?>
@@ -263,7 +263,7 @@ if ( isset($_SESSION['seudonimo']) && isset($_SESSION['clave']) && isset($_POST[
                 Error en la base de datos!
               </p>
               <p class="bg-danger">
-                Algo inesperado ocurrio, contacte a un administrador del sistema.
+                Algo inesperado ocurrió, contacte a un administrador del sistema.
               </p>
               <p>
                 <?php $cerrar = enlaceDinamico('cerrar.php'); ?>
@@ -277,7 +277,7 @@ if ( isset($_SESSION['seudonimo']) && isset($_SESSION['clave']) && isset($_POST[
                 </small>
               </h3>
               <p>
-                ¿O sera que entro en esta pagina erroneamente?
+                ¿O será que entro en esta pagina erróneamente?
               </p>
               <p class="bg-warning">
                 Si este es un problema recurrente, contacte a un administrador del sistema.
@@ -316,11 +316,11 @@ if ( isset($_SESSION['seudonimo']) && isset($_SESSION['clave']) && isset($_POST[
                 Error en el proceso de registro!
               </p>
               <h3>
-                Los datos suministrados al sistema parecen ser invalidos!
+                Los datos suministrados al sistema parecen ser inválidos!
               </h3>
               <div class="bg-danger">
                 <p>
-                  <em>Especificamente el sistema declara:</em>
+                  <em>Específicamente el sistema declara:</em>
                 </p>
                 <p>
                    <strong>
@@ -331,7 +331,7 @@ if ( isset($_SESSION['seudonimo']) && isset($_SESSION['clave']) && isset($_POST[
                 </p>
               </div>
               <p>
-                ¿O sera que entro en esta pagina erroneamente?
+                ¿O será que entro en esta pagina erróneamente?
               </p>
               <p class="bg-warning">
                 Si este es un problema recurrente, contacte a un administrador del sistema.
@@ -375,7 +375,7 @@ if ( isset($_SESSION['seudonimo']) && isset($_SESSION['clave']) && isset($_POST[
             </small>
           </h3>
           <p>
-            ¿O sera que entro en esta pagina erroneamente?
+            ¿O será que entro en esta pagina erróneamente?
           </p>
           <p class="bg-warning">
             Si este es un problema recurrente, contacte a un administrador del sistema.

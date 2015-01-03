@@ -122,7 +122,7 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);?>
               </div>
               <div class="form-group">
                 <label class="control-label" for="periodo_academico">
-                  Periodo Academico
+                  Periodo Académico
                 </label>
                 <?php
                   $query = "SELECT
@@ -155,7 +155,7 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);?>
                   name="comentarios"
                   id="comentarios"
                   class="form-control"
-                  placeholder="Puede agregar los comentarios que desee aqui!">
+                  placeholder="Puede agregar los comentarios que desee aquí!">
                 <p class="help-block" id="comentarios_chequeo">
                 </p>
               </div>

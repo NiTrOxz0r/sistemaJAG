@@ -57,7 +57,7 @@ function encuentraCedula($cedula_x = 0){
       $consultar_PI = enlaceDinamico("$enlace");
       return $consultar_PI;
     endif;
-  // si la cedula es invalida:
+  // si la cédula es invalida:
   else :
     return false;
   endif;

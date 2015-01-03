@@ -173,7 +173,7 @@ class TablaPrimaria{
 
   public function chequeaUsuario(){
     // codigo del usuario que esta haciendo
-    // la actualizacion del registro
+    // la actualización del registro
     // ya validado por el sistema.
     // if ( isset($_SESSION['codUsrMod']) ) {
     //  $this->codUsrMod = $_SESSION['codUsrMod'];

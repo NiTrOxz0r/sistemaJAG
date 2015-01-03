@@ -30,7 +30,7 @@ ChequearEmail.prototype.cambiar = function(){
 }
 
 /**
- * crea la variable de control de email (para actualizaciones)
+ * crea la variable de control de email (para actualizaciónes)
  */
 ChequearEmail.prototype.original = function(){
   this.original = this.email.val();

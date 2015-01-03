@@ -144,8 +144,8 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);
         <div class="col-sm-6 col-sm-offset-3">
           <form
             role="form"
-            id="actualizacion_singular_C"
-            name="actualizacion_singular_C"
+            id="actualización_singular_C"
+            name="actualización_singular_C"
             action="form_act_C.php"
             method="GET">
             <div class="form-group">
