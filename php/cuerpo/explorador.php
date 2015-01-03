@@ -39,7 +39,7 @@ endif;
           </div>
           <div class="col-xs-12">
             <h3>
-              Para navegar optimamente en esta pagina web.
+              Para navegar óptimamente en esta pagina web.
             </h3>
           </div>
         </div>

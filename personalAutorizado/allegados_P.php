@@ -98,7 +98,7 @@ if ( isset($_REQUEST['cedula']) ) :
                   <th data-field="sexo" data-sortable="true">Sexo</th>
                   <th data-field="fec_nac" data-sortable="true">Fecha. Nac.</th>
                   <th data-field="telefono" data-sortable="false">Teléfono</th>
-                  <th data-field="curso" data-sortable="false">Grado y seccion</th>
+                  <th data-field="curso" data-sortable="false">Grado y sección</th>
                   <th data-field="puede_retirar" data-sortable="true" data-visible="true">Puede retirar</th>
                   <th data-field="comentarios" data-sortable="true" data-visible="true">Comentarios</th>
                 </thead>

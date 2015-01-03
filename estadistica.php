@@ -345,8 +345,8 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']); ?>
               </div>
               <!-- por cursos -->
               <?php
-              // si es despues de inscripciones año actual - año mas 1
-              // si es antes de inscripciones año menos 1 - año actual
+              // si es despues de inscripciónes año actual - año mas 1
+              // si es antes de inscripciónes año menos 1 - año actual
               if ( intval(date('m')) > 7 ) :
                 $n = date('Y');
                 $n1 = intval(date('Y')) + 1;

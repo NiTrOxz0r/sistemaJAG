@@ -122,7 +122,7 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);?>
               </div>
               <div class="form-group">
                 <label class="control-label" for="periodo_academico">
-                  Periodo Academico
+                  Periodo Académico
                 </label>
                 <?php
                   $query = "SELECT

@@ -188,7 +188,7 @@ if ( isset($_POST['cedula']) && strlen($_POST['cedula']) == 8 ) :
                   El registro de <?php echo $p_apellido.", ".$p_nombre ?> fue realizado exitosamente!
                 </h4>
                 <p>
-                   <a href="menucon.php">Hacer otro Registro</a>
+                   <a href="menucon.php">Crear otro Registro</a>
                 </p>
                 <p>
                   <?php $index = enlaceDinamico(); ?>

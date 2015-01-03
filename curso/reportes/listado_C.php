@@ -120,7 +120,7 @@ if ( isset($_GET['tipo']) ) :
       $encabezado = $estilo.'<p></p><p></p><p><center><h1 style="text-align:center;">Listado de Cursos</h1></center></p><table style="" cellspacing="0">';
       $thead = '<thead>
                   <tr>
-                    <th>Codigo</th>
+                    <th>Código</th>
                     <th>Curso</th>
                     <th>Pdo. Ac.</th>
                     <th>Comentarios</th>
@@ -160,7 +160,7 @@ if ( isset($_GET['tipo']) ) :
       $encabezado = $estilo.'<p></p><p></p><table style="" cellspacing="0">';
       $thead = '<thead>
                   <tr>
-                    <th>Codigo</th>
+                    <th>Código</th>
                     <th>Curso</th>
                     <th>Pdo. Ac.</th>
                     <th>Comentarios</th>
@@ -242,7 +242,7 @@ if ( isset($_GET['tipo']) ) :
       $encabezado = $estilo.'<p></p><p></p><table style="" cellspacing="0">';
       $thead = '<thead>
                   <tr>
-                    <th>Codigo</th>
+                    <th>Código</th>
                     <th>Curso</th>
                     <th>Pdo. Ac.</th>
                     <th>Comentarios</th>
@@ -276,7 +276,7 @@ if ( isset($_GET['tipo']) ) :
     // Informacion inicial del documento
     $pdf->SetCreator('sistemaJAG');
     $pdf->SetAuthor('EBNB Jose Antonio Gonzalez');
-    $pdf->SetTitle('Constancia de inscripcion');
+    $pdf->SetTitle('Constancia de inscripción');
 
     // crea data del header y footer:
     $pdf->SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, PDF_HEADER_TITLE.' 001', PDF_HEADER_STRING, array(0,64,255), array(0,64,128));

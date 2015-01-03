@@ -91,7 +91,7 @@ else :
     // Informacion inicial del documento
     $pdf->SetCreator(PDF_CREATOR);
     $pdf->SetAuthor('EBNB Jose Antonio Gonzalez');
-    $pdf->SetTitle('Constancia de inscripcion');
+    $pdf->SetTitle('Constancia de inscripción');
 
     // crea data del header y footer:
     // $pdf->SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, PDF_HEADER_TITLE.' 001', PDF_HEADER_STRING, array(0,64,255), array(0,64,128));
@@ -181,7 +181,7 @@ $html = <<<HTML
   <p align="right">CARACAS, {$x} DE {$y} DE {$z} </p>
 </div>
 <div style="margin:80px 0;">
-  <p align="center">CONSTANCIA DE INSCRIPCION</p>
+  <p align="center">CONSTANCIA DE INSCRIPCIÓN</p>
 </div>
 <div style="text-align: justify; padding:0 40px;">
   <p>

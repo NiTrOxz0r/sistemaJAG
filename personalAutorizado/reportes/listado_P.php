@@ -60,7 +60,7 @@ if ( (isset($_REQUEST['informacion']) and isset($_REQUEST['tipo']) )
     // Informacion inicial del documento
     $pdf->SetCreator('sistemaJAG');
     $pdf->SetAuthor('EBNB Jose Antonio Gonzalez');
-    $pdf->SetTitle('Constancia de inscripcion');
+    $pdf->SetTitle('Constancia de inscripción');
 
     // crea data del header y footer:
     $pdf->SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, PDF_HEADER_TITLE.' 001', PDF_HEADER_STRING, array(0,64,255), array(0,64,128));
@@ -133,7 +133,7 @@ if ( (isset($_REQUEST['informacion']) and isset($_REQUEST['tipo']) )
                   <th>Sexo</th>
                   <th>Email</th>
                   <th>Nivel Ed.</th>
-                  <th>Profesion</th>
+                  <th>Profesión</th>
                   <th>Tel. Lab.</th>
                 </tr>
               </thead>';

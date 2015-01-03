@@ -98,7 +98,7 @@ else :
     // Informacion inicial del documento
     $pdf->SetCreator(PDF_CREATOR);
     $pdf->SetAuthor('EBNB Jose Antonio Gonzalez');
-    $pdf->SetTitle('Constancia de inscripcion');
+    $pdf->SetTitle('Constancia de inscripción');
 
     // crea data del header y footer:
     // $pdf->SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, PDF_HEADER_TITLE.' 001', PDF_HEADER_STRING, array(0,64,255), array(0,64,128));
@@ -281,7 +281,7 @@ $html = <<<HTML
           <td><strong>{$parroquia}</strong></td>
         </tr>
         <tr>
-          <th colspan="2" width="100%">Direccion detallada:</th>
+          <th colspan="2" width="100%">Dirección detallada:</th>
           <td></td>
         </tr>
         <tr>
@@ -290,7 +290,7 @@ $html = <<<HTML
         <tr>
           <th width="20%">Nivel Instruccion:</th>
           <td width="29%"><strong>{$nivel_instruccion}</strong></td>
-          <th>Profesion:</th>
+          <th>Profesión:</th>
           <td><strong>{$profesion}</strong></td>
         </tr>
         <tr>
@@ -300,7 +300,7 @@ $html = <<<HTML
           <td><strong>{$telefono_trabajo}</strong></td>
         </tr>
         <tr>
-          <th colspan="2" width="100%">Direccion de trabajo:</th>
+          <th colspan="2" width="100%">Dirección de trabajo:</th>
           <td></td>
         </tr>
         <tr>

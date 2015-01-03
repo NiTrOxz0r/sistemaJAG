@@ -123,7 +123,7 @@ else :
     // Informacion inicial del documento
     $pdf->SetCreator(PDF_CREATOR);
     $pdf->SetAuthor('EBNB Jose Antonio Gonzalez');
-    $pdf->SetTitle('Constancia de inscripcion');
+    $pdf->SetTitle('Constancia de inscripción');
 
     // crea data del header y footer:
     // $pdf->SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, PDF_HEADER_TITLE.' 001', PDF_HEADER_STRING, array(0,64,255), array(0,64,128));
@@ -298,7 +298,7 @@ $html = <<<HTML
           <td><strong>{$parroquia}</strong></td>
         </tr>
         <tr>
-          <th colspan="2" width="100%">Direccion detallada:</th>
+          <th colspan="2" width="100%">Dirección detallada:</th>
           <td></td>
         </tr>
         <tr>
@@ -311,30 +311,30 @@ $html = <<<HTML
           <td width="35%"><strong>{$email}</strong></td>
         </tr>
         <tr>
-          <th width="40%">Titulos y/o Certificados:</th>
+          <th width="40%">Títulos y/o Certificados:</th>
         </tr>
         <tr>
           <th width="08%">Tipo:</th>
           <td width="25%"><strong>{$certificado_1}</strong></td>
-          <th>Descripcion:</th>
+          <th>Descripción:</th>
           <td width="51%"><strong>{$descripcion_1}</strong></td>
         </tr>
         <tr>
           <th width="08%">Tipo:</th>
           <td width="25%"><strong>{$certificado_2}</strong></td>
-          <th>Descripcion:</th>
+          <th>Descripción:</th>
           <td width="51%"><strong>{$descripcion_2}</strong></td>
         </tr>
         <tr>
           <th width="08%">Tipo:</th>
           <td width="25%"><strong>{$certificado_3}</strong></td>
-          <th>Descripcion:</th>
+          <th>Descripción:</th>
           <td width="51%"><strong>{$descripcion_3}</strong></td>
         </tr>
         <tr>
           <th width="08%">Tipo:</th>
           <td width="25%"><strong>{$certificado_4}</strong></td>
-          <th>Descripcion:</th>
+          <th>Descripción:</th>
           <td width="51%"><strong>{$descripcion_4}</strong></td>
         </tr>
         <tr>
@@ -344,11 +344,11 @@ $html = <<<HTML
         <tr>
           <th width="20%">Tipo de personal:</th>
           <td width="29%"><strong>{$tipo_personal}</strong></td>
-          <th width="24%">Codigo de Personal:</th>
+          <th width="24%">Código de Personal:</th>
           <td><strong>{$codigo_personal}</strong></td>
         </tr>
         <tr>
-          <th width="20%">Seudonimo:</th>
+          <th width="20%">Seudónimo:</th>
           <td width="29%"><strong>{$seudonimo}</strong></td>
           <th width="24%">Tipo de usuario:</th>
           <td><strong>{$tipo_usr}</strong></td>

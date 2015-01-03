@@ -168,7 +168,7 @@ if ( (isset($_REQUEST['informacion'])
               <div class="row">
                 <div class="col-xs-12">
                   <h4>
-                    Listado seleccionado según los parámetros que Ud. escojio.
+                    Listado seleccionado según los parámetros que Ud. escogió.
                   </h4>
                   <p>
                     <small>
@@ -226,7 +226,7 @@ if ( (isset($_REQUEST['informacion'])
                   <?php else: ?>
                     <th data-field="telefono_otro" data-sortable="true" data-visible="true">Telf. Ad.</th>
                     <th data-field="cargo" data-sortable="true" data-visible="true">Cargo</th>
-                    <th data-field="seudonimo" data-sortable="true" data-visible="true">Seudonimo</th>
+                    <th data-field="seudonimo" data-sortable="true" data-visible="true">Seudónimo</th>
                   <?php endif ?>
                   <th data-field="tipo" data-sortable="true" data-visible="true">Tipo usuario</th>
                   <th data-field="status_p" data-sortable="true" data-visible="true">Estatus personal</th>

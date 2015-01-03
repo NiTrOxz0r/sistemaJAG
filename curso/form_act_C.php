@@ -152,7 +152,7 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);?>
                 </div>
                 <div class="form-group">
                   <label class="control-label" for="periodo_academico">
-                    Periodo Academico
+                    Periodo Académico
                   </label>
                   <?php
                     $query = "SELECT
@@ -267,7 +267,7 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);?>
             Error en el proceso de actualización!
           </p>
           <p>
-            ¿O entro en esta pagina erroneamente?
+            ¿O entró en esta pagina erróneamente?
           </p>
           <p class="bg-warning">
             Si este es un problema recurrente, contacte a un administrador del sistema.

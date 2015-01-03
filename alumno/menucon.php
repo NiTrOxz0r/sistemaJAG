@@ -185,7 +185,7 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr'], 'sistemaJAG 
           <div class="row">
             <div class="col-xs-12">
               <h4>
-                Tambien puede generar una constancia de inscripcion
+                También puede generar una constancia de inscripción
                 especificando la cédula de identidad del alumno:
               </h4>
             </div>

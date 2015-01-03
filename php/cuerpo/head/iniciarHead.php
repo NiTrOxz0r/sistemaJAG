@@ -15,7 +15,7 @@ require_once($master);
  * @version 1.0
  */
 function iniciarHead(
-	$titulo = "Sistema de inscripcion Jose Antonio Gonzalez",
+	$titulo = "Sistema de inscripción Jose Antonio Gonzalez",
 	$tipo = 0){
 
 	if(!isset($_SESSION)){

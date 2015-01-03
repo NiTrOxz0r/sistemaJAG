@@ -359,7 +359,7 @@ if($go):?>
                     <div class="row">
                       <div class="col-xs-12">
                         <div class="form-group">
-                          <label class="control-label" for="email">Correo Electronico</label>
+                          <label class="control-label" for="email">Correo Electrónico</label>
                           <div class="input-group">
                             <div class="input-group-addon">@</div>
                             <input
@@ -501,7 +501,7 @@ if($go):?>
                       <div class="row">
                         <div class="col-xs-11">
                           <div class="form-group">
-                            <label for="profesion" class="control-label">Profesion</label>
+                            <label for="profesion" class="control-label">Profesión</label>
                             <?php $sql =
                               "SELECT codigo, descripcion from profesion where status = 1 and descripcion LIKE 'SIN PROFESION'
                               UNION
@@ -561,7 +561,7 @@ if($go):?>
                       <div class="row">
                         <div class="col-xs-12">
                           <div class="form-group">
-                            <label for="direccion_trabajo" class="control-label">Direccion de trabajo (Av/Calle/Edf.)</label>
+                            <label for="direccion_trabajo" class="control-label">Dirección de trabajo (Av/Calle/Edf.)</label>
                             <input
                               class="form-control"
                               type="text"

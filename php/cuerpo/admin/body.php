@@ -20,16 +20,15 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);
         <div class="row">
           <div class="col-ms-12 text-left">
             <h1>
-              Sistema de Inscripcion
+              Sistema de Inscripción
               <small>trabajo en progreso!</small>
             </h1>
             <h1>
-              E.B.N.B. Jose Antonio Gonzalez
+              U.E.N.B. José Antonio González
             </h1>
             <?php include_once($version); ?>
             <p>
-            mensaje de bienvenida, info del sistema, informacion relevante de algún proceso.
-            alguna otra cosa que sea necesario.
+              Le damos la bienvenida al sistema informático de inscripción.
             </p>
           </div>
         </div>

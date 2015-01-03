@@ -26,7 +26,7 @@
 function empezarPagina (
   $tipo_head = 0,
   $tipo_navbar = 0,
-  $titulo = "Sistema de inscripcion Jose Antonio Gonzalez"
+  $titulo = "Sistema de inscripción Jose Antonio Gonzalez"
   ){
   // quitar si afecta otros exploradores, o buscar mejor solucion.
   $enlace = $_SERVER['DOCUMENT_ROOT']."/github/sistemaJAG/php/cuerpo/head/iniciarHead.php";

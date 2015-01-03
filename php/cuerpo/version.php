@@ -15,5 +15,12 @@
     endif;
   endwhile;
 ?>
-<h2>Version: <strong><?php echo $version ?></strong></h2>
+<h2>
+  Versión: <strong><?php echo $version ?></strong>
+  <span style="font-size:0.6em;">
+    <strong>
+      <em><?php echo date("d/m/Y H:i:s.", $latest_ctime) ?></em>
+    </strong>
+  </span>
+</h2>
 <!-- google hire me, im available: slayerfat@gmail.com -->

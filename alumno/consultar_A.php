@@ -66,7 +66,7 @@ if ( (isset($_REQUEST['informacion']) and isset($_REQUEST['tipo']) )
               <div class="row">
                 <div class="col-xs-12">
                   <h4>
-                    Listado seleccionado según los parámetros que Ud. escojio.
+                    Listado seleccionado según los parámetros que Ud. escogió.
                   </h4>
                   <p>
                     <small>

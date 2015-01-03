@@ -67,7 +67,7 @@ if ( (isset($_POST['seudonimo']) && isset($_POST['clave']) )
             method="POST"
             action="<?php echo $action; ?>">
               <fieldset>
-                <legend class="text-center">Continue con el proceso de registro</legend>
+                <legend class="text-center">Continué con el proceso de registro</legend>
                 <div class="container">
                   <!-- inicio de nacionalidad y cedula -->
                   <div class="row">
@@ -252,7 +252,7 @@ if ( (isset($_POST['seudonimo']) && isset($_POST['clave']) )
                   </div>
                   <!-- titulos y/o certificados -->
                   <fieldset>
-                    <legend class="text-center">Titulos y/o Certificados</legend>
+                    <legend class="text-center">Títulos y/o Certificados</legend>
                     <div class="row">
                       <div class="col-sm-3">
                         <div class="row">
@@ -277,7 +277,7 @@ if ( (isset($_POST['seudonimo']) && isset($_POST['clave']) )
                         <div class="row">
                           <div class="col-sm-12">
                             <div class="form-group">
-                              <label for="descripcion_1" class="control-label">Descripcion</label>
+                              <label for="descripcion_1" class="control-label">Descripción</label>
                               <input
                                 class="form-control"
                                 type="text"
@@ -315,7 +315,7 @@ if ( (isset($_POST['seudonimo']) && isset($_POST['clave']) )
                         <div class="row">
                           <div class="col-sm-12">
                             <div class="form-group">
-                              <label for="descripcion_2" class="control-label">Descripcion</label>
+                              <label for="descripcion_2" class="control-label">Descripción</label>
                               <input
                                 class="form-control"
                                 type="text"
@@ -353,7 +353,7 @@ if ( (isset($_POST['seudonimo']) && isset($_POST['clave']) )
                         <div class="row">
                           <div class="col-sm-12">
                             <div class="form-group">
-                              <label for="descripcion_3" class="control-label">Descripcion</label>
+                              <label for="descripcion_3" class="control-label">Descripción</label>
                               <input
                                 class="form-control"
                                 type="text"
@@ -391,7 +391,7 @@ if ( (isset($_POST['seudonimo']) && isset($_POST['clave']) )
                         <div class="row">
                           <div class="col-sm-12">
                             <div class="form-group">
-                              <label for="descripcion_4" class="control-label">Descripcion</label>
+                              <label for="descripcion_4" class="control-label">Descripción</label>
                               <input
                                 class="form-control"
                                 type="text"
@@ -465,7 +465,7 @@ if ( (isset($_POST['seudonimo']) && isset($_POST['clave']) )
                         <div class="row">
                           <div class="col-xs-12">
                             <div class="form-group">
-                              <label class="control-label" for="email">Correo Electronico</label>
+                              <label class="control-label" for="email">Correo Electrónico</label>
                               <div class="input-group">
                                 <div class="input-group-addon">@</div>
                                 <input
@@ -531,7 +531,7 @@ if ( (isset($_POST['seudonimo']) && isset($_POST['clave']) )
                   </fieldset>
                   <!-- inicio de estado, municio y parroquia -->
                   <fieldset>
-                    <legend class="text-center">Direccion de Habitacion</legend>
+                    <legend class="text-center">Dirección de Habitación </legend>
                     <div class="row">
                       <div class="col-sm-4">
                         <div class="row">
@@ -602,7 +602,7 @@ if ( (isset($_POST['seudonimo']) && isset($_POST['clave']) )
                         </h4>
                         <p>
                           <em>
-                            Una vez completado este proceso, debera contactar a un
+                            Una vez completado este proceso, deberá contactar a un
                             administrador del sistema.
                           </em>
                         </p>
@@ -828,7 +828,7 @@ if ( (isset($_POST['seudonimo']) && isset($_POST['clave']) )
             Error en el proceso de registro!
           </p>
           <p>
-            ¿O entro en esta pagina erroneamente?
+            ¿O entró en esta pagina erróneamente?
           </p>
           <p class="bg-warning">
             Si este es un problema recurrente, contacte a un administrador del sistema.
