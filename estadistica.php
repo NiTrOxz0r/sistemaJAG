@@ -50,7 +50,7 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']); ?>
               usar este sistema.
             </h2>
           </p>
-          <blockquote>
+          <blockquote class="blockquote-reverse">
             <p>La informacion es tan inutil como aquellos que no la comprendan.</p>
             <footer>Alejandro Granadillo.</footer>
           </blockquote>

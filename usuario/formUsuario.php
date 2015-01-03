@@ -41,55 +41,58 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);
           <div class="col-sm-6 col-sm-offset-3 well">
             <!-- http://www.w3schools.com/tags/ref_eventattributes.asp -->
             <form
-            role="form"
-            action="usuario/validar_U.php"
-            method="POST">
-              <div class="form-group">
-                <label for="seudonimo" class="control-label">Seudónimo</label>
-                <input
-                  type="text"
-                  name="seudonimo"
-                  id="seudonimo"
-                  class="form-control"
-                  required="required"
-                  placeholder="Introduzca Usuario">
-                  <p class="help-block" id="seudonimo_chequeo">
-                    Introduzca su seudónimo en el sistemaJAG
-                  </p>
-              </div>
-              <div class="form-group">
-                <label for="clave" class="control-label">Contrase&ntilde;a:</label>
-                <input
-                  class="form-control"
-                  type="password"
-                  name="clave"
-                  id="clave"
-                  required="required"
-                  maxlength="15"
-                  placeholder="Introduzca Clave">
-                  <p class="help-block" id="clave_chequeo">
-                    Especifique su contrase&ntilde;a
-                  </p>
-              </div>
-              <div class="row">
-                <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+              role="form"
+              action="usuario/validar_U.php"
+              method="POST">
+              <fieldset>
+                <legend class="text-center">Ingresar al sistemaJAG</legend>
+                <div class="form-group">
+                  <label for="seudonimo" class="control-label">Seudónimo</label>
                   <input
-                    class="btn btn-default btn-block"
-                    type="submit"
-                    value="Entrar en el SistemaJAG"
-                    name="enviar"
-                    onsubmit"return validacionUsuario();"
-                    onclick="return validacionUsuario();">
+                    type="text"
+                    name="seudonimo"
+                    id="seudonimo"
+                    class="form-control"
+                    required="required"
+                    placeholder="Introduzca Usuario">
+                    <p class="help-block" id="seudonimo_chequeo">
+                      Introduzca su seudónimo en el sistemaJAG
+                    </p>
                 </div>
-              </div>
-              <div id="error" class="help-block">
-                <?php if (isset($_SESSION['error_login'])): ?>
-                  <p class="text-danger">
-                    Los datos ingresados no concuerdan
-                    en el sistema, por favor intente nuevamente.
-                  </p>
-                <?php endif ?>
-              </div>
+                <div class="form-group">
+                  <label for="clave" class="control-label">Contrase&ntilde;a:</label>
+                  <input
+                    class="form-control"
+                    type="password"
+                    name="clave"
+                    id="clave"
+                    required="required"
+                    maxlength="15"
+                    placeholder="Introduzca Clave">
+                    <p class="help-block" id="clave_chequeo">
+                      Especifique su contrase&ntilde;a
+                    </p>
+                </div>
+                <div class="row">
+                  <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+                    <input
+                      class="btn btn-default btn-block"
+                      type="submit"
+                      value="Entrar en el SistemaJAG"
+                      name="enviar"
+                      onsubmit"return validacionUsuario();"
+                      onclick="return validacionUsuario();">
+                  </div>
+                </div>
+                <div id="error" class="help-block">
+                  <?php if (isset($_SESSION['error_login'])): ?>
+                    <p class="text-danger">
+                      Los datos ingresados no concuerdan
+                      en el sistema, por favor intente nuevamente.
+                    </p>
+                  <?php endif ?>
+                </div>
+              </fieldset>
             </form>
           </div>
         </div>
