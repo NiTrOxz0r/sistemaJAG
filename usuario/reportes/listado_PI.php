@@ -158,14 +158,14 @@ if ( (isset($_REQUEST['informacion'])
           padding: 5px;
         }
       </style>";
-      $encabezado = $estilo.'<p></p><p></p><table style="" cellspacing="0">';
+      $encabezado = $estilo.'<p></p><p></p><p><center><h1 style="text-align:center;">Listado de Personal</h1></center></p><table style="" cellspacing="0">';
       $thead = '<thead>
                   <tr>
-                    <th>Cedula</th>
+                    <th>Cédula</th>
                     <th>Primer Apellido</th>
                     <th>Primer Nombre</th>
                     <th>Celular</th>
-                    <th>Telefono</th>
+                    <th>Teléfono</th>
                     <th>Telf. Ad.</th>
                     <th>Nivel Instruccion</th>
                     <th>Email</th>
@@ -200,7 +200,10 @@ if ( (isset($_REQUEST['informacion'])
                   </tbody>';
         $c++;
       endwhile;
-      $pie = '</table>';
+      $x = date('d');
+      $z = date('Y');
+      $y = date('m');
+      $pie = '</table><p><em>reporte generado el: '.$x.'-'.$y.'-'.$z.'</em></p>';
       $html = $encabezado.$thead.$tbody.$pie;
     else:
       $estilo = "<style>
@@ -210,14 +213,14 @@ if ( (isset($_REQUEST['informacion'])
           padding: 5px;
         }
       </style>";
-      $encabezado = $estilo.'<p></p><p></p><table style="" cellspacing="0">';
+      $encabezado = $estilo.'<p></p><p></p><p><center><h1 style="text-align:center;">Listado de Personal</h1></center></p><table style="" cellspacing="0">';
       $thead = '<thead>
                   <tr>
-                    <th>Cedula</th>
+                    <th>Cédula</th>
                     <th>Primer Apellido</th>
                     <th>Primer Nombre</th>
                     <th>Celular</th>
-                    <th>Telefono</th>
+                    <th>Teléfono</th>
                     <th>Telf. Ad.</th>
                     <th>Nivel Instruccion</th>
                     <th>Email</th>
@@ -254,7 +257,10 @@ if ( (isset($_REQUEST['informacion'])
                   </tbody>';
         $c++;
       endwhile;
-      $pie = '</table>';
+      $x = date('d');
+      $z = date('Y');
+      $y = date('m');
+      $pie = '</table><p><em>reporte generado el: '.$x.'-'.$y.'-'.$z.'</em></p>';
       $html = $encabezado.$thead.$tbody.$pie;
     endif;
     // crea un nuevo documento pdf por medio de la clase TCDPF
@@ -262,7 +268,7 @@ if ( (isset($_REQUEST['informacion'])
     // Informacion inicial del documento
     $pdf->SetCreator('sistemaJAG');
     $pdf->SetAuthor('EBNB Jose Antonio Gonzalez');
-    $pdf->SetTitle('Constancia de inscripcion');
+    $pdf->SetTitle('Constancia de inscripción');
 
     // crea data del header y footer:
     $pdf->SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, PDF_HEADER_TITLE.' 001', PDF_HEADER_STRING, array(0,64,255), array(0,64,128));

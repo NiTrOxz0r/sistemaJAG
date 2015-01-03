@@ -15,7 +15,7 @@ require_once($master);
  * @version 1.0
  */
 function iniciarHead(
-	$titulo = "Sistema de inscripcion Jose Antonio Gonzalez",
+	$titulo = "Sistema de inscripción Jose Antonio Gonzalez",
 	$tipo = 0){
 
 	if(!isset($_SESSION)){
@@ -27,6 +27,7 @@ function iniciarHead(
 	// enlaces importantes:
 	$estilo = enlaceDinamico('css/estilo.css');
 	$jquery = enlaceDinamico('java/jquery-1.11.0.min.js');
+	$favicon = enlaceDinamico('imagenes/favicon.png');
 	$cargadorOnClick = enlaceDinamico("java/ajax/cargadorOnClick.js");
 	$bootstrap = enlaceDinamico('css/bootstrap/css/bootstrap.min.css');
 	?>
@@ -68,6 +69,7 @@ function iniciarHead(
 			<meta name="author" content="Bryan Torres">
 			<meta name="author" content="Erick Zerpa">
 			<meta name="author" content="Joan Camacho">
+			<link rel="icon" type="image/png" href="<?php echo $favicon ?>">
 			<meta name=viewport content="width=device-width, initial-scale=1">
 			<!-- estilos: -->
 			<title><?php echo $titulo ?></title>

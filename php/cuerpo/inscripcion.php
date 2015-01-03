@@ -2,18 +2,26 @@
   <div class="row">
     <div class="sm-12">
       <div class="jumbotron">
-        <h1>Inscripcion!</h1>
-        <p>Proceso de Registro 2014-2015</p>
+        <h1>Inscripción!</h1>
+        <?php
+          if ( intval(date('m')) > 7 ) :
+            $n = date('Y');
+            $n1 = intval(date('Y')) + 1;
+          else :
+            $n1 = date('Y');
+            $n  = intval(date('Y')) - 1;
+          endif; ?>
+        <p>Proceso de Registro <?php echo $n ?>-<?php echo $n1 ?></p>
         <form role="form" action="personalAutorizado/form_reg_P.php" method="POST" id="form">
           <p>
-            <h4>Para agilizar el proceso de Inscripcion, es necesario tener en mano los documentos necesarios.</h4>
+            <h4>Para agilizar el proceso de Inscripción, es necesario tener en mano los documentos necesarios.</h4>
             <ul>
               <li>Partida de Nacimiento.</li>
               <li>Boleta de notas.</li>
-              <li>Cedula Laminada y fotocopia.</li>
+              <li>Cédula Laminada y fotocopia.</li>
               <li>Constancia de estudios (si aplica).</li>
             </ul>
-            <h4>Tambien es recomendable destacar los documentos en mano requeridos para el proceso de Inscripcion.</h4>
+            <h4>También es recomendable destacar los documentos en mano requeridos para el proceso de Inscripción.</h4>
             <h5>Recaudos necesarios, favor seleccione:</h5>
             <div class="col-xs-12">
               <div class="checkbox">
@@ -37,7 +45,7 @@
               <div class="checkbox">
                 <label>
                   <input type="checkbox" value="s" name="bicentenario">
-                  Coleccion Bicentenario.
+                  Colección Bicentenario.
                 </label>
               </div>
               <div class="checkbox">
@@ -55,13 +63,13 @@
               <div class="checkbox">
                 <label>
                   <input type="checkbox" value="s" name="fotocopia_cedula_pa">
-                  Fotocopia Cedula de identidad del representante.
+                  Fotocopia Cédula de identidad del representante.
                 </label>
               </div>
               <div class="checkbox">
                 <label>
                   <input type="checkbox" value="s" name="fotocopia_cedula_pr">
-                  Fotocopia Cedula de identidad de los allegados (si aplica).
+                  Fotocopia Cédula de identidad de los allegados (si aplica).
                 </label>
               </div>
             </div>

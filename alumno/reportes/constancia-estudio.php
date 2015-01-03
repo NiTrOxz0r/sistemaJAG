@@ -3,7 +3,7 @@
  * @author Alejnadro Granadillo. <[slayerfat@gmail.com]>
  *
  * @internal genera un pdf con los datos del query expresado, requiere
- * al menos la cedula del alumno para generar el reporte o da mensaje de error.
+ * al menos la cédula del alumno para generar el reporte o da mensaje de error.
  *
  * @see insertar_A.php
  *
@@ -31,7 +31,7 @@ if (!( isset($_GET['cedula']) and preg_match( "/[0-9]{6,8}/", $_GET['cedula']) )
               Error en el proceso de reporte!
             </p>
             <p>
-              ¿O sera que entro en esta pagina erroneamente?
+              ¿O será que entro en esta pagina erróneamente?
             </p>
             <p class="bg-warning">
               Si este es un problema recurrente, contacte a un administrador del sistema.
@@ -82,7 +82,7 @@ else :
     // Informacion inicial del documento
     $pdf->SetCreator(PDF_CREATOR);
     $pdf->SetAuthor('EBNB Jose Antonio Gonzalez');
-    $pdf->SetTitle('Constancia de inscripcion');
+    $pdf->SetTitle('Constancia de inscripción');
 
     // crea data del header y footer:
     $pdf->SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, PDF_HEADER_TITLE.' 001', PDF_HEADER_STRING, array(0,64,255), array(0,64,128));
@@ -227,14 +227,14 @@ HTML;
                 <p>
                   La cedula <?php echo $_GET['cedula'] ?>, no esta registrada en el sistema.
                   <em>Para registrar a un alumno, es necesario registrar primero al representante.</em>
-                  para ir al proceso de inscripcion <a href="<?php echo $inscripcion ?>">
+                  para ir al proceso de inscripción <a href="<?php echo $inscripcion ?>">
                   puede seguir este enlace.
                   </a>
                 </p>
                 <!-- google hire me: slayerfat@gmail.com -->
               <?php endif ?>
               <p>
-                ¿O sera que entro en esta pagina erroneamente?
+                ¿O será que entro en esta pagina erróneamente?
               </p>
               <p class="bg-warning">
                 Si este es un problema recurrente, contacte a un administrador del sistema.

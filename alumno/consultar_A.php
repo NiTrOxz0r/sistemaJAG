@@ -66,17 +66,17 @@ if ( (isset($_REQUEST['informacion']) and isset($_REQUEST['tipo']) )
               <div class="row">
                 <div class="col-xs-12">
                   <h4>
-                    Listado seleccionado segun los parametros que Ud. escojio.
+                    Listado seleccionado según los parámetros que Ud. escogió.
                   </h4>
                   <p>
                     <small>
                       Si desea hacer otro tipo de consulta puede
-                      <a href="menucon.php">hacerlo aqui.</a>
+                      <a href="menucon.php">hacerlo aquí.</a>
                     </small>
                   </p>
                   <p>
                     <small>
-                      puede regresar <a href="../index.php">al menu principal.</a>
+                      puede regresar <a href="../index.php">al menú principal.</a>
                     </small>
                   </p>
                 </div>
@@ -127,19 +127,19 @@ if ( (isset($_REQUEST['informacion']) and isset($_REQUEST['tipo']) )
                   <!-- ignorar -->
                   <th data-radio="true" data-switchable="false"></th>
                   <!-- ignorar -->
-                  <th data-field="cedula" data-sortable="true" data-switchable="false">Cedula</th>
-                  <th data-field="cedula_escolar" data-sortable="true" data-switchable="false">Cedula escolar</th>
+                  <th data-field="cedula" data-sortable="true" data-switchable="false">Cédula</th>
+                  <th data-field="cedula_escolar" data-sortable="true" data-switchable="false">Cédula escolar</th>
                   <th data-field="p_apellido" data-sortable="true">Primer Apellido</th>
                   <th data-field="p_nombre" data-sortable="true">Primer Nombre</th>
-                  <th data-field="curso" data-sortable="true">Grado y Seccion</th>
-                  <th data-field="telefono" data-sortable="false">Telefono</th>
+                  <th data-field="curso" data-sortable="true">Grado y Sección</th>
+                  <th data-field="telefono" data-sortable="false">Teléfono</th>
                   <th data-field="telefono_otro" data-sortable="true" data-visible="true">Telf. Ad.</th>
                   <th data-field="sexo" data-sortable="true">Sexo</th>
                   <th data-field="discapacidad" data-sortable="true">Discapacidad</th>
-                  <th data-field="vacuna" data-sortable="true">Cert. vacunacion</th>
+                  <th data-field="vacuna" data-sortable="true">Cert. vacunación</th>
                   <th data-field="p_apellido_r" data-sortable="true">Primer Apellido (R)</th>
                   <th data-field="p_nombre_r" data-sortable="true">Primer Nombre (R)</th>
-                  <th data-field="cedula_r" data-sortable="true" data-switchable="false">Cedula (R)</th>
+                  <th data-field="cedula_r" data-sortable="true" data-switchable="false">Cédula (R)</th>
                 </thead>
                 <tbody>
                   <?php while( $datos = mysqli_fetch_array($resultado) ) : ?>
@@ -218,6 +218,22 @@ if ( (isset($_REQUEST['informacion']) and isset($_REQUEST['tipo']) )
               </table>
             </div>
           </div>
+          <div class="container">
+            <div class="row margen">
+              <div class="col-xs-6 col-xs-offset-3">
+                <span class="label label-info">generar este listado en formato pdf</span>
+              </div>
+            </div><p></p>
+             <div class="row">
+               <div class="col-xs-3 col-xs-offset-3">
+                <?php $enlace = "reportes/listado_A.php?tipo=$_REQUEST[tipo]&informacion=$_REQUEST[informacion]" ?>
+                 <a
+                  id="generar-pdf"
+                  href="<?php echo $enlace ?>"
+                  class="push-3 btn btn-primary btn-lg">Generar Reporte</a>
+               </div>
+             </div>
+          </div>
           <div class="row">
             <div class="col-xs-8 col-xs-offset-2 margen well">
               <div class="row">
@@ -227,13 +243,13 @@ if ( (isset($_REQUEST['informacion']) and isset($_REQUEST['tipo']) )
                   </h4>
                   <p>
                     <small>
-                      <a href="menucon.php">desde aqui.</a>
+                      <a href="menucon.php">desde aquí.</a>
                     </small>
                   </p>
                   <p>
                     <small>
                       o si prefiere puede regresar
-                      <a href="../index.php">al menu principal.</a>
+                      <a href="../index.php">al menú principal.</a>
                     </small>
                   </p>
                 </div>

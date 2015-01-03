@@ -246,11 +246,11 @@ if (isset($_POST['cedula'])
                     Error en el proceso de registro!
                   </p>
                   <h3>
-                    Los datos suministrados al sistema parecen ser invalidos!
+                    Los datos suministrados al sistema parecen ser inválidos!
                   </h3>
                   <div class="bg-danger">
                     <p>
-                      <em>Especificamente el sistema declara:</em>
+                      <em>Específicamente el sistema declara:</em>
                     </p>
                     <p>
                        <strong>
@@ -265,7 +265,7 @@ if (isset($_POST['cedula'])
                   </p>
                   <?php $inscripcion = enlaceDinamico('personalAutorizado/form_reg_P.php'); ?>
                   <p>
-                    para ir al proceso de inscripcion <a href="<?php echo $inscripcion ?>">
+                    para ir al proceso de inscripción <a href="<?php echo $inscripcion ?>">
                     puede seguir este enlace.
                     </a>
                   </p>
@@ -274,7 +274,7 @@ if (isset($_POST['cedula'])
                     <a href="menucon.php">click a este enlace.</a>
                   </p>
                   <p>
-                    ¿O sera que entro en esta pagina erroneamente?
+                    ¿O será que entro en esta pagina erróneamente?
                   </p>
                   <p class="bg-warning">
                     Si este es un problema recurrente, contacte a un administrador del sistema.
@@ -301,11 +301,11 @@ if (isset($_POST['cedula'])
                   Error en el proceso de registro!
                 </p>
                 <h3>
-                  Los datos suministrados al sistema parecen ser invalidos!
+                  Los datos suministrados al sistema parecen ser inválidos!
                 </h3>
                 <div class="bg-danger">
                   <p>
-                    <em>Especificamente el sistema declara:</em>
+                    <em>Específicamente el sistema declara:</em>
                   </p>
                   <p>
                      <strong>
@@ -320,7 +320,7 @@ if (isset($_POST['cedula'])
                 </p>
                 <?php $inscripcion = enlaceDinamico('personalAutorizado/form_reg_P.php'); ?>
                 <p>
-                  para ir al proceso de inscripcion <a href="<?php echo $inscripcion ?>">
+                  para ir al proceso de inscripción <a href="<?php echo $inscripcion ?>">
                   puede seguir este enlace.
                   </a>
                 </p>
@@ -329,7 +329,7 @@ if (isset($_POST['cedula'])
                   <a href="menucon.php">click a este enlace.</a>
                 </p>
                 <p>
-                  ¿O sera que entro en esta pagina erroneamente?
+                  ¿O será que entro en esta pagina erróneamente?
                 </p>
                 <p class="bg-warning">
                   Si este es un problema recurrente, contacte a un administrador del sistema.
@@ -365,7 +365,7 @@ if (isset($_POST['cedula'])
                 <a href="menucon.php">click a este enlace.</a>
               </p>
               <p>
-                ¿O sera que entro en esta pagina erroneamente?
+                ¿O será que entro en esta pagina erróneamente?
               </p>
               <p class="bg-warning">
                 Si este es un problema recurrente, contacte a un administrador del sistema.
@@ -401,7 +401,7 @@ else:
               <a href="menucon.php">click a este enlace.</a>
             </p>
             <p>
-              ¿O sera que entro en esta pagina erroneamente?
+              ¿O será que entro en esta pagina erróneamente?
             </p>
             <p class="bg-warning">
               Si este es un problema recurrente, contacte a un administrador del sistema.

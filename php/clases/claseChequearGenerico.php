@@ -139,7 +139,7 @@ class ChequearGenerico extends TablaPrimaria{
     // y si existe esta muerto o loco o fuera de la ley o
     // ALGUN AGENTE DEL CEBIN!!!
     // de hecho 6 digitos tambien porque no creo
-    // que exista alguien vivo con cedula menor de 1 millon,
+    // que exista alguien vivo con cédula menor de 1 millon,
     // pero como no tengo acceso a la onidex, lo dejo en 5.
 
     if ( !is_numeric($this->cedula) ) {
@@ -231,9 +231,9 @@ class ChequearGenerico extends TablaPrimaria{
 
   /**
    * [cedula usado para validar solo cedulas en el sistema]
-   * @param  string $cedula la cedula a validar
+   * @param  string $cedula la cédula a validar
    * @param  mixed  $tipo   tipo de cedula a devolver, con o sin comillas
-   * @return string         la cedula validada con o sin comillas.
+   * @return string         la cédula validada con o sin comillas.
    */
   static function cedula($cedula, $tipo = null){
     if ( preg_match( "/[0-9]{6,8}/", $cedula, $n) ) :

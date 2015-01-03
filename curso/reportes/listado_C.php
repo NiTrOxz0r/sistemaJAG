@@ -117,16 +117,16 @@ if ( isset($_GET['tipo']) ) :
           padding: 5px;
         }
       </style>";
-      $encabezado = $estilo.'<p></p><p></p><table style="" cellspacing="0">';
+      $encabezado = $estilo.'<p></p><p></p><p><center><h1 style="text-align:center;">Listado de Cursos</h1></center></p><table style="" cellspacing="0">';
       $thead = '<thead>
                   <tr>
-                    <th>Codigo</th>
+                    <th>Código</th>
                     <th>Curso</th>
                     <th>Pdo. Ac.</th>
                     <th>Comentarios</th>
                     <th>Primer Apellido</th>
                     <th>Primer Nombre</th>
-                    <th>Cedula</th>
+                    <th>Cédula</th>
                   </tr>
                 </thead>';
       $tbody = '';
@@ -160,7 +160,7 @@ if ( isset($_GET['tipo']) ) :
       $encabezado = $estilo.'<p></p><p></p><table style="" cellspacing="0">';
       $thead = '<thead>
                   <tr>
-                    <th>Codigo</th>
+                    <th>Código</th>
                     <th>Curso</th>
                     <th>Pdo. Ac.</th>
                     <th>Comentarios</th>
@@ -208,9 +208,9 @@ if ( isset($_GET['tipo']) ) :
                   <tr>
                     <th>Primer Apellido</th>
                     <th>Primer Nombre</th>
-                    <th>Cedula</th>
-                    <th>Cedula Escolar</th>
-                    <th>Telefono</th>
+                    <th>Cédula</th>
+                    <th>Cédula Escolar</th>
+                    <th>Teléfono</th>
                   </tr>
                 </thead>';
       $tbody = '';
@@ -242,7 +242,7 @@ if ( isset($_GET['tipo']) ) :
       $encabezado = $estilo.'<p></p><p></p><table style="" cellspacing="0">';
       $thead = '<thead>
                   <tr>
-                    <th>Codigo</th>
+                    <th>Código</th>
                     <th>Curso</th>
                     <th>Pdo. Ac.</th>
                     <th>Comentarios</th>
@@ -265,7 +265,10 @@ if ( isset($_GET['tipo']) ) :
                   </tbody>';
         $c++;
       endwhile;
-      $pie = '</table>';
+      $x = date('d');
+      $z = date('Y');
+      $y = date('m');
+      $pie = '</table><p><em>reporte generado el: '.$x.'-'.$y.'-'.$z.'</em></p>';
       $html = $encabezado.$thead.$tbody.$pie;
     endif;
     // crea un nuevo documento pdf por medio de la clase TCDPF
@@ -273,7 +276,7 @@ if ( isset($_GET['tipo']) ) :
     // Informacion inicial del documento
     $pdf->SetCreator('sistemaJAG');
     $pdf->SetAuthor('EBNB Jose Antonio Gonzalez');
-    $pdf->SetTitle('Constancia de inscripcion');
+    $pdf->SetTitle('Constancia de inscripción');
 
     // crea data del header y footer:
     $pdf->SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, PDF_HEADER_TITLE.' 001', PDF_HEADER_STRING, array(0,64,255), array(0,64,128));
@@ -318,9 +321,7 @@ if ( isset($_GET['tipo']) ) :
     );
     $n = date('m');
     $mes = $meses[$n];
-    $x = date('d');
     $y = $mes;
-    $z = date('Y');
     $n = intval(date('Y'));
     $n1 = $n+1;
     // mes actual mas 4

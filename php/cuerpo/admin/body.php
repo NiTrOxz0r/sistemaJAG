@@ -20,16 +20,15 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);
         <div class="row">
           <div class="col-ms-12 text-left">
             <h1>
-              Sistema de Inscripcion
+              Sistema de Inscripción
               <small>trabajo en progreso!</small>
             </h1>
             <h1>
-              E.B.N.B. Jose Antonio Gonzalez
+              U.E.N.B. José Antonio González
             </h1>
             <?php include_once($version); ?>
             <p>
-            mensaje de bienvenida, info del sistema, informacion relevante de algun proceso.
-            alguna otra cosa que sea necesario.
+              Le damos la bienvenida al sistema informático de inscripción.
             </p>
           </div>
         </div>
@@ -69,41 +68,8 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']);
         </div>
       </div>
     </div>
-    <div class="navbar-contenido-limpio">
-      <div class="container">
-        <div class="row text-center">
-          <div class="col-xs-12">
-            <h1 class="margenAbajo">El sistemaJAG</h1>
-            <p class="margenAbajo">
-              Recomienda el uso de
-            </p>
-            <div class="col-sm-4 col-sm-offset-2 col-xs-4 col-xs-offset-2">
-              <?php $firefox = enlaceDinamico('imagenes/firefox_logo-only_RGB.png') ?>
-              <a href="https://www.mozilla.org/es-ES/firefox/new/">
-                <img class="img-responsive" src="<?php echo $firefox ?>" alt="descargar firefox">
-              </a>
-              <div class="row">
-                <div class="col-xs-12">
-                  <p class="text-center"><small><em>Firefox</em></small></p>
-                </div>
-              </div>
-            </div>
-            <div class="col-sm-4 col-xs-4">
-              <?php $chrome = enlaceDinamico('imagenes/Google_Chrome_icon_(2011).svg.png') ?>
-              <a href="https://www.google.com/intl/es/chrome/">
-                <img class="img-responsive" src="<?php echo $chrome ?>" alt="descargar chrome">
-              </a>
-              <p class="text-center"><small><em>Chrome</em></small></p>
-            </div>
-            <div class="col-xs-12">
-              <h3>
-                Para navegar optimamente en esta pagina web.
-              </h3>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+    <?php $enlace = enlaceDinamico('php/cuerpo/explorador.php');
+    require_once($enlace); ?>
   </div>
 </div>
 <script type="text/javascript" src="java/ajax/cargadorOnClick.js"></script>

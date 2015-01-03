@@ -6,7 +6,7 @@ $enlace = $_SERVER['DOCUMENT_ROOT']."/github/sistemaJAG/php/master.php";
 require_once($enlace);
 
 // invocamos validarUsuario.php desde master.php
-validarUsuario(1, 3, $_SESSION['cod_tipo_usr']);
+validarUsuario(1, 2, $_SESSION['cod_tipo_usr']);
 
 if ( isset($_GET['cedula']) ):
   $con = conexion();
@@ -82,7 +82,11 @@ if ( isset($_GET['cedula']) ):
               <div class="margen">
                 <div class="row margen">
                   <div class="col-sm-4 col-sm-offset-4">
-                    <button class="actualizar btn btn-primary btn-block">Actualizar</button>
+                    <?php if ($_SESSION['cod_tipo_usr'] < 3): ?>
+                      <button class="actualizar btn btn-primary btn-block disabled">Actualizar</button>
+                    <?php else: ?>
+                      <button class="actualizar btn btn-primary btn-block">Actualizar</button>
+                    <?php endif ?>
                   </div>
                 </div>
                 <div class="row margen">
@@ -116,10 +120,10 @@ if ( isset($_GET['cedula']) ):
                                 class="form-control">
                                 <?php if ($datos['nacionaliad'] == 'v'): ?>
                                   <option selected="selected" value="v">Venezolano</option>
-                                  <option value="e">Extrangero</option>
+                                  <option value="e">Extranjero</option>
                                 <?php else: ?>
                                   <option value="v">Venezolano</option>
-                                  <option selected="selected" value="e">Extrangero</option>
+                                  <option selected="selected" value="e">Extranjero</option>
                                 <?php endif ?>
                               </select>
                                 <p class="help-block" id="nacionalidad_chequeo">
@@ -132,7 +136,7 @@ if ( isset($_GET['cedula']) ):
                         <div class="row">
                           <div class="col-sm-9">
                             <div class="form-group">
-                              <label for="cedula" class="control-label">Cedula</label>
+                              <label for="cedula" class="control-label">Cédula</label>
                               <input
                                 type="text"
                                 maxlength="8"
@@ -312,7 +316,7 @@ if ( isset($_GET['cedula']) ):
                     </div>
                     <!-- titulos y/o certificados -->
                     <fieldset>
-                      <legend class="text-center">Titulos y/o Certificados</legend>
+                      <legend class="text-center">Títulos y/o Certificados</legend>
                       <div class="row">
                         <div class="col-sm-3">
                           <div class="row">
@@ -351,7 +355,7 @@ if ( isset($_GET['cedula']) ):
                           <div class="row">
                             <div class="col-sm-12">
                               <div class="form-group">
-                                <label for="descripcion_1" class="control-label">Descripcion</label>
+                                <label for="descripcion_1" class="control-label">Descripción</label>
                                 <input
                                   disabled
                                   class="form-control"
@@ -405,7 +409,7 @@ if ( isset($_GET['cedula']) ):
                           <div class="row">
                             <div class="col-sm-12">
                               <div class="form-group">
-                                <label for="descripcion_2" class="control-label">Descripcion</label>
+                                <label for="descripcion_2" class="control-label">Descripción</label>
                                 <input
                                   disabled
                                   class="form-control"
@@ -459,7 +463,7 @@ if ( isset($_GET['cedula']) ):
                           <div class="row">
                             <div class="col-sm-12">
                               <div class="form-group">
-                                <label for="descripcion_3" class="control-label">Descripcion</label>
+                                <label for="descripcion_3" class="control-label">Descripción</label>
                                 <input
                                   disabled
                                   class="form-control"
@@ -513,7 +517,7 @@ if ( isset($_GET['cedula']) ):
                           <div class="row">
                             <div class="col-sm-12">
                               <div class="form-group">
-                                <label for="descripcion_4" class="control-label">Descripcion</label>
+                                <label for="descripcion_4" class="control-label">Descripción</label>
                                 <input
                                   disabled
                                   class="form-control"
@@ -532,13 +536,13 @@ if ( isset($_GET['cedula']) ):
                     </fieldset>
                     <!-- inicio de telefonos y email -->
                     <fieldset>
-                      <legend class="text-center">Informacion de contacto</legend>
+                      <legend class="text-center">Información de contacto</legend>
                       <div class="row">
                         <div class="col-sm-3">
                           <div class="row">
                             <div class="col-xs-11">
                               <div class="form-group">
-                                <label class="control-label" for="telefono">Telefono</label>
+                                <label class="control-label" for="telefono">Teléfono</label>
                                 <input
                                   class="form-control"
                                   type="text"
@@ -558,7 +562,7 @@ if ( isset($_GET['cedula']) ):
                           <div class="row">
                             <div class="col-xs-11">
                               <div class="form-group">
-                                <label class="control-label" for="telefono_otro">Telefono Adicional</label>
+                                <label class="control-label" for="telefono_otro">Teléfono Adicional</label>
                                 <input
                                   class="form-control"
                                   type="text"
@@ -578,7 +582,7 @@ if ( isset($_GET['cedula']) ):
                           <div class="row">
                             <div class="col-xs-11">
                               <div class="form-group">
-                                <label class="control-label" for="celular">Telefono Celular</label>
+                                <label class="control-label" for="celular">Teléfono Celular</label>
                                 <input
                                   class="form-control"
                                   type="text"
@@ -598,7 +602,7 @@ if ( isset($_GET['cedula']) ):
                           <div class="row">
                             <div class="col-xs-12">
                               <div class="form-group">
-                                <label class="control-label" for="email">Correo Electronico</label>
+                                <label class="control-label" for="email">Correo Electrónico</label>
                                 <div class="input-group">
                                   <div class="input-group-addon">@</div>
                                   <input
@@ -673,7 +677,7 @@ if ( isset($_GET['cedula']) ):
                     </div>
                     <!-- inicio de estado, municio, parroquia y direccion exacta -->
                     <fieldset>
-                      <legend class="text-center">Direccion de Habitacion</legend>
+                      <legend class="text-center">Dirección de Habitación </legend>
                       <!-- est/mun/par -->
                       <div class="row">
                         <div class="col-sm-4">
@@ -721,7 +725,7 @@ if ( isset($_GET['cedula']) ):
                       <div class="row">
                         <div class="col-xs-12">
                           <div class="form-group">
-                            <label for="direcc" class="control-label">Direccion (Av/Calle/Edf.)</label>
+                            <label for="direcc" class="control-label">Dirección (Av/Calle/Edf.)</label>
                             <textarea
                             class="form-control"
                             maxlenght="150"
@@ -742,7 +746,7 @@ if ( isset($_GET['cedula']) ):
                         <div class="row">
                           <div class="col-xs-11">
                             <div class="form-group">
-                              <label for="seudonimo" class="control-label">Seudonimo</label>
+                              <label for="seudonimo" class="control-label">Seudónimo</label>
                               <input
                                 class="form-control"
                                 type="text"
@@ -793,8 +797,8 @@ if ( isset($_GET['cedula']) ):
                       <div class="row">
                         <div class="col-xs-12">
                           <h4>
-                            Por favor, asegurese que los datos son correctos antes de
-                            continuar con el proceso de actualizacion.
+                            Por favor, asegúrese que los datos son correctos antes de
+                            continuar con el proceso de actualización.
                           </h4>
                         </div>
                       </div>
@@ -819,7 +823,11 @@ if ( isset($_GET['cedula']) ):
               <div class="margen">
                 <div class="row margen">
                   <div class="col-sm-4 col-sm-offset-4">
-                    <button class="actualizar btn btn-primary btn-block">Actualizar</button>
+                    <?php if ($_SESSION['cod_tipo_usr'] < 3): ?>
+                      <button class="actualizar btn btn-primary btn-block disabled">Actualizar</button>
+                    <?php else: ?>
+                      <button class="actualizar btn btn-primary btn-block">Actualizar</button>
+                    <?php endif ?>
                   </div>
                 </div>
                 <div class="row margen">
@@ -1054,10 +1062,10 @@ if ( isset($_GET['cedula']) ):
                 <!-- google hire me: slayerfat@gmail.com -->
               <?php endif ?>
               <p>
-                 Error en el proceso de actualizacion!
+                 Error en el proceso de actualización!
               </p>
               <p>
-                ¿O entro en esta pagina erroneamente?
+                ¿O entró en esta pagina erróneamente?
               </p>
               <p class="bg-warning">
                 Si este es un problema recurrente, contacte a un administrador del sistema.
@@ -1076,10 +1084,10 @@ if ( isset($_GET['cedula']) ):
         <div class="jumbotron">
           <h1>Ups!</h1>
           <p>
-            Error en el proceso de actualizacion!
+            Error en el proceso de actualización!
           </p>
           <p>
-            ¿O entro en esta pagina erroneamente?
+            ¿O entró en esta pagina erróneamente?
           </p>
           <p class="bg-warning">
             Si este es un problema recurrente, contacte a un administrador del sistema.

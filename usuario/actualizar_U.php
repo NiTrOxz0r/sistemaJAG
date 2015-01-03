@@ -115,11 +115,11 @@ if (isset($_POST['tipo_personal'])  and isset($_POST['cedula']) ) :
                 Error en el proceso de registro!
               </p>
               <h3>
-                Los datos suministrados al sistema parecen ser invalidos!
+                Los datos suministrados al sistema parecen ser inválidos!
               </h3>
               <div class="bg-danger">
                 <p>
-                  <em>Especificamente el sistema declara:</em>
+                  <em>Específicamente el sistema declara:</em>
                 </p>
                 <p>
                    <strong>
@@ -130,7 +130,7 @@ if (isset($_POST['tipo_personal'])  and isset($_POST['cedula']) ) :
                 </p>
               </div>
               <p>
-                ¿O sera que entro en esta pagina erroneamente?
+                ¿O será que entro en esta pagina erróneamente?
               </p>
               <p class="bg-warning">
                 Si este es un problema recurrente, contacte a un administrador del sistema.
@@ -217,7 +217,7 @@ if (isset($_POST['tipo_personal'])  and isset($_POST['cedula']) ) :
           <div class="container">
             <div class="row">
               <div class="jumbotron">
-                <h1>Actualizacion exitosa!</h1>
+                <h1>Actualización exitosa!</h1>
                 <h4>
                   Los registros asociados con
                   <strong>
@@ -240,7 +240,7 @@ if (isset($_POST['tipo_personal'])  and isset($_POST['cedula']) ) :
                   </div>
                 </div>
                 <p>
-                  Si desea hacer otra actualizacion de un usuario por favor dele
+                  Si desea hacer otra actualización de un usuario por favor dele
                   <a href="menucon.php">click a este enlace</a>
                 </p>
                 <p>
@@ -264,15 +264,15 @@ if (isset($_POST['tipo_personal'])  and isset($_POST['cedula']) ) :
                 </p>
                 <h3>
                   <small>
-                    Lamentablemente, es posible que los datos de actualizacion se perdieron.
+                    Lamentablemente, es posible que los datos de actualización se perdieron.
                   </small>
                 </h3>
                 <p>
-                  Si desea hacer otra actualizacion de un usuario por favor dele
+                  Si desea hacer otra actualización de un usuario por favor dele
                   <a href="menucon.php">click a este enlace</a>
                 </p>
                 <p>
-                  ¿O sera que entro en esta pagina erroneamente?
+                  ¿O será que entro en esta pagina erróneamente?
                 </p>
                 <p class="bg-warning">
                   Si este es un problema recurrente, contacte a un administrador del sistema.

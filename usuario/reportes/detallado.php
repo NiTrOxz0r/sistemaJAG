@@ -3,7 +3,7 @@
  * @author Alejnadro Granadillo. <[slayerfat@gmail.com]>
  *
  * @internal genera un pdf con los datos del query expresado, requiere
- * al menos la cedula del alumno para generar el reporte o da mensaje de error.
+ * al menos la cédula del alumno para generar el reporte o da mensaje de error.
  *
  * @see insertar_A.php
  *
@@ -32,7 +32,7 @@ if (!( isset($_GET['cedula']) and preg_match( "/[0-9]{6,8}/", $_GET['cedula']) )
               Error en el proceso de reporte!
             </p>
             <p>
-              ¿O sera que entro en esta pagina erroneamente?
+              ¿O será que entro en esta pagina erróneamente?
             </p>
             <p class="bg-warning">
               Si este es un problema recurrente, contacte a un administrador del sistema.
@@ -123,7 +123,7 @@ else :
     // Informacion inicial del documento
     $pdf->SetCreator(PDF_CREATOR);
     $pdf->SetAuthor('EBNB Jose Antonio Gonzalez');
-    $pdf->SetTitle('Constancia de inscripcion');
+    $pdf->SetTitle('Constancia de inscripción');
 
     // crea data del header y footer:
     // $pdf->SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, PDF_HEADER_TITLE.' 001', PDF_HEADER_STRING, array(0,64,255), array(0,64,128));
@@ -217,7 +217,7 @@ else :
     if ($datos['direccion'] != '' && $datos['direccion'] != null) :
       $direccion_exacta = $datos['direccion'];
     else :
-      $direccion_exacta = 'SIN INFORMACION, FAVOR ACTUALIZAR';
+      $direccion_exacta = 'SIN INFORMACIÓN, FAVOR ACTUALIZAR';
     endif;
     $email = $datos['email'] === (null) ? '-':$datos['email'];
     $nivel_instruccion = $datos['nivel_instruccion'];
@@ -258,7 +258,7 @@ $html = <<<HTML
         <tr>
           <th>Nac.:</th>
           <td><strong>{$nacionalidad}</strong></td>
-          <th>Cedula:</th>
+          <th>Cédula:</th>
           <td><strong>{$cedula}</strong></td>
         </tr>
         <tr>
@@ -280,7 +280,7 @@ $html = <<<HTML
           <td><strong>{$fec_nac}</strong></td>
         </tr>
         <tr>
-          <th>Telefono:</th>
+          <th>Teléfono:</th>
           <td><strong>{$telefono}</strong></td>
           <th>Telf. adc.:</th>
           <td><strong>{$telefono_otro}</strong></td>
@@ -298,7 +298,7 @@ $html = <<<HTML
           <td><strong>{$parroquia}</strong></td>
         </tr>
         <tr>
-          <th colspan="2" width="100%">Direccion detallada:</th>
+          <th colspan="2" width="100%">Dirección detallada:</th>
           <td></td>
         </tr>
         <tr>
@@ -307,56 +307,56 @@ $html = <<<HTML
         <tr>
           <th width="20%">Nivel Instruccion:</th>
           <td width="29%"><strong>{$nivel_instruccion}</strong></td>
-          <th>Email:</th>
-          <td><strong>{$email}</strong></td>
+          <th width="8%">Email:</th>
+          <td width="35%"><strong>{$email}</strong></td>
         </tr>
         <tr>
-          <th width="40%">Titulos y/o Certificados:</th>
+          <th width="40%">Títulos y/o Certificados:</th>
         </tr>
         <tr>
           <th width="08%">Tipo:</th>
           <td width="25%"><strong>{$certificado_1}</strong></td>
-          <th>Descripcion:</th>
+          <th>Descripción:</th>
           <td width="51%"><strong>{$descripcion_1}</strong></td>
         </tr>
         <tr>
           <th width="08%">Tipo:</th>
           <td width="25%"><strong>{$certificado_2}</strong></td>
-          <th>Descripcion:</th>
+          <th>Descripción:</th>
           <td width="51%"><strong>{$descripcion_2}</strong></td>
         </tr>
         <tr>
           <th width="08%">Tipo:</th>
           <td width="25%"><strong>{$certificado_3}</strong></td>
-          <th>Descripcion:</th>
+          <th>Descripción:</th>
           <td width="51%"><strong>{$descripcion_3}</strong></td>
         </tr>
         <tr>
           <th width="08%">Tipo:</th>
           <td width="25%"><strong>{$certificado_4}</strong></td>
-          <th>Descripcion:</th>
+          <th>Descripción:</th>
           <td width="51%"><strong>{$descripcion_4}</strong></td>
         </tr>
         <tr>
-          <th>Cargo:</th>
+          <th width="20%">Cargo:</th>
           <td><strong>{$cargo}</strong></td>
         </tr>
         <tr>
           <th width="20%">Tipo de personal:</th>
           <td width="29%"><strong>{$tipo_personal}</strong></td>
-          <th width="24%">Codigo de Personal:</th>
+          <th width="24%">Código de Personal:</th>
           <td><strong>{$codigo_personal}</strong></td>
         </tr>
         <tr>
-          <th>Seudonimo:</th>
-          <td><strong>{$seudonimo}</strong></td>
+          <th width="20%">Seudónimo:</th>
+          <td width="29%"><strong>{$seudonimo}</strong></td>
           <th width="24%">Tipo de usuario:</th>
           <td><strong>{$tipo_usr}</strong></td>
         </tr>
       </tbody>
     </table>
   </div>
-  <p style="padding:150px;">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+  <p style="padding:150px;">&nbsp;</p>
   <p><em>Reporte generado el: {$x}-{$y}-{$z}</em></p>
 </div>
 HTML;
@@ -400,7 +400,7 @@ HTML;
                 </div>
               <?php endif ?>
               <p>
-                ¿O sera que entro en esta pagina erroneamente?
+                ¿O será que entro en esta pagina erróneamente?
               </p>
               <p class="bg-warning">
                 Si este es un problema recurrente, contacte a un administrador del sistema.

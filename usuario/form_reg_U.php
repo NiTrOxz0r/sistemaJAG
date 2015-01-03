@@ -17,7 +17,7 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr'], 'sistemaJAG 
     <div class="row">
       <div id="info" class="col-xs-12">
         <h2>
-          Por favor instroduzca el seudonimo que desea en el sistema y una clave.
+          Por favor introduzca el seudónimo que desea en el sistema y una clave.
           <small>
             Es recomendable usar una clave entre 6 a 15 caracteres de largo por seguridad.
           </small>
@@ -36,10 +36,10 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr'], 'sistemaJAG 
           method="POST">
           <fieldset>
             <legend class="text-center">
-              Datos basicos del usuario
+              Datos básicos del usuario
             </legend>
             <div class="form-group">
-              <label for="seudonimo" class="control-label">Seudonimo</label>
+              <label for="seudonimo" class="control-label">Seudónimo</label>
               <input
                 type="text"
                 name="seudonimo"
@@ -48,9 +48,9 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr'], 'sistemaJAG 
                 autofocus="autofocus"
                 required
                 maxlength="20"
-                placeholder="Instroduzca Usuario">
+                placeholder="Introduzca Usuario">
                 <p class="help-block" id="seudonimo_chequeo">
-                  Instroduzca el seudonimo que desea en el sistemaJAG
+                  Introduzca el seudónimo que desea en el sistemaJAG
                 </p>
             </div>
             <div class="form-group">
@@ -62,7 +62,7 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr'], 'sistemaJAG 
                 id="clave"
                 required="required"
                 maxlength="15"
-                placeholder="Instroduzca Clave">
+                placeholder="Introduzca Clave">
                 <p class="help-block" id="clave_chequeo">
                   Especifique su contrase&ntilde;a
                 </p>
@@ -117,7 +117,7 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr'], 'sistemaJAG 
           // validamos datos de usuario:
           validacionUsuario();
           // hacemos una consulta por ajax
-          // para saber si el seudonimo esta disponible:
+          // para saber si el seudónimo esta disponible:
           $.ajax({
             url: '../java/ajax/usuario/seudonimo.php',
             type: 'POST',

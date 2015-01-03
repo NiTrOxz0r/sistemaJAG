@@ -125,17 +125,17 @@ if ( isset($_REQUEST['tipo']) ) :
             <div class="row">
               <div class="col-xs-12">
                 <h4>
-                  Listado seleccionado segun los parametros que Ud. escojio.
+                  Listado seleccionado según los parámetros que Ud. escogió.
                 </h4>
                 <p>
                   <small>
                     Si desea hacer otro tipo de consulta puede
-                    <a href="menucon.php">hacerlo aqui.</a>
+                    <a href="menucon.php">hacerlo aquí.</a>
                   </small>
                 </p>
                 <p>
                   <small>
-                    puede regresar <a href="../index.php">al menu principal.</a>
+                    puede regresar <a href="../index.php">al menú principal.</a>
                   </small>
                 </p>
               </div>
@@ -190,29 +190,29 @@ if ( isset($_REQUEST['tipo']) ) :
                 <th data-radio="true" data-switchable="false"></th>
                 <!-- ignorar -->
                 <?php if ($_REQUEST['tipo'] === '1'): ?>
-                  <th data-field="codigo" data-sortable="true">Codigo</th>
-                  <th data-field="curso" data-sortable="true">Descripcion de curso</th>
-                  <th data-field="periodo" data-sortable="true">Periodo Academico</th>
+                  <th data-field="codigo" data-sortable="true">Código</th>
+                  <th data-field="curso" data-sortable="true">Descripción de curso</th>
+                  <th data-field="periodo" data-sortable="true">Periodo Académico</th>
                   <th data-field="comentarios" data-sortable="true">Comentarios</th>
                   <th data-field="p_apellido" data-sortable="true">Primer Apellido</th>
                   <th data-field="p_nombre" data-sortable="true">Primer Nombre</th>
-                  <th data-field="cedula" data-sortable="true" data-switchable="false">Cedula</th>
+                  <th data-field="cedula" data-sortable="true" data-switchable="false">Cédula</th>
                 <?php elseif ($_REQUEST['tipo'] === '2'): ?>
-                  <th data-field="codigo" data-sortable="true">Codigo</th>
-                  <th data-field="curso" data-sortable="true">Descripcion de curso</th>
-                  <th data-field="periodo" data-sortable="true">Periodo Academico</th>
+                  <th data-field="codigo" data-sortable="true">Código</th>
+                  <th data-field="curso" data-sortable="true">Descripción de curso</th>
+                  <th data-field="periodo" data-sortable="true">Periodo Académico</th>
                   <th data-field="comentarios" data-sortable="true">Comentarios</th>
                 <?php elseif ($_REQUEST['tipo'] === '3'): ?>
-                  <th data-field="codigo" data-sortable="true">Codigo</th>
-                  <th data-field="curso" data-sortable="true">Descripcion de curso</th>
-                  <th data-field="periodo" data-sortable="true">Periodo Academico</th>
+                  <th data-field="codigo" data-sortable="true">Código</th>
+                  <th data-field="curso" data-sortable="true">Descripción de curso</th>
+                  <th data-field="periodo" data-sortable="true">Periodo Académico</th>
                   <th data-field="p_apellido" data-sortable="true">Primer Apellido</th>
                   <th data-field="p_nombre" data-sortable="true">Primer Nombre</th>
-                  <th data-field="cedula" data-sortable="true" data-switchable="false">Cedula</th>
+                  <th data-field="cedula" data-sortable="true" data-switchable="false">Cédula</th>
                 <?php elseif ($_REQUEST['tipo'] === '4'): ?>
-                  <th data-field="codigo" data-sortable="true">Codigo</th>
-                  <th data-field="curso" data-sortable="true">Descripcion de curso</th>
-                  <th data-field="periodo" data-sortable="true">Periodo Academico</th>
+                  <th data-field="codigo" data-sortable="true">Código</th>
+                  <th data-field="curso" data-sortable="true">Descripción de curso</th>
+                  <th data-field="periodo" data-sortable="true">Periodo Académico</th>
                   <th data-field="comentarios" data-sortable="true">Comentarios</th>
                   <th data-field="total" data-sortable="true">Total de Alumnos</th>
                 <?php endif ?>
@@ -316,7 +316,7 @@ if ( isset($_REQUEST['tipo']) ) :
             <!-- reporte -->
             <div class="row center-block margen">
               <div class="col-xs-6 col-xs-offset-3">
-                <span class="label label-info">generara este listado en formato pdf</span>
+                <span class="label label-info">generar este listado en formato pdf</span>
               </div>
             </div>
             <div class="row center-block margen">
@@ -338,17 +338,17 @@ if ( isset($_REQUEST['tipo']) ) :
                 <div class="row">
                   <div class="col-xs-12">
                     <h4>
-                      Listado seleccionado segun los parametros que Ud. escojio.
+                      Listado seleccionado según los parámetros que Ud. escogió.
                     </h4>
                     <p>
                       <small>
                         Si desea hacer otro tipo de consulta puede
-                        <a href="menucon.php">hacerlo aqui.</a>
+                        <a href="menucon.php">hacerlo aquí.</a>
                       </small>
                     </p>
                     <p>
                       <small>
-                        puede regresar <a href="../index.php">al menu principal.</a>
+                        puede regresar <a href="../index.php">al menú principal.</a>
                       </small>
                     </p>
                   </div>

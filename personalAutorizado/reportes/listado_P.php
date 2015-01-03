@@ -60,7 +60,7 @@ if ( (isset($_REQUEST['informacion']) and isset($_REQUEST['tipo']) )
     // Informacion inicial del documento
     $pdf->SetCreator('sistemaJAG');
     $pdf->SetAuthor('EBNB Jose Antonio Gonzalez');
-    $pdf->SetTitle('Constancia de inscripcion');
+    $pdf->SetTitle('Constancia de inscripción');
 
     // crea data del header y footer:
     $pdf->SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, PDF_HEADER_TITLE.' 001', PDF_HEADER_STRING, array(0,64,255), array(0,64,128));
@@ -122,18 +122,18 @@ if ( (isset($_REQUEST['informacion']) and isset($_REQUEST['tipo']) )
         padding: 5px;
       }
     </style>";
-    $encabezado = $estilo.'<p></p><p></p><table style="" cellspacing="0">';
+    $encabezado = $estilo.'<p></p><p></p><p><center><h1 style="text-align:center;">Listado de Allegados</h1></center></p><table style="" cellspacing="0">';
     $thead = '<thead>
                 <tr>
-                  <th>Cedula</th>
+                  <th>Cédula</th>
                   <th>Primer Apellido</th>
                   <th>Primer Nombre</th>
-                  <th>Telefono</th>
+                  <th>Teléfono</th>
                   <th>Telf. Ad.</th>
                   <th>Sexo</th>
                   <th>Email</th>
                   <th>Nivel Ed.</th>
-                  <th>Profesion</th>
+                  <th>Profesión</th>
                   <th>Tel. Lab.</th>
                 </tr>
               </thead>';
@@ -170,7 +170,8 @@ if ( (isset($_REQUEST['informacion']) and isset($_REQUEST['tipo']) )
                 </tbody>';
       $c++;
     endwhile;
-    $pie = '</table>';
+    $y = date('m');
+    $pie = '</table><p><em>reporte generado el: '.$x.'-'.$y.'-'.$z.'</em></p>';
     $html = $encabezado.$thead.$tbody.$pie;
     // magia:
     // Print text using writeHTMLCell()
@@ -179,7 +180,6 @@ if ( (isset($_REQUEST['informacion']) and isset($_REQUEST['tipo']) )
     // ---------------------------------------------------------
 
     // termina el proceso y crea el archivo:
-    $y = date('m');
     $nombre = "listado-alumnos-$x-$y-$z.pdf";
     $pdf->Output($nombre, 'I');
     // echo $html;

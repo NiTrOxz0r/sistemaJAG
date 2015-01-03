@@ -27,7 +27,7 @@ if ( isset($_SESSION['cod_tipo_usr']) ) : ?>
 		        <span class="icon-bar"></span>
 		      </button>
 		      <?php $index = enlaceDinamico(); ?>
-		      <a class="navbar-brand" href="<?php echo $index ?>">sitemaJAG</a>
+		      <a class="navbar-brand" href="<?php echo $index ?>">sistemaJAG</a>
 		    </div>
 		    <!-- Esto es ocultado cuando pasa a tipo movil. -->
 		    <div class="collapse navbar-collapse" id="navbar_target">
@@ -43,7 +43,7 @@ if ( isset($_SESSION['cod_tipo_usr']) ) : ?>
 							</a>
 						</li>
 		        <?php $inscripcion = enlaceDinamico('personalAutorizado/form_reg_P.php'); ?>
-		        <li><a href="<?php echo $inscripcion ?>">inscripcion</a></li>
+		        <li><a href="<?php echo $inscripcion ?>">inscripción</a></li>
 		        <li class="dropdown">
 		          <a
 		          href="#"
@@ -63,25 +63,22 @@ if ( isset($_SESSION['cod_tipo_usr']) ) : ?>
 		        </li>
 		      </ul>
 		      <ul class="nav navbar-nav navbar-right">
-		        <li><a href="#">Manual de uso</a></li>
+		        <?php $info = enlaceDinamico('estadistica.php'); ?>
+		        <li><a href="<?php echo $info ?>">Información del sistema</a></li>
 		        <li class="dropdown">
-		        	<a
-		        	href="#"
-		        	class="dropdown-toggle"
-		        	data-toggle="dropdown"
-		        	role="button"
-		        	aria-expanded="false">
-		        		Alumno <span class="caret"></span>
-		        	</a>
-		        	<ul class="dropdown-menu" role="menu">
-		        	  <li><a href="#">Registrar</a></li>
-		        	  <li><a href="#">Consultar</a></li>
-		        	  <li><a href="#">Actualizar</a></li>
-		        	  <li class="divider"></li>
-		        	  <li><a href="#">Ayuda al usuario</a></li>
-		        	  <li class="divider"></li>
-		        	  <li><a href="#">Manual de uso</a></li>
-		        	</ul>
+		          <a
+		          href="#"
+		          class="dropdown-toggle"
+		          data-toggle="dropdown"
+		          role="button"
+		          aria-expanded="false">
+		            Manual <span class="caret"></span>
+		          </a>
+		          <ul class="dropdown-menu" role="menu">
+		            <li><a href="#">Ayuda al usuario</a></li>
+		            <li class="divider"></li>
+		            <li><a href="#">Manual de uso</a></li>
+		          </ul>
 		        </li>
 		      </ul>
 		    </div><!-- /.navbar-collapse -->
@@ -99,7 +96,7 @@ if ( isset($_SESSION['cod_tipo_usr']) ) : ?>
 		        <span class="icon-bar"></span>
 		      </button>
 		      <?php $cerar = enlaceDinamico('cerrar.php'); ?>
-		      <a class="navbar-brand" href="<?php echo $cerrar ?>">sitemaJAG</a>
+		      <a class="navbar-brand" href="<?php echo $cerrar ?>">sistemaJAG</a>
 		    </div>
 		    <!-- Esto es ocultado cuando pasa a tipo movil. -->
 		    <div class="collapse navbar-collapse" id="navbar_target">

@@ -5,7 +5,7 @@ if(!isset($_SESSION)){
 $enlace = $_SERVER['DOCUMENT_ROOT']."/github/sistemaJAG/php/master.php";
 require_once($enlace);
 // invocamos validarUsuario.php desde master.php
-validarUsuario(1, 3, $_SESSION['cod_tipo_usr']);
+validarUsuario(1, 2, $_SESSION['cod_tipo_usr']);
 
 //ESTA FUNCION TRAE EL HEAD Y NAVBAR:
 //DESDE empezarPagina.php
@@ -49,7 +49,7 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr'], 'sistemaJAG 
                 autofocus="autofocus"
                 required>
                 <option selected="selected" value="0">--Seleccione--</option>
-                <option value="1">Por cedula</option>
+                <option value="1">Por cédula</option>
                 <option value="2">Por Nombre</option>
                 <option value="3">Por Apellido</option>
                 <option value="4">Por Cargo</option>
@@ -132,7 +132,7 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr'], 'sistemaJAG 
             <div class="col-xs-12">
               <h3>
                 Si Ud. desea registrar o actualizar a un personal interno de esta
-                institucion, puede hacerlo especificando la cedula de identidad:
+                institución, puede hacerlo especificando la cédula de identidad:
               </h3>
             </div>
           </div>
@@ -146,7 +146,7 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr'], 'sistemaJAG 
             id="form_PI"
             method="GET">
             <div class="form-group">
-               <label for="cedula" class="control-label">Cedula:</label>
+               <label for="cedula" class="control-label">Cédula:</label>
               <input
                 class="form-control"
                 type="text"
