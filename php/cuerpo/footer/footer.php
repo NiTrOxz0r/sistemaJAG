@@ -12,11 +12,23 @@ $bootstrapJS = enlaceDinamico('css/bootstrap/js/bootstrap.min.js');
   <div class="container">
     <div class="row">
       <div class="col-sm-4 col-sm-offset-1">
+        <div>
+          <h4 style="padding-left:40px;">
+            <strong>Autores</strong>
+          </h4>
+        </div>
         <ul>
-          <li>algo</li>
-          <li>algo</li>
-          <li>algo</li>
-          <li>algo</li>
+          <strong>
+            <li>
+              <a href="http://www.slayerfat.com.ve">
+                Alejandro Granadillo
+              </a>
+            </li>
+            <li>Andres Leotur</li>
+            <li>Bryan Torrez</li>
+            <li>Erick Zerpa</li>
+            <li>Joan Camacho</li>
+          </strong>
         </ul>
       </div>
       <div class="col-sm-2">
@@ -31,6 +43,22 @@ $bootstrapJS = enlaceDinamico('css/bootstrap/js/bootstrap.min.js');
         </ul>
       </div>
     </div>
+    <div class="row">
+      <div class="col-sm-6 col-sm-offset-3">
+        <div class="col-sm-6 col-sm-offset-3">
+          <h4 style="padding-left:40px;">
+            <strong>Profesores</strong>
+          </h4>
+          <ul>
+            <strong>
+              <li>Edwuard Castañeda</li>
+              <li>Gustavo Lujan</li>
+              <li>Antonio Viloria</li>
+            </strong>
+          </ul>
+        </div>
+      </div>
+    </div>
   </div>
   <div class="container-fluid">
     <div class="row">
@@ -42,7 +70,7 @@ $bootstrapJS = enlaceDinamico('css/bootstrap/js/bootstrap.min.js');
       </div>
     </div>
   </div>
-  <p>
+  <p id="mainTitulo">
     sistemaJAG 2014.
   </p>
   <script type="text/javascript">
