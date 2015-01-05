@@ -3,10 +3,10 @@ sistemaJAG
 
 Sistema de inscripción adaptado para la institucion publica U.E.N.B "José Antonio Gonzáles"
 
-El prototipo de este sistema (version 0.6.3) esta en linea en [sistemajag.esy.es/](http://sistemajag.esy.es/)
+El prototipo de este sistema (version 0.6.3.1) esta en linea en [sistemajag.esy.es/](http://sistemajag.esy.es/)
 ###Unidad Educativa Nacional Bolivariana "José Antonio Gonzáles"
 Escuela ubicada en el Paraíso, Caracas, Venezuela.
-##version 0.6.3
+##version 0.6.3.1
 ###Sistema 95.4% aprox completado, por ahora falta:
 ####FLUJO NORMAL DE FORMULARIOS
 en progreso: 99?% aprox.
