@@ -97,13 +97,13 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']); ?>
                 <div class="col-sm-6">
                   <h4>
                     Personas de sexo Masculino:
-                    <strong><?php echo $datosSexoTotal['hombres'] ?></strong>
+                    <strong><?php echo $datosSexoTotal['hombres'] === (null) ? 0 : $datosSexoTotal['hombres'] ?></strong>
                   </h4>
                 </div>
                 <div class="col-sm-6">
                   <h4>
                     Personas de sexo Femenino:
-                    <strong><?php echo $datosSexoTotal['mujeres'] ?></strong>
+                    <strong><?php echo $datosSexoTotal['mujeres'] === (null) ? 0 : $datosSexoTotal['mujeres'] ?></strong>
                   </h4>
                 </div>
               </div>
@@ -323,13 +323,13 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']); ?>
                 <div class="col-sm-6">
                   <h4>
                     Alumnos repitientes:
-                    <strong><?php echo $datosRepitiente['si'] ?></strong>
+                    <strong><?php echo $datosRepitiente['si'] === (null) ? 0 : $datosRepitiente['si'] ?></strong>
                   </h4>
                 </div>
                 <div class="col-sm-6">
                   <h4>
                     Alumnos no repitientes:
-                    <strong><?php echo $datosRepitiente['no'] ?></strong>
+                    <strong><?php echo $datosRepitiente['no'] === (null) ? 0 : $datosRepitiente['no'] ?></strong>
                   </h4>
                 </div>
               </div>
@@ -493,13 +493,13 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']); ?>
   // repitientes
   datos = [
     {
-      value: <?php echo $datosRepitiente['no'] ?>,
+      value: <?php echo $datosRepitiente['no'] === (null) ? 0 : $datosRepitiente['no'] ?>,
       color: <?php echo $colores[1][0] ?>,
       highlight: <?php echo $colores[1][1] ?>,
       label: 'No repitiente'
     },
     {
-      value: <?php echo $datosRepitiente['si'] ?>,
+      value: <?php echo $datosRepitiente['si'] === (null) ? 0 : $datosRepitiente['si'] ?>,
       color: <?php echo $colores[0][0] ?>,
       highlight: <?php echo $colores[0][1] ?>,
       label: 'repitiente'
@@ -518,8 +518,8 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']); ?>
           highlightFill: "rgba(111, 181, 240,0.75)",
           highlightStroke: "rgba(111, 181, 240,1)",
           data: [
-            <?php echo $datosRepitiente['no'] ?>,
-            <?php echo $datosRepitiente['si'] ?>
+            <?php echo $datosRepitiente['no'] === (null) ? 0 : $datosRepitiente['no'] ?>,
+            <?php echo $datosRepitiente['si'] === (null) ? 0 : $datosRepitiente['si'] ?>
           ]
         }
       ]
@@ -529,13 +529,13 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']); ?>
   // sexo
   datos = [
     {
-      value: <?php echo $datosSexo['ninos'] ?>,
+      value: <?php echo $datosSexo['ninos'] === (null) ? 0 : $datosSexo['ninos'] ?>,
       color: <?php echo $colores[7][0] ?>,
       highlight: <?php echo $colores[7][1] ?>,
       label: 'Masculino'
     },
     {
-      value: <?php echo $datosSexo['ninas'] ?>,
+      value: <?php echo $datosSexo['ninas'] === (null) ? 0 : $datosSexo['ninas'] ?>,
       color: <?php echo $colores[10][0] ?>,
       highlight: <?php echo $colores[10][1] ?>,
       label: 'Femenino'
@@ -554,8 +554,8 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']); ?>
           highlightFill: "rgba(111, 181, 240,0.75)",
           highlightStroke: "rgba(111, 181, 240,1)",
           data: [
-            <?php echo $datosSexo['ninos'] ?>,
-            <?php echo $datosSexo['ninas'] ?>
+            <?php echo $datosSexo['ninos'] === (null) ? 0 : $datosSexo['ninos'] ?>,
+            <?php echo $datosSexo['ninas'] === (null) ? 0 : $datosSexo['ninas'] ?>
           ]
         }
       ]
@@ -565,13 +565,13 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']); ?>
   // sexo total
   datos = [
     {
-      value: <?php echo $datosSexoTotal['hombres'] ?>,
+      value: <?php echo $datosSexoTotal['hombres'] === (null) ? 0 : $datosSexoTotal['hombres'] ?>,
       color: <?php echo $colores[7][0] ?>,
       highlight: <?php echo $colores[7][1] ?>,
       label: 'Masculino'
     },
     {
-      value: <?php echo $datosSexoTotal['mujeres'] ?>,
+      value: <?php echo $datosSexoTotal['mujeres'] === (null) ? 0 : $datosSexoTotal['mujeres'] ?>,
       color: <?php echo $colores[10][0] ?>,
       highlight: <?php echo $colores[10][1] ?>,
       label: 'Femenino'
@@ -590,8 +590,8 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']); ?>
           highlightFill: "rgba(111, 181, 240,0.75)",
           highlightStroke: "rgba(111, 181, 240,1)",
           data: [
-            <?php echo $datosSexoTotal['hombres'] ?>,
-            <?php echo $datosSexoTotal['mujeres'] ?>
+            <?php echo $datosSexoTotal['hombres'] === (null) ? 0 : $datosSexoTotal['hombres'] ?>,
+            <?php echo $datosSexoTotal['mujeres'] === (null) ? 0 : $datosSexoTotal['mujeres'] ?>
           ]
         }
       ]
