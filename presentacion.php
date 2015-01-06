@@ -128,121 +128,12 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']); ?>
           </div>
         </div>
       </div>
-      <!-- pagina 9 -->
+      <!-- pagina 8 -->
       <div class="row slide">
         <div class="col-xs-12 text-center">
           <div class="centrado">
-            <h1 class="courier">¿Cómo se hizo?</h1>
+            <h4 class="courier">Ejemplo</h4>
           </div>
-        </div>
-      </div>
-      <!-- pagina 10 -->
-      <div class="row slide">
-        <div class="col-xs-12 text-center">
-          <div class="centrado">
-            <h1 class="courier">Metodologías:</h1>
-            <h2 class="openSans">Proyecto | Sistema</h2>
-          </div>
-        </div>
-      </div>
-      <!-- pagina 11 -->
-      <div class="row slide">
-        <div class="col-xs-12">
-          <div class="centrado">
-            <h2 class="courier">Del proyecto:</h2>
-            <ul class="openSans">
-              <li>
-                <h4>Metodología Cualitativa.</h4>
-              </li>
-              <li>
-                <h4>Investigación Acción.</h4>
-              </li>
-              <li>
-                <h4>Paradigma Fenomenológico.</h4>
-              </li>
-            </ul>
-            <div class="espacio"></div>
-            <h2 class="courier">Marco Lógico</h2>
-            <ul class="openSans">
-              <li>
-                <h4>Instrumento de gestión de programas y proyectos.</h4>
-              </li>
-              <li>
-                <h4>Herramienta analítica.</h4>
-              </li>
-              <li>
-                <h4>Fortalece la preparación y ejecución</h4>
-              </li>
-              <li>
-                <h4>Facilita evaluación de resultados e impactos.</h4>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-      <!-- pagina 12 -->
-      <div class="row slide">
-        <div class="col-xs-12">
-          <div class="centrado">
-            <h3 class="openSans">
-              <strong>Diseño y desarrollo en espiral RUP:</strong>
-            </h3>
-            <h3 class="courier">
-              Diseño escalable e iterativo.
-            </h3>
-            <h3 class="courier">
-              Programación estructurada.
-            </h3>
-            <h3 class="courier">
-              Programación orientada a objetos.
-            </h3>
-            <div class="espacio"></div>
-            <h3 class="openSans">
-              <strong>Diagramas de diseño:</strong>
-            </h3>
-            <h3 class="courier">
-              Caso de uso.
-            </h3>
-            <h3 class="courier">
-              Entidad/Relación.
-            </h3>
-          </div>
-        </div>
-      </div>
-      <!-- pagina 13 -->
-      <div class="row slide">
-        <div class="col-xs-12 text-center">
-          <div class="centrado">
-            <h1 class="oswald">Caso de uso</h1>
-          </div>
-        </div>
-      </div>
-      <!-- pagina 14 -->
-      <div class="row slide">
-        <div class="col-xs-12 text-center">
-          <h4 class="openSans">Caso de uso del sistema</h4>
-          <img src="imagenes/casoUsoSistema_rev0.png">
-        </div>
-      </div>
-      <!-- pagina 15 -->
-      <div class="row slide">
-        <div class="col-xs-12 text-center">
-          <h4 class="openSans">Caso de uso del modulo usuario</h4>
-          <img src="imagenes/casoUsoUsuario_rev0.png">
-        </div>
-      </div>
-      <!-- pagina 16 -->
-      <div class="row slide">
-        <div class="col-xs-12 text-center">
-          <div class="centrado">
-            <h1 class="oswald">Diagrama </br> Entidad - Relación</h1>
-          </div>
-        </div>
-      </div>
-      <!-- pagina 15 -->
-      <div class="row slide">
-        <div class="col-xs-12 text-center">
-          <img src="imagenes/EntidadRelacion_rev8.png" width="100%">
         </div>
       </div>
       <!-- personas -->
@@ -571,6 +462,172 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']); ?>
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+      </div>
+      <!-- pagina 9 -->
+      <div class="row slide">
+        <div class="col-xs-12 text-center">
+          <div class="centrado">
+            <h1 class="courier">¿Cómo se hizo?</h1>
+          </div>
+        </div>
+      </div>
+      <!-- pagina 10 -->
+      <div class="row slide">
+        <div class="col-xs-12 text-center">
+          <div class="centrado">
+            <h1 class="courier">Metodologías:</h1>
+            <h2 class="openSans">Proyecto | Sistema</h2>
+          </div>
+        </div>
+      </div>
+      <!-- pagina 11 -->
+      <div class="row slide">
+        <div class="col-xs-12">
+          <div class="centrado">
+            <h2 class="courier">Del proyecto:</h2>
+            <ul class="openSans">
+              <li>
+                <h4>Metodología Cualitativa.</h4>
+              </li>
+              <li>
+                <h4>Investigación Acción.</h4>
+              </li>
+              <li>
+                <h4>Paradigma Fenomenológico.</h4>
+              </li>
+            </ul>
+            <div class="espacio"></div>
+            <h2 class="courier">Marco Lógico</h2>
+            <ul class="openSans">
+              <li>
+                <h4>Instrumento de gestión de programas y proyectos.</h4>
+              </li>
+              <li>
+                <h4>Herramienta analítica.</h4>
+              </li>
+              <li>
+                <h4>Fortalece la preparación y ejecución</h4>
+              </li>
+              <li>
+                <h4>Facilita evaluación de resultados e impactos.</h4>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <!-- pagina 12 -->
+      <div class="row slide">
+        <div class="col-xs-12">
+          <div class="centrado">
+            <h3 class="openSans">
+              <strong>Diseño y desarrollo en espiral RUP:</strong>
+            </h3>
+            <h3 class="courier">
+              Diseño escalable e iterativo.
+            </h3>
+            <h3 class="courier">
+              Programación estructurada.
+            </h3>
+            <h3 class="courier">
+              Programación orientada a objetos.
+            </h3>
+            <div class="espacio"></div>
+            <h3 class="openSans">
+              <strong>Diagramas de diseño:</strong>
+            </h3>
+            <h3 class="courier">
+              Caso de uso.
+            </h3>
+            <h3 class="courier">
+              Entidad/Relación.
+            </h3>
+          </div>
+        </div>
+      </div>
+      <!-- pagina 13 -->
+      <div class="row slide">
+        <div class="col-xs-12 text-center">
+          <div class="centrado">
+            <h1 class="oswald">Caso de uso</h1>
+          </div>
+        </div>
+      </div>
+      <!-- pagina 14 -->
+      <div class="row slide">
+        <div class="col-xs-12 text-center">
+          <h4 class="openSans">Caso de uso del sistema</h4>
+          <img src="imagenes/casoUsoSistema_rev0.png">
+        </div>
+      </div>
+      <!-- pagina 15 -->
+      <div class="row slide">
+        <div class="col-xs-12 text-center">
+          <h4 class="openSans">Caso de uso del modulo usuario</h4>
+          <img src="imagenes/casoUsoUsuario_rev0.png">
+        </div>
+      </div>
+      <!-- pagina 16 -->
+      <div class="row slide">
+        <div class="col-xs-12 text-center">
+          <div class="centrado">
+            <h1 class="oswald">Diagrama </br> Entidad - Relación</h1>
+          </div>
+        </div>
+      </div>
+      <!-- pagina 15 -->
+      <div class="row slide">
+        <div class="col-xs-12 text-center">
+          <img src="imagenes/EntidadRelacion_rev8.png" width="100%">
+        </div>
+      </div>
+      <!-- pagina 16 -->
+      <div class="row slide">
+        <div class="col-xs-12 text-center">
+          <div class="centrado">
+            <h1 class="oswald">Detalles</h1>
+          </div>
+        </div>
+      </div>
+      <!-- pagina 17 -->
+      <div class="row slide">
+        <div class="col-xs-12">
+          <div class="centrado">
+            <h3 class="openSans">
+              <a href="http://www.mppeuct.gob.ve/">
+                <strong>Acorde al MPPEUCT.</strong>
+              </a>
+            </h3>
+            <h3 class="courier">
+              Gaceta Oficial N° 38.272 </br> fecha: 14-09-2005.
+            </h3>
+            <h3 class="courier">
+              Servicio comunitario.
+            </h3>
+            <h3 class="courier">
+              Proyecto sociotecnológico.
+            </h3>
+            <h3 class="courier">
+              Software libre.
+            </h3>
+            <div class="espacio"></div>
+            <h3 class="openSans text-center">
+              Adaptado a las necesidades de la institución y sus usuarios.
+            </h3>
+          </div>
+        </div>
+      </div>
+      <!-- pagina 18 -->
+      <div class="row slide">
+        <div class="col-xs-12">
+          <div class="centrado">
+            <h1 class="oswald text-center">
+              <?php $enlace = enlaceDinamico(); ?>
+              <a href="<?php echo $enlace ?>">
+                <strong>El Sistema</strong>
+              </a>
+            </h1>
           </div>
         </div>
       </div>
