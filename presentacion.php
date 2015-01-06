@@ -499,7 +499,7 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']); ?>
               </li>
             </ul>
             <div class="espacio"></div>
-            <h2 class="courier">Marco Lógico</h2>
+            <h2 class="courier"><strong>Marco Lógico</strong></h2>
             <ul class="openSans">
               <li>
                 <h4>Instrumento de gestión de programas y proyectos.</h4>
@@ -521,6 +521,7 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']); ?>
       <div class="row slide">
         <div class="col-xs-12">
           <div class="centrado">
+            <h2 class="courier">Del sistema:</h2>
             <h3 class="openSans">
               <strong>Diseño y desarrollo en espiral RUP:</strong>
             </h3>
