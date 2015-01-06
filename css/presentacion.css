@@ -1,0 +1,75 @@
+@font-face {
+  font-family: Lato;
+  src: url(fonts/Lato/Lato-Regular.ttf);
+}
+@font-face {
+  font-family: Oswald;
+  src: url(fonts/Oswald/Oswald-Regular.ttf);
+}
+@font-face {
+  font-family: Oswald;
+  src: url(fonts/Oswald/Oswald-Bold.ttf);
+  font-weight: bold;
+}
+@font-face {
+  font-family: OpenSans;
+  src: url(fonts/Open_Sans/OpenSans-Regular.ttf);
+}
+
+.slide {
+  min-height: 720px;
+}
+.slide h1 {
+  font-size: 8em;
+}
+.slide h2 {
+  font-size: 5em;
+}
+.slide h3 {
+  font-size: 4em;
+}
+.slide h4 {
+  font-size: 3em;
+}
+.slide h5 {
+  font-size: 2em;
+}
+.slide ul {
+  list-style: none;
+}
+.centrado {
+  margin-bottom: 30%;
+  margin-top: 30%;
+}
+.margen-30 {
+  margin-top: -30%;
+}
+.margen-20 {
+  margin-top: -20%;
+}
+.margen-10 {
+  margin-top: -10%;
+}
+.margen-0 {
+  margin-top: 0%;
+}
+.espacio {
+  min-height: 6em;
+}
+.espacio-doble {
+  min-height: 12em;
+}
+
+/*fonts o letras*/
+.lato {
+  font-family: Lato;
+}
+.courier {
+  font-family: Courier;
+}
+.oswald {
+  font-family: Oswald;
+}
+.openSans {
+  font-family: OpenSans;
+}
