@@ -31,7 +31,7 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']); ?>
               </a>
             </h3>
             <div class="espacio-doble"></div>
-            <h3 class="courier">prototipo en linea:</h1>
+            <h3 class="courier">prototipo en línea:</h1>
             <h4 class="courier">
               <a href="http://sistemajag.esy.es">
                 sistemajag.esy.es
@@ -84,55 +84,165 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']); ?>
       <div class="row slide">
         <div class="col-xs-12 text-center">
           <div class="centrado">
-            <h1 class="courier">¿Por que esto?</h1>
+            <h1 class="courier">¿Por qué esto?</h1>
           </div>
         </div>
       </div>
-      <!-- info -->
-      <div class="row">
-        <div class="contenido col-md-12">
-          <h1>
-            SistemaJAG
-            </br>
-            <small>
-              SISTEMA INFORMÁTICO DE INSCRIPCIÓN
-              <em>"JOSÉ ANTONIO GONZÁLEZ"</em>
-            </small>
-          </h1>
-          <p>
-            <h2 class="text-justify">
-              Tomando en cuenta los beneficios de los procesos dentro de los sistemas
-              de informacion modernos el equipo de programadores encagargados de desarrollar
-              el <strong>sistemaJAG</strong> para la <em>U.E.N.B. José Antonio González</em>,
-              tomando en cuenta las ideas expresadas en el sigiente extracto:
-            </h2>
-            <blockquote>
-              <p>
-                Las bondades que dan los nuevos sistemas de información,
-                automatización y administración de base de datos en el
-                área informática pueden ser tomados en cuenta a la hora
-                de considerar una solución adaptable y factible en la
-                problemática de la E. B. N. B. José Antonio González,
-                ya que se puede crear y moldear aplicaciones y sistemas
-                que adapten a las necesidades de esta institución, además
-                de disminuir el tiempo para recabar los datos, archivarlos
-                y aminorar el número de personas para efectuar esta actividad.
-              </p>
-              <footer>
-                Planteamiento del problema - proyecto II
-              </footer>
-            </blockquote>
-            <h2>
-              da pie a crear segun las necesidades de la institucion, procesos
-              que manipulen de manera exacta, los datos existentes en el sistema,
-              de tal manera que genere informacion itul para todo usuario que llegue a
-              usar este sistema.
-            </h2>
-          </p>
-          <blockquote class="blockquote-reverse">
-            <p>La informacion es tan inutil como aquellos que no la comprendan.</p>
-            <footer>Alejandro Granadillo.</footer>
-          </blockquote>
+      <!-- pagina 6 -->
+      <div class="row slide">
+        <div class="col-xs-12">
+          <div class="centrado">
+            <h3 class="openSans">
+              <strong>Problema en la institución:</strong>
+            </h3>
+            <h3 class="courier">
+              Proceso manual de inscripción.
+            </h3>
+            <div class="espacio"></div>
+            <h3 class="openSans">
+              <strong>Solución propuesta:</strong>
+            </h3>
+            <h3 class="courier">
+              Sistema de información automatizado.
+            </h3>
+          </div>
+        </div>
+      </div>
+      <!-- pagina 7 -->
+      <div class="row slide">
+        <div class="col-xs-12 text-center">
+          <div class="centrado">
+            <h1 class="courier">Justificación</h1>
+          </div>
+        </div>
+      </div>
+      <!-- pagina 8 -->
+      <div class="row slide">
+        <div class="col-xs-12 text-center">
+          <div class="centrado">
+            <h4 class="courier">
+              El sistema informático
+              propuesto aporta la eficiencia
+              necesaria en el proceso de inscripción.
+            </h4>
+          </div>
+        </div>
+      </div>
+      <!-- pagina 9 -->
+      <div class="row slide">
+        <div class="col-xs-12 text-center">
+          <div class="centrado">
+            <h1 class="courier">¿Cómo se hizo?</h1>
+          </div>
+        </div>
+      </div>
+      <!-- pagina 10 -->
+      <div class="row slide">
+        <div class="col-xs-12 text-center">
+          <div class="centrado">
+            <h1 class="courier">Metodologías:</h1>
+            <h2 class="openSans">Proyecto | Sistema</h2>
+          </div>
+        </div>
+      </div>
+      <!-- pagina 11 -->
+      <div class="row slide">
+        <div class="col-xs-12">
+          <div class="centrado">
+            <h2 class="courier">Del proyecto:</h2>
+            <ul class="openSans">
+              <li>
+                <h4>Metodología Cualitativa.</h4>
+              </li>
+              <li>
+                <h4>Investigación Acción.</h4>
+              </li>
+              <li>
+                <h4>Paradigma Fenomenológico.</h4>
+              </li>
+            </ul>
+            <div class="espacio"></div>
+            <h2 class="courier">Marco Lógico</h2>
+            <ul class="openSans">
+              <li>
+                <h4>Instrumento de gestión de programas y proyectos.</h4>
+              </li>
+              <li>
+                <h4>Herramienta analítica.</h4>
+              </li>
+              <li>
+                <h4>Fortalece la preparación y ejecución</h4>
+              </li>
+              <li>
+                <h4>Facilita evaluación de resultados e impactos.</h4>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <!-- pagina 12 -->
+      <div class="row slide">
+        <div class="col-xs-12">
+          <div class="centrado">
+            <h3 class="openSans">
+              <strong>Diseño y desarrollo en espiral RUP:</strong>
+            </h3>
+            <h3 class="courier">
+              Diseño escalable e iterativo.
+            </h3>
+            <h3 class="courier">
+              Programación estructurada.
+            </h3>
+            <h3 class="courier">
+              Programación orientada a objetos.
+            </h3>
+            <div class="espacio"></div>
+            <h3 class="openSans">
+              <strong>Diagramas de diseño:</strong>
+            </h3>
+            <h3 class="courier">
+              Caso de uso.
+            </h3>
+            <h3 class="courier">
+              Entidad/Relación.
+            </h3>
+          </div>
+        </div>
+      </div>
+      <!-- pagina 13 -->
+      <div class="row slide">
+        <div class="col-xs-12 text-center">
+          <div class="centrado">
+            <h1 class="oswald">Caso de uso</h1>
+          </div>
+        </div>
+      </div>
+      <!-- pagina 14 -->
+      <div class="row slide">
+        <div class="col-xs-12 text-center">
+          <h4 class="openSans">Caso de uso del sistema</h4>
+          <img src="imagenes/casoUsoSistema_rev0.png">
+        </div>
+      </div>
+      <!-- pagina 15 -->
+      <div class="row slide">
+        <div class="col-xs-12 text-center">
+          <h4 class="openSans">Caso de uso del modulo usuario</h4>
+          <img src="imagenes/casoUsoUsuario_rev0.png">
+        </div>
+      </div>
+      <!-- pagina 16 -->
+      <div class="row slide">
+        <div class="col-xs-12 text-center">
+          <div class="centrado">
+            <h1 class="oswald">Diagrama </br> Entidad - Relación</h1>
+          </div>
+        </div>
+      </div>
+      <!-- pagina 15 -->
+      <div class="row slide">
+        <div class="col-xs-12 text-center">
+          <img src="imagenes/EntidadRelacion_rev8.png" width="100%">
         </div>
       </div>
       <!-- personas -->

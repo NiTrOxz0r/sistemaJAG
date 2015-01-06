@@ -31,6 +31,9 @@
 .slide h4 {
   font-size: 3em;
 }
+.slide h5 {
+  font-size: 2em;
+}
 .slide ul {
   list-style: none;
 }
@@ -45,7 +48,7 @@
   min-height: 12em;
 }
 
-/*fonts*/
+/*fonts o letras*/
 .lato {
   font-family: Lato;
 }
