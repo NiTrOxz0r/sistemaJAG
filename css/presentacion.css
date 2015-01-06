@@ -41,6 +41,18 @@
   margin-bottom: 30%;
   margin-top: 30%;
 }
+.margen-30 {
+  margin-top: -30%;
+}
+.margen-20 {
+  margin-top: -20%;
+}
+.margen-10 {
+  margin-top: -10%;
+}
+.margen-0 {
+  margin-top: 0%;
+}
 .espacio {
   min-height: 6em;
 }

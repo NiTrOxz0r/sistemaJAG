@@ -12,7 +12,7 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']); ?>
     <!-- inicio de presentacion -->
     <div class="container">
       <!-- pagina 1 -->
-      <div class="row slide">
+      <div class="row slide" id="slide_1">
         <div class="col-xs-12 text-center">
           <div class="centrado">
             <h1 class="lato">sistema<strong>JAG</strong></h1>
@@ -21,8 +21,8 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']); ?>
         </div>
       </div>
       <!-- pagina 2 -->
-      <div class="row slide">
-        <div class="col-xs-12 text-center">
+      <div class="row slide" id="slide_2">
+        <div class="col-xs-12 text-center margen-20">
           <div class="centrado">
             <h1 class="courier">código fuente:</h1>
             <h3 class="courier">
@@ -41,8 +41,8 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']); ?>
         </div>
       </div>
       <!-- pagina 3 -->
-      <div class="row slide">
-        <div class="col-xs-12">
+      <div class="row slide" id="slide_3">
+        <div class="col-xs-12 margen-20">
           <div class="centrado">
             <h2 class="courier">Integrantes:</h2>
             <ul class="text-right openSans">
@@ -66,7 +66,7 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']); ?>
         </div>
       </div>
       <!-- pagina 4 -->
-      <div class="row slide">
+      <div class="row slide" id="slide_4">
         <div class="col-xs-12">
           <div class="centrado">
             <!-- <div>
@@ -81,7 +81,7 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']); ?>
         </div>
       </div>
       <!-- pagina 5 -->
-      <div class="row slide">
+      <div class="row slide" id="slide_5">
         <div class="col-xs-12 text-center">
           <div class="centrado">
             <h1 class="courier">¿Por qué esto?</h1>
@@ -89,8 +89,8 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']); ?>
         </div>
       </div>
       <!-- pagina 6 -->
-      <div class="row slide">
-        <div class="col-xs-12">
+      <div class="row slide" id="slide_6">
+        <div class="col-xs-12 margen-20">
           <div class="centrado">
             <h3 class="openSans">
               <strong>Problema en la institución:</strong>
@@ -109,7 +109,7 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']); ?>
         </div>
       </div>
       <!-- pagina 7 -->
-      <div class="row slide">
+      <div class="row slide" id="slide_7">
         <div class="col-xs-12 text-center">
           <div class="centrado">
             <h1 class="courier">Justificación</h1>
@@ -117,7 +117,7 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']); ?>
         </div>
       </div>
       <!-- pagina 8 -->
-      <div class="row slide">
+      <div class="row slide" id="slide_8">
         <div class="col-xs-12 text-center">
           <div class="centrado">
             <h4 class="courier">
@@ -128,16 +128,17 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']); ?>
           </div>
         </div>
       </div>
-      <!-- pagina 8 -->
-      <div class="row slide">
+      <!-- pagina 9 -->
+      <div class="row slide" id="slide_9">
         <div class="col-xs-12 text-center">
           <div class="centrado">
             <h4 class="courier">Ejemplo</h4>
           </div>
         </div>
       </div>
+      <!-- pagina 10 -->
       <!-- personas -->
-      <div class="row">
+      <div class="row" id="slide_10">
         <div class="col-md-12">
           <h2>Personas en sistemaJAG:</h2>
           <div class="row">
@@ -201,8 +202,9 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']); ?>
           </div>
         </div>
       </div>
+      <!-- pagina 11 -->
       <!-- alumnos -->
-      <div class="row">
+      <div class="row" id="slide_11">
         <div class="col-md-12">
           <h2>Alumnos en sistemaJAG:</h2>
           <div class="row">
@@ -465,16 +467,16 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']); ?>
           </div>
         </div>
       </div>
-      <!-- pagina 9 -->
-      <div class="row slide">
+      <!-- pagina 12 -->
+      <div class="row slide" id="slide_12">
         <div class="col-xs-12 text-center">
           <div class="centrado">
             <h1 class="courier">¿Cómo se hizo?</h1>
           </div>
         </div>
       </div>
-      <!-- pagina 10 -->
-      <div class="row slide">
+      <!-- pagina 13 -->
+      <div class="row slide" id="slide_13">
         <div class="col-xs-12 text-center">
           <div class="centrado">
             <h1 class="courier">Metodologías:</h1>
@@ -482,9 +484,9 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']); ?>
           </div>
         </div>
       </div>
-      <!-- pagina 11 -->
-      <div class="row slide">
-        <div class="col-xs-12">
+      <!-- pagina 14 -->
+      <div class="row slide" id="slide_14">
+        <div class="col-xs-12 margen-30">
           <div class="centrado">
             <h2 class="courier">Del proyecto:</h2>
             <ul class="openSans">
@@ -517,9 +519,9 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']); ?>
           </div>
         </div>
       </div>
-      <!-- pagina 12 -->
-      <div class="row slide">
-        <div class="col-xs-12">
+      <!-- pagina 15 -->
+      <div class="row slide" id="slide_15">
+        <div class="col-xs-12 margen-30">
           <div class="centrado">
             <h2 class="courier">Del sistema:</h2>
             <h3 class="openSans">
@@ -547,53 +549,53 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']); ?>
           </div>
         </div>
       </div>
-      <!-- pagina 13 -->
-      <div class="row slide">
+      <!-- pagina 16 -->
+      <div class="row slide" id="slide_16">
         <div class="col-xs-12 text-center">
           <div class="centrado">
             <h1 class="oswald">Caso de uso</h1>
           </div>
         </div>
       </div>
-      <!-- pagina 14 -->
-      <div class="row slide">
+      <!-- pagina 17 -->
+      <div class="row slide" id="slide_17">
         <div class="col-xs-12 text-center">
           <h4 class="openSans">Caso de uso del sistema</h4>
           <img src="imagenes/casoUsoSistema_rev0.png">
         </div>
       </div>
-      <!-- pagina 15 -->
-      <div class="row slide">
+      <!-- pagina 18 -->
+      <div class="row slide" id="slide_18">
         <div class="col-xs-12 text-center">
           <h4 class="openSans">Caso de uso del modulo usuario</h4>
           <img src="imagenes/casoUsoUsuario_rev0.png">
         </div>
       </div>
-      <!-- pagina 16 -->
-      <div class="row slide">
-        <div class="col-xs-12 text-center">
+      <!-- pagina 19 -->
+      <div class="row slide" id="slide_19">
+        <div class="col-xs-12 text-center margen-20">
           <div class="centrado">
             <h1 class="oswald">Diagrama </br> Entidad - Relación</h1>
           </div>
         </div>
       </div>
-      <!-- pagina 15 -->
-      <div class="row slide">
+      <!-- pagina 20 -->
+      <div class="row slide" id="slide_20">
         <div class="col-xs-12 text-center">
           <img src="imagenes/EntidadRelacion_rev8.png" width="100%">
         </div>
       </div>
-      <!-- pagina 16 -->
-      <div class="row slide">
+      <!-- pagina 21 -->
+      <div class="row slide" id="slide_21">
         <div class="col-xs-12 text-center">
           <div class="centrado">
             <h1 class="oswald">Detalles</h1>
           </div>
         </div>
       </div>
-      <!-- pagina 17 -->
-      <div class="row slide">
-        <div class="col-xs-12">
+      <!-- pagina 22 -->
+      <div class="row slide" id="slide_22">
+        <div class="col-xs-12 margen-30">
           <div class="centrado">
             <h3 class="openSans">
               <a href="http://www.mppeuct.gob.ve/">
@@ -619,8 +621,8 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']); ?>
           </div>
         </div>
       </div>
-      <!-- pagina 18 -->
-      <div class="row slide">
+      <!-- pagina 23 -->
+      <div class="row slide" id="slide_23">
         <div class="col-xs-12">
           <div class="centrado">
             <h1 class="oswald text-center">
@@ -845,5 +847,60 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']); ?>
   };
   var elemento = $("#poligonoSexoTotal").get(0).getContext("2d");
   var poligonoSexoTotal = new Chart(elemento).Bar(datos, opciones);
+</script>
+<script type="text/javascript">
+  $(function() {
+    var i = 0;
+    var enlace = '#slide_'+i;
+    var blanco;
+    $(window).on('click', function() {
+      i++;
+      enlace = '#slide_'+i;
+      blanco = $(enlace);
+      if ( blanco.length ) {
+        $('html, body').animate({
+          scrollTop: blanco.offset().top
+        }, 1000);
+      }
+    });
+    $(document).keydown(function(e) {
+      switch(e.which) {
+        case 37: // izquierda
+          i--;
+          enlace = '#slide_'+i;
+          blanco = $(enlace);
+        break;
+
+        case 38: // arriba
+          i--;
+          enlace = '#slide_'+i;
+          blanco = $(enlace);
+        break;
+
+        case 39: // derecha
+          i++;
+          enlace = '#slide_'+i;
+          blanco = $(enlace);
+        break;
+
+        case 40: // abajo
+          i++;
+          enlace = '#slide_'+i;
+          blanco = $(enlace);
+        break;
+
+        default:
+          enlace = '#slide_'+i;
+          blanco = $(enlace);
+        break;
+      }
+      // e.preventDefault();
+      if ( blanco.length ) {
+        $('html, body').animate({
+          scrollTop: blanco.offset().top
+        }, 1000);
+      }
+    });
+  });
 </script>
 <?php finalizarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']); ?>
