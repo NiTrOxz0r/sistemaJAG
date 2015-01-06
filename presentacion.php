@@ -890,8 +890,7 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']); ?>
         break;
 
         default:
-          enlace = '#slide_'+i;
-          blanco = $(enlace);
+          blanco = null;
         break;
       }
       // e.preventDefault();
