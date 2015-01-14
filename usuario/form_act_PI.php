@@ -118,7 +118,7 @@ if ( isset($_GET['cedula']) ):
                                 required
                                 disabled
                                 class="form-control">
-                                <?php if ($datos['nacionaliad'] == 'v'): ?>
+                                <?php if ($datos['nacionalidad'] == 'v'): ?>
                                   <option selected="selected" value="v">Venezolano</option>
                                   <option value="e">Extranjero</option>
                                 <?php else: ?>
