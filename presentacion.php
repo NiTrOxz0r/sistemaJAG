@@ -16,7 +16,7 @@ empezarPagina($_SESSION['cod_tipo_usr'], $_SESSION['cod_tipo_usr']); ?>
         <div class="col-xs-12 text-center">
           <div class="centrado">
             <h1 class="lato">sistema<strong>JAG</strong></h1>
-            <h3 class="courier">Versión 0.6.3.4</h3>
+            <h3 class="courier">Versión 0.6.3.5</h3>
           </div>
         </div>
       </div>
