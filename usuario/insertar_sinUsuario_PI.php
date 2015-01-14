@@ -172,7 +172,7 @@ if ( isset($_POST['cedula']) && strlen($_POST['cedula']) == 8 ) :
       $resultado = conexion($query);
       if ($asume) :
         $query = "INSERT INTO asume values
-        (null, $codigoPersonal, 34, 0,
+        (null, $codigoPersonal[codigo], 34, 0,
           'Autogenerado en registro, por sistema.',
           1, $codUsrMod, null, $codUsrMod, current_timestamp);";
         $resultado = conexion($query);
